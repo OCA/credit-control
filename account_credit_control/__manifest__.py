@@ -1,25 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
- 'version': '10.0.0.3.0',
+ 'version': '10.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA),Okia",
  'maintainer': 'Camptocamp',
  'category': 'Finance',
@@ -28,7 +12,7 @@
      'account',
      'mail',
  ],
- 'website': 'http://www.camptocamp.com',
+ 'website': 'https://www.camptocamp.com',
  'data': [
      "security/res_groups.xml",
      # Reports
@@ -54,8 +38,6 @@
 
      # Security
      "security/ir.model.access.csv",
- ],
- 'demo': [
  ],
  'installable': True,
  'license': 'AGPL-3',
