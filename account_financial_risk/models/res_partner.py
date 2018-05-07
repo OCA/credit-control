@@ -256,7 +256,7 @@ class ResPartner(models.Model):
         # TODO: Sudo is needed?
         ConfigParameter = self.env['ir.config_parameter']
         last_check = ConfigParameter.get_param(
-            'partner_financial_risk.last_check', default='2016-01-01')
+            'account_financial_risk.last_check', default='2016-01-01')
         groups = self.env['account.move.line'].sudo().read_group(
             [('reconciled', '=', False),
              ('partner_id', '!=', False),
@@ -276,5 +276,5 @@ class ResPartner(models.Model):
                 force_company=company_id,
             )._compute_risk_account_amount()
         ConfigParameter.set_param(
-            'partner_financial_risk.last_check', max_date)
+            'account_financial_risk.last_check', max_date)
         return True
