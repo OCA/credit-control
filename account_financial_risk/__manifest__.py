@@ -2,21 +2,21 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Partner Financial Risk',
-    'summary': 'Manage partner risk',
+    'name': 'Account Financial Risk',
+    'summary': 'Manage customer risk',
     'version': '11.0.1.0.0',
-    'category': 'Sales Management',
+    'category': 'Accounting',
     'license': 'AGPL-3',
     'author': 'Tecnativa, Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/partner-contact',
+    'website': 'https://github.com/OCA/credit-control',
     'depends': [
         'account',
     ],
     'data': [
-        'data/partner_financial_risk_data.xml',
+        'data/account_financial_risk_data.xml',
         'views/res_config_view.xml',
         'views/res_partner_view.xml',
-        'wizard/partner_risk_exceeded_view.xml',
+        'wizards/partner_risk_exceeded_view.xml',
     ],
     'installable': True,
 }
