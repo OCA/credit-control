@@ -1,0 +1,38 @@
+language: python
+sudo: false
+cache:
+  apt: true
+  directories:
+    - $HOME/.cache/pip
+
+python:
+  - "2.7.13"
+
+addons:
+  postgresql: "9.5"
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+
+env:
+  global:
+  - VERSION="11.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: RJqdk55O/hkrsGeljxui60wzbQmXWNFH7XpP7p3CwkZ0uSO5JY52Y/bal6qJO0Rglk/rZfnLg+YIvQqYfp2728OIF/RU1r+F88Kc8PumWa64S1R6NJ6qRjZHt86+Ilw9kxsN/4dxST1LZ6zq8Bb11R5J0x/OQBSY1LHhc9GAp3hznWhECRmBCxCp0uFk629FMmAJUEIZTrS3RlDChDJrJsepzehhZ0EyolyuIYy5JJBEaZzK0wcJteTafjRn+Xd4xaeU9JWpoYNmGoV1yIu+mZNOas3AUBzz1gins4rFsa5/d/l26TRFpXbonodNP6jUIVRaCwoB/HsjVJfHQBQLiYSFBiB4+go0AFcI9V7uXtpIsb9KVJt8A+qtDUClYqrAlcalutkWkULddrnLdTquFGQjiHqRvh0p/NOb6Y9UJr9c3oWvSuzhR3TWGEWuJWWEt2RJTjQzxdxJLgmu88QGS7IZNhZv7q4XJZs9IqtucLK8YyuagmPs1FoWPaK8dH5iHjb72AYKE0ovFVH/7Wbf9fh3VwpY2AiTF9myuIYD9eTrhMHFptCcpnDNptzOPJEoQsv1ZeknoMhXfOfQhyOzetBPNIKoRyixZ0QLBYoqe2qTG6Z991WO2Drw1AE3i67qF8xiGgZfWghbfMDWGo4Hr9ahow7TRc1oT2Jz5vzE+RQ=
+
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="OCA/OCB"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+
+install:
+  - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - travis_install_nightly
+
+script:
+  - travis_run_tests
+
+after_success:
+  - travis_after_tests_success
