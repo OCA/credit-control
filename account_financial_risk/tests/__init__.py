@@ -1,1 +1,1 @@
-from . import test_partner_financial_risk
+from . import test_account_financial_risk
