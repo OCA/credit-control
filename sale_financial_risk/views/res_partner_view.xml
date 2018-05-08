@@ -6,7 +6,7 @@
     <record id="res_partner_view_risk" model="ir.ui.view">
         <field name="name">res.partner.view.risk</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="partner_financial_risk.res_partner_view_risk"/>
+        <field name="inherit_id" ref="account_financial_risk.res_partner_view_risk"/>
         <field name="arch" type="xml">
 
             <field name="risk_invoice_draft_include" position="before">
