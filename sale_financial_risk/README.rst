@@ -22,7 +22,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/134/10.0
+   :target: https://runbot.odoo-community.org/runbot/134/11.0
 
 
 Bug Tracker
@@ -45,8 +45,10 @@ Images
 Contributors
 ------------
 
-* Carlos Dauden <carlos.dauden@tecnativa.com>
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Carlos Dauden
+  * Pedro M. Baeza
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
 
 Do not contact contributors directly about support or help with technical issues.
