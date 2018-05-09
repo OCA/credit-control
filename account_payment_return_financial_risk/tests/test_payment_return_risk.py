@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Carlos Dauden <carlos.dauden@tecnativa.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2017-2018 Tecnativa - Carlos Dauden
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestPartnerPaymentReturnRisk(common.SavepointCase):
