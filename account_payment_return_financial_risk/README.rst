@@ -2,11 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===========================
-Partner Payment Return Risk
-===========================
+=====================================
+Account Payment Return Financial Risk
+=====================================
 
-Extends Partner Financial Risk to manage payments returns.
+Extends Account Financial Risk to manage payments returns.
 
 If any limit is exceed the partner gets forbidden to confirm sale orders.
 
