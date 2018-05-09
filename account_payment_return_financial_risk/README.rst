@@ -25,7 +25,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/134/9.0
+   :target: https://runbot.odoo-community.org/runbot/134/11.0
 
 
 Bug Tracker
@@ -47,7 +47,9 @@ Images
 Contributors
 ------------
 
-* Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Carlos Dauden
 
 
 Maintainer
