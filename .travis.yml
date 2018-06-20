@@ -6,7 +6,7 @@ cache:
     - $HOME/.cache/pip
 
 python:
-  - "2.7.13"
+  - "3.5"
 
 addons:
   postgresql: "9.5"
@@ -16,15 +16,12 @@ addons:
 
 env:
   global:
-  - VERSION="11.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
-  - TRANSIFEX_USER='transbot@odoo-community.org'
-  - secure: "QejhiX6Vh7qcDq7bCNsEvaQ93Uf6756t8cRJrc7a3sHgejw88KxV6Bn+d+c7c8OUwkIBcsKRGDTzozDakp1ivhyV+40Bv9iSAqjcfEjuADSnngUWd3wmVOpCQ1vtbC9zghdp9jvYr92qfpyW12QHrirb5Mm4/vbBnJOipqNCRvZiaTQFYmIt3oKArTAkMt1xfYfY96+c1ZraH/D2bz6pfLHtosgnEo4bgZhT0iuWKzWv60MLs0+zRfDq0wRk10JFbUGn5XHTiJZua8TKCtg3qrL76qjTPtb+XAL/x1iuhCZ9LhP0wEb9BWfhhxBm7i05uxfJ7BoIOz8J32dgSfVoLHX8TEyLJC9DPRK8HixwuBTF5HoHyYa2NC2XGYtU2WE6ICEQA9muJD4sIFvR8Z9Mju7HhOGQzmvuOGKOBZXDmjnpM8wtcRg8nkCZcjHWDu5nOVWBwoRuD3kBzLA6SobYw7tRK0IhGztRAhePRoRl4G+95D3uiXO/Vx92Cn/LpTUFytzrfjjtALGItkpd81aPP+MG1ydLBYolKCXOr/20geaw4xV1URHPwuOJ4NUVixR/deWmePt5DP2B2wd9QHhxSRtlnaSFOL2+X4xuFR5miCYg0pbmCBMLBEAdscedBO7enfc0wmFpWfmnj53k0BpARfqEvJuBajUabJE2+2BZqX8="
+  - VERSION="11.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
 
   matrix:
   - LINT_CHECK="1"
-  - TRANSIFEX="1"
   - TESTS="1" ODOO_REPO="OCA/OCB"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1"
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
