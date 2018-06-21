@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * partner_payment_return_risk
-# 
+# * account_payment_return_financial_risk
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -18,37 +18,37 @@ msgstr ""
 "Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,help:partner_payment_return_risk.field_res_partner_risk_payment_return_include
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner_risk_payment_return_include
 msgid "Full risk computation"
 msgstr ""
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,field_description:partner_payment_return_risk.field_res_partner_risk_payment_return_include
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner_risk_payment_return_include
 msgid "Include Payments Returns"
 msgstr ""
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,field_description:partner_payment_return_risk.field_res_partner_risk_payment_return_limit
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner_risk_payment_return_limit
 msgid "Limit Payments Returns"
 msgstr ""
 
-#. module: partner_payment_return_risk
-#: model:ir.model,name:partner_payment_return_risk.model_res_partner
+#. module: account_payment_return_financial_risk
+#: model:ir.model,name:account_payment_return_financial_risk.model_res_partner
 msgid "Partner"
 msgstr "Partner"
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,help:partner_payment_return_risk.field_res_partner_risk_payment_return_limit
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner_risk_payment_return_limit
 msgid "Set 0 if it is not locked"
 msgstr ""
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,field_description:partner_payment_return_risk.field_res_partner_risk_payment_return
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner_risk_payment_return
 msgid "Total Returned Invoices"
 msgstr ""
 
-#. module: partner_payment_return_risk
-#: model:ir.model.fields,help:partner_payment_return_risk.field_res_partner_risk_payment_return
+#. module: account_payment_return_financial_risk
+#: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner_risk_payment_return
 msgid "Total returned invoices in Open state"
 msgstr ""
