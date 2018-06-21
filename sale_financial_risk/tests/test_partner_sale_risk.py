@@ -52,19 +52,3 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertTrue(self.partner.risk_allow_edit)
         wiz.button_continue()
         self.assertAlmostEqual(self.partner.risk_sale_order, 200.0)
-
-    def test_invoice_amount(self):
-        self.sale_order.action_confirm()
-        self.assertAlmostEqual(self.sale_order.invoice_pending_amount, 100.0)
-        self.assertAlmostEqual(self.sale_order.invoice_amount, 0.0)
-        wizard = self.env['sale.advance.payment.inv'].with_context({
-            'active_id': self.sale_order.id,
-            'active_ids': [self.sale_order.id],
-            'active_model': 'sale.order',
-        }).create({
-            'advance_payment_method': 'percentage',
-            'amount': 80,
-        })
-        wizard.create_invoices()
-        self.assertAlmostEqual(self.sale_order.invoice_pending_amount, 20.0)
-        self.assertAlmostEqual(self.sale_order.invoice_amount, 80.0)
