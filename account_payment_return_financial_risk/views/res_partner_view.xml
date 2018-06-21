@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -8,12 +8,12 @@
         <field name="arch" type="xml">
             <field name="risk_invoice_unpaid" position="after">
                 <field name="risk_payment_return_include"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
-                <field name="risk_payment_return" nolabel="1"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_left_padding_15"/>
+                <field name="risk_payment_return" nolabel="1" class="oe_left_padding_15"/>
             </field>
             <field name="risk_invoice_unpaid_limit" position="after">
                 <field name="risk_payment_return_limit"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_label_to_left"/>
             </field>
         </field>
     </record>
