@@ -11,12 +11,12 @@
 
             <field name="risk_invoice_draft_include" position="before">
                 <field name="risk_sale_order_include"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
-                <field name="risk_sale_order" nolabel="1"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_left_padding_15"/>
+                <field name="risk_sale_order" nolabel="1" class="oe_left_padding_15"/>
             </field>
             <field name="risk_invoice_draft_limit" position="before">
                 <field name="risk_sale_order_limit"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_label_to_left"/>
             </field>
 
         </field>
