@@ -54,7 +54,7 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
             'code': 'RTEST',
             'name': 'Reason Test'
         })
-        cls.invoice.signal_workflow('invoice_open')
+        cls.invoice.action_invoice_open()
         cls.receivable_line = cls.invoice.move_id.line_ids.filtered(
             lambda x: x.account_id.internal_type == 'receivable')
         # Invert the move to simulate the payment
