@@ -17,6 +17,7 @@
         'views/res_config_view.xml',
         'views/res_partner_view.xml',
         'wizards/partner_risk_exceeded_view.xml',
+        'templates/assets.xml',
     ],
     'installable': True,
 }
