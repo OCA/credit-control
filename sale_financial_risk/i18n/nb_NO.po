@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * partner_sale_risk
-# 
+# * sale_financial_risk
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -18,70 +18,70 @@ msgstr ""
 "Language: nb_NO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: partner_sale_risk
-#: code:addons/partner_sale_risk/models/sale.py:42
+#. module: sale_financial_risk
+#: code:addons/sale_financial_risk/models/sale.py:42
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,help:partner_sale_risk.field_res_partner_risk_sale_order_include
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner_risk_sale_order_include
 msgid "Full risk computation"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,field_description:partner_sale_risk.field_res_partner_risk_sale_order_include
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner_risk_sale_order_include
 msgid "Include Sales Orders"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,field_description:partner_sale_risk.field_sale_order_invoice_amount
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_invoice_amount
 msgid "Invoice amount"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,field_description:partner_sale_risk.field_sale_order_invoice_pending_amount
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_invoice_pending_amount
 msgid "Invoice pending amount"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,field_description:partner_sale_risk.field_res_partner_risk_sale_order_limit
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner_risk_sale_order_limit
 msgid "Limit Sales Orders"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model,name:partner_sale_risk.model_res_partner
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_res_partner
 msgid "Partner"
 msgstr "Partner"
 
-#. module: partner_sale_risk
-#: model:ir.model,name:partner_sale_risk.model_sale_order
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_sale_order
 msgid "Sales Order"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,help:partner_sale_risk.field_res_partner_risk_sale_order_limit
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner_risk_sale_order_limit
 msgid "Set 0 if it is not locked"
 msgstr ""
 
-#. module: partner_sale_risk
-#: code:addons/partner_sale_risk/models/sale.py:51
+#. module: sale_financial_risk
+#: code:addons/sale_financial_risk/models/sale.py:51
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 msgstr ""
 
-#. module: partner_sale_risk
-#: code:addons/partner_sale_risk/models/sale.py:46
+#. module: sale_financial_risk
+#: code:addons/sale_financial_risk/models/sale.py:46
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,field_description:partner_sale_risk.field_res_partner_risk_sale_order
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner_risk_sale_order
 msgid "Total Sales Orders Not Invoiced"
 msgstr ""
 
-#. module: partner_sale_risk
-#: model:ir.model.fields,help:partner_sale_risk.field_res_partner_risk_sale_order
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner_risk_sale_order
 msgid "Total not invoiced of sales orders in Sale Order state"
 msgstr ""
