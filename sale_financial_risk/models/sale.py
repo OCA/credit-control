@@ -1,36 +1,11 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, models
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-
-    invoice_amount = fields.Monetary(
-        compute='_compute_invoice_amount', store=True)
-    invoice_pending_amount = fields.Monetary(
-        compute='_compute_invoice_amount', store=True)
-
-    @api.multi
-    @api.depends('state', 'order_line.invoice_lines.invoice_id.amount_total')
-    def _compute_invoice_amount(self):
-        AccountInvoice = self.env['account.invoice']
-        for order in self.filtered(lambda x: x.state == 'sale'):
-            invoice_ids = order.order_line.mapped(
-                'invoice_lines.invoice_id').ids
-            if not invoice_ids:
-                order.invoice_pending_amount = order.amount_total
-                continue
-            amount = AccountInvoice.read_group(
-                [('id', 'in', invoice_ids),
-                 ('type', 'in', ['out_invoice', 'out_refund'])],
-                ['amount_total'],
-                []
-            )[0]['amount_total']
-            order.invoice_amount = amount
-            if order.amount_total > amount:
-                order.invoice_pending_amount = order.amount_total - amount
 
     @api.multi
     def action_confirm(self):

@@ -12,7 +12,6 @@
     'depends': ['sale', 'account_financial_risk'],
     'data': [
         'views/res_partner_view.xml',
-        'views/sale_view.xml',
     ],
     'installable': True,
 }
