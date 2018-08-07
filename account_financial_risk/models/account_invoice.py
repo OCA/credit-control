@@ -11,7 +11,8 @@ class AccountInvoice(models.Model):
     def action_invoice_open(self):
         if self.env.context.get('bypass_risk', False):
             return super(AccountInvoice, self).action_invoice_open()
-        for invoice in self:
+        for invoice in self.filtered(lambda x: x.type in (
+                'out_invoice', 'out_refund') and x.amount_total_signed > 0.0):
             partner = invoice.partner_id.commercial_partner_id
             exception_msg = ""
             if partner.risk_exception:
