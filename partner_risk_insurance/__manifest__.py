@@ -4,9 +4,8 @@
     "version": "11.0.1.0.0",
     "development_status": "Production/Stable",
     "summary": "Risk insurance partner information",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Tecnativa - Pedro M. Baeza,"
+    "author": "AvanzOSC,"
+              "Tecnativa,"
               "Factor Libre S.L,"
               "NaN·tic,"
               "Odoo Community Association (OCA)",
@@ -18,6 +17,7 @@
     ],
     "category": "Credit Control",
     "data": [
+        'security/ir.model.access.csv',
         'views/res_partner_view.xml',
     ],
     "installable": True

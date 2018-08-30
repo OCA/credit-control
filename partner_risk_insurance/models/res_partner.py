@@ -9,8 +9,8 @@ class ResPartner(models.Model):
     @api.depends('company_credit_limit', 'insurance_credit_limit')
     def _compute_credit_limit(self):
         for partner in self:
-            partner.credit_limit = (self.company_credit_limit +
-                                    self.insurance_credit_limit)
+            partner.credit_limit = (partner.company_credit_limit +
+                                    partner.insurance_credit_limit)
 
     credit_limit = fields.Float('Credit Limit', store=True,
                                 compute='_compute_credit_limit')
@@ -37,3 +37,8 @@ class ResPartner(models.Model):
                                         help='Secondary code assigned to this '
                                         'partner by the risk insurance '
                                         'company.')
+    credit_policy_state_id = fields.Many2one(
+        string='Policy State',
+        comodel_name='credit.policy.state',
+        ondelete='restrict',
+    )
