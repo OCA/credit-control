@@ -1,37 +1,19 @@
-
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
-
-
-from openerp import models, fields, api
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    @api.one
+    @api.multi
     @api.depends('company_credit_limit', 'insurance_credit_limit')
-    def _credit_limit(self):
-        self.credit_limit = (self.company_credit_limit +
-                             self.insurance_credit_limit)
+    def _compute_credit_limit(self):
+        for partner in self:
+            partner.credit_limit = (partner.company_credit_limit +
+                                    partner.insurance_credit_limit)
 
     credit_limit = fields.Float('Credit Limit', store=True,
-                                compute=_credit_limit)
+                                compute='_compute_credit_limit')
     company_credit_limit = fields.Float("Company's Credit Limit",
                                         help='Credit limit granted by the '
                                         'company.')
@@ -55,3 +37,8 @@ class ResPartner(models.Model):
                                         help='Secondary code assigned to this '
                                         'partner by the risk insurance '
                                         'company.')
+    credit_policy_state_id = fields.Many2one(
+        string='Policy State',
+        comodel_name='credit.policy.state',
+        ondelete='restrict',
+    )
