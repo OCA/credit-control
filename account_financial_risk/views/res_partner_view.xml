@@ -55,6 +55,8 @@
                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                         <field name="credit_policy"
                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
+                        <field name="credit_policy_state_id"
+                               attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                         <field name="risk_exception"/>
                     </group>
                 </page>

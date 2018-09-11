@@ -105,6 +105,11 @@ class ResPartner(models.Model):
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute='_compute_risk_allow_edit')
     credit_limit = fields.Float(track_visibility='onchange')
+    credit_policy_state_id = fields.Many2one(
+        string='Policy State',
+        comodel_name='credit.policy.state',
+        ondelete='restrict',
+    )
 
     @api.multi
     def _compute_risk_allow_edit(self):
