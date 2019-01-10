@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 02:40+0000\n"
-"PO-Revision-Date: 2018-10-02 15:13+0000\n"
-"Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
+"POT-Creation-Date: 2018-11-26 12:28+0000\n"
+"PO-Revision-Date: 2019-03-08 11:09+0000\n"
+"Last-Translator: Thomas Pot <t.pot@open2bizz.nl>\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/"
 "23907/nl_NL/)\n"
 "Language: nl_NL\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -50,8 +50,8 @@ msgstr ""
 "dossier doorgestuurd naar onze incassobureau.\n"
 "\n"
 "            Eventueel kunnen we samen een betalingsregeling opstellen.\n"
-"            Een volledige lijst openstaande postenlijst is vind U hieronder."
-"\n"
+"            Een volledige lijst openstaande postenlijst is vind U "
+"hieronder.\n"
 "\n"
 "            Bijvoorbaat dank voor uw medewerking.\n"
 "\n"
@@ -76,6 +76,13 @@ msgstr ""
 "  "
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_count
+msgid "# of Credit Control Lines"
+msgstr "Aantal Factuurregels"
+
+#. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
 msgstr "10 dagen late herinnering"
@@ -89,85 +96,99 @@ msgstr "10 dagen netto"
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
 #: model:credit.control.policy.level,name:account_credit_control.3_time_2
 msgid "30 days end of month"
-msgstr ""
+msgstr "30 dagen einde maand"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
-msgstr ""
+msgstr "60 dagen laatste herinnering"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Total Due</strong>"
-msgstr ""
+msgstr "<strong>Totaal Openstaand</strong>"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Total Invoiced</strong>"
-msgstr ""
+msgstr "<strong>Totaal Gefactureerd</strong>"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
 msgid "A credit control line"
-msgstr ""
+msgstr "Een kredietcontrole regel"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:73
+#: code:addons/account_credit_control/models/credit_control_run.py:100
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
-msgstr ""
+msgstr "Een kredietcontrole regel eerder dan %s bestaat op %s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
 msgid "A credit control policy level"
-msgstr ""
+msgstr "Een kredietcontrole niveau"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:139
+#: code:addons/account_credit_control/models/credit_control_run.py:166
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
 msgstr ""
+"Een kredietcontrole is al op de achtergrond in uitvoer; probeer het later "
+"nogmaals."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:66
+#: code:addons/account_credit_control/models/credit_control_run.py:93
 #, python-format
 msgid "A run has already been executed more recently than %s"
-msgstr ""
+msgstr "Een kredietcontrole is al recenter dan %s uitgevoerd."
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_account
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_account_id
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Account"
-msgstr ""
+msgstr "Grootboekrekening"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_account_ids
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Accounts"
-msgstr ""
+msgstr "Grootboekrekeningen"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_active
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
 msgid "Allows to manually change credit level"
-msgstr ""
+msgstr "Mogelijk om manueel de niveau's te wijzigen"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
+msgstr "Een fout is opgetreden bij het versturen van het bericht."
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to run all ready lines channel action?"
+msgstr "Weet u zeker dat u alle regels wilt annuleren?"
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to set all Draft lines as Ready To Send?"
 msgstr ""
+"Weet u zeker dat u alle regels in concept wilt omzetten naar Gereed om te "
+"verzenden?"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:292
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
-msgstr ""
+msgstr "De functie voor berekening %s is niet geïmplementeerd."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -175,20 +196,20 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard_menu_action
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change Lines' State"
-msgstr ""
+msgstr "Aanpassen van de status van de regels"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.action_wizard_credit_policy_changer
 #: model:ir.actions.act_window,name:account_credit_control.action_wizard_credit_policy_changer_menu_action
 msgid "Change current credit policy"
-msgstr ""
+msgstr "Aanpassen van de huidige krediet beleid"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -221,6 +242,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_company_id
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_company_id
 msgid "Company"
 msgstr ""
 
@@ -249,6 +271,11 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 msgid "Control Credit Lines"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Control Lines"
 msgstr ""
 
 #. module: account_credit_control
@@ -292,6 +319,7 @@ msgstr ""
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
 msgstr ""
@@ -301,8 +329,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_line_ids
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
 msgid "Credit Control Lines"
@@ -491,8 +517,8 @@ msgid "Do Nothing"
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: selection:credit.control.run,state:0
 msgid "Done"
 msgstr ""
 
@@ -599,6 +625,11 @@ msgid "Group By"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_hide_change_state_button
+msgid "Hide Change State Button"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_id
@@ -619,8 +650,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ignored"
 msgstr ""
@@ -899,11 +929,6 @@ msgid "Only letter lines will be marked."
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-msgid "Open Credit Control Lines"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
 msgstr ""
@@ -1072,7 +1097,7 @@ msgid "Payment Note"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:87
+#: code:addons/account_credit_control/models/credit_control_run.py:114
 #, python-format
 msgid "Please select a policy"
 msgstr ""
@@ -1095,13 +1120,13 @@ msgid "Policy"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:110
+#: code:addons/account_credit_control/models/credit_control_run.py:137
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:114
+#: code:addons/account_credit_control/models/credit_control_run.py:141
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1149,8 +1174,7 @@ msgid "Print the selected lines"
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ready To Send"
 msgstr ""
@@ -1173,8 +1197,26 @@ msgid "Report Date"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Run channel action"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Run date"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_user_id
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Salesperson"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_line.py:244
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
+#, python-format
+msgid "Schedule activity"
 msgstr ""
 
 #. module: account_credit_control
@@ -1221,6 +1263,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Set to ready all"
 msgstr ""
 
 #. module: account_credit_control
@@ -1346,7 +1393,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:194
+#: code:addons/account_credit_control/models/credit_control_line.py:216
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
