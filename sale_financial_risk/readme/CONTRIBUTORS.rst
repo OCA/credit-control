@@ -2,5 +2,6 @@
 
   * Carlos Dauden
   * Pedro M. Baeza
+  * Ernesto Tejeda
 
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
