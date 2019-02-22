@@ -116,7 +116,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.partner.process_unpaid_invoices()
         self.assertEqual(self.env['ir.config_parameter'].get_param(
             'account_financial_risk.last_check'),
-            fields.Date.today())
+            fields.Date.to_string(fields.Date.today()))
 
     def test_other_account_amount(self):
         self.move = self.env['account.move'].create({

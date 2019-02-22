@@ -165,13 +165,13 @@ class ResPartner(models.Model):
                  'move_line_ids.date_maturity',
                  'company_id.invoice_unpaid_margin')
     def _compute_risk_account_amount(self):
-        AccountMoveLine = self.env['account.move.line'].sudo()
+        account_moveLine = self.env['account.move.line'].sudo()
         customers = self.filtered(lambda x: x.customer and not x.parent_id)
         if not customers:
             return
         groups = self._risk_account_groups()
         for key, group in groups.items():
-            group['read_group'] = AccountMoveLine.read_group(
+            group['read_group'] = account_moveLine.read_group(
                 group['domain'] + [('partner_id', 'in', customers.ids)],
                 group['fields'],
                 group['group_by'],
@@ -254,8 +254,8 @@ class ResPartner(models.Model):
     def process_unpaid_invoices(self):
         max_date = self._max_risk_date_due()
         # TODO: Sudo is needed?
-        ConfigParameter = self.env['ir.config_parameter']
-        last_check = ConfigParameter.get_param(
+        config_parameter = self.env['ir.config_parameter']
+        last_check = config_parameter.get_param(
             'account_financial_risk.last_check', default='2016-01-01')
         groups = self.env['account.move.line'].sudo().read_group(
             [('reconciled', '=', False),
@@ -275,6 +275,6 @@ class ResPartner(models.Model):
             partners.with_context(
                 force_company=company_id,
             )._compute_risk_account_amount()
-        ConfigParameter.set_param(
+        config_parameter.set_param(
             'account_financial_risk.last_check', max_date)
         return True
