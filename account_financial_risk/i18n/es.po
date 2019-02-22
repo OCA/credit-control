@@ -70,8 +70,8 @@ msgstr "Cliente"
 #: model:ir.model.fields,help:account_financial_risk.field_account_config_settings_invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_company_invoice_unpaid_margin
 msgid ""
-"Days after due date to set an invoice as unpaid.The change of this field "
-"recompute all partners risk,be patient."
+"Days after due date to set an invoice as unpaid. The change of this field "
+"recompute all partners risk, be patient."
 msgstr ""
 "Días posteriores a la fecha de vencimiento para establecer una factura como "
 "impagada. El cambio de este campo recalculará el riesgo de todos los "
