@@ -6,6 +6,7 @@ from odoo import _, api, fields, models
 
 class PartnerRiskExceededWiz(models.TransientModel):
     _name = 'partner.risk.exceeded.wiz'
+    _description = "Partner Risk Exceeded Wizard"
 
     partner_id = fields.Many2one(
         comodel_name='res.partner', readonly=True, string='Customer')

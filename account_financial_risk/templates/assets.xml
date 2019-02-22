@@ -3,7 +3,7 @@
 
     <template id="assets_common" inherit_id="web.assets_common">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/css" href="/account_financial_risk/static/src/less/account_financial_risk_table.less"/>
+            <link rel="stylesheet" type="text/scss" href="/account_financial_risk/static/src/scss/account_financial_risk_table.scss"/>
         </xpath>
     </template>
 
