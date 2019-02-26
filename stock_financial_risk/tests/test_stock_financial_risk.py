@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,17 +6,18 @@ from odoo import exceptions
 from odoo.tests import common
 
 
-class TestPartnerStocklRisk(common.SavepointCase):
+class TestStockFinancialRisk(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestPartnerStocklRisk, cls).setUpClass()
+        super(TestStockFinancialRisk, cls).setUpClass()
         cls.partner = cls.env['res.partner'].create({
             'name': 'Partner test',
             'customer': True,
         })
         cls.product = cls.env['product.product'].create({
             'name': 'Test product',
+            'type': 'product',
         })
         cls.location = cls.env['stock.location'].create({
             'name': 'Test location',
@@ -39,7 +39,7 @@ class TestPartnerStocklRisk(common.SavepointCase):
             'sequence_id': cls.sequence.id,
         })
         cls.quant = cls.env['stock.quant'].create({
-            'qty': 100,
+            'quantity': 100,
             'location_id': cls.location.id,
             'product_id': cls.product.id,
         })
@@ -62,36 +62,33 @@ class TestPartnerStocklRisk(common.SavepointCase):
         cls.env.user.lang = 'en_US'
 
     def test_stock_move_ok(self):
-        self.move.action_done()
+        self.move._action_done()
 
     def test_stock_move_error(self):
         self.partner.risk_exception = True
         self.move.partner_id = self.partner
         with self.assertRaises(exceptions.UserError):
-            self.move.action_done()
+            self.move._action_done()
 
     def test_stock_picking_ok(self):
         self.picking.action_assign()
-        self.picking.force_assign()
         self.picking.action_confirm()
 
     def test_stock_picking_error(self):
         self.partner.risk_exception = True
         res = self.picking.action_assign()
         self.assertEqual(res['name'], 'Partner risk exceeded')
-        res = self.picking.force_assign()
-        self.assertEqual(res['name'], 'Partner risk exceeded')
         res = self.picking.action_confirm()
         self.assertEqual(res['name'], 'Partner risk exceeded')
 
-    def test_do_new_transfer_ok(self):
+    def test_button_validate_ok(self):
         self.picking.action_assign()
-        self.picking.pack_operation_product_ids[:1].qty_done = 5
-        self.picking.do_new_transfer()
+        self.picking.move_line_ids[:1].qty_done = 5
+        self.picking.button_validate()
 
-    def test_do_new_transfer_error(self):
+    def test_button_validate_error(self):
         self.picking.action_assign()
-        self.picking.pack_operation_product_ids[:1].qty_done = 5
+        self.picking.move_line_ids[:1].qty_done = 5
         self.partner.risk_exception = True
-        res = self.picking.do_new_transfer()
+        res = self.picking.button_validate()
         self.assertEqual(res['name'], 'Partner risk exceeded')
