@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * partner_stock_risk
+# * stock_financial_risk
 #
 # Translators:
 # Carles Antoli <carlesantoli@hotmail.com>, 2017
@@ -19,26 +19,26 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: partner_stock_risk
-#: code:addons/partner_stock_risk/models/stock.py:31
+#. module: stock_financial_risk
+#: code:addons/stock_financial_risk/models/stock.py:31
 #, python-format
 msgid "Financial risk exceeded \n"
 msgstr ""
 
-#. module: partner_stock_risk
-#: code:addons/partner_stock_risk/models/stock.py:20
+#. module: stock_financial_risk
+#: code:addons/stock_financial_risk/models/stock.py:20
 #, python-format
 msgid ""
 "Financial risk exceeded in partner:\n"
 "%s"
 msgstr ""
 
-#. module: partner_stock_risk
-#: model:ir.model,name:partner_stock_risk.model_stock_move
+#. module: stock_financial_risk
+#: model:ir.model,name:stock_financial_risk.model_stock_move
 msgid "Stock Move"
 msgstr "Moviments d'estoc"
 
-#. module: partner_stock_risk
-#: model:ir.model,name:partner_stock_risk.model_stock_picking
+#. module: stock_financial_risk
+#: model:ir.model,name:stock_financial_risk.model_stock_picking
 msgid "Transfer"
 msgstr "Transferència"

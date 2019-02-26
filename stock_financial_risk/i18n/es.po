@@ -20,26 +20,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#. module: partner_stock_risk
-#: code:addons/partner_stock_risk/models/stock.py:31
+#. module: stock_financial_risk
+#: code:addons/stock_financial_risk/models/stock.py:31
 #, python-format
 msgid "Financial risk exceeded \n"
 msgstr "Riesgo financiero excedido.\n"
 
-#. module: partner_stock_risk
-#: code:addons/partner_stock_risk/models/stock.py:20
+#. module: stock_financial_risk
+#: code:addons/stock_financial_risk/models/stock.py:20
 #, python-format
 msgid ""
 "Financial risk exceeded in partner:\n"
 "%s"
 msgstr "Riesgo financiero excedido en empresa: %s"
 
-#. module: partner_stock_risk
-#: model:ir.model,name:partner_stock_risk.model_stock_move
+#. module: stock_financial_risk
+#: model:ir.model,name:stock_financial_risk.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de existencias"
 
-#. module: partner_stock_risk
-#: model:ir.model,name:partner_stock_risk.model_stock_picking
+#. module: stock_financial_risk
+#: model:ir.model,name:stock_financial_risk.model_stock_picking
 msgid "Transfer"
 msgstr "Transferir"
