@@ -4,4 +4,4 @@ To use this module, you need to:
 #. Set limits and choose options to compute in credit limit.
 #. Create an invoice and pay it.
 #. Create a payment return.
-#. Go to *Sales -> Sales Orders* and create a new Sales Orders.
+#. Go to *Sales -> Orders -> Orders* and create a new Sales Orders.
