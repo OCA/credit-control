@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo11-addon-account_financial_risk',
         'odoo11-addon-account_payment_return_financial_risk',
+        'odoo11-addon-partner_risk_insurance',
         'odoo11-addon-sale_financial_risk',
     ],
     classifiers=[
