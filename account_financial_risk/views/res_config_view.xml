@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="res_config_settings_view_form" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.partner.financial.risk</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[@id='account_followup']/.." position="inside">
+            <div class="col-12 col-lg-6 o_setting_box" title="Days after due date to set an invoice as unpaid. The change of this field recompute all partners risk, be patient.">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                    <span class="o_form_label">Financial Risk</span>
+                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                    <div class="text-muted">
+                        Set options applied to financial risk
+                    </div>
+                    <div class="content-group">
+                        <div class="row mt16">
+                            <label string="Maturity Margin" for="invoice_unpaid_margin" class="col-lg-3 o_light_label"/>
+                            <field name="invoice_unpaid_margin"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </field>
+</record>
+
+</odoo>
