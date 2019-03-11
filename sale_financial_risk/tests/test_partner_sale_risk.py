@@ -52,3 +52,32 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertTrue(self.partner.risk_allow_edit)
         wiz.button_continue()
         self.assertAlmostEqual(self.partner.risk_sale_order, 200.0)
+
+    def test_compute_amount_to_invoice(self):
+        self.sale_order.action_confirm()
+        # Now the amount to be invoiced must 100
+        self.assertEqual(self.partner.risk_sale_order, 100.0)
+        self.assertFalse(self.partner.risk_exception)
+        # If we set a risk_sale_order_limit to 99, risk_excepion must be True
+        self.partner.risk_sale_order_limit = 99.0
+        self.assertTrue(self.partner.risk_exception)
+        # If we create and validate an invoice from the sale order then the
+        # amount to be invoiced must be 0 and risk_exception must be False
+        inv_wiz = self.env['sale.advance.payment.inv'].with_context(
+            {'active_ids': [self.sale_order.id]}).create({})
+        inv_wiz.create_invoices()
+        invoice = self.sale_order.invoice_ids
+        invoice.with_context(bypass_risk=True).action_invoice_open()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0)
+        self.assertFalse(self.partner.risk_exception)
+        # After that, if we create and validate a Credit Note from the invoice
+        # then the amount to be invoiced must be 100 again
+        # and risk_exception must be True
+        ref_wiz_obj = self.env['account.invoice.refund'].with_context(
+            active_id=invoice.id, active_ids=[invoice.id])
+        ref_wiz = ref_wiz_obj.create({'description': "testing"})
+        action = ref_wiz.invoice_refund()
+        invoice_refund = self.env['account.invoice'].search(action['domain'])
+        invoice_refund.action_invoice_open()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        self.assertTrue(self.partner.risk_exception)
