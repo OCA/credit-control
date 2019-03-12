@@ -51,10 +51,7 @@ class SaleOrderLine(models.Model):
                  'invoice_lines.price_total',
                  'invoice_lines.invoice_id',
                  'invoice_lines.invoice_id.state',
-                 'invoice_lines.invoice_id.type',
-                 'invoice_lines.invoice_id.refund_invoice_ids',
-                 'invoice_lines.invoice_id.refund_invoice_ids.state',
-                 'invoice_lines.invoice_id.refund_invoice_ids.amount_total')
+                 'invoice_lines.invoice_id.type')
     def _compute_amount_to_invoice(self):
         """ Compute the taxed amount already invoiced from the sale order
             line. This amount is computed as
@@ -69,42 +66,25 @@ class SaleOrderLine(models.Model):
             where
                 `amount_invoiced` is taxed amount previously explained
         """
-        refund_lines_product = self.env['account.invoice.line']
-        for line in self:
+        for line in self.filtered(lambda l: l.state == 'sale'):
             invoice_lines = line.invoice_lines.filtered(
                 lambda l: l.invoice_id.state in {'open', 'in_payment', 'paid'})
-            # Refund invoices linked to invoice_lines
-            refund_invoices = invoice_lines.mapped(
-                'invoice_id.refund_invoice_ids').filtered(
-                lambda inv: inv.state in {'open', 'in_payment', 'paid'})
-            refund_invoice_lines = (refund_invoices.mapped(
-                'invoice_line_ids') - refund_lines_product).filtered(
-                lambda l: l.product_id == line.product_id)
-            if refund_invoice_lines:
-                refund_lines_product |= refund_invoice_lines
-
             amount_invoiced = 0.0
             for inv_line in invoice_lines:
                 inv_date = (inv_line.invoice_id.date_invoice
                             or fields.Date.today())
+                amount = inv_line.currency_id._convert(
+                    inv_line.price_total, line.company_id.currency_id,
+                    line.company_id, inv_date)
                 if inv_line.invoice_id.type == 'out_invoice':
-                    amount_invoiced += inv_line.currency_id._convert(
-                        inv_line.price_total, line.currency_id,
-                        line.company_id, inv_date)
-            for ref_line in refund_invoice_lines:
-                ref_date = (ref_line.invoice_id.date_invoice
-                            or fields.Date.today())
-                if ref_line.invoice_id.type == 'out_refund':
-                    amount_invoiced -= ref_line.currency_id._convert(
-                        ref_line.price_total, line.currency_id,
-                        line.company_id, ref_date)
-
-            amount_to_invoice = 0.0
-            if line.state in {'sale', 'done'}:
+                    amount_invoiced += amount
+                elif inv_line.invoice_id.type == 'out_refund':
+                    amount_invoiced -= amount
+            if line.product_id.invoice_policy == 'delivery':
+                total_sale_line = line.price_reduce_taxinc * line.qty_delivered
+            else:
                 total_sale_line = line.price_total
-                if line.product_id.invoice_policy == 'delivery':
-                    qty_delivered = line.qty_delivered
-                    total_sale_line = line.price_reduce_taxinc * qty_delivered
-                amount_to_invoice = total_sale_line - amount_invoiced
-
-            line.amt_to_invoice = amount_to_invoice
+            total_sale_line = line.currency_id._convert(
+                    total_sale_line, line.company_id.currency_id,
+                    line.company_id, fields.Date.today())
+            line.amt_to_invoice = total_sale_line - amount_invoiced

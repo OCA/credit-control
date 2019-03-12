@@ -75,9 +75,10 @@ class TestPartnerSaleRisk(SavepointCase):
         # and risk_exception must be True
         ref_wiz_obj = self.env['account.invoice.refund'].with_context(
             active_id=invoice.id, active_ids=[invoice.id])
-        ref_wiz = ref_wiz_obj.create({'description': "testing"})
-        action = ref_wiz.invoice_refund()
-        invoice_refund = self.env['account.invoice'].search(action['domain'])
-        invoice_refund.action_invoice_open()
+        ref_wiz = ref_wiz_obj.create({
+            'description': 'testing',
+            'filter_refund': 'modify',
+        })
+        ref_wiz.invoice_refund()
         self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
         self.assertTrue(self.partner.risk_exception)
