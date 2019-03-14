@@ -9,11 +9,10 @@ class ResPartner(models.Model):
     """ Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines.
     """
-
     _inherit = "res.partner"
 
     credit_policy_id = fields.Many2one(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         string='Credit Control Policy',
         domain="[('account_ids', 'in', property_account_receivable_id)]",
         help="The Credit Control Policy used for this "

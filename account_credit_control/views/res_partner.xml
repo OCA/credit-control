@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <act_window
-            id="act_partner_credit_relation_relation"
-            name="Credit Lines"
-            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
-            domain="[('partner_id', '=',  active_id)]"
-            res_model="credit.control.line"
-            src_model="res.partner"/>
+    <act_window id="act_partner_credit_relation_relation"
+                name="Credit Lines"
+                groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+                domain="[('partner_id', '=',  active_id)]"
+                res_model="credit.control.line"
+                src_model="res.partner"/>
     <record id="partner_view_buttons" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.partner_view_buttons"/>
@@ -69,11 +68,11 @@
         <field name="view_id" ref="customer_followup_tree"/>
         <field name="act_window_id" ref="action_customer_followup"/>
     </record>
-    <menuitem
-            name="Do Manual Follow-Ups"
-            parent="base_credit_control_menu"
-            action="action_customer_followup"
-            sequence="30"
-            id="credit_control_manual_action_menu"/>
+    <menuitem name="Do Manual Follow-Ups"
+              parent="base_credit_control_menu"
+              action="action_customer_followup"
+              sequence="30"
+              id="credit_control_manual_action_menu"
+    />
 
 </odoo>

@@ -21,16 +21,22 @@ class CreditControlMarker(models.TransientModel):
         lines = line_obj.browse(context['active_ids'])
         return self._filter_lines(lines)
 
-    name = fields.Selection([('ignored', 'Ignored'),
-                             ('to_be_sent', 'Ready To Send'),
-                             ('sent', 'Done')],
-                            string='Mark as',
-                            default='to_be_sent',
-                            required=True)
-    line_ids = fields.Many2many('credit.control.line',
-                                string='Credit Control Lines',
-                                default=lambda self: self._default_lines(),
-                                domain="[('state', '!=', 'sent')]")
+    name = fields.Selection(
+        selection=[
+            ('ignored', 'Ignored'),
+            ('to_be_sent', 'Ready To Send'),
+            ('sent', 'Done'),
+        ],
+        string='Mark as',
+        default='to_be_sent',
+        required=True,
+    )
+    line_ids = fields.Many2many(
+        comodel_name='credit.control.line',
+        string='Credit Control Lines',
+        default=lambda self: self._default_lines(),
+        domain="[('state', '!=', 'sent')]",
+    )
 
     @api.model
     @api.returns('credit.control.line')
@@ -64,9 +70,11 @@ class CreditControlMarker(models.TransientModel):
 
         self._mark_lines(filtered_lines, self.name)
 
-        return {'domain': str([('id', 'in', filtered_lines.ids)]),
-                'view_type': 'form',
-                'view_mode': 'tree,form',
-                'view_id': False,
-                'res_model': 'credit.control.line',
-                'type': 'ir.actions.act_window'}
+        return {
+            'domain': str([('id', 'in', filtered_lines.ids)]),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'credit.control.line',
+            'type': 'ir.actions.act_window',
+        }

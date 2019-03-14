@@ -7,11 +7,11 @@ from dateutil import relativedelta
 from odoo import fields
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestCreditControlRun(TransactionCase):
-    post_install = True
-    at_install = False
 
     def setUp(self):
         super(TestCreditControlRun, self).setUp()
@@ -33,18 +33,18 @@ class TestCreditControlRun(TransactionCase):
             'name': 'Ventes en Belgique (test)',
             'user_type_id': account_type_inc.id,
             'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
+            'tag_ids': [(6, 0, [tag_operation.id])],
         })
         payment_term = self.env.ref('account.account_payment_term_immediate')
 
         product = self.env['product.product'].create({
-            'name': 'Product test'
+            'name': 'Product test',
         })
 
         self.policy = \
             self.env.ref('account_credit_control.credit_control_3_time')
         self.policy.write({
-            'account_ids': [(6, 0, [account.id])]
+            'account_ids': [(6, 0, [account.id])],
         })
 
         # There is a bug with Odoo ...
@@ -84,11 +84,10 @@ class TestCreditControlRun(TransactionCase):
     def test_check_run_date(self):
         """
         Create a control run older than the last control run
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
 
         with self.assertRaises(UserError):
@@ -100,11 +99,10 @@ class TestCreditControlRun(TransactionCase):
     def test_generate_credit_lines(self):
         """
         Test the method generate_credit_lines
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
 
         control_run.with_context(lang='en_US').generate_credit_lines()
@@ -121,7 +119,6 @@ class TestCreditControlRun(TransactionCase):
     def test_multi_credit_control_run(self):
         """
         Generate several control run
-        :return:
         """
 
         six_months = datetime.today() - relativedelta.relativedelta(months=6)
@@ -132,7 +129,7 @@ class TestCreditControlRun(TransactionCase):
         # First run
         first_control_run = self.env['credit.control.run'].create({
             'date': six_months_str,
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
         first_control_run.with_context(lang='en_US').generate_credit_lines()
         self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
@@ -140,7 +137,7 @@ class TestCreditControlRun(TransactionCase):
         # Second run
         second_control_run = self.env['credit.control.run'].create({
             'date': three_months_str,
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
         second_control_run.with_context(lang='en_US').generate_credit_lines()
         self.assertTrue(len(self.invoice.credit_control_line_ids), 2)
@@ -148,7 +145,7 @@ class TestCreditControlRun(TransactionCase):
         # Last run
         last_control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
         last_control_run.with_context(lang='en_US').generate_credit_lines()
         self.assertTrue(len(self.invoice.credit_control_line_ids), 2)
@@ -156,11 +153,10 @@ class TestCreditControlRun(TransactionCase):
     def test_wiz_print_lines(self):
         """
         Test the wizard Credit Control Printer
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
 
         control_run.with_context(lang='en_US').generate_credit_lines()
@@ -178,7 +174,7 @@ class TestCreditControlRun(TransactionCase):
         control_lines = self.invoice.credit_control_line_ids
         marker = self.env['credit.control.marker'].create({
             'name': 'to_be_sent',
-            'line_ids': [(6, 0, control_lines.ids)]
+            'line_ids': [(6, 0, control_lines.ids)],
         })
         marker.mark_lines()
 
@@ -193,11 +189,10 @@ class TestCreditControlRun(TransactionCase):
     def test_wiz_credit_control_emailer(self):
         """
         Test the wizard credit control emailer
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [self.policy.id])]
+            'policy_ids': [(6, 0, [self.policy.id])],
         })
 
         control_run.with_context(lang='en_US').generate_credit_lines()
@@ -215,7 +210,7 @@ class TestCreditControlRun(TransactionCase):
         control_lines = self.invoice.credit_control_line_ids
         marker = self.env['credit.control.marker'].create({
             'name': 'to_be_sent',
-            'line_ids': [(6, 0, control_lines.ids)]
+            'line_ids': [(6, 0, control_lines.ids)],
         })
         marker.mark_lines()
 

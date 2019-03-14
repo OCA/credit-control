@@ -70,28 +70,28 @@
         </field>
     </record>
 
-    <menuitem
-            name="Credit Control"
-            parent="account.menu_finance_configuration"
-            id="base_credit_control_configuration_menu"
-            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+    <menuitem name="Credit Control"
+              parent="account.menu_finance_configuration"
+              id="base_credit_control_configuration_menu"
+              groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+    />
 
     <record model="ir.actions.act_window"
             id="credit_policy_configuration_action">
         <field name="name">Credit Control Policies</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.policy</field>
-        <field name="domain"></field>
+        <field name="domain"/>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_policy_tree"/>
     </record>
 
-    <menuitem
-            name="Credit Control Policies"
-            parent="base_credit_control_configuration_menu"
-            action="credit_policy_configuration_action"
-            id="credit_policy_configuration_action_menu"/>
+    <menuitem name="Credit Control Policies"
+              parent="base_credit_control_configuration_menu"
+              action="credit_policy_configuration_action"
+              id="credit_policy_configuration_action_menu"
+    />
 
     <record id="credit_mangement_policy_level_form" model="ir.ui.view">
         <field name="name">credit.mangement.policy.level.form</field>
