@@ -66,19 +66,19 @@
         <field name="name">Credit Control Run</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.run</field>
-        <field name="domain"></field>
+        <field name="domain"/>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_run_tree"/>
     </record>
 
 
-    <menuitem
-            name="Credit Control Run"
-            parent="base_credit_control_menu"
-            action="credit_control_run"
-            sequence="10"
-            id="credit_control_run_menu"
-            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+    <menuitem name="Credit Control Run"
+              parent="base_credit_control_menu"
+              action="credit_control_run"
+              sequence="10"
+              id="credit_control_run_menu"
+              groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+    />
 
 </odoo>
