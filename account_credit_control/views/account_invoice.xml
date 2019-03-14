@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <act_window
-            id="act_account_credit_relation_relation"
-            name="Credit Lines"
-            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
-            domain="[('account_id', '=', active_id)]"
-            res_model="credit.control.line"
-            src_model="account.account"/>
+    <act_window id="act_account_credit_relation_relation"
+                name="Credit Lines"
+                groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+                domain="[('account_id', '=', active_id)]"
+                res_model="credit.control.line"
+                src_model="account.account"/>
 
     <record id="invoice_followup_form_view" model="ir.ui.view">
         <field name="name">invoice.followup.form.view</field>

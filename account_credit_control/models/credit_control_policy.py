@@ -4,6 +4,11 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
+CHANNEL_LIST = [
+    ('letter', 'Letter'),
+    ('email', 'Email'),
+]
+
 
 class CreditControlPolicy(models.Model):
     """ Define a policy of reminder """
@@ -11,31 +16,44 @@ class CreditControlPolicy(models.Model):
     _name = "credit.control.policy"
     _description = """Define a reminder policy"""
 
-    name = fields.Char(required=True)
-    level_ids = fields.One2many('credit.control.policy.level',
-                                'policy_id',
-                                string='Policy Levels')
-    do_nothing = fields.Boolean(help='For policies which should not '
-                                     'generate lines or are obsolete')
-    company_id = fields.Many2one('res.company', string='Company')
+    name = fields.Char(
+        required=True,
+    )
+    level_ids = fields.One2many(
+        comodel_name='credit.control.policy.level',
+        inverse_name='policy_id',
+        string='Policy Levels',
+    )
+    do_nothing = fields.Boolean(
+        help='For policies which should not '
+             'generate lines or are obsolete',
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+    )
     account_ids = fields.Many2many(
-        'account.account',
+        comodel_name='account.account',
         string='Accounts',
         required=True,
         domain="[('internal_type', '=', 'receivable')]",
         help="This policy will be active only"
              " for the selected accounts",
     )
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(
+        default=True,
+    )
 
     @api.multi
     def _move_lines_domain(self, controlling_date):
         """ Build the default domain for searching move lines """
         self.ensure_one()
-        return [('account_id', 'in', self.account_ids.ids),
-                ('date_maturity', '<=', controlling_date),
-                ('reconciled', '=', False),
-                ('partner_id', '!=', False)]
+        return [
+            ('account_id', 'in', self.account_ids.ids),
+            ('date_maturity', '<=', controlling_date),
+            ('reconciled', '=', False),
+            ('partner_id', '!=', False),
+        ]
 
     @api.multi
     @api.returns('account.move.line')
@@ -110,14 +128,12 @@ class CreditControlPolicy(models.Model):
         """ Get the move lines for a policy related to a partner.
 
         :param str controlling_date: date of credit control
-        :param str model: name of the model where is defined a credit_policy_id
-        :param str move_relation_field: name of the field in account.move.line
-            which is a many2one to `model`
         :return: recordset to add in the process, recordset to remove from
             the process
         """
-        return self._move_lines_subset(controlling_date, 'res.partner',
-                                       'partner_id')
+        return self._move_lines_subset(
+            controlling_date, 'res.partner', 'partner_id',
+        )
 
     @api.multi
     @api.returns('account.move.line')
@@ -125,14 +141,12 @@ class CreditControlPolicy(models.Model):
         """ Get the move lines for a policy related to an invoice.
 
         :param str controlling_date: date of credit control
-        :param str model: name of the model where is defined a credit_policy_id
-        :param str move_relation_field: name of the field in account.move.line
-            which is a many2one to `model`
         :return: recordset to add in the process, recordset to remove from
             the process
         """
-        return self._move_lines_subset(controlling_date, 'account.invoice',
-                                       'invoice_id')
+        return self._move_lines_subset(
+            controlling_date, 'account.invoice', 'invoice_id',
+        )
 
     @api.multi
     @api.returns('account.move.line')
@@ -196,32 +210,54 @@ class CreditControlPolicyLevel(models.Model):
     _order = 'level'
     _description = """A credit control policy level"""
 
-    name = fields.Char(required=True, translate=True)
-    policy_id = fields.Many2one('credit.control.policy',
-                                string='Related Policy',
-                                required=True)
-    level = fields.Integer(required=True)
-    computation_mode = fields.Selection(
-        [('net_days', 'Due Date'),
-         ('end_of_month', 'Due Date, End Of Month'),
-         ('previous_date', 'Previous Reminder')],
-        string='Compute Mode',
-        required=True
+    name = fields.Char(
+        required=True,
+        translate=True,
     )
-    delay_days = fields.Integer(string='Delay (in days)', required=True)
-    email_template_id = fields.Many2one('mail.template',
-                                        string='Email Template',
-                                        required=True)
-    channel = fields.Selection([('letter', 'Letter'),
-                                ('email', 'Email')],
-                               required=True)
-    custom_text = fields.Text(string='Custom Message',
-                              required=True,
-                              translate=True)
-    custom_mail_text = fields.Html(string='Custom Mail Message',
-                                   required=True, translate=True)
+    policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        string='Related Policy',
+        required=True,
+    )
+    level = fields.Integer(
+        required=True,
+    )
+    computation_mode = fields.Selection(
+        selection=[
+            ('net_days', 'Due Date'),
+            ('end_of_month', 'Due Date, End Of Month'),
+            ('previous_date', 'Previous Reminder')
+        ],
+        string='Compute Mode',
+        required=True,
+    )
+    delay_days = fields.Integer(
+        string='Delay (in days)',
+        required=True,
+    )
+    email_template_id = fields.Many2one(
+        comodel_name='mail.template',
+        string='Email Template',
+        required=True,
+    )
+    channel = fields.Selection(
+        selection=CHANNEL_LIST,
+        required=True,
+    )
+    custom_text = fields.Text(
+        string='Custom Message',
+        required=True,
+        translate=True,
+    )
+    custom_mail_text = fields.Html(
+        string='Custom Mail Message',
+        required=True,
+        translate=True,
+    )
     custom_text_after_details = fields.Text(
-        string='Custom Message after details', translate=True)
+        string='Custom Message after details',
+        translate=True,
+    )
 
     _sql_constraint = [('unique level',
                         'UNIQUE (policy_id, level)',
@@ -233,7 +269,6 @@ class CreditControlPolicyLevel(models.Model):
         """ The smallest level of a policy cannot be computed on the
         "previous_date".
         """
-
         for policy_level in self:
             smallest_level = \
                 self.search([('policy_id', '=', policy_level.policy_id.id)],
@@ -252,10 +287,10 @@ class CreditControlPolicyLevel(models.Model):
         :return: previous level or None if there is no previous level
         """
         self.ensure_one()
-        previous_levels = self.search([('policy_id', '=', self.policy_id.id),
-                                       ('level', '<', self.level)],
-                                      order='level desc',
-                                      limit=1)
+        previous_levels = self.search([
+            ('policy_id', '=', self.policy_id.id),
+            ('level', '<', self.level),
+        ], order='level desc', limit=1)
         if not previous_levels:
             return None
         return previous_levels
