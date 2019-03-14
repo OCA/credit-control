@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <report
-            id="credit_control_summary"
+    <report id="credit_control_summary"
             model="credit.control.communication"
             string="Credit Control Summary"
             report_type="qweb-pdf"
