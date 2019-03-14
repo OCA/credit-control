@@ -1,12 +1,9 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
-logger = logging.getLogger(__name__)
 
 
 class CreditControlPolicyChanger(models.TransientModel):
@@ -16,6 +13,7 @@ class CreditControlPolicyChanger(models.TransientModel):
 
     """
     _name = "credit.control.policy.changer"
+    _description = "Credit Control Policy Changer"
 
     @api.model
     def _default_move_lines(self):
@@ -43,19 +41,26 @@ class CreditControlPolicyChanger(models.TransientModel):
             selected_lines |= move_lines
         return selected_lines
 
-    new_policy_id = fields.Many2one('credit.control.policy',
-                                    string='New Policy to Apply',
-                                    required=True)
-    new_policy_level_id = fields.Many2one('credit.control.policy.level',
-                                          string='New level to apply',
-                                          required=True)
+    new_policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        string='New Policy to Apply',
+        required=True,
+    )
+    new_policy_level_id = fields.Many2one(
+        comodel_name='credit.control.policy.level',
+        string='New level to apply',
+        required=True,
+    )
     # Only used to provide dynamic filtering on form
-    do_nothing = fields.Boolean(string='No follow  policy')
-    move_line_ids = fields.Many2many('account.move.line',
-                                     rel='credit_changer_ml_rel',
-                                     string='Move line to change',
-                                     default=lambda self:
-                                         self._default_move_lines())
+    do_nothing = fields.Boolean(
+        string='No follow policy',
+    )
+    move_line_ids = fields.Many2many(
+        comodel_name='account.move.line',
+        rel='credit_changer_ml_rel',
+        string='Move line to change',
+        default=lambda self: self._default_move_lines(),
+    )
 
     @api.onchange('new_policy_level_id')
     def onchange_policy_id(self):
@@ -96,7 +101,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         """ Set new policy on an invoice.
 
         This is done by creating a new credit control line
-        related to the move line and the policy setted in
+        related to the move line and the policy settled in
         the wizard form
 
         :return: ir.actions.act_windows dict
@@ -108,16 +113,18 @@ class CreditControlPolicyChanger(models.TransientModel):
         controlling_date = fields.date.today()
         self._check_accounts_policies(self.move_line_ids, self.new_policy_id)
         self._mark_as_overridden(self.move_line_ids)
-        # As disscused with business expert
+        # As discussed with business expert
         # draft lines should be passed to ignored
         # if same level as the new one
         # As it is a manual action
         # We also ignore rounding tolerance
         create = credit_line_obj.create_or_update_from_mv_lines
-        generated_lines = create(self.move_line_ids,
-                                 self.new_policy_level_id,
-                                 controlling_date,
-                                 check_tolerance=False)
+        generated_lines = create(
+            self.move_line_ids,
+            self.new_policy_level_id,
+            controlling_date,
+            check_tolerance=False,
+        )
         self._set_invoice_policy(self.move_line_ids, self.new_policy_id)
 
         if not generated_lines:
