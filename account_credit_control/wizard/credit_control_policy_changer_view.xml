@@ -7,8 +7,8 @@
             <form string="Set current credit level">
                 <separator string="Change the overdue level of current invoice"
                            colspan="4"/>
-                <label string="This wizard will let you set the overdue policy and level for selected invoices"/>
                 <newline/>
+                <span class="o_form_label">This wizard will let you set the overdue policy and level for selected invoices</span>
                 <group>
                     <group>
                         <field name="new_policy_id"/>
@@ -17,7 +17,7 @@
                         <field name="new_policy_level_id"
                                domain="[('policy_id', '=', new_policy_id)]"/>
                     </group>
-                    <group></group>
+                    <group/>
                 </group>
                 <notebook colspan="4">
                     <page string="Move lines to affect">

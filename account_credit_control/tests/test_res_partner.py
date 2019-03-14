@@ -2,11 +2,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestCreditControlPolicyLevel(TransactionCase):
-    post_install = True
-    at_install = False
 
     def test_check_credit_policy(self):
         """
@@ -15,7 +15,6 @@ class TestCreditControlPolicyLevel(TransactionCase):
         (this policy doesn't contains the account of the partner).
         After that we add the previous account in the policy and
         retry to assign this policy and this account on the partner
-        :return:
         """
         policy = self.env.ref('account_credit_control.credit_control_3_time')
 
@@ -30,7 +29,7 @@ class TestCreditControlPolicyLevel(TransactionCase):
             })
 
         policy.write({
-            'account_ids': [(6, 0, [account.id])]
+            'account_ids': [(6, 0, [account.id])],
         })
         partner.property_account_receivable_id = account.id
         partner.credit_policy_id = policy.id
