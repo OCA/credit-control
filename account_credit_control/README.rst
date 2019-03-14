@@ -13,12 +13,14 @@ identify outstanding debt beyond tolerance level and setup followup method.
 Configuration
 =============
 
-Configure the policies and policy levels in ``Accounting  > Configuration >
+Configure the policies and policy levels in ``Invoicing  > Configuration >
 Credit Control > Credit Control Policies``.
-You can define as many policy levels as you need.
+You can define as many policy levels as you need. You must set on which
+accounts are applied every Credit Control Policy under Accounts tab.
 
 Configure a tolerance for the Credit control and a default policy
-applied on all partners in each company, under the Accounting tab.
+applied on all partners in each company, under the Accounting tab in your
+company form.
 
 You are able to specify a particular policy for one partner or one invoice.
 
@@ -35,13 +37,15 @@ On each generated line, you have many choices:
  * Send a email
  * Print a letter
  * Change the state (so you can ignore or reopen lines)
- * Mark a line as Manually Overridden. The line will get the ignored state when a second credit control run is done.
- * Mark one line as Manual followup will also mark all the lines of the partner. The partner will be visible in "Do Manual Follow-ups".
+ * Mark a line as Manually Overridden. The line will get the ignored state when
+   a second credit control run is done.
+ * Mark one line as Manual followup will also mark all the lines of the
+   partner. The partner will be visible in "Do Manual Follow-ups".
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/11.0
+   :target: https://runbot.odoo-community.org/runbot/92/12.0
 
 Bug Tracker
 ===========
@@ -57,7 +61,7 @@ Credits
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+* Odoo Community Association: `Icon <https://odoo-community.org/logo.png>`_.
 
 Contributors
 ------------

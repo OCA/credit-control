@@ -1,12 +1,10 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
-logger = logging.getLogger(__name__)
+from .credit_control_policy import CHANNEL_LIST
 
 
 class CreditControlLine(models.Model):
@@ -34,39 +32,51 @@ class CreditControlLine(models.Model):
     # maturity date of related move line we do not use
     # a related field in order to
     # allow manual changes
-    date_due = fields.Date(string='Due date',
-                           required=True,
-                           readonly=True,
-                           states={'draft': [('readonly', False)]})
-    date_entry = fields.Date(string='Entry date',
-                             related='move_line_id.date',
-                             store=True,
-                             readonly=True)
-    date_sent = fields.Date(string='Sent date',
-                            readonly=True,
-                            states={'draft': [('readonly', False)]})
-    state = fields.Selection([('draft', 'Draft'),
-                              ('ignored', 'Ignored'),
-                              ('to_be_sent', 'Ready To Send'),
-                              ('sent', 'Done'),
-                              ('error', 'Error'),
-                              ('email_error', 'Emailing Error')],
-                             required=True,
-                             readonly=True,
-                             default='draft',
-                             help="Draft lines need to be triaged.\n"
-                                  "Ignored lines are lines for which we do "
-                                  "not want to send something.\n"
-                                  "Draft and ignored lines will be "
-                                  "generated again on the next run.")
-    channel = fields.Selection([('letter', 'Letter'),
-                                ('email', 'Email')],
-                               required=True,
-                               readonly=True,
-                               states={'draft': [('readonly', False)]})
-    invoice_id = fields.Many2one('account.invoice',
-                                 string='Invoice',
-                                 readonly=True)
+    date_due = fields.Date(
+        string='Due date',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    date_entry = fields.Date(
+        string='Entry date',
+        related='move_line_id.date',
+        store=True,
+    )
+    date_sent = fields.Date(
+        string='Sent date',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('ignored', 'Ignored'),
+            ('to_be_sent', 'Ready To Send'),
+            ('sent', 'Done'),
+            ('error', 'Error'),
+            ('email_error', 'Emailing Error'),
+        ],
+        required=True,
+        readonly=True,
+        default='draft',
+        help="Draft lines need to be triaged.\n"
+             "Ignored lines are lines for which we do "
+             "not want to send something.\n"
+             "Draft and ignored lines will be "
+             "generated again on the next run.",
+    )
+    channel = fields.Selection(
+        selection=CHANNEL_LIST,
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    invoice_id = fields.Many2one(
+        comodel_name='account.invoice',
+        string='Invoice',
+        readonly=True,
+    )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Partner',
@@ -74,44 +84,64 @@ class CreditControlLine(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
-    amount_due = fields.Float(string='Due Amount Tax incl.',
-                              required=True, readonly=True)
-    balance_due = fields.Float(string='Due balance', required=True,
-                               readonly=True)
-    mail_message_id = fields.Many2one('mail.mail', string='Sent Email',
-                                      readonly=True)
-    move_line_id = fields.Many2one('account.move.line',
-                                   string='Move line',
-                                   required=True,
-                                   readonly=True)
-    account_id = fields.Many2one('account.account',
-                                 related='move_line_id.account_id',
-                                 store=True,
-                                 readonly=True)
-    currency_id = fields.Many2one('res.currency',
-                                  related='move_line_id.currency_id',
-                                  store=True,
-                                  readonly=True)
-    company_id = fields.Many2one('res.company',
-                                 related='move_line_id.company_id',
-                                 store=True,
-                                 readonly=True)
+    amount_due = fields.Float(
+        string='Due Amount Tax incl.',
+        required=True,
+        readonly=True,
+    )
+    balance_due = fields.Float(
+        string='Due balance',
+        required=True,
+        readonly=True,
+    )
+    mail_message_id = fields.Many2one(
+        comodel_name='mail.mail',
+        string='Sent Email',
+        readonly=True,
+    )
+    move_line_id = fields.Many2one(
+        comodel_name='account.move.line',
+        string='Move line',
+        required=True,
+        readonly=True,
+    )
+    account_id = fields.Many2one(
+        comodel_name='account.account',
+        related='move_line_id.account_id',
+        store=True,
+    )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        related='move_line_id.currency_id',
+        store=True,
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        related='move_line_id.company_id',
+        store=True,
+    )
     # we can allow a manual change of policy in draft state
-    policy_level_id = fields.Many2one('credit.control.policy.level',
-                                      string='Overdue Level',
-                                      required=True,
-                                      readonly=True,
-                                      states={'draft': [('readonly', False)]})
-    policy_id = fields.Many2one('credit.control.policy',
-                                related='policy_level_id.policy_id',
-                                store=True,
-                                readonly=True)
-    level = fields.Integer(related='policy_level_id.level',
-                           store=True,
-                           readonly=True)
+    policy_level_id = fields.Many2one(
+        comodel_name='credit.control.policy.level',
+        string='Overdue Level',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        related='policy_level_id.policy_id',
+        store=True,
+    )
+    level = fields.Integer(
+        related='policy_level_id.level',
+        store=True,
+    )
     manually_overridden = fields.Boolean()
-    run_id = fields.Many2one(comodel_name='credit.control.run',
-                             string='Source')
+    run_id = fields.Many2one(
+        comodel_name='credit.control.run',
+        string='Source',
+    )
     manual_followup = fields.Boolean()
     partner_user_id = fields.Many2one(
         comodel_name='res.users',
@@ -176,8 +206,8 @@ class CreditControlLine(models.Model):
         tolerance_base = user.company_id.credit_control_tolerance
         user_currency = user.company_id.currency_id
         for currency in currencies:
-            tolerance[currency.id] = currency.compute(tolerance_base,
-                                                      user_currency)
+            tolerance[currency.id] = currency.compute(
+                tolerance_base, user_currency)
 
         new_lines = self.browse()
         for move_line in lines:
@@ -190,20 +220,20 @@ class CreditControlLine(models.Model):
                                           tolerance_base)
             if check_tolerance and open_amount < cur_tolerance:
                 continue
-            vals = self._prepare_from_move_line(move_line,
-                                                level,
-                                                controlling_date,
-                                                open_amount)
-            line = self.create(vals)
+            vals = self._prepare_from_move_line(
+                move_line, level, controlling_date, open_amount)
+            line = self.create([vals])
             new_lines |= line
 
             # when we have lines generated earlier in draft,
             # on the same level, it means that we have left
             # them, so they are to be considered as ignored
-            previous_drafts = self.search([('move_line_id', '=', move_line.id),
-                                           ('policy_level_id', '=', level.id),
-                                           ('state', '=', 'draft'),
-                                           ('id', '!=', line.id)])
+            previous_drafts = self.search([
+                ('move_line_id', '=', move_line.id),
+                ('policy_level_id', '=', level.id),
+                ('state', '=', 'draft'),
+                ('id', '!=', line.id),
+            ])
             if previous_drafts:
                 previous_drafts.write({'state': 'ignored'})
 
@@ -228,11 +258,12 @@ class CreditControlLine(models.Model):
             })
         return res
 
-    @api.model
-    def create(self, values):
-        line = super(CreditControlLine, self).create(values)
-        line.manual_followup = line.partner_id.manual_followup
-        return line
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super(CreditControlLine, self).create(vals_list)
+        for line in lines:
+            line.manual_followup = line.partner_id.manual_followup
+        return lines
 
     def button_schedule_activity(self):
         ctx = self.env.context.copy()

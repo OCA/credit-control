@@ -6,18 +6,17 @@ from dateutil import relativedelta
 from odoo import fields
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestAccountInvoice(TransactionCase):
-    post_install = True
-    at_install = False
 
     def test_action_cancel(self):
         """
         Test the method action_cancel on invoice
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 
@@ -36,17 +35,17 @@ class TestAccountInvoice(TransactionCase):
             'name': 'Ventes en Belgique (test)',
             'user_type_id': account_type_inc.id,
             'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
+            'tag_ids': [(6, 0, [tag_operation.id])],
         })
         payment_term = self.env.ref('account.account_payment_term_immediate')
 
         product = self.env['product.product'].create({
-            'name': 'Product test'
+            'name': 'Product test',
         })
 
         policy = self.env.ref('account_credit_control.credit_control_3_time')
         policy.write({
-            'account_ids': [(6, 0, [account.id])]
+            'account_ids': [(6, 0, [account.id])],
         })
 
         # There is a bug with Odoo ...
@@ -85,7 +84,7 @@ class TestAccountInvoice(TransactionCase):
 
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [policy.id])]
+            'policy_ids': [(6, 0, [policy.id])],
         })
         control_run.generate_credit_lines()
 
@@ -93,10 +92,10 @@ class TestAccountInvoice(TransactionCase):
         control_line = invoice.credit_control_line_ids
 
         control_marker = self.env['credit.control.marker']
-        marker_line = control_marker\
-            .with_context(active_model='credit.control.line',
-                          active_ids=[control_line.id])\
-            ._default_lines()
+        marker_line = control_marker.with_context(
+            active_model='credit.control.line',
+            active_ids=[control_line.id],
+        )._default_lines()
 
         self.assertIn(control_line, marker_line)
 
@@ -114,7 +113,6 @@ class TestAccountInvoice(TransactionCase):
         Test the method action_cancel on invoice
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 
@@ -133,17 +131,17 @@ class TestAccountInvoice(TransactionCase):
             'name': 'Ventes en Belgique (test)',
             'user_type_id': account_type_inc.id,
             'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
+            'tag_ids': [(6, 0, [tag_operation.id])],
         })
         payment_term = self.env.ref('account.account_payment_term_immediate')
 
         product = self.env['product.product'].create({
-            'name': 'Product test'
+            'name': 'Product test',
         })
 
         policy = self.env.ref('account_credit_control.credit_control_3_time')
         policy.write({
-            'account_ids': [(6, 0, [account.id])]
+            'account_ids': [(6, 0, [account.id])],
         })
 
         # There is a bug with Odoo ...
@@ -182,7 +180,7 @@ class TestAccountInvoice(TransactionCase):
 
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [policy.id])]
+            'policy_ids': [(6, 0, [policy.id])],
         })
 
         # Draft Lines
@@ -198,7 +196,6 @@ class TestAccountInvoice(TransactionCase):
         Test the wizard to change default credit policy on invoice
         We will create an invoice, change credit policy and check
         if it has change the policy on invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 
@@ -217,17 +214,17 @@ class TestAccountInvoice(TransactionCase):
             'name': 'Ventes en Belgique (test)',
             'user_type_id': account_type_inc.id,
             'reconcile': True,
-            'tag_ids': [(6, 0, [tag_operation.id])]
+            'tag_ids': [(6, 0, [tag_operation.id])],
         })
         payment_term = self.env.ref('account.account_payment_term_immediate')
 
         product = self.env['product.product'].create({
-            'name': 'Product test'
+            'name': 'Product test',
         })
 
         policy = self.env.ref('account_credit_control.credit_control_2_time')
         policy.write({
-            'account_ids': [(6, 0, [account.id])]
+            'account_ids': [(6, 0, [account.id])],
         })
 
         # There is a bug with Odoo ...
@@ -265,7 +262,7 @@ class TestAccountInvoice(TransactionCase):
         invoice.action_invoice_open()
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
-            'policy_ids': [(6, 0, [policy.id])]
+            'policy_ids': [(6, 0, [policy.id])],
         })
         control_run.generate_credit_lines()
 
@@ -278,7 +275,7 @@ class TestAccountInvoice(TransactionCase):
             'new_policy_level_id': days_30.id
         })
 
-        # Verfiy the lines on wiz belongs to same invoice
+        # Verify the lines on wiz belongs to same invoice
         self.assertEqual(wiz_rec.move_line_ids.invoice_id, invoice)
 
         # Execute change
