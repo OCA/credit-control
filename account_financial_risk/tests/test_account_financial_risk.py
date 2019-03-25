@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2016-2019 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import SavepointCase
@@ -147,3 +147,15 @@ class TestPartnerFinancialRisk(SavepointCase):
         """Computing risk shouldn't fail if record is a NewId."""
         new = self.env['res.partner'].new({'customer': True})
         new._compute_risk_invoice()
+
+    def test_batch_invoice_confirm(self):
+        self.invoice.action_invoice_open()
+        line = self.invoice.move_id.line_ids.filtered(lambda x: x.debit != 0.0)
+        line.date_maturity = '2017-01-01'
+        self.partner.risk_invoice_unpaid_include = True
+        self.partner.credit_limit = 100.0
+        invoice2 = self.invoice.copy({'partner_id': self.invoice_address.id})
+        wiz = self.env['account.invoice.confirm'].with_context(
+            active_ids=invoice2.ids
+        ).create({})
+        self.assertTrue(wiz.info_risk)
