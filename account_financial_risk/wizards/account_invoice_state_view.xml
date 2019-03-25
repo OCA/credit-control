@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_invoice_confirm_view" model="ir.ui.view">
+        <field name="name">account.invoice.confirm.form</field>
+        <field name="model">account.invoice.confirm</field>
+        <field name="inherit_id" ref="account.account_invoice_confirm_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//footer" position="before">
+                <p attrs="{'invisible': [('info_risk','=', '')]}">
+                    <p><strong>Your selection includes partners with risk exceeded.</strong></p>
+                    <p><strong>If you are an Billing Manager you can use Confirm ALL Invoices button.</strong></p>
+                    <p><strong>With Confirm Invoices button only not risk exceeded partner invoices will be confirmed.</strong></p>
+                </p>
+                <field name="info_risk" attrs="{'invisible': [('info_risk','=', '')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='invoice_confirm']" position="after">
+                <button string="Confirm ALL Invoices"
+                        class="oe_highlight"
+                        name="invoice_confirm"
+                        type="object"
+                        attrs="{'invisible': [('info_risk','=', '')]}"
+                        context="{'bypass_risk': True}"
+                        groups="account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
