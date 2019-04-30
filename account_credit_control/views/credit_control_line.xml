@@ -155,7 +155,7 @@
                 <field name="mail_message_id"/>
                 <field name="activity_date_deadline"/>
                 <button name="button_schedule_activity" type="object"
-                        aria-label="Schedule activity" title="Schedule activity" icon="fa fa-clock-o"/>
+                        aria-label="Schedule activity" title="Schedule activity" icon="fa-clock-o"/>
                 <field name="activity_summary"/>
             </tree>
         </field>
