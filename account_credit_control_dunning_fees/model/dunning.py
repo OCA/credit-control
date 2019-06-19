@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, api
 
 
 class FeesComputer(models.BaseModel):
-    """Model that compute dunnig fees.
+    """Model that compute dunning fees.
 
     This class does not need any database storage as
     it contains pure logic.
@@ -17,6 +16,7 @@ class FeesComputer(models.BaseModel):
 
     _name = 'credit.control.dunning.fees.computer'
     _auto = False
+    _description = 'Model that compute dunning fees'
     _log_access = True
     _register = True
     _transient = False
