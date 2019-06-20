@@ -7,7 +7,7 @@ class FixedFeesTester(common.TransactionCase):
 
     def setUp(self):
         """Initialize credit control level mock to test fees computations"""
-        super(FixedFeesTester, self).setUp()
+        super().setUp()
         self.currency_model = self.env['res.currency']
         self.euro = self.currency_model.search([('name', '=', 'EUR')])
         self.assertTrue(self.euro)

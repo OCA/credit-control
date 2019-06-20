@@ -5,7 +5,7 @@
  'category': 'Accounting',
  'complexity': 'normal',
  'depends': ['account_credit_control'],
- 'website': 'http://www.camptocamp.com',
+ 'website': 'http://odoo-community.org',
  'data': ['view/policy_view.xml',
           'view/line_view.xml',
           'report/report_credit_control_summary.xml',

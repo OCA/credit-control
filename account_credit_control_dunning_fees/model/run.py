@@ -12,7 +12,7 @@ class CreditControlRun(models.Model):
     @api.returns('credit.control.line')
     def _generate_credit_lines(self):
         """Override method to add fees computation"""
-        credit_lines = super(CreditControlRun, self)._generate_credit_lines()
+        credit_lines = super()._generate_credit_lines()
         fees_model = self.env['credit.control.dunning.fees.computer']
         fees_model._compute_fees(credit_lines)
         return credit_lines
