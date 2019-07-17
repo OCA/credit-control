@@ -28,6 +28,15 @@ class CreditControlPolicy(models.Model):
         help='For policies which should not '
              'generate lines or are obsolete',
     )
+    auto_process_lower_levels = fields.Boolean(
+        string='Auto Process Lower levels',
+        help='When an action is performed on a credit control line generated '
+        'by this policy, lower level lines for the same partner and policy '
+        'will also be processed.',
+    )
+    yield_by_level = fields.Boolean(
+        compute='_compute_yield_by_level'
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
@@ -43,6 +52,47 @@ class CreditControlPolicy(models.Model):
     active = fields.Boolean(
         default=True,
     )
+
+    @api.depends("auto_process_lower_levels")
+    def _compute_yield_by_level(self):
+        for rec in self:
+            rec.yield_by_level = not rec.auto_process_lower_levels
+
+    @api.multi
+    def write(self, values):
+        res = super(CreditControlPolicy, self).write(values)
+        if 'auto_process_lower_levels' in values:
+            credit_control_model = self.env['credit.control.line']
+            if values['auto_process_lower_levels']:
+                res = credit_control_model.read_group(
+                        domain=
+                            [
+                                ('policy_id', '=', self.id), 
+                                ('state', 'in', ('draft', 'to_be_sent')),
+                            ],
+                        fields=['id'],
+                        groupby=['partner_id'],
+                    )
+                for group in res:
+                    records = credit_control_model.search(
+                            group['__domain'], 
+                            order='level DESC, date_due ASC',
+                        )
+                    if not records:
+                        continue
+                    records[0].write({'auto_process': 'highest_level'})
+                    if len(records) > 1:
+                        records[1:].write({'auto_process': 'low_level'})
+            else:
+                lines = credit_control_model.search(
+                    [
+                        ('policy_id', '=', self.id),
+                        ('state', 'in', ('draft', 'to_be_sent')),
+                    ]
+                )
+                if lines:
+                    lines.write({'auto_process': 'no_auto_process'})
+        return res
 
     @api.multi
     def _move_lines_domain(self, controlling_date):

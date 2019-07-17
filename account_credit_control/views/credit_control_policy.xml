@@ -8,6 +8,7 @@
                 <group>
                     <field name="name"/>
                     <field name="do_nothing"/>
+                    <field name="auto_process_lower_levels"/>
                     <field name="company_id"/>
                     <field name="active"/>
                 </group>
@@ -66,6 +67,7 @@
             <tree string="Credit control policy">
                 <field name="name"/>
                 <field name="do_nothing"/>
+                <field name="auto_process_lower_levels"/>
             </tree>
         </field>
     </record>
