@@ -17,6 +17,7 @@
                         <group>
                             <field name="name" />
                             <field name="do_nothing" />
+                            <field name="auto_process_lower_levels" />
                             <field name="active" invisible="1" />
                         </group>
                         <group>
@@ -99,6 +100,7 @@
             <list>
                 <field name="name" />
                 <field name="do_nothing" />
+                <field name="auto_process_lower_levels" />
             </list>
         </field>
     </record>
