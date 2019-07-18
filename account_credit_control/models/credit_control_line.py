@@ -288,7 +288,10 @@ class CreditControlLine(models.Model):
                 'manual_followup': values.get('manual_followup'),
             })
         for line in self:
-            if 'auto_process' not in values and line.policy_id.auto_process_lower_levels:
+            if (
+                'auto_process' not in values and
+                line.policy_id.auto_process_lower_levels
+            ):
                 related_lines = line.get_related_lines()
                 if not related_lines:
                     return res

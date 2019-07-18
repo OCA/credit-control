@@ -65,19 +65,18 @@ class CreditControlPolicy(models.Model):
             credit_control_model = self.env['credit.control.line']
             if values['auto_process_lower_levels']:
                 res = credit_control_model.read_group(
-                        domain=
-                            [
-                                ('policy_id', '=', self.id), 
-                                ('state', 'in', ('draft', 'to_be_sent')),
-                            ],
+                        domain=[
+                            ('policy_id', '=', self.id),
+                            ('state', 'in', ('draft', 'to_be_sent')),
+                        ],
                         fields=['id'],
                         groupby=['partner_id'],
                     )
                 for group in res:
                     records = credit_control_model.search(
-                            group['__domain'], 
-                            order='level DESC, date_due ASC',
-                        )
+                        group['__domain'],
+                        order='level DESC, date_due ASC',
+                    )
                     if not records:
                         continue
                     records[0].write({'auto_process': 'highest_level'})

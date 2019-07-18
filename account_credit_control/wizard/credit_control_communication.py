@@ -137,7 +137,10 @@ class CreditControlCommunication(models.TransientModel):
             policy_level = line.policy_level_id
             if prev_group and (
                 group != prev_group
-                or (line.policy_id.yield_by_level and policy_level != prev_policy_level)
+                or (
+                    line.policy_id.yield_by_level and
+                    policy_level != prev_policy_level
+                )
             ):
                 yield (
                     group_lines[0].partner_id,
@@ -151,11 +154,11 @@ class CreditControlCommunication(models.TransientModel):
             prev_group = group
             prev_policy_level = policy_level
         yield (
-                    group_lines[0].partner_id,
-                    group_lines[0].currency_id,
-                    group_lines[0].policy_level_id,
-                    group_lines,
-                )
+            group_lines[0].partner_id,
+            group_lines[0].currency_id,
+            group_lines[0].policy_level_id,
+            group_lines,
+        )
 
     @api.model
     def _generate_comm_from_credit_lines(self, lines):
@@ -178,7 +181,7 @@ class CreditControlCommunication(models.TransientModel):
             data['partner_id'] = partner_id.id
             data['current_policy_level'] = policy_level_id.id
             data['currency_id'] = currency_id.id or company_currency.id
-            datas.append(data)       
+            datas.append(data)
         comms = self.create(datas)
         return comms
 
