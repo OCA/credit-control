@@ -81,6 +81,7 @@ class CreditControlLine(models.Model):
         comodel_name='res.partner',
         string='Partner',
         required=True,
+        index=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
@@ -139,6 +140,7 @@ class CreditControlLine(models.Model):
     policy_id = fields.Many2one(
         comodel_name='credit.control.policy',
         related='policy_level_id.policy_id',
+        index=True,
         store=True,
     )
     level = fields.Integer(
