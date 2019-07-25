@@ -8,7 +8,8 @@
            "Odoo Community Association (OCA),"
            "Okia,"
            "Access Bookings,"
-           "Tecnativa",
+           "Tecnativa,"
+           "ACSONE SA/NV",
  'maintainer': 'Camptocamp',
  'category': 'Finance',
  'depends': [
@@ -22,13 +23,7 @@
      "security/res_groups.xml",
      "security/account_security.xml",
      "security/ir.model.access.csv",
-
-     # Reports
-     "report/report.xml",
-     "report/report_credit_control_summary.xml",
-
-     # Data
-     "data/data.xml",
+     "security/acl_account_credit_control_analysis.xml",
 
      # Views
      "views/account_invoice.xml",
@@ -38,6 +33,14 @@
      "views/res_company.xml",
      "views/res_partner.xml",
      "views/res_config_settings_view.xml",
+
+     # Reports
+     "report/report.xml",
+     "report/report_credit_control_summary.xml",
+     "report/account_credit_control_analysis.xml",
+
+     # Data
+     "data/data.xml",
 
      # Wizards
      "wizard/credit_control_emailer_view.xml",

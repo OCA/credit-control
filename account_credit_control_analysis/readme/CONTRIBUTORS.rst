@@ -1,1 +1,0 @@
-* Quentin Groulard (ACSONE) <quentin.groulard@acsone.eu>
