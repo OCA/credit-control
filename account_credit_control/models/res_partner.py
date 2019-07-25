@@ -47,6 +47,9 @@ class ResPartner(models.Model):
         help="This is when the manual follow-up is needed.",
     )
     manual_followup = fields.Boolean()
+    credit_control_analysis_ids = fields.One2many(
+        "credit.control.analysis", "partner_id", string="Credit Control Levels"
+    )
 
     def _compute_credit_control_count(self):
         partners = self.filtered(lambda x: not x.parent_id)
