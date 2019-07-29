@@ -1,42 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_financial_risk
+#	* account_financial_risk
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: partner-contact (9.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2016-10-23 16:16+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-partner-"
-"contact-9-0/language/nl_BE/)\n"
-"Language: nl_BE\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\"/>"
+msgid "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
-"button.</strong>"
+msgid "<strong>If you are an Billing Manager you can use Confirm ALL Invoices button.</strong>"
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>With Confirm Invoices button only not risk exceeded partner invoices "
-"will be confirmed.</strong>"
+msgid "<strong>With Confirm Invoices button only not risk exceeded partner invoices will be confirmed.</strong>"
 msgstr ""
 
 #. module: account_financial_risk
@@ -53,12 +42,12 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
-msgstr "Bedrijven"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -88,12 +77,12 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_create_uid
 msgid "Created by"
-msgstr "Gemaakt door"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_create_date
 msgid "Created on"
-msgstr "Gemaakt op"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_policy
@@ -109,15 +98,13 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company_invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings_invoice_unpaid_margin
-msgid ""
-"Days after due date to set an invoice as unpaid.The change of this field "
-"recompute all partners risk,be patient."
+msgid "Days after due date to set an invoice as unpaid.The change of this field recompute all partners risk,be patient."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_display_name
 msgid "Display Name"
-msgstr "Schermnaam"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_exception_msg
@@ -134,6 +121,7 @@ msgstr ""
 #: code:addons/account_financial_risk/models/account_invoice.py:15
 #, python-format
 msgid "Financial risk exceeded.\n"
+""
 msgstr ""
 
 #. module: account_financial_risk
@@ -152,41 +140,29 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount_unpaid_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_account_amount_unpaid_include
-msgid ""
-"Full risk computation.\n"
-"Residual amount of move lines not reconciled with distinct account that is "
-"set as partner receivable and date maturity exceeded, considering Due Margin "
-"set in account settings."
+msgid "Full risk computation.\n"
+"Residual amount of move lines not reconciled with distinct account that is set as partner receivable and date maturity exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_account_amount_include
-msgid ""
-"Full risk computation.\n"
-"Residual amount of move lines not reconciled with distinct account that is "
-"set as partner receivable and date maturity not exceeded, considering Due "
-"Margin set in account settings."
+msgid "Full risk computation.\n"
+"Residual amount of move lines not reconciled with distinct account that is set as partner receivable and date maturity not exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_invoice_unpaid_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_invoice_unpaid_include
-msgid ""
-"Full risk computation.\n"
-"Residual amount of move lines not reconciled with the same account that is "
-"set as partner receivable and date maturity exceeded, considering Due Margin "
-"set in account settings."
+msgid "Full risk computation.\n"
+"Residual amount of move lines not reconciled with the same account that is set as partner receivable and date maturity exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_invoice_open_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_invoice_open_include
-msgid ""
-"Full risk computation.\n"
-"Residual amount of move lines not reconciled with the same account that is "
-"set as partner receivable and date maturity not exceeded, considering Due "
-"Margin set in account settings."
+msgid "Full risk computation.\n"
+"Residual amount of move lines not reconciled with the same account that is set as partner receivable and date maturity not exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
@@ -197,7 +173,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_invoice_draft_include
@@ -242,7 +218,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_invoice
 msgid "Invoice"
-msgstr "Factuur"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_exception
@@ -253,17 +229,17 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz___last_update
 msgid "Last Modified on"
-msgstr "Laatst Aangepast op"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_write_uid
 msgid "Last Updated by"
-msgstr "Laatst bijgewerkt door"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_write_date
 msgid "Last Updated on"
-msgstr "Laatst bijgewerkt op"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_invoice_draft_limit
@@ -316,37 +292,25 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount_unpaid
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_account_amount_unpaid
-msgid ""
-"Residual amount of move lines not reconciled with distinct account that is "
-"set as partner receivable and date maturity exceeded, considering Due Margin "
-"set in account settings."
+msgid "Residual amount of move lines not reconciled with distinct account that is set as partner receivable and date maturity exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_account_amount
-msgid ""
-"Residual amount of move lines not reconciled with distinct account that is "
-"set as partner receivable and date maturity not exceeded, considering Due "
-"Margin set in account settings."
+msgid "Residual amount of move lines not reconciled with distinct account that is set as partner receivable and date maturity not exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_invoice_unpaid
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_invoice_unpaid
-msgid ""
-"Residual amount of move lines not reconciled with the same account that is "
-"set as partner receivable and date maturity exceeded, considering Due Margin "
-"set in account settings."
+msgid "Residual amount of move lines not reconciled with the same account that is set as partner receivable and date maturity exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_invoice_open
 #: model:ir.model.fields,help:account_financial_risk.field_res_users_risk_invoice_open
-msgid ""
-"Residual amount of move lines not reconciled with the same account that is "
-"set as partner receivable and date maturity not exceeded, considering Due "
-"Margin set in account settings."
+msgid "Residual amount of move lines not reconciled with the same account that is set as partner receivable and date maturity not exceeded, considering Due Margin set in account settings."
 msgstr ""
 
 #. module: account_financial_risk
@@ -410,12 +374,14 @@ msgstr ""
 #: code:addons/account_financial_risk/models/account_invoice.py:26
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
+""
 msgstr ""
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/account_invoice.py:19
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
+""
 msgstr ""
 
 #. module: account_financial_risk
@@ -470,5 +436,3 @@ msgstr ""
 msgid "res.config.settings"
 msgstr ""
 
-#~ msgid "Partner"
-#~ msgstr "Relatie"
