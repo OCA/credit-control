@@ -28,7 +28,12 @@ class AccountCreditControlAnalysis(models.Model):
         readonly=True,
     )
     level = fields.Integer(string="Level", readonly=True)
-    open_balance = fields.Float(string="Open Balance", readonly=True)
+    open_balance = fields.Float(
+        string="Open Balance",
+        readonly=True,
+        help="Open balance on credit control lines"
+        "of same partner, policy and currency",
+    )
 
     @api.model_cr
     def init(self):
@@ -45,11 +50,7 @@ class AccountCreditControlAnalysis(models.Model):
                    ccl.currency_id                          AS currency_id,
                    ccl.policy_level_id                      AS policy_level_id,
                    ccpl.level                               AS level,
-                (SELECT CASE
-                    WHEN ccl.currency_id IS NOT NULL
-                    THEN sum(amount_residual_currency)
-                    ELSE sum(amount_residual)
-                    END
+                (SELECT sum(amount_residual)
                 FROM account_move_line AS aml
                 WHERE NOT aml.reconciled
                 AND aml.id IN
