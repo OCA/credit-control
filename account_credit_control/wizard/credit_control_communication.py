@@ -192,6 +192,8 @@ class CreditControlCommunication(models.TransientModel):
             # of storing res_id
             email_values.pop('model', None)
             email_values.pop('res_id', None)
+            # Remove when mail.template returns correct format attachments
+            attachment_list = email_values.pop('attachments', None)
             email = emails.create(email_values)
 
             state = 'sent'
@@ -202,27 +204,18 @@ class CreditControlCommunication(models.TransientModel):
             # a problem with the email
             if not all(email_values.get(field) for field in required_fields):
                 state = 'email_error'
-
             comm.credit_control_line_ids.write({
                 'mail_message_id': email.id,
                 'state': state,
             })
-            attachment_model = self.env['ir.attachment']
-            datas_attach = []
-            for att in email_values.get('attachments', []):
-                attach_fname = att[0]
-                attach_datas = att[1]
-                data_attach = {
-                    'name': attach_fname,
-                    'datas': attach_datas,
-                    'datas_fname': attach_fname,
-                    'res_model': 'mail.mail',
-                    'res_id': email.id,
-                    'type': 'binary',
-                }
-                datas_attach.append(data_attach)
-            attachments = attachment_model.create(datas_attach)
-            email.write({'attachment_ids': [(6, 0, attachments.ids)]})
+            email.attachment_ids = [(0, 0, {
+                'name': att[0],
+                'datas': att[1],
+                'datas_fname': att[0],
+                'res_model': 'mail.mail',
+                'res_id': email.id,
+                'type': 'binary',
+            }) for att in attachment_list]
             emails |= email
         return emails
 
