@@ -124,6 +124,17 @@ class TestCreditControlLine(TransactionCase):
         self.assertEqual(ccl_2.auto_process, 'low_level')
         self.assertTrue(ccl_2 in ccl_1.get_lower_related_lines())
 
+        policy.write({'auto_process_lower_levels': False})
+
+        self.assertEqual(ccl_1.auto_process, 'no_auto_process')
+        self.assertEqual(ccl_2.auto_process, 'no_auto_process')
+
+        policy.write({'auto_process_lower_levels': True})
+
+        self.assertEqual(ccl_1.auto_process, 'highest_level')
+        self.assertEqual(ccl_2.auto_process, 'low_level')
+        self.assertTrue(ccl_2 in ccl_1.get_lower_related_lines())
+
         ccl_1.unlink()
 
         self.assertEqual(ccl_2.auto_process, 'highest_level')
