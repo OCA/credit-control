@@ -328,49 +328,22 @@ class CreditControlPolicyLevel(models.Model):
                   '%s is not implemented') % (fname, )
             )
 
+    @api.multi
+    def _get_sql_level_part(self):
+        """ Return a where clauses statement for the previous line level """
+        self.ensure_one()
+        previous_level = self._previous_level()
+        if previous_level:
+            return "cr_line.level = %s" % (previous_level.level, )
+        else:
+            return "cr_line.id IS NULL"
+
     # -----------------------------------------
 
     @api.multi
     @api.returns('account.move.line')
-    def _get_first_level_move_lines(self, controlling_date, lines):
-        """ Retrieve all the move lines that are linked to a first level.
-        We use Raw SQL for performance. Security rule where applied in
-        policy object when the first set of lines were retrieved
-        """
-        self.ensure_one()
-        move_line_obj = self.env['account.move.line']
-        if not lines:
-            return move_line_obj
-        cr = self.env.cr
-        sql = ("SELECT DISTINCT mv_line.id\n"
-               " FROM account_move_line mv_line\n"
-               " WHERE mv_line.id in %(line_ids)s\n"
-               " AND NOT EXISTS (SELECT id\n"
-               "                 FROM credit_control_line\n"
-               "                 WHERE move_line_id = mv_line.id\n"
-               # lines from a previous level with a draft or ignored state
-               # or manually overridden
-               # have to be generated again for the previous level
-               "                 AND NOT manually_overridden\n"
-               "                 AND state NOT IN ('draft', 'ignored'))"
-               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n")
-        sql += " AND"
-        _get_sql_date_part = self._get_sql_date_boundary_for_computation_mode
-        sql += _get_sql_date_part()
-        data_dict = {'controlling_date': controlling_date,
-                     'line_ids': tuple(lines.ids),
-                     'delay': self.delay_days}
-        cr.execute(sql, data_dict)
-        res = cr.fetchall()
-        if res:
-            return move_line_obj.browse([row[0] for row in res])
-        return move_line_obj
-
-    @api.multi
-    @api.returns('account.move.line')
-    def _get_other_level_move_lines(self, controlling_date, lines):
-        """ Retrieve the move lines for other levels than first level.
-        """
+    def _get_level_move_lines(self, controlling_date, lines):
+        """ Retrieve the move lines for all levels. """
         self.ensure_one()
         move_line_obj = self.env['account.move.line']
         if not lines:
@@ -378,30 +351,24 @@ class CreditControlPolicyLevel(models.Model):
         cr = self.env.cr
         sql = ("SELECT mv_line.id\n"
                " FROM account_move_line mv_line\n"
-               " JOIN credit_control_line cr_line\n"
+               " LEFT JOIN credit_control_line cr_line\n"
                " ON (mv_line.id = cr_line.move_line_id)\n"
-               " WHERE cr_line.id = (SELECT credit_control_line.id "
-               " FROM credit_control_line\n"
-               "      WHERE credit_control_line.move_line_id = mv_line.id\n"
-               "      AND state != 'ignored'"
-               "      AND NOT manually_overridden"
-               "      ORDER BY credit_control_line.level desc limit 1)\n"
-               " AND cr_line.level = %(previous_level)s\n"
-               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
-               # lines from a previous level with a draft or ignored state
-               # or manually overridden
-               # have to be generated again for the previous level
-               " AND NOT manually_overridden\n"
-               " AND cr_line.state NOT IN ('draft', 'ignored')\n"
+               " AND cr_line.id = ("
+               "      SELECT max(id)"
+               "      FROM credit_control_line"
+               "      WHERE move_line_id = cr_line.move_line_id"
+               "      AND state NOT IN ('draft', 'ignored')"
+               "      AND NOT manually_overridden)\n"
+               " WHERE (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND "
         _get_sql_date_part = self._get_sql_date_boundary_for_computation_mode
         sql += _get_sql_date_part()
-        previous_level = self._previous_level()
+        sql += " AND "
+        sql += self._get_sql_level_part()
         data_dict = {'controlling_date': controlling_date,
                      'line_ids': tuple(lines.ids),
-                     'delay': self.delay_days,
-                     'previous_level': previous_level.level}
+                     'delay': self.delay_days}
 
         # print cr.mogrify(sql, data_dict)
         cr.execute(sql, data_dict)
@@ -416,9 +383,5 @@ class CreditControlPolicyLevel(models.Model):
         """ get all move lines in entry lines that match the current level """
         self.ensure_one()
         matching_lines = self.env['account.move.line']
-        if self._previous_level() is None:
-            method = self._get_first_level_move_lines
-        else:
-            method = self._get_other_level_move_lines
-        matching_lines |= method(controlling_date, lines)
+        matching_lines |= self._get_level_move_lines(controlling_date, lines)
         return matching_lines
