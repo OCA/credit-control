@@ -68,6 +68,8 @@ class AccountCreditControlAnalysis(models.Model):
             FROM credit_control_line AS ccl
             LEFT JOIN credit_control_policy_level AS ccpl
             ON ccpl.id=ccl.policy_level_id
+            INNER JOIN account_move_line AS aml
+            ON aml.id=ccl.move_line_id AND NOT aml.reconciled
             ORDER BY ccl.partner_id,
                     ccl.policy_id,
                     ccl.currency_id,
