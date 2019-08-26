@@ -84,6 +84,14 @@ class CreditControlLine(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
+    commercial_partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Commercial Entity',
+        compute_sudo=True,
+        related='partner_id.commercial_partner_id',
+        store=True,
+        readonly=True,
+    )
     amount_due = fields.Float(
         string='Due Amount Tax incl.',
         required=True,

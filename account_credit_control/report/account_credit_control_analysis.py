@@ -42,10 +42,10 @@ class AccountCreditControlAnalysis(models.Model):
             """
             CREATE VIEW credit_control_analysis
             AS
-            (SELECT DISTINCT ON (ccl.partner_id,
+            (SELECT DISTINCT ON (ccl.commercial_partner_id,
                    ccl.policy_id,
                    ccl.currency_id) ccl.id                  AS id,
-                   ccl.partner_id                           AS partner_id,
+                   ccl.commercial_partner_id                AS partner_id,
                    ccl.policy_id                            AS policy_id,
                    ccl.currency_id                          AS currency_id,
                    ccl.policy_level_id                      AS policy_level_id,
@@ -56,7 +56,7 @@ class AccountCreditControlAnalysis(models.Model):
                 AND aml.id IN
                     (SELECT move_line_id
                     FROM credit_control_line AS ccl2
-                    WHERE ccl2.partner_id=ccl.partner_id
+                    WHERE ccl2.commercial_partner_id=ccl.commercial_partner_id
                         AND ccl2.policy_id=ccl.policy_id
                         AND (
                             (ccl.currency_id IS NULL
@@ -70,7 +70,7 @@ class AccountCreditControlAnalysis(models.Model):
             ON ccpl.id=ccl.policy_level_id
             INNER JOIN account_move_line AS aml
             ON aml.id=ccl.move_line_id AND NOT aml.reconciled
-            ORDER BY ccl.partner_id,
+            ORDER BY ccl.commercial_partner_id,
                     ccl.policy_id,
                     ccl.currency_id,
                     ccpl.level DESC,
