@@ -155,8 +155,8 @@
                 <field name="invoice_id"/>
                 <field name="partner_id"/>
                 <field name="manual_followup"/>
-                <field name="amount_due" sum="Total Amount Due"/>
-                <field name="balance_due" sum="Total Balance Due"/>
+                <field name="amount_due"/>
+                <field name="balance_due"/>
                 <field name="currency_id" invisible="1"/>
                 <field name="move_line_id"/>
                 <field name="account_id"/>
