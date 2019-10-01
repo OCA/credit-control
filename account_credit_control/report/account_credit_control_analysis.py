@@ -11,7 +11,7 @@ class AccountCreditControlAnalysis(models.Model):
     _rec_name = "partner_id"
 
     partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", readonly=True
+        comodel_name="res.partner", readonly=True
     )
     partner_ref = fields.Char(
         related="partner_id.ref", string="Partner Ref", readonly=True
@@ -20,7 +20,7 @@ class AccountCreditControlAnalysis(models.Model):
         comodel_name="credit.control.policy", string="Policy", readonly=True
     )
     currency_id = fields.Many2one(
-        comodel_name="res.currency", string="Currency", readonly=True
+        comodel_name="res.currency", readonly=True
     )
     policy_level_id = fields.Many2one(
         comodel_name="credit.control.policy.level",
@@ -29,7 +29,6 @@ class AccountCreditControlAnalysis(models.Model):
     )
     level = fields.Integer(string="Level", readonly=True)
     open_balance = fields.Float(
-        string="Open Balance",
         readonly=True,
         help="Open balance on credit control lines"
         "of same partner, policy and currency",

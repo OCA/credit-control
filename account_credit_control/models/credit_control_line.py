@@ -90,7 +90,6 @@ class CreditControlLine(models.Model):
         compute_sudo=True,
         related='partner_id.commercial_partner_id',
         store=True,
-        readonly=True,
     )
     amount_due = fields.Float(
         string='Due Amount Tax incl.',
