@@ -168,7 +168,6 @@ class CreditControlLine(models.Model):
             ('highest_level', 'Highest Level'),
         ],
         default="no_auto_process",
-        store=True,
         readonly=True,
     )
 
@@ -263,7 +262,7 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
-    def update_auto_process(self, exclude_ids=[]):
+    def update_auto_process(self, exclude_ids=None):
         self.ensure_one()
         if not self.policy_id.auto_process_lower_levels:
             return
@@ -272,7 +271,7 @@ class CreditControlLine(models.Model):
         )
         highest_related_line.write({'auto_process': 'highest_level'})
         self.get_related_lines(
-            exclude_ids=(exclude_ids + highest_related_line.ids)
+            exclude_ids=((exclude_ids or []) + highest_related_line.ids)
         ).write({'auto_process': 'low_level'})
 
     @api.multi
@@ -305,11 +304,11 @@ class CreditControlLine(models.Model):
             line.update_auto_process()
         return lines
 
-    def get_highest_related_line(self, exclude_ids=[]):
+    def get_highest_related_line(self, exclude_ids=None):
         self.ensure_one()
         return self.get_related_lines(exclude_ids=exclude_ids, limit=1)
 
-    def get_related_lines(self, exclude_ids=[], limit=None):
+    def get_related_lines(self, exclude_ids=None, limit=None):
         """
         Return lines from the same group if grouped
         (ie with same partner, policy and currency).
@@ -325,7 +324,7 @@ class CreditControlLine(models.Model):
                     ('currency_id', '=', self.currency_id.id),
                     ('policy_id', '=', self.policy_id.id),
                     ('state', 'in', ('draft', 'to_be_sent')),
-                    ('id', 'not in', exclude_ids),
+                    ('id', 'not in', exclude_ids if exclude_ids else []),
                 ],
                 limit=limit,
                 order='level DESC, date_due ASC',
@@ -341,7 +340,7 @@ class CreditControlLine(models.Model):
         self.ensure_one()
         if self.policy_id.auto_process_lower_levels:
             return self.get_related_lines().filtered(
-                lambda l: l.policy_level_id.level <= self.policy_level_id.level
+                lambda l: l.level <= self.level
             )
         else:
             return self
@@ -378,7 +377,7 @@ class CreditControlLine(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": "Credit Control Lines",
+            "name": _("Credit Control Lines"),
             "res_model": "credit.control.line",
             "domain": [("id", "in", self.get_lower_related_lines().ids)],
             "view_mode": "tree,form",
