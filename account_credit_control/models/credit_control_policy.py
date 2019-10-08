@@ -70,7 +70,8 @@ class CreditControlPolicy(models.Model):
                         ('state', 'in', ('draft', 'to_be_sent')),
                     ],
                     fields=['id'],
-                    groupby=['partner_id'],
+                    groupby=['partner_id', 'currency_id'],
+                    lazy=False,
                 )
                 for group in res:
                     highest_level_line = credit_control_model.search(
