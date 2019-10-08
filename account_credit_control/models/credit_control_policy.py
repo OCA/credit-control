@@ -73,15 +73,15 @@ class CreditControlPolicy(models.Model):
                     groupby=['partner_id'],
                 )
                 for group in res:
-                    records = credit_control_model.search(
+                    highest_level_line = credit_control_model.search(
                         group['__domain'],
                         order='level DESC, date_due ASC',
+                        limit=1,
                     )
-                    if not records:
-                        continue
-                    records[0].write({'auto_process': 'highest_level'})
-                    if len(records) > 1:
-                        records[1:].write({'auto_process': 'low_level'})
+                    highest_level_line.write({'auto_process': 'highest_level'})
+                    highest_level_line.get_related_lines(
+                        exclude_ids=highest_level_line.ids
+                    ).write({'auto_process': 'low_level'})
             else:
                 lines = credit_control_model.search(
                     [

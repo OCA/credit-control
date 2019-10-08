@@ -263,6 +263,18 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
+    def update_auto_process(self, exclude_ids=[]):
+        self.ensure_one()
+        if not self.policy_id.auto_process_lower_levels:
+            return
+        highest_related_line = self.get_highest_related_line(
+            exclude_ids=exclude_ids
+        )
+        highest_related_line.write({'auto_process': 'highest_level'})
+        self.get_related_lines(
+            exclude_ids=(exclude_ids + highest_related_line.ids)
+        ).write({'auto_process': 'low_level'})
+
     @api.multi
     def unlink(self):
         for line in self:
@@ -271,15 +283,7 @@ class CreditControlLine(models.Model):
                     _('You are not allowed to delete a credit control '
                       'line that is not in draft state.')
                 )
-            if line.policy_id.auto_process_lower_levels:
-                related_lines = line.get_related_lines().filtered(
-                    lambda l: l.id != line.id
-                )
-                if not related_lines:
-                    continue
-                related_lines[0].write({'auto_process': 'highest_level'})
-                if len(related_lines) > 1:
-                    related_lines[1:].write({'auto_process': 'low_level'})
+            line.update_auto_process(exclude_ids=line.ids)
         return super(CreditControlLine, self).unlink()
 
     @api.multi
@@ -290,32 +294,22 @@ class CreditControlLine(models.Model):
                 'manual_followup': values.get('manual_followup'),
             })
         for line in self:
-            if (
-                'auto_process' not in values and
-                line.policy_id.auto_process_lower_levels
-            ):
-                related_lines = line.get_related_lines()
-                if not related_lines:
-                    return res
-                related_lines[0].write({'auto_process': 'highest_level'})
-                if len(related_lines) > 1:
-                    related_lines[1:].write({'auto_process': 'low_level'})
+            if ('auto_process' not in values):
+                line.update_auto_process()
         return res
 
     @api.model_create_multi
     def create(self, vals_list):
         lines = super(CreditControlLine, self).create(vals_list)
         for line in lines:
-            if line.policy_id.auto_process_lower_levels:
-                related_lines = line.get_related_lines()
-                if not related_lines:
-                    continue
-                related_lines[0].write({'auto_process': 'highest_level'})
-                if len(related_lines) > 1:
-                    related_lines[1:].write({'auto_process': 'low_level'})
+            line.update_auto_process()
         return lines
 
-    def get_related_lines(self):
+    def get_highest_related_line(self, exclude_ids=[]):
+        self.ensure_one()
+        return self.get_related_lines(exclude_ids=exclude_ids, limit=1)
+
+    def get_related_lines(self, exclude_ids=[], limit=None):
         """
         Return lines from the same group if grouped
         (ie with same partner, policy and currency).
@@ -331,7 +325,9 @@ class CreditControlLine(models.Model):
                     ('currency_id', '=', self.currency_id.id),
                     ('policy_id', '=', self.policy_id.id),
                     ('state', 'in', ('draft', 'to_be_sent')),
+                    ('id', 'not in', exclude_ids),
                 ],
+                limit=limit,
                 order='level DESC, date_due ASC',
             )
         else:
