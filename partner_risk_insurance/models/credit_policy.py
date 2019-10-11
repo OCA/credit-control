@@ -5,5 +5,6 @@ from odoo import fields, models
 
 class CreditPolicyState(models.Model):
     _name = 'credit.policy.state'
+    _description = "State of credit policies"
 
     name = fields.Char(required=True)
