@@ -24,7 +24,7 @@ class CreditControlMarker(models.TransientModel):
     name = fields.Selection(
         selection=[
             ('ignored', 'Ignored'),
-            ('to_be_sent', 'Ready To Send'),
+            ('to_be_sent', 'To Do'),
             ('sent', 'Done'),
         ],
         string='Mark as',
@@ -75,6 +75,7 @@ class CreditControlMarker(models.TransientModel):
             'view_type': 'form',
             'view_mode': 'tree,form',
             'view_id': False,
+            'name': _('Control Credit Line'),
             'res_model': 'credit.control.line',
             'type': 'ir.actions.act_window',
         }

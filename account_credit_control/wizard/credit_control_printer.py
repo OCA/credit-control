@@ -21,7 +21,7 @@ class CreditControlPrinter(models.TransientModel):
         return context.get('active_ids', False)
 
     mark_as_sent = fields.Boolean(
-        string='Mark letter lines as sent',
+        string='Mark letter lines as done',
         default=True,
         help="Only letter lines will be marked.",
     )
