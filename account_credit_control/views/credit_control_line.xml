@@ -71,16 +71,16 @@
                             string="Draft" domain="[('state', '=', 'draft')]"
                             help="Draft lines have to be triaged."/>
                     <filter name="filter_to_be_sent" icon="fa-share"
-                            string="Ready To Send"
+                            string="To Do"
                             domain="[('state', '=', 'to_be_sent')]"
-                            help="These lines are ready to send by email or by letter using the Actions."/>
+                            help="These lines are to do using the Actions."/>
                     <filter name="filter_ignored" icon="fa-times"
                             string="Ignored"
                             domain="[('state', '=', 'ignored')]"
                             help="Lines which have been ignored from previous runs."/>
                     <filter name="filter_sent" icon="fa-paper-plane"
-                            string="Sent" domain="[('state', '=', 'sent')]"
-                            help="Lines already sent."/>
+                            string="Done" domain="[('state', '=', 'sent')]"
+                            help="Lines already done."/>
                     <filter name="filter_error" icon="fa-exclamation-triangle"
                             string="Error"
                             domain="[('state', 'in', ('error', 'email_error'))]"
