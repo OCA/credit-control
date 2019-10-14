@@ -104,6 +104,7 @@ class CreditControlLine(models.Model):
         string='Move line',
         required=True,
         readonly=True,
+        index=True,
     )
     account_id = fields.Many2one(
         comodel_name='account.account',
@@ -209,6 +210,8 @@ class CreditControlLine(models.Model):
             tolerance[currency.id] = currency.compute(
                 tolerance_base, user_currency)
 
+        lines_to_create = []
+        lines_to_write = self.browse()
         new_lines = self.browse()
         for move_line in lines:
             ml_currency = move_line.currency_id
@@ -222,8 +225,7 @@ class CreditControlLine(models.Model):
                 continue
             vals = self._prepare_from_move_line(
                 move_line, level, controlling_date, open_amount)
-            line = self.create([vals])
-            new_lines |= line
+            lines_to_create.append(vals)
 
             # when we have lines generated earlier in draft,
             # on the same level, it means that we have left
@@ -232,10 +234,11 @@ class CreditControlLine(models.Model):
                 ('move_line_id', '=', move_line.id),
                 ('policy_level_id', '=', level.id),
                 ('state', '=', 'draft'),
-                ('id', '!=', line.id),
             ])
-            if previous_drafts:
-                previous_drafts.write({'state': 'ignored'})
+            lines_to_write = lines_to_write | previous_drafts
+
+        new_lines = self.create(lines_to_create)
+        lines_to_write.write({'state': 'ignored'})
 
         return new_lines
 
