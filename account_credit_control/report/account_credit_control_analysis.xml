@@ -26,7 +26,6 @@
             <pivot string="Credit Control Analysis">
                 <field name="partner_id" type="row"/>
                 <field name="policy_id" type="row"/>
-                <field name="currency_id" type="row"/>
                 <field name="policy_level_id" type="col"/>
                 <field name="level" type="col"/>
                 <field name="open_balance" type="measure"/>
