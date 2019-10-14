@@ -46,14 +46,19 @@ class CreditControlEmailer(models.TransientModel):
         return line_obj.search(domain)
 
     @api.multi
-    def email_lines(self):
+    def _send_emails(self):
         self.ensure_one()
-        if not self.line_ids:
-            raise UserError(_('No credit control lines selected.'))
-
         comm_obj = self.env['credit.control.communication']
 
         filtered_lines = self._filter_lines(self.line_ids)
         comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
         comms._generate_emails()
+
+    @api.multi
+    def email_lines(self):
+        self.ensure_one()
+        if not self.line_ids:
+            raise UserError(_('No credit control lines selected.'))
+
+        self._send_emails()
         return {'type': 'ir.actions.act_window_close'}

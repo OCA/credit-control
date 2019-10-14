@@ -86,6 +86,7 @@ Authors
 * Okia
 * Access Bookings
 * Tecnativa
+* ACSONE SA/NV
 
 Contributors
 ~~~~~~~~~~~~
@@ -97,6 +98,7 @@ Contributors
 * Vicent Cubells (Tecnativa) <vicent.cubells@tecnativa.com>
 * Kinner Vachhani (Access Bookings Ltd) <kin.vachhani@gmail.com>
 * Raf Ven <raf.ven@dynapps.be>
+* Quentin Groulard (ACSONE) <quentin.groulard@acsone.eu>
 
 Maintainers
 ~~~~~~~~~~~
