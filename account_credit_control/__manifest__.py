@@ -3,7 +3,7 @@
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
- 'version': '12.0.1.0.3',
+ 'version': '12.0.1.5.2',
  'author': "Camptocamp,"
            "Odoo Community Association (OCA),"
            "Okia,"
@@ -24,6 +24,7 @@
      "security/account_security.xml",
      "security/ir.model.access.csv",
      "security/acl_account_credit_control_analysis.xml",
+     "security/acl_res_partner_payment_action_type.xml",
 
      # Views
      "views/account_invoice.xml",

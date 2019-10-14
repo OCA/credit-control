@@ -5,6 +5,27 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
+class ResPartnerPaymentActionType(models.Model):
+
+    _name = 'res.partner.payment.action.type'
+    _description = 'Partner Payment Action Types'
+    _order = 'sequence, id'
+
+    name = fields.Char()
+    sequence = fields.Integer('Sequence', default=10)
+    active = fields.Boolean(default=True)
+    partner_ids = fields.One2many(
+        comodel_name='res.partner',
+        inverse_name='payment_next_action_type',
+        string='Partners',
+    )
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id,
+    )
+
+
 class ResPartner(models.Model):
     """ Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines.
@@ -37,6 +58,11 @@ class ResPartner(models.Model):
         help="Payment Note",
         track_visibility="onchange",
     )
+    payment_next_action_type = fields.Many2one(
+        comodel_name='res.partner.payment.action.type',
+        string='Next Action Type',
+        track_visibility='onchange',
+    )
     payment_next_action = fields.Text(
         string='Next Action',
         help="This is the next action to be taken.",
@@ -45,6 +71,7 @@ class ResPartner(models.Model):
     payment_next_action_date = fields.Date(
         string='Next Action Date',
         help="This is when the manual follow-up is needed.",
+        track_visibility='onchange',
     )
     manual_followup = fields.Boolean()
     credit_control_analysis_ids = fields.One2many(
