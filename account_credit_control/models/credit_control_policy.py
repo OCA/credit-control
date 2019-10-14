@@ -201,8 +201,27 @@ class CreditControlPolicy(models.Model):
             )
         return True
 
+    def _create_lines(
+        self, level_lines, level, ccl_model, controlling_date, run_id
+    ):
+        return ccl_model.create_or_update_from_mv_lines(
+            level_lines, level, controlling_date, run_id=run_id
+        )
+
+    def _process_report(self, policy_lines_generated):
+        if policy_lines_generated:
+            return _(
+                "Policy \"<b>%s</b>\" has generated <b>%d Credit "
+                "Control Lines.</b><br/>"
+            ) % (self.name, len(policy_lines_generated))
+        else:
+            return _(
+                "Policy \"<b>%s</b>\" has not generated any "
+                "Credit Control Lines.<br/>"
+            ) % self.name
+
     @api.multi
-    def generate_credit_lines(self, controlling_date):
+    def generate_credit_lines(self, controlling_date, run_id):
         self.ensure_one()
         credit_line_model = self.env['credit.control.line']
         lines = self._get_move_lines_to_process(controlling_date)
@@ -212,20 +231,16 @@ class CreditControlPolicy(models.Model):
         if lines:
             # policy levels are sorted by level
             # so iteration is in the correct order
-            create = policy_lines_generated.create_or_update_from_mv_lines
             for level in reversed(self.level_ids):
                 level_lines = level.get_level_lines(controlling_date, lines)
-                policy_lines_generated += create(
-                    level_lines, level, controlling_date)
-        if policy_lines_generated:
-            report = _(
-                "Policy \"<b>%s</b>\" has generated <b>%d Credit "
-                "Control Lines.</b><br/>"
-            ) % (self.name, len(policy_lines_generated))
-        else:
-            report = _(
-                "Policy \"<b>%s</b>\" has not generated any "
-                "Credit Control Lines.<br/>") % self.name
+                policy_lines_generated += self._create_lines(
+                    level_lines,
+                    level,
+                    credit_line_model,
+                    controlling_date,
+                    run_id,
+                )
+        report = self._process_report(policy_line_generated)
         return (manual_lines, policy_lines_generated, report)
 
 

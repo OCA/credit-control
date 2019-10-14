@@ -133,7 +133,7 @@ class CreditControlRun(models.Model):
                 policy_manual_lines,
                 policy_lines_generated,
                 policy_report,
-            ) = policy.generate_credit_lines(self.date)
+            ) = policy.generate_credit_lines(self.date, self.id)
             manually_managed_lines |= policy_manual_lines
             generated |= policy_lines_generated
             report += policy_report
@@ -142,7 +142,6 @@ class CreditControlRun(models.Model):
             'state': 'done',
             'report': report,
             'manual_ids': [(6, 0, manually_managed_lines.ids)],
-            'line_ids': [(6, 0, generated.ids)],
         }
         self.write(vals)
         return generated

@@ -167,7 +167,7 @@ class CreditControlLine(models.Model):
 
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,
-                                open_amount):
+                                open_amount, run_id):
         """ Create credit control line """
         data = {
             'date': controlling_date,
@@ -183,12 +183,13 @@ class CreditControlLine(models.Model):
             'policy_level_id': level.id,
             'move_line_id': move_line.id,
             'manual_followup': move_line.partner_id.manual_followup,
+            'run_id': run_id,
         }
         return data
 
     @api.model
     def create_or_update_from_mv_lines(self, lines, level, controlling_date,
-                                       check_tolerance=True):
+                                       run_id=None, check_tolerance=True):
         """ Create or update line based on levels
 
         if check_tolerance is true credit line will not be
@@ -205,6 +206,7 @@ class CreditControlLine(models.Model):
                                 will not be generated if open amount
                                 is smaller than company defined
                                 tolerance
+        :param run_id: credit.control.run record id
 
         :returns: recordset of created credit lines
         """
@@ -233,7 +235,7 @@ class CreditControlLine(models.Model):
             if check_tolerance and open_amount < cur_tolerance:
                 continue
             vals = self._prepare_from_move_line(
-                move_line, level, controlling_date, open_amount)
+                move_line, level, controlling_date, open_amount, run_id)
             lines_to_create.append(vals)
 
             # when we have lines generated earlier in draft,
