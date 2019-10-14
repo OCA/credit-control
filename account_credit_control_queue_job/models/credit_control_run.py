@@ -9,9 +9,9 @@ class CreditControlRun(models.Model):
     _inherit = 'credit.control.run'
 
     run_in_jobs = fields.Boolean(
-        help='The generation of credit control lines may take some time' 
+        help='The generation of credit control lines may take some time'
              'to process, running it in jobs may be needed in case'
-             'of high volumes.' 
+             'of high volumes.'
     )
 
     def _create_lines(self, level_lines, level, ccl_model, group_size=100):
@@ -31,7 +31,7 @@ class CreditControlRun(models.Model):
                 self, level_lines, level, ccl_model
             )
 
-    def _process_report(policy_lines_generated, policy
+    def _process_report(self, policy_lines_generated, policy):
         if self.run_in_jobs:
             return ""
         else:
