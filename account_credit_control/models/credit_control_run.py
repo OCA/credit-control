@@ -140,6 +140,7 @@ class CreditControlRun(models.Model):
                 create = policy_lines_generated.create_or_update_from_mv_lines
                 for level in reversed(policy.level_ids):
                     level_lines = level.get_level_lines(self.date, lines)
+                    lines -= level_lines
                     policy_lines_generated += create(
                         level_lines, level, self.date)
             generated |= policy_lines_generated

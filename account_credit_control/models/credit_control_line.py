@@ -225,12 +225,10 @@ class CreditControlLine(models.Model):
             line = self.create([vals])
             new_lines |= line
 
-            # when we have lines generated earlier in draft,
-            # on the same level, it means that we have left
-            # them, so they are to be considered as ignored
+            # other lines still in draft for this move_line
+            # have to be ignored
             previous_drafts = self.search([
                 ('move_line_id', '=', move_line.id),
-                ('policy_level_id', '=', level.id),
                 ('state', '=', 'draft'),
                 ('id', '!=', line.id),
             ])

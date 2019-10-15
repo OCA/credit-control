@@ -20,6 +20,7 @@
                                 <field name="channel"/>
                                 <field name="delay_days"/>
                                 <field name="computation_mode"/>
+                                <field name="always_compute"/>
                                 <field name="email_template_id"/>
                             </tree>
                             <form string="Policy level">
@@ -31,6 +32,7 @@
                                             <field name="channel"/>
                                             <field name="delay_days"/>
                                             <field name="computation_mode"/>
+                                            <field name="always_compute"/>
                                         </group>
                                     </page>
                                     <page string="Mail and reporting">
@@ -106,6 +108,7 @@
                             <field name="channel"/>
                             <field name="delay_days"/>
                             <field name="computation_mode"/>
+                            <field name="always_compute"/>
                         </group>
                     </page>
                     <page string="Mail and reporting">
@@ -129,6 +132,7 @@
                 <field name="channel"/>
                 <field name="delay_days"/>
                 <field name="computation_mode"/>
+                <field name="always_compute"/>
                 <field name="email_template_id"/>
             </tree>
         </field>

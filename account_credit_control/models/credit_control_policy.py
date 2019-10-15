@@ -258,6 +258,11 @@ class CreditControlPolicyLevel(models.Model):
         string='Custom Message after details',
         translate=True,
     )
+    always_compute = fields.Boolean(
+        help='If checked, credit control line will be generated for '
+        'this level even if previous level lines have not been '
+        'processed.',
+    )
 
     _sql_constraint = [('unique level',
                         'UNIQUE (policy_id, level)',
@@ -275,6 +280,19 @@ class CreditControlPolicyLevel(models.Model):
                             order='level asc', limit=1)
             if smallest_level.computation_mode == 'previous_date':
                 raise ValidationError(_('The smallest level can not be '
+                                        'of type Previous Reminder'))
+
+    @api.multi
+    @api.constrains('computation_mode', 'always_compute')
+    def _check_always_compute(self):
+        """ An always compute level cannot depend on previous reminder.
+        """
+        for policy_level in self:
+            if (
+                policy_level.computation_mode == 'previous_date'
+                and policy_level.always_compute
+            ):
+                raise ValidationError(_('An always compute level cannot be '
                                         'of type Previous Reminder'))
 
     @api.multi
@@ -332,6 +350,10 @@ class CreditControlPolicyLevel(models.Model):
     def _get_sql_level_part(self):
         """ Return a where clauses statement for the previous line level """
         self.ensure_one()
+        if self.always_compute:
+            return "(cr_line.id IS NULL OR cr_line.level < %s)" % (
+                self.level,
+            )
         previous_level = self._previous_level()
         if previous_level:
             return "cr_line.level = %s" % (previous_level.level, )

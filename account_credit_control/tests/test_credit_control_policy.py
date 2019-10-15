@@ -50,6 +50,15 @@ class TestCreditControlPolicy(TransactionCase):
         with self.assertRaises(ValidationError):
             level_1.computation_mode = 'previous_date'
 
+    def test_check_always_compute(self):
+        """
+        Check the method _check_always_compute on policy level
+        """
+        level_3 = self.env.ref('account_credit_control.3_time_3')
+
+        with self.assertRaises(ValidationError):
+            level_3.always_compute = True
+
     def test_previous_level(self):
         """
         Check the method _previous_level on policy level
