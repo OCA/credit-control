@@ -162,19 +162,21 @@ class CreditControlLine(models.Model):
     def _prepare_from_move_line(self, move_line, level, controlling_date,
                                 open_amount):
         """ Create credit control line """
-        data = {}
-        data['date'] = controlling_date
-        data['date_due'] = move_line.date_maturity
-        data['state'] = 'draft'
-        data['channel'] = level.channel
-        data['invoice_id'] = (move_line.invoice_id.id if
-                              move_line.invoice_id else False)
-        data['partner_id'] = move_line.partner_id.id
-        data['amount_due'] = (move_line.amount_currency or move_line.debit or
-                              move_line.credit)
-        data['balance_due'] = open_amount
-        data['policy_level_id'] = level.id
-        data['move_line_id'] = move_line.id
+        data = {
+            'date': controlling_date,
+            'date_due': move_line.date_maturity,
+            'state': 'draft',
+            'channel': level.channel,
+            'invoice_id': (move_line.invoice_id.id if
+                           move_line.invoice_id else False),
+            'partner_id': move_line.partner_id.id,
+            'amount_due': (move_line.amount_currency or move_line.debit or
+                           move_line.credit),
+            'balance_due': open_amount,
+            'policy_level_id': level.id,
+            'move_line_id': move_line.id,
+            'manual_followup': move_line.partner_id.manual_followup,
+        }
         return data
 
     @api.model
@@ -260,13 +262,6 @@ class CreditControlLine(models.Model):
                 'manual_followup': values.get('manual_followup'),
             })
         return res
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super(CreditControlLine, self).create(vals_list)
-        for line in lines:
-            line.manual_followup = line.partner_id.manual_followup
-        return lines
 
     def button_schedule_activity(self):
         ctx = self.env.context.copy()
