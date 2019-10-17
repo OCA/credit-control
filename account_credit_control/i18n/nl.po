@@ -274,6 +274,11 @@ msgid "Channel"
 msgstr "Kanaal"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__commercial_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
 msgstr "Bedrijven"
@@ -378,6 +383,24 @@ msgstr "Aangemaakt op"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
 msgstr "Aanmaning"
+
+#. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.credit_control_analysis_act_window
+#: model:ir.model,name:account_credit_control.model_credit_control_analysis
+#: model:ir.ui.menu,name:account_credit_control.credit_control_analysis_menu
+#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_analysis_pivot_view
+#, fuzzy
+#| msgid "Credit Control Lines"
+msgid "Credit Control Analysis"
+msgstr "Aanmaning regels"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_analysis_ids
+#, fuzzy
+#| msgid "Credit Control Lines"
+msgid "Credit Control Levels"
+msgstr "Aanmaning regels"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_line_action
@@ -491,6 +514,7 @@ msgid "Credit policy level"
 msgstr "Aanmaningsbeleid niveau"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__currency_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__currency_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__currency_id
 msgid "Currency"
@@ -559,6 +583,7 @@ msgid "Delay Setting"
 msgstr "Vertraging instelling"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__display_name
@@ -715,6 +740,7 @@ msgid "Hide Change State Button"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__id
@@ -797,6 +823,7 @@ msgid "Issued Lines"
 msgstr "Uitgevoerde regels"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line____last_update
@@ -842,6 +869,7 @@ msgid "Letter"
 msgstr "Brief"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__current_policy_level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__level
@@ -1103,9 +1131,22 @@ msgid "Only letter lines will be marked."
 msgstr "Allen briefregels worden gemarkeerd."
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
+#, fuzzy
+#| msgid "Due balance"
+msgid "Open Balance"
+msgstr "Vervallen bedrag"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
 msgstr "Open bedrag"
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
+msgid ""
+"Open balance on credit control linesof same partner, policy and currency"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1355,15 +1396,24 @@ msgid "Overdue"
 msgstr "Aanmaningsniveau"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__policy_level_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__policy_level_id
 msgid "Overdue Level"
 msgstr "Aanmaningsniveau"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__partner_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Partner"
+msgstr "Relatie"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
+#, fuzzy
+#| msgid "Partner"
+msgid "Partner Ref"
 msgstr "Relatie"
 
 #. module: account_credit_control
@@ -1396,6 +1446,7 @@ msgid "Policies"
 msgstr "Beleid"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__policy_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Policy"
 msgstr "Beleid"
@@ -1511,7 +1562,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:274
+#: code:addons/account_credit_control/models/credit_control_line.py:281
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1729,7 +1780,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:252
+#: code:addons/account_credit_control/models/credit_control_line.py:259
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
