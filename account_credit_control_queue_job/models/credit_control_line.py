@@ -14,10 +14,9 @@ class CreditControlLine(models.Model):
     def create_or_update_from_mv_lines(self, lines, level, controlling_date,
                                        run_id=None, check_tolerance=True):
         return super(CreditControlLine, self).create_or_update_from_mv_lines(
-            self,
             lines,
             level,
             controlling_date,
-            run_id=None,
-            check_tolerance=True,
+            run_id,
+            check_tolerance,
         )

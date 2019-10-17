@@ -209,6 +209,7 @@ class CreditControlPolicy(models.Model):
         )
 
     def _process_report(self, policy_lines_generated):
+        self.ensure_one()
         if policy_lines_generated:
             return _(
                 "Policy \"<b>%s</b>\" has generated <b>%d Credit "
