@@ -104,6 +104,7 @@ class CreditControlLine(models.Model):
         string='Move line',
         required=True,
         readonly=True,
+        index=True,
     )
     account_id = fields.Many2one(
         comodel_name='account.account',
@@ -161,19 +162,21 @@ class CreditControlLine(models.Model):
     def _prepare_from_move_line(self, move_line, level, controlling_date,
                                 open_amount):
         """ Create credit control line """
-        data = {}
-        data['date'] = controlling_date
-        data['date_due'] = move_line.date_maturity
-        data['state'] = 'draft'
-        data['channel'] = level.channel
-        data['invoice_id'] = (move_line.invoice_id.id if
-                              move_line.invoice_id else False)
-        data['partner_id'] = move_line.partner_id.id
-        data['amount_due'] = (move_line.amount_currency or move_line.debit or
-                              move_line.credit)
-        data['balance_due'] = open_amount
-        data['policy_level_id'] = level.id
-        data['move_line_id'] = move_line.id
+        data = {
+            'date': controlling_date,
+            'date_due': move_line.date_maturity,
+            'state': 'draft',
+            'channel': level.channel,
+            'invoice_id': (move_line.invoice_id.id if
+                           move_line.invoice_id else False),
+            'partner_id': move_line.partner_id.id,
+            'amount_due': (move_line.amount_currency or move_line.debit or
+                           move_line.credit),
+            'balance_due': open_amount,
+            'policy_level_id': level.id,
+            'move_line_id': move_line.id,
+            'manual_followup': move_line.partner_id.manual_followup,
+        }
         return data
 
     @api.model
@@ -209,6 +212,8 @@ class CreditControlLine(models.Model):
             tolerance[currency.id] = currency.compute(
                 tolerance_base, user_currency)
 
+        lines_to_create = []
+        lines_to_write = self.browse()
         new_lines = self.browse()
         for move_line in lines:
             ml_currency = move_line.currency_id
@@ -222,8 +227,7 @@ class CreditControlLine(models.Model):
                 continue
             vals = self._prepare_from_move_line(
                 move_line, level, controlling_date, open_amount)
-            line = self.create([vals])
-            new_lines |= line
+            lines_to_create.append(vals)
 
             # when we have lines generated earlier in draft,
             # on the same level, it means that we have left
@@ -232,10 +236,11 @@ class CreditControlLine(models.Model):
                 ('move_line_id', '=', move_line.id),
                 ('policy_level_id', '=', level.id),
                 ('state', '=', 'draft'),
-                ('id', '!=', line.id),
             ])
-            if previous_drafts:
-                previous_drafts.write({'state': 'ignored'})
+            lines_to_write = lines_to_write | previous_drafts
+
+        new_lines = self.create(lines_to_create)
+        lines_to_write.write({'state': 'ignored'})
 
         return new_lines
 
@@ -257,13 +262,6 @@ class CreditControlLine(models.Model):
                 'manual_followup': values.get('manual_followup'),
             })
         return res
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super(CreditControlLine, self).create(vals_list)
-        for line in lines:
-            line.manual_followup = line.partner_id.manual_followup
-        return lines
 
     def button_schedule_activity(self):
         ctx = self.env.context.copy()
