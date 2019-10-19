@@ -11,7 +11,7 @@ class CreditControlRun(models.Model):
     run_in_jobs = fields.Boolean(
         help='The generation of credit control lines may take some time'
              'to process, running it in jobs may be needed in case'
-             'of high volumes.'
+             'of high volumes.',
     )
 
     @api.multi

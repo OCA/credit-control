@@ -11,6 +11,9 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://acsone.eu",
     "depends": ["account_credit_control", "queue_job"],
-    "data": ["views/credit_control_run.xml"],
+    "data": [
+        "views/credit_control_run.xml",
+        "wizard/credit_control_emailer_view.xml",
+    ],
     "demo": [],
 }
