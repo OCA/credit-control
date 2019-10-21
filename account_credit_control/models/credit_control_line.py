@@ -43,8 +43,8 @@ class CreditControlLine(models.Model):
         related='move_line_id.date',
         store=True,
     )
-    date_sent = fields.Date(
-        string='Sent date',
+    date_reminded = fields.Date(
+        string='Reminded date',
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
@@ -52,14 +52,15 @@ class CreditControlLine(models.Model):
         selection=[
             ('draft', 'Draft'),
             ('ignored', 'Ignored'),
-            ('to_be_sent', 'Ready To Send'),
-            ('sent', 'Done'),
+            ('to_do', 'To Do'),
+            ('done', 'Done'),
             ('error', 'Error'),
             ('email_error', 'Emailing Error'),
         ],
         required=True,
         readonly=True,
         default='draft',
+        track_visibility='on_change',
         help="Draft lines need to be triaged.\n"
              "Ignored lines are lines for which we do "
              "not want to send something.\n"
@@ -143,6 +144,7 @@ class CreditControlLine(models.Model):
     )
     level = fields.Integer(
         related='policy_level_id.level',
+        group_operator='max',
         store=True,
     )
     manually_overridden = fields.Boolean()
@@ -159,6 +161,26 @@ class CreditControlLine(models.Model):
         compute='_compute_partner_user_id',
         store=True,
     )
+    # Helps to filter
+    move_line_journal_id = fields.Many2one(
+        related='move_line_id.journal_id',
+        comodel_name='account.journal',
+        string='Journal',
+        readonly=True,
+        store=True
+    )
+    # Notes to help accountant to get partner related notes and
+    # particular move lines notes.
+    partner_notes = fields.Char(
+        string='Partner Notes',
+        related='partner_id.credit_control_notes',
+        readonly=True
+    )
+    move_line_notes = fields.Char(
+        string='Invoice Notes',
+        related='move_line_id.credit_control_notes',
+        readonly=True
+    )
 
     @api.depends('partner_id.user_id')
     def _compute_partner_user_id(self):
@@ -169,20 +191,26 @@ class CreditControlLine(models.Model):
     def _prepare_from_move_line(self, move_line, level, controlling_date,
                                 open_amount):
         """ Create credit control line """
+        channel = level.channel
+        partner = move_line.partner_id
+        # Fallback to letter
+        if channel == 'email' and partner and\
+                not partner.email and not partner.credit_control_email:
+            channel = 'letter'
         data = {
             'date': controlling_date,
             'date_due': move_line.date_maturity,
             'state': 'draft',
-            'channel': level.channel,
+            'channel': channel,
             'invoice_id': (move_line.invoice_id.id if
                            move_line.invoice_id else False),
-            'partner_id': move_line.partner_id.id,
+            'partner_id': partner.id,
             'amount_due': (move_line.amount_currency or move_line.debit or
                            move_line.credit),
             'balance_due': open_amount,
             'policy_level_id': level.id,
             'move_line_id': move_line.id,
-            'manual_followup': move_line.partner_id.manual_followup,
+            'manual_followup': partner.manual_followup,
         }
         return data
 

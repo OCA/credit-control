@@ -10,7 +10,6 @@ class CreditControlRun(models.Model):
     """ Credit Control run generate all credit control lines and reject """
 
     _name = "credit.control.run"
-    _rec_name = 'date'
     _description = "Credit control line generator"
 
     @api.model
@@ -75,6 +74,17 @@ class CreditControlRun(models.Model):
         index=True,
     )
 
+    @api.multi
+    def name_get(self):
+        lang = self.env.context.get('lang', self.env.user.lang)
+        date_format = (
+            self.env['res.lang'].search([('code', '=', lang)]).date_format
+        )
+        result = []
+        for run in self:
+            result.append((run.id, "%s" % run.date.strftime(date_format)))
+        return result
+
     def _compute_credit_control_count(self):
         fetch_data = self.env['credit.control.line'].read_group(
             domain=[('run_id', 'in', self.ids)],
@@ -92,7 +102,11 @@ class CreditControlRun(models.Model):
         using controlling_date
 
         """
-        runs = self.search(
+        lang = self.env.context.get('lang', self.env.user.lang)
+        date_format = (
+            self.env['res.lang'].search([('code', '=', lang)]).date_format
+        )
+        runs = self.env['credit.control.run'].search(
             [('date', '>', controlling_date),
              ('company_id', '=', self.env.user.company_id.id)],
             order='date DESC',
@@ -100,17 +114,20 @@ class CreditControlRun(models.Model):
         )
         if runs:
             raise UserError(
-                _('A run has already been executed more '
-                  'recently than %s') % runs.date)
+                _('A run has already been executed more recently (%s)')
+                % (runs.date.strftime(date_format)))
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
             raise UserError(
-                _('A credit control line more '
-                  'recent than %s exists at %s') % (
-                    controlling_date, lines.date))
+                _('A credit control line more recent than %s exists at %s')
+                % (
+                    controlling_date.strftime(date_format),
+                    lines.date.strftime(date_format),
+                )
+            )
 
     @api.multi
     @api.returns('credit.control.line')
@@ -197,12 +214,12 @@ class CreditControlRun(models.Model):
     def set_to_ready_lines(self):
         self.ensure_one()
         draft_lines = self.line_ids.filtered(lambda x: x.state == 'draft')
-        draft_lines.write({'state': 'to_be_sent'})
+        draft_lines.write({'state': 'to_do'})
         self.hide_change_state_button = True
 
     def run_channel_action(self):
         self.ensure_one()
-        lines = self.line_ids.filtered(lambda x: x.state == 'to_be_sent')
+        lines = self.line_ids.filtered(lambda x: x.state == 'to_do')
         letter_lines = lines.filtered(lambda x: x.channel == 'letter')
         email_lines = lines.filtered(lambda x: x.channel == 'email')
         if email_lines:

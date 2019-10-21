@@ -173,7 +173,7 @@ class TestCreditControlRun(TransactionCase):
         # Mark lines to be send
         control_lines = self.invoice.credit_control_line_ids
         marker = self.env['credit.control.marker'].create({
-            'name': 'to_be_sent',
+            'name': 'to_do',
             'line_ids': [(6, 0, control_lines.ids)],
         })
         marker.mark_lines()
@@ -209,7 +209,7 @@ class TestCreditControlRun(TransactionCase):
         # Mark lines to be send
         control_lines = self.invoice.credit_control_line_ids
         marker = self.env['credit.control.marker'].create({
-            'name': 'to_be_sent',
+            'name': 'to_do',
             'line_ids': [(6, 0, control_lines.ids)],
         })
         marker.mark_lines()

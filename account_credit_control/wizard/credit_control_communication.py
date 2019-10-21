@@ -199,7 +199,7 @@ class CreditControlCommunication(models.TransientModel):
             attachment_list = email_values.pop('attachments', None)
             email = emails.create(email_values)
 
-            state = 'sent'
+            state = 'done'
             # The mail will not be send, however it will be in the pool, in an
             # error state. So we create it, link it with
             # the credit control line
@@ -224,10 +224,10 @@ class CreditControlCommunication(models.TransientModel):
 
     @api.multi
     @api.returns('credit.control.line')
-    def _mark_credit_line_as_sent(self):
+    def _mark_credit_line_as_done(self):
         lines = self.env['credit.control.line']
         for comm in self:
             lines |= comm.credit_control_line_ids
 
-        lines.write({'state': 'sent'})
+        lines.write({'state': 'done'})
         return lines

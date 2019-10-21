@@ -28,7 +28,7 @@ class CreditControlEmailer(models.TransientModel):
         string='Credit Control Lines',
         default=lambda self: self._get_line_ids(),
         domain=[
-            ('state', '=', 'to_be_sent'),
+            ('state', '=', 'to_do'),
             ('channel', '=', 'email'),
         ],
     )
@@ -39,7 +39,7 @@ class CreditControlEmailer(models.TransientModel):
         """ filter lines to use in the wizard """
         line_obj = self.env['credit.control.line']
         domain = [
-            ('state', '=', 'to_be_sent'),
+            ('state', '=', 'to_do'),
             ('id', 'in', lines.ids),
             ('channel', '=', 'email'),
         ]
