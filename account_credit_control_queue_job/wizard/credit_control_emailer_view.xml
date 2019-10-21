@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="credit_line_emailer_form_view">
+        <field name="name">credit.line.emailer.form (in account_credit_control_queue_job)</field>
+        <field name="model">credit.control.emailer</field>
+        <field name="inherit_id" ref="account_credit_control.credit_line_emailer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="before">
+                <group>
+                    <field name="run_in_jobs"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
