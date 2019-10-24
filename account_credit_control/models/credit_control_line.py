@@ -89,6 +89,7 @@ class CreditControlLine(models.Model):
         string='Commercial Entity',
         compute_sudo=True,
         related='partner_id.commercial_partner_id',
+        index=True,
         store=True,
     )
     amount_due = fields.Float(

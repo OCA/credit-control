@@ -27,29 +27,31 @@ class AccountCreditControlAnalysis(models.Model):
         string="Overdue Level",
         readonly=True,
     )
-    level = fields.Integer(string="Level", readonly=True)
+    level = fields.Integer(string="Max Level", readonly=True)
     open_balance = fields.Float(
+        string="Overdue Balance",
         readonly=True,
         help="Open balance on credit control lines"
         "of same partner, policy and currency",
     )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        readonly=True,
+    )
 
-    @api.model_cr
-    def init(self):
-        tools.drop_view_if_exists(self._cr, "credit_control_analysis")
-        self._cr.execute(
+    def _fields_to_select(self):
+        return (
             """
-            CREATE VIEW credit_control_analysis
-            AS
-            (SELECT DISTINCT ON (ccl.commercial_partner_id,
-                   ccl.policy_id,
-                   ccl.currency_id) ccl.id                  AS id,
-                   ccl.commercial_partner_id                AS partner_id,
-                   ccl.policy_id                            AS policy_id,
-                   ccl.currency_id                          AS currency_id,
-                   ccl.policy_level_id                      AS policy_level_id,
-                   ccpl.level                               AS level,
-                (SELECT sum(amount_residual)
+            DISTINCT ON (ccl.commercial_partner_id,
+            ccl.policy_id,
+            ccl.currency_id) ccl.id                  AS id,
+            ccl.commercial_partner_id                AS partner_id,
+            ccl.policy_id                            AS policy_id,
+            ccl.currency_id                          AS currency_id,
+            ccl.policy_level_id                      AS policy_level_id,
+            ccl.company_id                           AS company_id,
+            ccpl.level                               AS level,
+            (SELECT sum(amount_residual)
                 FROM account_move_line AS aml
                 WHERE NOT aml.reconciled
                 AND aml.id IN
@@ -64,6 +66,17 @@ class AccountCreditControlAnalysis(models.Model):
                         )
                     )
                 ) AS open_balance
+            """
+        )
+
+    @api.model_cr
+    def init(self):
+        tools.drop_view_if_exists(self._cr, "credit_control_analysis")
+        query = (
+            """
+            CREATE VIEW credit_control_analysis
+            AS
+            (SELECT %s
             FROM credit_control_line AS ccl
             LEFT JOIN credit_control_policy_level AS ccpl
             ON ccpl.id=ccl.policy_level_id
@@ -74,5 +87,6 @@ class AccountCreditControlAnalysis(models.Model):
                     ccl.currency_id,
                     ccpl.level DESC,
                     ccl.id)
-            """
+            """ % self._fields_to_select()
         )
+        self._cr.execute(query)
