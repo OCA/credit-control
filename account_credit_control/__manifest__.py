@@ -15,6 +15,7 @@
  'depends': [
      'base',
      'account',
+     'contacts',
      'mail',
  ],
  'website': 'https://github.com/OCA/account-financial-tools',
@@ -24,6 +25,7 @@
      "security/account_security.xml",
      "security/ir.model.access.csv",
      "security/acl_account_credit_control_analysis.xml",
+     "security/acl_res_partner_payment_action_type.xml",
 
      # Views
      "views/account_invoice.xml",
