@@ -21,10 +21,16 @@ class CreditControlEmailer(models.TransientModel):
             filtered_lines = self._filter_lines(self.line_ids)
             datas = comm_obj._aggregate_credit_lines(filtered_lines)
             filtered_lines.write({'state': 'sending'})
+            batch = self.env['queue.job.batch'].get_new_batch(
+                'Credit Control Emailer'
+            )
             offset = 0
             while offset <= len(datas):
-                sub_datas = datas[offset:offset+group_size]
-                comm_obj.with_delay()._generate_emails_in_jobs(sub_datas)
+                sub_datas = datas[offset : offset + group_size]
+                comm_obj.with_context(
+                    job_batch=batch
+                ).with_delay()._generate_emails_in_jobs(sub_datas)
                 offset += group_size
+            batch.enqueue()
         else:
             super(CreditControlEmailer, self)._send_emails()
