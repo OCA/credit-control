@@ -37,29 +37,6 @@ class AccountCreditControlAnalysis(models.Model):
         readonly=True,
     )
 
-    def _with(self):
-        return (
-            """
-            WITH residuals AS (
-                -- Residuals of all open move_lines with credit_control_line
-                WITH move_lines AS (SELECT DISTINCT ON (aml.id)
-                    aml.partner_id,
-                    ccl2.policy_id,
-                    ccl2.currency_id,
-                    aml.amount_residual
-                    FROM account_move_line AS aml
-                    INNER JOIN credit_control_line AS ccl2
-                    ON ccl2.move_line_id=aml.id
-                    WHERE NOT aml.reconciled)
-                SELECT sum(amount_residual) AS open_balance,
-                partner_id,
-                policy_id,
-                currency_id
-                FROM move_lines
-                GROUP BY partner_id, policy_id, currency_id)
-            """
-        )
-
     def _distinct_fields(self):
         return (
             """
@@ -78,7 +55,21 @@ class AccountCreditControlAnalysis(models.Model):
             ccl.policy_level_id                      AS policy_level_id,
             ccl.company_id                           AS company_id,
             ccpl.level                               AS level,
-            residuals.open_balance		             AS open_balance
+            (SELECT sum(amount_residual)
+                FROM account_move_line AS aml
+                WHERE NOT aml.reconciled
+                AND aml.id IN
+                    (SELECT move_line_id
+                    FROM credit_control_line AS ccl2
+                    WHERE ccl2.commercial_partner_id=partner.id
+                        AND ccl2.policy_id=ccl.policy_id
+                        AND (
+                            (ccl.currency_id IS NULL
+                            AND ccl2.currency_id IS NULL)
+                        OR ccl2.currency_id=ccl.currency_id
+                        )
+                    )
+                ) AS open_balance
             """
         )
 
@@ -92,12 +83,6 @@ class AccountCreditControlAnalysis(models.Model):
             ON aml.id=ccl.move_line_id AND NOT aml.reconciled
             LEFT JOIN res_partner AS partner
             ON partner.id=ccl.commercial_partner_id
-            LEFT JOIN residuals
-            ON residuals.partner_id=ccl.commercial_partner_id
-            AND residuals.policy_id=ccl.policy_id
-            AND ((ccl.currency_id IS NULL AND residuals.currency_id IS NULL)
-                  OR ccl.currency_id=residuals.currency_id
-            )
             """
         )
 
@@ -113,12 +98,10 @@ class AccountCreditControlAnalysis(models.Model):
             """
             CREATE VIEW credit_control_analysis
             AS
-            (%s
-            SELECT DISTINCT ON (%s) %s
+            (SELECT DISTINCT ON (%s) %s
             %s
             ORDER BY %s)
             """ % (
-                self._with(),
                 self._distinct_fields(),
                 self._fields_to_select(),
                 self._from_tables(),
