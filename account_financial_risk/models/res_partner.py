@@ -210,16 +210,18 @@ class ResPartner(models.Model):
         risk_field_list = self._risk_field_list()
         for partner in self.filtered('customer'):
             amount = 0.0
+            risk_exception = False
             for risk_field in risk_field_list:
                 field_value = getattr(partner, risk_field[0], 0.0)
                 max_value = getattr(partner, risk_field[1], 0.0)
                 if max_value and field_value > max_value:
-                    partner.risk_exception = True
+                    risk_exception = True
                 if getattr(partner, risk_field[2], False):
                     amount += field_value
             partner.risk_total = amount
             if partner.credit_limit and amount > partner.credit_limit:
-                partner.risk_exception = True
+                risk_exception = True
+            partner.risk_exception = risk_exception
 
     @api.model
     def _max_risk_date_due(self):
