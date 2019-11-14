@@ -15,9 +15,12 @@ class TestPartnerSaleRisk(SavepointCase):
         })
         cls.product = cls.env.ref('product.product_product_2')
         cls.product.invoice_policy = 'order'
+        cls.product_pricelist = cls.env['product.pricelist'].create({
+            'name': 'pricelist for sale_financial_risk test',
+        })
         cls.sale_order = cls.env['sale.order'].create({
             'partner_id': cls.partner.id,
-            'pricelist_id': cls.env.ref('product.list0').id,
+            'pricelist_id': cls.product_pricelist.id,
             'order_line': [(0, 0, {
                 'name': cls.product.name,
                 'product_id': cls.product.id,
