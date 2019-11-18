@@ -202,6 +202,35 @@ class CreditControlPolicy(models.Model):
             )
         return True
 
+    @api.multi
+    def generate_credit_lines(self, run):
+        self.ensure_one()
+        credit_line_model = self.env['credit.control.line']
+        if self.do_nothing:
+            return (self.env['account.move.line'], credit_line_model, "")
+        lines = self._get_move_lines_to_process(run.date)
+        manual_lines = self._lines_different_policy(lines)
+        lines -= manual_lines
+        policy_lines_generated = credit_line_model
+        if lines:
+            # policy levels are sorted by level
+            # so iteration is in the correct order
+            create = policy_lines_generated.create_or_update_from_mv_lines
+            for level in reversed(self.level_ids):
+                level_lines = level.get_level_lines(run.date, lines)
+                policy_lines_generated += create(
+                    level_lines, level, run.date)
+        if policy_lines_generated:
+            report = _(
+                "Policy \"<b>%s</b>\" has generated <b>%d Credit "
+                "Control Lines.</b><br/>"
+            ) % (self.name, len(policy_lines_generated))
+        else:
+            report = _(
+                "Policy \"<b>%s</b>\" has not generated any "
+                "Credit Control Lines.<br/>") % self.name
+        return (manual_lines, policy_lines_generated, report)
+
 
 class CreditControlPolicyLevel(models.Model):
     """Define a policy level. A level allows to determine if
