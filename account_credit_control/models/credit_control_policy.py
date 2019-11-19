@@ -203,12 +203,12 @@ class CreditControlPolicy(models.Model):
         return True
 
     @api.multi
-    def generate_credit_lines(self, run):
+    def generate_credit_lines(self, controlling_date):
         self.ensure_one()
         credit_line_model = self.env['credit.control.line']
         if self.do_nothing:
             return (self.env['account.move.line'], credit_line_model, "")
-        lines = self._get_move_lines_to_process(run.date)
+        lines = self._get_move_lines_to_process(controlling_date)
         manual_lines = self._lines_different_policy(lines)
         lines -= manual_lines
         policy_lines_generated = credit_line_model
@@ -217,9 +217,9 @@ class CreditControlPolicy(models.Model):
             # so iteration is in the correct order
             create = policy_lines_generated.create_or_update_from_mv_lines
             for level in reversed(self.level_ids):
-                level_lines = level.get_level_lines(run.date, lines)
+                level_lines = level.get_level_lines(controlling_date, lines)
                 policy_lines_generated += create(
-                    level_lines, level, run.date)
+                    level_lines, level, controlling_date)
         if policy_lines_generated:
             report = _(
                 "Policy \"<b>%s</b>\" has generated <b>%d Credit "
