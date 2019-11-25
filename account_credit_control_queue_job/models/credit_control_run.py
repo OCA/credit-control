@@ -18,9 +18,6 @@ class CreditControlRun(models.Model):
     def _create_lines(self, level_lines, level, ccl_model, group_size=100):
         self.ensure_one()
         if self.run_in_jobs:
-            batch = self.env['queue.job.batch'].get_new_batch(
-                'Credit Control Run'
-            )
             offset = 0
             while offset <= len(level_lines):
                 sub_level_lines = level_lines.search(
@@ -28,13 +25,10 @@ class CreditControlRun(models.Model):
                     limit=group_size,
                     offset=offset,
                 )
-                ccl_model.with_context(
-                    job_batch=batch
-                ).with_delay().create_or_update_from_mv_lines(
+                ccl_model.with_delay().create_or_update_from_mv_lines(
                     sub_level_lines, level, self.date, run_id=self.id
                 )
                 offset += group_size
-            batch.enqueue()
             return ccl_model
         else:
             return super(CreditControlRun, self)._create_lines(

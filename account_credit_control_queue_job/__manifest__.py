@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://acsone.eu",
-    "depends": ["account_credit_control", "queue_job", "queue_job_batch"],
+    "depends": ["account_credit_control", "queue_job_batch"],
     "data": [
         "views/credit_control_run.xml",
         "wizard/credit_control_emailer_view.xml",
