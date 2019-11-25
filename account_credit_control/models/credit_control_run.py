@@ -128,6 +128,8 @@ class CreditControlRun(models.Model):
         report = ''
         generated = self.env['credit.control.line']
         for policy in policies:
+            if policy.do_nothing:
+                continue
             (
                 policy_manual_lines,
                 policy_lines_generated,

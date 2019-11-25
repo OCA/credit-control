@@ -206,8 +206,6 @@ class CreditControlPolicy(models.Model):
     def generate_credit_lines(self, controlling_date):
         self.ensure_one()
         credit_line_model = self.env['credit.control.line']
-        if self.do_nothing:
-            return (self.env['account.move.line'], credit_line_model, "")
         lines = self._get_move_lines_to_process(controlling_date)
         manual_lines = self._lines_different_policy(lines)
         lines -= manual_lines
