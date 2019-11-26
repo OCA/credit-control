@@ -241,7 +241,7 @@ class CreditControlPolicy(models.Model):
                     controlling_date,
                     run_id,
                 )
-        report = self._process_report(policy_line_generated)
+        report = self._process_report(policy_lines_generated)
         return (manual_lines, policy_lines_generated, report)
 
 
