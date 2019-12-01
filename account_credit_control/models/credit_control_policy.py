@@ -218,6 +218,7 @@ class CreditControlPolicyLevel(models.Model):
         comodel_name='credit.control.policy',
         string='Related Policy',
         required=True,
+        ondelete="cascade",
     )
     level = fields.Integer(
         required=True,
