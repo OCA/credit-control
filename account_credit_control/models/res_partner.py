@@ -62,7 +62,9 @@ class ResPartner(models.Model):
     @api.model
     def _get_default_credit_policy(self):
         policy_obj = self.env['credit.control.policy']
-        default_policy = policy_obj.search([('default_on_partner', '=', True)])
+        default_policy = policy_obj.sudo().search(
+            [('default_on_partner', '=', True)]
+        )
         if default_policy:
             return default_policy
 
