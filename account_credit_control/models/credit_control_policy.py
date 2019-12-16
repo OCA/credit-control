@@ -50,43 +50,6 @@ class CreditControlPolicy(models.Model):
         default=True,
     )
 
-
-    @api.multi
-    def write(self, values):
-        res = super(CreditControlPolicy, self).write(values)
-        if 'auto_process_lower_levels' in values:
-            credit_control_model = self.env['credit.control.line']
-            if values['auto_process_lower_levels']:
-                res = credit_control_model.read_group(
-                    domain=[
-                        ('policy_id', '=', self.id),
-                        ('state', 'in', ('draft', 'to_be_sent')),
-                    ],
-                    fields=['id'],
-                    groupby=['partner_id', 'currency_id'],
-                    lazy=False,
-                )
-                for group in res:
-                    highest_level_line = credit_control_model.search(
-                        group['__domain'],
-                        order='level DESC, date_due ASC',
-                        limit=1,
-                    )
-                    highest_level_line.write({'auto_process': 'highest_level'})
-                    highest_level_line.get_related_lines(
-                        exclude_ids=highest_level_line.ids
-                    ).write({'auto_process': 'low_level'})
-            else:
-                lines = credit_control_model.search(
-                    [
-                        ('policy_id', '=', self.id),
-                        ('state', 'in', ('draft', 'to_be_sent')),
-                    ]
-                )
-                if lines:
-                    lines.write({'auto_process': 'no_auto_process'})
-        return res
-
     @api.multi
     def _move_lines_domain(self, controlling_date):
         """ Build the default domain for searching move lines """
