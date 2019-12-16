@@ -134,7 +134,7 @@ class CreditControlRun(models.Model):
                 policy_manual_lines,
                 policy_lines_generated,
                 policy_report,
-            ) = policy.generate_credit_lines(self.date)
+            ) = policy._generate_credit_lines(self.date)
             manually_managed_lines |= policy_manual_lines
             generated |= policy_lines_generated
             report += policy_report

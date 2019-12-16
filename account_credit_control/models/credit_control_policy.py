@@ -203,7 +203,7 @@ class CreditControlPolicy(models.Model):
         return True
 
     @api.multi
-    def generate_credit_lines(self, controlling_date):
+    def _generate_credit_lines(self, controlling_date):
         self.ensure_one()
         credit_line_model = self.env['credit.control.line']
         lines = self._get_move_lines_to_process(controlling_date)
