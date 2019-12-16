@@ -138,7 +138,7 @@ class CreditControlCommunication(models.TransientModel):
             if prev_group and (
                 group != prev_group
                 or (
-                    line.policy_id.yield_by_level and
+                    not line.policy_id.auto_process_lower_levels and
                     policy_level != prev_policy_level
                 )
             ):
