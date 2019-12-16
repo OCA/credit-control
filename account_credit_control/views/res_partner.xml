@@ -28,7 +28,7 @@
         <field name="arch" type="xml">
             <page name="accounting" position="after">
                 <page string="Credit Control" name="credit_control" attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}" groups="account.group_account_invoice">
-                    <group string="Follow-up" name="followup">
+                    <group name="followup">
                         <field name="credit_policy_id" widget="selection"/>
                         <field name="payment_responsible_id"/>
                         <field name="payment_note"/>
