@@ -193,7 +193,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:327
+#: code:addons/account_credit_control/models/credit_control_policy.py:328
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -1517,7 +1517,7 @@ msgid "The partner had a manual followup."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:277
+#: code:addons/account_credit_control/models/credit_control_policy.py:278
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
