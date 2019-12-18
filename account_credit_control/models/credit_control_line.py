@@ -43,7 +43,7 @@ class CreditControlLine(models.Model):
         related='move_line_id.date',
         store=True,
     )
-    date_reminded = fields.Date(
+    date_sent = fields.Date(
         string='Reminded date',
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -52,8 +52,8 @@ class CreditControlLine(models.Model):
         selection=[
             ('draft', 'Draft'),
             ('ignored', 'Ignored'),
-            ('to_do', 'To Do'),
-            ('done', 'Done'),
+            ('to_be_sent', 'To Do'),
+            ('sent', 'Done'),
             ('error', 'Error'),
             ('email_error', 'Emailing Error'),
         ],
@@ -161,26 +161,6 @@ class CreditControlLine(models.Model):
         compute='_compute_partner_user_id',
         store=True,
     )
-    # Helps to filter
-    move_line_journal_id = fields.Many2one(
-        related='move_line_id.journal_id',
-        comodel_name='account.journal',
-        string='Journal',
-        readonly=True,
-        store=True
-    )
-    # Notes to help accountant to get partner related notes and
-    # particular move lines notes.
-    partner_notes = fields.Char(
-        string='Partner Notes',
-        related='partner_id.credit_control_notes',
-        readonly=True
-    )
-    move_line_notes = fields.Char(
-        string='Invoice Notes',
-        related='move_line_id.credit_control_notes',
-        readonly=True
-    )
 
     @api.depends('partner_id.user_id')
     def _compute_partner_user_id(self):
@@ -194,8 +174,7 @@ class CreditControlLine(models.Model):
         channel = level.channel
         partner = move_line.partner_id
         # Fallback to letter
-        if channel == 'email' and partner and\
-                not partner.email and not partner.credit_control_email:
+        if channel == 'email' and partner and not partner.email:
             channel = 'letter'
         data = {
             'date': controlling_date,

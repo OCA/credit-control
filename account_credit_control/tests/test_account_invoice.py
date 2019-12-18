@@ -100,7 +100,7 @@ class TestAccountInvoice(TransactionCase):
         self.assertIn(control_line, marker_line)
 
         marker = self.env['credit.control.marker'].create({
-            'name': 'to_do',
+            'name': 'to_be_sent',
             'line_ids': [(6, 0, [control_line.id])]
         })
         marker.mark_lines()

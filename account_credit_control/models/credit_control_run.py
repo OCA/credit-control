@@ -214,12 +214,12 @@ class CreditControlRun(models.Model):
     def set_to_ready_lines(self):
         self.ensure_one()
         draft_lines = self.line_ids.filtered(lambda x: x.state == 'draft')
-        draft_lines.write({'state': 'to_do'})
+        draft_lines.write({'state': 'to_be_sent'})
         self.hide_change_state_button = True
 
     def run_channel_action(self):
         self.ensure_one()
-        lines = self.line_ids.filtered(lambda x: x.state == 'to_do')
+        lines = self.line_ids.filtered(lambda x: x.state == 'to_be_sent')
         letter_lines = lines.filtered(lambda x: x.channel == 'letter')
         email_lines = lines.filtered(lambda x: x.channel == 'email')
         if email_lines:

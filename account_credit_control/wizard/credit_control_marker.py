@@ -24,18 +24,18 @@ class CreditControlMarker(models.TransientModel):
     name = fields.Selection(
         selection=[
             ('ignored', 'Ignored'),
-            ('to_do', 'To Do'),
-            ('done', 'Done'),
+            ('to_be_sent', 'To Do'),
+            ('sent', 'Done'),
         ],
         string='Mark as',
-        default='to_do',
+        default='to_be_sent',
         required=True,
     )
     line_ids = fields.Many2many(
         comodel_name='credit.control.line',
         string='Credit Control Lines',
         default=lambda self: self._default_lines(),
-        domain="[('state', '!=', 'done')]",
+        domain="[('state', '!=', 'sent')]",
     )
 
     @api.model
@@ -43,7 +43,7 @@ class CreditControlMarker(models.TransientModel):
     def _filter_lines(self, lines):
         """ get line to be marked filter done lines """
         line_obj = self.env['credit.control.line']
-        domain = [('state', '!=', 'done'), ('id', 'in', lines.ids)]
+        domain = [('state', '!=', 'sent'), ('id', 'in', lines.ids)]
         return line_obj.search(domain)
 
     @api.model

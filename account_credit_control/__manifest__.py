@@ -27,7 +27,6 @@
 
      # Views
      "views/account_invoice.xml",
-     "views/account_move_line.xml",
      "views/credit_control_line.xml",
      "views/credit_control_policy.xml",
      "views/credit_control_run.xml",
