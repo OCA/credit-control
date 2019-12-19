@@ -380,6 +380,7 @@ msgstr "Aangemaakt op"
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
@@ -691,11 +692,6 @@ msgstr "Fout"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Filters"
 msgstr "Filters"
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
-msgid "Follow-up"
-msgstr "Opvolging"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_responsible_id
@@ -1824,6 +1820,9 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "aanmaning communicatie"
+
+#~ msgid "Follow-up"
+#~ msgstr "Opvolging"
 
 #~ msgid "credit.control.policy.changer"
 #~ msgstr "credit.control.policy.changer"

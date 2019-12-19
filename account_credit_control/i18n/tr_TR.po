@@ -343,6 +343,7 @@ msgstr "Oluşturulma tarihi"
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
@@ -641,11 +642,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Filters"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
-msgid "Follow-up"
 msgstr ""
 
 #. module: account_credit_control
