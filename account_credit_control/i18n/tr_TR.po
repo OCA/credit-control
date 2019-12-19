@@ -252,6 +252,7 @@ msgid "Companies"
 msgstr "Firmalar"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__company_id
@@ -814,7 +815,6 @@ msgid "Letter"
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__current_policy_level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__level
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__level
@@ -944,6 +944,11 @@ msgid "Mass printer"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__level
+msgid "Max Level"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_error
 msgid "Message Delivery error"
 msgstr ""
@@ -1063,11 +1068,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_printer__mark_as_sent
 msgid "Only letter lines will be marked."
-msgstr ""
-
-#. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
-msgid "Open Balance"
 msgstr ""
 
 #. module: account_credit_control
@@ -1229,6 +1229,11 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 msgid "Overdue"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
+msgid "Overdue Balance"
 msgstr ""
 
 #. module: account_credit_control
@@ -1394,7 +1399,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:281
+#: code:addons/account_credit_control/models/credit_control_line.py:282
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1596,7 +1601,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:259
+#: code:addons/account_credit_control/models/credit_control_line.py:260
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
