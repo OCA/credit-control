@@ -203,7 +203,9 @@ class CreditControlPolicy(models.Model):
         return True
 
     @api.multi
-    def _generate_credit_lines(self, controlling_date, default_lines_vals):
+    def _generate_credit_lines(
+        self, controlling_date, default_lines_vals=None
+    ):
         self.ensure_one()
         credit_line_model = self.env['credit.control.line']
         lines = self._get_move_lines_to_process(controlling_date)
@@ -217,7 +219,11 @@ class CreditControlPolicy(models.Model):
             for level in reversed(self.level_ids):
                 level_lines = level.get_level_lines(controlling_date, lines)
                 policy_lines_generated += create(
-                    level_lines, level, controlling_date, default_lines_vals)
+                    level_lines,
+                    level,
+                    controlling_date,
+                    default_lines_vals=default_lines_vals,
+                )
         if policy_lines_generated:
             report = _(
                 "Policy \"<b>%s</b>\" has generated <b>%d Credit "

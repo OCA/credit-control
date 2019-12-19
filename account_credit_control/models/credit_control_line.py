@@ -207,8 +207,8 @@ class CreditControlLine(models.Model):
         lines,
         level,
         controlling_date,
-        default_lines_vals,
         check_tolerance=True,
+        default_lines_vals=None,
     ):
         """ Create or update line based on levels
 
@@ -260,7 +260,7 @@ class CreditControlLine(models.Model):
                 level,
                 controlling_date,
                 open_amount,
-                default_lines_vals,
+                default_lines_vals or {},
             )
             lines_to_create.append(vals)
 

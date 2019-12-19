@@ -123,7 +123,6 @@ class CreditControlPolicyChanger(models.TransientModel):
             self.move_line_ids,
             self.new_policy_level_id,
             controlling_date,
-            {},
             check_tolerance=False,
         )
         self._set_invoice_policy(self.move_line_ids, self.new_policy_id)
