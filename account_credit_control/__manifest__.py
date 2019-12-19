@@ -15,7 +15,6 @@
  'depends': [
      'base',
      'account',
-     'contacts',
      'mail',
  ],
  'website': 'https://github.com/OCA/account-financial-tools',

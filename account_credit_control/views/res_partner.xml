@@ -129,7 +129,7 @@
 
     <record model="ir.ui.menu" id="res_partner_payment_action_type_menu">
         <field name="name">Partner Payment Action Types</field>
-        <field name="parent_id" ref="contacts.res_partner_menu_config"/>
+        <field name="parent_id" ref="account_credit_control.base_credit_control_configuration_menu"/>
         <field name="action" ref="res_partner_payment_action_type_act_window"/>
         <field name="sequence" eval="16"/>
     </record>
