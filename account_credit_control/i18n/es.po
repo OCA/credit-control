@@ -125,7 +125,7 @@ msgid "A credit control line"
 msgstr "Una línea de control de crédito"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:111
+#: code:addons/account_credit_control/models/credit_control_run.py:112
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr "Ya existe una línea de control de crédito más reciente que %s el %s"
@@ -136,7 +136,7 @@ msgid "A credit control policy level"
 msgstr "Un nivel de política de control de crédito"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:177
+#: code:addons/account_credit_control/models/credit_control_run.py:178
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -146,8 +146,9 @@ msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:103
-#, python-format
-msgid "A run has already been executed more recently than %s"
+#, fuzzy, python-format
+#| msgid "A run has already been executed more recently than %s"
+msgid "A run has already been executed more recently (%s)"
 msgstr "Ya se ha realizado una ejecución más recientemente que el %s"
 
 #. module: account_credit_control
@@ -213,7 +214,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:328
+#: code:addons/account_credit_control/models/credit_control_policy.py:329
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -308,6 +309,13 @@ msgstr "Contacto"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__contact_address
 msgid "Contact Address"
 msgstr "Dirección de contacto"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/wizard/credit_control_marker.py:78
+#, fuzzy, python-format
+#| msgid "Control Credit Lines"
+msgid "Control Credit Line"
+msgstr "Líneas de control de crédito"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
@@ -601,6 +609,7 @@ msgstr "No hace nada"
 #. module: account_credit_control
 #: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: selection:credit.control.run,state:0
+#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Done"
 msgstr "Completado"
 
@@ -873,7 +882,9 @@ msgstr "Líneas"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Lines already sent."
+#, fuzzy
+#| msgid "Lines already sent."
+msgid "Lines already done."
 msgstr "Líneas ya enviadas."
 
 #. module: account_credit_control
@@ -967,7 +978,9 @@ msgstr "Marcar como"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__mark_as_sent
-msgid "Mark letter lines as sent"
+#, fuzzy
+#| msgid "Mark letter lines as sent"
+msgid "Mark letter lines as done"
 msgstr "Marcar líneas de carta como enviadas"
 
 #. module: account_credit_control
@@ -1326,12 +1339,18 @@ msgid "Payment Note"
 msgstr "Nota del pago"
 
 #. module: account_credit_control
+#: selection:credit.control.line,channel:0
+#: selection:credit.control.policy.level,channel:0
+msgid "Phone"
+msgstr ""
+
+#. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 msgid "Planned"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:125
+#: code:addons/account_credit_control/models/credit_control_run.py:126
 #, python-format
 msgid "Please select a policy"
 msgstr "Seleccione por favor una política"
@@ -1355,7 +1374,7 @@ msgid "Policy"
 msgstr "Política"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:147
+#: code:addons/account_credit_control/models/credit_control_run.py:148
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
@@ -1363,7 +1382,7 @@ msgstr ""
 "<br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:151
+#: code:addons/account_credit_control/models/credit_control_run.py:152
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1413,16 +1432,17 @@ msgid "Print the selected lines"
 msgstr "Imprime las líneas seleccionadas"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Ready To Send"
-msgstr "Listo para ser enviado"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__policy_id
 msgid "Related Policy"
 msgstr "Política asociada"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_sent
+#, fuzzy
+#| msgid "Run date"
+msgid "Reminded date"
+msgstr "Fecha de ejecución"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__report
@@ -1467,7 +1487,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:282
+#: code:addons/account_credit_control/models/credit_control_line.py:289
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1495,19 +1515,9 @@ msgid "Send the emails"
 msgstr "Enviar los correos electrónicos"
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Sent"
-msgstr "Enviado"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__mail_message_id
 msgid "Sent Email"
 msgstr "Correo electrónico enviado"
-
-#. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_sent
-msgid "Sent date"
-msgstr "Fecha de envío"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -1596,14 +1606,17 @@ msgid "The partner had a manual followup."
 msgstr "La empresa tiene un seguimiento manual."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:278
+#: code:addons/account_credit_control/models/credit_control_policy.py:279
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "El menor nivel no puede ser de tipo Recordatorio previo"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "These lines are ready to send by email or by letter using the Actions."
+#, fuzzy
+#| msgid ""
+#| "These lines are ready to send by email or by letter using the Actions."
+msgid "These lines are to do using the Actions."
 msgstr ""
 "Estas líneas están disponibles para ser enviadas por correo electrónico o "
 "por carta usando las acciones."
@@ -1633,6 +1646,12 @@ msgstr "Esto es cuando se necesita seguimiento manual."
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__account_ids
 msgid "This policy will be active only for the selected accounts"
 msgstr "Esta política estará activa solo para las cuentas seleccionadas"
+
+#. module: account_credit_control
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "To Do"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
@@ -1683,7 +1702,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:260
+#: code:addons/account_credit_control/models/credit_control_line.py:267
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
@@ -1693,7 +1712,7 @@ msgstr ""
 "en estado borrador."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:197
+#: code:addons/account_credit_control/models/credit_control_policy.py:198
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"
@@ -1720,6 +1739,15 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
+
+#~ msgid "Ready To Send"
+#~ msgstr "Listo para ser enviado"
+
+#~ msgid "Sent"
+#~ msgstr "Enviado"
+
+#~ msgid "Sent date"
+#~ msgstr "Fecha de envío"
 
 #~ msgid "Follow-up"
 #~ msgstr "Seguimiento"
