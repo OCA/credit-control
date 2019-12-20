@@ -127,3 +127,21 @@ class TestCreditControlLine(TransactionCase):
         ccl_1.unlink()
 
         self.assertEqual(ccl_2.auto_process, 'highest_level')
+
+        policy.write({"auto_process_lower_levels": False})
+
+        ccl_3 = self.env['credit.control.line'].create({
+            'date': datetime.today(),
+            'date_due': datetime.today(),
+            'state': 'sent',
+            'partner_id': partner.id,
+            'account_id': account.id,
+            'policy_level_id': policy_level_2.id,
+            'channel': 'email',
+            'amount_due': 100,
+            'balance_due': 100,
+            'move_line_id': move_line.id,
+        })
+
+        self.assertEqual(ccl_3.auto_process, 'no_auto_process')
+        self.assertEqual(ccl_3, ccl_3.get_related_lines())
