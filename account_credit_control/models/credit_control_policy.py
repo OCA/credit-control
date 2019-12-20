@@ -7,6 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 CHANNEL_LIST = [
     ('letter', 'Letter'),
     ('email', 'Email'),
+    ('phone', 'Phone'),
 ]
 
 

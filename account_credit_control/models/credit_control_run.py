@@ -100,17 +100,18 @@ class CreditControlRun(models.Model):
         )
         if runs:
             raise UserError(
-                _('A run has already been executed more '
-                  'recently than %s') % runs.date)
+                _('A run has already been executed more recently (%s)')
+                % (runs.date)
+            )
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
             raise UserError(
-                _('A credit control line more '
-                  'recent than %s exists at %s') % (
-                    controlling_date, lines.date))
+                _('A credit control line more recent than %s exists at %s')
+                % (controlling_date, lines.date)
+            )
 
     @api.multi
     @api.returns('credit.control.line')
