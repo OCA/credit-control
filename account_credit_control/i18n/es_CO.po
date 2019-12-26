@@ -98,6 +98,11 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+msgid "<strong>Date:</strong>"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Total Due</strong>"
 msgstr ""
 
