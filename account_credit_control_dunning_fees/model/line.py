@@ -15,5 +15,5 @@ class CreditControlLine(models.Model):
     @api.multi
     @api.depends('dunning_fees_amount', 'balance_due')
     def compute_balance_due(self):
-        self.ensure_one()
-        self.balance_due_total = self.balance_due + self.dunning_fees_amount
+        for line in self:
+            line.balance_due_total = line.balance_due + line.dunning_fees_amount
