@@ -125,7 +125,7 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:178
+#: code:addons/account_credit_control/models/credit_control_run.py:164
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -196,7 +196,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:329
+#: code:addons/account_credit_control/models/credit_control_policy.py:362
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -1305,13 +1305,13 @@ msgid "Policy"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:148
+#: code:addons/account_credit_control/models/credit_control_policy.py:228
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:152
+#: code:addons/account_credit_control/models/credit_control_policy.py:233
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1412,7 +1412,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:289
+#: code:addons/account_credit_control/models/credit_control_line.py:309
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1523,7 +1523,7 @@ msgid "The partner had a manual followup."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:279
+#: code:addons/account_credit_control/models/credit_control_policy.py:312
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
@@ -1610,7 +1610,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:267
+#: code:addons/account_credit_control/models/credit_control_line.py:287
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
