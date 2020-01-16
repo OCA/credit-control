@@ -130,28 +130,14 @@ class CreditControlRun(models.Model):
         for policy in policies:
             if policy.do_nothing:
                 continue
-            lines = policy._get_move_lines_to_process(self.date)
-            manual_lines = policy._lines_different_policy(lines)
-            lines -= manual_lines
-            manually_managed_lines |= manual_lines
-            policy_lines_generated = self.env['credit.control.line']
-            if lines:
-                # policy levels are sorted by level
-                # so iteration is in the correct order
-                create = policy_lines_generated.create_or_update_from_mv_lines
-                for level in reversed(policy.level_ids):
-                    level_lines = level.get_level_lines(self.date, lines)
-                    policy_lines_generated += create(
-                        level_lines, level, self.date)
+            (
+                policy_manual_lines,
+                policy_lines_generated,
+                policy_report,
+            ) = policy._generate_credit_lines(self.date, {'run_id': self.id})
+            manually_managed_lines |= policy_manual_lines
             generated |= policy_lines_generated
-            if policy_lines_generated:
-                report += (_("Policy \"<b>%s</b>\" has generated <b>%d Credit "
-                             "Control Lines.</b><br/>") %
-                            (policy.name, len(policy_lines_generated)))
-            else:
-                report += _(
-                    "Policy \"<b>%s</b>\" has not generated any "
-                    "Credit Control Lines.<br/>") % policy.name
+            report += policy_report
 
         vals = {
             'state': 'done',

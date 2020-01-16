@@ -170,33 +170,46 @@ class CreditControlLine(models.Model):
 
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,
-                                open_amount):
+                                open_amount, default_lines_vals):
         """ Create credit control line """
         channel = level.channel
         partner = move_line.partner_id
         # Fallback to letter
         if channel == 'email' and partner and not partner.email:
             channel = 'letter'
-        data = {
-            'date': controlling_date,
-            'date_due': move_line.date_maturity,
-            'state': 'draft',
-            'channel': channel,
-            'invoice_id': (move_line.invoice_id.id if
-                           move_line.invoice_id else False),
-            'partner_id': partner.id,
-            'amount_due': (move_line.amount_currency or move_line.debit or
-                           move_line.credit),
-            'balance_due': open_amount,
-            'policy_level_id': level.id,
-            'move_line_id': move_line.id,
-            'manual_followup': partner.manual_followup,
-        }
+        data = default_lines_vals.copy()
+        data.update(
+            {
+                'date': controlling_date,
+                'date_due': move_line.date_maturity,
+                'state': 'draft',
+                'channel': channel,
+                'invoice_id': (
+                    move_line.invoice_id.id if move_line.invoice_id else False
+                ),
+                'partner_id': partner.id,
+                'amount_due': (
+                    move_line.amount_currency
+                    or move_line.debit
+                    or move_line.credit
+                ),
+                'balance_due': open_amount,
+                'policy_level_id': level.id,
+                'move_line_id': move_line.id,
+                'manual_followup': partner.manual_followup,
+            }
+        )
         return data
 
     @api.model
-    def create_or_update_from_mv_lines(self, lines, level, controlling_date,
-                                       check_tolerance=True):
+    def create_or_update_from_mv_lines(
+        self,
+        lines,
+        level,
+        controlling_date,
+        check_tolerance=True,
+        default_lines_vals=None,
+    ):
         """ Create or update line based on levels
 
         if check_tolerance is true credit line will not be
@@ -209,6 +222,8 @@ class CreditControlLine(models.Model):
         :param controlling_date: date string of the credit controlling date.
                                  Generally it should be the same
                                  as create date
+        :param default_lines_vals: default values to create new credit control
+                                   lines with
         :param check_tolerance: boolean if True credit line
                                 will not be generated if open amount
                                 is smaller than company defined
@@ -241,7 +256,12 @@ class CreditControlLine(models.Model):
             if check_tolerance and open_amount < cur_tolerance:
                 continue
             vals = self._prepare_from_move_line(
-                move_line, level, controlling_date, open_amount)
+                move_line,
+                level,
+                controlling_date,
+                open_amount,
+                default_lines_vals or {},
+            )
             lines_to_create.append(vals)
 
             # when we have lines generated earlier in draft,
