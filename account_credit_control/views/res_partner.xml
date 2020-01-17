@@ -32,6 +32,7 @@
                         <field name="credit_policy_id" widget="selection"/>
                         <field name="payment_responsible_id"/>
                         <field name="payment_note"/>
+                        <field name="payment_next_action_type"/>
                         <field name="payment_next_action"/>
                         <field name="payment_next_action_date"/>
                         <field name="credit_control_analysis_ids" nolabel="1" colspan="2">
@@ -55,6 +56,7 @@
         <field name="arch" type="xml">
             <tree string="Customer Followup" create="false" delete="false">
                 <field name="display_name"/>
+                <field name="payment_next_action_type"/>
                 <field name="payment_next_action_date"/>
                 <field name="payment_next_action"/>
                 <field name="payment_responsible_id"/>
@@ -83,5 +85,53 @@
               sequence="30"
               id="credit_control_manual_action_menu"
     />
+
+    <!-- Partner Payment Action Types -->
+    <record model="ir.ui.view" id="res_partner_payment_action_type_form_view">
+        <field name="name">res.partner.payment.action.type.form</field>
+        <field name="model">res.partner.payment.action.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="res_partner_payment_action_type_tree_view">
+        <field name="name">res.partner.payment.action.type.form</field>
+        <field name="model">res.partner.payment.action.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="res_partner_payment_action_type_act_window">
+        <field name="name">Partner Payment Action Types</field>
+        <field name="res_model">res.partner.payment.action.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.menu" id="res_partner_payment_action_type_menu">
+        <field name="name">Partner Payment Action Types</field>
+        <field name="parent_id" ref="account_credit_control.base_credit_control_configuration_menu"/>
+        <field name="action" ref="res_partner_payment_action_type_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
 
 </odoo>
