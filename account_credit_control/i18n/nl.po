@@ -1114,7 +1114,7 @@ msgid "Next Activity Type"
 msgstr "Volgende actie datum"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_emailer.py:52
+#: code:addons/account_credit_control/wizard/credit_control_emailer.py:61
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:64
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:48
 #, python-format
@@ -1650,6 +1650,11 @@ msgstr "Verzend een email voor geselecteerd regels."
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send the emails"
 msgstr "Verzend de emails"
+
+#. module: account_credit_control
+#: selection:credit.control.line,state:0
+msgid "Sending"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__mail_message_id
