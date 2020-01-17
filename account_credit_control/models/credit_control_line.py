@@ -167,6 +167,13 @@ class CreditControlLine(models.Model):
             ('low_level', 'Low Level'),
             ('highest_level', 'Highest Level'),
         ],
+        help="'No Auto Process' lines are not automatically processed "
+             "with other lines.\n"
+             "'Low Level' lines are automatically processed "
+             "with higher level lines.\n"
+             "'Highest Level' indicates that all 'Low Level' lines for this "
+             "line's partner-policy combination will be automatically "
+             "processed with it.",
         default="no_auto_process",
         readonly=True,
     )
