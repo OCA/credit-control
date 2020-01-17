@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_risk_insurance
+# 	* partner_risk_insurance
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2019-11-21 11:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -135,8 +136,11 @@ msgstr "Última actualización el"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
-msgid "Mark this field if an insurance was requested for the credit of this partner."
-msgstr "Marque este campo si se ha solicitado un seguro para el crédito de esta empresa"
+msgid ""
+"Mark this field if an insurance was requested for the credit of this partner."
+msgstr ""
+"Marque este campo si se ha solicitado un seguro para el crédito de esta "
+"empresa"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
@@ -165,9 +169,3 @@ msgstr "Código secundario asignado a este partner por la compoañía de seguros
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
 msgstr "Estado de las pólizas"
-
-#. module: partner_risk_insurance
-#: model:ir.ui.view,name:partner_risk_insurance.view_partner_form
-msgid "res.partner.form.risk_insurance"
-msgstr ""
-
