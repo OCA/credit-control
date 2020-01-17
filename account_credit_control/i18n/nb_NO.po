@@ -158,6 +158,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__active
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__active
 msgid "Active"
 msgstr ""
 
@@ -261,6 +262,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__company_id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__company_id
 msgid "Company"
 msgstr ""
 
@@ -332,6 +334,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__create_uid
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__create_uid
 msgid "Created by"
 msgstr "Laget av"
 
@@ -345,6 +348,7 @@ msgstr "Laget av"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__create_date
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__create_date
 msgid "Created on"
 msgstr "Laget den"
 
@@ -559,6 +563,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__display_name
 msgid "Display Name"
 msgstr "Vis navn"
 
@@ -707,6 +712,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__id
 msgid "ID"
 msgstr "ID"
 
@@ -786,6 +792,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run____last_update
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type____last_update
 msgid "Last Modified on"
 msgstr "Sist endret den"
 
@@ -799,6 +806,7 @@ msgstr "Sist endret den"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__write_uid
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__write_uid
 msgid "Last Updated by"
 msgstr "Sist oppdatert av"
 
@@ -812,6 +820,7 @@ msgstr "Sist oppdatert av"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__write_date
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__write_date
 msgid "Last Updated on"
 msgstr "Sist oppdatert den"
 
@@ -983,6 +992,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__name
 msgid "Name"
 msgstr ""
 
@@ -1006,6 +1016,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_next_action_date
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__payment_next_action_date
 msgid "Next Action Date"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_next_action_type
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users__payment_next_action_type
+msgid "Next Action Type"
 msgstr ""
 
 #. module: account_credit_control
@@ -1258,8 +1274,20 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.res_partner_payment_action_type_act_window
+#: model:ir.model,name:account_credit_control.model_res_partner_payment_action_type
+#: model:ir.ui.menu,name:account_credit_control.res_partner_payment_action_type_menu
+msgid "Partner Payment Action Types"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
 msgid "Partner Ref"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
+msgid "Partners"
 msgstr ""
 
 #. module: account_credit_control
@@ -1441,6 +1469,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__mail_message_id
 msgid "Sent Email"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__sequence
+msgid "Sequence"
 msgstr ""
 
 #. module: account_credit_control
