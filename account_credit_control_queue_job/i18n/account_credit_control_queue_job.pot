@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_credit_control_queue_job
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_line
+msgid "A credit control line"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model.fields,help:account_credit_control_queue_job.field_credit_control_emailer__run_in_jobs
+msgid "Create and send emails in jobs"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Done"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model.fields,help:account_credit_control_queue_job.field_credit_control_line__state
+msgid "Draft lines need to be triaged.\n"
+"Ignored lines are lines for which we do not want to send something.\n"
+"Draft and ignored lines will be generated again on the next run."
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Emailing Error"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Error"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Ignored"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_emailer
+msgid "Mass credit line emailer"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model.fields,field_description:account_credit_control_queue_job.field_credit_control_emailer__run_in_jobs
+msgid "Run In Jobs"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Sending"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model.fields,field_description:account_credit_control_queue_job.field_credit_control_line__state
+msgid "State"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "To Do"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
+msgid "credit control communication"
+msgstr ""
+
