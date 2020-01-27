@@ -87,6 +87,10 @@ Contributors
 
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
 
+* `RGB Consulting <https://www.rgbconsulting.com>`_:
+
+  * Domantas Sidorenkovas
+
 Maintainers
 ~~~~~~~~~~~
 

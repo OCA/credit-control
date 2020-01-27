@@ -115,9 +115,9 @@ class ResPartner(models.Model):
     @api.multi
     @api.depends(
         'customer', 'invoice_ids', 'invoice_ids.state',
-        'invoice_ids.amount_total',
+        'invoice_ids.amount_total_signed',
         'child_ids.invoice_ids', 'child_ids.invoice_ids.state',
-        'child_ids.invoice_ids.amount_total')
+        'child_ids.invoice_ids.amount_total_signed')
     def _compute_risk_invoice(self):
         all_partners_and_children = {}
         all_partner_ids = []
@@ -133,11 +133,11 @@ class ResPartner(models.Model):
             [('type', 'in', ['out_invoice', 'out_refund']),
              ('state', 'in', ['draft', 'proforma', 'proforma2']),
              ('partner_id', 'in', self.ids)],
-            ['partner_id', 'amount_total'],
+            ['partner_id', 'amount_total_signed'],
             ['partner_id'])
         for partner, child_ids in list(all_partners_and_children.items()):
             partner.risk_invoice_draft = sum(
-                x['amount_total']
+                x['amount_total_signed']
                 for x in total_group if x['partner_id'][0] in child_ids)
 
     @api.model
