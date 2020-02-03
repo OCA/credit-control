@@ -24,16 +24,24 @@ class ResPartner(models.Model):
         partners = customers | customers.mapped('child_ids')
         orders_group = self.env['sale.order.line'].read_group(
             [('state', '=', 'sale'), ('order_partner_id', 'in', partners.ids)],
-            ['order_partner_id', 'price_total',
-             'amt_to_invoice', 'amt_invoiced'],
+            ['order_partner_id', 'price_total', 'amt_to_invoice',
+                'amt_invoiced', 'qty_invoiced'],
             ['order_partner_id'])
         for partner in customers:
             partner_ids = (partner | partner.child_ids).ids
             # Take in account max of ordered qty and delivered qty
-            partner.risk_sale_order = sum(
-                max(x['price_total'], x['amt_to_invoice']) - x['amt_invoiced']
-                for x in orders_group if x['order_partner_id'][0] in
-                partner_ids)
+            risk_sale_order = 0
+            for x in orders_group:
+                if x['order_partner_id'][0] in partner_ids:
+                    if x['qty_invoiced']:
+                        if x['price_total'] != x['amt_to_invoice']:
+                            risk_sale_order += max(
+                                x['price_total'],
+                                x['amt_to_invoice']) - x['amt_invoiced']
+                    else:
+                        risk_sale_order += x['price_total']
+
+            partner.risk_sale_order = risk_sale_order
 
     @api.model
     def _risk_field_list(self):
