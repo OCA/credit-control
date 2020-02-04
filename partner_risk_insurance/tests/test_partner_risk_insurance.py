@@ -10,11 +10,13 @@ class TestSaleOrderLineInput(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner = cls.env['res.partner'].create({
-            'name': 'Test',
-            'company_credit_limit': 100.00,
-            'insurance_credit_limit': 50.00,
-        })
+        cls.partner = cls.env["res.partner"].create(
+            {
+                "name": "Test",
+                "company_credit_limit": 100.00,
+                "insurance_credit_limit": 50.00,
+            }
+        )
 
     def test_credit_limit(self):
         self.assertEqual(self.partner.credit_limit, 150.00)
