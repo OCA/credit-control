@@ -5,7 +5,6 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    @api.multi
     @api.depends("company_credit_limit", "insurance_credit_limit")
     def _compute_credit_limit(self):
         for partner in self:
