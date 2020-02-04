@@ -202,7 +202,7 @@ class CreditControlCommunication(models.TransientModel):
             email_values.pop('model', None)
             email_values.pop('res_id', None)
             # Remove when mail.template returns correct format attachments
-            attachment_list = email_values.pop('attachments', None)
+            attachment_list = email_values.pop('attachments', [])
             email = emails.create(email_values)
 
             state = 'sent'
