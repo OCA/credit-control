@@ -7,7 +7,6 @@ from odoo import _, api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.multi
     def action_confirm(self):
         if not self.env.context.get("bypass_risk", False):
             partner = self.partner_id.commercial_partner_id
@@ -55,9 +54,9 @@ class SaleOrderLine(models.Model):
         "qty_delivered",
         "invoice_lines",
         "invoice_lines.price_total",
-        "invoice_lines.invoice_id",
-        "invoice_lines.invoice_id.state",
-        "invoice_lines.invoice_id.type",
+        "invoice_lines.move_id",
+        "invoice_lines.move_id.state",
+        "invoice_lines.move_id.type",
     )
     def _compute_amount_to_invoice(self):
         """ Compute the taxed amount already invoiced from the sale order
@@ -73,31 +72,34 @@ class SaleOrderLine(models.Model):
             where
                 `amount_invoiced` is taxed amount previously explained
         """
-        for line in self.filtered(lambda l: l.state == "sale"):
-            invoice_lines = line.invoice_lines.filtered(
-                lambda l: l.invoice_id.state in {"open", "in_payment", "paid"}
-            )
-            amount_invoiced = 0.0
-            for inv_line in invoice_lines:
-                inv_date = inv_line.invoice_id.date_invoice or fields.Date.today()
-                amount = inv_line.currency_id._convert(
-                    inv_line.price_total,
+        for line in self:
+            if line.state == "sale":
+                invoice_lines = line.invoice_lines.filtered(
+                    lambda l: l.move_id.state == "posted"
+                )
+                amount_invoiced = 0.0
+                for inv_line in invoice_lines:
+                    inv_date = inv_line.move_id.invoice_date or fields.Date.today()
+                    amount = inv_line.currency_id._convert(
+                        inv_line.price_total,
+                        line.company_id.currency_id,
+                        line.company_id,
+                        inv_date,
+                    )
+                    if inv_line.move_id.type == "out_invoice":
+                        amount_invoiced += amount
+                    elif inv_line.move_id.type == "out_refund":
+                        amount_invoiced -= amount
+                if line.product_id.invoice_policy == "delivery":
+                    total_sale_line = line.price_reduce_taxinc * line.qty_delivered
+                else:
+                    total_sale_line = line.price_total
+                total_sale_line = line.currency_id._convert(
+                    total_sale_line,
                     line.company_id.currency_id,
                     line.company_id,
-                    inv_date,
+                    fields.Date.today(),
                 )
-                if inv_line.invoice_id.type == "out_invoice":
-                    amount_invoiced += amount
-                elif inv_line.invoice_id.type == "out_refund":
-                    amount_invoiced -= amount
-            if line.product_id.invoice_policy == "delivery":
-                total_sale_line = line.price_reduce_taxinc * line.qty_delivered
+                line.amt_to_invoice = total_sale_line - amount_invoiced
             else:
-                total_sale_line = line.price_total
-            total_sale_line = line.currency_id._convert(
-                total_sale_line,
-                line.company_id.currency_id,
-                line.company_id,
-                fields.Date.today(),
-            )
-            line.amt_to_invoice = total_sale_line - amount_invoiced
+                line.amt_to_invoice = 0.0
