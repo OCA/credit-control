@@ -5,11 +5,11 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     invoice_unpaid_margin = fields.Integer(
         string="Maturity Margin",
         help="Days after due date to set an invoice as unpaid. "
-             "The change of this field recompute all partners risk, "
-             "be patient.",
+        "The change of this field recompute all partners risk, "
+        "be patient.",
     )
