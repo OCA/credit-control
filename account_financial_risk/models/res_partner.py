@@ -117,15 +117,12 @@ class ResPartner(models.Model):
     risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
     credit_limit = fields.Float(track_visibility="onchange")
 
-    @api.multi
     def _compute_risk_allow_edit(self):
         is_editable = self.env.user.has_group("account.group_account_manager")
-        for partner in self.filtered("customer"):
+        for partner in self.filtered("customer_rank"):
             partner.risk_allow_edit = is_editable
 
-    @api.multi
     @api.depends(
-        "customer",
         "invoice_ids",
         "invoice_ids.state",
         "invoice_ids.amount_total",
@@ -136,7 +133,7 @@ class ResPartner(models.Model):
     def _compute_risk_invoice(self):
         all_partners_and_children = {}
         all_partner_ids = []
-        for partner in self.filtered("customer"):
+        for partner in self.filtered("customer_rank"):
             if not partner.id:
                 continue
             all_partners_and_children[partner] = (
@@ -148,7 +145,7 @@ class ResPartner(models.Model):
         if not all_partner_ids:
             return
         total_group = (
-            self.env["account.invoice"]
+            self.env["account.move"]
             .sudo()
             .read_group(
                 [
@@ -173,8 +170,9 @@ class ResPartner(models.Model):
         return {
             "open": {
                 "domain": [
+                    ("parent_state", "=", "posted"),
                     ("reconciled", "=", False),
-                    ("account_id.internal_type", "=", "receivable"),
+                    ("account_internal_type", "=", "receivable"),
                     ("date_maturity", ">=", max_date),
                 ],
                 "fields": ["partner_id", "account_id", "amount_residual"],
@@ -182,8 +180,9 @@ class ResPartner(models.Model):
             },
             "unpaid": {
                 "domain": [
+                    ("parent_state", "=", "posted"),
                     ("reconciled", "=", False),
-                    ("account_id.internal_type", "=", "receivable"),
+                    ("account_internal_type", "=", "receivable"),
                     ("date_maturity", "<", max_date),
                 ],
                 "fields": ["partner_id", "account_id", "amount_residual"],
@@ -191,7 +190,6 @@ class ResPartner(models.Model):
             },
         }
 
-    @api.multi
     @api.depends(
         "move_line_ids.amount_residual",
         "move_line_ids.date_maturity",
@@ -199,11 +197,11 @@ class ResPartner(models.Model):
     )
     def _compute_risk_account_amount(self):
         account_moveLine = self.env["account.move.line"].sudo()
-        customers = self.filtered(lambda x: x.customer and not x.parent_id)
+        customers = self.filtered(lambda x: x.customer_rank and not x.parent_id)
         if not customers:
             return
         groups = self._risk_account_groups()
-        for key, group in groups.items():
+        for group in groups.values():
             group["read_group"] = account_moveLine.read_group(
                 group["domain"] + [("partner_id", "in", customers.ids)],
                 group["fields"],
@@ -213,7 +211,6 @@ class ResPartner(models.Model):
         for partner in customers:
             partner.update(partner._prepare_risk_account_vals(groups))
 
-    @api.multi
     def _prepare_risk_account_vals(self, groups):
         vals = {
             "risk_invoice_open": 0.0,
@@ -237,11 +234,10 @@ class ResPartner(models.Model):
                 vals["risk_account_amount_unpaid"] += reg["amount_residual"]
         return vals
 
-    @api.multi
     @api.depends(lambda x: x._get_depends_compute_risk_exception())
     def _compute_risk_exception(self):
         risk_field_list = self._risk_field_list()
-        for partner in self.filtered("customer"):
+        for partner in self.filtered("customer_rank"):
             amount = 0.0
             risk_exception = False
             for risk_field in risk_field_list:

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="account_invoice_confirm_view" model="ir.ui.view">
-        <field name="name">account.invoice.confirm.form</field>
-        <field name="model">account.invoice.confirm</field>
-        <field name="inherit_id" ref="account.account_invoice_confirm_view" />
+    <record id="validate_account_move_view" model="ir.ui.view">
+        <field name="model">validate.account.move</field>
+        <field name="inherit_id" ref="account.validate_account_move_view" />
         <field name="arch" type="xml">
             <xpath expr="//footer" position="before">
                 <p attrs="{'invisible': [('info_risk','=', '')]}">
@@ -14,10 +13,10 @@
                 </p>
                 <field name="info_risk" attrs="{'invisible': [('info_risk','=', '')]}"/>
             </xpath>
-            <xpath expr="//button[@name='invoice_confirm']" position="after">
-                <button string="Confirm ALL Invoices"
+            <xpath expr="//button[@name='validate_move']" position="after">
+                <button string="Post All Journal Entries"
                         class="oe_highlight"
-                        name="invoice_confirm"
+                        name="validate_move"
                         type="object"
                         attrs="{'invisible': [('info_risk','=', '')]}"
                         context="{'bypass_risk': True}"

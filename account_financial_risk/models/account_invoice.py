@@ -1,11 +1,11 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, models
 
 
-class AccountInvoice(models.Model):
-    _inherit = "account.invoice"
+class AccountMove(models.Model):
+    _inherit = "account.move"
 
     def risk_exception_msg(self):
         self.ensure_one()
@@ -26,10 +26,9 @@ class AccountInvoice(models.Model):
             exception_msg = _("This invoice exceeds the financial risk.\n")
         return exception_msg
 
-    @api.multi
-    def action_invoice_open(self):
+    def action_post(self):
         if self.env.context.get("bypass_risk", False):
-            return super(AccountInvoice, self).action_invoice_open()
+            return super().action_post()
         for invoice in self.filtered(
             lambda x: x.type in ("out_invoice", "out_refund")
             and x.amount_total_signed > 0.0
@@ -42,11 +41,12 @@ class AccountInvoice(models.Model):
                         {
                             "exception_msg": exception_msg,
                             "partner_id": invoice.partner_id.commercial_partner_id.id,
-                            "origin_reference": "%s,%s"
-                            % ("account.invoice", invoice.id),
-                            "continue_method": "action_invoice_open",
+                            "origin_reference": "{},{}".format(
+                                "account.move", invoice.id
+                            ),
+                            "continue_method": "action_post",
                         }
                     )
                     .action_show()
                 )
-        return super(AccountInvoice, self).action_invoice_open()
+        return super().action_post()

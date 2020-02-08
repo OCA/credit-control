@@ -8,8 +8,10 @@
     <field name="model">res.config.settings</field>
     <field name="inherit_id" ref="account.res_config_settings_view_form"/>
     <field name="arch" type="xml">
-        <xpath expr="//div[@id='account_followup']/.." position="inside">
-            <div class="col-12 col-lg-6 o_setting_box" title="Days after due date to set an invoice as unpaid. The change of this field recompute all partners risk, be patient.">
+        <xpath expr="//div[@id='invoicing_settings']" position="inside">
+            <div class="col-12 col-lg-6 o_setting_box"
+                 title="Days after due date to set an invoice as unpaid.
+                        The change of this field recompute all partners risk, be patient.">
                 <div class="o_setting_left_pane"/>
                 <div class="o_setting_right_pane">
                     <span class="o_form_label">Financial Risk</span>
