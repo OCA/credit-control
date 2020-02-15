@@ -11,7 +11,7 @@ class TestStockFinancialRisk(common.SavepointCase):
     def setUpClass(cls):
         super(TestStockFinancialRisk, cls).setUpClass()
         cls.partner = cls.env["res.partner"].create(
-            {"name": "Partner test", "customer": True}
+            {"name": "Partner test", "customer_rank": 1}
         )
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "type": "product"}
@@ -35,6 +35,7 @@ class TestStockFinancialRisk(common.SavepointCase):
                 "name": "Test picking type",
                 "code": "outgoing",
                 "sequence_id": cls.sequence.id,
+                "sequence_code": "test",
             }
         )
         cls.quant = cls.env["stock.quant"].create(
