@@ -10,16 +10,12 @@ class AccountCreditControlAnalysis(models.Model):
     _auto = False
     _rec_name = "partner_id"
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", readonly=True
-    )
+    partner_id = fields.Many2one(comodel_name="res.partner", readonly=True)
     partner_ref = fields.Char(string="Partner Ref", readonly=True)
     policy_id = fields.Many2one(
         comodel_name="credit.control.policy", string="Policy", readonly=True
     )
-    currency_id = fields.Many2one(
-        comodel_name="res.currency", readonly=True
-    )
+    currency_id = fields.Many2one(comodel_name="res.currency", readonly=True)
     policy_level_id = fields.Many2one(
         comodel_name="credit.control.policy.level",
         string="Overdue Level",
@@ -32,21 +28,15 @@ class AccountCreditControlAnalysis(models.Model):
         help="Open balance on credit control lines"
         "of same partner, policy and currency",
     )
-    company_id = fields.Many2one(
-        comodel_name='res.company',
-        readonly=True,
-    )
+    company_id = fields.Many2one(comodel_name="res.company", readonly=True)
 
     def _distinct_fields(self):
-        return (
-            """
+        return """
             partner.id, ccl.policy_id, ccl.currency_id
             """
-        )
 
     def _fields_to_select(self):
-        return (
-            """
+        return """
             ccl.id                                   AS id,
             partner.id                               AS partner_id,
             partner.ref                              AS partner_ref,
@@ -71,11 +61,9 @@ class AccountCreditControlAnalysis(models.Model):
                     )
                 ) AS open_balance
             """
-        )
 
     def _from_tables(self):
-        return (
-            """
+        return """
             FROM credit_control_line AS ccl
             LEFT JOIN credit_control_policy_level AS ccpl
             ON ccpl.id=ccl.policy_level_id
@@ -84,29 +72,24 @@ class AccountCreditControlAnalysis(models.Model):
             LEFT JOIN res_partner AS partner
             ON partner.id=ccl.commercial_partner_id
             """
-        )
 
     def _order_by(self):
-        return (
-            """
+        return """
             partner.id, ccl.policy_id, ccl.currency_id, ccpl.level DESC, ccl.id
             """
-        )
 
     def _get_sql_query(self):
-        return (
-            """
+        return """
             CREATE VIEW credit_control_analysis
             AS
             (SELECT DISTINCT ON (%s) %s
             %s
             ORDER BY %s)
             """ % (
-                self._distinct_fields(),
-                self._fields_to_select(),
-                self._from_tables(),
-                self._order_by(),
-            )
+            self._distinct_fields(),
+            self._fields_to_select(),
+            self._from_tables(),
+            self._order_by(),
         )
 
     @api.model_cr
