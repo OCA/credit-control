@@ -7,19 +7,18 @@ from odoo import fields, models
 
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     credit_control_tolerance = fields.Float(
-        related="company_id.credit_control_tolerance",
-        readonly=False,
+        related="company_id.credit_control_tolerance", readonly=False
     )
     credit_policy_id = fields.Many2one(
-        comodel_name='credit.control.policy',
+        comodel_name="credit.control.policy",
         related="company_id.credit_policy_id",
         readonly=False,
-        string='Credit Control Policy',
+        string="Credit Control Policy",
         help="The Credit Control Policy used "
-             "on partners by default. "
-             "This setting can be overridden"
-             " on partners or invoices.",
+        "on partners by default. "
+        "This setting can be overridden"
+        " on partners or invoices.",
     )
