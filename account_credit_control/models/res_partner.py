@@ -7,22 +7,20 @@ from odoo.exceptions import UserError, ValidationError
 
 class ResPartnerPaymentActionType(models.Model):
 
-    _name = 'res.partner.payment.action.type'
-    _description = 'Partner Payment Action Types'
-    _order = 'sequence, id'
+    _name = "res.partner.payment.action.type"
+    _description = "Partner Payment Action Types"
+    _order = "sequence, id"
 
     name = fields.Char()
-    sequence = fields.Integer('Sequence', default=10)
+    sequence = fields.Integer("Sequence", default=10)
     active = fields.Boolean(default=True)
     partner_ids = fields.One2many(
-        comodel_name='res.partner',
-        inverse_name='payment_next_action_type',
-        string='Partners',
+        comodel_name="res.partner",
+        inverse_name="payment_next_action_type",
+        string="Partners",
     )
     company_id = fields.Many2one(
-        'res.company',
-        'Company',
-        default=lambda self: self.env.user.company_id,
+        "res.company", "Company", default=lambda self: self.env.user.company_id
     )
 
 
@@ -30,48 +28,48 @@ class ResPartner(models.Model):
     """ Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines.
     """
+
     _inherit = "res.partner"
 
     credit_policy_id = fields.Many2one(
-        comodel_name='credit.control.policy',
-        string='Credit Control Policy',
+        comodel_name="credit.control.policy",
+        string="Credit Control Policy",
         domain="[('account_ids', 'in', property_account_receivable_id)]",
         help="The Credit Control Policy used for this "
-             "partner. This setting can be forced on the "
-             "invoice. If nothing is defined, it will use "
-             "the company setting.",
+        "partner. This setting can be forced on the "
+        "invoice. If nothing is defined, it will use "
+        "the company setting.",
     )
     credit_control_count = fields.Integer(
-        compute='_compute_credit_control_count',
-        string='# of Credit Control Lines',
+        compute="_compute_credit_control_count", string="# of Credit Control Lines"
     )
     payment_responsible_id = fields.Many2one(
-        comodel_name='res.users',
-        ondelete='set null',
-        string='Follow-up Responsible',
+        comodel_name="res.users",
+        ondelete="set null",
+        string="Follow-up Responsible",
         help="Optionally you can assign a user to this field, "
-             "which will make him responsible for the action.",
+        "which will make him responsible for the action.",
         track_visibility="onchange",
     )
     payment_note = fields.Text(
-        string='Customer Payment Promise',
+        string="Customer Payment Promise",
         help="Payment Note",
         track_visibility="onchange",
     )
     payment_next_action_type = fields.Many2one(
-        comodel_name='res.partner.payment.action.type',
-        string='Next Action Type',
-        track_visibility='onchange',
+        comodel_name="res.partner.payment.action.type",
+        string="Next Action Type",
+        track_visibility="onchange",
     )
     payment_next_action = fields.Text(
-        string='Next Action',
+        string="Next Action",
         help="This is the next action to be taken.",
         track_visibility="onchange",
     )
     payment_next_action_date = fields.Date(
-        string='Next Action Date',
+        string="Next Action Date",
         help="This is when the manual follow-up is needed.",
-        track_visibility='onchange',
+        track_visibility="onchange",
     )
     manual_followup = fields.Boolean()
     credit_control_analysis_ids = fields.One2many(
@@ -80,23 +78,26 @@ class ResPartner(models.Model):
 
     def _compute_credit_control_count(self):
         partners = self.filtered(lambda x: not x.parent_id)
-        fetch_data = self.env['credit.control.line'].read_group(
-            domain=[('partner_id', 'in', partners.ids)],
-            fields=['partner_id'],
-            groupby=['partner_id'],
+        fetch_data = self.env["credit.control.line"].read_group(
+            domain=[("partner_id", "in", partners.ids)],
+            fields=["partner_id"],
+            groupby=["partner_id"],
         )
-        result = {data['partner_id'][0]: data['partner_id_count']
-                  for data in fetch_data}
+        result = {
+            data["partner_id"][0]: data["partner_id_count"] for data in fetch_data
+        }
         for partner in self:
             partner.credit_control_count = result.get(partner.id, 0)
 
-    @api.constrains('credit_policy_id', 'property_account_receivable_id')
+    @api.constrains("credit_policy_id", "property_account_receivable_id")
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
         # sudo needed for those w/o permission that duplicate records
         for partner in self:
-            if (not partner.property_account_receivable_id or
-                    not partner.sudo().credit_policy_id):
+            if (
+                not partner.property_account_receivable_id
+                or not partner.sudo().credit_policy_id
+            ):
                 continue
             account = partner.property_account_receivable_id
             policy = partner.sudo().credit_policy_id
