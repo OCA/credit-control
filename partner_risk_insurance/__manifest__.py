@@ -16,4 +16,5 @@
     "category": "Credit Control",
     "data": ["security/ir.model.access.csv", "views/res_partner_view.xml"],
     "installable": True,
+    "maintainers": ["Daniel-CA", "sergio-teruel", "omar7r", "Tardo"],
 }
