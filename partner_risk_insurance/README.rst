@@ -84,6 +84,23 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-Daniel-CA| image:: https://github.com/Daniel-CA.png?size=40px
+    :target: https://github.com/Daniel-CA
+    :alt: Daniel-CA
+.. |maintainer-sergio-teruel| image:: https://github.com/sergio-teruel.png?size=40px
+    :target: https://github.com/sergio-teruel
+    :alt: sergio-teruel
+.. |maintainer-omar7r| image:: https://github.com/omar7r.png?size=40px
+    :target: https://github.com/omar7r
+    :alt: omar7r
+.. |maintainer-Tardo| image:: https://github.com/Tardo.png?size=40px
+    :target: https://github.com/Tardo
+    :alt: Tardo
+
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-Daniel-CA| |maintainer-sergio-teruel| |maintainer-omar7r| |maintainer-Tardo| 
+
 This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/13.0/partner_risk_insurance>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
     <!--Add risk insurance tab in partner form. -->
     <record model="ir.ui.view" id="view_partner_form">
         <field name="name">res.partner.form.risk_insurance</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page string="Credit Insurance">
