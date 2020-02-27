@@ -13,3 +13,12 @@ class ResCompany(models.Model):
              "The change of this field recompute all partners risk,"
              "be patient.",
     )
+
+    # TODO: Remove when odoo compare values before to write
+    def write(self, vals):
+        new_margin = vals.get('invoice_unpaid_margin')
+        if (new_margin is not None and
+                all(new_margin == x.invoice_unpaid_margin for x in self)):
+            vals = vals.copy()
+            vals.pop('invoice_unpaid_margin')
+        return super().write(vals)
