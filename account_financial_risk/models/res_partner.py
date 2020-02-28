@@ -119,7 +119,7 @@ class ResPartner(models.Model):
 
     def _compute_risk_allow_edit(self):
         is_editable = self.env.user.has_group("account.group_account_manager")
-        for partner in self.filtered("customer_rank"):
+        for partner in self:
             partner.risk_allow_edit = is_editable
 
     @api.depends(
@@ -237,7 +237,7 @@ class ResPartner(models.Model):
     @api.depends(lambda x: x._get_depends_compute_risk_exception())
     def _compute_risk_exception(self):
         risk_field_list = self._risk_field_list()
-        for partner in self.filtered("customer_rank"):
+        for partner in self:
             amount = 0.0
             risk_exception = False
             for risk_field in risk_field_list:
