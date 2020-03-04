@@ -70,6 +70,7 @@ Contributors
   * Pedro M. Baeza
 
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
+* Rodrigo Bonilla <rodrigo.bonilla@factorlibre.com>
 
 Maintainers
 ~~~~~~~~~~~
