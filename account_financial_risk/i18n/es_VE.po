@@ -10,28 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
 "PO-Revision-Date: 2020-02-04 20:13+0000\n"
 "Last-Translator: Nelson Ramírez Sánchez <info@konos.cl>\n"
-"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/"
-"OCA-partner-contact-9-0/language/es_VE/)\n"
+"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-partner-"
+"contact-9-0/language/es_VE/)\n"
 "Language: es_VE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.10\n"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"<span class=\"o_form_label\">Financial Risk</span>\n"
-"                    <span class=\"fa fa-lg fa-building-o\" title=\"Values "
-"set here are company-specific.\" aria-label=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
-msgstr ""
-"<span class=\"o_form_label\">Riesgo Financiero</span>\n"
-"                    <span class=\"fa fa-lg fa-building-o\" title=\"Los "
-"valores establecidos aquí son específicos de la compañía.\" aria-label=\"Los "
-"valores establecidos aquí son específicos de la compañía.\" groups=\"base."
-"group_multi_company\" role=\"img\"/>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -61,6 +47,30 @@ msgstr "<strong>Su selección incluye socios con riesgo excedido.</strong>"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
 msgstr "Movimientos Contables"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid "Allow invoice validation over the risk"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Always allow the validation of draft invoices.\n"
+"                            Useful when the flow comes from sales orders and "
+"the over-risk\n"
+"                            has already been allowed when confirming these."
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid ""
+"Always allow the validation of draft invoices. Useful when the flow comes "
+"from sales orders and the over-risk has already been allowed when confirming "
+"these."
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -130,9 +140,23 @@ msgid "Customer"
 msgstr "Cliente"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+#, fuzzy
+#| msgid ""
+#| "Days after due date to set an invoice as unpaid. The change of this field "
+#| "recompute all partners risk, be patient."
+msgid ""
+"Days after due date to set an invoice as unpaid.\n"
+"                            The change of this field recompute all partners "
+"risk, be patient."
+msgstr ""
+"Días después de la fecha de vencimiento para establecer una factura como "
+"impaga. El cambio de este campo recalcula el riesgo de todos los socios, sea "
+"paciente."
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
@@ -152,6 +176,7 @@ msgid "Exception Msg"
 msgstr "Msg Excepción"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
 msgstr "Riesgo Financiero"
@@ -344,7 +369,6 @@ msgstr "Límite de Otra Cuenta Monto Impago"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "Maturity Margin"
 msgstr "Margen de Vencimiento"
 
@@ -448,11 +472,6 @@ msgid "Set 0 if it is not locked"
 msgstr "Establezca 0 si no está bloqueado"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid "Set options applied to financial risk"
-msgstr "Establecer opciones aplicadas al riesgo financiero"
-
-#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Specific Limits"
 msgstr "Límites Específicos"
@@ -521,6 +540,21 @@ msgstr "Total de facturas impagas / saldo de capital"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Cantidad total de facturas en estado borrador o pro forma"
+
+#~ msgid ""
+#~ "<span class=\"o_form_label\">Financial Risk</span>\n"
+#~ "                    <span class=\"fa fa-lg fa-building-o\" title=\"Values "
+#~ "set here are company-specific.\" aria-label=\"Values set here are company-"
+#~ "specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+#~ msgstr ""
+#~ "<span class=\"o_form_label\">Riesgo Financiero</span>\n"
+#~ "                    <span class=\"fa fa-lg fa-building-o\" title=\"Los "
+#~ "valores establecidos aquí son específicos de la compañía.\" aria-label="
+#~ "\"Los valores establecidos aquí son específicos de la compañía.\" groups="
+#~ "\"base.group_multi_company\" role=\"img\"/>"
+
+#~ msgid "Set options applied to financial risk"
+#~ msgstr "Establecer opciones aplicadas al riesgo financiero"
 
 #~ msgid "Partner"
 #~ msgstr "Empresa"
