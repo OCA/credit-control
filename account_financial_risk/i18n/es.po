@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 14:55+0100\n"
-"PO-Revision-Date: 2020-02-04 20:13+0000\n"
-"Last-Translator: Nelson Ramírez Sánchez <info@konos.cl>\n"
+"POT-Creation-Date: 2020-03-23 11:13+0100\n"
+"PO-Revision-Date: 2020-03-23 11:18+0100\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
 "Language: es\n"
@@ -19,21 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"<span class=\"o_form_label\">Financial Risk</span>\n"
-"                    <span class=\"fa fa-lg fa-building-o\" title=\"Values "
-"set here are company-specific.\" aria-label=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
-msgstr ""
-"<span class=\"o_form_label\">Riesgo Financiero</span>\n"
-"                    <span class=\"fa fa-lg fa-building-o\" title=\"Los "
-"valores establecidos aquí son específicos de la empresa.\" aria-label=\"Los "
-"valores establecidos aquí son específicos de la empresa..\" groups=\"base."
-"group_multi_company\" role=\"img\"/>"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -63,6 +49,37 @@ msgstr "<strong>Su selección incluye contactos con riesgo excedido.</strong>"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
 msgstr "Apuntes contables"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid "Allow invoice validation over the risk"
+msgstr "Permite validar facturas con riesgo excedido"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Always allow the validation of draft invoices.\n"
+"                            Useful when the flow comes from sales orders and "
+"the over-risk\n"
+"                            has already been allowed when confirming these."
+msgstr ""
+"Permite siempre la validación de facturas borrador.\n"
+"                            Útil cuando el flujo viene de pedidos de venta y "
+"sobrepasar el riesgo\n"
+"                            ha sido permitido al confirmar estos."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid ""
+"Always allow the validation of draft invoices. Useful when the flow comes "
+"from sales orders and the over-risk has already been allowed when confirming "
+"these."
+msgstr ""
+"Permite siempre la validación de facturas borrador. Útil cuando el flujo "
+"viene de pedidos de compra y el sobre riesgo ha sido permitido al confirmar "
+"estos."
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -132,9 +149,20 @@ msgid "Customer"
 msgstr "Cliente"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Days after due date to set an invoice as unpaid.\n"
+"                            The change of this field recompute all partners "
+"risk, be patient."
+msgstr ""
+"Días después de la fecha de vencimiento para establecer una factura como "
+"impagada.\n"
+"                            El cambio de este campo recalcula el riesgo de "
+"todos los clientes, sea paciente."
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
@@ -154,6 +182,7 @@ msgid "Exception Msg"
 msgstr "Mensaje de excepción"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
 msgstr "Riesgo financiero"
@@ -345,7 +374,6 @@ msgstr "Límite en otro saldo contable impagado"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "Maturity Margin"
 msgstr "Margen vencimiento"
 
@@ -448,11 +476,6 @@ msgid "Set 0 if it is not locked"
 msgstr "Establece 0 si no está bloqueado"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid "Set options applied to financial risk"
-msgstr "Establecer opciones aplicadas al riesgo financiero"
-
-#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Specific Limits"
 msgstr "Límites específicos"
@@ -521,9 +544,3 @@ msgstr "Total facturas/saldo principal impagado"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Importe total de facturas borrador o pro-forma"
-
-#~ msgid "These taxes are set in any new product created."
-#~ msgstr "Estos impuestos son establecidos en algún nuevo producto creado."
-
-#~ msgid "partner.risk.exceeded.wiz"
-#~ msgstr "partner.risk.exceeded.wiz"
