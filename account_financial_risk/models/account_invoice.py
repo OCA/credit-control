@@ -29,7 +29,8 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_invoice_open(self):
-        if self.env.context.get('bypass_risk', False):
+        if (self.env.context.get('bypass_risk', False) or
+                self.company_id.allow_overrisk_invoice_validation):
             return super(AccountInvoice, self).action_invoice_open()
         for invoice in self.filtered(lambda x: x.type in (
                 'out_invoice', 'out_refund') and x.amount_total_signed > 0.0):

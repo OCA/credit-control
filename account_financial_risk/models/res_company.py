@@ -13,3 +13,9 @@ class ResCompany(models.Model):
              "The change of this field recompute all partners risk, "
              "be patient.",
     )
+    allow_overrisk_invoice_validation = fields.Boolean(
+        string="Allow invoice validation over the risk",
+        help="Always allow the validation of draft invoices. "
+             "Useful when the flow comes from sales orders and the over-risk "
+             "has already been allowed when confirming these.",
+    )
