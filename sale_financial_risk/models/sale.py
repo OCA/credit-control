@@ -68,7 +68,7 @@ class SaleOrderLine(models.Model):
         """
         for line in self.filtered(lambda l: l.state == 'sale'):
             invoice_lines = line.invoice_lines.filtered(
-                lambda l: l.invoice_id.state in {'open', 'in_payment', 'paid'})
+                lambda l: l.invoice_id.state != 'cancel')
             amount_invoiced = 0.0
             for inv_line in invoice_lines:
                 inv_date = (inv_line.invoice_id.date_invoice

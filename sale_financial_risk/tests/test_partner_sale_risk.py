@@ -69,9 +69,13 @@ class TestPartnerSaleRisk(SavepointCase):
         inv_wiz = self.env['sale.advance.payment.inv'].with_context(
             {'active_ids': [self.sale_order.id]}).create({})
         inv_wiz.create_invoices()
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         invoice = self.sale_order.invoice_ids
         invoice.with_context(bypass_risk=True).action_invoice_open()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
+        self.assertAlmostEqual(self.partner.risk_invoice_open, 100.0)
         self.assertFalse(self.partner.risk_exception)
         # After that, if we create and validate a Credit Note from the invoice
         # then the amount to be invoiced must be 100 again
@@ -82,6 +86,10 @@ class TestPartnerSaleRisk(SavepointCase):
             'description': 'testing',
             'filter_refund': 'modify',
         })
-        ref_wiz.invoice_refund()
+        res = ref_wiz.invoice_refund()
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        modify_invoice = invoice.browse(res['res_id'])
+        modify_invoice.action_invoice_cancel()
         self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
         self.assertTrue(self.partner.risk_exception)
