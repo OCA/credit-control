@@ -20,15 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"<span class=\"o_form_label\">Financial Risk</span>\n"
-"                    <span class=\"fa fa-lg fa-building-o\" title=\"Values "
-"set here are company-specific.\" aria-label=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
-msgstr ""
-
-#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
 msgid ""
 "<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
@@ -51,6 +42,30 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid "Allow invoice validation over the risk"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Always allow the validation of draft invoices.\n"
+"                            Useful when the flow comes from sales orders and "
+"the over-risk\n"
+"                            has already been allowed when confirming these."
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid ""
+"Always allow the validation of draft invoices. Useful when the flow comes "
+"from sales orders and the over-risk has already been allowed when confirming "
+"these."
 msgstr ""
 
 #. module: account_financial_risk
@@ -125,9 +140,16 @@ msgid "Customer"
 msgstr "Kunde"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Days after due date to set an invoice as unpaid.\n"
+"                            The change of this field recompute all partners "
+"risk, be patient."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
@@ -145,6 +167,7 @@ msgid "Exception Msg"
 msgstr "Fehlermeldung"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
 msgstr "Finanzielles Risiko"
@@ -339,7 +362,6 @@ msgstr "Beschränke anderen Kontobetrag"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "Maturity Margin"
 msgstr "Fälligkeitsgrenze"
 
@@ -439,11 +461,6 @@ msgstr "Risikoüberschreitung"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Set 0 if it is not locked"
 msgstr "Setze 0, wenn nicht gesperrt"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid "Set options applied to financial risk"
-msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
