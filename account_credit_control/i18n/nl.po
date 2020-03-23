@@ -6,15 +6,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2018-12-04 12:09+0000\n"
-"Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
+"PO-Revision-Date: 2020-03-23 16:38+0000\n"
+"Last-Translator: Cas Vissers <c.vissers@brahoo.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -75,9 +75,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_count
-#, fuzzy
 msgid "# of Credit Control Lines"
-msgstr "Aanmaning regels"
+msgstr "# Aanmaning regels"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
@@ -102,32 +101,26 @@ msgstr "60 dagen laatste herinnering"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
-#, fuzzy
-#| msgid ""
-#| "This wizard will let you set the overdue policy and level for selected "
-#| "invoices"
 msgid ""
 "<span class=\"o_form_label\">This wizard will let you set the overdue policy "
 "and level for selected invoices</span>"
 msgstr ""
-"Deze wizard maakt het mogelijk om de vervallen beleid en niveau van de "
-"geselecteerde facturen aan te passen."
+"<span class=\"o_form_label\">Deze wizard maakt het mogelijk om de vervallen "
+"beleid en niveau van de geselecteerde facturen aan te passen.</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
-#, fuzzy
-#| msgid "Warning: you will maybe not be able to revert this operation."
 msgid ""
 "<span class=\"o_form_label\">Warning: you will maybe not be able to revert "
 "this operation.</span>"
-msgstr "Waarschuwing: U kan misschien deze wijziging niet terugzetten."
+msgstr ""
+"<span class=\"o_form_label\">Waarschuwing: U kan misschien deze wijziging "
+"niet terugzetten..</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
-#, fuzzy
-#| msgid "<strong>Total Due</strong>"
 msgid "<strong>Date:</strong>"
-msgstr "<strong>Totaal vervallen</strong>"
+msgstr "<strong>Datum</strong>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -165,10 +158,9 @@ msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:103
-#, fuzzy, python-format
-#| msgid "A run has already been executed more recently than %s"
+#, python-format
 msgid "A run has already been executed more recently (%s)"
-msgstr "Er is reeds eerder een aanmaningsrun uitgevoerd dan %s"
+msgstr "Er is reeds eerder een aanmaningsrun uitgevoerd dan (%s)"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_account
@@ -181,12 +173,12 @@ msgstr "Rekening"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__account_ids
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Accounts"
-msgstr "Kostenplaatsen"
+msgstr "Grootboeken"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Actie nodig"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__active
@@ -196,17 +188,13 @@ msgstr "Actief"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_ids
-#, fuzzy
-#| msgid "Active"
 msgid "Activities"
-msgstr "Actief"
+msgstr "Activiteiten"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_state
-#, fuzzy
-#| msgid "Active"
 msgid "Activity State"
-msgstr "Actief"
+msgstr "Activiteit status"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -221,7 +209,7 @@ msgstr "Er is een fout opgetreden bij het versturen van de mail."
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Are you sure you want to run all ready lines channel action?"
-msgstr ""
+msgstr "Weet u zeker dat u de actie wil draaien voor voltooide regels?"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
@@ -231,7 +219,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Aantal bijlage"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:362
@@ -285,7 +273,7 @@ msgstr "Kanaal"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__commercial_partner_id
 msgid "Commercial Entity"
-msgstr ""
+msgstr "Commerciële entiteit"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
@@ -314,10 +302,8 @@ msgstr "Berekeningsmethode"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_config_settings
-#, fuzzy
-#| msgid "res.config.settings"
 msgid "Config Settings"
-msgstr "res.config.settings"
+msgstr "Configuratie instellingen"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_partner
@@ -331,17 +317,14 @@ msgstr "Contact Adres"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:78
-#, fuzzy, python-format
-#| msgid "Control Credit Lines"
+#, python-format
 msgid "Control Credit Line"
-msgstr "Aanmaningsregels"
+msgstr "Aanmaningsregel"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
-#, fuzzy
-#| msgid "Control Credit Lines"
 msgid "Control Credit Line Form"
-msgstr "Aanmaningsregels"
+msgstr "Aanmaningsregel formulier"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_form
@@ -352,7 +335,6 @@ msgstr "Aanmaningsregels"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-#, fuzzy
 msgid "Control Lines"
 msgstr "Aanmaning regels"
 
@@ -410,18 +392,14 @@ msgstr "Aanmaning"
 #: model:ir.model,name:account_credit_control.model_credit_control_analysis
 #: model:ir.ui.menu,name:account_credit_control.credit_control_analysis_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_analysis_pivot_view
-#, fuzzy
-#| msgid "Credit Control Lines"
 msgid "Credit Control Analysis"
-msgstr "Aanmaning regels"
+msgstr "Aanmaning regels analyse"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_analysis_ids
-#, fuzzy
-#| msgid "Credit Control Lines"
 msgid "Credit Control Levels"
-msgstr "Aanmaning regels"
+msgstr "Aanmaning regels niveaus"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_line_action
@@ -450,10 +428,8 @@ msgstr "Aanmaning beleid"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
-#, fuzzy
-#| msgid "Credit Control Policy"
 msgid "Credit Control Policy Changer"
-msgstr "Aanmaning beleid"
+msgstr "Aanmaning beleid aanpassen"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_run
@@ -722,20 +698,18 @@ msgstr "Opvolgingsverantwoordelijke"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_follower_ids
-#, fuzzy
-#| msgid "Follow-up"
 msgid "Followers"
-msgstr "Opvolging"
+msgstr "Volgers"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Volgers (kanalen)"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Volgers (relaties)"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__do_nothing
@@ -755,7 +729,7 @@ msgstr "Groepeer op"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__hide_change_state_button
 msgid "Hide Change State Button"
-msgstr ""
+msgstr "Verberg verander status knop"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__id
