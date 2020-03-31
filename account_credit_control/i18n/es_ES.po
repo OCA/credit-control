@@ -115,7 +115,7 @@ msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:112
+#: code:addons/account_credit_control/models/credit_control_run.py:113
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr ""
@@ -126,14 +126,14 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:164
+#: code:addons/account_credit_control/models/credit_control_run.py:165
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:103
+#: code:addons/account_credit_control/models/credit_control_run.py:104
 #, python-format
 msgid "A run has already been executed more recently (%s)"
 msgstr ""
@@ -1308,7 +1308,7 @@ msgid "Planned"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:126
+#: code:addons/account_credit_control/models/credit_control_run.py:127
 #, python-format
 msgid "Please select a policy"
 msgstr ""

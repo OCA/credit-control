@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
 "PO-Revision-Date: 2020-03-21 20:14+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,13 +49,13 @@ msgstr ""
 "             Se o seu pagamento não for recebido nos próximos 5 dias, seu "
 "arquivo será transferido para a nossa agência de cobrança de dívidas.\n"
 "\n"
-"             Se você precisar de um plano de pagamento para você, informe-o."
+"             Se você precisar de um plano de pagamento para você, informe-"
+"o.\n"
+"             Um extrato da conta do cliente é anexado para sua "
+"conveniência.\n"
 "\n"
-"             Um extrato da conta do cliente é anexado para sua conveniência."
-"\n"
-"\n"
-"             Agradecemos desde já a sua cooperação antecipada neste assunto."
-"\n"
+"             Agradecemos desde já a sua cooperação antecipada neste "
+"assunto.\n"
 "\n"
 "             Cumprimentos\n"
 "        "
@@ -144,7 +144,7 @@ msgid "A credit control line"
 msgstr "Uma linha de controle de crédito"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:112
+#: code:addons/account_credit_control/models/credit_control_run.py:113
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr "Uma linha de controle de crédito mais recente do que %s existe em %s"
@@ -155,7 +155,7 @@ msgid "A credit control policy level"
 msgstr "Um nível de política de controle de crédito"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:164
+#: code:addons/account_credit_control/models/credit_control_run.py:165
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -164,7 +164,7 @@ msgstr ""
 "por favor tente mais tarde."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:103
+#: code:addons/account_credit_control/models/credit_control_run.py:104
 #, python-format
 msgid "A run has already been executed more recently (%s)"
 msgstr "Uma execução já foi executada mais recentemente (%s)"
@@ -216,7 +216,8 @@ msgstr "Ocorreu um erro durante o envio do e-mail."
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Are you sure you want to run all ready lines channel action?"
-msgstr "Tem certeza que quer executar todas as linhas prontas de ação do canal?"
+msgstr ""
+"Tem certeza que quer executar todas as linhas prontas de ação do canal?"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
@@ -1443,7 +1444,7 @@ msgid "Planned"
 msgstr "Planejado"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:126
+#: code:addons/account_credit_control/models/credit_control_run.py:127
 #, python-format
 msgid "Please select a policy"
 msgstr "Por favor, selecione uma política"

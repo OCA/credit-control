@@ -142,7 +142,7 @@ msgid "A credit control line"
 msgstr "Ligne de relance"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:112
+#: code:addons/account_credit_control/models/credit_control_run.py:113
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr "Une ligne plus récente que %s existe au %s"
@@ -153,7 +153,7 @@ msgid "A credit control policy level"
 msgstr "Un niveau de politique de relance"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:164
+#: code:addons/account_credit_control/models/credit_control_run.py:165
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -162,7 +162,7 @@ msgstr ""
 "d'essayer à nouveau plus tard."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:103
+#: code:addons/account_credit_control/models/credit_control_run.py:104
 #, python-format
 msgid "A run has already been executed more recently (%s)"
 msgstr "Un contrôle a déjà été exécuté plus récemment que le %s"
@@ -222,8 +222,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Are you sure you want to set all Draft lines as Ready To Send?"
 msgstr ""
-"Êtes-vous sûr(e) de vouloir marquer toutes les lignes brouillon comme prêtes "
-"?"
+"Êtes-vous sûr(e) de vouloir marquer toutes les lignes brouillon comme "
+"prêtes ?"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_attachment_count
@@ -1454,7 +1454,7 @@ msgid "Planned"
 msgstr "Planifiée"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:126
+#: code:addons/account_credit_control/models/credit_control_run.py:127
 #, python-format
 msgid "Please select a policy"
 msgstr "Veuillez sélectionner une politique"
