@@ -12,6 +12,7 @@ class CreditControlRun(models.Model):
     _name = "credit.control.run"
     _rec_name = 'date'
     _description = "Credit control line generator"
+    _order = "date DESC"
 
     @api.model
     def _default_policies(self):
