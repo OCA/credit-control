@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -40,7 +41,6 @@ class CreditControlPrinter(models.TransientModel):
     def _get_lines(self, lines, predicate):
         return lines.filtered(predicate)
 
-    @api.multi
     def print_lines(self):
         self.ensure_one()
         comm_obj = self.env["credit.control.communication"]

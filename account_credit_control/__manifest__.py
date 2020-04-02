@@ -1,10 +1,11 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Account Credit Control",
-    "version": "12.0.1.5.2",
+    "version": "13.0.1.0.0",
     "author": "Camptocamp,"
     "Odoo Community Association (OCA),"
     "Okia,"
@@ -17,13 +18,12 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "data": [
         # Security
-        "security/res_groups.xml",
         "security/account_security.xml",
         "security/ir.model.access.csv",
         "security/acl_account_credit_control_analysis.xml",
         "security/acl_res_partner_payment_action_type.xml",
         # Views
-        "views/account_invoice.xml",
+        "views/account_move.xml",
         "views/credit_control_line.xml",
         "views/credit_control_policy.xml",
         "views/credit_control_run.xml",

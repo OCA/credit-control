@@ -1,4 +1,5 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 from datetime import datetime
@@ -8,7 +9,7 @@ from dateutil import relativedelta
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 @tagged("post_install", "-at_install")
@@ -16,12 +17,12 @@ class TestCreditControlRun(TransactionCase):
     def setUp(self):
         super(TestCreditControlRun, self).setUp()
 
-        journal = self.env["account.invoice"]._default_journal()
+        journal = self.env.ref("account_credit_control.sales_journal")
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
-                "code": "400001",
+                "code": "TEST430001",
                 "name": "Clients (test)",
                 "user_type_id": account_type_rec.id,
                 "reconcile": True,
@@ -32,7 +33,7 @@ class TestCreditControlRun(TransactionCase):
         account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
-                "code": "701001",
+                "code": "TEST701001",
                 "name": "Ventes en Belgique (test)",
                 "user_type_id": account_type_inc.id,
                 "reconcile": True,
@@ -58,30 +59,28 @@ class TestCreditControlRun(TransactionCase):
         partner.credit_policy_id = self.policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
-        self.invoice = self.env["account.invoice"].create(
-            {
-                "partner_id": partner.id,
-                "journal_id": journal.id,
-                "type": "out_invoice",
-                "payment_term_id": payment_term.id,
-                "date_invoice": fields.Datetime.to_string(date_invoice),
-                "date_due": fields.Datetime.to_string(date_invoice),
-            }
-        )
 
-        self.invoice.invoice_line_ids.create(
-            {
-                "invoice_id": self.invoice.id,
-                "product_id": product.id,
-                "name": product.name,
-                "account_id": analytic_account.id,
-                "quantity": 5,
-                "price_unit": 100,
-            }
+        # Create an invoice
+        invoice_form = Form(
+            self.env["account.move"].with_context(
+                default_type="out_invoice", check_move_validity=False
+            )
         )
+        invoice_form.invoice_date = date_invoice
+        invoice_form.invoice_date_due = date_invoice
+        invoice_form.partner_id = partner
+        invoice_form.journal_id = journal
+        invoice_form.invoice_payment_term_id = payment_term
 
-        # Validate the invoice
-        self.invoice.action_invoice_open()
+        with invoice_form.invoice_line_ids.new() as invoice_line_form:
+            invoice_line_form.product_id = product
+            invoice_line_form.quantity = 1
+            invoice_line_form.price_unit = 500
+            invoice_line_form.account_id = analytic_account
+            invoice_line_form.tax_ids.clear()
+        self.invoice = invoice_form.save()
+
+        self.invoice.post()
 
     def test_check_run_date(self):
         """
