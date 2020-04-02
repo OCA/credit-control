@@ -1,6 +1,7 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
@@ -31,15 +32,10 @@ class CreditControlCommunication(models.TransientModel):
     contact_address = fields.Many2one(comodel_name="res.partner", readonly=True)
     report_date = fields.Date(default=lambda self: fields.Date.context_today(self))
 
-    @api.model
-    def _get_company(self):
-        company_obj = self.env["res.company"]
-        return company_obj._company_default_get("credit.control.policy")
-
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        default=lambda self: self._get_company(),
+        default=lambda self: self.env.company,
         required=True,
     )
     user_id = fields.Many2one(
@@ -58,7 +54,6 @@ class CreditControlCommunication(models.TransientModel):
         balance_field = "credit_control_line_ids.balance_due"
         return sum(self.mapped(balance_field))
 
-    @api.multi
     @api.depends(
         "credit_control_line_ids",
         "credit_control_line_ids.amount_due",
@@ -80,7 +75,6 @@ class CreditControlCommunication(models.TransientModel):
                 vals["contact_address"] = self._get_contact_address(partner_id).id
         return super(CreditControlCommunication, self).create(vals_list)
 
-    @api.multi
     def get_email(self):
         """ Return a valid email for customer """
         self.ensure_one()
@@ -90,7 +84,6 @@ class CreditControlCommunication(models.TransientModel):
             email = contact.commercial_partner_id.email
         return email
 
-    @api.multi
     @api.returns("res.partner")
     def get_contact_address(self):
         """ Compatibility method, please use the contact_address field """
@@ -167,7 +160,6 @@ class CreditControlCommunication(models.TransientModel):
         comms = self.create(datas)
         return comms
 
-    @api.multi
     @api.returns("mail.mail")
     def _generate_emails(self):
         """ Generate email message using template related to level """
@@ -182,7 +174,7 @@ class CreditControlCommunication(models.TransientModel):
             email_values.pop("model", None)
             email_values.pop("res_id", None)
             # Remove when mail.template returns correct format attachments
-            attachment_list = email_values.pop("attachments", [])
+            attachment_list = email_values.pop("attachments", None)
             email = emails.create(email_values)
 
             state = "sent"
@@ -214,7 +206,6 @@ class CreditControlCommunication(models.TransientModel):
             emails |= email
         return emails
 
-    @api.multi
     @api.returns("credit.control.line")
     def _mark_credit_line_as_sent(self):
         lines = self.env["credit.control.line"]
