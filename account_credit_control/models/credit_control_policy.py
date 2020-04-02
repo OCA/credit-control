@@ -159,7 +159,7 @@ class CreditControlPolicy(models.Model):
         cr.execute(
             "SELECT move_line_id FROM credit_control_line"
             "    WHERE policy_id != %s and move_line_id in %s"
-            "    AND manually_overridden IS false",
+            "    AND manually_overridden IS NOT True",
             (self.id, tuple(lines.ids)),
         )
         res = cr.fetchall()
@@ -359,7 +359,7 @@ class CreditControlPolicyLevel(models.Model):
             "      FROM credit_control_line"
             "      WHERE move_line_id = cr_line.move_line_id"
             "      AND state NOT IN ('draft', 'ignored')"
-            "      AND NOT manually_overridden)\n"
+            "      AND manually_overridden IS NOT True)\n"
             " WHERE (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
             " AND mv_line.id in %(line_ids)s\n"
         )
