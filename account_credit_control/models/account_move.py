@@ -1,14 +1,15 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
     """Check on cancelling of an invoice"""
 
-    _inherit = "account.invoice"
+    _inherit = "account.move"
 
     credit_policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
@@ -31,8 +32,7 @@ class AccountInvoice(models.Model):
         copy=False,
     )
 
-    @api.multi
-    def action_cancel(self):
+    def button_cancel(self):
         """Prevent to cancel invoice related to credit line"""
         # We will search if this invoice is linked with credit
         cc_line_obj = self.env["credit.control.line"]
@@ -41,7 +41,9 @@ class AccountInvoice(models.Model):
                 ("invoice_id", "=", invoice.id),
                 ("state", "!=", "draft"),
             ]
+
             cc_nondraft_lines = cc_line_obj.search(nondraft_domain)
+
             if cc_nondraft_lines:
                 raise UserError(
                     _(
@@ -55,4 +57,4 @@ class AccountInvoice(models.Model):
             draft_domain = [("invoice_id", "=", invoice.id), ("state", "=", "draft")]
             cc_draft_line = cc_line_obj.search(draft_domain)
             cc_draft_line.unlink()
-        return super(AccountInvoice, self).action_cancel()
+        return super(AccountMove, self).button_cancel()
