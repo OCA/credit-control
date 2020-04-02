@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -12,6 +13,7 @@ class CreditControlRun(models.Model):
     _name = "credit.control.run"
     _rec_name = "date"
     _description = "Credit control line generator"
+    _order = "date DESC"
 
     @api.model
     def _default_policies(self):
@@ -63,9 +65,7 @@ class CreditControlRun(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "account.account"
-        ),
+        default=lambda self: self.env.company,
         index=True,
     )
 
@@ -106,7 +106,6 @@ class CreditControlRun(models.Model):
                 % (controlling_date, lines.date)
             )
 
-    @api.multi
     @api.returns("credit.control.line")
     def _generate_credit_lines(self):
         """ Generate credit control lines. """
@@ -121,6 +120,7 @@ class CreditControlRun(models.Model):
         report = ""
         generated = self.env["credit.control.line"]
         for policy in policies:
+
             if policy.do_nothing:
                 continue
             (
@@ -141,7 +141,6 @@ class CreditControlRun(models.Model):
         self.write(vals)
         return generated
 
-    @api.multi
     def generate_credit_lines(self):
         """ Generate credit control lines
 

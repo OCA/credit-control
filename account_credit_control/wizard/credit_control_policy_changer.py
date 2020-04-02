@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -27,7 +28,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         """
         context = self.env.context
         active_ids = context.get("active_ids")
-        invoice_obj = self.env["account.invoice"]
+        invoice_obj = self.env["account.move"]
         if not active_ids:
             return False
         selected_lines = self.env["account.move.line"]
@@ -36,10 +37,11 @@ class CreditControlPolicyChanger(models.TransientModel):
                 raise UserError(_("Please use wizard on customer invoices"))
 
             domain = [
-                ("account_id", "=", invoice.account_id.id),
-                ("move_id", "=", invoice.move_id.id),
+                ("account_id.internal_type", "=", "receivable"),
+                ("move_id", "=", invoice.id),
                 ("reconciled", "=", False),
             ]
+
             move_lines = selected_lines.search(domain)
             selected_lines |= move_lines
         return selected_lines
@@ -87,17 +89,17 @@ class CreditControlPolicyChanger(models.TransientModel):
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
         """ Force policy on invoice """
-        invoices = move_lines.mapped("invoice_id")
+        invoices = move_lines.mapped("move_id")
         invoices.write({"credit_policy_id": policy.id})
 
     @api.model
     def _check_accounts_policies(self, lines, policy):
         accounts = {line.account_id for line in lines}
         for account in accounts:
+            # import pdb ; pdb.set_trace()
             policy.check_policy_against_account(account)
         return True
 
-    @api.multi
     def set_new_policy(self):
         """ Set new policy on an invoice.
 
