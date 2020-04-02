@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -71,7 +72,7 @@ class CreditControlLine(models.Model):
         states={"draft": [("readonly", False)]},
     )
     invoice_id = fields.Many2one(
-        comodel_name="account.invoice", string="Invoice", readonly=True
+        comodel_name="account.move", string="Invoice", readonly=True
     )
     partner_id = fields.Many2one(
         comodel_name="res.partner",
@@ -161,9 +162,7 @@ class CreditControlLine(models.Model):
                 "date_due": move_line.date_maturity,
                 "state": "draft",
                 "channel": channel,
-                "invoice_id": (
-                    move_line.invoice_id.id if move_line.invoice_id else False
-                ),
+                "invoice_id": (move_line.move_id.id if move_line.move_id else False),
                 "partner_id": partner.id,
                 "amount_due": (
                     move_line.amount_currency or move_line.debit or move_line.credit
@@ -214,7 +213,9 @@ class CreditControlLine(models.Model):
         tolerance_base = user.company_id.credit_control_tolerance
         user_currency = user.company_id.currency_id
         for currency in currencies:
-            tolerance[currency.id] = currency.compute(tolerance_base, user_currency)
+            tolerance[currency.id] = currency._convert(
+                tolerance_base, user_currency, user.company_id, controlling_date
+            )
 
         lines_to_create = []
         lines_to_write = self.browse()
@@ -254,7 +255,6 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
-    @api.multi
     def unlink(self):
         for line in self:
             if line.state != "draft":
@@ -266,7 +266,6 @@ class CreditControlLine(models.Model):
                 )
         return super(CreditControlLine, self).unlink()
 
-    @api.multi
     def write(self, values):
         res = super(CreditControlLine, self).write(values)
         if "manual_followup" in values:
@@ -280,7 +279,7 @@ class CreditControlLine(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Schedule activity"),
             "res_model": "mail.activity",
-            "view_type": "form",
+            "binding_view_types": "form",
             "view_mode": "form",
             "res_id": self.activity_ids and self.activity_ids.ids[0] or False,
             "views": [[False, "form"]],
