@@ -195,7 +195,7 @@ class CreditControlCommunication(models.TransientModel):
                     {
                         "name": att[0],
                         "datas": att[1],
-                        "datas_fname": att[0],
+                        "store_fname": att[0],
                         "res_model": "mail.mail",
                         "res_id": email.id,
                         "type": "binary",
