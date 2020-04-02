@@ -91,7 +91,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.run</field>
         <field name="domain" />
-        <field name="view_type">form</field>
+        <field name="binding_view_types">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_run_tree" />
     </record>

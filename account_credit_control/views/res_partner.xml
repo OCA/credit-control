@@ -6,7 +6,7 @@
         groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
         domain="[('partner_id', '=',  active_id)]"
         res_model="credit.control.line"
-        src_model="res.partner"
+        binding_model="res.partner"
     />
     <record id="partner_view_buttons" model="ir.ui.view">
         <field name="model">res.partner</field>
@@ -96,7 +96,7 @@
         <field name="name">Manual Follow-Ups</field>
         <field name="view_id" ref="customer_followup_tree" />
         <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
+        <field name="binding_view_types">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('manual_followup', '=', True)]</field>
         <field name="context">{}</field>
@@ -122,17 +122,16 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button
-                            name="toggle_active"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-archive"
-                        >
-                            <field name="active" widget="boolean_button" />
-                        </button>
+                        <widget
+                            name="web_ribbon"
+                            title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"
+                        />
                     </div>
                     <group>
                         <group>
+                            <field name="active" invisible="1" />
                             <field name="name" />
                         </group>
                     </group>

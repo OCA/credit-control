@@ -101,6 +101,7 @@ class ResPartner(models.Model):
                 continue
             account = partner.property_account_receivable_id
             policy = partner.sudo().credit_policy_id
+
             try:
                 policy.check_policy_against_account(account)
             except UserError as err:

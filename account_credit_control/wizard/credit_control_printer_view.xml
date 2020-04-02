@@ -32,17 +32,15 @@
     <act_window
         name="Print Lines"
         res_model="credit.control.printer"
-        src_model="credit.control.line"
+        binding_model="credit.control.line"
         view_mode="form"
         target="new"
-        key2="client_action_multi"
         id="open_credit_line_printer_wizard_menu_action"
     />
     <record id="open_credit_line_printer_wizard" model="ir.actions.act_window">
         <field name="name">Print Lines</field>
         <field name="res_model">credit.control.printer</field>
-        <field name="src_model">credit.control.line</field>
-        <field name="view_type">form</field>
+        <field name="binding_view_types">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="credit_line_printer_form" />
         <field name="target">new</field>

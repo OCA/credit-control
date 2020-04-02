@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -52,7 +53,6 @@ class CreditControlMarker(models.TransientModel):
         filtered_lines.write({"state": state})
         return filtered_lines
 
-    @api.multi
     def mark_lines(self):
         """ Write state of selected credit lines to the one in entry
         done credit line will be ignored """
@@ -74,7 +74,7 @@ class CreditControlMarker(models.TransientModel):
 
         return {
             "domain": str([("id", "in", filtered_lines.ids)]),
-            "view_type": "form",
+            "binding_view_types": "form",
             "view_mode": "tree,form",
             "view_id": False,
             "name": _("Control Credit Line"),
