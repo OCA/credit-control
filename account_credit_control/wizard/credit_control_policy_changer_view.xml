@@ -45,8 +45,7 @@
     <record id="action_wizard_credit_policy_changer" model="ir.actions.act_window">
         <field name="name">Change current credit policy</field>
         <field name="res_model">credit.control.policy.changer</field>
-        <field name="src_model">account.invoice</field>
-        <field name="view_type">form</field>
+        <field name="binding_view_types">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="credit_control_policy_changer_form" />
         <field name="target">new</field>
@@ -56,10 +55,9 @@
     <act_window
         name="Change current credit policy"
         res_model="credit.control.policy.changer"
-        src_model="account.invoice"
+        binding_model="account.move"
         view_mode="form"
         target="new"
-        key2="client_action_multi"
         id="action_wizard_credit_policy_changer_menu_action"
     />
 </odoo>

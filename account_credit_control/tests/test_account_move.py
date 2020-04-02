@@ -7,7 +7,7 @@ from dateutil import relativedelta
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 @tagged("post_install", "-at_install")
@@ -18,12 +18,12 @@ class TestAccountInvoice(TransactionCase):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.env["account.invoice"]._default_journal()
+        journal = self.env.ref("account_credit_control.sales_journal")
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
-                "code": "400001",
+                "code": "TEST430",
                 "name": "Clients (test)",
                 "user_type_id": account_type_rec.id,
                 "reconcile": True,
@@ -34,7 +34,7 @@ class TestAccountInvoice(TransactionCase):
         account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
-                "code": "701001",
+                "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
                 "user_type_id": account_type_inc.id,
                 "reconcile": True,
@@ -60,30 +60,28 @@ class TestAccountInvoice(TransactionCase):
         partner.credit_policy_id = policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
-        invoice = self.env["account.invoice"].create(
-            {
-                "partner_id": partner.id,
-                "journal_id": journal.id,
-                "type": "out_invoice",
-                "payment_term_id": payment_term.id,
-                "date_invoice": fields.Datetime.to_string(date_invoice),
-                "date_due": fields.Datetime.to_string(date_invoice),
-            }
-        )
 
-        invoice.invoice_line_ids.create(
-            {
-                "invoice_id": invoice.id,
-                "product_id": product.id,
-                "name": product.name,
-                "account_id": analytic_account.id,
-                "quantity": 5,
-                "price_unit": 100,
-            }
+        # Create an invoice
+        invoice_form = Form(
+            self.env["account.move"].with_context(
+                default_type="out_invoice", check_move_validity=False
+            )
         )
+        invoice_form.invoice_date = date_invoice
+        invoice_form.invoice_date_due = date_invoice
+        invoice_form.partner_id = partner
+        invoice_form.journal_id = journal
+        invoice_form.invoice_payment_term_id = payment_term
 
-        # Validate the invoice
-        invoice.action_invoice_open()
+        with invoice_form.invoice_line_ids.new() as invoice_line_form:
+            invoice_line_form.product_id = product
+            invoice_line_form.quantity = 1
+            invoice_line_form.price_unit = 500
+            invoice_line_form.account_id = analytic_account
+            invoice_line_form.tax_ids.clear()
+        invoice = invoice_form.save()
+
+        invoice.post()
 
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}
@@ -106,7 +104,7 @@ class TestAccountInvoice(TransactionCase):
         marker.mark_lines()
 
         with self.assertRaises(UserError):
-            invoice.action_cancel()
+            invoice.button_cancel()
 
     def test_action_cancel_draft_credit_lines(self):
         """
@@ -114,12 +112,12 @@ class TestAccountInvoice(TransactionCase):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.env["account.invoice"]._default_journal()
+        journal = self.env.ref("account_credit_control.sales_journal")
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
-                "code": "400001",
+                "code": "TEST430",
                 "name": "Clients (test)",
                 "user_type_id": account_type_rec.id,
                 "reconcile": True,
@@ -130,7 +128,7 @@ class TestAccountInvoice(TransactionCase):
         account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
-                "code": "701001",
+                "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
                 "user_type_id": account_type_inc.id,
                 "reconcile": True,
@@ -156,30 +154,28 @@ class TestAccountInvoice(TransactionCase):
         partner.credit_policy_id = policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
-        invoice = self.env["account.invoice"].create(
-            {
-                "partner_id": partner.id,
-                "journal_id": journal.id,
-                "type": "out_invoice",
-                "payment_term_id": payment_term.id,
-                "date_invoice": fields.Datetime.to_string(date_invoice),
-                "date_due": fields.Datetime.to_string(date_invoice),
-            }
-        )
 
-        invoice.invoice_line_ids.create(
-            {
-                "invoice_id": invoice.id,
-                "product_id": product.id,
-                "name": product.name,
-                "account_id": analytic_account.id,
-                "quantity": 5,
-                "price_unit": 100,
-            }
+        # Create an invoice
+        invoice_form = Form(
+            self.env["account.move"].with_context(
+                default_type="out_invoice", check_move_validity=False
+            )
         )
+        invoice_form.invoice_date = date_invoice
+        invoice_form.invoice_date_due = date_invoice
+        invoice_form.partner_id = partner
+        invoice_form.journal_id = journal
+        invoice_form.invoice_payment_term_id = payment_term
 
-        # Validate the invoice
-        invoice.action_invoice_open()
+        with invoice_form.invoice_line_ids.new() as invoice_line_form:
+            invoice_line_form.product_id = product
+            invoice_line_form.quantity = 1
+            invoice_line_form.price_unit = 500
+            invoice_line_form.account_id = analytic_account
+            invoice_line_form.tax_ids.clear()
+        invoice = invoice_form.save()
+
+        invoice.post()
 
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}
@@ -189,9 +185,7 @@ class TestAccountInvoice(TransactionCase):
         control_run.generate_credit_lines()
         self.assertTrue(len(invoice.credit_control_line_ids), 1)
 
-        # Raise Cancelling invoice modify journal error
-        with self.assertRaises(UserError):
-            invoice.action_cancel()
+        invoice.button_cancel()
 
     def test_invoice_policy_wiz(self):
         """
@@ -199,12 +193,12 @@ class TestAccountInvoice(TransactionCase):
         We will create an invoice, change credit policy and check
         if it has change the policy on invoice
         """
-        journal = self.env["account.invoice"]._default_journal()
+        journal = self.env.ref("account_credit_control.sales_journal")
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
-                "code": "400001",
+                "code": "TEST430",
                 "name": "Clients (test)",
                 "user_type_id": account_type_rec.id,
                 "reconcile": True,
@@ -215,7 +209,7 @@ class TestAccountInvoice(TransactionCase):
         account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
-                "code": "701001",
+                "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
                 "user_type_id": account_type_inc.id,
                 "reconcile": True,
@@ -241,30 +235,29 @@ class TestAccountInvoice(TransactionCase):
         partner.credit_policy_id = policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
-        invoice = self.env["account.invoice"].create(
-            {
-                "partner_id": partner.id,
-                "journal_id": journal.id,
-                "type": "out_invoice",
-                "payment_term_id": payment_term.id,
-                "date_invoice": fields.Datetime.to_string(date_invoice),
-                "date_due": fields.Datetime.to_string(date_invoice),
-            }
-        )
 
-        invoice.invoice_line_ids.create(
-            {
-                "invoice_id": invoice.id,
-                "product_id": product.id,
-                "name": product.name,
-                "account_id": analytic_account.id,
-                "quantity": 5,
-                "price_unit": 100,
-            }
+        # Create an invoice
+        invoice_form = Form(
+            self.env["account.move"].with_context(
+                default_type="out_invoice", check_move_validity=False
+            )
         )
+        invoice_form.invoice_date = date_invoice
+        invoice_form.invoice_date_due = date_invoice
+        invoice_form.partner_id = partner
+        invoice_form.journal_id = journal
+        invoice_form.invoice_payment_term_id = payment_term
 
-        # Validate the invoice
-        invoice.action_invoice_open()
+        with invoice_form.invoice_line_ids.new() as invoice_line_form:
+            invoice_line_form.product_id = product
+            invoice_line_form.quantity = 1
+            invoice_line_form.price_unit = 500
+            invoice_line_form.account_id = analytic_account
+            invoice_line_form.tax_ids.clear()
+        invoice = invoice_form.save()
+
+        invoice.post()
+
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}
         )
@@ -278,7 +271,7 @@ class TestAccountInvoice(TransactionCase):
         )
 
         # Verify the lines on wiz belongs to same invoice
-        self.assertEqual(wiz_rec.move_line_ids.invoice_id, invoice)
+        self.assertEqual(wiz_rec.move_line_ids.move_id, invoice)
 
         # Execute change
         wiz_rec.set_new_policy()

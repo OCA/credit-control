@@ -5,7 +5,16 @@
         <field name="model">credit.control.policy</field>
         <field name="arch" type="xml">
             <form string="Credit control policy">
+                <div class="oe_button_box" name="button_box">
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                </div>
                 <group>
+                    <field name="active" invisible="1" />
                     <field name="name" />
                     <field name="do_nothing" />
                     <field name="company_id" />
@@ -82,7 +91,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.policy</field>
         <field name="domain" />
-        <field name="view_type">form</field>
+        <field name="binding_view_types">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_policy_tree" />
     </record>
