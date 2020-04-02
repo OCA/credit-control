@@ -1,7 +1,8 @@
 # Copyright 2019 ACSONE SA/NV
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, tools
+from odoo import fields, models, tools
 
 
 class AccountCreditControlAnalysis(models.Model):
@@ -92,7 +93,6 @@ class AccountCreditControlAnalysis(models.Model):
             self._order_by(),
         )
 
-    @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self._cr, "credit_control_analysis")
         query = self._get_sql_query()

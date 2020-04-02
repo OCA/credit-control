@@ -1,5 +1,6 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -20,7 +21,7 @@ class CreditControlPolicy(models.Model):
         string="Policy Levels",
     )
     do_nothing = fields.Boolean(
-        help="For policies which should not " "generate lines or are obsolete"
+        help="For policies which should not generate lines or are obsolete"
     )
     company_id = fields.Many2one(comodel_name="res.company", string="Company")
     account_ids = fields.Many2many(
@@ -32,7 +33,6 @@ class CreditControlPolicy(models.Model):
     )
     active = fields.Boolean(default=True)
 
-    @api.multi
     def _move_lines_domain(self, controlling_date):
         """ Build the default domain for searching move lines """
         self.ensure_one()
@@ -43,7 +43,6 @@ class CreditControlPolicy(models.Model):
             ("partner_id", "!=", False),
         ]
 
-    @api.multi
     @api.returns("account.move.line")
     def _due_move_lines(self, controlling_date):
         """ Get the due move lines for the policy of the company.
@@ -64,7 +63,6 @@ class CreditControlPolicy(models.Model):
         domain_line = self._move_lines_domain(controlling_date)
         return move_l_obj.search(domain_line)
 
-    @api.multi
     @api.returns("account.move.line")
     def _move_lines_subset(self, controlling_date, model, move_relation_field):
         """ Get the move lines related to one model for a policy.
@@ -111,7 +109,6 @@ class CreditControlPolicy(models.Model):
             to_remove = to_remove.search(domain)
         return to_add, to_remove
 
-    @api.multi
     @api.returns("account.move.line")
     def _get_partner_related_lines(self, controlling_date):
         """ Get the move lines for a policy related to a partner.
@@ -122,7 +119,6 @@ class CreditControlPolicy(models.Model):
         """
         return self._move_lines_subset(controlling_date, "res.partner", "partner_id")
 
-    @api.multi
     @api.returns("account.move.line")
     def _get_invoice_related_lines(self, controlling_date):
         """ Get the move lines for a policy related to an invoice.
@@ -131,11 +127,8 @@ class CreditControlPolicy(models.Model):
         :return: recordset to add in the process, recordset to remove from
             the process
         """
-        return self._move_lines_subset(
-            controlling_date, "account.invoice", "invoice_id"
-        )
+        return self._move_lines_subset(controlling_date, "account.move", "move_id")
 
-    @api.multi
     @api.returns("account.move.line")
     def _get_move_lines_to_process(self, controlling_date):
         """ Build a list of move lines ids to include in a run
@@ -153,7 +146,6 @@ class CreditControlPolicy(models.Model):
         lines = (lines | to_add) - to_remove
         return lines
 
-    @api.multi
     @api.returns("account.move.line")
     def _lines_different_policy(self, lines):
         """ Return a set of move lines ids for which there is an
@@ -175,7 +167,6 @@ class CreditControlPolicy(models.Model):
             return different_lines.browse([row[0] for row in res])
         return different_lines
 
-    @api.multi
     def check_policy_against_account(self, account):
         """ Ensure that the policy corresponds to account relation """
         allowed = self.search(
@@ -194,7 +185,6 @@ class CreditControlPolicy(models.Model):
             )
         return True
 
-    @api.multi
     def _generate_credit_lines(self, controlling_date, default_lines_vals=None):
         self.ensure_one()
         credit_line_model = self.env["credit.control.line"]
@@ -272,7 +262,6 @@ class CreditControlPolicyLevel(models.Model):
         ("unique level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
     ]
 
-    @api.multi
     @api.constrains("level", "computation_mode")
     def _check_level_mode(self):
         """ The smallest level of a policy cannot be computed on the
@@ -289,7 +278,6 @@ class CreditControlPolicyLevel(models.Model):
                     _("The smallest level can not be " "of type Previous Reminder")
                 )
 
-    @api.multi
     def _previous_level(self):
         """ For one policy level, returns the id of the previous level
 
@@ -329,7 +317,6 @@ class CreditControlPolicyLevel(models.Model):
     def _previous_date_get_boundary():
         return "(cr_line.date + %(delay)s)::date <= date(%(controlling_date)s)"
 
-    @api.multi
     def _get_sql_date_boundary_for_computation_mode(self):
         """ Return a where clauses statement for the given controlling
         date and computation mode of the level
@@ -345,7 +332,6 @@ class CreditControlPolicyLevel(models.Model):
                 % (fname,)
             )
 
-    @api.multi
     def _get_sql_level_part(self):
         """ Return a where clauses statement for the previous line level """
         self.ensure_one()
@@ -355,9 +341,6 @@ class CreditControlPolicyLevel(models.Model):
         else:
             return "cr_line.id IS NULL"
 
-    # -----------------------------------------
-
-    @api.multi
     @api.returns("account.move.line")
     def _get_level_move_lines(self, controlling_date, lines):
         """ Retrieve the move lines for all levels. """
@@ -398,7 +381,6 @@ class CreditControlPolicyLevel(models.Model):
             return move_line_obj.browse([row[0] for row in res])
         return move_line_obj
 
-    @api.multi
     @api.returns("account.move.line")
     def get_level_lines(self, controlling_date, lines):
         """ get all move lines in entry lines that match the current level """
