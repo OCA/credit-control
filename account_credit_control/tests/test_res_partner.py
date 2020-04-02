@@ -1,4 +1,5 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged
@@ -16,9 +17,17 @@ class TestCreditControlPolicyLevel(TransactionCase):
         retry to assign this policy and this account on the partner
         """
         policy = self.env.ref("account_credit_control.credit_control_3_time")
-
         partner = self.env["res.partner"].create({"name": "Partner 1"})
-        account = partner.property_account_receivable_id
+        account_type = self.env.ref("account.data_account_type_receivable")
+        account = self.env["account.account"].create(
+            {
+                "code": "400001",
+                "name": "Test",
+                "user_type_id": account_type.id,
+                "reconcile": True,
+            }
+        )
+        partner.property_account_receivable_id = account
 
         with self.assertRaises(ValidationError):
             partner.write({"credit_policy_id": policy.id})
