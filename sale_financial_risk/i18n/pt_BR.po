@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
 "PO-Revision-Date: 2020-02-20 16:36+0000\n"
 "Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,6 +53,11 @@ msgstr "Inclua Ordens de Venda"
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_limit
 msgid "Limit Sales Orders"
 msgstr "Limitar Ordens de Venda"
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
