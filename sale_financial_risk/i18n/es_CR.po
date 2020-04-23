@@ -54,6 +54,11 @@ msgid "Limit Sales Orders"
 msgstr ""
 
 #. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
 msgid "Sale Order"
 msgstr ""
