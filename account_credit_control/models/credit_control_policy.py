@@ -279,7 +279,7 @@ class CreditControlPolicyLevel(models.Model):
         selection=CHANNEL_LIST,
         required=True,
     )
-    custom_text = fields.Text(
+    custom_text = fields.Html(
         string='Custom Message',
         required=True,
         translate=True,
@@ -289,7 +289,7 @@ class CreditControlPolicyLevel(models.Model):
         required=True,
         translate=True,
     )
-    custom_text_after_details = fields.Text(
+    custom_text_after_details = fields.Html(
         string='Custom Message after details',
         translate=True,
     )
