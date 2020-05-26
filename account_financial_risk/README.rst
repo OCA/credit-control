@@ -30,6 +30,10 @@ Adds a new page in partner to manage its *Financial Risk*.
 If any limit is exceeded, you won't be able to confirm any of its invoices
 unless you are authorized (Account Billing Manager group).
 
+You can click in risk amount to view amount origin.
+
+.. figure:: https://raw.githubusercontent.com/OCA/credit-control/12.0/account_financial_risk/static/description/financial_risk_click.png
+
 **Table of contents**
 
 .. contents::
@@ -57,6 +61,7 @@ To use this module, you need to:
    customer invoices.
 #. Test the restriction trying to create an invoice for the partner for an
    amount higher of the limit you have set.
+#. Return to Customer *Financial Risk* tab and click in amount to view origin.
 
 Bug Tracker
 ===========
