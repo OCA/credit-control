@@ -53,6 +53,13 @@ msgid "Account Moves"
 msgstr "Pièces comptables"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
+#, fuzzy
+#| msgid "Account Moves"
+msgid "Account move lines"
+msgstr "Pièces comptables"
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
@@ -192,11 +199,11 @@ msgid "Financial risk exceeded.\n"
 msgstr "Risque financier dépassé.\n"
 
 #. module: account_financial_risk
-#: model:ir.actions.server,name:account_financial_risk.ir_cron_due_invoice_every_day_ir_actions_server
-#: model:ir.cron,cron_name:account_financial_risk.ir_cron_due_invoice_every_day
-#: model:ir.cron,name:account_financial_risk.ir_cron_due_invoice_every_day
-msgid "Financial risk: Process due invoices"
-msgstr "Risque financier: Traiter les factures échues"
+#: code:addons/account_financial_risk/models/res_partner.py:319
+#, fuzzy, python-format
+#| msgid "Financial Risk"
+msgid "Financial risk information"
+msgstr "Risque Financier"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -313,6 +320,13 @@ msgstr "Info Risque"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_invoice
 msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
+#, fuzzy
+#| msgid "Invoice"
+msgid "Invoices"
 msgstr "Facture"
 
 #. module: account_financial_risk
@@ -538,6 +552,9 @@ msgstr "Total des factures impayées / solde du capital"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Montant total des factures brouillon ou pro forma"
+
+#~ msgid "Financial risk: Process due invoices"
+#~ msgstr "Risque financier: Traiter les factures échues"
 
 #~ msgid ""
 #~ "<span class=\"o_form_label\">Financial Risk</span>\n"
