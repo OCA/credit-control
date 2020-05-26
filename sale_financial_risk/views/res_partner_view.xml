@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -11,12 +11,15 @@
 
             <field name="risk_invoice_draft_include" position="before">
                 <field name="risk_sale_order_include"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_left_padding_15"/>
-                <field name="risk_sale_order" nolabel="1" class="oe_left_padding_15"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
+                <button name="open_risk_pivot_info" type="object" class="oe_link"
+                        context="{'open_risk_field': 'risk_sale_order'}">
+                    <field name="risk_sale_order" nolabel="1"/>
+                </button>
             </field>
             <field name="risk_invoice_draft_limit" position="before">
                 <field name="risk_sale_order_limit"
-                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}" class="oe_label_to_left"/>
+                       attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
             </field>
 
         </field>

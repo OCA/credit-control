@@ -20,8 +20,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: sale_financial_risk
-#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__amt_to_invoice
-msgid "Amount To Invoice"
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__commercial_partner_id
+msgid "Commercial Entity"
 msgstr ""
 
 #. module: sale_financial_risk
@@ -30,7 +30,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:16
+#: code:addons/sale_financial_risk/models/sale.py:20
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Finanzrisiko überschritten\n"
@@ -59,9 +59,22 @@ msgid "Payment Transaction"
 msgstr ""
 
 #. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_amount
+#, fuzzy
+#| msgid "Invoice amount"
+msgid "Risk amount"
+msgstr "Rechnungsbetrag"
+
+#. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
 #, fuzzy
 msgid "Sale Order"
+msgstr "Verkaufsauftrag"
+
+#. module: sale_financial_risk
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
+#, fuzzy
+msgid "Sale lines"
 msgstr "Verkaufsauftrag"
 
 #. module: sale_financial_risk
@@ -77,13 +90,13 @@ msgid "Set 0 if it is not locked"
 msgstr "Setze 0, wenn nicht gesperrt"
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:25
+#: code:addons/sale_financial_risk/models/sale.py:29
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 msgstr "Dieser Verkaufsauftrag überschreitet das finanzielle Risiko.\n"
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:20
+#: code:addons/sale_financial_risk/models/sale.py:24
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
 msgstr "Dieser Auftrag übersteigt das Auftragsrisiko.\n"
@@ -99,9 +112,6 @@ msgstr "Anzahl nicht abgerechneter"
 #: model:ir.model.fields,help:sale_financial_risk.field_res_users__risk_sale_order
 msgid "Total not invoiced of sales orders in Sale Order state"
 msgstr ""
-
-#~ msgid "Invoice amount"
-#~ msgstr "Rechnungsbetrag"
 
 #~ msgid "Invoice pending amount"
 #~ msgstr "Ausstehender Rechnungsbetrag"
