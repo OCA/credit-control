@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-23 11:13+0100\n"
-"PO-Revision-Date: 2020-03-23 11:18+0100\n"
+"POT-Creation-Date: 2020-06-04 00:25+0000\n"
+"PO-Revision-Date: 2020-06-04 02:28+0200\n"
 "Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -48,6 +48,11 @@ msgstr "<strong>Su selección incluye contactos con riesgo excedido.</strong>"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
+msgstr "Apuntes contables"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
+msgid "Account move lines"
 msgstr "Apuntes contables"
 
 #. module: account_financial_risk
@@ -194,11 +199,10 @@ msgid "Financial risk exceeded.\n"
 msgstr "Riesgo financiero excedido.\n"
 
 #. module: account_financial_risk
-#: model:ir.actions.server,name:account_financial_risk.ir_cron_due_invoice_every_day_ir_actions_server
-#: model:ir.cron,cron_name:account_financial_risk.ir_cron_due_invoice_every_day
-#: model:ir.cron,name:account_financial_risk.ir_cron_due_invoice_every_day
-msgid "Financial risk: Process due invoices"
-msgstr "Riesgo financiero: Procesar facturas vencidas"
+#: code:addons/account_financial_risk/models/res_partner.py:319
+#, python-format
+msgid "Financial risk information"
+msgstr "Información de riesgo financiero"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -319,6 +323,11 @@ msgstr "Información de riesgo"
 #: model:ir.model,name:account_financial_risk.model_account_invoice
 msgid "Invoice"
 msgstr "Factura"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
+msgid "Invoices"
+msgstr "Facturas"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
@@ -544,3 +553,6 @@ msgstr "Total facturas/saldo principal impagado"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Importe total de facturas borrador o pro-forma"
+
+#~ msgid "Financial risk: Process due invoices"
+#~ msgstr "Riesgo financiero: Procesar facturas vencidas"
