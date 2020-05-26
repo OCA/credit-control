@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="financial_risk_account_invoice_pivot_view" model="ir.ui.view">
+        <field name="name">Account financial risk invoice pivot view</field>
+        <field name="model">account.invoice</field>
+        <field name="arch" type="xml">
+            <pivot string="Invoices" disable_linking="True">
+                <field name="partner_id" type="row"/>
+                <field name="date_due" interval="month" type="col"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="financial_risk_account_move_line_pivot_view" model="ir.ui.view">
+        <field name="name">Account financial risk account move line pivot view</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Account move lines">
+                <field name="account_id" type="row"/>
+                <field name="date_maturity" interval="month" type="col"/>
+                <field name="amount_residual" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+</odoo>

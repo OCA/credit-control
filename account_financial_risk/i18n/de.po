@@ -45,6 +45,11 @@ msgid "Account Moves"
 msgstr ""
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
+msgid "Account move lines"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
@@ -179,12 +184,11 @@ msgid "Financial risk exceeded.\n"
 msgstr "Finanzrisiko überschritten\n"
 
 #. module: account_financial_risk
-#: model:ir.actions.server,name:account_financial_risk.ir_cron_due_invoice_every_day_ir_actions_server
-#: model:ir.cron,cron_name:account_financial_risk.ir_cron_due_invoice_every_day
-#: model:ir.cron,name:account_financial_risk.ir_cron_due_invoice_every_day
-#, fuzzy
-msgid "Financial risk: Process due invoices"
-msgstr "Finanzielles Risiko div"
+#: code:addons/account_financial_risk/models/res_partner.py:319
+#, fuzzy, python-format
+#| msgid "Financial Risk"
+msgid "Financial risk information"
+msgstr "Finanzielles Risiko"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -302,6 +306,13 @@ msgstr "Gesamtrisiko"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_invoice
 msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
+#, fuzzy
+#| msgid "Invoice"
+msgid "Invoices"
 msgstr "Rechnung"
 
 #. module: account_financial_risk
@@ -535,6 +546,10 @@ msgstr "Unbezahlte Rechnungen Gesamt"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Gesamtbetrag aller Rechnungen im Status Enturf oder Proforma"
+
+#, fuzzy
+#~ msgid "Financial risk: Process due invoices"
+#~ msgstr "Finanzielles Risiko div"
 
 #~ msgid "Days after due date to set an invoice as unpaid"
 #~ msgstr "Tage nach der Fälligkeit, um eine Rechnung als unbezahlt zu setzen"
