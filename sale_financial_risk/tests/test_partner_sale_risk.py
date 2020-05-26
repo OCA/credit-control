@@ -56,7 +56,7 @@ class TestPartnerSaleRisk(SavepointCase):
         wiz.button_continue()
         self.assertAlmostEqual(self.partner.risk_sale_order, 200.0)
 
-    def test_compute_amount_to_invoice(self):
+    def test_compute_risk_amount(self):
         self.sale_order.action_confirm()
         # Now the amount to be invoiced must 100
         self.assertEqual(self.partner.risk_sale_order, 100.0)
@@ -69,9 +69,13 @@ class TestPartnerSaleRisk(SavepointCase):
         inv_wiz = self.env['sale.advance.payment.inv'].with_context(
             {'active_ids': [self.sale_order.id]}).create({})
         inv_wiz.create_invoices()
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         invoice = self.sale_order.invoice_ids
         invoice.with_context(bypass_risk=True).action_invoice_open()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
+        self.assertAlmostEqual(self.partner.risk_invoice_open, 100.0)
         self.assertFalse(self.partner.risk_exception)
         # After that, if we create and validate a Credit Note from the invoice
         # then the amount to be invoiced must be 100 again
@@ -82,6 +86,24 @@ class TestPartnerSaleRisk(SavepointCase):
             'description': 'testing',
             'filter_refund': 'modify',
         })
-        ref_wiz.invoice_refund()
+        res = ref_wiz.invoice_refund()
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        # The way to re-invoice a sale order is creating a refund with
+        # modify option and cancel or remove draft invoice
+        modify_invoice = invoice.browse(res['res_id'])
+        modify_invoice.unlink()
         self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
         self.assertTrue(self.partner.risk_exception)
+        line = self.sale_order.order_line[:1]
+        line.product_uom_qty = 0.0
+        self.assertAlmostEqual(line.risk_amount, 0.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+
+    def test_open_risk_pivot_info(self):
+        action = self.partner.with_context(
+            open_risk_field='risk_sale_order'
+        ).open_risk_pivot_info()
+        self.assertEqual(action['res_model'], 'sale.order.line')
+        self.assertTrue(action['view_id'])
+        self.assertTrue(action['domain'])

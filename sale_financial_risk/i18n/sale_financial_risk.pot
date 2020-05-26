@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_financial_risk
-#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__amt_to_invoice
-msgid "Amount To Invoice"
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__commercial_partner_id
+msgid "Commercial Entity"
 msgstr ""
 
 #. module: sale_financial_risk
@@ -24,7 +24,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:16
+#: code:addons/sale_financial_risk/models/sale.py:20
 #, python-format
 msgid "Financial risk exceeded.\n"
 ""
@@ -54,8 +54,18 @@ msgid "Payment Transaction"
 msgstr ""
 
 #. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_amount
+msgid "Risk amount"
+msgstr ""
+
+#. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
 msgid "Sale Order"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
+msgid "Sale lines"
 msgstr ""
 
 #. module: sale_financial_risk
@@ -70,14 +80,14 @@ msgid "Set 0 if it is not locked"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:25
+#: code:addons/sale_financial_risk/models/sale.py:29
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 ""
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:20
+#: code:addons/sale_financial_risk/models/sale.py:24
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
 ""
