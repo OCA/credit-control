@@ -82,3 +82,11 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
         self.assertAlmostEqual(self.partner.risk_payment_return, 500.0)
         self.payment_return.action_cancel()
         self.assertAlmostEqual(self.partner.risk_payment_return, 0.0)
+
+    def test_open_risk_pivot_info(self):
+        action = self.partner.with_context(
+            open_risk_field='risk_payment_return'
+        ).open_risk_pivot_info()
+        self.assertEqual(action['res_model'], 'account.move.line')
+        self.assertTrue(action['view_id'])
+        self.assertTrue(action['domain'])
