@@ -14,14 +14,14 @@ class AccountInvoice(models.Model):
         if partner.risk_exception:
             exception_msg = _("Financial risk exceeded.\n")
         elif partner.risk_invoice_open_limit and (
-                (partner.risk_invoice_open + self.amount_total) >
-                partner.risk_invoice_open_limit):
+                (partner.risk_invoice_open + self.amount_total_company_signed)
+                > partner.risk_invoice_open_limit):
             exception_msg = _(
                 "This invoice exceeds the open invoices risk.\n")
         # If risk_invoice_draft_include this invoice included in risk_total
         elif not partner.risk_invoice_draft_include and (
                 partner.risk_invoice_open_include and
-                (partner.risk_total + self.amount_total) >
+                (partner.risk_total + self.amount_total_company_signed) >
                 partner.credit_limit):
             exception_msg = _(
                 "This invoice exceeds the financial risk.\n")
@@ -31,8 +31,7 @@ class AccountInvoice(models.Model):
     def action_invoice_open(self):
         if self.env.context.get('bypass_risk', False):
             return super(AccountInvoice, self).action_invoice_open()
-        for invoice in self.filtered(lambda x: x.type in (
-                'out_invoice', 'out_refund') and x.amount_total_signed > 0.0):
+        for invoice in self.filtered(lambda x: x.type == 'out_invoice'):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
                 return self.env['partner.risk.exceeded.wiz'].create({
