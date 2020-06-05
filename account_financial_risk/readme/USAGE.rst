@@ -8,3 +8,4 @@ To use this module, you need to:
    customer invoices.
 #. Test the restriction trying to create an invoice for the partner for an
    amount higher of the limit you have set.
+#. Return to Customer *Financial Risk* tab and click in amount to view origin.
