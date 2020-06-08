@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -8,21 +8,19 @@
         <field name="arch" type="xml">
             <form string="Risk exceeded">
                 <p>The partner has exceeded his risk</p>
-                <field name="exception_msg" colspan="2" nolabel="1"/>
+                <field name="exception_msg" colspan="2" nolabel="1" />
                 <group>
-                    <field name="partner_id"/>
+                    <field name="partner_id" />
                 </group>
                 <footer>
-                    <button string="Continue"
-                            class="oe_highlight"
-                            name="button_continue"
-                            type="object"
-                            groups="account.group_account_manager"
-                            />
-                    <button string="Cancel"
-                            class="oe_link"
-                            special="cancel"
-                            />
+                    <button
+                        string="Continue"
+                        class="oe_highlight"
+                        name="button_continue"
+                        type="object"
+                        groups="account.group_account_manager"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>
