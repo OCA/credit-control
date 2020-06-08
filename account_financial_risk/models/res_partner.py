@@ -1,8 +1,6 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
-
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
@@ -23,7 +21,7 @@ class ResPartner(models.Model):
         string="Limit In Draft Invoices", help="Set 0 if it is not locked"
     )
     risk_invoice_draft = fields.Monetary(
-        compute="_compute_risk_invoice",
+        compute="_compute_risk_account_amount",
         string="Total Draft Invoices",
         help="Total amount of invoices in Draft or Pro-forma state",
     )
@@ -123,77 +121,56 @@ class ResPartner(models.Model):
 
     @api.model
     def _get_risk_company_domain(self):
-        return [("company_id", "=", self.env.user.company_id.id)]
+        return [("company_id", "in", self.env.companies.ids)]
 
     def _get_field_risk_model_domain(self, field_name):
         """ Returns a tuple with model name and domain"""
-        if field_name == "risk_invoice_draft":
-            domain = self._get_risk_company_domain() + [
-                ("type", "in", ["out_invoice", "out_refund"]),
-                ("state", "in", ["draft", "proforma", "proforma2"]),
-                ("commercial_partner_id", "in", self.ids),
-            ]
-            return "account.invoice", domain
         risk_account_groups = self._risk_account_groups()
-        if field_name.endswith("_unpaid"):
+        if field_name == "risk_invoice_draft":
+            domain = risk_account_groups["draft"]["domain"]
+        elif field_name.endswith("_unpaid"):
             domain = risk_account_groups["unpaid"]["domain"]
         else:
             domain = risk_account_groups["open"]["domain"]
         # Usually this method is called in form view (one record in self)
         account_receivable_id = self[:1].property_account_receivable_id.id
         # Partner receivable account determines if amount is in invoice field
-        if field_name.startswith("risk_invoice_"):
-            domain.append(("account_id", "=", account_receivable_id))
-        else:
-            domain.append(("account_id", "!=", account_receivable_id))
+        if field_name != "risk_invoice_draft":
+            if field_name.startswith("risk_invoice_"):
+                domain.append(("account_id", "=", account_receivable_id))
+            else:
+                domain.append(("account_id", "!=", account_receivable_id))
         domain.append(("partner_id", "in", self.ids))
         return "account.move.line", domain
-
-    @api.depends(
-        "invoice_ids",
-        "invoice_ids.state",
-        "invoice_ids.amount_total_company_signed",
-        "child_ids.invoice_ids",
-        "child_ids.invoice_ids.state",
-        "child_ids.invoice_ids.amount_total_company_signed",
-    )
-    def _compute_risk_invoice(self):
-        self.update({"risk_invoice_draft": 0.0})
-        # When p is NewId object instance bool(p.id) is False
-        commercial_partners = self.filtered(
-            lambda p: (p.customer and p.id and p == p.commercial_partner_id)
-        )
-        if not commercial_partners:
-            return
-        model_name, domain = commercial_partners._get_field_risk_model_domain(
-            "risk_invoice_draft"
-        )
-        total_group = (
-            self.env[model_name]
-            .sudo()
-            .read_group(
-                domain=domain,
-                fields=["partner_id", "amount_total_company_signed"],
-                groupby=["commercial_partner_id"],
-                orderby="id",
-            )
-        )
-        for group in total_group:
-            self.browse(
-                group["commercial_partner_id"][0], self._prefetch
-            ).risk_invoice_draft = group["amount_total_company_signed"]
 
     @api.model
     def _risk_account_groups(self):
         max_date = self._max_risk_date_due()
         company_domain = self._get_risk_company_domain()
         return {
+            "draft": {
+                "domain": company_domain
+                + [
+                    ("move_id.type", "in", ["out_invoice", "out_refund"]),
+                    ("account_internal_type", "=", "receivable"),
+                    ("parent_state", "in", ["draft", "proforma", "proforma2"]),
+                ],
+                "fields": ["partner_id", "account_id", "amount_residual"],
+                "group_by": ["partner_id", "account_id"],
+            },
             "open": {
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("user_type_id.type", "=", "receivable"),
+                    ("account_internal_type", "=", "receivable"),
+                    "|",
+                    "&",
+                    ("date_maturity", "!=", False),
                     ("date_maturity", ">=", max_date),
+                    "&",
+                    ("date_maturity", "=", False),
+                    ("date", ">=", max_date),
+                    ("parent_state", "=", "posted"),
                 ],
                 "fields": ["partner_id", "account_id", "amount_residual"],
                 "group_by": ["partner_id", "account_id"],
@@ -202,15 +179,21 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("user_type_id.type", "=", "receivable"),
+                    ("account_internal_type", "=", "receivable"),
+                    "|",
+                    "&",
+                    ("date_maturity", "!=", False),
                     ("date_maturity", "<", max_date),
+                    "&",
+                    ("date_maturity", "=", False),
+                    ("date", "<", max_date),
+                    ("parent_state", "=", "posted"),
                 ],
                 "fields": ["partner_id", "account_id", "amount_residual"],
                 "group_by": ["partner_id", "account_id"],
             },
         }
 
-    @api.multi
     @api.depends(
         "move_line_ids.amount_residual",
         "move_line_ids.date_maturity",
@@ -219,6 +202,7 @@ class ResPartner(models.Model):
     def _compute_risk_account_amount(self):
         self.update(
             {
+                "risk_invoice_draft": 0.0,
                 "risk_invoice_open": 0.0,
                 "risk_invoice_unpaid": 0.0,
                 "risk_account_amount": 0.0,
@@ -226,7 +210,7 @@ class ResPartner(models.Model):
             }
         )
         AccountMoveLine = self.env["account.move.line"].sudo()
-        customers = self.filtered(lambda x: x.customer and not x.parent_id)
+        customers = self.filtered(lambda p: p == p.commercial_partner_id)
         if not customers:
             return  # pragma: no cover
         groups = self._risk_account_groups()
@@ -241,15 +225,19 @@ class ResPartner(models.Model):
         for partner in customers:
             partner.update(partner._prepare_risk_account_vals(groups))
 
-    @api.multi
     def _prepare_risk_account_vals(self, groups):
         vals = {
+            "risk_invoice_draft": 0.0,
             "risk_invoice_open": 0.0,
             "risk_invoice_unpaid": 0.0,
             "risk_account_amount": 0.0,
             "risk_account_amount_unpaid": 0.0,
         }
         # Partner receivable account determines if amount is in invoice field
+        for reg in groups["draft"]["read_group"]:
+            if reg["partner_id"][0] != self.id:
+                continue
+            vals["risk_invoice_draft"] += reg["amount_residual"]
         for reg in groups["open"]["read_group"]:
             if reg["partner_id"][0] != self.id:
                 continue
@@ -270,9 +258,6 @@ class ResPartner(models.Model):
     def _compute_risk_exception(self):
         risk_field_list = self._risk_field_list()
         for partner in self:
-            if not partner.customer:
-                partner.risk_exception = False
-                continue
             amount = 0.0
             risk_exception = False
             for risk_field in risk_field_list:
@@ -282,16 +267,16 @@ class ResPartner(models.Model):
                     risk_exception = True
                 if getattr(partner, risk_field[2], False):
                     amount += field_value
-            partner.risk_total = amount
             if partner.credit_limit and amount > partner.credit_limit:
                 risk_exception = True
+            partner.risk_total = amount
             partner.risk_exception = risk_exception
 
     @api.model
     def _search_risk_exception(self, operator, value):
         commercial_partners = self.search(
             [
-                ("customer", "=", True),
+                ("customer_rank", ">", 0),
                 "|",
                 ("is_company", "=", True),
                 ("parent_id", "=", False),
@@ -307,8 +292,8 @@ class ResPartner(models.Model):
     @api.model
     def _max_risk_date_due(self):
         return fields.Date.to_string(
-            datetime.today().date()
-            - relativedelta(days=self.env.user.company_id.invoice_unpaid_margin)
+            fields.Date.today()
+            - relativedelta(days=self.env.company.invoice_unpaid_margin)
         )
 
     @api.model
@@ -371,7 +356,6 @@ class ResPartner(models.Model):
         )
         return {
             "name": _("Financial risk information"),
-            "view_type": "form",
             "view_mode": "pivot",
             "res_model": model_name,
             "view_id": view_id,
