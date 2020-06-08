@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 
 
 class PartnerRiskExceededWiz(models.TransientModel):
@@ -18,7 +18,6 @@ class PartnerRiskExceededWiz(models.TransientModel):
     )
     continue_method = fields.Char()
 
-    @api.multi
     def action_show(self):
         self.ensure_one()
         return {
@@ -26,12 +25,10 @@ class PartnerRiskExceededWiz(models.TransientModel):
             "name": _("Partner risk exceeded"),
             "res_model": self._name,
             "res_id": self.id,
-            "view_type": "form",
             "view_mode": "form",
             "target": "new",
         }
 
-    @api.multi
     def button_continue(self):
         self.ensure_one()
         return getattr(
