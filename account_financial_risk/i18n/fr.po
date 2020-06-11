@@ -52,6 +52,11 @@ msgid "Account Moves"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
+msgid "Account move lines"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Cancel"
 msgstr "Annuler"
@@ -141,11 +146,11 @@ msgid "Financial risk exceeded.\n"
 msgstr ""
 
 #. module: account_financial_risk
-#: model:ir.actions.server,name:account_financial_risk.ir_cron_due_invoice_every_day_ir_actions_server
-#: model:ir.cron,cron_name:account_financial_risk.ir_cron_due_invoice_every_day
-#: model:ir.cron,name:account_financial_risk.ir_cron_due_invoice_every_day
-msgid "Financial risk: Process due invoices"
-msgstr ""
+#: code:addons/account_financial_risk/models/res_partner.py:319
+#, fuzzy, python-format
+#| msgid "Financial Risk"
+msgid "Financial risk information"
+msgstr "Risque Financier"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_invoice_draft_include
@@ -249,6 +254,13 @@ msgstr "Risque Total"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_invoice
 msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_financial_risk
+#: model:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
+#, fuzzy
+#| msgid "Invoice"
+msgid "Invoices"
 msgstr "Facture"
 
 #. module: account_financial_risk
