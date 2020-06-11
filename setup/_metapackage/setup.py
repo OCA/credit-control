@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-credit-control Odoo addons",
     version=version,
     install_requires=[
+        'odoo13-addon-account_credit_control',
         'odoo13-addon-partner_risk_insurance',
     ],
     classifiers=[
