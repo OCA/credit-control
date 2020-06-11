@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2016-2020 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -12,29 +12,33 @@ class ResPartner(models.Model):
     risk_sale_order_limit = fields.Monetary(
         string='Limit Sales Orders', help='Set 0 if it is not locked')
     risk_sale_order = fields.Monetary(
-        compute='_compute_risk_sale_order', store=True,
+        compute='_compute_risk_sale_order',
         compute_sudo=True,
         string='Total Sales Orders Not Invoiced',
         help='Total not invoiced of sales orders in Sale Order state')
 
-    @api.multi
-    @api.depends('sale_order_ids.order_line.amt_invoiced',
-                 'child_ids.sale_order_ids.order_line.amt_invoiced')
+    def _get_risk_sale_order_domain(self):
+        # When p is NewId object instance bool(p.id) is False
+        commercial_partners = self.filtered(lambda p: (
+            p.customer and p.id and p == p.commercial_partner_id
+        ))
+        return self._get_risk_company_domain() + [
+            ('state', '=', 'sale'),
+            ('commercial_partner_id', 'in', commercial_partners.ids),
+        ]
+
+    @api.depends('sale_order_ids.order_line.risk_amount',
+                 'child_ids.sale_order_ids.order_line.risk_amount')
     def _compute_risk_sale_order(self):
-        customers = self.filtered('customer')
-        partners = customers | customers.mapped('child_ids')
+        self.update({'risk_sale_order': 0.0})
         orders_group = self.env['sale.order.line'].read_group(
-            [('state', '=', 'sale'), ('order_partner_id', 'in', partners.ids)],
-            ['order_partner_id', 'price_total',
-             'amt_to_invoice', 'amt_invoiced'],
-            ['order_partner_id'])
-        for partner in customers:
-            partner_ids = (partner | partner.child_ids).ids
-            # Take in account max of ordered qty and delivered qty
-            partner.risk_sale_order = sum(
-                max(x['price_total'], x['amt_to_invoice']) - x['amt_invoiced']
-                for x in orders_group if x['order_partner_id'][0] in
-                partner_ids)
+            domain=self._get_risk_sale_order_domain(),
+            fields=['commercial_partner_id', 'risk_amount'],
+            groupby=['commercial_partner_id'],
+            orderby='id')
+        for group in orders_group:
+            self.browse(group["commercial_partner_id"][0], self._prefetch) \
+                .risk_sale_order = group["risk_amount"]
 
     @api.model
     def _risk_field_list(self):
@@ -42,3 +46,9 @@ class ResPartner(models.Model):
         res.append(('risk_sale_order', 'risk_sale_order_limit',
                     'risk_sale_order_include'))
         return res
+
+    def _get_field_risk_model_domain(self, field_name):
+        if field_name == 'risk_sale_order':
+            return 'sale.order.line', self._get_risk_sale_order_domain()
+        else:
+            return super()._get_field_risk_model_domain(field_name)
