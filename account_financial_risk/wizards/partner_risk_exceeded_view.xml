@@ -7,7 +7,6 @@
         <field name="model">partner.risk.exceeded.wiz</field>
         <field name="arch" type="xml">
             <form string="Risk exceeded">
-                <p>The partner has exceeded his risk</p>
                 <field name="exception_msg" colspan="2" nolabel="1" />
                 <group>
                     <field name="partner_id" />

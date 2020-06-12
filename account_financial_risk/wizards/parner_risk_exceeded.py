@@ -22,7 +22,7 @@ class PartnerRiskExceededWiz(models.TransientModel):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Partner risk exceeded"),
+            "name": _("Credit limit exceeded"),
             "res_model": self._name,
             "res_id": self.id,
             "view_mode": "form",

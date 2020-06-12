@@ -1,4 +1,5 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2020 ForgeFlow
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -45,7 +46,7 @@ class AccountMove(models.Model):
         partner = self.partner_id.commercial_partner_id
         exception_msg = ""
         if partner.risk_exception:
-            exception_msg = _("Financial risk exceeded.\n")
+            exception_msg = _("Financial risk warning.\n")
         elif partner.risk_invoice_open_limit and (
             (partner.risk_invoice_open + self.risk_amount_total_currency)
             > partner.risk_invoice_open_limit
@@ -57,7 +58,7 @@ class AccountMove(models.Model):
             and (partner.risk_total + self.risk_amount_total_currency)
             > partner.credit_limit
         ):
-            exception_msg = _("This invoice exceeds the financial risk.\n")
+            exception_msg = _("This invoice exceeds the credit limit.\n")
         return exception_msg
 
     def action_post(self):
@@ -96,3 +97,42 @@ class AccountMove(models.Model):
                         % invoice.partner_id.commercial_partner_id.display_name
                     )
         return super().action_post()
+
+
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
+
+    risk_currency_id = fields.Many2one(related="partner_id.risk_currency_id")
+    risk_amount_residual = fields.Monetary(
+        string="Risk Residual Amount",
+        currency_field="risk_currency_id",
+        compute="_compute_risk_amount_residual",
+    )
+
+    @api.depends(
+        "debit",
+        "credit",
+        "account_id",
+        "amount_currency",
+        "currency_id",
+        "matched_debit_ids",
+        "matched_credit_ids",
+        "matched_debit_ids.amount",
+        "matched_credit_ids.amount",
+        "move_id.state",
+        "company_id",
+        "partner_id.credit_currency",
+        "partner_id.manual_credit_currency_id",
+        "partner_id.property_account_receivable_id.currency_id",
+        "partner_id.country_id",
+        "company_id.currency_id",
+    )
+    def _compute_risk_amount_residual(self):
+        for move_line in self:
+            move_line.risk_amount_residual = move_line.company_currency_id._convert(
+                move_line.amount_residual,
+                move_line.risk_currency_id,
+                move_line.company_id,
+                move_line.move_id.date or fields.Date.context_today(self),
+                round=False,
+            )

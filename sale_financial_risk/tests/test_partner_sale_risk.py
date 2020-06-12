@@ -43,6 +43,7 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
         self.assertFalse(self.partner.risk_exception)
         self.partner.risk_sale_order_limit = 99.0
+        self.partner.risk_sale_order_include = True
         self.assertTrue(self.partner.risk_exception)
         sale_order2 = self.sale_order.copy()
         wiz_dic = sale_order2.action_confirm()
@@ -73,6 +74,7 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertFalse(self.partner.risk_exception)
         # If we set a risk_sale_order_limit to 99, risk_exception must be True
         self.partner.risk_sale_order_limit = 99.0
+        self.partner.risk_sale_order_include = True
         self.assertTrue(self.partner.risk_exception)
         # If we create and validate an invoice from the sale order then the
         # amount to be invoiced must be 0 and risk_exception must be False

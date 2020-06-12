@@ -11,4 +11,34 @@
             </pivot>
         </field>
     </record>
+    <record id="view_account_move_line_risk_tree" model="ir.ui.view">
+        <field name="name">account.move.line.risk.tree</field>
+        <field name="model">account.move.line</field>
+        <field eval="30" name="priority" />
+        <field name="arch" type="xml">
+            <tree string="Account Move Lines" create="0">
+                <field name="move_id" />
+                <field name="partner_id" />
+                <field name="account_id" />
+                <field
+                    name="amount_residual"
+                    widget="monetary"
+                    options="{'currency_field': 'company_currency_id'}"
+                    string="Residual Amount"
+                    sum="Residual Amount"
+                />
+                <field
+                    name="risk_amount_residual"
+                    widget="monetary"
+                    options="{'currency_field': 'risk_currency_id'}"
+                    string="Risk Residual Amount"
+                    sum="Risk Residual Amount"
+                />
+                <field name="date_maturity" />
+                <field name="company_currency_id" invisible="1" />
+                <field name="risk_currency_id" invisible="1" />
+                <field name='company_id' groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
 </odoo>

@@ -13,4 +13,34 @@
             </pivot>
         </field>
     </record>
+    <record id="view_sale_line_risk_tree" model="ir.ui.view">
+        <field name="name">sale.order.line.risk.tree</field>
+        <field name="model">sale.order.line</field>
+        <field eval="30" name="priority" />
+        <field name="arch" type="xml">
+            <tree string="Sale Order Lines">
+                <field name="product_id" />
+                <field name="order_id" />
+                <field name="order_partner_id" />
+                <field
+                    name="risk_amount"
+                    widget="monetary"
+                    options="{'currency_field': 'company_currency_id'}"
+                    string="Amount Not Invoiced"
+                    sum="Amount Not Invoiced"
+                />
+                <field
+                    name="risk_amount_currency"
+                    widget="monetary"
+                    options="{'currency_field': 'risk_currency_id'}"
+                    string="Risk Amount Not Invoiced"
+                    sum="Risk Amount Not Invoiced"
+                />
+                <field name="currency_id" invisible="1" />
+                <field name="company_currency_id" invisible="1" />
+                <field name="risk_currency_id" invisible="1" />
+                <field name='company_id' groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
 </odoo>

@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     Copyright 2020 ForgeFLow S.L.
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
+    <record id="res_partner_view_risk_button" model="ir.ui.view">
+        <field name="name">res.partner.view.risk (button)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="19" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-exclamation-triangle"
+                    name="action_view_partner_in_risk"
+                    attrs="{'invisible': ['|',('risk_exception', '=', False),('credit_limit', '=', 0.0)]}"
+                    context="{'default_partner_id': active_id}"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field
+                                name="risk_amount_exceeded"
+                                widget='monetary'
+                                options="{'currency_field': 'risk_currency_id'}"
+                            />
+                        </span>
+                        <span class="o_stat_text">Risk Over Limit</span>
+                    </div>
+                </button>
+                <field name="risk_exception" invisible="1" />
+                <field name="credit_limit" invisible="1" />
+                <field name="risk_currency_id" invisible="1" />
+            </div>
+        </field>
+    </record>
     <record id="res_partner_view_risk" model="ir.ui.view">
         <field name="name">res.partner.view.risk</field>
         <field name="model">res.partner</field>
@@ -16,14 +49,14 @@
                     attrs="{'invisible': ['|', ('customer_rank', '=', 0), '&amp;', ('is_company','=',False), ('parent_id','!=',False)]}"
                 >
                     <field name="customer_rank" invisible="1" />
-                    <group name="risk_general" col="3" class="oe_risk_group">
+                    <group name="risk_general" col="4" class="oe_risk_group">
                         <group
                             string="General Limits"
                             name="risk_include"
-                            class="o_group_col_6"
+                            class="o_group_col_8"
                         >
                             <group
-                                col="3"
+                                col="4"
                                 class="oe_subtotal_footer"
                                 style="float: left !important;"
                             >
@@ -44,6 +77,12 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+                                <button
+                                    name="action_risk_tree"
+                                    type="object"
+                                    icon="fa-search"
+                                    context="{'risk_type': 'draft'}"
+                                />
                                 <field
                                     name="risk_invoice_open_include"
                                     attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
@@ -61,6 +100,12 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+                                <button
+                                    name="action_risk_tree"
+                                    type="object"
+                                    icon="fa-search"
+                                    context="{'risk_type': 'open'}"
+                                />
                                 <field
                                     name="risk_invoice_unpaid_include"
                                     attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
@@ -78,6 +123,12 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+                                <button
+                                    name="action_risk_tree"
+                                    type="object"
+                                    icon="fa-search"
+                                    context="{'risk_type': 'unpaid'}"
+                                />
                                 <field
                                     name="risk_account_amount_include"
                                     attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
@@ -95,6 +146,12 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+                                <button
+                                    name="action_risk_tree"
+                                    type="object"
+                                    icon="fa-search"
+                                    context="{'risk_type': 'amount'}"
+                                />
                                 <field
                                     name="risk_account_amount_unpaid_include"
                                     attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
@@ -112,6 +169,12 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+                                <button
+                                    name="action_risk_tree"
+                                    type="object"
+                                    icon="fa-search"
+                                    context="{'risk_type': 'amount_unpaid'}"
+                                />
                                 <field
                                     name="risk_total"
                                     colspan="3"
@@ -197,10 +260,75 @@
                             name="credit_policy"
                             attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
                         />
-                        <field name="risk_exception" />
+                        <field name="risk_exception" invisible="1" />
                     </group>
                 </page>
             </page>
         </field>
+    </record>
+    <record id="view_res_partner_filter_risk" model="ir.ui.view">
+        <field name="name">res.partner.risk.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="supplier" position="after">
+                <separator />
+                <filter
+                    string="Risk exceeded"
+                    name='risk_exception'
+                    domain="[('risk_exception', '=', True)]"
+                    help="Partners that did not ask not to be included in mass mailing campaigns"
+                />
+                <separator />
+            </filter>
+            <field name="category_id" position="after">
+                <field name="risk_exception" />
+            </field>
+        </field>
+    </record>
+    <record id="view_partner_in_risk_tree" model="ir.ui.view">
+        <field name="name">res.partner.risk.tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="50" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field
+                    name="risk_amount_exceeded"
+                    widget="monetary"
+                    options="{'currency_field': 'risk_currency_id'}"
+                />
+                <field
+                    name="risk_total"
+                    widget="monetary"
+                    options="{'currency_field': 'risk_currency_id'}"
+                />
+                <field
+                    name="credit_limit"
+                    widget="monetary"
+                    options="{'currency_field': 'risk_currency_id'}"
+                />
+                <field name="risk_currency_id" options="{'no_create': True}" />
+                <field name="commercial_partner_id" invisible="1" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    options="{'no_create': True}"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="action_partner_in_risk_tree" model="ir.actions.act_window">
+        <field name="name">Customers in risk</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="view_partner_in_risk_tree" />
+        <field
+            name="domain"
+        >[('risk_exception', '=', True), ('credit_limit', '!=', 0.0)]</field>
+        <field
+            name="context"
+        >{'default_type':'customer', 'type':'customer', 'search_default_customer': 1,
+            'res_partner_search_mode': 'customer', 'default_customer_rank': 1}</field>
     </record>
 </odoo>

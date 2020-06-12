@@ -1,7 +1,7 @@
 # Copyright 2016-2020 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
@@ -73,3 +73,31 @@ class ResPartner(models.Model):
             return "sale.order.line", self._get_risk_sale_order_domain()
         else:
             return super()._get_field_risk_model_domain(field_name)
+
+    def _get_domain_risk_tree(self):
+        domain = super(ResPartner, self)._get_domain_risk_tree()
+        risk_type = self._context.get("risk_type")
+        if risk_type == "sale":
+            domain += [
+                ("order_partner_id", "in", (self | self.child_ids).ids),
+                ("state", "=", "sale"),
+                "|",
+                ("price_total", "!=", 0.0),
+                ("amt_invoice_diff", "!=", 0.0),
+            ]
+        return domain
+
+    def _get_view_risk_tree(self, domain):
+        view = super(ResPartner, self)._get_view_risk_tree(domain)
+        risk_type = self._context.get("risk_type")
+        if risk_type == "sale":
+            view_tree = self.env.ref("sale_financial_risk." "view_sale_line_risk_tree")
+            view = {
+                "name": _("Sale Order Lines"),
+                "type": "ir.actions.act_window",
+                "res_model": "sale.order.line",
+                "view_mode": "tree, form",
+                "views": [(view_tree.id, "tree")],
+                "domain": domain,
+            }
+        return view
