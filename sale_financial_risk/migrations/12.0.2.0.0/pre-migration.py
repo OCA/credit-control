@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tools import sql
-from odoo.addons.sale_financial_risk.hooks import \
-    create_commercial_partner_id_column
+
+from odoo.addons.sale_financial_risk.hooks import create_commercial_partner_id_column
 
 
 def migrate(cr, version):
@@ -15,10 +15,10 @@ def migrate(cr, version):
 
 
 def rename_amt_to_invoice(cr):
-    if (not sql.column_exists(cr, 'sale_order_line', 'risk_amount') and
-            sql.column_exists(cr, 'sale_order_line', 'amt_to_invoice')):
-        sql.rename_column(
-            cr, 'sale_order_line', 'amt_to_invoice', 'risk_amount')
+    if not sql.column_exists(
+        cr, "sale_order_line", "risk_amount"
+    ) and sql.column_exists(cr, "sale_order_line", "amt_to_invoice"):
+        sql.rename_column(cr, "sale_order_line", "amt_to_invoice", "risk_amount")
 
 
 def compute_zero_risk_amount(cr):
