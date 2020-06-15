@@ -22,7 +22,7 @@ class ResPartner(models.Model):
     def _get_risk_sale_order_domain(self):
         # When p is NewId object instance bool(p.id) is False
         commercial_partners = self.filtered(
-            lambda p: (p.customer and p.id and p == p.commercial_partner_id)
+            lambda p: (p.id and p == p.commercial_partner_id)
         )
         return self._get_risk_company_domain() + [
             ("state", "=", "sale"),
@@ -42,9 +42,9 @@ class ResPartner(models.Model):
             orderby="id",
         )
         for group in orders_group:
-            self.browse(
-                group["commercial_partner_id"][0], self._prefetch
-            ).risk_sale_order = group["risk_amount"]
+            self.browse(group["commercial_partner_id"][0]).risk_sale_order = group[
+                "risk_amount"
+            ]
 
     @api.model
     def _risk_field_list(self):
