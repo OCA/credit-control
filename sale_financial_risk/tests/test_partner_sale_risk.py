@@ -10,7 +10,7 @@ class TestPartnerSaleRisk(SavepointCase):
         super(TestPartnerSaleRisk, cls).setUpClass()
         cls.env.user.groups_id |= cls.env.ref("sales_team.group_sale_manager")
         cls.partner = cls.env["res.partner"].create(
-            {"name": "Partner test", "customer": True}
+            {"name": "Partner test", "customer_rank": 1}
         )
         cls.product = cls.env.ref("product.product_product_2")
         cls.product.invoice_policy = "order"
@@ -71,7 +71,7 @@ class TestPartnerSaleRisk(SavepointCase):
         # Now the amount to be invoiced must 100
         self.assertEqual(self.partner.risk_sale_order, 100.0)
         self.assertFalse(self.partner.risk_exception)
-        # If we set a risk_sale_order_limit to 99, risk_excepion must be True
+        # If we set a risk_sale_order_limit to 99, risk_exception must be True
         self.partner.risk_sale_order_limit = 99.0
         self.assertTrue(self.partner.risk_exception)
         # If we create and validate an invoice from the sale order then the
@@ -85,7 +85,7 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         invoice = self.sale_order.invoice_ids
-        invoice.with_context(bypass_risk=True).action_invoice_open()
+        invoice.with_context(bypass_risk=True).post()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
         self.assertAlmostEqual(self.partner.risk_invoice_open, 100.0)
@@ -93,13 +93,11 @@ class TestPartnerSaleRisk(SavepointCase):
         # After that, if we create and validate a Credit Note from the invoice
         # then the amount to be invoiced must be 100 again
         # and risk_exception must be True
-        ref_wiz_obj = self.env["account.invoice.refund"].with_context(
-            active_id=invoice.id, active_ids=[invoice.id]
+        ref_wiz_obj = self.env["account.move.reversal"].with_context(
+            active_model="account.move", active_ids=[invoice.id]
         )
-        ref_wiz = ref_wiz_obj.create(
-            {"description": "testing", "filter_refund": "modify"}
-        )
-        res = ref_wiz.invoice_refund()
+        ref_wiz = ref_wiz_obj.create({"reason": "testing", "refund_method": "modify"})
+        res = ref_wiz.reverse_moves()
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
         # The way to re-invoice a sale order is creating a refund with
