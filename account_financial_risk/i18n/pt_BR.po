@@ -61,9 +61,21 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: account_financial_risk
+#: code:addons/account_financial_risk/models/res_partner.py:0
+#, python-format
+msgid "Choose Manual Credit Currency."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
 msgstr "Empresas"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
+msgid "Company Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
@@ -95,6 +107,12 @@ msgstr "Criado por"
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_date
 msgid "Created on"
 msgstr "Criado em"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
+msgid "Credit Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -310,6 +328,13 @@ msgid "Limit Other Account Unpaid Amount"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
+msgid "Manual Credit Currency"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
 msgid "Maturity Margin"
@@ -330,6 +355,16 @@ msgstr ""
 #, python-format
 msgid "Partner risk exceeded"
 msgstr "Risco de parceiro excedido"
+
+#. module: account_financial_risk
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
+msgid "Pricelist Currency"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
+msgid "Receivable Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -372,6 +407,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
 msgid "Risk Allow Edit"
 msgstr "Permitir Editar o Risco"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
+msgid "Risk Amount Total"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
+msgid "Risk Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
