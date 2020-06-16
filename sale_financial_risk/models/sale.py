@@ -40,10 +40,17 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    company_currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        related='company_id.currency_id',
+        string="Company Currency",
+        readonly=True,
+    )
     risk_amount = fields.Monetary(
         string="Risk amount",
         compute='_compute_risk_amount',
         compute_sudo=True,
+        currency_field="company_currency_id",
         store=True
     )
     # TODO: Analyze performance vs order_id.partner_id.commercial_partner_id
