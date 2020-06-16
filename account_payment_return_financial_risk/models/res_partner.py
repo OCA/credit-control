@@ -13,10 +13,13 @@ class ResPartner(models.Model):
              'Residual amount of move lines not reconciled with returned '
              'lines related.')
     risk_payment_return_limit = fields.Monetary(
-        string='Limit Payments Returns', help='Set 0 if it is not locked')
+        string='Limit Payments Returns',
+        currency_field="risk_currency_id",
+        help='Set 0 if it is not locked')
     risk_payment_return = fields.Monetary(
         compute='_compute_risk_account_amount',
         string='Total Payments Returns',
+        currency_field="risk_currency_id",
         help='Residual amount of move lines not reconciled with returned '
              'lines related.')
 
@@ -43,9 +46,16 @@ class ResPartner(models.Model):
     @api.multi
     def _prepare_risk_account_vals(self, groups):
         vals = super(ResPartner, self)._prepare_risk_account_vals(groups)
-        vals['risk_payment_return'] = sum(
-            reg['amount_residual'] for reg in groups['returned']['read_group']
-            if reg['partner_id'][0] == self.id)
+        vals.update({'risk_payment_return': 0.0})
+        for reg in groups['returned']['read_group']:
+            if reg['partner_id'][0] != self.id:
+                continue  # pragma: no cover
+            account = self.env['account.account'].browse(reg['account_id'][0])
+            vals['risk_payment_return'] += \
+                account.company_id.currency_id._convert(
+                    reg['amount_residual'], self.risk_currency_id,
+                    account.company_id, fields.Date.context_today(self),
+                    round=False)
         return vals
 
     @api.model
