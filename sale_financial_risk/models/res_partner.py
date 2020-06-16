@@ -11,11 +11,14 @@ class ResPartner(models.Model):
         string="Include Sales Orders", help="Full risk computation"
     )
     risk_sale_order_limit = fields.Monetary(
-        string="Limit Sales Orders", help="Set 0 if it is not locked"
+        string="Limit Sales Orders",
+        currency_field="risk_currency_id",
+        help="Set 0 if it is not locked",
     )
     risk_sale_order = fields.Monetary(
         compute="_compute_risk_sale_order",
         string="Total Sales Orders Not Invoiced",
+        currency_field="risk_currency_id",
         help="Total not invoiced of sales orders in Sale Order state",
     )
 
@@ -37,14 +40,29 @@ class ResPartner(models.Model):
         self.update({"risk_sale_order": 0.0})
         orders_group = self.env["sale.order.line"].read_group(
             domain=self._get_risk_sale_order_domain(),
-            fields=["commercial_partner_id", "risk_amount"],
-            groupby=["commercial_partner_id"],
+            fields=["commercial_partner_id", "company_id", "risk_amount"],
+            groupby=["commercial_partner_id", "company_id"],
             orderby="id",
+            lazy=False,
         )
         for group in orders_group:
-            self.browse(group["commercial_partner_id"][0]).risk_sale_order = group[
-                "risk_amount"
-            ]
+            partner = self.browse(group["commercial_partner_id"][0])
+            company = self.env["res.company"].browse(
+                group["company_id"][0] or self.env.company.id
+            )
+            company_currency = company.currency_id
+            partner.risk_sale_order = company_currency._convert(
+                group["risk_amount"],
+                partner.risk_currency_id,
+                company,
+                fields.Date.context_today(self),
+                round=False,
+            )
+
+    @api.onchange("risk_currency_id")
+    def _onchange_risk_currency_id(self):
+        super()._onchange_risk_currency_id()
+        self._compute_risk_sale_order()
 
     @api.model
     def _risk_field_list(self):
