@@ -14,7 +14,10 @@ class SaleOrder(models.Model):
                 self.amount_total,
                 self.company_id.currency_id,
                 self.company_id,
-                fields.Date.today(),
+                self.date_order
+                and self.date_order.date()
+                or fields.Date.context_today(self),
+                round=False,
             )
             partner = self.partner_id.commercial_partner_id
             exception_msg = ""
@@ -109,5 +112,8 @@ class SaleOrderLine(models.Model):
                 risk_amount,
                 line.company_id.currency_id,
                 line.company_id,
-                fields.Date.today(),
+                line.order_id.date_order
+                and line.order_id.date_order.date()
+                or fields.Date.context_today(self),
+                round=False,
             )
