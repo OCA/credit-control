@@ -8,7 +8,7 @@
             <pivot string="Invoices" disable_linking="True">
                 <field name="partner_id" type="row"/>
                 <field name="date_due" interval="month" type="col"/>
-                <field name="amount_total" type="measure"/>
+                <field name="amount_total_company_signed" type="measure"/>
             </pivot>
         </field>
     </record>
