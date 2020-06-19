@@ -21,32 +21,6 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
-"button.</strong>"
-msgstr ""
-"<strong>Si vous êtes responsable de la facturation, vous pouvez utiliser le "
-"bouton Confirmer toutes les factures.</strong>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>With Confirm Invoices button only not risk exceeded partner invoices "
-"will be confirmed.</strong>"
-msgstr ""
-"<strong>Avec le bouton Confirmer les factures, vous ne risquez pas de "
-"dépasser la limite pour les factures des partenaires qui seront validées.</"
-"strong>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid "<strong>Your selection includes partners with risk exceeded.</strong>"
-msgstr ""
-"<strong>Votre sélection inclut des partenaires dont la limite du risque a "
-"été dépassé.</strong>"
-
-#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
@@ -97,16 +71,6 @@ msgstr "Sociétés"
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
 msgid "Config Settings"
 msgstr "Paramètres de configuration"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid "Confirm ALL Invoices"
-msgstr "Confirmer toutes les factures"
-
-#. module: account_financial_risk
-#: model:ir.model,name:account_financial_risk.model_account_invoice_confirm
-msgid "Confirm the selected invoices"
-msgstr "Confirmer les factures sélectionnées"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
@@ -193,13 +157,13 @@ msgid "Financial Risk"
 msgstr "Risque Financier"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:15
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Risque financier dépassé.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/res_partner.py:319
+#: code:addons/account_financial_risk/models/res_partner.py:0
 #, fuzzy, python-format
 #| msgid "Financial Risk"
 msgid "Financial risk information"
@@ -313,27 +277,15 @@ msgid "Info"
 msgstr "Info"
 
 #. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_confirm__info_risk
-msgid "Info Risk"
-msgstr "Info Risque"
-
-#. module: account_financial_risk
-#: model:ir.model,name:account_financial_risk.model_account_invoice
-msgid "Invoice"
-msgstr "Facture"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
-#, fuzzy
-#| msgid "Invoice"
-msgid "Invoices"
-msgstr "Facture"
-
-#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
 msgid "It Indicate if partner risk exceeded"
 msgstr "Indique si le risque du partenaire a été dépassé"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_account_move
+msgid "Journal Entries"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
@@ -397,7 +349,7 @@ msgid "Partner Risk Exceeded Wizard"
 msgstr "Assistant pour risque du partenaire dépassé"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:25
+#: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
 msgstr "Risque partenaire dépassé"
@@ -498,13 +450,13 @@ msgid "The partner has exceeded his risk"
 msgstr "Le partenaire a dépassé sa limite de risque"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:26
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
 msgstr "Cette facture dépasse la limite du risque financier.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:19
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
 msgstr ""
@@ -552,6 +504,44 @@ msgstr "Total des factures impayées / solde du capital"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Montant total des factures brouillon ou pro forma"
+
+#~ msgid ""
+#~ "<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
+#~ "button.</strong>"
+#~ msgstr ""
+#~ "<strong>Si vous êtes responsable de la facturation, vous pouvez utiliser "
+#~ "le bouton Confirmer toutes les factures.</strong>"
+
+#~ msgid ""
+#~ "<strong>With Confirm Invoices button only not risk exceeded partner "
+#~ "invoices will be confirmed.</strong>"
+#~ msgstr ""
+#~ "<strong>Avec le bouton Confirmer les factures, vous ne risquez pas de "
+#~ "dépasser la limite pour les factures des partenaires qui seront validées."
+#~ "</strong>"
+
+#~ msgid ""
+#~ "<strong>Your selection includes partners with risk exceeded.</strong>"
+#~ msgstr ""
+#~ "<strong>Votre sélection inclut des partenaires dont la limite du risque a "
+#~ "été dépassé.</strong>"
+
+#~ msgid "Confirm ALL Invoices"
+#~ msgstr "Confirmer toutes les factures"
+
+#~ msgid "Confirm the selected invoices"
+#~ msgstr "Confirmer les factures sélectionnées"
+
+#~ msgid "Info Risk"
+#~ msgstr "Info Risque"
+
+#~ msgid "Invoice"
+#~ msgstr "Facture"
+
+#, fuzzy
+#~| msgid "Invoice"
+#~ msgid "Invoices"
+#~ msgstr "Facture"
 
 #~ msgid "Financial risk: Process due invoices"
 #~ msgstr "Risque financier: Traiter les factures échues"
