@@ -20,25 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
-"button.</strong>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid ""
-"<strong>With Confirm Invoices button only not risk exceeded partner invoices "
-"will be confirmed.</strong>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid "<strong>Your selection includes partners with risk exceeded.</strong>"
-msgstr ""
-
-#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
@@ -88,16 +69,6 @@ msgstr "Unternehmen"
 #, fuzzy
 msgid "Config Settings"
 msgstr "account.config.settings"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
-msgid "Confirm ALL Invoices"
-msgstr ""
-
-#. module: account_financial_risk
-#: model:ir.model,name:account_financial_risk.model_account_invoice_confirm
-msgid "Confirm the selected invoices"
-msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
@@ -178,13 +149,13 @@ msgid "Financial Risk"
 msgstr "Finanzielles Risiko"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:15
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Finanzrisiko überschritten\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/res_partner.py:319
+#: code:addons/account_financial_risk/models/res_partner.py:0
 #, fuzzy, python-format
 #| msgid "Financial Risk"
 msgid "Financial risk information"
@@ -298,28 +269,15 @@ msgid "Info"
 msgstr "Info"
 
 #. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_confirm__info_risk
-#, fuzzy
-msgid "Info Risk"
-msgstr "Gesamtrisiko"
-
-#. module: account_financial_risk
-#: model:ir.model,name:account_financial_risk.model_account_invoice
-msgid "Invoice"
-msgstr "Rechnung"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
-#, fuzzy
-#| msgid "Invoice"
-msgid "Invoices"
-msgstr "Rechnung"
-
-#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
 msgid "It Indicate if partner risk exceeded"
 msgstr "Zeigt Risikoüberschreitung auf"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_account_move
+msgid "Journal Entries"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
@@ -388,7 +346,7 @@ msgid "Partner Risk Exceeded Wizard"
 msgstr "Partnerrisiko überschritten"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:25
+#: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
 msgstr "Partnerrisiko überschritten"
@@ -490,13 +448,13 @@ msgid "The partner has exceeded his risk"
 msgstr "Der Partner überschreitet sein Risiko"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:26
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
 msgstr "Diese Rechnung überschreitet das finanzielle Risiko.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:19
+#: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
 msgstr "Diese Rechnung überschreitet das Risko offener Rechnungen.\n"
@@ -546,6 +504,18 @@ msgstr "Unbezahlte Rechnungen Gesamt"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Gesamtbetrag aller Rechnungen im Status Enturf oder Proforma"
+
+#, fuzzy
+#~ msgid "Info Risk"
+#~ msgstr "Gesamtrisiko"
+
+#~ msgid "Invoice"
+#~ msgstr "Rechnung"
+
+#, fuzzy
+#~| msgid "Invoice"
+#~ msgid "Invoices"
+#~ msgstr "Rechnung"
 
 #, fuzzy
 #~ msgid "Financial risk: Process due invoices"
