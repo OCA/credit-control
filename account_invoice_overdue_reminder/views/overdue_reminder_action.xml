@@ -73,8 +73,8 @@
     <field name="model">overdue.reminder.action</field>
     <field name="arch" type="xml">
         <pivot>
-            <field name="date" type="col" interval="week"/>
-            <field name="user_id" type="row"/>
+            <field name="date" type="row" interval="week"/>
+            <field name="user_id" type="col"/>
         </pivot>
     </field>
 </record>
