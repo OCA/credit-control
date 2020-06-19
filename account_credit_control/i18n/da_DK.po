@@ -94,7 +94,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, fuzzy
-#| msgid "<strong>Total Invoiced</strong>"
 msgid "<strong>Date:</strong>"
 msgstr "I alt faktureret"
 
@@ -1281,7 +1280,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
 #, fuzzy
-#| msgid "Open amount"
 msgid "Overdue Balance"
 msgstr "Åben saldo"
 
