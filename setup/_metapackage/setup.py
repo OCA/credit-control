@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-account_credit_control',
         'odoo13-addon-account_financial_risk',
         'odoo13-addon-partner_risk_insurance',
+        'odoo13-addon-sale_financial_risk',
     ],
     classifiers=[
         'Programming Language :: Python',
