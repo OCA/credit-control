@@ -20,12 +20,12 @@
                     </div>
                 </div>
                 <div class="row mt32 mb32">
-                    <div class="col-xs-12">
+                    <div class="col-12">
                         <span t-field="doc.current_policy_level.custom_text" />
                     </div>
                 </div>
                 <h3>Summary</h3>
-                <table class="table table-condensed" id="summary_table">
+                <table class="table table-sm" id="summary_table">
                     <thead>
                         <tr>
                             <th>Invoice number</th>
@@ -75,7 +75,7 @@
                     <div
                         t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto"
                     >
-                        <table class="table table-condensed">
+                        <table class="table table-sm">
                             <tr>
                                 <td>
                                     <strong>Total Invoiced</strong>
@@ -103,7 +103,7 @@
                 </div>
                 <t t-if="doc.current_policy_level.custom_text_after_details">
                     <div class="row mt32 mb32">
-                        <div class="col-xs-12">
+                        <div class="col-12">
                             <p
                                 t-field="doc.current_policy_level.custom_text_after_details"
                             />
