@@ -120,7 +120,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, fuzzy
-#| msgid "<strong>Total Due</strong>"
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Totaal Openstaand</strong>"
 
@@ -162,7 +161,6 @@ msgstr ""
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 #, fuzzy, python-format
-#| msgid "A run has already been executed more recently than %s"
 msgid "A run has already been executed more recently (%s)"
 msgstr "Een kredietcontrole is al recenter dan %s uitgevoerd."
 
@@ -193,7 +191,6 @@ msgstr "Actief"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_ids
 #, fuzzy
-#| msgid "Active"
 msgid "Activities"
 msgstr "Actief"
 
@@ -205,7 +202,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_state
 #, fuzzy
-#| msgid "Active"
 msgid "Activity State"
 msgstr "Actief"
 
@@ -419,7 +415,6 @@ msgstr ""
 #: model:ir.ui.menu,name:account_credit_control.credit_control_analysis_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_analysis_pivot_view
 #, fuzzy
-#| msgid "# of Credit Control Lines"
 msgid "Credit Control Analysis"
 msgstr "Aantal Factuurregels"
 
@@ -427,7 +422,6 @@ msgstr "Aantal Factuurregels"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_analysis_ids
 #, fuzzy
-#| msgid "# of Credit Control Lines"
 msgid "Credit Control Levels"
 msgstr "Aantal Factuurregels"
 
@@ -459,7 +453,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 #, fuzzy
-#| msgid "A credit control policy level"
 msgid "Credit Control Policy Changer"
 msgstr "Een kredietcontrole niveau"
 
