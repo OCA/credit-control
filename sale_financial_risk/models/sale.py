@@ -58,6 +58,7 @@ class SaleOrderLine(models.Model):
     commercial_partner_id = fields.Many2one(
         related='order_partner_id.commercial_partner_id',
         string='Commercial Entity',
+        compute_sudo=True,
         store=True,
         index=True,
     )
