@@ -17,7 +17,7 @@
      'account',
      'mail',
  ],
- 'website': 'https://github.com/OCA/account-financial-tools',
+ 'website': 'https://github.com/OCA/credit-control',
  'data': [
      # Security
      "security/res_groups.xml",
