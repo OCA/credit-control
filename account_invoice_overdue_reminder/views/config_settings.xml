@@ -23,7 +23,7 @@
                 </div>
                 <label for="overdue_reminder_min_interval_days" string="Default Reminder Minimum Interval"/>
                 <div name="overdue_reminder_min_interval_days">
-                    <field name="overdue_reminder_min_interval_days"/> days
+                    <field name="overdue_reminder_min_interval_days" class="oe_inline"/> days
                 </div>
             </group>
         </group>
