@@ -394,6 +394,9 @@ class OverdueReminderStep(models.TransientModel):
     def validate_mail(self):
         self.ensure_one()
         iao = self.env['ir.attachment']
+        if not self.partner_id.email:
+            raise UserError(_(
+                "E-mail missing on partner '%s'.") % self.partner_id.display_name)
         if not self.mail_subject:
             raise UserError(_('Mail subject is empty.'))
         if not self.mail_body:
