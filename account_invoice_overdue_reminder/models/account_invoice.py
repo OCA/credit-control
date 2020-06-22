@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -8,6 +9,10 @@ from odoo import api, fields, models
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    # backport of the v12 field
+    amount_untaxed_invoice_signed = fields.Monetary(
+        string='Untaxed Amount in Invoice Currency', currency_field='currency_id',
+        readonly=True, compute='_compute_amount_untaxed_invoice_signed')
     no_overdue_reminder = fields.Boolean(
         string='Disable Overdue Reminder',
         track_visibility='onchange')
@@ -58,3 +63,13 @@ class AccountInvoice(models.Model):
             counter = counter_reminder and counter_reminder.counter or False
             inv.overdue_reminder_last_date = date
             inv.overdue_reminder_counter = counter
+
+    @api.depends('type', 'amount_untaxed')
+    def _compute_amount_untaxed_invoice_signed(self):
+        for inv in self:
+            sign = inv.type in ('out_refund', 'in_refund') and -1 or 1
+            inv.amount_untaxed_invoice_signed = inv.amount_untaxed * sign
+
+    def _get_report_base_filename(self):
+        self.ensure_one()
+        return self.number.replace('/', '_')

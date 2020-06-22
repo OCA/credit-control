@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="account_invoice_overdue_reminder.report_overdue_reminder_document">
-    <t t-call="web.external_layout">
+    <t t-call="report.external_layout">
         <t t-set="o" t-value="o.with_context(lang=lang)" />
         <t t-set="address">
             <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
@@ -84,7 +84,7 @@
 </template>
 
 <template id="report_overdue_reminder">
-    <t t-call="web.html_container">
+    <t t-call="report.html_container">
         <t t-foreach="docs" t-as="o">
             <t t-set="lang" t-value="o.partner_id.lang"/>
             <t t-call="account_invoice_overdue_reminder.report_overdue_reminder_document" t-lang="lang"/>

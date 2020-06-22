@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -49,7 +50,7 @@ class OverdueReminderStart(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super().default_get(fields_list)
+        res = super(OverdueReminderStart, self).default_get(fields_list)
         amo = self.env['account.move']
         company = self.env.user.company_id
         journals = self.env['account.journal'].search([
@@ -84,11 +85,12 @@ class OverdueReminderStart(models.TransientModel):
         return base_domain
 
     def _prepare_remind_trigger_domain(self, base_domain):
-        today = fields.Date.context_today(self)
+        today = fields.Date.from_string(fields.Date.context_today(self))
         limit_date = today
         if self.start_days:
             limit_date -= relativedelta(days=self.start_days)
-        domain = base_domain + [('date_due', '<', limit_date)]
+        limit_date_str = fields.Date.to_string(limit_date)
+        domain = base_domain + [('date_due', '<', limit_date_str)]
         if self.partner_ids:
             domain.append(('commercial_partner_id', 'in', self.partner_ids.ids))
         if self.user_ids:
@@ -122,8 +124,9 @@ class OverdueReminderStart(models.TransientModel):
             ('company_id', '=', self.company_id.id),
             ('type', '=', 'sale'),
             ])
-        today = fields.Date.context_today(self)
-        min_interval_date = today - relativedelta(days=self.min_interval_days)
+        today = fields.Date.from_string(fields.Date.context_today(self))
+        min_interval_date = fields.Date.to_string(
+            today - relativedelta(days=self.min_interval_days))
         # It is important to understand this: there are 2 search on invoice :
         # 1. a first search to know if a partner must be reminded or not
         # 2. a second search to get the invoices to remind for that partner
@@ -185,7 +188,7 @@ class OverdueReminderStart(models.TransientModel):
                 'Skipping customer %s that has at least one invoice '
                 'with last reminder after %s',
                 commercial_partner.display_name,
-                fields.Date.to_string(min_interval_date))
+                min_interval_date)
             return False
         max_counter = max([inv.overdue_reminder_counter for inv in invs])
         unrec_domain = [
@@ -241,8 +244,12 @@ class OverdueReminderStep(models.TransientModel):
     partner_id = fields.Many2one(
         'res.partner', required=True, string='Invoicing Contact')
     partner_email = fields.Char(related='partner_id.email', readonly=True)
-    partner_phone = fields.Char(related='partner_id.phone', readonly=True)
-    partner_mobile = fields.Char(related='partner_id.mobile', readonly=True)
+    # for phone fields, I don't put a related field because
+    # of the OCA module base_phone (when installed, this module
+    # re-qualified the 'phone' and 'mobile' fields of res.partner
+    # as fields.Phone()
+    partner_phone = fields.Char(compute='_compute_phone', readonly=True)
+    partner_mobile = fields.Char(compute='_compute_phone', readonly=True)
     commercial_partner_id = fields.Many2one(
         'res.partner', string='Customer', readonly=True, required=True)
     user_id = fields.Many2one('res.users', required=True, readonly=True)
@@ -256,14 +263,6 @@ class OverdueReminderStep(models.TransientModel):
     result_id = fields.Many2one(
         'overdue.reminder.result', string='Call Result/Info')
     result_notes = fields.Text(string='Call Notes')
-    create_activity = fields.Boolean()
-    activity_type_id = fields.Many2one(
-        'mail.activity.type', string='Activity')
-    activity_summary = fields.Char(string='Summary')
-    activity_deadline = fields.Date('Deadline')
-    activity_note = fields.Html(string='Note')
-    activity_user_id = fields.Many2one(
-        'res.users', string='Assigned to', default=lambda self: self.env.user)
     letter_printed = fields.Boolean(readonly=True)
     invoice_ids = fields.Many2many(
         'account.invoice', string='Overdue Invoices', readonly=True)
@@ -287,17 +286,23 @@ class OverdueReminderStep(models.TransientModel):
     def _reminder_type_selection(self):
         return self.env['overdue.reminder.action']._reminder_type_selection()
 
+    @api.depends('partner_id.phone', 'partner_id.mobile')
+    def _compute_phone(self):
+        for step in self:
+            step.partner_phone = step.partner_id and step.partner_id.phone or False
+            step.partner_mobile = step.partner_id and step.partner_id.mobile or False
+
     @api.model
     def create(self, vals):
-        action = super().create(vals)
+        action = super(OverdueReminderStep, self).create(vals)
         commercial_partner = self.env['res.partner'].browse(
             vals['commercial_partner_id'])
         xmlid = MOD + '.overdue_invoice_reminder_mail_template'
         mail_tpl = self.env.ref(xmlid)
         mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or 'en_US')
-        mail_subject = mail_tpl_lang._render_template(
+        mail_subject = mail_tpl_lang.render_template(
             mail_tpl_lang.subject, self._name, action.id)
-        mail_body = mail_tpl_lang._render_template(
+        mail_body = mail_tpl_lang.render_template(
             mail_tpl_lang.body_html, self._name, action.id)
         if mail_tpl.user_signature:
             signature = self.env.user.signature
@@ -316,7 +321,6 @@ class OverdueReminderStep(models.TransientModel):
         if self.reminder_type and self.reminder_type != 'phone':
             self.result_id = False
             self.result_notes = False
-            self.create_activity = False
 
     def next(self):
         self.ensure_one()
@@ -347,28 +351,6 @@ class OverdueReminderStep(models.TransientModel):
                 action = self.goto_list_view()
             return action
 
-    def _prepare_mail_activity(self):
-        self.ensure_one()
-        partner_model_id = self.env.ref('base.model_res_partner').id
-        if not self.activity_user_id:
-            raise UserError(_(
-                "For the reminder of customer '%s', you must assign someone "
-                "for the activity.") % self.commercial_partner_id.display_name)
-        if not self.activity_deadline:
-            raise UserError(_(
-                "For the reminder of customer '%s', the deadline is missing "
-                "for the activity.") % self.commercial_partner_id.display_name)
-        vals = {
-            'activity_type_id': self.activity_type_id.id or False,
-            'summary': self.activity_summary,
-            'date_deadline': self.activity_deadline,
-            'user_id': self.activity_user_id.id,
-            'note': self.activity_note,
-            'res_id': self.commercial_partner_id.id,
-            'res_model_id': partner_model_id,
-        }
-        return vals
-
     def check_warnings(self):
         self.ensure_one()
         for rec in self:
@@ -390,7 +372,6 @@ class OverdueReminderStep(models.TransientModel):
 
     def validate(self):
         orao = self.env['overdue.reminder.action']
-        mao = self.env['mail.activity']
         self.check_warnings()
         for rec in self:
             vals = {}
@@ -402,8 +383,6 @@ class OverdueReminderStep(models.TransientModel):
                 vals = rec.validate_post()
             rec._prepare_overdue_reminder_action(vals)
             orao.create(vals)
-            if rec.create_activity:
-                mao.create(self._prepare_mail_activity())
         self.write({'state': 'done'})
         if len(self) == 1:
             if self.interface == 'onebyone':
@@ -428,13 +407,13 @@ class OverdueReminderStep(models.TransientModel):
         mvals.pop('attachment_ids', None)
         mvals.pop('attachments', None)
         mail = self.env['mail.mail'].create(mvals)
-        inv_report = self.env['ir.actions.report']._get_report_from_name(
-            'account.report_invoice_with_payments')
+        inv_report = self.env.ref('account.account_invoice_action_report_duplicate')
         if self.company_id.overdue_reminder_attach_invoice:
             attachment_ids = []
             for inv in self.invoice_ids:
                 if inv_report.report_type in ('qweb-html', 'qweb-pdf'):
-                    report_bin, report_format = inv_report.render_qweb_pdf([inv.id])
+                    report_bin, report_format = self.env['report'].get_pdf(
+                        [inv.id], 'account.report_invoice'), 'pdf'
                 else:
                     res = inv_report.render([inv.id])
                     if not res:
@@ -491,17 +470,15 @@ class OverdueReminderStep(models.TransientModel):
     def print_letter(self):
         self.check_warnings()
         self.write({'letter_printed': True})
-        action = action = self.env.ref(
-            MOD + '.overdue_reminder_step_report').with_context(
-                {'discard_logo_check': True}).report_action(self)
+        action = self.env['report'].get_action(
+            self, 'account_invoice_overdue_reminder.report_overdue_reminder')
         return action
 
     def print_invoices(self):
         # in v12, it seems printing several invoices at the same time
         # doesn't work
-        action = self.env.ref('account.account_invoices')\
-            .with_context(
-                {'discard_logo_check': True}).report_action(self.invoice_ids.ids)
+        action = self.env['report'].get_action(
+            self.invoice_ids, 'account.report_invoice')
         return action
 
     def total_residual(self):
@@ -513,11 +490,6 @@ class OverdueReminderStep(models.TransientModel):
             else:
                 res[inv.currency_id] = inv.residual_signed
         return res.items()
-
-    def _get_report_base_filename(self):
-        self.ensure_one()
-        fname = 'overdue_letter-%s' % self.commercial_partner_id.name.replace(' ', '_')
-        return fname
 
 
 class OverdueReminderEnd(models.TransientModel):

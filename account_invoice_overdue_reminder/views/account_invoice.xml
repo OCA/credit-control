@@ -13,7 +13,7 @@
     <field name="model">account.invoice</field>
     <field name="inherit_id" ref="account.invoice_form"/>
     <field name="arch" type="xml">
-        <button id="account_invoice_payment_btn" position="after">
+        <button name="action_invoice_proforma2" position="after">
             <button name="%(overdue_reminder_start_action)d" string="Overdue Reminder" type="action"
                     context="{'default_partner_ids': [commercial_partner_id]}"
                     attrs="{'invisible': ['|', ('overdue', '=', False), ('no_overdue_reminder', '=', True)]}"

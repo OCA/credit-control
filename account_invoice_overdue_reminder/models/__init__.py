@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from . import company
 from . import config_settings
 from . import partner

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -20,11 +21,12 @@ class AccountInvoiceOverdueReminder(models.Model):
         'overdue.reminder.action', string='Overdue Reminder Action',
         ondelete='cascade')
     action_commercial_partner_id = fields.Many2one(
-        related='action_id.commercial_partner_id', store=True)
+        related='action_id.commercial_partner_id', store=True, readonly=True)
     action_partner_id = fields.Many2one(
-        related='action_id.partner_id', store=True)
-    action_date = fields.Date(related='action_id.date', store=True)
-    action_user_id = fields.Many2one(related='action_id.user_id')
+        related='action_id.partner_id', store=True, readonly=True)
+    action_date = fields.Date(
+        related='action_id.date', store=True, readonly=True)
+    action_user_id = fields.Many2one(related='action_id.user_id', readonly=True)
     action_reminder_type = fields.Selection(
         related='action_id.reminder_type', store=True)
     action_result_id = fields.Many2one(
@@ -32,12 +34,12 @@ class AccountInvoiceOverdueReminder(models.Model):
     action_result_notes = fields.Text(
         related='action_id.result_notes', readonly=False)
     action_mail_id = fields.Many2one(
-        related='action_id.mail_id')
+        related='action_id.mail_id', readonly=True)
     action_mail_state = fields.Selection(
-        related='action_id.mail_id.state', string='E-mail Status')
+        related='action_id.mail_id.state', string='E-mail Status', readonly=True)
     counter = fields.Integer(readonly=True)
     company_id = fields.Many2one(
-        related='invoice_id.company_id', store=True)
+        related='invoice_id.company_id', store=True, readonly=True)
 
     _sql_constraints = [(
         'counter_positive',
