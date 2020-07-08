@@ -13,6 +13,7 @@
     'data': [
         'views/res_partner_view.xml',
         'views/sale_financial_risk_view.xml',
+        'views/res_config_settings.xml'
     ],
     'installable': True,
     'pre_init_hook': 'pre_init_hook',

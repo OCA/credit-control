@@ -21,8 +21,9 @@ class ResPartner(models.Model):
         commercial_partners = self.filtered(lambda p: (
             p.customer and p.id and p == p.commercial_partner_id
         ))
+        risk_states = self.env['sale.order']._get_risk_states()
         return self._get_risk_company_domain() + [
-            ('state', '=', 'sale'),
+            ('state', 'in', risk_states),
             ('commercial_partner_id', 'in', commercial_partners.ids),
         ]
 
