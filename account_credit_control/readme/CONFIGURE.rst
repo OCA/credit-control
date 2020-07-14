@@ -1,7 +1,9 @@
 Configure the policies and policy levels in ``Invoicing  > Configuration >
 Credit Control > Credit Control Policies``.
-You can define as many policy levels as you need. You must set on which
-accounts are applied every Credit Control Policy under Accounts tab.
+You can define as many policy levels as you need and you can even define
+levels with a negative number of days to run notifications days in advance.
+You must set on which accounts are applied every Credit Control Policy
+under Accounts tab.
 
 Configure a tolerance for the Credit control and a default policy
 applied on all partners in each company, under the Accounting tab in your

@@ -19,7 +19,7 @@ class TestCreditControlRun(TransactionCase):
         journal = self.env['account.invoice']._default_journal()
 
         account_type_rec = self.env.ref('account.data_account_type_receivable')
-        account = self.env['account.account'].create({
+        self.account = self.env['account.account'].create({
             'code': '400001',
             'name': 'Clients (test)',
             'user_type_id': account_type_rec.id,
@@ -44,7 +44,7 @@ class TestCreditControlRun(TransactionCase):
         self.policy = \
             self.env.ref('account_credit_control.credit_control_3_time')
         self.policy.write({
-            'account_ids': [(6, 0, [account.id])],
+            'account_ids': [(6, 0, [self.account.id])],
         })
 
         # There is a bug with Odoo ...
@@ -55,7 +55,7 @@ class TestCreditControlRun(TransactionCase):
         # However constrains are applied after the first creation.
         partner = self.env['res.partner'].create({
             'name': 'Partner',
-            'property_account_receivable_id': account.id,
+            'property_account_receivable_id': self.account.id,
         })
         partner.credit_policy_id = self.policy.id
 
@@ -116,6 +116,45 @@ class TestCreditControlRun(TransactionCase):
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
+    def test_generate_credit_lines_negative_levels(self):
+        """
+        Test the method generate_credit_lines with policy with
+        negative levels.
+        """
+        preventive_polity = self.env['credit.control.policy'].create({
+            'name': 'Preventive policy',
+            'level_ids': [
+                (0, 0, {
+                    'name': '10 days before',
+                    'level': 1,
+                    'channel': 'email',
+                    'delay_days': -10,
+                    'computation_mode': 'net_days',
+                    'email_template_id': self.env.ref(
+                        "account_credit_control."
+                        "email_template_credit_control_base").id,
+                    'custom_mail_text': '10 days or less until due date.',
+                    'custom_text': '10 days or less until due date.',
+                }),
+            ],
+            'account_ids': [(6, 0, [self.account.id])],
+        })
+        self.invoice.partner_id.credit_policy_id = preventive_polity.id
+        # Create a 'Credit Control Run' and compute credit control lines
+        run_date = self.invoice.date_due - relativedelta.relativedelta(days=8)
+        control_run = self.env['credit.control.run'].create({
+            'date': run_date,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
+        self.assertEqual(control_run.state, 'done')
+        report_regex = \
+            r'<p>Policy "<b>%s</b>" has generated <b>' \
+            r'\d+ Credit Control Lines.</b><br></p>' % preventive_polity.name
+        regex_result = re.match(report_regex, control_run.report)
+        self.assertIsNotNone(regex_result)
+
     def test_multi_credit_control_run(self):
         """
         Generate several control run
@@ -149,6 +188,132 @@ class TestCreditControlRun(TransactionCase):
         })
         last_control_run.with_context(lang='en_US').generate_credit_lines()
         self.assertEqual(len(self.invoice.credit_control_line_ids), 3)
+
+    def test_multi_credit_control_run_negative_levels(self):
+        """
+        Generate several control run with negative levels
+        """
+        preventive_polity = self.env['credit.control.policy'].create({
+            'name': 'Preventive policy',
+            'level_ids': [
+                (0, 0, {
+                    'name': '30 days before',
+                    'level': 1,
+                    'channel': 'email',
+                    'delay_days': -30,
+                    'computation_mode': 'net_days',
+                    'email_template_id': self.env.ref(
+                        "account_credit_control."
+                        "email_template_credit_control_base").id,
+                    'custom_mail_text': '30 days or less until due date.',
+                    'custom_text': '30 days or less until due date.',
+                }),
+                (0, 0, {
+                    'name': '10 days before',
+                    'level': 2,
+                    'channel': 'email',
+                    'delay_days': -10,
+                    'computation_mode': 'net_days',
+                    'email_template_id': self.env.ref(
+                        "account_credit_control."
+                        "email_template_credit_control_base").id,
+                    'custom_mail_text': '10 days or less until due date.',
+                    'custom_text': '10 days or less until due date.',
+                }),
+            ],
+            'account_ids': [(6, 0, [self.account.id])],
+        })
+        self.invoice.partner_id.credit_policy_id = preventive_polity.id
+        # Determine dates
+        date_due = self.invoice.date_due
+        first = date_due - relativedelta.relativedelta(days=32)
+        second = date_due - relativedelta.relativedelta(days=28)
+        third = date_due - relativedelta.relativedelta(days=8)
+        # First run
+        first_control_run = self.env['credit.control.run'].create({
+            'date': first,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        first_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 0)
+        # Second run
+        second_control_run = self.env['credit.control.run'].create({
+            'date': second,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        second_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
+        second_control_run.set_to_ready_lines()
+        # third run
+        last_control_run = self.env['credit.control.run'].create({
+            'date': third,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        last_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 2)
+
+    def test_multi_credit_control_run_negative_and_positive_levels(self):
+        """
+        Generate several control run with negative and positive levels
+        """
+        preventive_polity = self.env['credit.control.policy'].create({
+            'name': 'Notify before and after due date',
+            'level_ids': [
+                (0, 0, {
+                    'name': '30 days before',
+                    'level': 1,
+                    'channel': 'email',
+                    'delay_days': -30,
+                    'computation_mode': 'net_days',
+                    'email_template_id': self.env.ref(
+                        "account_credit_control."
+                        "email_template_credit_control_base").id,
+                    'custom_mail_text': '30 days or less until due date.',
+                    'custom_text': '30 days or less until due date.',
+                }),
+                (0, 0, {
+                    'name': '10 days after',
+                    'level': 2,
+                    'channel': 'email',
+                    'delay_days': 10,
+                    'computation_mode': 'net_days',
+                    'email_template_id': self.env.ref(
+                        "account_credit_control."
+                        "email_template_credit_control_base").id,
+                    'custom_mail_text': '10 days or more after due date.',
+                    'custom_text': '10 days  or more after due date.',
+                }),
+            ],
+            'account_ids': [(6, 0, [self.account.id])],
+        })
+        self.invoice.partner_id.credit_policy_id = preventive_polity.id
+        # Determine dates
+        date_due = self.invoice.date_due
+        first = date_due - relativedelta.relativedelta(days=32)
+        second = date_due - relativedelta.relativedelta(days=28)
+        third = date_due + relativedelta.relativedelta(days=12)
+        # First run
+        first_control_run = self.env['credit.control.run'].create({
+            'date': first,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        first_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 0)
+        # Second run
+        second_control_run = self.env['credit.control.run'].create({
+            'date': second,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        second_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
+        second_control_run.set_to_ready_lines()
+        # third run
+        last_control_run = self.env['credit.control.run'].create({
+            'date': third,
+            'policy_ids': [(6, 0, [preventive_polity.id])],
+        })
+        last_control_run.with_context(lang='en_US').generate_credit_lines()
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 2)
 
     def test_wiz_print_lines(self):
         """

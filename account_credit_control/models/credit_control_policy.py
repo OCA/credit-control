@@ -1,6 +1,7 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from math import copysign
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -44,17 +45,41 @@ class CreditControlPolicy(models.Model):
     active = fields.Boolean(
         default=True,
     )
+    policy_sign = fields.Selection(
+        selection=[
+            ('positive', 'Positive'),
+            ('negative', 'Negative'),
+        ],
+        compute='_compute_policy_sign',
+    )
+
+    @api.depends('level_ids')
+    def _compute_policy_sign(self):
+        mapping = {-1: 'negative', 0: False, 1: 'positive'}
+        for record in self:
+            policy_sign = 0
+            for level in record.level_ids:
+                if not policy_sign:
+                    policy_sign = copysign(1, level.delay_days)
+                elif copysign(1, level.delay_days) != policy_sign:
+                    policy_sign = 0
+                    break
+            record.policy_sign = mapping[policy_sign]
 
     @api.multi
     def _move_lines_domain(self, controlling_date):
         """ Build the default domain for searching move lines """
         self.ensure_one()
-        return [
+        domain = [
             ('account_id', 'in', self.account_ids.ids),
-            ('date_maturity', '<=', controlling_date),
             ('reconciled', '=', False),
             ('partner_id', '!=', False),
         ]
+        if self.policy_sign == "negative":
+            domain.append(('date_maturity', '>=', controlling_date))
+        elif self.policy_sign == "positive":
+            domain.append(('date_maturity', '<=', controlling_date))
+        return domain
 
     @api.multi
     @api.returns('account.move.line')
