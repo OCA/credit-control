@@ -39,8 +39,10 @@ Configuration
 
 Configure the policies and policy levels in ``Invoicing  > Configuration >
 Credit Control > Credit Control Policies``.
-You can define as many policy levels as you need. You must set on which
-accounts are applied every Credit Control Policy under Accounts tab.
+You can define as many policy levels as you need and you can even define
+levels with a negative number of days to run notifications days in advance.
+You must set on which accounts are applied every Credit Control Policy
+under Accounts tab.
 
 Configure a tolerance for the Credit control and a default policy
 applied on all partners in each company, under the Accounting tab in your
@@ -95,10 +97,14 @@ Contributors
 * Guewen Baconnier (Camptocamp)
 * Sylvain Van Hoof (Okia SPRL) <sylvain@okia.be>
 * Akim Juillerat (Camptocamp) <akim.juillerat@camptocamp.com>
-* Vicent Cubells (Tecnativa) <vicent.cubells@tecnativa.com>
 * Kinner Vachhani (Access Bookings Ltd) <kin.vachhani@gmail.com>
 * Raf Ven <raf.ven@dynapps.be>
 * Quentin Groulard (ACSONE) <quentin.groulard@acsone.eu>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Vicent Cubells
+  * Ernesto Tejeda
+  * Pedro M. Baeza
 
 Maintainers
 ~~~~~~~~~~~
