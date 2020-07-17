@@ -176,7 +176,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:362
+#: code:addons/account_credit_control/models/credit_control_policy.py:387
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -975,6 +975,11 @@ msgid "Name"
 msgstr "Pavadinimas"
 
 #. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Negative"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__new_policy_id
 msgid "New Policy to Apply"
 msgstr ""
@@ -1331,13 +1336,13 @@ msgid "Policy"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:228
+#: code:addons/account_credit_control/models/credit_control_policy.py:253
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:233
+#: code:addons/account_credit_control/models/credit_control_policy.py:258
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1345,6 +1350,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__level_ids
 msgid "Policy Levels"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
+msgid "Policy Sign"
 msgstr ""
 
 #. module: account_credit_control
@@ -1356,6 +1366,11 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Policy levels"
+msgstr ""
+
+#. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Positive"
 msgstr ""
 
 #. module: account_credit_control
@@ -1559,7 +1574,7 @@ msgid "The partner had a manual followup."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:312
+#: code:addons/account_credit_control/models/credit_control_policy.py:337
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
@@ -1654,7 +1669,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:198
+#: code:addons/account_credit_control/models/credit_control_policy.py:223
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"

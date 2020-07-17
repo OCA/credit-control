@@ -192,7 +192,7 @@ msgid "Attachment Count"
 msgstr "Nº de Anexos"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:362
+#: code:addons/account_credit_control/models/credit_control_policy.py:387
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Não obtemos função para o modo de cálculo: %s não está implementada"
@@ -1000,6 +1000,11 @@ msgid "Name"
 msgstr "Nome"
 
 #. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Negative"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__new_policy_id
 msgid "New Policy to Apply"
 msgstr "Nova Política a Aplicar"
@@ -1518,14 +1523,14 @@ msgid "Policy"
 msgstr "Política"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:228
+#: code:addons/account_credit_control/models/credit_control_policy.py:253
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 "Política \"<b>%s</b>\" gerou <b>%d Linhas de Controlo de Crédito.</b><br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:233
+#: code:addons/account_credit_control/models/credit_control_policy.py:258
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1537,6 +1542,13 @@ msgid "Policy Levels"
 msgstr "Níveis da Política"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
+#, fuzzy
+#| msgid "Policy"
+msgid "Policy Sign"
+msgstr "Política"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
 msgid "Policy level"
@@ -1546,6 +1558,11 @@ msgstr "Nível da política"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Policy levels"
 msgstr "Níveis da Política"
+
+#. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Positive"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -1759,7 +1776,7 @@ msgid "The partner had a manual followup."
 msgstr "O parceiro teve um seguimento manual."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:312
+#: code:addons/account_credit_control/models/credit_control_policy.py:337
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "O menor nível não pode ser do tipo Lembrete Anterior"
@@ -1858,7 +1875,7 @@ msgstr ""
 "rascunho."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:198
+#: code:addons/account_credit_control/models/credit_control_policy.py:223
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"

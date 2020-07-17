@@ -193,7 +193,7 @@ msgid "Attachment Count"
 msgstr "Compteur de pièce jointe"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:362
+#: code:addons/account_credit_control/models/credit_control_policy.py:387
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -1004,6 +1004,11 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Negative"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__new_policy_id
 msgid "New Policy to Apply"
 msgstr "Nouvelle politique à appliquer"
@@ -1537,7 +1542,7 @@ msgid "Policy"
 msgstr "Politique"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:228
+#: code:addons/account_credit_control/models/credit_control_policy.py:253
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
@@ -1545,7 +1550,7 @@ msgstr ""
 "<br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:233
+#: code:addons/account_credit_control/models/credit_control_policy.py:258
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1558,6 +1563,13 @@ msgid "Policy Levels"
 msgstr "Niveaux de relance"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
+#, fuzzy
+#| msgid "Policy"
+msgid "Policy Sign"
+msgstr "Politique"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
 msgid "Policy level"
@@ -1567,6 +1579,11 @@ msgstr "Niveau de relance"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Policy levels"
 msgstr "Niveaux de relance"
+
+#. module: account_credit_control
+#: selection:credit.control.policy,policy_sign:0
+msgid "Positive"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -1782,7 +1799,7 @@ msgid "The partner had a manual followup."
 msgstr "Le partenaire a un suivi manuel."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:312
+#: code:addons/account_credit_control/models/credit_control_policy.py:337
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Le premier niveau ne peut pas être basé sur un précédent rappel"
@@ -1882,7 +1899,7 @@ msgstr ""
 "Vous ne pouvez pas supprimer une ligne de relance qui n'est pas en brouillon."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:198
+#: code:addons/account_credit_control/models/credit_control_policy.py:223
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"
