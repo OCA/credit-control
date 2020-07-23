@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2020-07-23 11:19+0000\n"
+"PO-Revision-Date: 2020-07-23 15:19+0000\n"
 "Last-Translator: André Volksdorf <volksdorf@smartpage.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -90,10 +90,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
-#, fuzzy
-#| msgid "<strong>Total Due</strong>"
 msgid "<strong>Date:</strong>"
-msgstr "<strong>Fällig insgesamt</strong>"
+msgstr "<strong>Datum</strong>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -132,8 +130,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:104
-#, fuzzy, python-format
-#| msgid "A run has already been executed more recently than %s"
+#, python-format
 msgid "A run has already been executed more recently (%s)"
 msgstr "Ein Lauf wurde bereits nach dem %s ausgeführt"
 
@@ -163,10 +160,8 @@ msgstr "Aktiv"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_ids
-#, fuzzy
-#| msgid "Active"
 msgid "Activities"
-msgstr "Aktiv"
+msgstr "Aktivitäten"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_state
@@ -1888,12 +1883,12 @@ msgstr "Diese Regel wird nur für ausgewählte Konten aktiviert"
 #: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "To Do"
-msgstr ""
+msgstr "To Do"
 
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1913,7 +1908,7 @@ msgstr "Rechnungssumme"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ungelesene Nachrichten"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread_counter
