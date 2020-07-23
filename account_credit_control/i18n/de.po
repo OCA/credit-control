@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2018-10-10 13:02+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"PO-Revision-Date: 2020-07-23 11:19+0000\n"
+"Last-Translator: André Volksdorf <volksdorf@smartpage.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
@@ -194,11 +194,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Are you sure you want to set all Draft lines as Ready To Send?"
 msgstr ""
+"Sind Sie sicher, dass Sie alle Entwurfszeilen als versandfertig kennzeichnen "
+"möchten?"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Anzahl der Anhänge"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:387
@@ -298,10 +300,9 @@ msgstr "Kontaktanschrift"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:78
-#, fuzzy, python-format
-#| msgid "Control Credit Lines"
+#, python-format
 msgid "Control Credit Line"
-msgstr "Mahnpositionen"
+msgstr "Mahnposition"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
@@ -319,7 +320,6 @@ msgstr "Mahnpositionen"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-#, fuzzy
 msgid "Control Lines"
 msgstr "Mahnpositionen"
 
@@ -1068,10 +1068,8 @@ msgstr "Datum der nächsten Handlung"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_date_deadline
-#, fuzzy
-#| msgid "Next Action Date"
 msgid "Next Activity Deadline"
-msgstr "Datum der nächsten Handlung"
+msgstr "Deadline der nächsten Handlung"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_summary
@@ -1155,6 +1153,8 @@ msgstr "Offene Summe"
 msgid ""
 "Open balance on credit control linesof same partner, policy and currency"
 msgstr ""
+"Offener Saldo auf Kreditkontrolllinien desselben Partners, derselben "
+"Richtlinie und Währung"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1509,8 +1509,6 @@ msgstr "Mahnstufe"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
-#, fuzzy
-#| msgid "Due balance"
 msgid "Overdue Balance"
 msgstr "Fälliger Saldo"
 
@@ -1559,12 +1557,12 @@ msgstr "Zahlungsmitteilung"
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 msgid "Planned"
-msgstr ""
+msgstr "Geplant"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:127
@@ -1683,7 +1681,7 @@ msgstr "Berichtsdatum"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Verantwortlicher Benutzer"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__body_html
@@ -1693,7 +1691,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_mail_mail__body_html
 msgid "Rich-text/HTML message"
-msgstr ""
+msgstr "Rich-Text/HTML-Nachricht"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
@@ -1709,14 +1707,14 @@ msgstr "Laufdatum"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Salesperson"
-msgstr ""
+msgstr "Verkäufer"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_line.py:309
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
-msgstr ""
+msgstr "Aktivität planen"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
@@ -1742,7 +1740,7 @@ msgstr "Versende die Emails"
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 msgid "Sending"
-msgstr ""
+msgstr "Senden"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__mail_message_id
@@ -1752,7 +1750,7 @@ msgstr "Versandte Email"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenz"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
