@@ -8,30 +8,34 @@ from odoo.tools import float_round
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    def risk_exception_msg(self):
+        risk_amount = self.currency_id._convert(
+            self.amount_total, self.company_id.currency_id,
+            self.company_id, fields.Date.today())
+        partner = self.partner_id.commercial_partner_id
+        exception_msg = ""
+        if partner.risk_exception:
+            exception_msg = _("Financial risk exceeded.\n")
+        elif partner.risk_sale_order_limit and (
+                (partner.risk_sale_order + risk_amount) >
+                partner.risk_sale_order_limit):
+            exception_msg = _(
+                "This sale order exceeds the sales orders risk.\n")
+        elif partner.risk_sale_order_include and (
+                (partner.risk_total + risk_amount) >
+                partner.credit_limit):
+            exception_msg = _(
+                "This sale order exceeds the financial risk.\n")
+        return exception_msg
+
     @api.multi
     def action_confirm(self):
         if not self.env.context.get('bypass_risk', False):
-            risk_amount = self.currency_id._convert(
-                self.amount_total, self.company_id.currency_id,
-                self.company_id, fields.Date.today())
-            partner = self.partner_id.commercial_partner_id
-            exception_msg = ""
-            if partner.risk_exception:
-                exception_msg = _("Financial risk exceeded.\n")
-            elif partner.risk_sale_order_limit and (
-                    (partner.risk_sale_order + risk_amount) >
-                    partner.risk_sale_order_limit):
-                exception_msg = _(
-                    "This sale order exceeds the sales orders risk.\n")
-            elif partner.risk_sale_order_include and (
-                    (partner.risk_total + risk_amount) >
-                    partner.credit_limit):
-                exception_msg = _(
-                    "This sale order exceeds the financial risk.\n")
+            exception_msg = self.risk_exception_msg()
             if exception_msg:
                 return self.env['partner.risk.exceeded.wiz'].create({
                     'exception_msg': exception_msg,
-                    'partner_id': partner.id,
+                    'partner_id': self.partner_id.commercial_partner_id.id,
                     'origin_reference': '%s,%s' % ('sale.order', self.id),
                     'continue_method': 'action_confirm',
                 }).action_show()
