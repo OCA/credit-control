@@ -35,7 +35,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:20
+#: code:addons/sale_financial_risk/models/sale.py:18
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr ""
@@ -90,13 +90,13 @@ msgid "Set 0 if it is not locked"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:29
+#: code:addons/sale_financial_risk/models/sale.py:27
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:24
+#: code:addons/sale_financial_risk/models/sale.py:22
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
 msgstr ""
