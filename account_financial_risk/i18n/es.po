@@ -70,9 +70,20 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: account_financial_risk
+#: code:addons/account_financial_risk/models/res_partner.py:173
+#, python-format
+msgid "Choose Manual Credit Currency."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
 msgstr "Compañías"
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Company Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -108,6 +119,14 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_create_date
 msgid "Created on"
 msgstr "Creado en"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_credit_currency
+#, fuzzy
+#| msgid "Credit Policy"
+msgid "Credit Currency"
+msgstr "Póliza de crédito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_policy
@@ -148,13 +167,13 @@ msgid "Financial Risk"
 msgstr "Riesgo financiero"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:15
+#: code:addons/account_financial_risk/models/account_invoice.py:40
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Riesgo financiero excedido.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/res_partner.py:319
+#: code:addons/account_financial_risk/models/res_partner.py:408
 #, fuzzy, python-format
 #| msgid "Financial Risk"
 msgid "Financial risk information"
@@ -339,6 +358,13 @@ msgid "Limit Other Account Unpaid Amount"
 msgstr "Límite en otro saldo contable impagado"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_manual_credit_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_manual_credit_currency_id
+#: selection:res.partner,credit_currency:0
+msgid "Manual Credit Currency"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company_invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings_invoice_unpaid_margin
 #: model:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -355,6 +381,16 @@ msgstr "Objeto"
 #, python-format
 msgid "Partner risk exceeded"
 msgstr "Empresa con riesgo excedido"
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Pricelist Currency"
+msgstr ""
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Receivable Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount_unpaid
@@ -414,6 +450,18 @@ msgid "Risk Allow Edit"
 msgstr "Permitir editar riesgo"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_risk_amount_total_currency
+msgid "Risk Amount Total"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_risk_currency_id
+msgid "Risk Currency"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_exception
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users_risk_exception
 msgid "Risk Exception"
@@ -465,13 +513,13 @@ msgid "These taxes are set in any new product created."
 msgstr "Estos impuestos son establecidos en algún nuevo producto creado."
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:26
+#: code:addons/account_financial_risk/models/account_invoice.py:51
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
 msgstr "Esta factura excede el riesgo financiero.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:19
+#: code:addons/account_financial_risk/models/account_invoice.py:44
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
 msgstr "Esta factura excede el riesgo de facturas abiertas.\n"

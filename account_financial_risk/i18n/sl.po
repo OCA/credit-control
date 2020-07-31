@@ -62,9 +62,20 @@ msgid "Cancel"
 msgstr "Preklic"
 
 #. module: account_financial_risk
+#: code:addons/account_financial_risk/models/res_partner.py:173
+#, python-format
+msgid "Choose Manual Credit Currency."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
 msgstr "Družbe"
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Company Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -101,6 +112,13 @@ msgstr "Ustvaril"
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_credit_currency
+#, fuzzy
+msgid "Credit Currency"
+msgstr "Kreditni pravilnik"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_policy
@@ -140,13 +158,13 @@ msgid "Financial Risk"
 msgstr "Finančno tveganje"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:15
+#: code:addons/account_financial_risk/models/account_invoice.py:40
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Prekoračeno finančno tveganje.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/res_partner.py:319
+#: code:addons/account_financial_risk/models/res_partner.py:408
 #, fuzzy, python-format
 #| msgid "Financial Risk"
 msgid "Financial risk information"
@@ -337,6 +355,13 @@ msgid "Limit Other Account Unpaid Amount"
 msgstr "Omejitev pri zneskih drugih kontov"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_manual_credit_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_manual_credit_currency_id
+#: selection:res.partner,credit_currency:0
+msgid "Manual Credit Currency"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company_invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings_invoice_unpaid_margin
 #: model:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -353,6 +378,16 @@ msgstr "Objekt"
 #, python-format
 msgid "Partner risk exceeded"
 msgstr "Prekoračeno tveganje za partnerja"
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Pricelist Currency"
+msgstr ""
+
+#. module: account_financial_risk
+#: selection:res.partner,credit_currency:0
+msgid "Receivable Currency"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner_risk_account_amount_unpaid
@@ -414,6 +449,18 @@ msgid "Risk Allow Edit"
 msgstr "Omogoči urejanje tveganja"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_risk_amount_total_currency
+msgid "Risk Amount Total"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_invoice_risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users_risk_currency_id
+msgid "Risk Currency"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_risk_exception
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users_risk_exception
 msgid "Risk Exception"
@@ -465,13 +512,13 @@ msgid "These taxes are set in any new product created."
 msgstr ""
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:26
+#: code:addons/account_financial_risk/models/account_invoice.py:51
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
 msgstr "Ta račun prekorači finančno tveganje.\n"
 
 #. module: account_financial_risk
-#: code:addons/account_financial_risk/models/account_invoice.py:19
+#: code:addons/account_financial_risk/models/account_invoice.py:44
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
 msgstr "Ta račun prekorači tveganje za odprte račune.\n"
