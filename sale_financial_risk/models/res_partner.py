@@ -10,9 +10,12 @@ class ResPartner(models.Model):
     risk_sale_order_include = fields.Boolean(
         string='Include Sales Orders', help='Full risk computation')
     risk_sale_order_limit = fields.Monetary(
-        string='Limit Sales Orders', help='Set 0 if it is not locked')
+        string='Limit Sales Orders',
+        currency_field="risk_currency_id",
+        help='Set 0 if it is not locked')
     risk_sale_order = fields.Monetary(
         compute='_compute_risk_sale_order',
+        currency_field="risk_currency_id",
         compute_sudo=True,
         string='Total Sales Orders Not Invoiced',
         help='Total not invoiced of sales orders in Sale Order state')
@@ -33,12 +36,19 @@ class ResPartner(models.Model):
         self.update({'risk_sale_order': 0.0})
         orders_group = self.env['sale.order.line'].read_group(
             domain=self._get_risk_sale_order_domain(),
-            fields=['commercial_partner_id', 'risk_amount'],
-            groupby=['commercial_partner_id'],
-            orderby='id')
+            fields=['commercial_partner_id', 'company_id', 'risk_amount'],
+            groupby=['commercial_partner_id', 'company_id'],
+            orderby='id',
+            lazy=False,
+        )
         for group in orders_group:
-            self.browse(group["commercial_partner_id"][0], self._prefetch) \
-                .risk_sale_order = group["risk_amount"]
+            partner = self.browse(
+                group["commercial_partner_id"][0], self._prefetch)
+            company_currency = self.env['res.company'].browse(
+                group['company_id'][0] or self.env.user.company_id.id
+            ).currency_id
+            partner.risk_sale_order = company_currency.compute(
+                group["risk_amount"], partner.risk_currency_id, round=False)
 
     @api.model
     def _risk_field_list(self):

@@ -20,54 +20,68 @@
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                                         context="{'open_risk_field': 'risk_invoice_draft'}">
-                                    <field name="risk_invoice_draft" nolabel="1"/>
+                                    <field name="risk_invoice_draft" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                                 </button>
                                 <field name="risk_invoice_open_include"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                                         context="{'open_risk_field': 'risk_invoice_open'}">
-                                    <field name="risk_invoice_open" nolabel="1"/>
+                                    <field name="risk_invoice_open" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                                 </button>
                                 <field name="risk_invoice_unpaid_include"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                                         context="{'open_risk_field': 'risk_invoice_unpaid'}">
-                                    <field name="risk_invoice_unpaid" nolabel="1"/>
+                                    <field name="risk_invoice_unpaid" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                                 </button>
                                 <field name="risk_account_amount_include"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                                         context="{'open_risk_field': 'risk_account_amount'}">
-                                    <field name="risk_account_amount" nolabel="1"/>
+                                    <field name="risk_account_amount" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                                 </button>
                                 <field name="risk_account_amount_unpaid_include"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                                         context="{'open_risk_field': 'risk_account_amount_unpaid'}">
-                                    <field name="risk_account_amount_unpaid" nolabel="1"/>
+                                    <field name="risk_account_amount_unpaid" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                                 </button>
-                                <field name="risk_total" colspan="3" class="oe_subtotal_footer_separator"/>
+                                <field name="risk_total" colspan="3" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                             </group>
                         </group>
                         <group string="Specific Limits" name="risk_limits" class="o_group_col_6">
                             <group class="oe_subtotal_footer" style="float: left !important;">
                                 <field name="risk_invoice_draft_limit"
+                                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <field name="risk_invoice_open_limit"
+                                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <field name="risk_invoice_unpaid_limit"
+                                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <field name="risk_account_amount_limit"
+                                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <field name="risk_account_amount_unpaid_limit"
+                                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                                 <field name="risk_allow_edit" invisible="1"/>
                             </group>
                         </group>
                     </group>
                     <group string="Info" col="4">
+                        <label for="credit_currency"/>
+                        <div class="o_row">
+                            <field name="credit_currency"
+                                   attrs="{'readonly': [('risk_allow_edit', '=', False)]}" nolabel="1"/>
+                            <span>(<field name="risk_currency_id" readonly="1" nolabel="1"/>)</span>
+                        </div>
+                        <field name="manual_credit_currency_id"
+                               options="{'no_create': True}"
+                               attrs="{'readonly': [('risk_allow_edit', '=', False)], 'invisible': [('credit_currency', '!=', 'manual')]}"/>
                         <field name="credit_limit"
-                               widget="monetary"
+                               widget="monetary" options="{'currency_field': 'risk_currency_id'}"
                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                         <field name="credit_policy"
                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>

@@ -1,8 +1,10 @@
 # Copyright 2016-2020 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.tools import float_round
+from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class SaleOrder(models.Model):
@@ -11,10 +13,17 @@ class SaleOrder(models.Model):
     @api.multi
     def action_confirm(self):
         if not self.env.context.get('bypass_risk', False):
-            risk_amount = self.currency_id.compute(
-                self.amount_total, self.company_id.currency_id)
             partner = self.partner_id.commercial_partner_id
             exception_msg = ""
+            risk_amount = self.currency_id.with_context(
+                date=self.confirmation_date and
+                datetime.strptime(
+                    self.confirmation_date,
+                    DEFAULT_SERVER_DATETIME_FORMAT).date()
+                or fields.Date.context_today(self)).compute(
+                self.amount_total,
+                partner.risk_currency_id, round=False,
+            )
             if partner.risk_exception:
                 exception_msg = _("Financial risk exceeded.\n")
             elif partner.risk_sale_order_limit and (
@@ -91,5 +100,10 @@ class SaleOrderLine(models.Model):
                     risk_qty / line.product_uom_qty)
             else:
                 risk_amount = line.price_reduce_taxinc * risk_qty
-            line.risk_amount = line.order_id.currency_id.compute(
-                risk_amount, line.company_id.currency_id)
+            line.risk_amount = line.order_id.currency_id.with_context(
+                date=line.order_id.confirmation_date and
+                datetime.strptime(
+                    line.order_id.confirmation_date,
+                    DEFAULT_SERVER_DATETIME_FORMAT).date()
+                or fields.Date.context_today(self)).compute(
+                risk_amount, line.company_id.currency_id, round=False)
