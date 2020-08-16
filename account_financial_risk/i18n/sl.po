@@ -157,7 +157,6 @@ msgstr "Prekoračeno finančno tveganje.\n"
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, fuzzy, python-format
-#| msgid "Financial Risk"
 msgid "Financial risk information"
 msgstr "Finančno tveganje"
 
