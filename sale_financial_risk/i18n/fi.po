@@ -75,7 +75,6 @@ msgstr ""
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order_line
 #, fuzzy
-#| msgid "Sales Order"
 msgid "Sales Order Line"
 msgstr "Myyntitilaus"
 
