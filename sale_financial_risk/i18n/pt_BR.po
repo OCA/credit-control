@@ -72,14 +72,12 @@ msgstr ""
 #. module: sale_financial_risk
 #: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
 #, fuzzy
-#| msgid "Sales Order Line"
 msgid "Sale lines"
 msgstr "Linha de Ordens de Venda"
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
 #, fuzzy
-#| msgid "Sale Order"
 msgid "Sales Order"
 msgstr "Ordem de Venda"
 
