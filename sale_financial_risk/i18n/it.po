@@ -77,7 +77,6 @@ msgstr "Ordini vendita"
 #. module: sale_financial_risk
 #: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
 #, fuzzy
-#| msgid "Sales Order Line"
 msgid "Sale lines"
 msgstr "Righe Ordini vendita"
 
