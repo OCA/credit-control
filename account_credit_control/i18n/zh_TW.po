@@ -1283,14 +1283,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
 #, fuzzy
-#| msgid "Partner"
 msgid "Partner Ref"
 msgstr "夥伴"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
 #, fuzzy
-#| msgid "Partner"
 msgid "Partners"
 msgstr "夥伴"
 

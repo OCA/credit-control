@@ -68,9 +68,6 @@ msgstr "Último recordatorio a los 60 días"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 #, fuzzy
-#| msgid ""
-#| "This wizard will let you set the overdue policy and level for selected "
-#| "invoices"
 msgid ""
 "<span class=\"o_form_label\">This wizard will let you set the overdue policy "
 "and level for selected invoices</span>"
@@ -81,7 +78,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 #, fuzzy
-#| msgid "Warning: you will maybe not be able to revert this operation."
 msgid ""
 "<span class=\"o_form_label\">Warning: you will maybe not be able to revert "
 "this operation.</span>"
@@ -90,7 +86,6 @@ msgstr "Aviso: no podrá deshacer esta operación."
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, fuzzy
-#| msgid "<strong>Total Due</strong>"
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Total vencido</strong>"
 
@@ -132,7 +127,6 @@ msgstr ""
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:104
 #, fuzzy, python-format
-#| msgid "A run has already been executed more recently than %s"
 msgid "A run has already been executed more recently (%s)"
 msgstr "Ya se ha realizado una ejecución más recientemente que el %s"
 
@@ -163,14 +157,12 @@ msgstr "Activa"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_ids
 #, fuzzy
-#| msgid "Active"
 msgid "Activities"
 msgstr "Activa"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_state
 #, fuzzy
-#| msgid "Active"
 msgid "Activity State"
 msgstr "Activa"
 
@@ -283,7 +275,6 @@ msgstr "Modo de cálculo"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_config_settings
 #, fuzzy
-#| msgid "res.config.settings"
 msgid "Config Settings"
 msgstr "res.config.settings"
 
@@ -300,14 +291,12 @@ msgstr "Dirección de contacto"
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:78
 #, fuzzy, python-format
-#| msgid "Control Credit Lines"
 msgid "Control Credit Line"
 msgstr "Líneas de control de crédito"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, fuzzy
-#| msgid "Control Credit Lines"
 msgid "Control Credit Line Form"
 msgstr "Líneas de control de crédito"
 
@@ -379,7 +368,6 @@ msgstr "Control de crédito"
 #: model:ir.ui.menu,name:account_credit_control.credit_control_analysis_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_analysis_pivot_view
 #, fuzzy
-#| msgid "Credit Control Lines"
 msgid "Credit Control Analysis"
 msgstr "Líneas de control de crédito"
 
@@ -387,7 +375,6 @@ msgstr "Líneas de control de crédito"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_analysis_ids
 #, fuzzy
-#| msgid "Credit Control Lines"
 msgid "Credit Control Levels"
 msgstr "Líneas de control de crédito"
 
@@ -419,7 +406,6 @@ msgstr "Política de control de crédito"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 #, fuzzy
-#| msgid "Credit Control Policy"
 msgid "Credit Control Policy Changer"
 msgstr "Política de control de crédito"
 
@@ -692,7 +678,6 @@ msgstr "Responsable del seguimiento"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_follower_ids
 #, fuzzy
-#| msgid "Follow-up"
 msgid "Followers"
 msgstr "Seguimiento"
 
@@ -801,7 +786,6 @@ msgstr "Importe facturado"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_is_follower
 #, fuzzy
-#| msgid "Follow-up"
 msgid "Is Follower"
 msgstr "Seguimiento"
 
@@ -877,7 +861,6 @@ msgstr "Líneas"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 #, fuzzy
-#| msgid "Lines already sent."
 msgid "Lines already done."
 msgstr "Líneas ya enviadas."
 
@@ -973,7 +956,6 @@ msgstr "Marcar como"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__mark_as_sent
 #, fuzzy
-#| msgid "Mark letter lines as sent"
 msgid "Mark letter lines as done"
 msgstr "Marcar líneas de carta como enviadas"
 
@@ -995,7 +977,6 @@ msgstr "Impresión masiva"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__level
 #, fuzzy
-#| msgid "Level"
 msgid "Max Level"
 msgstr "Nivel"
 
@@ -1007,7 +988,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_ids
 #, fuzzy
-#| msgid "Custom Message"
 msgid "Messages"
 msgstr "Mensaje personalizado"
 
@@ -1064,14 +1044,12 @@ msgstr "Fecha de la siguiente acción"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_next_action_type
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__payment_next_action_type
 #, fuzzy
-#| msgid "Next Action Date"
 msgid "Next Action Type"
 msgstr "Fecha de la siguiente acción"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_date_deadline
 #, fuzzy
-#| msgid "Next Action Date"
 msgid "Next Activity Deadline"
 msgstr "Fecha de la siguiente acción"
 
@@ -1083,7 +1061,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_id
 #, fuzzy
-#| msgid "Next Action Date"
 msgid "Next Activity Type"
 msgstr "Fecha de la siguiente acción"
 
@@ -1103,7 +1080,6 @@ msgstr "Sin seguimiento"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__do_nothing
 #, fuzzy
-#| msgid "No follow  policy"
 msgid "No follow policy"
 msgstr "Sin política de seguimiento"
 
@@ -1118,7 +1094,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction_counter
 #, fuzzy
-#| msgid "Next Action"
 msgid "Number of Actions"
 msgstr "Siguiente acción"
 
@@ -1325,14 +1300,12 @@ msgstr "Correos electrónicos salientes"
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 #, fuzzy
-#| msgid "Overdue Level"
 msgid "Overdue"
 msgstr "Nivel de retraso"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
 #, fuzzy
-#| msgid "Due balance"
 msgid "Overdue Balance"
 msgstr "Saldo vencido"
 
@@ -1360,14 +1333,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
 #, fuzzy
-#| msgid "Partner"
 msgid "Partner Ref"
 msgstr "Empresa"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
 #, fuzzy
-#| msgid "Partner"
 msgid "Partners"
 msgstr "Empresa"
 
@@ -1436,7 +1407,6 @@ msgstr "Niveles de política"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
 #, fuzzy
-#| msgid "Policy"
 msgid "Policy Sign"
 msgstr "Política"
 
@@ -1491,7 +1461,6 @@ msgstr "Política asociada"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_sent
 #, fuzzy
-#| msgid "Run date"
 msgid "Reminded date"
 msgstr "Fecha de ejecución"
 
@@ -1675,8 +1644,6 @@ msgstr "El menor nivel no puede ser de tipo Recordatorio previo"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 #, fuzzy
-#| msgid ""
-#| "These lines are ready to send by email or by letter using the Actions."
 msgid "These lines are to do using the Actions."
 msgstr ""
 "Estas líneas están disponibles para ser enviadas por correo electrónico o "
@@ -1753,7 +1720,6 @@ msgstr "Usuario"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__website_message_ids
 #, fuzzy
-#| msgid "Custom Message"
 msgid "Website Messages"
 msgstr "Mensaje personalizado"
 

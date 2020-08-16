@@ -1121,17 +1121,6 @@ msgstr ""
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_1
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_1
 #, fuzzy
-#| msgid ""
-#| "Our records indicate that we have not received the payment of the invoice "
-#| "mentioned below.\n"
-#| "            If it has already been sent, please disregard this notice. If "
-#| "not, please proceed with payment within 10 days.\n"
-#| "\n"
-#| "            Thank you in advance for your anticipated cooperation in this "
-#| "matter.\n"
-#| "\n"
-#| "            Best regards\n"
-#| "        "
 msgid ""
 "Our records indicate that we have not received the payment of the invoice "
 "mentioned below.\n"
@@ -1203,17 +1192,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_2
 #, fuzzy
-#| msgid ""
-#| "Our records indicate that we have not yet received the payment of the "
-#| "invoice mentioned below despite our first reminder.\n"
-#| "            If it has already been sent, please disregard this notice. If "
-#| "not, please proceed with payment within 5 days.\n"
-#| "\n"
-#| "            Thank you in advance for your anticipated cooperation in this "
-#| "matter.\n"
-#| "\n"
-#| "            Best regards\n"
-#| "        "
 msgid ""
 "Our records indicate that we have not yet received the payment of the "
 "invoice mentioned below despite our first reminder.\n"
@@ -1261,25 +1239,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_3
 #, fuzzy
-#| msgid ""
-#| "\n"
-#| "            Our records indicate that we still have not received the "
-#| "payment of the invoice mentioned below despite our two reminders.\n"
-#| "            If payment have already been sent, please disregard this "
-#| "notice. If not, please proceed with payment.\n"
-#| "            If your payment has not been received in the next 5 days, "
-#| "your file will be transfered to our debt collection agency.\n"
-#| "\n"
-#| "            Should you need us to arrange a payment plan for you, please "
-#| "advise.\n"
-#| "            A customer account statement is enclosed for you "
-#| "convenience.\n"
-#| "\n"
-#| "            Thank you in advance for your anticipated cooperation in this "
-#| "matter.\n"
-#| "\n"
-#| "            Best regards\n"
-#| "        "
 msgid ""
 "Our records indicate that we still have not received the payment of the "
 "invoice mentioned below despite our two reminders.\n"
@@ -1388,25 +1347,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_2
 #, fuzzy
-#| msgid ""
-#| "Our records indicate that we still have not received the payment of the "
-#| "mentioned below invoice despite our reminder.\n"
-#| "\n"
-#| "            If payment have already been sent, please disregard this "
-#| "notice. If not, please proceed with payment.\n"
-#| "            If your payment has not been received in the next 5 days, "
-#| "your file will be transfered to our debt collection agency.\n"
-#| "\n"
-#| "            Should you need us to arrange a payment plan for you, please "
-#| "advise.\n"
-#| "            A customer account statement is enclosed for you "
-#| "convenience.\n"
-#| "\n"
-#| "            Thank you in advance for your anticipated cooperation in this "
-#| "matter.\n"
-#| "\n"
-#| "            Best regards\n"
-#| "        "
 msgid ""
 "Our records indicate that we still have not received the payment of the "
 "mentioned below invoice despite our reminder.\n"
@@ -1450,7 +1390,6 @@ msgstr "Uitgaande e-mails"
 #. module: account_credit_control
 #: selection:credit.control.line,activity_state:0
 #, fuzzy
-#| msgid "Overdue Level"
 msgid "Overdue"
 msgstr "Aanmaningsniveau"
 
@@ -1554,7 +1493,6 @@ msgstr "Beleidsniveaus"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
 #, fuzzy
-#| msgid "Policy"
 msgid "Policy Sign"
 msgstr "Beleid"
 
