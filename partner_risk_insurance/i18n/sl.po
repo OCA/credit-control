@@ -24,8 +24,6 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
 #, fuzzy
-#| msgid ""
-#| "Secondary code assigned to this partner by the risk insurance company."
 msgid "Code assigned to this partner by the risk insurance company."
 msgstr ""
 "Sekundarna koda, ki jo je partnerju dodelila zavarovalnica za zavarovanje "
@@ -61,7 +59,6 @@ msgstr "Zavarovanje kredita"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_limit
 #, fuzzy
-#| msgid "Company's Credit Limit"
 msgid "Credit Limit"
 msgstr "Kreditni limit družbe"
 
