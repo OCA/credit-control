@@ -66,7 +66,6 @@ msgstr ""
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_amount
 #, fuzzy
-#| msgid "Invoice amount"
 msgid "Risk amount"
 msgstr "Rechnungsbetrag"
 

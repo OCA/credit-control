@@ -77,7 +77,6 @@ msgstr "Lineas de venta"
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order
 #, fuzzy
-#| msgid "Sale Order"
 msgid "Sales Order"
 msgstr "Pedido de venta"
 
