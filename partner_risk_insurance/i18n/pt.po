@@ -23,7 +23,6 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner_risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users_risk_insurance_code
 #, fuzzy
-#| msgid "Credit limit granted by the insurance company."
 msgid "Code assigned to this partner by the risk insurance company."
 msgstr "Limite de crédito concedido pela companhia de seguros."
 
@@ -161,7 +160,6 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner_risk_insurance_code_2
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users_risk_insurance_code_2
 #, fuzzy
-#| msgid "Credit limit granted by the insurance company."
 msgid "Secondary code assigned to this partner by the risk insurance company."
 msgstr "Limite de crédito concedido pela companhia de seguros."
 

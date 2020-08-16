@@ -24,8 +24,6 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner_risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users_risk_insurance_code
 #, fuzzy
-#| msgid ""
-#| "Secondary code assigned to this partner by the risk insurance company."
 msgid "Code assigned to this partner by the risk insurance company."
 msgstr "Código secundario asignado a esta empresa por la aseguradora."
 
