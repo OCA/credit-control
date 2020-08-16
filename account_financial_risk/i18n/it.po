@@ -271,7 +271,6 @@ msgstr "Fattura"
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
 #, fuzzy
-#| msgid "Invoice"
 msgid "Invoices"
 msgstr "Fattura"
 

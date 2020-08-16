@@ -60,7 +60,6 @@ msgstr "Apuntes contables"
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 #, fuzzy
-#| msgid "Account Moves"
 msgid "Account move lines"
 msgstr "Apuntes contables"
 
@@ -124,7 +123,6 @@ msgstr "Creado en"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner_credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users_credit_currency
 #, fuzzy
-#| msgid "Credit Policy"
 msgid "Credit Currency"
 msgstr "Póliza de crédito"
 
@@ -175,7 +173,6 @@ msgstr "Riesgo financiero excedido.\n"
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:408
 #, fuzzy, python-format
-#| msgid "Financial Risk"
 msgid "Financial risk information"
 msgstr "Riesgo financiero"
 
@@ -302,7 +299,6 @@ msgstr "Factura"
 #. module: account_financial_risk
 #: model:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_invoice_pivot_view
 #, fuzzy
-#| msgid "Invoice"
 msgid "Invoices"
 msgstr "Factura"
 
