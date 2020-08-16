@@ -28,7 +28,6 @@ msgstr "Movimentos Contabilísticos"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 #, fuzzy
-#| msgid "Account Moves"
 msgid "Account move lines"
 msgstr "Movimentos Contabilísticos"
 
@@ -116,9 +115,6 @@ msgstr "Cliente"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #, fuzzy
-#| msgid ""
-#| "Days after due date to set an invoice as unpaid. The change of this field "
-#| "recompute all partners risk, be patient."
 msgid ""
 "Days after due date to set an invoice as unpaid.\n"
 "                            The change of this field recompute all partners "
@@ -164,7 +160,6 @@ msgstr "Risco de crédito ultrapassado.\n"
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, fuzzy, python-format
-#| msgid "Financial Risk"
 msgid "Financial risk information"
 msgstr "Risco de Crédito"
 
