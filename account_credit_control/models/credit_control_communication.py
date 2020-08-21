@@ -6,30 +6,31 @@
 from odoo import api, fields, models
 
 
-class CreditControlCommunication(models.TransientModel):
-    """Shell class used to provide a base model to email template and reporting
-    If used this approach in version 7 a browse record
-    will exist even if not saved
-
-    """
-
+class CreditControlCommunication(models.Model):
     _name = "credit.control.communication"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _description = "Credit control communication process"
     _description = "credit control communication"
     _rec_name = "partner_id"
 
     partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", required=True
+        comodel_name="res.partner", string="Partner", required=True, index=True
     )
-    current_policy_level = fields.Many2one(
-        comodel_name="credit.control.policy.level", string="Level", required=True
+    policy_id = fields.Many2one(
+        related='policy_level_id.policy_id',
+        store=True,
+        index=True,
+    )
+    policy_level_id = fields.Many2one(
+        comodel_name="credit.control.policy.level", string="Level", required=True, index=True
     )
     currency_id = fields.Many2one(
-        comodel_name="res.currency", string="Currency", required=True
+        comodel_name="res.currency", string="Currency", required=True, index=True
     )
-    credit_control_line_ids = fields.Many2many(
-        comodel_name="credit.control.line", rel="comm_credit_rel", string="Credit Lines"
+    credit_control_line_ids = fields.One2many(
+        comodel_name="credit.control.line", inverse_name="communication_id", string="Credit Lines"
     )
-    contact_address = fields.Many2one(comodel_name="res.partner", readonly=True)
+    contact_address_id = fields.Many2one(comodel_name="res.partner", readonly=True, index=True)
     report_date = fields.Date(default=lambda self: fields.Date.context_today(self))
 
     company_id = fields.Many2one(
@@ -37,12 +38,18 @@ class CreditControlCommunication(models.TransientModel):
         string="Company",
         default=lambda self: self.env.company,
         required=True,
+        index=True,
     )
     user_id = fields.Many2one(
-        comodel_name="res.users", default=lambda self: self.env.user, string="User"
+        comodel_name="res.users", default=lambda self: self.env.user, string="User", index=True,
     )
     total_invoiced = fields.Float(compute="_compute_total")
     total_due = fields.Float(compute="_compute_total")
+
+    @api.model
+    def _default_company(self):
+        company_obj = self.env['res.company']
+        return company_obj._company_default_get('credit.control.policy')
 
     @api.model
     def _get_total(self):
@@ -64,40 +71,27 @@ class CreditControlCommunication(models.TransientModel):
             communication.total_invoiced = communication._get_total()
             communication.total_due = communication._get_total_due()
 
-    @api.model_create_multi
-    @api.returns("self", lambda value: value.id)
-    def create(self, vals_list):
-        for vals in vals_list:
-            if vals.get("partner_id"):
-                # the computed field does not work in TransientModel,
-                # just set a value on creation
-                partner_id = vals["partner_id"]
-                vals["contact_address"] = self._get_contact_address(partner_id).id
-        return super(CreditControlCommunication, self).create(vals_list)
+    @api.model
+    def _onchange_partner_id(self):
+        """Update address when partner changes."""
+        for one in self:
+            partners = one.env["res.partner"].search([
+                ("id", "child_of", one.partner_id.id),
+            ])
+            if one.contact_address_id in partners:
+                # Contact is already child of partner
+                return
+            address_ids = one.partner_id.address_get(adr_pref=['invoice'])
+            one.contact_address_id = address_ids["invoice"]
 
     def get_email(self):
         """ Return a valid email for customer """
         self.ensure_one()
-        contact = self.contact_address
+        contact = self.contact_address_id
         email = contact.email
         if not email and contact.commercial_partner_id.email:
             email = contact.commercial_partner_id.email
         return email
-
-    @api.returns("res.partner")
-    def get_contact_address(self):
-        """ Compatibility method, please use the contact_address field """
-        self.ensure_one()
-        return self.contact_address
-
-    @api.model
-    @api.returns("res.partner")
-    def _get_contact_address(self, partner_id):
-        partner_obj = self.env["res.partner"]
-        partner = partner_obj.browse(partner_id)
-        add_ids = partner.address_get(adr_pref=["invoice"]) or {}
-        add_id = add_ids["invoice"]
-        return partner_obj.browse(add_id)
 
     @api.model
     @api.returns("credit.control.line")
@@ -147,7 +141,7 @@ class CreditControlCommunication(models.TransientModel):
             )
             data["credit_control_line_ids"] = [(6, 0, level_lines.ids)]
             data["partner_id"] = group["partner_id"]
-            data["current_policy_level"] = group["policy_level_id"]
+            data["policy_level_id"] = group["policy_level_id"]
             data["currency_id"] = group["currency_id"] or company_currency.id
             datas.append(data)
         return datas
@@ -158,59 +152,26 @@ class CreditControlCommunication(models.TransientModel):
         """
         datas = self._aggregate_credit_lines(lines)
         comms = self.create(datas)
+        comms._onchange_partner_id()
         return comms
 
     @api.returns("mail.mail")
     def _generate_emails(self):
         """ Generate email message using template related to level """
-        emails = self.env["mail.mail"]
-        required_fields = ["subject", "body_html", "email_from", "email_to"]
         for comm in self:
-            template = comm.current_policy_level.email_template_id
-            email_values = template.generate_email(comm.id)
-            email_values["message_type"] = "email"
-            # model is Transient record (self) removed periodically so no point
-            # of storing res_id
-            email_values.pop("model", None)
-            email_values.pop("res_id", None)
-            # Remove when mail.template returns correct format attachments
-            attachment_list = email_values.pop("attachments", None)
-            email = emails.create(email_values)
-
-            state = "sent"
-            # The mail will not be send, however it will be in the pool, in an
-            # error state. So we create it, link it with
-            # the credit control line
-            # and put this latter in a `email_error` state we not that we have
-            # a problem with the email
-            if not all(email_values.get(field) for field in required_fields):
-                state = "email_error"
-            comm.credit_control_line_ids.write(
-                {"mail_message_id": email.id, "state": state}
+            comm.message_post_with_template(
+                comm.policy_level_id.email_template_id.id,
+                composition_mode="mass_post",
+                is_log=False,
+                notify=True,
+                subtype_id=self.env.ref("account_credit_control.mt_request").id,
             )
-            email.attachment_ids = [
-                (
-                    0,
-                    0,
-                    {
-                        "name": att[0],
-                        "datas": att[1],
-                        "store_fname": att[0],
-                        "res_model": "mail.mail",
-                        "res_id": email.id,
-                        "type": "binary",
-                    },
-                )
-                for att in attachment_list
-            ]
-            emails |= email
-        return emails
+            comm.credit_control_line_ids \
+                .filtered(lambda line: line.state == 'to_be_sent') \
+                .write({"state": "queued"})
 
     @api.returns("credit.control.line")
     def _mark_credit_line_as_sent(self):
-        lines = self.env["credit.control.line"]
-        for comm in self:
-            lines |= comm.credit_control_line_ids
-
+        lines = self.mapped('credit_control_line_ids')
         lines.write({"state": "sent"})
         return lines

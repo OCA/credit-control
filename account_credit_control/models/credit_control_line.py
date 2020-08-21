@@ -50,6 +50,7 @@ class CreditControlLine(models.Model):
         selection=[
             ("draft", "Draft"),
             ("ignored", "Ignored"),
+            ("queued", "Queued"),
             ("to_be_sent", "To Do"),
             ("sent", "Done"),
             ("error", "Error"),
@@ -89,13 +90,15 @@ class CreditControlLine(models.Model):
         index=True,
         store=True,
     )
+    communication_id = fields.Many2one(
+        comodel_name="credit.control.communication",
+        string="Communication process",
+        help="Credit control communication process where this line belongs",
+    )
     amount_due = fields.Float(
         string="Due Amount Tax incl.", required=True, readonly=True
     )
     balance_due = fields.Float(string="Due balance", required=True, readonly=True)
-    mail_message_id = fields.Many2one(
-        comodel_name="mail.mail", string="Sent Email", readonly=True
-    )
     move_line_id = fields.Many2one(
         comodel_name="account.move.line",
         string="Move line",
