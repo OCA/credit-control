@@ -5,13 +5,13 @@
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <t t-set="address">
                 <address
-                    t-field="doc.contact_address"
+                    t-field="doc.contact_address_id"
                     t-options="{'widget':'contact', 'fields': ['address', 'name'], 'no_marker': True}"
                 />
             </t>
             <div class="page">
                 <h2 id="policy_level">
-                    <span t-field="doc.current_policy_level.name" />
+                    <span t-field="doc.policy_level_id.name" />
                 </h2>
                 <div id="informations" class="row mt32 mb32">
                     <div class="col-auto mw-100 mb-2" name="date">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row mt32 mb32">
                     <div class="col-12">
-                        <span t-field="doc.current_policy_level.custom_text" />
+                        <span t-field="doc.policy_level_id.custom_text" />
                     </div>
                 </div>
                 <h3>Summary</h3>
@@ -101,11 +101,11 @@
                         </table>
                     </div>
                 </div>
-                <t t-if="doc.current_policy_level.custom_text_after_details">
+                <t t-if="doc.policy_level_id.custom_text_after_details">
                     <div class="row mt32 mb32">
                         <div class="col-12">
                             <p
-                                t-field="doc.current_policy_level.custom_text_after_details"
+                                t-field="doc.policy_level_id.custom_text_after_details"
                             />
                         </div>
                     </div>
