@@ -43,7 +43,7 @@
 
     <record model="ir.ui.menu" id="credit_control_analysis_menu">
         <field name="name">Credit Control Analysis</field>
-        <field name="parent_id" ref="account_credit_control.base_credit_control_menu"/>
+        <field name="parent_id" ref="account.menu_finance_reports"/>
         <field name="action" ref="credit_control_analysis_act_window"/>
         <field name="sequence" eval="16"/>
     </record>
