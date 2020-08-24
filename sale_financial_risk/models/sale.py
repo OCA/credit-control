@@ -77,7 +77,11 @@ class SaleOrderLine(models.Model):
     )
     def _compute_risk_amount(self):
         for line in self:
-            if line.state != "sale":
+            skip = (
+                line.state != "sale"
+                or bool(line.display_type)
+            )
+            if skip:
                 line.risk_amount = 0.0
                 continue
             qty = line.product_uom_qty
