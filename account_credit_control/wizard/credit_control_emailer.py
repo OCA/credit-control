@@ -61,12 +61,8 @@ class CreditControlEmailer(models.TransientModel):
         communications = self._send_emails()
         if not communications:
             return {'type': 'ir.actions.act_window_close'}
-        return {
-            'domain': [('id', 'in', communications.ids)],
-            'name': _('Generated communications'),
-            'res_model': 'credit.control.communication',
-            'type': 'ir.actions.act_window',
-            # 'view_id': False,
-            'view_mode': 'tree,form',
-            'view_type': 'tree',
-        }
+        action = self.env.ref(
+            "account_credit_control.credit_control_communication_action")
+        action['name'] = _('Generated communications')
+        action["domain"] = [('id', 'in', communications.ids)]
+        return action
