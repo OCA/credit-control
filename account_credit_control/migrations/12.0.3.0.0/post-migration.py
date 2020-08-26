@@ -30,11 +30,18 @@ def migrate(env, version):
         openupgrade.logged_query(
             env.cr,
             """
-            UPDATE mail_template SET
-                value = REPLACE(value, %(from)s, %(to)s),
-                source = REPLACE(source, %(from)s, %(to)s)
+            UPDATE ir_translation SET
+                value = REPLACE(value, %(from)s, %(to)s)
             WHERE module = 'account_credit_control'
-            AND name ilike 'mail.template'
+            AND name ilike 'mail.template%%'
             """,
-            {"from": from_, "to": to, "model_id": communication_model.id},
+            {"from": from_, "to": to},
         )
+    # Update the recipients config just for this template, others should be
+    # manually changed if desired althoug they'll keep working as there's
+    # backward compatibility with the old method
+    communication_template = env.ref(
+        "account_credit_control.email_template_credit_control_base")
+    communication_template.email_to = False
+    communication_template.partner_to = (
+        "${object.get_emailing_contact().id or ''}")
