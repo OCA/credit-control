@@ -27,3 +27,14 @@ def migrate(env, version):
             """,
             {"from": from_, "to": to, "model_id": communication_model.id},
         )
+        openupgrade.logged_query(
+            env.cr,
+            """
+            UPDATE mail_template SET
+                value = REPLACE(value, %(from)s, %(to)s),
+                source = REPLACE(source, %(from)s, %(to)s)
+            WHERE module = 'account_credit_control'
+            AND name ilike 'mail.template'
+            """,
+            {"from": from_, "to": to, "model_id": communication_model.id},
+        )
