@@ -84,14 +84,20 @@ class CreditControlCommunication(models.Model):
             address_ids = one.partner_id.address_get(adr_pref=['invoice'])
             one.contact_address_id = address_ids["invoice"]
 
-    def get_email(self):
-        """ Return a valid email for customer """
+    def get_emailing_contact(self):
+        """Return a valid customer for the emailing. If the contact address
+        doesn't have a valid email we fallback to the commercial partner"""
         self.ensure_one()
         contact = self.contact_address_id
-        email = contact.email
-        if not email and contact.commercial_partner_id.email:
-            email = contact.commercial_partner_id.email
-        return email
+        if not contact.email:
+            contact = contact.commercial_partner_id
+        return contact
+
+    def get_email(self):
+        """Kept for backwards compatibility. To be removed in v13/v14"""
+        self.ensure_one()
+        contact = self.get_emailing_contact()
+        return contact and contact.email
 
     @api.model
     @api.returns("credit.control.line")
