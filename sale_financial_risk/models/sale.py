@@ -41,6 +41,14 @@ class SaleOrder(models.Model):
                 }).action_show()
         return super(SaleOrder, self).action_confirm()
 
+    @api.model
+    def _get_risk_states(self):
+        risk_states = ['sale']
+        if self.env['ir.config_parameter'].sudo().get_param(
+                'sale_financial_risk.include_risk_sale_order_done'):
+            risk_states.append('done')
+        return risk_states
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -73,8 +81,9 @@ class SaleOrderLine(models.Model):
                  'product_uom_qty',
                  'qty_invoiced')
     def _compute_risk_amount(self):
+        risk_states = self.env['sale.order']._get_risk_states()
         for line in self:
-            if line.state != 'sale':
+            if line.state not in risk_states:
                 line.risk_amount = 0.0
                 continue
             qty = line.product_uom_qty
