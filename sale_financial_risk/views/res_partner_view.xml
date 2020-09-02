@@ -14,11 +14,12 @@
                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                         context="{'open_risk_field': 'risk_sale_order'}">
-                    <field name="risk_sale_order" nolabel="1"/>
+                    <field name="risk_sale_order" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                 </button>
             </field>
             <field name="risk_invoice_draft_limit" position="before">
                 <field name="risk_sale_order_limit"
+                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
             </field>
 

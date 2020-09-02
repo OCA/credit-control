@@ -4,6 +4,7 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -17,10 +18,13 @@ class ResPartner(models.Model):
     risk_invoice_draft_include = fields.Boolean(
         string='Include Draft Invoices', help='Full risk computation')
     risk_invoice_draft_limit = fields.Monetary(
-        string='Limit In Draft Invoices', help='Set 0 if it is not locked')
+        string='Limit In Draft Invoices',
+        currency_field="risk_currency_id",
+        help='Set 0 if it is not locked')
     risk_invoice_draft = fields.Monetary(
         compute='_compute_risk_invoice',
         string='Total Draft Invoices',
+        currency_field="risk_currency_id",
         help='Total amount of invoices in Draft or Pro-forma state')
     risk_invoice_open_include = fields.Boolean(
         string='Include Open Invoices/Principal Balance',
@@ -31,11 +35,13 @@ class ResPartner(models.Model):
     )
     risk_invoice_open_limit = fields.Monetary(
         string='Limit In Open Invoices/Principal Balance',
+        currency_field="risk_currency_id",
         help='Set 0 if it is not locked',
     )
     risk_invoice_open = fields.Monetary(
         compute='_compute_risk_account_amount',
         string='Total Open Invoices/Principal Balance',
+        currency_field="risk_currency_id",
         help='Residual amount of move lines not reconciled with the same '
              'account that is set as partner receivable and date maturity '
              'not exceeded, considering Due Margin set in account settings.',
@@ -49,11 +55,13 @@ class ResPartner(models.Model):
     )
     risk_invoice_unpaid_limit = fields.Monetary(
         string='Limit In Unpaid Invoices/Principal Balance',
+        currency_field="risk_currency_id",
         help='Set 0 if it is not locked',
     )
     risk_invoice_unpaid = fields.Monetary(
         compute='_compute_risk_account_amount',
         string='Total Unpaid Invoices/Principal Balance',
+        currency_field="risk_currency_id",
         help='Residual amount of move lines not reconciled with the same '
              'account that is set as partner receivable and date maturity '
              'exceeded, considering Due Margin set in account settings.',
@@ -67,11 +75,13 @@ class ResPartner(models.Model):
     )
     risk_account_amount_limit = fields.Monetary(
         string='Limit Other Account Open Amount',
+        currency_field="risk_currency_id",
         help='Set 0 if it is not locked',
     )
     risk_account_amount = fields.Monetary(
         compute='_compute_risk_account_amount',
         string='Total Other Account Open Amount',
+        currency_field="risk_currency_id",
         help='Residual amount of move lines not reconciled with distinct '
              'account that is set as partner receivable and date maturity '
              'not exceeded, considering Due Margin set in account settings.',
@@ -85,26 +95,82 @@ class ResPartner(models.Model):
     )
     risk_account_amount_unpaid_limit = fields.Monetary(
         string='Limit Other Account Unpaid Amount',
+        currency_field="risk_currency_id",
         help='Set 0 if it is not locked',
     )
     risk_account_amount_unpaid = fields.Monetary(
         compute='_compute_risk_account_amount',
         string='Total Other Account Unpaid Amount',
+        currency_field="risk_currency_id",
         help='Residual amount of move lines not reconciled with distinct '
              'account that is set as partner receivable and date maturity '
              'exceeded, considering Due Margin set in account settings.',
     )
     risk_total = fields.Monetary(
         compute='_compute_risk_exception',
-        string='Total Risk', help='Sum of total risk included')
+        string='Total Risk',
+        currency_field="risk_currency_id",
+        help='Sum of total risk included')
     risk_exception = fields.Boolean(
         compute='_compute_risk_exception',
         search='_search_risk_exception',
         string='Risk Exception',
-        help='It Indicate if partner risk exceeded')
+        help='It Indicate if partner risk exceeded',
+    )
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute='_compute_risk_allow_edit')
     credit_limit = fields.Float(track_visibility='onchange')
+    credit_currency = fields.Selection(
+        selection=[('company', 'Company Currency'),
+                   ('receivable', 'Receivable Currency'),
+                   ('pricelist', 'Pricelist Currency'),
+                   ('manual', 'Manual Credit Currency'),
+                   ], default='company', track_visibility='onchange',
+    )
+    manual_credit_currency_id = fields.Many2one(
+        comodel_name="res.currency", string="Manual Credit Currency",
+    )
+    risk_currency_id = fields.Many2one(
+        comodel_name="res.currency", compute='_compute_credit_currency')
+
+    @api.multi
+    @api.depends('credit_currency', 'manual_credit_currency_id',
+                 'property_account_receivable_id.currency_id',
+                 'country_id',
+                 'company_id.currency_id')
+    def _compute_credit_currency(self):
+        for partner in self:
+            if partner.credit_currency == 'manual':
+                partner.risk_currency_id = \
+                    partner.manual_credit_currency_id or partner.currency_id
+            elif partner.credit_currency == 'receivable':
+                partner.risk_currency_id = \
+                    partner.property_account_receivable_id.currency_id or \
+                    partner.currency_id
+            elif partner.credit_currency == 'pricelist':
+                partner.risk_currency_id = \
+                    partner.property_product_pricelist.currency_id or \
+                    partner.currency_id
+            else:
+                partner.risk_currency_id = partner.currency_id
+
+    @api.multi
+    @api.onchange('credit_currency')
+    def _onchange_credit_currency(self):
+        for partner in self:
+            if partner.credit_currency == 'manual':
+                partner.manual_credit_currency_id = partner.risk_currency_id
+            else:
+                partner.manual_credit_currency_id = False
+
+    @api.multi
+    @api.constrains('credit_currency', 'manual_credit_currency_id')
+    def _check_credit_currency(self):
+        for partner in self:
+            if partner.credit_currency == 'manual' \
+                    and not partner.manual_credit_currency_id:
+                raise ValidationError(
+                    _("Choose Manual Credit Currency."))
 
     def _compute_risk_allow_edit(self):
         self.update({'risk_allow_edit': self.env.user.has_group(
@@ -155,13 +221,22 @@ class ResPartner(models.Model):
             'risk_invoice_draft')
         total_group = self.env[model_name].sudo().read_group(
             domain=domain,
-            fields=['partner_id', 'amount_total_company_signed'],
-            groupby=['commercial_partner_id'],
+            fields=['commercial_partner_id', 'company_id',
+                    'amount_total_company_signed'],
+            groupby=['commercial_partner_id', 'company_id'],
             orderby='id',
+            lazy=False,
         )
         for group in total_group:
-            self.browse(group["commercial_partner_id"][0], self._prefetch) \
-                .risk_invoice_draft = group["amount_total_company_signed"]
+            partner = self.browse(
+                group["commercial_partner_id"][0], self._prefetch)
+            amount = group["amount_total_company_signed"]
+            company = self.env['res.company'].browse(
+                group['company_id'][0])
+            company_currency = company.currency_id
+            partner.risk_invoice_draft = company_currency._convert(
+                amount, partner.risk_currency_id, company,
+                fields.Date.context_today(self), round=False)
 
     @api.model
     def _risk_account_groups(self):
@@ -226,39 +301,59 @@ class ResPartner(models.Model):
         # Partner receivable account determines if amount is in invoice field
         for reg in groups['open']['read_group']:
             if reg['partner_id'][0] != self.id:
-                continue
+                continue  # pragma: no cover
+            account = self.env['account.account'].browse(reg['account_id'][0])
             if self.property_account_receivable_id.id == reg['account_id'][0]:
-                vals['risk_invoice_open'] += reg['amount_residual']
+                vals['risk_invoice_open'] += \
+                    account.company_id.currency_id._convert(
+                        reg['amount_residual'], self.risk_currency_id,
+                        account.company_id, fields.Date.context_today(self),
+                        round=False)
             else:
-                vals['risk_account_amount'] += reg['amount_residual']
+                vals['risk_account_amount'] += \
+                    account.company_id.currency_id._convert(
+                        reg['amount_residual'], self.risk_currency_id,
+                        account.company_id, fields.Date.context_today(self),
+                        round=False)
         for reg in groups['unpaid']['read_group']:
+            account = self.env['account.account'].browse(reg['account_id'][0])
             if reg['partner_id'][0] != self.id:
                 continue  # pragma: no cover
             if self.property_account_receivable_id.id == reg['account_id'][0]:
-                vals['risk_invoice_unpaid'] += reg['amount_residual']
+                vals['risk_invoice_unpaid'] += \
+                    account.company_id.currency_id._convert(
+                        reg['amount_residual'], self.risk_currency_id,
+                        account.company_id, fields.Date.context_today(self),
+                        round=False)
             else:
-                vals['risk_account_amount_unpaid'] += reg['amount_residual']
+                vals['risk_account_amount_unpaid'] += \
+                    account.company_id.currency_id._convert(
+                        reg['amount_residual'], self.risk_currency_id,
+                        account.company_id, fields.Date.context_today(self),
+                        round=False)
         return vals
 
     @api.depends(lambda x: x._get_depends_compute_risk_exception())
     def _compute_risk_exception(self):
         risk_field_list = self._risk_field_list()
         for partner in self:
-            if not partner.customer:
-                partner.risk_exception = False
-                continue
             amount = 0.0
             risk_exception = False
+            if not partner.customer:
+                partner.risk_total = amount
+                partner.risk_exception = risk_exception
+                continue
             for risk_field in risk_field_list:
                 field_value = getattr(partner, risk_field[0], 0.0)
                 max_value = getattr(partner, risk_field[1], 0.0)
+                include = getattr(partner, risk_field[2], False)
                 if max_value and field_value > max_value:
                     risk_exception = True
-                if getattr(partner, risk_field[2], False):
+                if include:
                     amount += field_value
-            partner.risk_total = amount
             if partner.credit_limit and amount > partner.credit_limit:
                 risk_exception = True
+            partner.risk_total = amount
             partner.risk_exception = risk_exception
 
     @api.model

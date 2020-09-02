@@ -11,11 +11,12 @@
                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
                 <button name="open_risk_pivot_info" type="object" class="oe_link"
                         context="{'open_risk_field': 'risk_payment_return'}">
-                    <field name="risk_payment_return" nolabel="1"/>
+                    <field name="risk_payment_return" nolabel="1" widget='monetary' options="{'currency_field': 'risk_currency_id'}"/>
                 </button>
             </field>
             <field name="risk_account_amount_limit" position="before">
                 <field name="risk_payment_return_limit"
+                       widget='monetary' options="{'currency_field': 'risk_currency_id'}"
                        attrs="{'readonly': [('risk_allow_edit', '=', False)]}"/>
             </field>
         </field>

@@ -11,7 +11,9 @@ class SaleOrder(models.Model):
     def risk_exception_msg(self):
         risk_amount = self.currency_id._convert(
             self.amount_total, self.company_id.currency_id,
-            self.company_id, fields.Date.today())
+            self.company_id, self.confirmation_date and
+            self.confirmation_date.date()
+            or fields.Date.context_today(self), round=False)
         partner = self.partner_id.commercial_partner_id
         exception_msg = ""
         if partner.risk_exception:
@@ -110,4 +112,6 @@ class SaleOrderLine(models.Model):
                 risk_amount = line.price_reduce_taxinc * risk_qty
             line.risk_amount = line.order_id.currency_id._convert(
                 risk_amount, line.company_id.currency_id,
-                line.company_id, fields.Date.today())
+                line.company_id, line.order_id.confirmation_date and
+                line.order_id.confirmation_date.date()
+                or fields.Date.context_today(self), round=False)
