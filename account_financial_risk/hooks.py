@@ -4,7 +4,7 @@ from odoo import tools
 
 
 def pre_init_hook(cr):
-    if tools.column_exists(cr, "account_move", "company_currency_id"):
+    if tools.column_exists(cr, "account_invoice", "company_currency_id"):
         return
     cr.execute("""
         ALTER TABLE account_invoice
