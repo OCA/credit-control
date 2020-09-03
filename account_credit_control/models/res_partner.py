@@ -49,27 +49,25 @@ class ResPartner(models.Model):
         string="Follow-up Responsible",
         help="Optionally you can assign a user to this field, "
         "which will make him responsible for the action.",
-        track_visibility="onchange",
+        tracking=True,
     )
     payment_note = fields.Text(
-        string="Customer Payment Promise",
-        help="Payment Note",
-        track_visibility="onchange",
+        string="Customer Payment Promise", help="Payment Note", tracking=True,
     )
     payment_next_action_type = fields.Many2one(
         comodel_name="res.partner.payment.action.type",
         string="Next Action Type",
-        track_visibility="onchange",
+        tracking=True,
     )
     payment_next_action = fields.Text(
         string="Next Action",
         help="This is the next action to be taken.",
-        track_visibility="onchange",
+        tracking=True,
     )
     payment_next_action_date = fields.Date(
         string="Next Action Date",
         help="This is when the manual follow-up is needed.",
-        track_visibility="onchange",
+        tracking=True,
     )
     manual_followup = fields.Boolean()
     credit_control_analysis_ids = fields.One2many(
