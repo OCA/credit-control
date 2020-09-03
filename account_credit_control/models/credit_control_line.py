@@ -58,7 +58,7 @@ class CreditControlLine(models.Model):
         required=True,
         readonly=True,
         default="draft",
-        track_visibility="on_change",
+        tracking=True,
         help="Draft lines need to be triaged.\n"
         "Ignored lines are lines for which we do "
         "not want to send something.\n"
