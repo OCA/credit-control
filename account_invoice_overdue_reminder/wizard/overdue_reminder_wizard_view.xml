@@ -82,7 +82,7 @@
                 </div>
             </group>
             <group name="invoices">
-                <field name="invoice_ids" nolabel="1">
+                <field name="invoice_ids" nolabel="1" context="{'form_view_ref': 'account.invoice_form'}">
                     <tree>
                         <field name="partner_id" string="Invoicing Contact"/>
                         <field name="number"/>
