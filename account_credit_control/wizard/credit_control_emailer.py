@@ -38,9 +38,12 @@ class CreditControlEmailer(models.TransientModel):
     def _filter_lines(self, lines):
         """ filter lines to use in the wizard """
         line_obj = self.env['credit.control.line']
+        lines_and_related = lines.mapped(
+            lambda l: l._get_lower_related_lines()
+        )
         domain = [
             ('state', '=', 'to_be_sent'),
-            ('id', 'in', lines.ids),
+            ('id', 'in', lines_and_related.ids),
             ('channel', '=', 'email'),
         ]
         return line_obj.search(domain)

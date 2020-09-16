@@ -124,17 +124,41 @@ class CreditControlCommunication(models.TransientModel):
         return partner_obj.browse(add_id)
 
     @api.model
-    @api.returns('credit.control.line')
-    def _get_credit_lines(self, line_ids, partner_id, level_id, currency_id):
-        """ Return credit lines related to a partner and a policy level """
-        cr_line_obj = self.env['credit.control.line']
-        cr_lines = cr_line_obj.search([
-            ('id', 'in', line_ids),
-            ('partner_id', '=', partner_id),
-            ('policy_level_id', '=', level_id),
-            ('currency_id', '=', currency_id),
-        ])
-        return cr_lines
+    def _group_lines(self, lines):
+        ordered_lines = lines.search(
+            [("id", "in", lines.ids)],
+            order="partner_id, currency_id, policy_id, state, level DESC",
+        )
+        prev_group = None
+        prev_policy_level = None
+        group_lines = self.env["credit.control.line"].browse()
+        for line in ordered_lines:
+            group = (line.partner_id, line.currency_id, line.policy_id)
+            policy_level = line.policy_level_id
+            if prev_group and (
+                group != prev_group
+                or (
+                    not line.policy_id.auto_process_lower_levels and
+                    policy_level != prev_policy_level
+                )
+            ):
+                yield (
+                    group_lines[0].partner_id,
+                    group_lines[0].currency_id,
+                    group_lines[0].policy_level_id,
+                    group_lines,
+                )
+                group_lines = self.env["credit.control.line"].browse()
+            if line not in group_lines:
+                group_lines |= line._get_lower_related_lines() or line
+            prev_group = group
+            prev_policy_level = policy_level
+        yield (
+            group_lines[0].partner_id,
+            group_lines[0].currency_id,
+            group_lines[0].policy_level_id,
+            group_lines,
+        )
 
     @api.model
     def _aggregate_credit_lines(self, lines):
@@ -143,34 +167,19 @@ class CreditControlCommunication(models.TransientModel):
         comms = self.browse()
         if not lines:
             return comms
-        sql = (
-            "SELECT distinct partner_id, policy_level_id, "
-            " credit_control_line.currency_id, "
-            " credit_control_policy_level.level"
-            " FROM credit_control_line JOIN credit_control_policy_level "
-            "   ON (credit_control_line.policy_level_id = "
-            "       credit_control_policy_level.id)"
-            " WHERE credit_control_line.id in %s"
-            " ORDER by credit_control_policy_level.level, "
-            "          credit_control_line.currency_id"
-        )
-        cr = self.env.cr
-        cr.execute(sql, (tuple(lines.ids), ))
-        res = cr.dictfetchall()
         company_currency = self.env.user.company_id.currency_id
         datas = []
-        for group in res:
+        for (
+            partner_id,
+            currency_id,
+            policy_level_id,
+            grouped_lines,
+        ) in self._group_lines(lines):
             data = {}
-            level_lines = self._get_credit_lines(
-                lines.ids,
-                group['partner_id'],
-                group['policy_level_id'],
-                group['currency_id'],
-            )
-            data['credit_control_line_ids'] = [(6, 0, level_lines.ids)]
-            data['partner_id'] = group['partner_id']
-            data['current_policy_level'] = group['policy_level_id']
-            data['currency_id'] = group['currency_id'] or company_currency.id
+            data['credit_control_line_ids'] = [(6, 0, grouped_lines.ids)]
+            data['partner_id'] = partner_id.id
+            data['current_policy_level'] = policy_level_id.id
+            data['currency_id'] = currency_id.id or company_currency.id
             datas.append(data)
         return datas
 

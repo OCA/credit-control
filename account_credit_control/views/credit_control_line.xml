@@ -67,6 +67,10 @@
                 </group>
 
                 <group string="Filters" name="filters">
+                    <filter name="filter_group_lines"
+                            string="Group Lines" 
+                            domain="[('auto_process', 'in', ('no_auto_process', 'highest_level'))]"/>
+                    <separator/>
                     <filter name="filter_draft" icon="fa-envelope"
                             string="Draft" domain="[('state', '=', 'draft')]"
                             help="Draft lines have to be triaged."/>
@@ -136,6 +140,12 @@
                 <button name="button_credit_control_line_form"
                         aria-label="Control Credit Line Form" title="Control Credit Line Form"
                         type="object" icon="fa-external-link" class="oe_stat_button"/>
+                <button title="Highest Level" icon="fa-star"
+                        attrs="{'invisible':[('auto_process', '!=', 'highest_level')]}"/>
+                <button name="act_show_auto_process_line" title="Auto Process" 
+                        type="object" icon="fa-list" class="oe_stat_button"
+                        attrs="{'invisible':[('auto_process', '=', 'no_auto_process')]}"/>
+                <field name="auto_process" invisible="1"/>
                 <field name="date"/>
                 <field name="date_due"/>
                 <field name="level"/>
@@ -147,7 +157,7 @@
                 <field name="manual_followup"/>
                 <field name="amount_due"/>
                 <field name="balance_due"/>
-                <field name="currency_id"/>
+                <field name="currency_id" invisible="1"/>
                 <field name="move_line_id"/>
                 <field name="account_id"/>
                 <field name="policy_level_id"/>

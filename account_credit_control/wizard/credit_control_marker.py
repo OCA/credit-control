@@ -43,7 +43,10 @@ class CreditControlMarker(models.TransientModel):
     def _filter_lines(self, lines):
         """ get line to be marked filter done lines """
         line_obj = self.env['credit.control.line']
-        domain = [('state', '!=', 'sent'), ('id', 'in', lines.ids)]
+        lines_and_related = lines.mapped(
+            lambda l: l._get_lower_related_lines()
+        )
+        domain = [('state', '!=', 'sent'), ('id', 'in', lines_and_related.ids)]
         return line_obj.search(domain)
 
     @api.model
