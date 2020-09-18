@@ -77,6 +77,8 @@ class CreditControlRun(models.Model):
         string='Company',
         default=lambda self: self.env['res.company']._company_default_get(
             'account.account'),
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         index=True,
     )
 
