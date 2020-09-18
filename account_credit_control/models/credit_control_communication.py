@@ -101,7 +101,9 @@ class CreditControlCommunication(models.Model):
 
     @api.model
     @api.returns("credit.control.line")
-    def _get_credit_lines(self, line_ids, partner_id, level_id, currency_id):
+    def _get_credit_lines(
+        self, line_ids, partner_id, level_id, currency_id, company_id
+    ):
         """ Return credit lines related to a partner and a policy level """
         cr_line_obj = self.env["credit.control.line"]
         cr_lines = cr_line_obj.search(
@@ -110,6 +112,7 @@ class CreditControlCommunication(models.Model):
                 ("partner_id", "=", partner_id),
                 ("policy_level_id", "=", level_id),
                 ("currency_id", "=", currency_id),
+                ("company_id", "=", company_id),
             ]
         )
         return cr_lines
@@ -124,7 +127,8 @@ class CreditControlCommunication(models.Model):
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
             " credit_control_line.currency_id, "
-            " credit_control_policy_level.level"
+            " credit_control_policy_level.level, "
+            " credit_control_line.company_id "
             " FROM credit_control_line JOIN credit_control_policy_level "
             "   ON (credit_control_line.policy_level_id = "
             "       credit_control_policy_level.id)"
@@ -135,7 +139,6 @@ class CreditControlCommunication(models.Model):
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids),))
         res = cr.dictfetchall()
-        company_currency = self.env.user.company_id.currency_id
         datas = []
         for group in res:
             data = {}
@@ -144,11 +147,15 @@ class CreditControlCommunication(models.Model):
                 group["partner_id"],
                 group["policy_level_id"],
                 group["currency_id"],
+                group["company_id"],
             )
+            company_currency = self.env["res.company"].browse(
+                group["company_id"]).currency_id
             data["credit_control_line_ids"] = [(6, 0, level_lines.ids)]
             data["partner_id"] = group["partner_id"]
             data["policy_level_id"] = group["policy_level_id"]
             data["currency_id"] = group["currency_id"] or company_currency.id
+            data["company_id"] = group["company_id"]
             datas.append(data)
         return datas
 
