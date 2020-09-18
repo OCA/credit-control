@@ -70,6 +70,8 @@ class CreditControlRun(models.Model):
         comodel_name="res.company",
         string="Company",
         default=lambda self: self.env.company,
+        readonly=True,
+        states={"draft": [("readonly", False)]},
         index=True,
     )
 
