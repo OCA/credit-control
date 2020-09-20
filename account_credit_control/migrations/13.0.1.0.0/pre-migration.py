@@ -7,8 +7,9 @@ from psycopg2 import sql
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.copy_columns(
-        env.cr, {"credit_control_line": [("invoice_id", None, None)]}
+    openupgrade.rename_columns(env.cr, {"credit_control_line": [("invoice_id", None)]})
+    openupgrade.logged_query(
+        env.cr, "ALTER TABLE credit_control_line ADD invoice_id INT4"
     )
     openupgrade.logged_query(
         env.cr,
