@@ -45,6 +45,8 @@
     <record id="action_wizard_credit_policy_changer" model="ir.actions.act_window">
         <field name="name">Change current credit policy</field>
         <field name="res_model">credit.control.policy.changer</field>
+        <!-- for emptying previous v12 `src_model` value -->
+        <field name="binding_model_id" eval="False" />
         <field name="binding_view_types">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="credit_control_policy_changer_form" />
