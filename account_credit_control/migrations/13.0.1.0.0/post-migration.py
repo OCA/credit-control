@@ -14,5 +14,5 @@ def migrate(env, version):
         """UPDATE account_move am
         SET credit_policy_id = ai.credit_policy_id
         FROM account_invoice ai
-        WHERE ai.move_id = am.id""",
+        WHERE ai.id = am.old_invoice_id""",
     )
