@@ -23,6 +23,7 @@ class CreditControlMarker(models.TransientModel):
 
     name = fields.Selection(
         selection=[
+            ('draft', 'Draft'),
             ('ignored', 'Ignored'),
             ('to_be_sent', 'To Do'),
             ('sent', 'Done'),

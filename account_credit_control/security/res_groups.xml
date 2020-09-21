@@ -22,4 +22,12 @@
         <field name="implied_ids" eval="[(4, ref('group_account_credit_control_user'))]"/>
     </record>
 
+    <data noupdate="1">
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_account_credit_control_manager'))]"/>
+        </record>
+
+    </data>
+
 </odoo>

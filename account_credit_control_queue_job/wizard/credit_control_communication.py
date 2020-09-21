@@ -5,7 +5,7 @@ from odoo import api, models
 from odoo.addons.queue_job.job import job
 
 
-class CreditControlCommunication(models.TransientModel):
+class CreditControlCommunication(models.Model):
 
     _inherit = 'credit.control.communication'
 

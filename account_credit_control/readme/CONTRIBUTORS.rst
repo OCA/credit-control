@@ -10,3 +10,6 @@
   * Vicent Cubells
   * Ernesto Tejeda
   * Pedro M. Baeza
+  * Jairo Llopis
+
+* Enric Tobella <etobella@creublanca.es>

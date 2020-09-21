@@ -29,6 +29,7 @@
      # Views
      "views/account_invoice.xml",
      "views/credit_control_line.xml",
+     "views/credit_control_communication.xml",
      "views/credit_control_policy.xml",
      "views/credit_control_run.xml",
      "views/res_company.xml",
@@ -49,6 +50,7 @@
      "wizard/credit_control_printer_view.xml",
      "wizard/credit_control_policy_changer_view.xml",
  ],
+ "demo": ["demo/res_users.xml"],
  'installable': True,
  'license': 'AGPL-3',
  'application': True,

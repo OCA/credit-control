@@ -53,12 +53,17 @@ class CreditControlEmailer(models.TransientModel):
         filtered_lines = self._filter_lines(self.line_ids)
         comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
         comms._generate_emails()
+        return comms
 
-    @api.multi
     def email_lines(self):
         self.ensure_one()
         if not self.line_ids:
             raise UserError(_('No credit control lines selected.'))
-
-        self._send_emails()
-        return {'type': 'ir.actions.act_window_close'}
+        communications = self._send_emails()
+        if not communications:
+            return {'type': 'ir.actions.act_window_close'}
+        action = self.sudo().env.ref(
+            "account_credit_control.credit_control_communication_action")
+        action['name'] = _('Generated communications')
+        action["domain"] = [('id', 'in', communications.ids)]
+        return action
