@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_credit_control_queue_job
+# 	* account_credit_control_queue_job
 #
 msgid ""
 msgstr ""
@@ -27,6 +27,11 @@ msgid "Create and send emails in jobs"
 msgstr "Crie e envie e-mails em ações agendada"
 
 #. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
+msgid "Credit control communication process"
+msgstr ""
+
+#. module: account_credit_control_queue_job
 #: selection:credit.control.line,state:0
 msgid "Done"
 msgstr "Concluído"
@@ -38,7 +43,8 @@ msgstr "Provisório"
 
 #. module: account_credit_control_queue_job
 #: model:ir.model.fields,help:account_credit_control_queue_job.field_credit_control_line__state
-msgid "Draft lines need to be triaged.\n"
+msgid ""
+"Draft lines need to be triaged.\n"
 "Ignored lines are lines for which we do not want to send something.\n"
 "Draft and ignored lines will be generated again on the next run."
 msgstr ""
@@ -67,6 +73,11 @@ msgid "Mass credit line emailer"
 msgstr "E-mail de linha de crédito em massa"
 
 #. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Queued"
+msgstr ""
+
+#. module: account_credit_control_queue_job
 #: model:ir.model.fields,field_description:account_credit_control_queue_job.field_credit_control_emailer__run_in_jobs
 msgid "Run In Jobs"
 msgstr "Executar Ações Agendadas"
@@ -86,7 +97,5 @@ msgstr "Estado"
 msgid "To Do"
 msgstr "A Fazer"
 
-#. module: account_credit_control_queue_job
-#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
-msgid "credit control communication"
-msgstr "comunicação de controle de crédito"
+#~ msgid "credit control communication"
+#~ msgstr "comunicação de controle de crédito"
