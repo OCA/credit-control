@@ -24,6 +24,11 @@ msgid "Create and send emails in jobs"
 msgstr ""
 
 #. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
+msgid "Credit control communication process"
+msgstr ""
+
+#. module: account_credit_control_queue_job
 #: selection:credit.control.line,state:0
 msgid "Done"
 msgstr ""
@@ -61,6 +66,11 @@ msgid "Mass credit line emailer"
 msgstr ""
 
 #. module: account_credit_control_queue_job
+#: selection:credit.control.line,state:0
+msgid "Queued"
+msgstr ""
+
+#. module: account_credit_control_queue_job
 #: model:ir.model.fields,field_description:account_credit_control_queue_job.field_credit_control_emailer__run_in_jobs
 msgid "Run In Jobs"
 msgstr ""
@@ -78,10 +88,5 @@ msgstr ""
 #. module: account_credit_control_queue_job
 #: selection:credit.control.line,state:0
 msgid "To Do"
-msgstr ""
-
-#. module: account_credit_control_queue_job
-#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
-msgid "credit control communication"
 msgstr ""
 
