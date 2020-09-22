@@ -406,6 +406,8 @@ class OverdueReminderStep(models.TransientModel):
         mvals.update({
             'subject': self.mail_subject,
             'body_html': self.mail_body,
+            'model': False,  # don't link to the wizard !
+            'res_id': False,
             })
         mvals.pop('attachment_ids', None)
         mvals.pop('attachments', None)
