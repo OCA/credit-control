@@ -83,10 +83,10 @@ class AccountCreditControlAnalysis(models.Model):
         return """
             CREATE VIEW credit_control_analysis
             AS
-            (SELECT DISTINCT ON (%s) %s
-            %s
-            ORDER BY %s)
-            """ % (
+            (SELECT DISTINCT ON ({}) {}
+            {}
+            ORDER BY {})
+            """.format(
             self._distinct_fields(),
             self._fields_to_select(),
             self._from_tables(),
