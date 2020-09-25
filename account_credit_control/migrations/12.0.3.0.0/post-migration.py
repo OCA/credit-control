@@ -41,7 +41,7 @@ def migrate(env, version):
     # manually changed if desired althoug they'll keep working as there's
     # backward compatibility with the old method
     communication_template = env.ref(
-        "account_credit_control.email_template_credit_control_base")
+        "account_credit_control.email_template_credit_control_base"
+    )
     communication_template.email_to = False
-    communication_template.partner_to = (
-        "${object.get_emailing_contact().id or ''}")
+    communication_template.partner_to = "${object.get_emailing_contact().id or ''}"

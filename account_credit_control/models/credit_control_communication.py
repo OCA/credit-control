@@ -17,20 +17,25 @@ class CreditControlCommunication(models.Model):
         comodel_name="res.partner", string="Partner", required=True, index=True
     )
     policy_id = fields.Many2one(
-        related='policy_level_id.policy_id',
-        store=True,
-        index=True,
+        related="policy_level_id.policy_id", store=True, index=True,
     )
     policy_level_id = fields.Many2one(
-        comodel_name="credit.control.policy.level", string="Level", required=True, index=True
+        comodel_name="credit.control.policy.level",
+        string="Level",
+        required=True,
+        index=True,
     )
     currency_id = fields.Many2one(
         comodel_name="res.currency", string="Currency", required=True, index=True
     )
     credit_control_line_ids = fields.One2many(
-        comodel_name="credit.control.line", inverse_name="communication_id", string="Credit Lines"
+        comodel_name="credit.control.line",
+        inverse_name="communication_id",
+        string="Credit Lines",
     )
-    contact_address_id = fields.Many2one(comodel_name="res.partner", readonly=True, index=True)
+    contact_address_id = fields.Many2one(
+        comodel_name="res.partner", readonly=True, index=True
+    )
     report_date = fields.Date(default=lambda self: fields.Date.context_today(self))
 
     company_id = fields.Many2one(
@@ -41,15 +46,18 @@ class CreditControlCommunication(models.Model):
         index=True,
     )
     user_id = fields.Many2one(
-        comodel_name="res.users", default=lambda self: self.env.user, string="User", index=True,
+        comodel_name="res.users",
+        default=lambda self: self.env.user,
+        string="User",
+        index=True,
     )
     total_invoiced = fields.Float(compute="_compute_total")
     total_due = fields.Float(compute="_compute_total")
 
     @api.model
     def _default_company(self):
-        company_obj = self.env['res.company']
-        return company_obj._company_default_get('credit.control.policy')
+        company_obj = self.env["res.company"]
+        return company_obj._company_default_get("credit.control.policy")
 
     @api.model
     def _get_total(self):
@@ -75,13 +83,13 @@ class CreditControlCommunication(models.Model):
     def _onchange_partner_id(self):
         """Update address when partner changes."""
         for one in self:
-            partners = one.env["res.partner"].search([
-                ("id", "child_of", one.partner_id.id),
-            ])
+            partners = one.env["res.partner"].search(
+                [("id", "child_of", one.partner_id.id)]
+            )
             if one.contact_address_id in partners:
                 # Contact is already child of partner
                 return
-            address_ids = one.partner_id.address_get(adr_pref=['invoice'])
+            address_ids = one.partner_id.address_get(adr_pref=["invoice"])
             one.contact_address_id = address_ids["invoice"]
 
     def get_emailing_contact(self):
@@ -149,8 +157,9 @@ class CreditControlCommunication(models.Model):
                 group["currency_id"],
                 group["company_id"],
             )
-            company_currency = self.env["res.company"].browse(
-                group["company_id"]).currency_id
+            company_currency = (
+                self.env["res.company"].browse(group["company_id"]).currency_id
+            )
             data["credit_control_line_ids"] = [(6, 0, level_lines.ids)]
             data["partner_id"] = group["partner_id"]
             data["policy_level_id"] = group["policy_level_id"]
@@ -179,12 +188,12 @@ class CreditControlCommunication(models.Model):
                 notify=True,
                 subtype_id=self.env.ref("account_credit_control.mt_request").id,
             )
-            comm.credit_control_line_ids \
-                .filtered(lambda line: line.state == 'to_be_sent') \
-                .write({"state": "queued"})
+            comm.credit_control_line_ids.filtered(
+                lambda line: line.state == "to_be_sent"
+            ).write({"state": "queued"})
 
     @api.returns("credit.control.line")
     def _mark_credit_line_as_sent(self):
-        lines = self.mapped('credit_control_line_ids')
+        lines = self.mapped("credit_control_line_ids")
         lines.write({"state": "sent"})
         return lines
