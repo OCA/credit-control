@@ -11,14 +11,9 @@ def migrate(env, version):
     mail_message_legacy = openupgrade.get_legacy_name("mail_message_id")
     openupgrade.copy_columns(
         env.cr,
-        {
-            "credit_control_line": [
-                ("mail_message_id", mail_message_legacy, None),
-            ]
-        },
+        {"credit_control_line": [("mail_message_id", mail_message_legacy, None)]},
     )
     # Vacuum meaningless transient data from credit.control.communication
     openupgrade.logged_query(
-        env.cr,
-        "DELETE FROM credit_control_communication",
+        env.cr, "DELETE FROM credit_control_communication",
     )

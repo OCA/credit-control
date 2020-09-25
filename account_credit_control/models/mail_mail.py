@@ -17,10 +17,7 @@ class Mail(models.Model):
             mt_request = self.env.ref("account_credit_control.mt_request")
             if self.subtype_id == mt_request:
                 lines = self.env["credit.control.line"].search(
-                    [
-                        ("communication_id", "=", msg.res_id),
-                        ("state", "=", "queued"),
-                    ]
+                    [("communication_id", "=", msg.res_id), ("state", "=", "queued")]
                 )
                 new_state = "sent" if self.state == "sent" else "email_error"
                 lines.write({"state": new_state})

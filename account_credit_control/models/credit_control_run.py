@@ -62,8 +62,8 @@ class CreditControlRun(models.Model):
         compute="_compute_credit_control_count", string="# of Credit Control Lines"
     )
     credit_control_communication_count = fields.Integer(
-        compute='_compute_credit_control_count',
-        string='# of Credit Control Communications',
+        compute="_compute_credit_control_count",
+        string="# of Credit Control Communications",
     )
     hide_change_state_button = fields.Boolean()
     company_id = fields.Many2one(
@@ -182,11 +182,11 @@ class CreditControlRun(models.Model):
         """Open the generated communications."""
         self.ensure_one()
         action = self.env.ref(
-            'account_credit_control.credit_control_communication_action'
+            "account_credit_control.credit_control_communication_action"
         )
         action = action.read()[0]
-        action['domain'] = [
-            ('id', 'in', self.mapped("line_ids.communication_id").ids),
+        action["domain"] = [
+            ("id", "in", self.mapped("line_ids.communication_id").ids),
         ]
         return action
 

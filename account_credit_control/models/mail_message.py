@@ -5,18 +5,21 @@ from odoo import models
 
 
 class MailMessage(models.Model):
-    _inherit = 'mail.message'
+    _inherit = "mail.message"
 
     def message_format(self):
         result = super().message_format()
-        credit_control = self.env['ir.model.data'].xmlid_to_res_id(
-            'account_credit_control.mt_request'
+        credit_control = self.env["ir.model.data"].xmlid_to_res_id(
+            "account_credit_control.mt_request"
         )
         for message in result:
-            message.update({
-                'is_discussion': message['is_discussion'] or (
-                    message['subtype_id'] and
-                    message['subtype_id'][0] == credit_control
-                )
-            })
+            message.update(
+                {
+                    "is_discussion": message["is_discussion"]
+                    or (
+                        message["subtype_id"]
+                        and message["subtype_id"][0] == credit_control
+                    )
+                }
+            )
         return result
