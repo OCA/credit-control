@@ -1,7 +1,7 @@
 # Copyright 2017-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestPartnerPaymentReturnRisk(common.SavepointCase):
@@ -9,23 +9,10 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
     def setUpClass(cls):
         super(TestPartnerPaymentReturnRisk, cls).setUpClass()
         cls.journal = cls.env["account.journal"].create(
-            {
-                "name": "Test Sales Journal",
-                "code": "tVEN",
-                "type": "sale",
-                "update_posted": True,
-            }
-        )
-        cls.bank_journal = cls.env["account.journal"].create(
-            {
-                "name": "Test Bank Journal",
-                "code": "BANK",
-                "type": "bank",
-                "update_posted": True,
-            }
+            {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
         cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable",}
+            {"name": "Test", "type": "receivable", "internal_group": "asset"}
         )
         cls.account = cls.env["account.account"].create(
             {
@@ -35,20 +22,25 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
                 "reconcile": True,
             }
         )
+        cls.bank_journal = cls.env["account.journal"].create(
+            {"name": "Test Bank Journal", "code": "BANK", "type": "bank"}
+        )
         cls.account_income = cls.env["account.account"].create(
             {
                 "name": "Test income account",
                 "code": "INCOME",
                 "user_type_id": cls.env["account.account.type"]
-                .create({"name": "Test income"})
+                .create(
+                    {"name": "Test income", "type": "other", "internal_group": "income"}
+                )
                 .id,
             }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test"})
-        cls.invoice = cls.env["account.invoice"].create(
+        cls.invoice = cls.env["account.move"].create(
             {
+                "type": "out_invoice",
                 "journal_id": cls.journal.id,
-                "account_id": cls.account.id,
                 "company_id": cls.env.user.company_id.id,
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "partner_id": cls.partner.id,
@@ -69,21 +61,25 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
         cls.reason = cls.env["payment.return.reason"].create(
             {"code": "RTEST", "name": "Reason Test"}
         )
-        cls.invoice.action_invoice_open()
-        cls.receivable_line = cls.invoice.move_id.line_ids.filtered(
+        cls.invoice.post()
+        cls.receivable_line = cls.invoice.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
-        # Invert the move to simulate the payment
-        cls.payment_move = cls.invoice.move_id.copy({"journal_id": cls.bank_journal.id})
-        for move_line in cls.payment_move.line_ids:
-            move_line.with_context(check_move_validity=False).write(
-                {"debit": move_line.credit, "credit": move_line.debit}
+        # Create payment from invoice
+        cls.payment_model = cls.env["account.payment"]
+        payment_register = Form(
+            cls.payment_model.with_context(
+                active_model="account.move", active_ids=cls.invoice.ids
             )
-        cls.payment_line = cls.payment_move.line_ids.filtered(
+        )
+        cls.payment = payment_register.save()
+        cls.payment.post()
+
+        cls.payment_move = cls.payment.move_line_ids[0].move_id
+
+        cls.payment_line = cls.payment.move_line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
-        # Reconcile both
-        (cls.receivable_line | cls.payment_line).reconcile()
         # Create payment return
         cls.payment_return = cls.env["payment.return"].create(
             {

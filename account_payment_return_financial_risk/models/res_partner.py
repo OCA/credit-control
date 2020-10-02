@@ -25,7 +25,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _risk_account_groups(self):
-        res = super(ResPartner, self)._risk_account_groups()
+        res = super()._risk_account_groups()
         res["open"]["domain"] += [
             ("partial_reconcile_returned_ids", "=", False),
         ]
@@ -36,7 +36,7 @@ class ResPartner(models.Model):
             "domain": self._get_risk_company_domain()
             + [
                 ("reconciled", "=", False),
-                ("user_type_id.type", "=", "receivable"),
+                ("account_internal_type", "=", "receivable"),
                 ("partial_reconcile_returned_ids", "!=", False),
             ],
             "fields": ["partner_id", "account_id", "amount_residual"],
@@ -44,9 +44,8 @@ class ResPartner(models.Model):
         }
         return res
 
-    @api.multi
     def _prepare_risk_account_vals(self, groups):
-        vals = super(ResPartner, self)._prepare_risk_account_vals(groups)
+        vals = super()._prepare_risk_account_vals(groups)
         vals["risk_payment_return"] = sum(
             reg["amount_residual"]
             for reg in groups["returned"]["read_group"]
@@ -56,7 +55,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _risk_field_list(self):
-        res = super(ResPartner, self)._risk_field_list()
+        res = super()._risk_field_list()
         res.append(
             (
                 "risk_payment_return",
