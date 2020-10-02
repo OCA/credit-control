@@ -33,19 +33,23 @@ class CreditControlPolicy(models.Model):
     )
     active = fields.Boolean(default=True)
 
-    def _move_lines_domain(self, controlling_date):
+    def _move_lines_domain(self, credit_control_run):
         """ Build the default domain for searching move lines """
         self.ensure_one()
+        # We need to set the company in order to work properly with multi-companies.
+        # If we have Company A and Company B (child of A), we might be able to run this
+        # for company B from Company A view.
         return [
             ("account_id", "in", self.account_ids.ids),
-            ("date_maturity", "<=", controlling_date),
+            ("date_maturity", "<=", credit_control_run.date),
             ("reconciled", "=", False),
             ("partner_id", "!=", False),
             ("parent_state", "=", "posted"),
+            ("company_id", "=", credit_control_run.company_id.id),
         ]
 
     @api.returns("account.move.line")
-    def _due_move_lines(self, controlling_date):
+    def _due_move_lines(self, credit_control_run):
         """ Get the due move lines for the policy of the company.
 
         The set of ids will be reduced and extended according
@@ -58,14 +62,13 @@ class CreditControlPolicy(models.Model):
         """
         self.ensure_one()
         move_l_obj = self.env["account.move.line"]
-        user = self.env.user
-        if user.company_id.credit_policy_id.id != self.id:
+        if credit_control_run.company_id.credit_policy_id.id != self.id:
             return move_l_obj
-        domain_line = self._move_lines_domain(controlling_date)
+        domain_line = self._move_lines_domain(credit_control_run)
         return move_l_obj.search(domain_line)
 
     @api.returns("account.move.line")
-    def _move_lines_subset(self, controlling_date, model, move_relation_field):
+    def _move_lines_subset(self, credit_control_run, model, move_relation_field):
         """ Get the move lines related to one model for a policy.
 
         Do not use direct SQL in order to respect security rules.
@@ -85,7 +88,7 @@ class CreditControlPolicy(models.Model):
         self.ensure_one()
         # MARK possible place for a good optimisation
         my_obj = self.env[model].with_context(active_test=False)
-        default_domain = self._move_lines_domain(controlling_date)
+        default_domain = self._move_lines_domain(credit_control_run)
 
         to_add = self.env["account.move.line"]
         to_remove = self.env["account.move.line"]
@@ -111,27 +114,27 @@ class CreditControlPolicy(models.Model):
         return to_add, to_remove
 
     @api.returns("account.move.line")
-    def _get_partner_related_lines(self, controlling_date):
+    def _get_partner_related_lines(self, credit_control_run):
         """ Get the move lines for a policy related to a partner.
 
         :param str controlling_date: date of credit control
         :return: recordset to add in the process, recordset to remove from
             the process
         """
-        return self._move_lines_subset(controlling_date, "res.partner", "partner_id")
+        return self._move_lines_subset(credit_control_run, "res.partner", "partner_id")
 
     @api.returns("account.move.line")
-    def _get_invoice_related_lines(self, controlling_date):
+    def _get_invoice_related_lines(self, credit_control_run):
         """ Get the move lines for a policy related to an invoice.
 
         :param str controlling_date: date of credit control
         :return: recordset to add in the process, recordset to remove from
             the process
         """
-        return self._move_lines_subset(controlling_date, "account.move", "move_id")
+        return self._move_lines_subset(credit_control_run, "account.move", "move_id")
 
     @api.returns("account.move.line")
-    def _get_move_lines_to_process(self, controlling_date):
+    def _get_move_lines_to_process(self, credit_control_run):
         """ Build a list of move lines ids to include in a run
         for a policy at a given date.
 
@@ -140,10 +143,10 @@ class CreditControlPolicy(models.Model):
         """
         self.ensure_one()
         # there is a priority between the lines, depicted by the calls below
-        lines = self._due_move_lines(controlling_date)
-        to_add, to_remove = self._get_partner_related_lines(controlling_date)
+        lines = self._due_move_lines(credit_control_run)
+        to_add, to_remove = self._get_partner_related_lines(credit_control_run)
         lines = (lines | to_add) - to_remove
-        to_add, to_remove = self._get_invoice_related_lines(controlling_date)
+        to_add, to_remove = self._get_invoice_related_lines(credit_control_run)
         lines = (lines | to_add) - to_remove
         return lines
 
@@ -186,10 +189,11 @@ class CreditControlPolicy(models.Model):
             )
         return True
 
-    def _generate_credit_lines(self, controlling_date, default_lines_vals=None):
+    def _generate_credit_lines(self, credit_control_run, default_lines_vals=None):
         self.ensure_one()
+        controlling_date = credit_control_run.date
         credit_line_model = self.env["credit.control.line"]
-        lines = self._get_move_lines_to_process(controlling_date)
+        lines = self._get_move_lines_to_process(credit_control_run)
         manual_lines = self._lines_different_policy(lines)
         lines -= manual_lines
         policy_lines_generated = credit_line_model
@@ -203,6 +207,7 @@ class CreditControlPolicy(models.Model):
                     level_lines,
                     level,
                     controlling_date,
+                    credit_control_run.company_id,
                     default_lines_vals=default_lines_vals,
                 )
         if policy_lines_generated:
