@@ -299,11 +299,6 @@ msgid "Company"
 msgstr "บริษัท"
 
 #. module: account_credit_control
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_line__company_id
-msgid "Company related to this journal"
-msgstr ""
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Compute Credit Control Lines"
 msgstr ""
