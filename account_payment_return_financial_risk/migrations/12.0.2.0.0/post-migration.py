@@ -9,6 +9,4 @@ def migrate(env, version):
     if not version:
         return
     # Remove old stored computed fields db columns
-    openupgrade.drop_columns(env.cr, [
-        ('res_partner', 'risk_payment_return'),
-    ])
+    openupgrade.drop_columns(env.cr, [("res_partner", "risk_payment_return"),])
