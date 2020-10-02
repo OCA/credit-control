@@ -39,10 +39,7 @@
                         <tr t-foreach="doc.credit_control_line_ids" t-as="l">
                             <t t-if="l.invoice_id">
                                 <td>
-                                    <span t-field="l.invoice_id.number" />
-                                    <t t-if="l.invoice_id.name">
-                                        <span t-field="l.invoice_id.name" />
-                                    </t>
+                                    <span t-field="l.invoice_id.name" />
                                 </td>
                             </t>
                             <t t-if="not l.invoice_id">
