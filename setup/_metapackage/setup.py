@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo13-addon-account_credit_control',
         'odoo13-addon-account_financial_risk',
+        'odoo13-addon-account_payment_return_financial_risk',
         'odoo13-addon-partner_risk_insurance',
         'odoo13-addon-sale_financial_risk',
     ],
