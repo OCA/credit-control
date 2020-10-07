@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo13-addon-account_payment_return_financial_risk',
         'odoo13-addon-partner_risk_insurance',
         'odoo13-addon-sale_financial_risk',
+        'odoo13-addon-stock_financial_risk',
     ],
     classifiers=[
         'Programming Language :: Python',
