@@ -29,7 +29,7 @@
                                 <th class="text-center">Past Reminders</th>
                             </tr>
                         </thead>
-                        <tr t-foreach="o.invoice_ids" t-as="inv">
+                        <tr t-foreach="o.invoice_ids.sorted(key='date_invoice')" t-as="inv">
                             <td class="text-center">
                                 <span t-field="inv.number"/>
                             </td>

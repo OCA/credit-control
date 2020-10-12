@@ -17,5 +17,6 @@ class AccountConfigSettings(models.TransientModel):
         related='company_id.overdue_reminder_min_interval_days',
         readonly=False)
     overdue_reminder_interface = fields.Selection(
-        related='company_id.overdue_reminder_interface',
-        readonly=False)
+        related='company_id.overdue_reminder_interface', readonly=False)
+    overdue_reminder_partner_policy = fields.Selection(
+        related='company_id.overdue_reminder_partner_policy', readonly=False)

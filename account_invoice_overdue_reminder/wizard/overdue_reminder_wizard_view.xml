@@ -18,6 +18,7 @@
                 <field name="user_ids" widget="many2many_tags"/>
             </group>
             <group name="options" string="Options">
+                <field name="partner_policy"/>
                 <field name="interface"/>
                 <label for="start_days"/>
                 <div name="start_days">
@@ -83,7 +84,7 @@
             </group>
             <group name="invoices">
                 <field name="invoice_ids" nolabel="1" context="{'form_view_ref': 'account.invoice_form'}">
-                    <tree>
+                    <tree default_order="date_invoice">
                         <field name="partner_id" string="Invoicing Contact"/>
                         <field name="number"/>
                         <field name="date_invoice"/>
@@ -110,6 +111,7 @@
                 <field name="result_notes"/>
             </group>
             <group name="mail" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}">
+                <field name="mail_cc_partner_ids" domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id)]" widget="many2many_tags"/>
                 <field name="mail_subject"/>
                 <field name="mail_body" colspan="2" nolabel="1"/>
             </group>

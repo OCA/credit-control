@@ -19,12 +19,23 @@ class ResCompany(models.Model):
         '_overdue_reminder_interface_selection',
         string='Default Overdue Reminder Wizard Interface',
         default='onebyone')
+    overdue_reminder_partner_policy = fields.Selection(
+        '_overdue_reminder_partner_policy_selection',
+        default='last_reminder', string='Contact to Remind')
 
     @api.model
     def _overdue_reminder_interface_selection(self):
         return [
             ('onebyone', _('One by One')),
             ('mass', _('Mass')),
+            ]
+
+    @api.model
+    def _overdue_reminder_partner_policy_selection(self):
+        return [
+            ('last_reminder', 'Last Reminder'),
+            ('last_invoice', 'Last Invoice'),
+            ('invoice_contact', 'Invoice Contact'),
             ]
 
     _sql_constraints = [

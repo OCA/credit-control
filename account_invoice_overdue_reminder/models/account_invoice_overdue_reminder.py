@@ -35,6 +35,8 @@ class AccountInvoiceOverdueReminder(models.Model):
         related='action_id.result_notes', readonly=False)
     action_mail_id = fields.Many2one(
         related='action_id.mail_id', readonly=True)
+    action_mail_cc = fields.Char(
+        related='action_id.mail_id.email_cc', readonly=True, string='Cc')
     action_mail_state = fields.Selection(
         related='action_id.mail_id.state', string='E-mail Status', readonly=True)
     counter = fields.Integer(readonly=True)

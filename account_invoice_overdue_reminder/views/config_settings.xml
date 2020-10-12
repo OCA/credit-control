@@ -16,7 +16,8 @@
         <group name="followup" position="before">
             <group name="overdue_reminder" string="Overdue Invoice Reminder">
                 <field name="overdue_reminder_attach_invoice"/>
-                <field name="overdue_reminder_interface"/>
+                <field name="overdue_reminder_partner_policy" widget="radio"/>
+                <field name="overdue_reminder_interface" widget="radio"/>
                 <label for="overdue_reminder_start_days" string="Default Reminder Trigger Delay"/>
                 <div name="overdue_reminder_start_days">
                     <field name="overdue_reminder_start_days" class="oe_inline"/> days

@@ -43,10 +43,18 @@ class OverdueReminderStart(models.TransientModel):
         '_interface_selection',
         string='Wizard Interface',
         default='onebyone', required=True)
+    partner_policy = fields.Selection(
+        '_partner_policy_selection', required=True,
+        string='Contact to Remind')
 
     @api.model
     def _interface_selection(self):
         return self.env['res.company']._overdue_reminder_interface_selection()
+
+    @api.model
+    def _partner_policy_selection(self):
+        return self.env['res.company'].\
+            _overdue_reminder_partner_policy_selection()
 
     @api.model
     def default_get(self, fields_list):
@@ -72,6 +80,7 @@ class OverdueReminderStart(models.TransientModel):
             'payment_ids': payments,
             'start_days': company.overdue_reminder_start_days,
             'min_interval_days': company.overdue_reminder_min_interval_days,
+            'partner_policy': company.overdue_reminder_partner_policy,
             })
         return res
 
@@ -208,8 +217,30 @@ class OverdueReminderStart(models.TransientModel):
                 ('credit', '>', 0),
             ])
         warn_unrec = unrec_payments + unrec_refunds
+        if self.partner_policy == 'last_reminder':
+            last_reminder = self.env['overdue.reminder.action'].search([
+                ('commercial_partner_id', '=', commercial_partner.id),
+                ('company_id', '=', self.company_id.id),
+                ], limit=1, order='date desc, id desc')
+            if last_reminder:
+                partner_id = last_reminder.partner_id.id
+            else:
+                partner_id = commercial_partner.address_get(
+                    ['invoice'])['invoice']
+        elif self.partner_policy == 'last_invoice':
+            last_inv = self.env['account.invoice'].search([
+                ('company_id', '=', self.company_id.id),
+                ('type', 'in', ('out_invoice', 'out_refund')),
+                ('commercial_partner_id', '=', commercial_partner.id),
+                ('state', 'in', ('open', 'paid')),
+                ], order='date_invoice desc', limit=1)
+            partner_id = last_inv.partner_id.id
+        elif self.partner_policy == 'invoice_contact':
+            partner_id = commercial_partner.address_get(
+                ['invoice'])['invoice']
+
         vals = {
-            'partner_id': invs[0].partner_id.id,
+            'partner_id': partner_id,
             'commercial_partner_id': commercial_partner.id,
             'user_id': self.env.user.id,
             'invoice_ids': [(6, 0, invs.ids)],
@@ -258,6 +289,7 @@ class OverdueReminderStep(models.TransientModel):
     reminder_type = fields.Selection(
         '_reminder_type_selection', default='mail',
         string='Reminder Type', required=True)
+    mail_cc_partner_ids = fields.Many2many('res.partner', string='Cc')
     mail_subject = fields.Char(string='Subject')
     mail_body = fields.Html()
     result_id = fields.Many2one(
@@ -406,6 +438,8 @@ class OverdueReminderStep(models.TransientModel):
         mvals.update({
             'subject': self.mail_subject,
             'body_html': self.mail_body,
+            'email_cc': ', '.join([
+                p.email for p in self.mail_cc_partner_ids if p.email]),
             'model': False,  # don't link to the wizard !
             'res_id': False,
             })

@@ -18,7 +18,7 @@ class OverdueReminderAction(models.Model):
         'res.partner', readonly=True, string='Contact')
     date = fields.Date(
         default=fields.Date.context_today, required=True, index=True,
-        readonly=True)
+        readonly=False)
     user_id = fields.Many2one(
         'res.users', string='Performed by', required=True, readonly=True,
         ondelete='restrict', default=lambda self: self.env.user)
@@ -33,6 +33,7 @@ class OverdueReminderAction(models.Model):
         'mail.mail', string='Reminder E-mail', readonly=True)
     mail_state = fields.Selection(
         related='mail_id.state', string='E-mail Status')
+    mail_cc = fields.Char(related='mail_id.email_cc', readonly=True)
     company_id = fields.Many2one(
         'res.company', string='Company', readonly=True)
     reminder_count = fields.Integer(
