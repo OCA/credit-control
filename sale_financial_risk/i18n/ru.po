@@ -21,7 +21,7 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: sale_financial_risk
-#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__commercial_partner_id
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_partner_id
 msgid "Commercial Entity"
 msgstr ""
 
