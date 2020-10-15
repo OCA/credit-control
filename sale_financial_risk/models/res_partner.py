@@ -23,13 +23,9 @@ class ResPartner(models.Model):
     )
 
     def _get_risk_sale_order_domain(self):
-        # When p is NewId object instance bool(p.id) is False
-        commercial_partners = self.filtered(
-            lambda p: (p.id and p == p.commercial_partner_id)
-        )
         return self._get_risk_company_domain() + [
             ("state", "=", "sale"),
-            ("commercial_partner_id", "in", commercial_partners.ids),
+            ("risk_partner_id", "in", self.mapped("commercial_partner_id").ids),
         ]
 
     @api.depends(
@@ -40,13 +36,13 @@ class ResPartner(models.Model):
         self.update({"risk_sale_order": 0.0})
         orders_group = self.env["sale.order.line"].read_group(
             domain=self._get_risk_sale_order_domain(),
-            fields=["commercial_partner_id", "company_id", "risk_amount"],
-            groupby=["commercial_partner_id", "company_id"],
+            fields=["risk_partner_id", "company_id", "risk_amount"],
+            groupby=["risk_partner_id", "company_id"],
             orderby="id",
             lazy=False,
         )
         for group in orders_group:
-            partner = self.browse(group["commercial_partner_id"][0])
+            partner = self.browse(group["risk_partner_id"][0])
             company = self.env["res.company"].browse(
                 group["company_id"][0] or self.env.company.id
             )

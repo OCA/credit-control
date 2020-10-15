@@ -67,9 +67,8 @@ class SaleOrderLine(models.Model):
         currency_field="company_currency_id",
         store=True,
     )
-    # TODO: Analyze performance vs order_id.partner_id.commercial_partner_id
-    commercial_partner_id = fields.Many2one(
-        related="order_partner_id.commercial_partner_id",
+    risk_partner_id = fields.Many2one(
+        related="order_id.partner_invoice_id.commercial_partner_id",
         string="Commercial Entity",
         store=True,
         index=True,
