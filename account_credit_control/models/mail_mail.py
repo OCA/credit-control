@@ -12,18 +12,21 @@ class Mail(models.Model):
         self, success_pids, failure_reason=False, failure_type=None
     ):
         """Mark credit control lines states."""
-        msg = self.mail_message_id
-        if msg.model == "credit.control.communication":
-            mt_request = self.env.ref("account_credit_control.mt_request")
-            if self.subtype_id == mt_request:
-                lines = self.env["credit.control.line"].search(
-                    [
-                        ("communication_id", "=", msg.res_id),
-                        ("state", "=", "queued"),
-                    ]
-                )
-                new_state = "sent" if self.state == "sent" else "email_error"
-                lines.write({"state": new_state})
+        mt_request = self.env.ref("account_credit_control.mt_request")
+        credit_control_line_obj = self.env["credit.control.line"]
+        for mail in self:
+            msg = mail.mail_message_id
+            if msg.model == "credit.control.communication":
+                if mail.subtype_id == mt_request:
+                    lines = credit_control_line_obj.search(
+                        [
+                            ("communication_id", "=", msg.res_id),
+                            ("state", "=", "queued"),
+                        ]
+                    )
+                    new_state = "sent" if mail.state == "sent" else \
+                                "email_error"
+                    lines.write({"state": new_state})
         return super()._postprocess_sent_message(
             success_pids=success_pids,
             failure_reason=failure_reason,
