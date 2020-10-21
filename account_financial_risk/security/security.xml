@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_overpass_partner_risk_exception" model="res.groups">
+        <field name="name">Partner Risk Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="comment">Can Overpass Partner Risk Exceptions</field>
+    </record>
+
+    <record model="res.groups" id="account.group_account_manager">
+        <field name="implied_ids" eval="[(4, ref('account_financial_risk.group_overpass_partner_risk_exception'))]"/>
+    </record>
+
+</odoo>
