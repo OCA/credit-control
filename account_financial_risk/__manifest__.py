@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/credit-control",
     "depends": ["account"],
     "data": [
+        "security/security.xml",
         "views/account_financial_risk_view.xml",
         "views/res_config_view.xml",
         "views/res_partner_view.xml",
