@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_financial_risk
-#: code:addons/stock_financial_risk/models/stock.py:30
+#: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid "Financial risk exceeded \n"
 msgstr ""
 
 #. module: stock_financial_risk
-#: code:addons/stock_financial_risk/models/stock.py:19
+#: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid ""
 "Financial risk exceeded in partner:\n"
