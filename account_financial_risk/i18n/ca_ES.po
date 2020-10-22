@@ -73,6 +73,11 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
+msgid "Can Overpass Partner Risk Exceptions"
+msgstr ""
+
+#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -379,6 +384,11 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
+msgid "Partner Risk Manager"
 msgstr ""
 
 #. module: account_financial_risk
