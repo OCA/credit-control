@@ -196,7 +196,7 @@ msgid "Attachment Count"
 msgstr "Compteur de pièce jointe"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:387
+#: code:addons/account_credit_control/models/credit_control_policy.py:392
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -1562,7 +1562,7 @@ msgid "Policy"
 msgstr "Politique"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:253
+#: code:addons/account_credit_control/models/credit_control_policy.py:258
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
@@ -1570,7 +1570,7 @@ msgstr ""
 "<br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:258
+#: code:addons/account_credit_control/models/credit_control_policy.py:263
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1688,7 +1688,7 @@ msgid "Salesperson"
 msgstr "Vendeur"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:310
+#: code:addons/account_credit_control/models/credit_control_line.py:315
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1825,7 +1825,7 @@ msgid "The partner had a manual followup."
 msgstr "Le partenaire a un suivi manuel."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:337
+#: code:addons/account_credit_control/models/credit_control_policy.py:342
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Le premier niveau ne peut pas être basé sur un précédent rappel"
@@ -1921,7 +1921,7 @@ msgid "Website communication history"
 msgstr "Historique de la communication du site web"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:288
+#: code:addons/account_credit_control/models/credit_control_line.py:293
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
@@ -1930,7 +1930,7 @@ msgstr ""
 "Vous ne pouvez pas supprimer une ligne de relance qui n'est pas en brouillon."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:223
+#: code:addons/account_credit_control/models/credit_control_policy.py:226
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"
