@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Credit control run">
                 <field name="date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
                 <field name="state"/>
             </tree>
         </field>

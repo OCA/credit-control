@@ -119,12 +119,15 @@ class CreditControlPolicyChanger(models.TransientModel):
         # As it is a manual action
         # We also ignore rounding tolerance
         create = credit_line_obj.create_or_update_from_mv_lines
-        generated_lines = create(
-            self.move_line_ids,
-            self.new_policy_level_id,
-            controlling_date,
-            check_tolerance=False,
-        )
+        generated_lines = credit_line_obj
+        for line in self.move_line_ids:
+            generated_lines |= create(
+                line,
+                self.new_policy_level_id,
+                controlling_date,
+                line.company_id,
+                check_tolerance=False,
+            )
         self._set_invoice_policy(self.move_line_ids, self.new_policy_id)
 
         if not generated_lines:

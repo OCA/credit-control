@@ -208,6 +208,7 @@ class CreditControlLine(models.Model):
         lines,
         level,
         controlling_date,
+        company,
         check_tolerance=True,
         default_lines_vals=None,
     ):
@@ -223,6 +224,7 @@ class CreditControlLine(models.Model):
         :param controlling_date: date string of the credit controlling date.
                                  Generally it should be the same
                                  as create date
+        :param company: res.company
         :param default_lines_vals: default values to create new credit control
                                    lines with
         :param check_tolerance: boolean if True credit line
@@ -233,15 +235,18 @@ class CreditControlLine(models.Model):
         :returns: recordset of created credit lines
         """
         currency_obj = self.env['res.currency']
-        user = self.env.user
         currencies = currency_obj.search([])
 
         tolerance = {}
-        tolerance_base = user.company_id.credit_control_tolerance
-        user_currency = user.company_id.currency_id
+        tolerance_base = company.credit_control_tolerance
+        user_currency = company.currency_id
         for currency in currencies:
-            tolerance[currency.id] = currency.compute(
-                tolerance_base, user_currency)
+            tolerance[currency.id] = currency._convert(
+                tolerance_base,
+                user_currency,
+                company,
+                controlling_date or fields.Date.today()
+            )
 
         lines_to_create = []
         lines_to_write = self.browse()
