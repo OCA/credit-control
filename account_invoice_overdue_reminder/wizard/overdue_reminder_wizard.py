@@ -435,11 +435,13 @@ class OverdueReminderStep(models.TransientModel):
             raise UserError(_('Mail body is empty.'))
         xmlid = MOD + '.overdue_invoice_reminder_mail_template'
         mvals = self.env.ref(xmlid).generate_email(self.id)
+        cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
+        if mvals.get('email_cc'):
+            cc_list.append(mvals['email_cc'])
         mvals.update({
             'subject': self.mail_subject,
             'body_html': self.mail_body,
-            'email_cc': ', '.join([
-                p.email for p in self.mail_cc_partner_ids if p.email]),
+            'email_cc': ', '.join(cc_list),
             'model': False,  # don't link to the wizard !
             'res_id': False,
             })
