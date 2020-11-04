@@ -41,6 +41,7 @@ class CreditControlPolicy(models.Model):
             ("date_maturity", "<=", controlling_date),
             ("reconciled", "=", False),
             ("partner_id", "!=", False),
+            ("parent_state", "=", "posted"),
         ]
 
     @api.returns("account.move.line")
