@@ -23,6 +23,10 @@
                             <label for="overdue_reminder_attach_invoice" class="col-md-5 o_light_label"/>
                             <field name="overdue_reminder_attach_invoice"/>
                         </div>
+                        <div class="row" name="overdue_reminder_partner_policy">
+                            <label for="overdue_reminder_partner_policy" class="col-md-5 o_light_label"/>
+                            <field name="overdue_reminder_partner_policy"/>
+                        </div>
                         <div class="row" name="overdue_reminder_interface">
                             <label for="overdue_reminder_interface" class="col-md-5 o_light_label" string="Default Wizard Interface"/>
                             <field name="overdue_reminder_interface"/>
