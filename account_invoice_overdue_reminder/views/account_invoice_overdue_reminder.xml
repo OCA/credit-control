@@ -16,12 +16,13 @@
             <group name="main">
                 <field name="counter" attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"/>
                 <field name="action_commercial_partner_id" invisible="not context.get('overdue_reminder_main_view')"/>
-                <field name="action_partner_id"/>
+                <field name="action_partner_id" context="{'show_email': True}"/>
                 <field name="invoice_id" invisible="not context.get('overdue_reminder_main_view')"/>
                 <field name="action_date"/>
                 <field name="action_user_id"/>
                 <field name="action_reminder_type"/>
                 <field name="action_mail_id" attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"/>
+                <field name="action_mail_cc" attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"/>
                 <field name="action_mail_state" attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"/>
             </group>
             <group string="Info/Result" name="result">
