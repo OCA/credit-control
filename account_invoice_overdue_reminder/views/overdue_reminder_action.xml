@@ -15,11 +15,12 @@
         <form>
             <group name="main">
                 <field name="commercial_partner_id"/>
-                <field name="partner_id"/>
+                <field name="partner_id" context="{'show_email': True}"/>
                 <field name="date"/>
                 <field name="user_id"/>
                 <field name="reminder_type"/>
                 <field name="mail_id" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"/>
+                <field name="mail_cc" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"/>
                 <field name="mail_state" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"/>
             </group>
             <group name="result" string="Info/Result">
