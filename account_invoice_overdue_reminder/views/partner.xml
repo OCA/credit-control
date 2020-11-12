@@ -21,5 +21,12 @@
     </field>
 </record>
 
+<act_window
+    id="action_overdue_reminder_action"
+    name="Overdue Reminder Actions"
+    context="{'search_default_commercial_partner_id': [active_id]}"
+    res_model="overdue.reminder.action"
+    src_model="res.partner"/>
+
 
 </odoo>
