@@ -111,7 +111,7 @@
                 <field name="result_notes"/>
             </group>
             <group name="mail" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}">
-                <field name="mail_cc_partner_ids" domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id)]" widget="many2many_tags"/>
+                <field name="mail_cc_partner_ids" domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id), ('email', '!=', False)]" widget="many2many_tags"/>
                 <field name="mail_subject"/>
                 <field name="mail_body" colspan="2" nolabel="1"/>
             </group>
