@@ -35,7 +35,7 @@
         <th style="padding: 5px; border: 1px solid black;">Residual</th>
         <th style="padding: 5px; border: 1px solid black;">Past Reminders</th>
     </tr>
-% for inv in object.invoice_ids:
+% for inv in object.invoice_ids.sorted(key='date_invoice'):
     <tr>
         <td style="padding: 5px; border: 1px solid black;">${inv.number}</td>
         <td style="padding: 5px; border: 1px solid black;">${format_date(inv.date_invoice)}</td>
