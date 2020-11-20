@@ -15,12 +15,12 @@
                 <footer>
                     <button
                         string="Continue"
-                        class="oe_highlight"
+                        class="btn-primary"
                         name="button_continue"
                         type="object"
                         groups="account_financial_risk.group_overpass_partner_risk_exception"
                     />
-                    <button string="Cancel" class="oe_link" special="cancel" />
+                    <button string="Cancel" class="btn-link" special="cancel" />
                 </footer>
             </form>
         </field>
