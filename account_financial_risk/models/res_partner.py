@@ -135,7 +135,8 @@ class ResPartner(models.Model):
         tracking=True,
     )
     manual_credit_currency_id = fields.Many2one(
-        comodel_name="res.currency", string="Manual Credit Currency",
+        comodel_name="res.currency",
+        string="Manual Credit Currency",
     )
     risk_currency_id = fields.Many2one(
         comodel_name="res.currency", compute="_compute_credit_currency"
@@ -229,7 +230,7 @@ class ResPartner(models.Model):
             "draft": {
                 "domain": company_domain
                 + [
-                    ("move_id.type", "in", ["out_invoice", "out_refund"]),
+                    ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
                     ("account_internal_type", "=", "receivable"),
                     ("parent_state", "in", ["draft", "proforma", "proforma2"]),
                 ],
@@ -468,7 +469,10 @@ class ResPartner(models.Model):
         view_name = "financial_risk_{}_pivot_view".format(model_name.replace(".", "_"))
         view_id = (
             self.env["ir.model.data"]
-            .search([("name", "=", view_name), ("model", "=", "ir.ui.view")], limit=1,)
+            .search(
+                [("name", "=", view_name), ("model", "=", "ir.ui.view")],
+                limit=1,
+            )
             .res_id
         )
         return {
