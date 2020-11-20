@@ -5,3 +5,5 @@
   * Ernesto Tejeda
 
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
+
+* Ugne Sinkeviciene <ugne@versada.eu>
