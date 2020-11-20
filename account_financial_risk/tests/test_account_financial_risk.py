@@ -59,8 +59,7 @@ class TestPartnerFinancialRisk(SavepointCase):
                 "name": "Test journal for sale",
                 "type": "sale",
                 "code": "TSALE",
-                "default_debit_account_id": cls.account_sale.id,
-                "default_credit_account_id": cls.account_sale.id,
+                "company_id": cls.env.company.id,
             }
         )
         cls.tax = cls.env["account.tax"].create(
@@ -74,7 +73,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         )
         cls.invoice = (
             cls.env["account.move"]
-            .with_context(default_type="out_invoice")
+            .with_context(default_move_type="out_invoice")
             .create(
                 {
                     "partner_id": cls.partner.id,
@@ -102,7 +101,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.partner.risk_invoice_draft_include = True
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 550.0)
         self.assertAlmostEqual(self.partner.risk_total, 550.0)
-        self.invoice.post()
+        self.invoice.action_post()
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
         line = self.invoice.line_ids.filtered(lambda x: x.debit != 0.0)
         line.date_maturity = "2017-01-01"
@@ -119,7 +118,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         invoice2 = self.invoice.copy({"partner_id": self.invoice_address.id})
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 550.0)
         self.assertAlmostEqual(self.partner.risk_invoice_unpaid, 550.0)
-        wiz_dic = invoice2.post()
+        wiz_dic = invoice2.action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.partner.risk_invoice_unpaid_limit = 0.0
@@ -128,7 +127,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.assertIn(self.partner, unrisk_partners)
         self.partner.risk_invoice_open_limit = 300.0
         invoice2.invoice_date_due = fields.Date.today()
-        wiz_dic = invoice2.post()
+        wiz_dic = invoice2.action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This invoice exceeds the open invoices risk.\n"
@@ -137,7 +136,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.partner.risk_invoice_draft_include = False
         self.partner.risk_invoice_open_include = True
         self.partner.credit_limit = 900.0
-        wiz_dic = invoice2.post()
+        wiz_dic = invoice2.action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This invoice exceeds the financial risk.\n"
@@ -150,7 +149,7 @@ class TestPartnerFinancialRisk(SavepointCase):
     def test_other_account_amount(self):
         self.move = (
             self.env["account.move"]
-            .with_context(default_type="entry")
+            .with_context(default_move_type="entry")
             .create(
                 {
                     "journal_id": self.journal_sale.id,
@@ -180,7 +179,7 @@ class TestPartnerFinancialRisk(SavepointCase):
                 }
             )
         )
-        self.move.post()
+        self.move.action_post()
         self.assertAlmostEqual(self.partner.risk_account_amount, 100.0)
         line = self.move.line_ids.filtered(lambda x: x.debit != 0.0)
         line.date_maturity = "2017-01-01"
@@ -201,13 +200,13 @@ class TestPartnerFinancialRisk(SavepointCase):
         new._compute_risk_account_amount()
 
     def test_batch_invoice_confirm(self):
-        self.invoice.post()
+        self.invoice.action_post()
         line = self.invoice.line_ids.filtered(lambda x: x.debit != 0.0)
         line.date_maturity = "2017-01-01"
         self.partner.risk_invoice_unpaid_include = True
         self.partner.credit_limit = 100.0
         invoice2 = self.invoice.copy({"partner_id": self.invoice_address.id})
-        risk_exceeded_view = invoice2.post()
+        risk_exceeded_view = invoice2.action_post()
         self.assertTrue(isinstance(risk_exceeded_view, dict))
         self.assertEqual(invoice2.state, "draft")
 
