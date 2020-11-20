@@ -59,13 +59,13 @@ class AccountMove(models.Model):
             exception_msg = _("This invoice exceeds the financial risk.\n")
         return exception_msg
 
-    def post(self):
+    def action_post(self):
         if (
             self.env.context.get("bypass_risk", False)
             or self.company_id.allow_overrisk_invoice_validation
         ):
-            return super().post()
-        for invoice in self.filtered(lambda x: x.type == "out_invoice"):
+            return super().action_post()
+        for invoice in self.filtered(lambda x: x.move_type == "out_invoice"):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
                 return (
@@ -77,9 +77,9 @@ class AccountMove(models.Model):
                             "origin_reference": "{},{}".format(
                                 "account.move", invoice.id
                             ),
-                            "continue_method": "post",
+                            "continue_method": "action_post",
                         }
                     )
                     .action_show()
                 )
-        return super().post()
+        return super().action_post()

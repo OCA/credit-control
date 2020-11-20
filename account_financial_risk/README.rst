@@ -14,10 +14,10 @@ Account Financial Risk
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
-    :target: https://github.com/OCA/credit-control/tree/13.0/account_financial_risk
+    :target: https://github.com/OCA/credit-control/tree/14.0/account_financial_risk
     :alt: OCA/credit-control
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/credit-control-13-0/credit-control-13-0-account_financial_risk
+    :target: https://translation.odoo-community.org/projects/credit-control-14-0/credit-control-13-0-account_financial_risk
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/262/13.0
@@ -105,6 +105,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/13.0/account_financial_risk>`_ project on GitHub.
+This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/14.0/account_financial_risk>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
