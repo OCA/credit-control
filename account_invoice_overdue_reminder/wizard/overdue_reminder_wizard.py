@@ -306,7 +306,7 @@ class OverdueReminderStep(models.TransientModel):
         'account.move.line', string='Unreconciled Payments/Refunds',
         readonly=True)
     unreconciled_move_line_normal = fields.Boolean(
-        string='Check if unreconciled payments/refunds above have a good '
+        string='To check if unreconciled payments/refunds above have a good '
                'reason not to be reconciled with an open invoice')
     interface = fields.Char(readonly=True)
     state = fields.Selection([
