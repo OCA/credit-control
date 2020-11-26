@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_common" inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/account_financial_risk/static/src/scss/account_financial_risk_table.scss"
+            />
+        </xpath>
+    </template>
+</odoo>
