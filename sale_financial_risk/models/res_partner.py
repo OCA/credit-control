@@ -62,7 +62,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _risk_field_list(self):
-        res = super(ResPartner, self)._risk_field_list()
+        res = super()._risk_field_list()
         res.append(
             ("risk_sale_order", "risk_sale_order_limit", "risk_sale_order_include")
         )
