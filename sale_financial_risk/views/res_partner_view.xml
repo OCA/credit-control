@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_partner_view_risk" model="ir.ui.view">
+        <field name="name">res.partner.view.risk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account_financial_risk.res_partner_view_risk" />
+        <field name="arch" type="xml">
+            <field name="risk_invoice_draft_include" position="before">
+                <field
+                    name="risk_sale_order_include"
+                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                />
+                <button
+                    name="open_risk_pivot_info"
+                    type="object"
+                    class="btn-link"
+                    context="{'open_risk_field': 'risk_sale_order'}"
+                >
+                    <field
+                        name="risk_sale_order"
+                        nolabel="1"
+                        widget='monetary'
+                        options="{'currency_field': 'risk_currency_id'}"
+                    />
+                </button>
+            </field>
+            <field name="risk_invoice_draft_limit" position="before">
+                <field
+                    name="risk_sale_order_limit"
+                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                    widget='monetary'
+                    options="{'currency_field': 'risk_currency_id'}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
