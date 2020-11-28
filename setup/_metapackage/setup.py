@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-account_financial_risk',
+        'odoo14-addon-sale_financial_risk',
     ],
     classifiers=[
         'Programming Language :: Python',
