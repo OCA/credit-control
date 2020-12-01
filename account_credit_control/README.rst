@@ -115,6 +115,8 @@ Contributors
   * Pedro M. Baeza
   * Jairo Llopis
 
+* Enric Tobella <etobella@creublanca.es>
+
 Maintainers
 ~~~~~~~~~~~
 
