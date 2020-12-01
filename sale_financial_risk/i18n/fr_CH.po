@@ -9,70 +9,71 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
-"PO-Revision-Date: 2017-06-02 00:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (Switzerland) (https://www.transifex.com/oca/"
-"teams/23907/fr_CH/)\n"
+"PO-Revision-Date: 2020-12-01 10:36+0000\n"
+"Last-Translator: Martronic SA <info@martronic.ch>\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/"
+"23907/fr_CH/)\n"
 "Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__commercial_partner_id
 msgid "Commercial Entity"
-msgstr ""
+msgstr "Entité commerciale"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Devise de la société"
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configuration"
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: sale_financial_risk
 #: code:addons/sale_financial_risk/models/sale.py:20
 #, python-format
 msgid "Financial risk exceeded.\n"
-msgstr ""
+msgstr "Limite de crédit dépassé\n"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,help:sale_financial_risk.field_res_partner__risk_sale_order_include
 #: model:ir.model.fields,help:sale_financial_risk.field_res_users__risk_sale_order_include
 msgid "Full risk computation"
-msgstr ""
+msgstr "Risque total"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order_include
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_include
 msgid "Include Sales Orders"
-msgstr ""
+msgstr "Inclure les Commandes"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_config_settings__include_risk_sale_order_done
 #: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
 msgid "Include locked sale orders into risk calculation"
-msgstr ""
+msgstr "Inclure les Commandes bloquées dans le calcul du risque"
 
 #. module: sale_financial_risk
 #: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
 msgid "Include orders in done state"
-msgstr ""
+msgstr "Inclure les Commandes bloquées"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order_limit
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_limit
 msgid "Limit Sales Orders"
-msgstr ""
+msgstr "Limite sur les Commandes"
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_payment_transaction
