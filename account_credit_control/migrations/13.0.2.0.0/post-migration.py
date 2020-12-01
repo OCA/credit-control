@@ -4,9 +4,14 @@
 
 from openupgradelib import openupgrade
 
+from odoo.tools.parse_version import parse_version
+
 
 @openupgrade.migrate()
 def migrate(env, version):
+    # Skip migration if 12.0.3 was already installed (migration was already run)
+    if parse_version("12.0.3.0.0") <= parse_version(version) < parse_version("13.0"):
+        return
     # Update mail.template records for credit.control.communication
     communication_model = env.ref(
         "account_credit_control.model_credit_control_communication"
