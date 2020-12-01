@@ -129,9 +129,8 @@ class CreditControlCommunication(models.Model):
     def _aggregate_credit_lines(self, lines):
         """ Aggregate credit control line by partner, level, and currency
         """
-        comms = self.browse()
         if not lines:
-            return comms
+            return []
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
             " credit_control_line.currency_id, "
@@ -157,14 +156,17 @@ class CreditControlCommunication(models.Model):
                 group["currency_id"],
                 group["company_id"],
             )
-            company_currency = (
-                self.env["res.company"].browse(group["company_id"]).currency_id
+            company = (
+                self.env["res.company"].browse(group["company_id"])
+                if group["company_id"]
+                else self.env.company
             )
+            company_currency = company.currency_id
             data["credit_control_line_ids"] = [(6, 0, level_lines.ids)]
             data["partner_id"] = group["partner_id"]
             data["policy_level_id"] = group["policy_level_id"]
             data["currency_id"] = group["currency_id"] or company_currency.id
-            data["company_id"] = group["company_id"]
+            data["company_id"] = group["company_id"] or company.id
             datas.append(data)
         return datas
 
