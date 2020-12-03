@@ -6,4 +6,12 @@
 * Kinner Vachhani (Access Bookings Ltd) <kin.vachhani@gmail.com>
 * Raf Ven <raf.ven@dynapps.be>
 * Quentin Groulard (ACSONE) <quentin.groulard@acsone.eu>
-* Manuel Calero (Tecnativa)
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Vicent Cubells
+  * Manuel Calero
+  * Ernesto Tejeda
+  * Pedro M. Baeza
+  * Jairo Llopis
+
+* Enric Tobella <etobella@creublanca.es>

@@ -54,14 +54,32 @@
                             attrs="{'invisible': [('state', '=', 'draft')]}"
                         >
                             <field
-                                string="Control Lines"
+                                string="Lines"
                                 name="credit_control_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="open_credit_communications"
+                            icon="fa-comments-o"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"
+                        >
+                            <field
+                                string="Communications"
+                                name="credit_control_communication_count"
                                 widget="statinfo"
                             />
                         </button>
                     </div>
                     <group>
                         <field name="date" />
+                        <field
+                            name="company_id"
+                            groups="base.group_multi_company"
+                            options="{'no_create': True}"
+                        />
                         <field name="hide_change_state_button" invisible="1" />
                     </group>
                     <notebook>
@@ -96,11 +114,11 @@
         <field name="view_id" ref="credit_control_run_tree" />
     </record>
     <menuitem
-        name="Credit Control Run"
+        name="Runs"
         parent="base_credit_control_menu"
         action="credit_control_run"
         sequence="10"
         id="credit_control_run_menu"
-        groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+        groups="account_credit_control.group_account_credit_control_user"
     />
 </odoo>

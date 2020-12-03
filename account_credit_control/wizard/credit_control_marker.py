@@ -25,7 +25,12 @@ class CreditControlMarker(models.TransientModel):
         return self._filter_lines(lines)
 
     name = fields.Selection(
-        selection=[("ignored", "Ignored"), ("to_be_sent", "To Do"), ("sent", "Done")],
+        selection=[
+            ("draft", "Draft"),
+            ("ignored", "Ignored"),
+            ("to_be_sent", "To Do"),
+            ("sent", "Done"),
+        ],
         string="Mark as",
         default="to_be_sent",
         required=True,
