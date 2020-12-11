@@ -9,6 +9,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     def evaluate_risk_message(self, partner):
+        self.ensure_one()
         risk_amount = self.currency_id._convert(
             self.amount_total,
             self.company_id.currency_id,
@@ -33,21 +34,22 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         if not self.env.context.get("bypass_risk", False):
-            partner = self.partner_invoice_id.commercial_partner_id
-            exception_msg = self.evaluate_risk_message(partner)
-            if exception_msg:
-                return (
-                    self.env["partner.risk.exceeded.wiz"]
-                    .create(
-                        {
-                            "exception_msg": exception_msg,
-                            "partner_id": partner.id,
-                            "origin_reference": "{},{}".format("sale.order", self.id),
-                            "continue_method": "action_confirm",
-                        }
+            for order in self:
+                partner = order.partner_invoice_id.commercial_partner_id
+                exception_msg = order.evaluate_risk_message(partner)
+                if exception_msg:
+                    return (
+                        self.env["partner.risk.exceeded.wiz"]
+                        .create(
+                            {
+                                "exception_msg": exception_msg,
+                                "partner_id": partner.id,
+                                "origin_reference": "%s,%s" % ("sale.order", order.id),
+                                "continue_method": "action_confirm",
+                            }
+                        )
+                        .action_show()
                     )
-                    .action_show()
-                )
         return super().action_confirm()
 
 
