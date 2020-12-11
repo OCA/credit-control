@@ -1,11 +1,11 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
-# Copyright 2020 Manuel Calero - Tecnativa
+# Copyright 2019-2020 Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Account Credit Control",
-    "version": "13.0.2.0.0",
+    "version": "13.0.2.0.1",
     "author": "Camptocamp,"
     "Odoo Community Association (OCA),"
     "Okia,"

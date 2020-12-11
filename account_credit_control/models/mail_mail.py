@@ -13,7 +13,7 @@ class Mail(models.Model):
     ):
         """Mark credit control lines states."""
         for mail in self:
-            msg = self.mail_message_id
+            msg = mail.mail_message_id
             if msg.model != "credit.control.communication":
                 continue
             mt_request = self.env.ref("account_credit_control.mt_request")
