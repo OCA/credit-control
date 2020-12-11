@@ -9,6 +9,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def risk_exception_msg(self):
+        self.ensure_one()
         risk_amount = self.currency_id._convert(
             self.amount_total, self.company_id.currency_id,
             self.company_id, self.confirmation_date and
@@ -33,14 +34,15 @@ class SaleOrder(models.Model):
     @api.multi
     def action_confirm(self):
         if not self.env.context.get('bypass_risk', False):
-            exception_msg = self.risk_exception_msg()
-            if exception_msg:
-                return self.env['partner.risk.exceeded.wiz'].create({
-                    'exception_msg': exception_msg,
-                    'partner_id': self.partner_id.commercial_partner_id.id,
-                    'origin_reference': '%s,%s' % ('sale.order', self.id),
-                    'continue_method': 'action_confirm',
-                }).action_show()
+            for order in self:
+                exception_msg = order.risk_exception_msg()
+                if exception_msg:
+                    return self.env['partner.risk.exceeded.wiz'].create({
+                        'exception_msg': exception_msg,
+                        'partner_id': order.partner_id.commercial_partner_id.id,
+                        'origin_reference': '%s,%s' % ('sale.order', order.id),
+                        'continue_method': 'action_confirm',
+                    }).action_show()
         return super(SaleOrder, self).action_confirm()
 
     @api.model
