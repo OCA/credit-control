@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
 "PO-Revision-Date: 2020-12-01 10:36+0000\n"
 "Last-Translator: Martronic SA <info@martronic.ch>\n"
-"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/"
-"23907/fr_CH/)\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/"
+"teams/23907/fr_CH/)\n"
 "Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgid "Contact"
 msgstr "Contact"
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:20
+#: code:addons/sale_financial_risk/models/sale.py:21
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr "Limite de crédit dépassé\n"
@@ -107,13 +107,13 @@ msgid "Set 0 if it is not locked"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:29
+#: code:addons/sale_financial_risk/models/sale.py:30
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 msgstr ""
 
 #. module: sale_financial_risk
-#: code:addons/sale_financial_risk/models/sale.py:24
+#: code:addons/sale_financial_risk/models/sale.py:25
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
 msgstr ""
