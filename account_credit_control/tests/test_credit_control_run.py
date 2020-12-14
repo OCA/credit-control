@@ -1,23 +1,39 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
-# Copyright 2020 Manuel Calero - Tecnativa
+# Copyright 2020 Tecnativa - Manuel Calero
+# Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 from datetime import datetime
 
 from dateutil import relativedelta
 
-from odoo import fields
+from odoo import fields, tools
 from odoo.exceptions import UserError
+from odoo.modules.module import get_resource_path
 from odoo.tests import tagged
 from odoo.tests.common import Form, TransactionCase
 
 
 @tagged("post_install", "-at_install")
 class TestCreditControlRun(TransactionCase):
+    def _load(self, module, *args):
+        tools.convert_file(
+            self.cr,
+            module,
+            get_resource_path(module, *args),
+            {},
+            "init",
+            False,
+            "test",
+            self.registry._assertion_report,
+        )
+
     def setUp(self):
         super(TestCreditControlRun, self).setUp()
 
-        journal = self.env.ref("account_credit_control.sales_journal")
+        self._load("account", "test", "account_minimal_test.xml")
+
+        journal = self.env.ref("account.sales_journal")
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
