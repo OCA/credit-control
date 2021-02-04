@@ -14,12 +14,16 @@ class ResPartner(models.Model):
 
     credit_limit = fields.Float('Credit Limit', store=True,
                                 compute='_compute_credit_limit')
-    company_credit_limit = fields.Float("Company's Credit Limit",
-                                        help='Credit limit granted by the '
-                                        'company.')
-    insurance_credit_limit = fields.Float("Insurance's Credit Limit",
-                                          help='Credit limit granted by the '
-                                          'insurance company.')
+    company_credit_limit = fields.Float(
+        "Company's Credit Limit",
+        help='Credit limit granted by the company.',
+        track_visibility="onchange",
+    )
+    insurance_credit_limit = fields.Float(
+        "Insurance's Credit Limit",
+        help='Credit limit granted by the insurance company.',
+        track_visibility="onchange",
+    )
     risk_insurance_coverage_percent = fields.Float(
         "Insurance's Credit Coverage", help='Percentage of the credit covered '
         'by the insurance.')
