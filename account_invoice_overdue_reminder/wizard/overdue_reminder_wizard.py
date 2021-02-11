@@ -1,10 +1,11 @@
-# Copyright 2020 Akretion France (http://www.akretion.com/)
+# Copyright 2020-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
+from collections import defaultdict
 import base64
 import logging
 logger = logging.getLogger(__name__)
@@ -18,7 +19,7 @@ class OverdueReminderStart(models.TransientModel):
 
     partner_ids = fields.Many2many(
         'res.partner', string='Customers',
-        domain=[('customer', '=', True), ('parent_id', '=', False)])
+        domain=[('customer_rank', '>', 0), ('parent_id', '=', False)])
     user_ids = fields.Many2many(
         'res.users', string='Salesman')
     payment_ids = fields.Many2many(
@@ -37,7 +38,7 @@ class OverdueReminderStart(models.TransientModel):
         string='I consider that payments are up-to-date')
     company_id = fields.Many2one(
         'res.company', readonly=True, required=True,
-        default=lambda self: self.env['res.company']._company_default_get())
+        default=lambda self: self.env.company)
     interface = fields.Selection(
         '_interface_selection',
         string='Wizard Interface',
@@ -59,7 +60,7 @@ class OverdueReminderStart(models.TransientModel):
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
         amo = self.env['account.move']
-        company = self.env.user.company_id
+        company = self.env.company
         journals = self.env['account.journal'].search([
             ('company_id', '=', company.id),
             ('type', 'in', ('bank', 'cash'))])
@@ -86,8 +87,9 @@ class OverdueReminderStart(models.TransientModel):
     def _prepare_base_domain(self):
         base_domain = [
             ('company_id', '=', self.company_id.id),
-            ('type', '=', 'out_invoice'),
-            ('state', '=', 'open'),
+            ('move_type', '=', 'out_invoice'),
+            ('state', '=', 'posted'),
+            ('payment_state', 'not in', ('paid', 'reversed', 'in_payment')),
             ('no_overdue_reminder', '=', False),
             ]
         return base_domain
@@ -97,7 +99,7 @@ class OverdueReminderStart(models.TransientModel):
         limit_date = today
         if self.start_days:
             limit_date -= relativedelta(days=self.start_days)
-        domain = base_domain + [('date_due', '<', limit_date)]
+        domain = base_domain + [('invoice_date_due', '<', limit_date)]
         if self.partner_ids:
             domain.append(('commercial_partner_id', 'in', self.partner_ids.ids))
         if self.user_ids:
@@ -116,7 +118,7 @@ class OverdueReminderStart(models.TransientModel):
         if self.min_interval_days < 1:
             raise UserError(_(
                 "The minimum delay since last reminder must be strictly positive."))
-        aio = self.env['account.invoice']
+        amo = self.env['account.move']
         ajo = self.env['account.journal']
         rpo = self.env['res.partner']
         orso = self.env['overdue.reminder.step']
@@ -141,14 +143,14 @@ class OverdueReminderStart(models.TransientModel):
         # whereas search 2 compares due_date to today
         base_domain = self._prepare_base_domain()
         domain = self._prepare_remind_trigger_domain(base_domain)
-        rg_res = aio.read_group(
+        rg_res = amo.read_group(
             domain,
-            ['commercial_partner_id', 'residual_company_signed'],
+            ['commercial_partner_id', 'amount_residual_signed'],
             ['commercial_partner_id'])
         # Sort by residual amount desc
         rg_res_sorted = sorted(
             rg_res,
-            key=lambda to_sort: to_sort['residual_company_signed'],
+            key=lambda to_sort: to_sort['amount_residual_signed'],
             reverse=True)
         action_ids = []
         for rg_re in rg_res_sorted:
@@ -165,7 +167,7 @@ class OverdueReminderStart(models.TransientModel):
                 "There are no overdue reminders."))
         if self.interface == 'onebyone':
             xid = MOD + '.overdue_reminder_step_onebyone_action'
-            action = self.env.ref(xid).read()[0]
+            action = self.env.ref(xid).sudo().read()[0]
             action['res_id'] = action_ids[0]
         elif self.interface == 'mass':
             action = orso.goto_list_view()
@@ -180,10 +182,10 @@ class OverdueReminderStart(models.TransientModel):
                 'Skipping customer %s that has no_overdue_reminder=True',
                 commercial_partner.display_name)
             return False
-        invs = self.env['account.invoice'].search(
+        invs = self.env['account.move'].search(
             base_domain + [
                 ('commercial_partner_id', '=', commercial_partner.id),
-                ('date_due', '<', fields.Date.context_today(self))])
+                ('invoice_date_due', '<', fields.Date.context_today(self))])
         assert invs
         # Check min interval
         if any([
@@ -225,12 +227,12 @@ class OverdueReminderStart(models.TransientModel):
                 partner_id = commercial_partner.address_get(
                     ['invoice'])['invoice']
         elif self.partner_policy == 'last_invoice':
-            last_inv = self.env['account.invoice'].search([
+            last_inv = self.env['account.move'].search([
                 ('company_id', '=', self.company_id.id),
-                ('type', 'in', ('out_invoice', 'out_refund')),
+                ('move_type', 'in', ('out_invoice', 'out_refund')),
                 ('commercial_partner_id', '=', commercial_partner.id),
-                ('state', 'in', ('open', 'in_payment', 'paid')),
-                ], order='date_invoice desc', limit=1)
+                ('state', '=', 'posted'),
+                ], order='invoice_date desc', limit=1)
             partner_id = last_inv.partner_id.id
         elif self.partner_policy == 'invoice_contact':
             partner_id = commercial_partner.address_get(
@@ -298,10 +300,10 @@ class OverdueReminderStep(models.TransientModel):
         'res.users', string='Assigned to', default=lambda self: self.env.user)
     letter_printed = fields.Boolean(readonly=True)
     invoice_ids = fields.Many2many(
-        'account.invoice', string='Overdue Invoices', readonly=True)
+        'account.move', string='Overdue Invoices', readonly=True)
     company_id = fields.Many2one(
         'res.company', readonly=True, required=True,
-        default=lambda self: self.env['res.company']._company_default_get())
+        default=lambda self: self.env.company)
     warn_unreconciled_move_line_ids = fields.Many2many(
         'account.move.line', string='Unreconciled Payments/Refunds',
         readonly=True)
@@ -321,27 +323,22 @@ class OverdueReminderStep(models.TransientModel):
 
     @api.model
     def create(self, vals):
-        action = super().create(vals)
+        step = super().create(vals)
         commercial_partner = self.env['res.partner'].browse(
             vals['commercial_partner_id'])
         xmlid = MOD + '.overdue_invoice_reminder_mail_template'
         mail_tpl = self.env.ref(xmlid)
         mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or 'en_US')
         mail_subject = mail_tpl_lang._render_template(
-            mail_tpl_lang.subject, self._name, action.id)
+            mail_tpl_lang.subject, self._name, [step.id])[step.id]
         mail_body = mail_tpl_lang._render_template(
-            mail_tpl_lang.body_html, self._name, action.id)
-        if mail_tpl.user_signature:
-            signature = self.env.user.signature
-            if signature:
-                mail_body = tools.append_content_to_html(
-                    mail_body, signature, plaintext=False)
+            mail_tpl_lang.body_html, self._name, [step.id])[step.id]
         mail_body = tools.html_sanitize(mail_body)
-        action.write({
+        step.write({
             'mail_subject': mail_subject,
             'mail_body': mail_body,
             })
-        return action
+        return step
 
     @api.onchange('reminder_type')
     def reminder_type_change(self):
@@ -358,16 +355,16 @@ class OverdueReminderStep(models.TransientModel):
             ('company_id', '=', self.company_id.id)], limit=1)
         if left:
             action = self.env.ref(
-                MOD + '.overdue_reminder_step_onebyone_action').read()[0]
+                MOD + '.overdue_reminder_step_onebyone_action').sudo().read()[0]
             action['res_id'] = left.id
         else:
             action = self.env.ref(
-                MOD + '.overdue_reminder_end_action').read()[0]
+                MOD + '.overdue_reminder_end_action').sudo().read()[0]
         return action
 
     def goto_list_view(self):
         action = self.env.ref(
-            MOD + '.overdue_reminder_step_mass_action').read()[0]
+            MOD + '.overdue_reminder_step_mass_action').sudo().read()[0]
         return action
 
     def skip(self):
@@ -404,7 +401,7 @@ class OverdueReminderStep(models.TransientModel):
     def check_warnings(self):
         self.ensure_one()
         for rec in self:
-            if rec.company_id != self.env.user.company_id:
+            if rec.company_id != self.env.company:
                 raise UserError(_(
                     "User company is different from action company. "
                     "This should never happen."))
@@ -455,7 +452,8 @@ class OverdueReminderStep(models.TransientModel):
         if not self.mail_body:
             raise UserError(_('Mail body is empty.'))
         xmlid = MOD + '.overdue_invoice_reminder_mail_template'
-        mvals = self.env.ref(xmlid).generate_email(self.id)
+        mvals = self.env.ref(xmlid).generate_email(
+            self.id, ['email_from', 'email_to', 'partner_to', 'reply_to'])
         cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
         if mvals.get('email_cc'):
             cc_list.append(mvals['email_cc'])
@@ -475,7 +473,7 @@ class OverdueReminderStep(models.TransientModel):
             attachment_ids = []
             for inv in self.invoice_ids:
                 if inv_report.report_type in ('qweb-html', 'qweb-pdf'):
-                    report_bin, report_format = inv_report.render_qweb_pdf([inv.id])
+                    report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
                 else:
                     res = inv_report.render([inv.id])
                     if not res:
@@ -483,11 +481,9 @@ class OverdueReminderStep(models.TransientModel):
                             "Report format '%s' is not supported.")
                             % inv_report.report_type)
                     report_bin, report_format = res
-                # WARN : update when backporting
                 filename = '%s.%s' % (inv._get_report_base_filename(), report_format)
                 attach = iao.create({
                     'name': filename,
-                    'datas_fname': filename,
                     'datas': base64.b64encode(report_bin),
                     'res_model': 'mail.message',
                     'res_id': mail.mail_message_id.id,
@@ -547,12 +543,9 @@ class OverdueReminderStep(models.TransientModel):
 
     def total_residual(self):
         self.ensure_one()
-        res = {}
+        res = defaultdict(float)
         for inv in self.invoice_ids:
-            if inv.currency_id in res:
-                res[inv.currency_id] += inv.residual_signed
-            else:
-                res[inv.currency_id] = inv.residual_signed
+            res[inv.currency_id] += inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1)
         return res.items()
 
     def _get_report_base_filename(self):

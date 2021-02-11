@@ -1,4 +1,4 @@
-# Copyright 2020 Akretion France (http://www.akretion.com/)
+# Copyright 2020-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -15,7 +15,7 @@ class AccountInvoiceOverdueReminder(models.Model):
     # Because of the "counter" field: a single reminder action for a customer,
     # the "counter" may not be the same for each invoice
     invoice_id = fields.Many2one(
-        'account.invoice', string='Invoice', ondelete='cascade', readonly=True)
+        'account.move', string='Invoice', ondelete='cascade', readonly=True)
     action_id = fields.Many2one(
         'overdue.reminder.action', string='Overdue Reminder Action',
         ondelete='cascade')
@@ -49,7 +49,7 @@ class AccountInvoiceOverdueReminder(models.Model):
     @api.constrains('invoice_id')
     def invoice_id_check(self):
         for action in self:
-            if action.invoice_id and action.invoice_id.type != 'out_invoice':
+            if action.invoice_id and action.invoice_id.move_type != 'out_invoice':
                 raise ValidationError(_(
                     "An overdue reminder can only be attached "
                     "to a customer invoice"))
@@ -58,6 +58,6 @@ class AccountInvoiceOverdueReminder(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = _('%s Reminder %d') % (rec.invoice_id.number, rec.counter)
+            name = _('%s Reminder %d') % (rec.invoice_id.name, rec.counter)
             res.append((rec.id, name))
         return res
