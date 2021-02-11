@@ -29,30 +29,30 @@
                                 <th class="text-center">Past Reminders</th>
                             </tr>
                         </thead>
-                        <tr t-foreach="o.invoice_ids.sorted(key='date_invoice')" t-as="inv">
-                            <td class="text-center">
-                                <span t-field="inv.number"/>
-                            </td>
-                            <td class="text-center">
-                                <span t-field="inv.date_invoice"/>
-                            </td>
-                            <td class="text-center">
-                                <span t-field="inv.payment_term_id.name"/>
-                            </td>
-                            <td class="text-center">
-                                <span t-field="inv.date_due"/>
-                            </td>
+                        <tr t-foreach="o.invoice_ids.sorted(key='invoice_date')" t-as="inv">
                             <td class="text-center">
                                 <span t-field="inv.name"/>
                             </td>
-                            <td class="text-right">
-                                <span t-field="inv.amount_untaxed_invoice_signed"/>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_date"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_payment_term_id.name"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_date_due"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.ref"/>
                             </td>
                             <td class="text-right">
-                                <span t-field="inv.amount_total_signed"/>
+                                <span t-field="inv.amount_untaxed"/>
                             </td>
                             <td class="text-right">
-                                <span t-field="inv.residual_signed"/>
+                                <span t-field="inv.amount_total"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="inv.amount_residual"/>
                             </td>
                             <td class="text-center">
                                 <span t-field="inv.overdue_reminder_counter"/>
