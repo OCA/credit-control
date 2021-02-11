@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2020 Akretion France (http://www.akretion.com/)
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
   @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
@@ -8,10 +8,10 @@
 <odoo>
 
 
-<record id="invoice_form" model="ir.ui.view">
+<record id="view_move_form" model="ir.ui.view">
     <field name="name">overdue.reminder.customer.invoice.form</field>
-    <field name="model">account.invoice</field>
-    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
     <field name="arch" type="xml">
         <button id="account_invoice_payment_btn" position="after">
             <button name="%(overdue_reminder_start_action)d" string="Overdue Reminder" type="action"
@@ -35,12 +35,23 @@
     </field>
 </record>
 
+<record id="view_invoice_tree" model="ir.ui.view">
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_invoice_tree"/>
+    <field name="arch" type="xml">
+            <field name="payment_state" position="after">
+                    <field name="overdue_reminder_counter" optional="hide"/>
+            </field>
+        </field>
+</record>
+
 <record id="view_account_invoice_filter" model="ir.ui.view">
     <field name="name">overdue.reminder.customer.invoice.search</field>
-    <field name="model">account.invoice</field>
+    <field name="model">account.move</field>
     <field name="inherit_id" ref="account.view_account_invoice_filter"/>
     <field name="arch" type="xml">
-        <filter name="status" position="after">
+        <filter name="duedate" position="after">
+            <separator/>
             <filter string="Overdue Reminder Count" name="overdue_reminder_counter_groupby" context="{'group_by': 'overdue_reminder_counter'}"/>
         </filter>
     </field>
