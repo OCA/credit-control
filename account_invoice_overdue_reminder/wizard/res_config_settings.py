@@ -6,16 +6,20 @@ from odoo import fields, models
 
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     overdue_reminder_attach_invoice = fields.Boolean(
-        related='company_id.overdue_reminder_attach_invoice', readonly=False)
+        related="company_id.overdue_reminder_attach_invoice", readonly=False
+    )
     overdue_reminder_start_days = fields.Integer(
-        related='company_id.overdue_reminder_start_days', readonly=False)
+        related="company_id.overdue_reminder_start_days", readonly=False
+    )
     overdue_reminder_min_interval_days = fields.Integer(
-        related='company_id.overdue_reminder_min_interval_days',
-        readonly=False)
+        related="company_id.overdue_reminder_min_interval_days", readonly=False
+    )
     overdue_reminder_interface = fields.Selection(
-        related='company_id.overdue_reminder_interface', readonly=False)
+        related="company_id.overdue_reminder_interface", readonly=False
+    )
     overdue_reminder_partner_policy = fields.Selection(
-        related='company_id.overdue_reminder_partner_policy', readonly=False)
+        related="company_id.overdue_reminder_partner_policy", readonly=False
+    )
