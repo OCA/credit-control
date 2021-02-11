@@ -1,4 +1,4 @@
-You should increase the **osv_memory_age_limit** (default value = 1, which means 1 hour) in the Odoo server config file: for example, you can set it to 12 (12 hours). The value must be superior to the duration of the invoicing reminder wizard from the start screen to the end.
+You should increase the **transient_age_limit** (default value = 1, which means 1 hour) in the Odoo server config file: for example, you can set it to 12 (12 hours). The value must be superior to the duration of the invoicing reminder wizard from the start screen to the end.
 
 Go to the menu *Invoicing > Configuration > Settings* then go to the section *Overdue Invoice Reminder*: you will be able to configure if you want to attach the overdue invoice to the reminder emails and set default values for some parameters.
 
