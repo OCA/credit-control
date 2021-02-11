@@ -6,8 +6,9 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     # Property of commercial partner, applies for the whole entity
     no_overdue_reminder = fields.Boolean(
-        string='Disable Overdue Invoice Reminder', company_dependent=True)
+        string="Disable Overdue Invoice Reminder", company_dependent=True
+    )
