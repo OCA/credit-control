@@ -241,14 +241,15 @@ class CreditControlLine(models.Model):
             )
             lines_to_create.append(vals)
 
-            # when we have lines generated earlier in draft,
-            # on the same level, it means that we have left
-            # them, so they are to be considered as ignored
+            # when we have lines generated earlier in draft
+            # or to_be_sent on the same level, it means that
+            # we have left them, so they are to be considered
+            # as ignored
             previous_drafts = self.search(
                 [
                     ("move_line_id", "=", move_line.id),
                     ("policy_level_id", "=", level.id),
-                    ("state", "=", "draft"),
+                    ("state", "in", ["draft", "to_be_sent"]),
                 ]
             )
             lines_to_write = lines_to_write | previous_drafts
