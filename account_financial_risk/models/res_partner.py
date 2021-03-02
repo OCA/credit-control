@@ -189,13 +189,15 @@ class ResPartner(models.Model):
                 raise ValidationError(_("Choose Manual Credit Currency."))
 
     def _compute_risk_allow_edit(self):
-        self.update(
-            {
-                "risk_allow_edit": self.env.user.has_group(
-                    "account.group_account_manager"
-                )
-            }
-        )
+        view_id = self.env.ref('account_financial_risk.res_partner_view_risk', raise_if_not_found=False)
+        if view_id:
+            risk_allow_edit = any([
+                self.env.user.has_group(ext_id)
+                for id,ext_id in view_id.groups_id.get_external_id().items()
+            ]) if view_id.groups_id else True
+        else:
+            risk_allow_edit = self.env.user.has_group("account.group_account_manager")
+        self.risk_allow_edit = risk_allow_edit
 
     @api.model
     def _get_risk_company_domain(self):
