@@ -23,6 +23,10 @@ class ResPartner(models.Model):
         "lines related.",
     )
 
+    def _compute_risk_account_amount(self):
+        self.update({"risk_payment_return": 0.0})
+        super()._compute_risk_account_amount()
+
     @api.model
     def _risk_account_groups(self):
         res = super()._risk_account_groups()
