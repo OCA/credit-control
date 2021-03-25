@@ -15,7 +15,7 @@
     "maintainer": "Camptocamp",
     "category": "Finance",
     "depends": ["base", "account", "mail"],
-    "website": "https://github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/credit-control",
     "data": [
         # Security
         "security/account_security.xml",
