@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-20 03:40+0000\n"
-"PO-Revision-Date: 2019-07-23 14:43+0000\n"
-"Last-Translator: chafique delli <chafique.delli@akretion.com>\n"
+"PO-Revision-Date: 2021-03-25 18:46+0000\n"
+"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/fr/)\n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
@@ -35,8 +35,9 @@ msgstr "Pièces comptables"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+#, fuzzy
 msgid "Allow invoice validation over the risk"
-msgstr ""
+msgstr "Autoriser la validation de la facture sur le risque"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -55,6 +56,9 @@ msgid ""
 "from sales orders and the over-risk has already been allowed when confirming "
 "these."
 msgstr ""
+"Toujours permettre la validation des projets de factures. Utile lorsque le "
+"flux provient de commandes clients et que le sur-risque a déjà été autorisé "
+"lors de la confirmation de celles-ci."
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
@@ -70,7 +74,7 @@ msgstr "Annuler"
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Choisir la devise manuelle de crédit."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -81,7 +85,7 @@ msgstr "Sociétés"
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr ""
+msgstr "Devise de l'entreprise"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
@@ -117,7 +121,7 @@ msgstr "Créé le"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr ""
+msgstr "Devise de crédit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -354,8 +358,9 @@ msgstr "Limite du solde d'impayé des autres comptes"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
+#, fuzzy
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Devise manuelle de crédit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -375,8 +380,9 @@ msgstr "Assistant pour risque du partenaire dépassé"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
+#, fuzzy
 msgid "Partner Risk Manager"
-msgstr ""
+msgstr "Responsable des risques partenaires"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
@@ -387,12 +393,13 @@ msgstr "Risque partenaire dépassé"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Devise de la liste de prix"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
+#, fuzzy
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Devise acceptée"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -451,7 +458,7 @@ msgstr "Modifier le risque autorisé"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr ""
+msgstr "Montant total du risque"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_currency_id
