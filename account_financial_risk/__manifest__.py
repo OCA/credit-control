@@ -17,6 +17,7 @@
         "views/res_partner_view.xml",
         "wizards/partner_risk_exceeded_view.xml",
         "templates/assets.xml",
+	"views/res_company_view.xml",
     ],
     "installable": True,
     "pre_init_hook": "pre_init_hook",
