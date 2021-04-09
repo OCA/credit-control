@@ -33,9 +33,9 @@ class ResCompany(models.Model):
     @api.model
     def _overdue_reminder_partner_policy_selection(self):
         return [
-            ('last_reminder', 'Last Reminder'),
-            ('last_invoice', 'Last Invoice'),
-            ('invoice_contact', 'Invoice Contact'),
+            ('last_reminder', _('Last Reminder')),
+            ('last_invoice', _('Last Invoice')),
+            ('invoice_contact', _('Invoice Contact')),
             ]
 
     _sql_constraints = [
