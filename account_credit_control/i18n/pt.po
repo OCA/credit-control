@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2020-02-29 14:13+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"PO-Revision-Date: 2021-04-09 18:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
@@ -29,11 +29,17 @@ msgid ""
 "  ${object.policy_level_id.custom_mail_text | safe}\n"
 "  "
 msgstr ""
+"\n"
+"  Caro ${object.contact_address_id.name or ''}\n"
+"  <br/>\n"
+"  <br/>\n"
+"  ${object.policy_level_id.custom_mail_text | safe}\n"
+"  "
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
 msgid "# of Credit Control Communications"
-msgstr ""
+msgstr "Número de Comunicações de Controlo de Crédito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_count
@@ -251,13 +257,13 @@ msgstr "Entidade Comercial"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__communication_id
 msgid "Communication process"
-msgstr ""
+msgstr "Processo de comunicação"
 
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_communication_action_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Communications"
-msgstr ""
+msgstr "Comunicações"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
@@ -305,7 +311,7 @@ msgstr "Endereço de Contacto"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_tree_view
 msgid "Control Credit Communications"
-msgstr ""
+msgstr "Comunicações de Controlo de Crédito"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:79
@@ -385,7 +391,7 @@ msgstr "Análise de Controlo de Crédito"
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_communication_action
 msgid "Credit Control Communications"
-msgstr ""
+msgstr "Comunicações de Controlo de Crédito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
@@ -441,7 +447,7 @@ msgstr "Tolerância do Controlo de Crédito"
 #. module: account_credit_control
 #: model:mail.template,subject:account_credit_control.email_template_credit_control_base
 msgid "Credit Control: (${object.policy_level_id.name or 'n/a'})"
-msgstr ""
+msgstr "Controlo de Crédito: (${object.policy_level_id.name or 'n/a'})"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.act_account_credit_relation_relation
@@ -460,17 +466,17 @@ msgstr "Limite de Tolerância de Crédito"
 #. module: account_credit_control
 #: model:mail.message.subtype,name:account_credit_control.mt_request
 msgid "Credit control"
-msgstr ""
+msgstr "Controlo de crédito"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "Credit control communication process"
-msgstr ""
+msgstr "Processo de comunicações do controlo de crédito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__communication_id
 msgid "Credit control communication process where this line belongs"
-msgstr ""
+msgstr "Processo de comunicações do controlo de crédito desta linha"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
@@ -480,7 +486,7 @@ msgstr "Gerador de linhas de controlo de crédito"
 #. module: account_credit_control
 #: model:mail.message.subtype,description:account_credit_control.mt_request
 msgid "Credit control notification"
-msgstr ""
+msgstr "Notificação de controlo de crédito"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
@@ -731,7 +737,7 @@ msgstr "Para políticas que não devam gerar linhas ou estejam obsoletas"
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:67
 #, python-format
 msgid "Generated communications"
-msgstr ""
+msgstr "Comunicações geradas"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__line_ids
@@ -744,6 +750,9 @@ msgid ""
 "Go to <i>Invoicing &gt; Credit Control &gt; Credit Control Run</i> to create "
 "a new credit control communication process."
 msgstr ""
+"Ir para <i>Faturação &gt; Controlod e Crédito &gt; Executar Controlo de "
+"Crédito</i> para criar um novo processo de comunicação de controlo de "
+"crédito."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
@@ -1032,7 +1041,7 @@ msgstr "Nível Max"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_message
 msgid "Message"
-msgstr ""
+msgstr "Mensagem"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_error
@@ -1071,7 +1080,7 @@ msgstr "Nome"
 #. module: account_credit_control
 #: selection:credit.control.policy,policy_sign:0
 msgid "Negative"
-msgstr ""
+msgstr "Negativo"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__new_policy_id
@@ -1206,7 +1215,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_1
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_1
-#, fuzzy
 msgid ""
 "Our records indicate that we have not received the payment of the invoice "
 "mentioned below.\n"
@@ -1225,8 +1233,7 @@ msgstr ""
 "\n"
 "            Obrigado pela sua colaboração.\n"
 "\n"
-"            Cumprimentos\n"
-"        "
+"            Cumprimentos"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
@@ -1273,7 +1280,6 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_2
-#, fuzzy
 msgid ""
 "Our records indicate that we have not yet received the payment of the "
 "invoice mentioned below despite our first reminder.\n"
@@ -1292,8 +1298,7 @@ msgstr ""
 "\n"
 "            Obrigado pela sua colaboração.\n"
 "\n"
-"            Cumprimentos\n"
-"        "
+"            Cumprimentos"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
@@ -1318,7 +1323,6 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_3
-#, fuzzy
 msgid ""
 "Our records indicate that we still have not received the payment of the "
 "invoice mentioned below despite our two reminders.\n"
@@ -1336,9 +1340,8 @@ msgid ""
 "\n"
 "            Best regards"
 msgstr ""
-"\n"
-"            Os nossos registos indicam que ainda não recebemos o pagamento "
-"das faturas do ficheiro em anexo, apesar dos nossos 2 avisos.\n"
+"Os nossos registos indicam que ainda não recebemos o pagamento das faturas "
+"do ficheiro em anexo, apesar dos nossos 2 avisos.\n"
 "           Se já foi enviado, por favor não leve este aviso em consideração. "
 "Se não, proceda ao seu pagamento.\n"
 "           Se o seu pagamento não for recebido nos próximos 5 dias, a sua "
@@ -1348,8 +1351,7 @@ msgstr ""
 "  \n"
 "           Obrigado pela sua colaboração.\n"
 "  \n"
-"           Cumprimentos\n"
-"        "
+"           Cumprimentos"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1418,7 +1420,6 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_2
-#, fuzzy
 msgid ""
 "Our records indicate that we still have not received the payment of the "
 "mentioned below invoice despite our reminder.\n"
@@ -1449,8 +1450,7 @@ msgstr ""
 "  \n"
 "           Obrigado pela sua colaboração.\n"
 "  \n"
-"           Cumprimentos\n"
-"        "
+"           Cumprimentos"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
@@ -1563,9 +1563,8 @@ msgstr "Níveis da Política"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
-#, fuzzy
 msgid "Policy Sign"
-msgstr "Política"
+msgstr "Política de Assinatura"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
@@ -1581,7 +1580,7 @@ msgstr "Níveis da Política"
 #. module: account_credit_control
 #: selection:credit.control.policy,policy_sign:0
 msgid "Positive"
-msgstr ""
+msgstr "Positivo"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -1612,7 +1611,7 @@ msgstr "Imprimir as linhas selecionadas"
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 msgid "Queued"
-msgstr ""
+msgstr "Em espera"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id
@@ -1657,7 +1656,7 @@ msgstr "Data de execução"
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_run_menu
 msgid "Runs"
-msgstr ""
+msgstr "Execuções"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
@@ -1755,6 +1754,8 @@ msgid ""
 "That's the most common way of creating these records. However, you can do it "
 "from here too if you want, by pressing <i>Create</i>."
 msgstr ""
+"É a maneira mais comum de criar estes registos. No entanto, pode fazê-lo a "
+"partir daqui se preferir, carregando em <i>Criar</i>."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_invoice__credit_policy_id
@@ -1914,7 +1915,8 @@ msgid ""
 " %s"
 msgstr ""
 "Só pode usar uma política definida na conta %s.\n"
-"Por favor escolha uma das seguintes políticas: %s"
+"Por favor escolha uma das seguintes políticas: \n"
+"%s"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/account_invoice.py:44
