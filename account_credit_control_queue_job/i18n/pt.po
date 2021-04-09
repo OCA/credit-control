@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-29 20:13+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"PO-Revision-Date: 2021-04-09 18:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_credit_control_queue_job
 #: model:ir.model,name:account_credit_control_queue_job.model_credit_control_line
@@ -29,7 +29,7 @@ msgstr "Criar e enviar emails em jobs"
 #. module: account_credit_control_queue_job
 #: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
 msgid "Credit control communication process"
-msgstr ""
+msgstr "Processo de comunicações do Controlo de Crédito"
 
 #. module: account_credit_control_queue_job
 #: selection:credit.control.line,state:0
@@ -75,7 +75,7 @@ msgstr "Enviador em massa de linhas de crédito"
 #. module: account_credit_control_queue_job
 #: selection:credit.control.line,state:0
 msgid "Queued"
-msgstr ""
+msgstr "Em espera"
 
 #. module: account_credit_control_queue_job
 #: model:ir.model.fields,field_description:account_credit_control_queue_job.field_credit_control_emailer__run_in_jobs
