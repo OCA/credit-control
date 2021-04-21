@@ -448,15 +448,27 @@ class OverdueReminderStep(models.TransientModel):
         mvals.pop('attachment_ids', None)
         mvals.pop('attachments', None)
         mail = self.env['mail.mail'].create(mvals)
+
+
+        inv_report = self.env['report']._get_report_from_name(
+            'account.report_invoice')
         if self.company_id.overdue_reminder_attach_invoice:
             attachment_ids = []
             for inv in self.invoice_ids:
-                res = self.env['report'].get_pdf(
-                    [inv.id], 'account.report_invoice'), 'pdf'
-                if not res:
-                    raise UserError(_(
-                        "Error in the PDF rendering of invoice %s.")
-                        % inv.number)
+                if inv_report.report_type in ('qweb-html', 'qweb-pdf'):
+                    res = self.env['report'].get_pdf(
+                        [inv.id], 'account.report_invoice'), 'pdf'
+                else:
+                    context = dict(self.env.context)
+                    context['report_name'] = 'account.report_invoice'
+                    py3o_report = self.env['py3o.report'].create({
+                        'ir_actions_report_xml_id': inv_report.id
+                    }).with_context(context)
+                    res = py3o_report.create_report([inv.id], {})
+                    if not res:
+                        raise UserError(_(
+                            "Report format '%s' is not supported.")
+                            % inv_report.report_type)
                 report_bin, report_format = res
                 # WARN : update when backporting
                 filename = '%s.%s' % (inv._get_report_base_filename(), report_format)
