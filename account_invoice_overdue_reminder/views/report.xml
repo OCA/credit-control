@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2020-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  The licence is in the file __manifest__.py
+-->
+<odoo>
+
+    <record id="overdue_reminder_step_report" model="ir.actions.report">
+        <field name="name">Overdue Letter</field>
+        <field name="model">overdue.reminder.step</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >account_invoice_overdue_reminder.report_overdue_reminder</field>
+        <field
+            name="report_file"
+        >account_invoice_overdue_reminder.report_overdue_reminder</field>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+    </record>
+
+</odoo>

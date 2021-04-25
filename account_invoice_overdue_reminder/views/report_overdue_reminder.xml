@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<template id="account_invoice_overdue_reminder.report_overdue_reminder_document">
+    <t t-call="web.external_layout">
+        <t t-set="o" t-value="o.with_context(lang=lang)" />
+        <t t-set="address">
+            <address
+                    t-field="o.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                />
+            <div t-if="o.partner_id.vat" class="mt16"><t
+                        t-esc="o.company_id.country_id.vat_label or 'Tax ID'"
+                    />: <span t-field="o.partner_id.vat" /></div>
+        </t>
+        <div class="page">
+                <p>Date: <span t-field="o.date" /></p>
+                <p>Subject: Overdue invoice reminder n°<span t-field="o.counter" /></p>
+
+                <p>Dear Customer,</p>
+
+                <p>According to our books, the following invoices are overdue:</p>
+
+                <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Invoice Number</th>
+                                <th class="text-center">Invoice Date</th>
+                                <th class="text-center">Payment Terms</th>
+                                <th class="text-center">Due Date</th>
+                                <th class="text-center">Order Ref.</th>
+                                <th class="text-center">Total Untaxed</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Residual</th>
+                                <th class="text-center">Past Reminders</th>
+                            </tr>
+                        </thead>
+                        <tr
+                        t-foreach="o.invoice_ids.sorted(key='invoice_date')"
+                        t-as="inv"
+                    >
+                            <td class="text-center">
+                                <span t-field="inv.name" />
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_date" />
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_payment_term_id.name" />
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.invoice_date_due" />
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.ref" />
+                            </td>
+                            <td class="text-right">
+                                <span t-field="inv.amount_untaxed" />
+                            </td>
+                            <td class="text-right">
+                                <span t-field="inv.amount_total" />
+                            </td>
+                            <td class="text-right">
+                                <span t-field="inv.amount_residual" />
+                            </td>
+                            <td class="text-center">
+                                <span t-field="inv.overdue_reminder_counter" />
+                            </td>
+                        </tr>
+                        <tr
+                        t-foreach="o.total_residual()"
+                        t-as="tot"
+                        t-att-class="'bg-200 font-weight-bold'"
+                    >
+                            <td colspan="6" />
+                            <td class="text-center">
+                                Total in <span t-esc="tot[0].name" />:
+                            </td>
+                            <td class="text-right">
+                                <span
+                                t-esc="tot[1]"
+                                t-options='{"widget": "monetary", "display_currency": tot[0]}'
+                            />
+                            </td>
+                            <td />
+                        </tr>
+                    </table>
+                <p
+                >If you made a payment for these invoices a few days ago, please ignore this letter.</p>
+
+                <t t-if="o.counter > 2">
+                    <p
+                    >Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>
+                </t>
+
+                <p>Yours faithfully,</p>
+
+                <p><span t-field="user.name" /></p>
+
+        </div>
+   </t>
+</template>
+
+<template id="report_overdue_reminder">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-set="lang" t-value="o.partner_id.lang" />
+            <t
+                    t-call="account_invoice_overdue_reminder.report_overdue_reminder_document"
+                    t-lang="lang"
+                />
+        </t>
+    </t>
+</template>
+</odoo>

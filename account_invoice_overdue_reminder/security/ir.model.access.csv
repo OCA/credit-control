@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_overdue_reminder_result_read,Read access on overdue.reminder.result,model_overdue_reminder_result,account.group_account_invoice,1,0,0,0
+access_overdue_reminder_result_full,Full access on overdue.reminder.result,model_overdue_reminder_result,account.group_account_manager,1,1,1,1
+access_overdue_reminder_action_user,Read/create/write on reminder actions,model_overdue_reminder_action,account.group_account_invoice,1,1,1,0
+access_overdue_reminder_action_manager,Full access on reminder actions,model_overdue_reminder_action,account.group_account_manager,1,1,1,1
+access_account_invoice_overdue_reminder_user,Read/create/write on reminder counters,model_account_invoice_overdue_reminder,account.group_account_invoice,1,1,1,0
+access_account_invoice_overdue_reminder_manager,Full access on reminder counters,model_account_invoice_overdue_reminder,account.group_account_manager,1,1,1,1
+access_overdue_reminder_start,Full access on overdue.reminder.start (wizard),model_overdue_reminder_start,account.group_account_invoice,1,1,1,1
+access_overdue_reminder_start_payment,Full access on overdue.reminder.start.payment (wizard),model_overdue_reminder_start_payment,account.group_account_invoice,1,1,1,1
+access_overdue_reminder_step,Full access on overdue.reminder.step (wizard),model_overdue_reminder_step,account.group_account_invoice,1,1,1,1
+access_overdue_reminder_end,Full access on overdue.reminder.end (wizard),model_overdue_reminder_end,account.group_account_invoice,1,1,1,1
+access_overdue_reminder_mass_update,Full access on overdue.reminder.mass.update (wizard),model_overdue_reminder_mass_update,account.group_account_invoice,1,1,1,1

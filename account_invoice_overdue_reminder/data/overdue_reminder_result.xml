@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+
+<record id="voicemail" model="overdue.reminder.result">
+    <field name="name">Message left on voicemail</field>
+    <field name="sequence">10</field>
+</record>
+
+<record id="unreachable" model="overdue.reminder.result">
+    <field name="name">Unreachable</field>
+    <field name="sequence">20</field>
+</record>
+
+<record id="invoice_not_received" model="overdue.reminder.result">
+    <field name="name">Invoice not received</field>
+    <field name="sequence">30</field>
+</record>
+
+<record id="invoice_wait_approval" model="overdue.reminder.result">
+    <field name="name">Invoice waiting approval</field>
+    <field name="sequence">40</field>
+</record>
+
+<record id="invoice_dispute" model="overdue.reminder.result">
+    <field name="name">Invoice dispute</field>
+    <field name="sequence">50</field>
+</record>
+
+<record id="invoice_in_payment_pipe" model="overdue.reminder.result">
+    <field name="name">Invoice in payment pipe</field>
+    <field name="sequence">60</field>
+</record>
+
+<record id="invoice_payment_sent" model="overdue.reminder.result">
+    <field name="name">Payment sent</field>
+    <field name="sequence">70</field>
+</record>
+
+
+</odoo>
