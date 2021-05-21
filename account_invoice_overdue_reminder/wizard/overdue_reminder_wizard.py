@@ -273,14 +273,16 @@ class OverdueReminderStep(models.TransientModel):
     _description = 'Overdue reminder wizard step'
 
     partner_id = fields.Many2one(
-        'res.partner', required=True, string='Invoicing Contact')
+        'res.partner', required=True, string='Reminder Contact')
     partner_email = fields.Char(related='partner_id.email', readonly=True)
     # for phone fields, I don't put a related field because
     # of the OCA module base_phone (when installed, this module
     # re-qualified the 'phone' and 'mobile' fields of res.partner
     # as fields.Phone()
-    partner_phone = fields.Char(compute='_compute_phone', readonly=True)
-    partner_mobile = fields.Char(compute='_compute_phone', readonly=True)
+    partner_phone = fields.Char(
+        compute='_compute_phone', readonly=True, string='Phone')
+    partner_mobile = fields.Char(
+        compute='_compute_phone', readonly=True, string='Mobile')
     commercial_partner_id = fields.Many2one(
         'res.partner', string='Customer', readonly=True, required=True)
     user_id = fields.Many2one('res.users', required=True, readonly=True)

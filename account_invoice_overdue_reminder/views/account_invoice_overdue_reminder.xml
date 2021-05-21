@@ -88,7 +88,7 @@
             <field name="action_user_id"/>
             <filter name="mail" string="E-mail" domain="[('action_reminder_type', '=', 'mail')]"/>
             <filter name="phone" string="Phone" domain="[('action_reminder_type', '=', 'phone')]"/>
-            <filter name="post" string="Post" domain="[('action_reminder_type', '=', 'post')]"/>
+            <filter name="post" string="Letter" domain="[('action_reminder_type', '=', 'post')]"/>
             <group name="groupby">
                 <filter name="action_commercial_partner_groupby" string="Customer" context="{'group_by': 'action_commercial_partner_id'}"/>
                 <filter name="invoice_groupby" string="Invoice" context="{'group_by': 'invoice_id'}"/>

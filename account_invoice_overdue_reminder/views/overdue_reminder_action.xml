@@ -59,7 +59,7 @@
             <field name="user_id"/>
             <filter name="mail" string="E-mail" domain="[('reminder_type', '=', 'mail')]"/>
             <filter name="phone" string="Phone" domain="[('reminder_type', '=', 'phone')]"/>
-            <filter name="post" string="Post" domain="[('reminder_type', '=', 'post')]"/>
+            <filter name="post" string="Letter" domain="[('reminder_type', '=', 'post')]"/>
             <group name="groupby">
                 <filter name="commercial_partner_groupby" string="Customer" context="{'group_by': 'commercial_partner_id'}"/>
                 <filter name="reminder_type_groupby" string="Type" context="{'group_by': 'reminder_type'}"/>
