@@ -5,6 +5,11 @@
             name="domain_force"
         >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
+    <record id="credit_control_communication_rule" model="ir.rule">
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
+    </record>
     <record id="credit_control_line_rule" model="ir.rule">
         <field
             name="domain_force"
