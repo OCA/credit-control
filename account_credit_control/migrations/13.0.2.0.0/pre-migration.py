@@ -20,5 +20,6 @@ def migrate(env, version):
     )
     # Vacuum meaningless transient data from credit.control.communication
     openupgrade.logged_query(
-        env.cr, "DELETE FROM credit_control_communication",
+        env.cr,
+        "DELETE FROM credit_control_communication",
     )
