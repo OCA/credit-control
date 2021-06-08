@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2021-06-08 11:48+0000\n"
+"PO-Revision-Date: 2021-06-08 15:48+0000\n"
 "Last-Translator: Lorenzo Battistini <lb@takobi.online>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -58,7 +58,7 @@ msgstr "Movimenti Contabili"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
-msgstr "Permettere la validazione di fatture oltre il rischio"
+msgstr "Permettere la validazione di fatture oltre il fido"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -70,7 +70,7 @@ msgid ""
 msgstr ""
 "Permettere sempre la validazione di fatture bozza.\n"
 "                            Utile quando il flusso arriva dagli ordini di "
-"vendita e il superamento del rischio\n"
+"vendita e il superamento del fido\n"
 "                            è già stato permesso quando questi sono stati "
 "confermati."
 
@@ -83,7 +83,7 @@ msgid ""
 "these."
 msgstr ""
 "Permettere sempre la validazione di fatture bozza. Utile quando il flusso "
-"arriva dagli ordini di vendita e il superamento del rischio è già stato "
+"arriva dagli ordini di vendita e il superamento del fido è già stato "
 "permesso quando questi sono stati confermati."
 
 #. module: account_financial_risk
@@ -187,7 +187,7 @@ msgid ""
 msgstr ""
 "Giorni dopo la scadenza per impostare una fattura come non pagata.\n"
 "                            La modifica di questo campo ricalcola tutti i "
-"rischi dei partner, sii paziente."
+"fidi dei partner, sii paziente."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -223,9 +223,9 @@ msgstr "Superato rischio finanziario.\n"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:414
-#, fuzzy, python-format
+#, python-format
 msgid "Financial risk information"
-msgstr "Rischio Finanziario"
+msgstr "Informazioni rischio finanziario"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
