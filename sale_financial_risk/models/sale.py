@@ -83,7 +83,7 @@ class SaleOrderLine(models.Model):
     )
     def _compute_risk_amount(self):
         for line in self:
-            if line.state != "sale" or line.display_type:
+            if line.state not in ["sale", "done"] or line.display_type:
                 line.risk_amount = 0.0
                 continue
             qty = line.product_uom_qty
@@ -100,7 +100,7 @@ class SaleOrderLine(models.Model):
                 and (hasattr(line, "move_ids"))
             ):
                 if not line.move_ids.filtered(
-                    lambda move: move.state not in ("done", "cancel")
+                    lambda move: move.state not in ("cancel")
                 ):
                     risk_qty = line.qty_to_invoice
             if risk_qty == 0.0:

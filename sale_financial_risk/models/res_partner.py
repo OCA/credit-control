@@ -24,7 +24,7 @@ class ResPartner(models.Model):
 
     def _get_risk_sale_order_domain(self):
         return self._get_risk_company_domain() + [
-            ("state", "=", "sale"),
+            ("state", "in", ["sale", "done"]),
             ("risk_partner_id", "in", self.mapped("commercial_partner_id").ids),
         ]
 
