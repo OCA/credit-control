@@ -402,7 +402,6 @@ class OverdueReminderStep(models.TransientModel):
         return vals
 
     def check_warnings(self):
-        self.ensure_one()
         for rec in self:
             if rec.company_id != self.env.user.company_id:
                 raise UserError(_(
