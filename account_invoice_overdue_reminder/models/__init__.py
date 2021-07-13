@@ -5,3 +5,4 @@ from . import account_invoice
 from . import overdue_reminder_result
 from . import overdue_reminder_action
 from . import account_invoice_overdue_reminder
+from . import mail_template
