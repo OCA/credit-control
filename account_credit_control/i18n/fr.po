@@ -124,7 +124,7 @@ msgstr "Attention: Cette opération ne peut pas être annulée"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, fuzzy
 msgid "<strong>Date:</strong>"
-msgstr "<strong>Total dû</strong>"
+msgstr "<strong>Date :</strong>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
