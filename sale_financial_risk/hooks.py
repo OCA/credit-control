@@ -27,6 +27,6 @@ def create_commercial_partner_id_column(cr):
         SET commercial_partner_id = p.commercial_partner_id
         FROM res_partner p
         WHERE  p.id = sol.order_partner_id and
-                sol.commercial_partner_id <> p.commercial_partner_id;
+                sol.commercial_partner_id IS DISTINCT FROM p.commercial_partner_id;
         """
     )
