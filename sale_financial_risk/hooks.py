@@ -28,6 +28,6 @@ def create_risk_partner_id_column(cr):
         FROM sale_order so LEFT JOIN
             res_partner p ON p.id = so.partner_invoice_id
         WHERE so.id = sol.order_id and
-            sol.risk_partner_id <> p.commercial_partner_id;
+            sol.risk_partner_id IS DISTINCT FROM p.commercial_partner_id;
         """
     )
