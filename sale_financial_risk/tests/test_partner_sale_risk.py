@@ -8,7 +8,9 @@ class TestPartnerSaleRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestPartnerSaleRisk, cls).setUpClass()
-        cls.env.user.groups_id |= cls.env.ref("sales_team.group_sale_manager")
+        cls.env.user.groups_id |= cls.env.ref(
+            "account_financial_risk.group_account_financial_risk_manager"
+        )
         cls.partner = cls.env["res.partner"].create(
             {"name": "Partner test", "customer_rank": 1}
         )
