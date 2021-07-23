@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2016-2021 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
@@ -240,7 +240,7 @@ class ResPartner(models.Model):
         self.update(
             {
                 "risk_allow_edit": self.env.user.has_group(
-                    "account.group_account_manager"
+                    "account_financial_risk.group_account_financial_risk_manager"
                 )
             }
         )
