@@ -180,10 +180,14 @@ class OverdueReminderStart(models.TransientModel):
                 'Skipping customer %s that has no_overdue_reminder=True',
                 commercial_partner.display_name)
             return False
+        today = fields.Date.context_today(self)
+        limit_date = today
+        if self.start_days:
+            limit_date -= relativedelta(days=self.start_days)
         invs = self.env['account.invoice'].search(
             base_domain + [
                 ('commercial_partner_id', '=', commercial_partner.id),
-                ('date_due', '<', fields.Date.context_today(self))])
+                ('date_due', '<', limit_date)])
         assert invs
         # Check min interval
         if any([
