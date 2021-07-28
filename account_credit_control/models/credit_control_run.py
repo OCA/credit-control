@@ -49,7 +49,6 @@ class CreditControlRun(models.Model):
     )
     manual_ids = fields.Many2many(
         comodel_name="account.move.line",
-        rel="credit_runreject_rel",
         string="Lines to handle manually",
         help="If a credit control line has been generated"
         "on a policy and the policy has been changed "
@@ -68,7 +67,6 @@ class CreditControlRun(models.Model):
     hide_change_state_button = fields.Boolean()
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         default=lambda self: self.env.company,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -95,7 +93,7 @@ class CreditControlRun(models.Model):
         runs = self.search(
             [
                 ("date", ">", controlling_date),
-                ("company_id", "=", self.env.user.company_id.id),
+                ("company_id", "=", self.env.company.id),
             ],
             order="date DESC",
             limit=1,
@@ -115,7 +113,6 @@ class CreditControlRun(models.Model):
                 % (controlling_date, lines.date)
             )
 
-    @api.returns("credit.control.line")
     def _generate_credit_lines(self):
         """ Generate credit control lines. """
         self.ensure_one()
@@ -158,7 +155,7 @@ class CreditControlRun(models.Model):
         """
         try:
             self.env.cr.execute(
-                "SELECT id FROM credit_control_run" " LIMIT 1 FOR UPDATE NOWAIT"
+                "SELECT id FROM credit_control_run LIMIT 1 FOR UPDATE NOWAIT"
             )
         except Exception:
             # In case of exception openerp will do a rollback

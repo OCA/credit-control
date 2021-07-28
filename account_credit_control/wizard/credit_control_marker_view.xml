@@ -24,25 +24,27 @@
                 <newline />
                 <footer>
                     <button
-                        class="oe_highlight"
+                        class="btn-primary"
                         name="mark_lines"
                         string="Change Lines' State"
                         type="object"
                     />
-                    <button class="oe_link" special="cancel" string="Cancel" />
+                    <button class="btn-link" special="cancel" string="Cancel" />
                 </footer>
             </form>
         </field>
     </record>
     <!-- for menu -->
-    <act_window
-        name="Change Lines' State"
-        res_model="credit.control.marker"
-        binding_model="credit.control.line"
-        view_mode="form"
-        target="new"
+    <record
         id="open_credit_line_marker_wizard_menu_action"
-    />
+        model="ir.actions.act_window"
+    >
+        <field name="name">Change Lines' State</field>
+        <field name="res_model">credit.control.marker</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_credit_control_line" />
+    </record>
     <record id="open_credit_line_marker_wizard" model="ir.actions.act_window">
         <field name="name">Change Lines' State</field>
         <field name="res_model">credit.control.marker</field>

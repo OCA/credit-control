@@ -15,3 +15,4 @@
   * João Marques
 
 * Enric Tobella <etobella@creublanca.es>
+* Naglis Jonaitis (Versada UAB) <naglis@versada.eu>
