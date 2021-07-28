@@ -88,7 +88,7 @@ class CreditControlRun(models.Model):
 
     @api.model
     def _check_run_date(self, controlling_date):
-        """ Ensure that there is no credit line in the future
+        """Ensure that there is no credit line in the future
         using controlling_date
 
         """
@@ -151,7 +151,7 @@ class CreditControlRun(models.Model):
         return generated
 
     def generate_credit_lines(self):
-        """ Generate credit control lines
+        """Generate credit control lines
 
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.

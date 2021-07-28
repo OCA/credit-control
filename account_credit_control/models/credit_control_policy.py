@@ -50,7 +50,7 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _due_move_lines(self, credit_control_run):
-        """ Get the due move lines for the policy of the company.
+        """Get the due move lines for the policy of the company.
 
         The set of ids will be reduced and extended according
         to the specific policies defined on partners and invoices.
@@ -69,7 +69,7 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _move_lines_subset(self, credit_control_run, model, move_relation_field):
-        """ Get the move lines related to one model for a policy.
+        """Get the move lines related to one model for a policy.
 
         Do not use direct SQL in order to respect security rules.
 
@@ -115,7 +115,7 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _get_partner_related_lines(self, credit_control_run):
-        """ Get the move lines for a policy related to a partner.
+        """Get the move lines for a policy related to a partner.
 
         :param str controlling_date: date of credit control
         :return: recordset to add in the process, recordset to remove from
@@ -125,7 +125,7 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _get_invoice_related_lines(self, credit_control_run):
-        """ Get the move lines for a policy related to an invoice.
+        """Get the move lines for a policy related to an invoice.
 
         :param str controlling_date: date of credit control
         :return: recordset to add in the process, recordset to remove from
@@ -135,7 +135,7 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _get_move_lines_to_process(self, credit_control_run):
-        """ Build a list of move lines ids to include in a run
+        """Build a list of move lines ids to include in a run
         for a policy at a given date.
 
         :param str controlling_date: date of credit control
@@ -152,8 +152,8 @@ class CreditControlPolicy(models.Model):
 
     @api.returns("account.move.line")
     def _lines_different_policy(self, lines):
-        """ Return a set of move lines ids for which there is an
-            existing credit line but with a different policy.
+        """Return a set of move lines ids for which there is an
+        existing credit line but with a different policy.
         """
         self.ensure_one()
         different_lines = self.env["account.move.line"]
@@ -270,7 +270,7 @@ class CreditControlPolicyLevel(models.Model):
 
     @api.constrains("level", "computation_mode")
     def _check_level_mode(self):
-        """ The smallest level of a policy cannot be computed on the
+        """The smallest level of a policy cannot be computed on the
         "previous_date".
         """
         for policy_level in self:
@@ -285,7 +285,7 @@ class CreditControlPolicyLevel(models.Model):
                 )
 
     def _previous_level(self):
-        """ For one policy level, returns the id of the previous level
+        """For one policy level, returns the id of the previous level
 
         If there is no previous level, it returns None, it means that's the
         first policy level
@@ -324,7 +324,7 @@ class CreditControlPolicyLevel(models.Model):
         return "(cr_line.date + %(delay)s)::date <= date(%(controlling_date)s)"
 
     def _get_sql_date_boundary_for_computation_mode(self):
-        """ Return a where clauses statement for the given controlling
+        """Return a where clauses statement for the given controlling
         date and computation mode of the level
         """
         self.ensure_one()

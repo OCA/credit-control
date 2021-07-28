@@ -17,7 +17,9 @@ class CreditControlCommunication(models.Model):
         comodel_name="res.partner", string="Partner", required=True, index=True
     )
     policy_id = fields.Many2one(
-        related="policy_level_id.policy_id", store=True, index=True,
+        related="policy_level_id.policy_id",
+        store=True,
+        index=True,
     )
     policy_level_id = fields.Many2one(
         comodel_name="credit.control.policy.level",
@@ -127,8 +129,7 @@ class CreditControlCommunication(models.Model):
 
     @api.model
     def _aggregate_credit_lines(self, lines):
-        """ Aggregate credit control line by partner, level, and currency
-        """
+        """Aggregate credit control line by partner, level, and currency"""
         if not lines:
             return []
         sql = (
@@ -172,8 +173,7 @@ class CreditControlCommunication(models.Model):
 
     @api.model
     def _generate_comm_from_credit_lines(self, lines):
-        """ Generate a communication object per aggregation of credit lines.
-        """
+        """Generate a communication object per aggregation of credit lines."""
         datas = self._aggregate_credit_lines(lines)
         comms = self.create(datas)
         comms._onchange_partner_id()

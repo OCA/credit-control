@@ -188,7 +188,7 @@ class CreditControlLine(models.Model):
         check_tolerance=True,
         default_lines_vals=None,
     ):
-        """ Create or update line based on levels
+        """Create or update line based on levels
 
         if check_tolerance is true credit line will not be
         created if open amount is too small.

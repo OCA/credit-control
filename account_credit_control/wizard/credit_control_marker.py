@@ -59,8 +59,8 @@ class CreditControlMarker(models.TransientModel):
         return filtered_lines
 
     def mark_lines(self):
-        """ Write state of selected credit lines to the one in entry
-        done credit line will be ignored """
+        """Write state of selected credit lines to the one in entry
+        done credit line will be ignored"""
         self.ensure_one()
 
         if not self.line_ids:
