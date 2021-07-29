@@ -85,7 +85,7 @@ class TestPartnerSaleRisk(SavepointCase):
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         invoice = self.sale_order.invoice_ids
-        invoice.with_context(bypass_risk=True).post()
+        invoice.with_context(bypass_risk=True).action_post()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
         self.assertAlmostEqual(self.partner.risk_invoice_open, 100.0)
