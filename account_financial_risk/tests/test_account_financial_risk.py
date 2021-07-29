@@ -143,6 +143,8 @@ class TestPartnerFinancialRisk(SavepointCase):
         )
         self.assertAlmostEqual(self.partner.risk_invoice_open, 0.0)
         wiz.button_continue()
+        # HACK: Force the maturity date for not having an error here
+        invoice2.line_ids.write({"date_maturity": fields.Date.today()})
         self.assertAlmostEqual(self.partner.risk_invoice_open, 550.0)
         self.assertTrue(self.partner.risk_allow_edit)
 
