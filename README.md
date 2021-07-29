@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_financial_risk](account_financial_risk/) | 14.0.1.0.1 | Manage customer risk
+[account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 14.0.1.0.0 | Simple mail/letter/phone overdue customer invoice reminder
 [sale_financial_risk](sale_financial_risk/) | 14.0.1.0.1 | Manage partner risk in sales orders
 
 [//]: # (end addons)
