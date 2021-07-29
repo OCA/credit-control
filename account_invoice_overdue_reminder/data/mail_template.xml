@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+
+<record id="overdue_invoice_reminder_mail_template" model="mail.template">
+    <field name="name">Overdue Invoice Reminder</field>
+    <field
+            name="model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="auto_delete" eval="False" />
+    <field name="lang">${object.partner_id.lang}</field>
+    <field name="email_from">${object.user_id.email or object.company_id.email}</field>
+    <field name="email_to">${object.partner_id.email}</field>
+    <field
+            name="subject"
+        >${object.company_id.name} - Overdue invoice reminder n°${object.counter}</field>
+    <field
+            name="body_html"
+        ><![CDATA[
+<div style="margin: 0px; padding: 0px; font-size: 13px;">
+<p>Dear customer,</p>
+
+<p>According to our books, the following invoices are overdue:</p>
+
+<table style="border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;">
+    <tr>
+        <th style="padding: 5px; border: 1px solid black;">Invoice Number</th>
+        <th style="padding: 5px; border: 1px solid black;">Invoice Date</th>
+        <th style="padding: 5px; border: 1px solid black;">Payment Terms</th>
+        <th style="padding: 5px; border: 1px solid black;">Due Date</th>
+        <th style="padding: 5px; border: 1px solid black;">Order Ref.</th>
+        <th style="padding: 5px; border: 1px solid black;">Total Untaxed</th>
+        <th style="padding: 5px; border: 1px solid black;">Total</th>
+        <th style="padding: 5px; border: 1px solid black;">Residual</th>
+        <th style="padding: 5px; border: 1px solid black;">Past Reminders</th>
+    </tr>
+% for inv in object.invoice_ids.sorted(key='invoice_date'):
+    <tr>
+        <td style="padding: 5px; border: 1px solid black;">${inv.name}</td>
+        <td style="padding: 5px; border: 1px solid black;">${format_date(inv.invoice_date)}</td>
+        <td style="padding: 5px; border: 1px solid black;">${inv.invoice_payment_term_id.name or ''}</td>
+        <td style="padding: 5px; border: 1px solid black;">${format_date(inv.invoice_date_due)}</td>
+        <td style="padding: 5px; border: 1px solid black;">${inv.ref or ''}</td>
+        <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
+        <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
+        <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
+        <td style="padding: 5px; border: 1px solid black;">${inv.overdue_reminder_counter}</td>
+    </tr>
+% endfor
+% for (currency, total_residual) in object.total_residual():
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan="2" style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;">Total Residual in ${currency.name}:</td>
+        <td style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;">${format_amount(total_residual, currency)}</td>
+        <td></td>
+    </tr>
+% endfor
+</table>
+
+<p>If you made a payment for these invoices a few days ago, please ignore this email.</p>
+
+% if object.company_id.overdue_reminder_attach_invoice:
+<p>You will find enclosed the overdue invoices.</p>
+% endif
+
+% if object.counter > 2:
+<p>Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>
+% endif
+
+<p>Regards,</p>
+
+% if user.signature:
+<p>
+${user.signature | safe}
+</p>
+% endif
+
+</div>
+]]></field>
+</record>
+
+
+</odoo>

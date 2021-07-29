@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+<record id="overdue_reminder_start_form" model="ir.ui.view">
+    <field name="name">overdue.reminder.start.form</field>
+    <field name="model">overdue.reminder.start</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="filters" string="Filters">
+                <field name="partner_ids" widget="many2many_tags" />
+                <field name="user_ids" widget="many2many_tags" />
+            </group>
+            <group name="options" string="Options">
+                <field name="partner_policy" />
+                <field name="interface" />
+                <label for="start_days" />
+                <div name="start_days">
+                    <field name="start_days" class="oe_inline" /> days
+                </div>
+                <label for="min_interval_days" />
+                <div name="min_interval_days">
+                    <field name="min_interval_days" class="oe_inline" /> days
+                </div>
+            </group>
+            <group name="payment_ids" string="Payments up-to-date ?">
+                <field name="payment_ids" nolabel="1" colspan="2">
+                    <tree>
+                        <field name="journal_id" />
+                        <field name="last_entry_date" />
+                        <field name="last_entry_create_date" />
+                        <field name="last_entry_create_uid" />
+                    </tree>
+                </field>
+                <div name="up_to_date">
+                    <field name="up_to_date" class="oe_inline" />
+                    <label for="up_to_date" />
+                </div>
+            </group>
+            <footer>
+                <button name="run" type="object" string="Start" class="btn-primary" />
+                <button special="cancel" string="Cancel" class="btn-default" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="overdue_reminder_start_action" model="ir.actions.act_window">
+    <field name="name">Overdue Invoice Remind</field>
+    <field name="res_model">overdue.reminder.start</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<menuitem
+        id="overdue_reminder_start_menu"
+        action="overdue_reminder_start_action"
+        sequence="16"
+        parent="account.menu_finance_receivables"
+    />
+
+<record id="overdue_reminder_step_form" model="ir.ui.view">
+    <field name="name">overdue.reminder.step.form</field>
+    <field name="model">overdue.reminder.step</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="main" col="4">
+                <field name="commercial_partner_id" />
+                <field name="counter" />
+                <field
+                        name="partner_id"
+                        domain="[('id', 'child_of', commercial_partner_id)]"
+                    />
+                <field name="partner_phone" widget="phone" />
+                <field name="partner_email" widget="email" />
+                <field name="partner_mobile" widget="phone" />
+            </group>
+            <group
+                    attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
+                    string="WARNING: unreconciled payments/refunds"
+                >
+                <field name="warn_unreconciled_move_line_ids" nolabel="1" />
+            </group>
+            <group
+                    attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
+                >
+                <div name="unreconciled_move_line_normal">
+                    <field name="unreconciled_move_line_normal" class="oe_inline" />
+                    <label for="unreconciled_move_line_normal" />
+                </div>
+            </group>
+            <group name="invoices">
+                <field name="invoice_ids" nolabel="1">
+                    <tree default_order="invoice_date">
+                        <field name="partner_id" string="Invoicing Contact" />
+                        <field name="name" />
+                        <field name="invoice_date" />
+                        <field name="invoice_payment_term_id" />
+                        <field name="invoice_date_due" />
+                        <field name="ref" string="Order Ref" />
+                        <field name="user_id" />
+                        <!-- Should we display in company currency with sum or in invoice current (in this case, it should be without sum...) ?  -->
+                        <field
+                                name="amount_untaxed_signed"
+                                string="Tax Excluded"
+                                sum="Total"
+                            />
+                        <field name="amount_total_signed" string="Total" sum="Total" />
+                        <field
+                                name="amount_residual_signed"
+                                string="Amount Due"
+                                sum="Amount Due"
+                            />
+                        <field name="currency_id" invisible="1" />
+                        <field name="company_currency_id" invisible="1" />
+                        <field
+                                name="overdue_reminder_counter"
+                                string="Current Remind Counter"
+                            />
+                        <field
+                                name="overdue_reminder_last_date"
+                                string="Last Reminder"
+                            />
+                        <field name="state" invisible="1" />
+                        <field name="payment_state" invisible="1" />
+                    </tree>
+                </field>
+            </group>
+            <group name="reminder_type">
+                <field name="reminder_type" />
+            </group>
+            <group
+                    name="phone"
+                    attrs="{'invisible': [('reminder_type', '!=', 'phone')]}"
+                >
+                <field
+                        name="result_id"
+                        widget="selection"
+                        attrs="{'required': [('reminder_type', '=', 'phone')]}"
+                    />
+                <field name="result_notes" />
+                <field name="create_activity" />
+            </group>
+            <group
+                    name="phone_activity"
+                    attrs="{'invisible': ['|', ('reminder_type', '!=', 'phone'), ('create_activity', '=', False)]}"
+                    col="4"
+                >
+                <field
+                        name="activity_type_id"
+                        attrs="{'required': [('create_activity', '=', True)]}"
+                    />
+                <field
+                        name="activity_deadline"
+                        attrs="{'required': [('create_activity', '=', True)]}"
+                    />
+                <field name="activity_summary" />
+                <field
+                        name="activity_user_id"
+                        attrs="{'required': [('create_activity', '=', True)]}"
+                    />
+                <field name="activity_note" colspan="4" nolabel="1" />
+            </group>
+            <group name="mail" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}">
+                <field
+                        name="mail_cc_partner_ids"
+                        domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id), ('email', '!=', False)]"
+                        widget="many2many_tags"
+                    />
+                <field name="mail_subject" />
+                <field name="mail_body" colspan="2" nolabel="1" />
+            </group>
+            <group attrs="{'invisible': [('reminder_type', '!=', 'post')]}" col="1">
+                <button
+                        name="print_letter"
+                        type="object"
+                        string="Print Letter"
+                        class="btn-primary"
+                    />
+                <button
+                        name="print_invoices"
+                        type="object"
+                        string="Print Overdue Invoices"
+                        class="btn-primary"
+                    />
+            </group>
+            <footer>
+                <button
+                        name="validate"
+                        type="object"
+                        string="Validate"
+                        class="btn-primary"
+                    />
+                <button name="skip" type="object" string="Skip" class="btn-default" />
+                <button special="cancel" string="Cancel" class="btn-default" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="overdue_reminder_step_tree" model="ir.ui.view">
+    <field name="name">overdue.reminder.step.tree</field>
+    <field name="model">overdue.reminder.step</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="commercial_partner_id" />
+            <field name="partner_id" />
+            <field name="counter" />
+            <field name="reminder_type" />
+            <field name="invoice_ids" />
+            <field name="warn_unreconciled_move_line_ids" />
+            <field name="state" invisible="1" />
+        </tree>
+    </field>
+</record>
+
+<record id="overdue_reminder_step_onebyone_action" model="ir.actions.act_window">
+    <field name="name">Overdue Invoice Step</field>
+    <field name="res_model">overdue.reminder.step</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<record id="overdue_reminder_step_mass_action" model="ir.actions.act_window">
+    <field name="name">Overdue Invoice Step</field>
+    <field name="res_model">overdue.reminder.step</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('state', '=', 'draft'), ('user_id', '=', uid)]</field>
+</record>
+
+<record id="overdue_reminder_end_form" model="ir.ui.view">
+    <field name="name">overdue.reminder.end.form</field>
+    <field name="model">overdue.reminder.end</field>
+    <field name="arch" type="xml">
+        <form>
+            <div>
+                <h2>Good job !</h2>
+                <p>You processed all your overdue invoice reminders.</p>
+            </div>
+            <footer>
+                <button special="cancel" string="Close" class="btn-primary" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="overdue_reminder_end_action" model="ir.actions.act_window">
+    <field name="name">Overdue Invoice End</field>
+    <field name="res_model">overdue.reminder.end</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<record id="overdue_reminder_mass_update_form" model="ir.ui.view">
+    <field name="name">overdue.reminder.mass.update.form</field>
+    <field name="model">overdue.reminder.mass.update</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="main">
+                <field name="update_action" />
+                <field
+                        name="reminder_type"
+                        attrs="{'required': [('update_action', '=', 'reminder_type')], 'invisible': [('update_action', '!=', 'reminder_type')]}"
+                    />
+            </group>
+            <footer>
+                <button name="run" type="object" string="Run" class="btn-primary" />
+                <button special="cancel" string="Cancel" class="btn-default" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="mass_update_reminder_type_action" model="ir.actions.act_window">
+    <field name="name">Change Reminder Type</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'reminder_type'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
+<record id="mass_update_validate_action" model="ir.actions.act_window">
+    <field name="name">Validate</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'validate'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
+<record id="mass_update_skip_action" model="ir.actions.act_window">
+    <field name="name">Skip</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'skip'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
+</odoo>
