@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="view_partner_credit_form" model="ir.ui.view">
+        <field name="name">Partner Credit Form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <page name="sales_purchases" position="inside">
+                <group name="credit_info" string="Credit Info">
+                    <group name="credit_info_limit">
+                        <label for="credit_limit" />
+                        <div>
+                            <field name="credit_limit" readonly="1" class="oe_inline" />
+                            <button
+                                name="%(action_partner_credit_limit_wizard)d"
+                                context="{'default_partner_id': active_id, 'default_amount': credit_limit}"
+                                type="action"
+                                string="Change Limit"
+                            />
+                        </div>
+                    </group>
+                    <field
+                        name="credit_history_ids"
+                        widget="one2many_list"
+                        readonly="1"
+                        nolabel="1"
+                    >
+                        <tree>
+                            <field name="create_date" />
+                            <field name="previous_amount" />
+                            <field name="new_amount" />
+                            <field name="note" />
+                            <field name="create_uid" string="User" />
+                        </tree>
+                    </field>
+                </group>
+            </page>
+        </field>
+    </record>
+    <record id="view_partner_credit_history_tree" model="ir.ui.view">
+        <field name="name">Partner Credit Form</field>
+        <field name="model">res.partner.credit.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="previous_amount" />
+                <field name="new_amount" />
+                <field name="note" />
+                <field name="create_uid" string="User" />
+            </tree>
+        </field>
+    </record>
+</odoo>
