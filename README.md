@@ -20,7 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_credit_control](account_credit_control/) | 13.0.2.3.0 | Account Credit Control
-[account_financial_risk](account_financial_risk/) | 13.0.2.1.0 | Manage customer risk
+[account_financial_risk](account_financial_risk/) | 13.0.2.2.0 | Manage customer risk
 [account_payment_return_financial_risk](account_payment_return_financial_risk/) | 13.0.1.0.1 | Partner Payment Return Risk
 [partner_credit_limit_history](partner_credit_limit_history/) | 13.0.1.0.0 | Partner Credit Limit History
 [partner_risk_insurance](partner_risk_insurance/) | 13.0.1.1.1 | Risk insurance partner information
