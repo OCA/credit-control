@@ -11,7 +11,9 @@ class TestPartnerFinancialRisk(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestPartnerFinancialRisk, cls).setUpClass()
-        cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
+        cls.env.user.groups_id |= cls.env.ref(
+            "account_financial_risk.group_account_financial_risk_manager"
+        )
         type_revenue = cls.env.ref("account.data_account_type_revenue")
         type_receivable = cls.env.ref("account.data_account_type_receivable")
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
