@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record model="ir.ui.view" id="partner_credit_limit_wizard_form">
+        <field name="name">Partner credit limit wizard</field>
+        <field name="model">partner.credit.limit.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div>
+                    <group>
+                        <field name="amount" />
+                        <field name="note" />
+                    </group>
+                </div>
+                <footer>
+                    <button
+                        name="action_confirm"
+                        string="Submit"
+                        class="oe_highlight"
+                        type="object"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        class="oe_link"
+                        special="cancel"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_partner_credit_limit_wizard" model="ir.actions.act_window">
+        <field name="name">Partner credit limit wizard</field>
+        <field name="res_model">partner.credit.limit.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="partner_credit_limit_wizard_form" />
+    </record>
+</odoo>
