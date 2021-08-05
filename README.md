@@ -15,7 +15,16 @@ Odoo modules for customer credit control
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_credit_control](account_credit_control/) | 13.0.2.3.0 | Account Credit Control
+[account_financial_risk](account_financial_risk/) | 13.0.2.1.0 | Manage customer risk
+[account_payment_return_financial_risk](account_payment_return_financial_risk/) | 13.0.1.0.1 | Partner Payment Return Risk
+[partner_risk_insurance](partner_risk_insurance/) | 13.0.1.1.1 | Risk insurance partner information
+[sale_financial_risk](sale_financial_risk/) | 13.0.2.0.3 | Manage partner risk in sales orders
+[stock_financial_risk](stock_financial_risk/) | 13.0.1.0.0 | Manage partner risk in stock moves
 
 [//]: # (end addons)
 
