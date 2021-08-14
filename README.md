@@ -17,11 +17,11 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[account_financial_risk](account_financial_risk/) | 14.0.1.0.1 | Manage customer risk
-[account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 14.0.1.0.0 | Simple mail/letter/phone overdue customer invoice reminder
-[sale_financial_risk](sale_financial_risk/) | 14.0.1.0.2 | Manage partner risk in sales orders
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[account_financial_risk](account_financial_risk/) | 14.0.1.0.1 |  | Manage customer risk
+[account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Simple mail/letter/phone overdue customer invoice reminder
+[sale_financial_risk](sale_financial_risk/) | 14.0.1.0.2 |  | Manage partner risk in sales orders
 
 [//]: # (end addons)
 
