@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Tecnativa - Jairo Llopis
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="credit_control_communication_form_view" model="ir.ui.view">
+        <field name="name">credit.control.communication.form</field>
+        <field name="model">credit.control.communication</field>
+        <field name="arch" type="xml">
+            <form string="Control Credit Communications">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="contact_address_id" />
+                            <field name="company_id" />
+                            <field name="user_id" />
+                        </group>
+                        <group>
+                            <field name="policy_level_id" />
+                            <field name="policy_id" />
+                            <field name="report_date" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="total_invoiced" />
+                            <field name="total_due" />
+                            <field name="currency_id" />
+                        </group>
+                    </group>
+                    <group string="Lines">
+                        <field name="credit_control_line_ids" colspan="4" nolabel="1" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="credit_control_communication_search_view" model="ir.ui.view">
+        <field name="name">Credit Control Communications</field>
+        <field name="model">credit.control.communication</field>
+        <field name="arch" type="xml">
+            <search string="Control Credit Communications">
+                <group>
+                    <field name="partner_id" />
+                    <field name="user_id" />
+                    <field name="company_id" />
+                    <separator />
+                    <field name="policy_level_id" />
+                    <field name="policy_id" />
+                    <field name="report_date" />
+                </group>
+                <group expand="0" string="Group By" name="group_by">
+                    <filter
+                        name="group_by_report_date"
+                        domain='[]'
+                        context="{'group_by': 'report_date'}"
+                        icon="terp-go-month"
+                        string="Run date"
+                    />
+                    <filter
+                        name="group_by_partner"
+                        domain='[]'
+                        context="{'group_by': 'partner_id'}"
+                        icon="terp-partner"
+                        string="Partner"
+                    />
+                    <filter
+                        name="group_by_company"
+                        domain='[]'
+                        context="{'group_by': 'company_id'}"
+                        icon="terp-company"
+                        string="Company"
+                    />
+                    <filter
+                        name="group_by_policy"
+                        domain='[]'
+                        context="{'group_by': 'policy_id'}"
+                        icon="terp-document-new"
+                        string="Credit policy"
+                    />
+                    <filter
+                        name="group_by_policy_level"
+                        domain='[]'
+                        context="{'group_by': 'policy_level_id'}"
+                        icon="terp-document-new"
+                        string="Credit policy level"
+                    />
+                    <filter
+                        name="group_by_partner_user"
+                        string="Salesperson"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="credit_control_communication_tree_view" model="ir.ui.view">
+        <field name="name">credit.control.communication.tree</field>
+        <field name="model">credit.control.communication</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="user_id" />
+                <field name="company_id" />
+                <field name="policy_level_id" />
+                <field name="policy_id" />
+                <field name="report_date" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="credit_control_communication_action">
+        <field name="name">Credit Control Communications</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">credit.control.communication</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="view_id" ref="credit_control_communication_tree_view"/> -->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Go to <i
+                >Invoicing > Credit Control > Credit Control Run</i> to create a new credit control communication process.
+            </p>
+            <p>
+                That's the most common way of creating these records. However, you can do it from here too if you want, by pressing <i
+                >Create</i>.
+            </p>
+        </field>
+    </record>
+    <menuitem
+        name="Communications"
+        parent="base_credit_control_menu"
+        action="credit_control_communication_action"
+        sequence="25"
+        id="credit_control_communication_action_menu"
+    />
+</odoo>

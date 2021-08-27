@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="credit_control_summary" model="ir.actions.report">
+        <field name="name">Credit Control Summary</field>
+        <field name="model">credit.control.communication</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >account_credit_control.report_credit_control_summary</field>
+        <field
+            name="report_file"
+        >account_credit_control.report_credit_control_summary</field>
+    </record>
+</odoo>
