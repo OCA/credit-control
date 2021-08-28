@@ -12,16 +12,24 @@
     <field name="model">account.move</field>
     <field name="inherit_id" ref="account.view_move_form" />
     <field name="arch" type="xml">
-        <button id="account_invoice_payment_btn" position="after">
+        <div role="alert" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('overdue', '=', False)]}"
+                >
+                        This customer invoice is overdue.
             <button
-                    name="%(overdue_reminder_start_action)d"
-                    string="Overdue Reminder"
-                    type="action"
-                    context="{'default_partner_ids': [commercial_partner_id]}"
-                    attrs="{'invisible': ['|', ('overdue', '=', False), ('no_overdue_reminder', '=', True)]}"
-                    class="btn-primary"
-                />
-        </button>
+                        name="%(overdue_reminder_start_action)d"
+                        string="Send an overdue reminder"
+                        type="action"
+                        context="{'default_partner_ids': [commercial_partner_id]}"
+                        attrs="{'invisible': ['|', ('overdue', '=', False), ('no_overdue_reminder', '=', True)]}"
+                        class="oe_link"
+                    />
+
+                </div>
+        </div>
         <notebook position="inside">
             <page
                     name="overdue_reminder"
