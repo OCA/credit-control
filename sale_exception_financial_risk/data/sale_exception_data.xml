@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="exception.rule" id="sale_financial_risk_have_risk_message">
+            <field name="name">This sale order has risk messages</field>
+            <field name="description">This sale order has risk messages</field>
+            <field name="active" eval="True" />
+            <field name="sequence" eval="40" />
+            <field name="model">sale.order</field>
+            <field
+                name="code"
+            >failed=obj.evaluate_risk_message(obj.partner_id)!=""</field>
+        </record>
+    </data>
+</odoo>
