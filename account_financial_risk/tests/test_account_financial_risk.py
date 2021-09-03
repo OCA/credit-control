@@ -4,6 +4,7 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
+from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
 
@@ -118,7 +119,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         invoice2 = self.invoice.copy({"partner_id": self.invoice_address.id})
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 550.0)
         self.assertAlmostEqual(self.partner.risk_invoice_unpaid, 550.0)
-        wiz_dic = invoice2.action_post()
+        wiz_dic = invoice2.with_context(active_model="account.move").action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.partner.risk_invoice_unpaid_limit = 0.0
@@ -127,7 +128,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.assertIn(self.partner, unrisk_partners)
         self.partner.risk_invoice_open_limit = 300.0
         invoice2.invoice_date_due = fields.Date.today()
-        wiz_dic = invoice2.action_post()
+        wiz_dic = invoice2.with_context(active_model="account.move").action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This invoice exceeds the open invoices risk.\n"
@@ -136,7 +137,7 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.partner.risk_invoice_draft_include = False
         self.partner.risk_invoice_open_include = True
         self.partner.credit_limit = 900.0
-        wiz_dic = invoice2.action_post()
+        wiz_dic = invoice2.with_context(active_model="account.move").action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This invoice exceeds the financial risk.\n"
@@ -208,8 +209,8 @@ class TestPartnerFinancialRisk(SavepointCase):
         self.partner.risk_invoice_unpaid_include = True
         self.partner.credit_limit = 100.0
         invoice2 = self.invoice.copy({"partner_id": self.invoice_address.id})
-        risk_exceeded_view = invoice2.action_post()
-        self.assertTrue(isinstance(risk_exceeded_view, dict))
+        with self.assertRaises(ValidationError):
+            invoice2.post()
         self.assertEqual(invoice2.state, "draft")
 
     def test_open_risk_pivot_info(self):
