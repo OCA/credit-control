@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="partner_view_buttons" model="ir.ui.view">
+            <field name="model">res.partner</field>
+        <!-- We inherit a view that is already restricted to account.group_account_invoice
+                    and account.group_account_readonly -->
+        <field name="inherit_id" ref="account.partner_view_buttons" />
+        <field name="arch" type="xml">
+            <div role="alert" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('overdue_invoice_count', '=', 0)]}"
+                >
+                  This customer has <field name="overdue_invoice_count" /><button
+                        string="overdue invoice(s)"
+                        type="object"
+                        name="jump_to_overdue_invoices"
+                        class="oe_link"
+                    />for a total residual of <field name="overdue_invoice_amount" />
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>
