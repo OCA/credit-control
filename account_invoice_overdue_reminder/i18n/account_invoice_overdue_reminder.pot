@@ -983,6 +983,11 @@ msgid "Salesman"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_move_form
+msgid "Send an overdue reminder"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__sequence
 msgid "Sequence"
 msgstr ""
@@ -1057,6 +1062,11 @@ msgstr ""
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_account_move__overdue_reminder_counter
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_account_payment__overdue_reminder_counter
 msgid "This counter is not increased in case of phone reminder."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_move_form
+msgid "This customer invoice is overdue."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
