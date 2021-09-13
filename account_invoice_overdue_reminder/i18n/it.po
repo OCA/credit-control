@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-09-13 12:33+0000\n"
+"PO-Revision-Date: 2021-09-13 17:33+0000\n"
 "Last-Translator: Sergio Corato <sergiocorato@gmail.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -82,7 +82,7 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "<p>Gentile cliente,</p>\n"
 "\n"
-"<p>In base ai nostri libri contabili, le seguenti fatture sono scadute:</p>\n"
+"<p>In base alle nostre registrazioni, le seguenti fatture sono scadute:</p>\n"
 "\n"
 "<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; "
 "text-align: center;\">\n"
@@ -181,7 +181,7 @@ msgstr "%s, Promemoria %s"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "According to our books, the following invoices are overdue:"
-msgstr "In base ai nostri libri contabili, le seguenti fatture sono scadute:"
+msgstr "In base alle nostre registrazioni, le seguenti fatture sono scadute:"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__active
