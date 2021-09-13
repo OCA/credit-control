@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-06-29 19:48+0000\n"
-"Last-Translator: Mario Riva <mario.riva@agilebg.com>\n"
+"PO-Revision-Date: 2021-09-13 12:33+0000\n"
+"Last-Translator: Sergio Corato <sergiocorato@gmail.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -143,20 +143,20 @@ msgstr ""
 "% endfor\n"
 "</table>\n"
 "\n"
-"<p>Se hai effettuato un pagamento per queste fatture pochi giorni fa, per "
-"favore ignora questa email.</p>\n"
+"<p>Se il pagamento per queste fatture è stato effettuato pochi giorni fa, si "
+"prega di ignorare questa email.</p>\n"
 "\n"
 "% if object.company_id.overdue_reminder_attach_invoice:\n"
-"<p>Troverai allegate le fatture scadute.</p>\n"
+"<p>In allegato le fatture scadute.</p>\n"
 "% endif\n"
 "\n"
 "% if object.counter > 2:\n"
-"<p>Nonostante diversi solleciti, siamo rammaricati nel vedere che queste "
-"fatture scadute sono ancora non pagate. Per evitare procedimenti legali, ti "
-"sollecitiamo a pagare queste fatture nei prossimi giorni.</p>\n"
+"<p>Nonostante diversi solleciti, siamo rammaricati nel constatare che le "
+"fatture scadute non sono ancora state pagate. Per evitare procedimenti "
+"legali, sollecitiamo il pagamento delle fatture citate a stretto giro.</p>\n"
 "% endif\n"
 "\n"
-"<p>Saluti,</p>\n"
+"<p>Distinti saluti</p>\n"
 "\n"
 "</div>\n"
 
@@ -272,7 +272,7 @@ msgstr "Aziende"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__company_id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__company_id
 msgid "Company"
-msgstr "Anzienda"
+msgstr "Azienda"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_res_config_settings
@@ -415,7 +415,7 @@ msgstr "Intervallo minimo per promemoria"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "Default Reminder Trigger Delay"
-msgstr "Ritardo scatenante predefinito per il solleciti"
+msgstr "Ritardo scatenante predefinito per i solleciti"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
@@ -426,9 +426,9 @@ msgstr "Interfaccia predefinita della procedura"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days."
 msgstr ""
-"Nonostante diversi solleciti, siamo delusi nel vedere che queste fatture "
-"scadute non sono ancora state pagate. Al fine di evitare procedimenti "
-"legali, ti invitiamo a pagare queste fatture scadute nei prossimi giorni."
+"Nonostante diversi solleciti, siamo rammaricati nel constatare che le "
+"fatture scadute non sono ancora state pagate. Per evitare procedimenti "
+"legali, sollecitiamo il pagamento delle fatture citate a stretto giro."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_partner__no_overdue_reminder
@@ -537,8 +537,8 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "If you made a payment for these invoices a few days ago, please ignore this letter."
 msgstr ""
-"Se hai effettuato il pagamento per queste fatture pochi giorni fa, per "
-"favore ignora questa lettera."
+"Se il pagamento per queste fatture è stato effettuato pochi giorni fa, si "
+"prega di ignorare questa lettera."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:110
@@ -594,7 +594,7 @@ msgstr "Numero fattura"
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.overdue_reminder_action_action
 #: model:ir.ui.menu,name:account_invoice_overdue_reminder.overdue_reminder_action_menu
 msgid "Invoice Reminder Actions"
-msgstr "Azioni promomeria fattura"
+msgstr "Azioni promemoria fattura"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.account_invoice_overdue_reminder_action
@@ -820,7 +820,7 @@ msgstr "Opzioni"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid "Order Ref"
-msgstr "Rif ordine"
+msgstr "Rif. ordine"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
@@ -846,7 +846,7 @@ msgstr "Fine fatture scadute"
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.overdue_reminder_start_action
 #: model:ir.ui.menu,name:account_invoice_overdue_reminder.overdue_reminder_start_menu
 msgid "Overdue Invoice Remind"
-msgstr "Sollecitare fatture scadute"
+msgstr "Sollecito fatture scadute"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
@@ -856,7 +856,7 @@ msgstr "Solleciti fatture scadute"
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_account_invoice_overdue_reminder
 msgid "Overdue Invoice Reminder Action History"
-msgstr "Storia azioni solleciti fatture scadute"
+msgstr "Storico azioni solleciti fatture scadute"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_result
@@ -1010,7 +1010,7 @@ msgstr "Il Formato del report '%s' non è supportato."
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Residual"
-msgstr "Redisuo"
+msgstr "Residuo"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.account_invoice_overdue_reminder_search
@@ -1189,7 +1189,7 @@ msgstr "Validare"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid "WARNING: unreconciled payments/refunds"
-msgstr "WARNING: pagamenti / rimborsi non riconciliati"
+msgstr "ATTENZIONE: pagamenti / rimborsi non riconciliati"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start_payment__wizard_id
@@ -1220,7 +1220,7 @@ msgstr "Hai elaborato tutti i tuoi solleciti di fatture scadute."
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Yours faithfully,"
-msgstr "In fede,"
+msgstr "Distinti saluti"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_start_form
