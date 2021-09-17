@@ -32,14 +32,14 @@ class TestOverdueWarn(TransactionCase):
             ],
             limit=1,
         )
-        self.out_invoice1 = self.env["account.move"].create(
+        self.out_invoice1 = self.env["account.invoice"].create(
             {
                 "partner_id": self.bad_payer.id,
-                "move_type": "out_invoice",
+                "type": "out_invoice",
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
-                "invoice_date": today - timedelta(days=5),
-                "invoice_date_due": today - timedelta(days=5),
+                "date_invoice": today - timedelta(days=5),
+                "date_due": today - timedelta(days=5),
                 "invoice_line_ids": [
                     (
                         0,
@@ -54,15 +54,15 @@ class TestOverdueWarn(TransactionCase):
                 ],
             }
         )
-        self.out_invoice1.action_post()
-        self.out_invoice2 = self.env["account.move"].create(
+        self.out_invoice1.action_invoice_open()
+        self.out_invoice2 = self.env["account.invoice"].create(
             {
                 "partner_id": self.bad_payer.id,
-                "move_type": "out_invoice",
+                "type": "out_invoice",
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
-                "invoice_date": datetime.now().date(),
-                "invoice_date_due": today + timedelta(days=30),
+                "date_invoice": datetime.now().date(),
+                "date_due": today + timedelta(days=30),
                 "invoice_line_ids": [
                     (
                         0,
@@ -77,7 +77,7 @@ class TestOverdueWarn(TransactionCase):
                 ],
             }
         )
-        self.out_invoice2.action_post()
+        self.out_invoice2.action_invoice_open()
 
     def test_overdue_warn(self):
         self.assertEqual(self.bad_payer.overdue_invoice_count, 1)

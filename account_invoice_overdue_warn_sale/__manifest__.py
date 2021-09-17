@@ -4,7 +4,7 @@
 
 {
     "name": "Warning on Overdue Invoices - Sale",
-    "version": "14.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Sales/Sales",
     "license": "AGPL-3",
     "summary": "Show overdue warning on sale order form view",
