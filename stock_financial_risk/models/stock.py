@@ -22,7 +22,7 @@ class StockMove(models.Model):
                         moves.mapped("partner_id.name"),
                     )
                 )
-        return super()._action_done()
+        return super()._action_done(cancel_backorder=cancel_backorder)
 
 
 class StockPicking(models.Model):
