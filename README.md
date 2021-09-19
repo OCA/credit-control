@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_invoice_overdue_warn](account_invoice_overdue_warn/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Show warning on customer form view if it has overdue invoices
 [account_invoice_overdue_warn_sale](account_invoice_overdue_warn_sale/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Show overdue warning on sale order form view
 [sale_financial_risk](sale_financial_risk/) | 14.0.1.0.2 |  | Manage partner risk in sales orders
+[stock_financial_risk](stock_financial_risk/) | 14.0.1.0.0 |  | Manage partner risk in stock moves
 
 [//]: # (end addons)
 
