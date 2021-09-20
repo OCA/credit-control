@@ -1,17 +1,16 @@
+# -*- coding: utf-8 -*-
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime, timedelta
 
-from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 
-@tagged("post_install", "-at_install")
 class TestOverdueWarn(TransactionCase):
     def setUp(self):
-        super().setUp()
+        super(TestOverdueWarn, self).setUp()
         self.company = self.env.ref("base.main_company")
         self.bad_payer = self.env["res.partner"].create(
             {

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -23,8 +24,9 @@ class ResPartner(models.Model):
     )
 
     def _compute_overdue_invoice_count_amount(self):
+        user_company_id = self.env.user.company_id.id
         for partner in self:
-            company_id = partner.company_id.id or partner.env.company.id
+            company_id = partner.company_id.id or user_company_id
             (
                 count,
                 amount_company_currency,
@@ -34,7 +36,7 @@ class ResPartner(models.Model):
 
     def _prepare_overdue_invoice_count_amount(self, company_id):
         # This method is also called by the module
-        # account_invoice_overdue_warn_sale where the company_id arg is used
+        # account_invoice_overdue_warn_sale
         self.ensure_one()
         domain = self._prepare_overdue_invoice_domain(company_id)
         # amount_residual_signed is in company currency

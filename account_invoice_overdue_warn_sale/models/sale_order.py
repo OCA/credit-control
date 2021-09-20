@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -22,11 +23,12 @@ class SaleOrder(models.Model):
         "in company currency.",
     )
     company_currency_id = fields.Many2one(
-        related="company_id.currency_id", store=True, string="Company Currency"
+        related="company_id.currency_id", store=True, string="Company Currency",
+        readonly=True,
     )
     commercial_partner_invoicing_id = fields.Many2one(
         related="partner_invoice_id.commercial_partner_id",
-        string="Commercial Invoicing Partner",
+        string="Commercial Invoicing Partner", readonly=True,
     )
 
     @api.depends("partner_invoice_id", "company_id")
