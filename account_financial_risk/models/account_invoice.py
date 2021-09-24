@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
@@ -60,26 +61,38 @@ class AccountMove(models.Model):
         return exception_msg
 
     def post(self):
-        if (
-            self.env.context.get("bypass_risk", False)
-            or self.company_id.allow_overrisk_invoice_validation
-        ):
+        if self.env.context.get("bypass_risk", False):
             return super().post()
-        for invoice in self.filtered(lambda x: x.type == "out_invoice"):
+        for invoice in self.filtered(
+            lambda x: x.type == "out_invoice"
+            and not x.company_id.allow_overrisk_invoice_validation
+        ):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
-                return (
-                    self.env["partner.risk.exceeded.wiz"]
-                    .create(
-                        {
-                            "exception_msg": exception_msg,
-                            "partner_id": invoice.partner_id.commercial_partner_id.id,
-                            "origin_reference": "{},{}".format(
-                                "account.move", invoice.id
-                            ),
-                            "continue_method": "post",
-                        }
+                # When we post from validate.account.move wizard, validate_move returns
+                # 'ir.actions.act_window_close'
+                # Check active model to raise exception instead of returns wizard
+                if self.env.context.get("active_model") == "account.move":
+                    return (
+                        self.env["partner.risk.exceeded.wiz"]
+                        .create(
+                            {
+                                "exception_msg": exception_msg,
+                                "partner_id": invoice.partner_id.commercial_partner_id.id,
+                                "origin_reference": "{},{}".format(
+                                    "account.move", invoice.id
+                                ),
+                                "continue_method": "post",
+                            }
+                        )
+                        .action_show()
                     )
-                    .action_show()
-                )
+                else:
+                    raise ValidationError(
+                        _(
+                            "The partner %s is in risk exception.\n"
+                            "You must post his invoices from form view to allow over risk"
+                        )
+                        % invoice.partner_id.commercial_partner_id.display_name
+                    )
         return super().post()
