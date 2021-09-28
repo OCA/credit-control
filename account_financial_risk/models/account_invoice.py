@@ -71,8 +71,8 @@ class AccountMove(models.Model):
             if exception_msg:
                 # When we post from validate.account.move wizard, validate_move returns
                 # 'ir.actions.act_window_close'
-                # Check active model to raise exception instead of returns wizard
-                if self.env.context.get("active_model") == "account.move":
+                # Active active_model is false in header buttons as Post in invoice form view
+                if not self.env.context.get("active_model", False):
                     return (
                         self.env["partner.risk.exceeded.wiz"]
                         .create(
