@@ -118,7 +118,6 @@ class ResPartner(models.Model):
     risk_exception = fields.Boolean(
         compute="_compute_risk_exception",
         search="_search_risk_exception",
-        string="Risk Exception",
         help="It Indicate if partner risk exceeded",
     )
     credit_policy = fields.Char()
@@ -203,7 +202,7 @@ class ResPartner(models.Model):
         return [("company_id", "in", self.env.companies.ids)]
 
     def _get_field_risk_model_domain(self, field_name):
-        """ Returns a tuple with model name and domain"""
+        """Returns a tuple with model name and domain"""
         risk_account_groups = self._risk_account_groups()
         if field_name == "risk_invoice_draft":
             domain = risk_account_groups["draft"]["domain"]
