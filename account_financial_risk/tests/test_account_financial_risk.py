@@ -6,8 +6,10 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 from odoo.tests.common import SavepointCase
 
+from odoo.odoo.tests import TransactionCase
 
-class TestPartnerFinancialRisk(SavepointCase):
+
+class TestPartnerFinancialRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestPartnerFinancialRisk, cls).setUpClass()
