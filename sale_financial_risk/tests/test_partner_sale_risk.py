@@ -78,7 +78,7 @@ class TestPartnerSaleRisk(SavepointCase):
         # amount to be invoiced must be 0 and risk_exception must be False
         inv_wiz = (
             self.env["sale.advance.payment.inv"]
-            .with_context({"active_ids": [self.sale_order.id]})
+            .with_context(**{"active_ids": [self.sale_order.id]})
             .create({})
         )
         inv_wiz.create_invoices()

@@ -61,7 +61,6 @@ class SaleOrderLine(models.Model):
         readonly=True,
     )
     risk_amount = fields.Monetary(
-        string="Risk amount",
         compute="_compute_risk_amount",
         compute_sudo=True,
         currency_field="company_currency_id",
