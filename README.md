@@ -20,6 +20,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_financial_risk](account_financial_risk/) | 15.0.1.0.1 |  | Manage customer risk
+[sale_financial_risk](sale_financial_risk/) | 15.0.1.0.0 |  | Manage partner risk in sales orders
 
 [//]: # (end addons)
 
