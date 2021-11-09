@@ -23,6 +23,7 @@ class ResPartner(models.Model):
         "lines related.",
     )
 
+    @api.depends("move_line_ids.partial_reconcile_returned_ids")
     def _compute_risk_account_amount(self):
         self.update({"risk_payment_return": 0.0})
         super()._compute_risk_account_amount()

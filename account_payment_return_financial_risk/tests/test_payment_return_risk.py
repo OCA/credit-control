@@ -39,7 +39,7 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
         cls.partner = cls.env["res.partner"].create({"name": "Test"})
         cls.invoice = cls.env["account.move"].create(
             {
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "journal_id": cls.journal.id,
                 "company_id": cls.env.user.company_id.id,
                 "currency_id": cls.env.user.company_id.currency_id.id,
@@ -61,23 +61,22 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
         cls.reason = cls.env["payment.return.reason"].create(
             {"code": "RTEST", "name": "Reason Test"}
         )
-        cls.invoice.post()
+        cls.invoice.action_post()
         cls.receivable_line = cls.invoice.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
         # Create payment from invoice
-        cls.payment_model = cls.env["account.payment"]
+        cls.payment_register_model = cls.env["account.payment.register"]
         payment_register = Form(
-            cls.payment_model.with_context(
+            cls.payment_register_model.with_context(
                 active_model="account.move", active_ids=cls.invoice.ids
             )
         )
-        cls.payment = payment_register.save()
-        cls.payment.post()
+        cls.payment = payment_register.save()._create_payments()
 
-        cls.payment_move = cls.payment.move_line_ids[0].move_id
+        cls.payment_move = cls.payment.move_id
 
-        cls.payment_line = cls.payment.move_line_ids.filtered(
+        cls.payment_line = cls.payment.move_id.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
         # Create payment return
