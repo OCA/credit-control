@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="financial_risk_sale_order_line_pivot_view" model="ir.ui.view">
+        <field name="name">Account financial risk sale pivot view</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Sale lines">
+                <field name="order_partner_id" type="row" />
+                <field name="risk_amount" type="measure" />
+                <field name="product_uom_qty" type="measure" />
+                <field name="qty_delivered" type="measure" />
+                <field name="qty_invoiced" type="measure" />
+            </pivot>
+        </field>
+    </record>
+</odoo>
