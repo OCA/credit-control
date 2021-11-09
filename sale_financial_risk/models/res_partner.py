@@ -57,8 +57,9 @@ class ResPartner(models.Model):
 
     @api.onchange("risk_currency_id")
     def _onchange_risk_currency_id(self):
-        super()._onchange_risk_currency_id()
+        res = super()._onchange_risk_currency_id()
         self._compute_risk_sale_order()
+        return res
 
     @api.model
     def _risk_field_list(self):
