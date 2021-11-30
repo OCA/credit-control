@@ -16,6 +16,11 @@ class TestPartnerFinancialRisk(TransactionCase):
         type_revenue = cls.env.ref("account.data_account_type_revenue")
         type_receivable = cls.env.ref("account.data_account_type_receivable")
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
+        main_company = cls.env.ref("base.main_company")
+        cls.cr.execute(
+            "UPDATE res_company SET currency_id = %s WHERE id = %s",
+            [cls.env.ref("base.USD").id, main_company.id],
+        )
         cls.account_sale = cls.env["account.account"].create(
             {
                 "name": "Sale",
@@ -248,3 +253,29 @@ class TestPartnerFinancialRisk(TransactionCase):
         self.assertEqual(action["res_model"], "account.move.line")
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
+
+    def test_invoice_risk_draft_same_currency(self):
+        self.partner.risk_invoice_draft_include = True
+        self.invoice.currency_id = self.env.ref("base.USD")
+        self.partner.credit_limit = 100.0
+        self.assertGreater(self.partner.risk_total, self.partner.credit_limit)
+        self.assertTrue(
+            self.partner.risk_total, self.invoice.risk_amount_total_currency
+        )
+        self.assertTrue(
+            self.partner.risk_amount_exceeded,
+            self.partner.risk_total - self.partner.credit_limit,
+        )
+
+    def test_invoice_risk_draft_different_currency(self):
+        self.partner.risk_invoice_draft_include = True
+        self.invoice.currency_id = self.env.ref("base.EUR")
+        self.partner.credit_limit = 100.0
+        self.assertGreater(self.partner.risk_total, self.partner.credit_limit)
+        self.assertTrue(
+            self.partner.risk_total, self.invoice.risk_amount_total_currency
+        )
+        self.assertTrue(
+            self.partner.risk_amount_exceeded,
+            self.partner.risk_total - self.partner.credit_limit,
+        )
