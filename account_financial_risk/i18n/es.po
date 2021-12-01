@@ -43,13 +43,10 @@ msgstr "Permite validar facturas con riesgo excedido"
 msgid ""
 "Always allow the validation of draft invoices.\n"
 "                            Useful when the flow comes from sales orders and "
-"the over-risk\n"
+"the\n"
+"                                over-risk\n"
 "                            has already been allowed when confirming these."
 msgstr ""
-"Permite siempre la validación de facturas borrador.\n"
-"                            Útil cuando el flujo viene de pedidos de venta y "
-"sobrepasar el riesgo\n"
-"                            ha sido permitido al confirmar estos."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -85,7 +82,9 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__company_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__company_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
 msgstr ""
@@ -148,12 +147,9 @@ msgstr "Cliente"
 msgid ""
 "Days after due date to set an invoice as unpaid.\n"
 "                            The change of this field recompute all partners "
-"risk, be patient."
+"risk, be\n"
+"                                patient."
 msgstr ""
-"Días después de la fecha de vencimiento para establecer una factura como "
-"impagada.\n"
-"                            El cambio de este campo recalcula el riesgo de "
-"todos los clientes, sea paciente."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -167,7 +163,11 @@ msgstr ""
 "paciente."
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
 
@@ -265,7 +265,11 @@ msgid "General Limits"
 msgstr "Límites generales"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__id
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__id
 msgid "ID"
 msgstr "ID (identificación)"
 
@@ -312,11 +316,15 @@ msgstr "Indica si se ha excedido el riesgo"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company____last_update
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -462,12 +470,16 @@ msgid "Risk Allow Edit"
 msgstr "Permitir editar riesgo"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
 msgid "Risk Amount Total"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
@@ -478,6 +490,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_exception
 msgid "Risk Exception"
 msgstr "Excepción por riesgo"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
+msgid "Risk Over Limit"
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -508,6 +526,14 @@ msgstr "Límites específicos"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
 msgstr "Suma de riesgo total incluido"
+
+#. module: account_financial_risk
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid ""
+"The partner %s is in risk exception.\n"
+"You must post his invoices from form view to allow over risk"
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -567,6 +593,28 @@ msgstr "Total facturas/saldo principal impagado"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Importe total de facturas borrador o pro-forma"
+
+#~ msgid ""
+#~ "Always allow the validation of draft invoices.\n"
+#~ "                            Useful when the flow comes from sales orders "
+#~ "and the over-risk\n"
+#~ "                            has already been allowed when confirming "
+#~ "these."
+#~ msgstr ""
+#~ "Permite siempre la validación de facturas borrador.\n"
+#~ "                            Útil cuando el flujo viene de pedidos de "
+#~ "venta y sobrepasar el riesgo\n"
+#~ "                            ha sido permitido al confirmar estos."
+
+#~ msgid ""
+#~ "Days after due date to set an invoice as unpaid.\n"
+#~ "                            The change of this field recompute all "
+#~ "partners risk, be patient."
+#~ msgstr ""
+#~ "Días después de la fecha de vencimiento para establecer una factura como "
+#~ "impagada.\n"
+#~ "                            El cambio de este campo recalcula el riesgo "
+#~ "de todos los clientes, sea paciente."
 
 #~ msgid ""
 #~ "<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
