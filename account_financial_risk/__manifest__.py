@@ -8,6 +8,7 @@
     "category": "Accounting",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
+    "maintainers": ["carlosdauden"],
     "website": "https://github.com/OCA/credit-control",
     "depends": ["account"],
     "data": [

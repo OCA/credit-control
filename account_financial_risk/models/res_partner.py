@@ -121,6 +121,11 @@ class ResPartner(models.Model):
         string="Risk Exception",
         help="It Indicate if partner risk exceeded",
     )
+    risk_amount_exceeded = fields.Monetary(
+        string="Risk Over Limit",
+        currency_field="risk_currency_id",
+        compute="_compute_risk_exception",
+    )
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
     credit_limit = fields.Float(tracking=True)
@@ -376,18 +381,22 @@ class ResPartner(models.Model):
         risk_field_list = self._risk_field_list()
         for partner in self:
             amount = 0.0
+            amount_exceeded = 0.0
             risk_exception = False
             for risk_field in risk_field_list:
                 field_value = getattr(partner, risk_field[0], 0.0)
                 max_value = getattr(partner, risk_field[1], 0.0)
                 include = getattr(partner, risk_field[2], False)
-                if max_value and field_value > max_value:
+                if include and max_value and field_value > max_value:
                     risk_exception = True
+                    amount_exceeded += field_value - max_value
                 if include:
                     amount += field_value
             if partner.credit_limit and amount > partner.credit_limit:
                 risk_exception = True
+                amount_exceeded = amount - partner.credit_limit
             partner.risk_total = amount
+            partner.risk_amount_exceeded = amount_exceeded
             partner.risk_exception = risk_exception
 
     @api.model
