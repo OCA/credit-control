@@ -422,6 +422,12 @@ msgid "Risk Exception"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
+msgid "Risk Over Limit"
+msgstr ""
+
+#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Risk exceeded"
 msgstr ""
@@ -449,6 +455,14 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
+msgstr ""
+
+#. module: account_financial_risk
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid ""
+"The partner %s is in risk exception.\n"
+"You must post his invoices from form view to allow over risk"
 msgstr ""
 
 #. module: account_financial_risk
