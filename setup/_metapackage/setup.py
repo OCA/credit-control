@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo14-addon-account_invoice_overdue_reminder',
         'odoo14-addon-account_invoice_overdue_warn',
         'odoo14-addon-account_invoice_overdue_warn_sale',
+        'odoo14-addon-account_payment_return_financial_risk',
         'odoo14-addon-sale_financial_risk',
         'odoo14-addon-stock_financial_risk',
     ],
