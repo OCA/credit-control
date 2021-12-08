@@ -31,6 +31,11 @@ msgid "Company Currency"
 msgstr ""
 
 #. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_res_partner
 msgid "Contact"
 msgstr "Contacto"
@@ -52,6 +57,17 @@ msgstr "Computar en riesgo total"
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_include
 msgid "Include Sales Orders"
 msgstr "Incluir pedidos de venta"
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_config_settings__include_risk_sale_order_done
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
+msgid "Include locked sale orders into risk calculation"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
+msgid "Include orders in done state"
+msgstr ""
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order_limit
