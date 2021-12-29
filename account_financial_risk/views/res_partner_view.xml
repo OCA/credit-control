@@ -16,9 +16,8 @@
                 <page
                     name="financial_risk"
                     string="Financial Risk"
-                    attrs="{'invisible': ['|', ('customer_rank', '=', 0), '&amp;', ('is_company','=',False), ('parent_id','!=',False)]}"
+                    attrs="{'invisible': [('is_company','=',False), ('parent_id','!=',False)]}"
                 >
-                    <field name="customer_rank" invisible="1" />
                     <group name="risk_general" col="3" class="oe_risk_group">
                         <group
                             string="General Limits"
