@@ -75,7 +75,6 @@ msgid "Companies"
 msgstr ""
 
 #. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
 msgstr ""
