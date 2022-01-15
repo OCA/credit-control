@@ -8,7 +8,6 @@ from odoo.exceptions import ValidationError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    company_currency_id = fields.Many2one(comodel_name="res.currency", store=True)
     risk_currency_id = fields.Many2one(related="partner_id.risk_currency_id")
     risk_amount_total_currency = fields.Monetary(
         string="Risk Amount Total",
@@ -28,7 +27,7 @@ class AccountMove(models.Model):
         "partner_id.manual_credit_currency_id",
         "partner_id.property_account_receivable_id.currency_id",
         "partner_id.country_id",
-        "company_id.currency_id",
+        "company_currency_id",
     )
     def _compute_risk_amount_total_currency(self):
         for invoice in self:
