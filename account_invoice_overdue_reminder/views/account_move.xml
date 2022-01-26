@@ -54,7 +54,7 @@
     <field name="model">account.move</field>
     <field name="inherit_id" ref="account.view_invoice_tree" />
     <field name="arch" type="xml">
-            <field name="payment_state" position="after">
+            <field name="invoice_payment_state" position="after">
                     <field name="overdue_reminder_counter" optional="hide" />
             </field>
         </field>

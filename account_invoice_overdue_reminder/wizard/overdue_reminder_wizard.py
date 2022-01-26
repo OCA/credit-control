@@ -99,9 +99,9 @@ class OverdueReminderStart(models.TransientModel):
     def _prepare_base_domain(self):
         base_domain = [
             ("company_id", "=", self.company_id.id),
-            ("move_type", "=", "out_invoice"),
+            ("type", "=", "out_invoice"),
             ("state", "=", "posted"),
-            ("payment_state", "not in", ("paid", "reversed", "in_payment")),
+            ("invoice_payment_state", "=", "not_paid"),
             ("no_overdue_reminder", "=", False),
         ]
         return base_domain
@@ -141,10 +141,10 @@ class OverdueReminderStart(models.TransientModel):
         existing_actions = orso.search([("user_id", "=", user_id)])
         existing_actions.unlink()
         payment_journals = ajo.search(
-            [("company_id", "=", self.company_id.id), ("type", "in", ("bank", "cash")),]
+            [("company_id", "=", self.company_id.id), ("type", "in", ("bank", "cash"))]
         )
         sale_journals = ajo.search(
-            [("company_id", "=", self.company_id.id), ("type", "=", "sale"),]
+            [("company_id", "=", self.company_id.id), ("type", "=", "sale")]
         )
         today = fields.Date.context_today(self)
         min_interval_date = today - relativedelta(days=self.min_interval_days)
@@ -236,11 +236,10 @@ class OverdueReminderStart(models.TransientModel):
             ("matched_credit_ids", "=", False),
         ]
         unrec_payments = amlo.search(
-            unrec_domain + [("journal_id", "in", payment_journals.ids),]
+            unrec_domain + [("journal_id", "in", payment_journals.ids)]
         )
         unrec_refunds = amlo.search(
-            unrec_domain
-            + [("journal_id", "in", sale_journals.ids), ("credit", ">", 0),]
+            unrec_domain + [("journal_id", "in", sale_journals.ids), ("credit", ">", 0)]
         )
         warn_unrec = unrec_payments + unrec_refunds
         if self.partner_policy == "last_reminder":
@@ -260,7 +259,7 @@ class OverdueReminderStart(models.TransientModel):
             last_inv = self.env["account.move"].search(
                 [
                     ("company_id", "=", self.company_id.id),
-                    ("move_type", "in", ("out_invoice", "out_refund")),
+                    ("type", "in", ("out_invoice", "out_refund")),
                     ("commercial_partner_id", "=", commercial_partner.id),
                     ("state", "=", "posted"),
                 ],
@@ -353,7 +352,7 @@ class OverdueReminderStep(models.TransientModel):
     )
     interface = fields.Char(readonly=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("skipped", "Skipped"), ("done", "Done"),],
+        [("draft", "Draft"), ("skipped", "Skipped"), ("done", "Done")],
         default="draft",
         readonly=True,
     )
@@ -378,9 +377,7 @@ class OverdueReminderStep(models.TransientModel):
             mail_tpl_lang.body_html, self._name, [step.id]
         )[step.id]
         mail_body = tools.html_sanitize(mail_body)
-        step.write(
-            {"mail_subject": mail_subject, "mail_body": mail_body,}
-        )
+        step.write({"mail_subject": mail_subject, "mail_body": mail_body})
         return step
 
     @api.onchange("reminder_type")
@@ -543,7 +540,7 @@ class OverdueReminderStep(models.TransientModel):
             attachment_ids = []
             for inv in self.invoice_ids:
                 if inv_report.report_type in ("qweb-html", "qweb-pdf"):
-                    report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
+                    report_bin, report_format = inv_report.render_qweb_pdf([inv.id])
                 else:
                     res = inv_report.render([inv.id])
                     if not res:
@@ -626,7 +623,7 @@ class OverdueReminderStep(models.TransientModel):
         res = defaultdict(float)
         for inv in self.invoice_ids:
             res[inv.currency_id] += inv.amount_residual * (
-                inv.move_type == "out_refund" and -1 or 1
+                inv.type == "out_refund" and -1 or 1
             )
         return res.items()
 

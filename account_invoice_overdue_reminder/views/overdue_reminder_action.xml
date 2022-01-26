@@ -50,17 +50,15 @@
     <field name="name">overdue.reminder.action.tree</field>
     <field name="model">overdue.reminder.action</field>
     <field name="arch" type="xml">
-        <tree>
+        <tree
+                decoration-info="reminder_type == 'phone'"
+                decoration-success="reminder_type == 'mail'"
+                decoration-danger="reminder_type == 'post'"
+            >
             <field name="date" />
             <field name="commercial_partner_id" />
             <field name="user_id" widget="many2one_avatar_user" />
-            <field
-                    name="reminder_type"
-                    widget="badge"
-                    decoration-info="reminder_type == 'phone'"
-                    decoration-success="reminder_type == 'mail'"
-                    decoration-danger="reminder_type == 'post'"
-                />
+            <field name="reminder_type" widget="badge" />
             <field name="result_id" />
         </tree>
     </field>

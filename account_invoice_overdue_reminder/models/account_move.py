@@ -37,15 +37,15 @@ class AccountMove(models.Model):
         )
     ]
 
-    @api.depends("move_type", "state", "payment_state", "invoice_date_due")
+    @api.depends("type", "state", "invoice_payment_state", "invoice_date_due")
     def _compute_overdue(self):
         today = fields.Date.context_today(self)
         for move in self:
             overdue = False
             if (
-                move.move_type == "out_invoice"
+                move.type == "out_invoice"
                 and move.state == "posted"
-                and move.payment_state not in ("paid", "reversed", "in_payment")
+                and move.invoice_payment_state == "not_paid"
                 and move.invoice_date_due < today
             ):
                 overdue = True

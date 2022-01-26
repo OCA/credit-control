@@ -48,7 +48,7 @@ class AccountInvoiceOverdueReminder(models.Model):
     @api.constrains("invoice_id")
     def invoice_id_check(self):
         for action in self:
-            if action.invoice_id and action.invoice_id.move_type != "out_invoice":
+            if action.invoice_id and action.invoice_id.type != "out_invoice":
                 raise ValidationError(
                     _(
                         "An overdue reminder can only be attached "

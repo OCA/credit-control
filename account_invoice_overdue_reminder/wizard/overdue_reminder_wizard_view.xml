@@ -126,7 +126,7 @@
                                 string="Last Reminder"
                             />
                         <field name="state" invisible="1" />
-                        <field name="payment_state" invisible="1" />
+                        <field name="invoice_payment_state" invisible="1" />
                     </tree>
                 </field>
             </group>
