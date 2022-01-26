@@ -141,16 +141,10 @@ class OverdueReminderStart(models.TransientModel):
         existing_actions = orso.search([("user_id", "=", user_id)])
         existing_actions.unlink()
         payment_journals = ajo.search(
-            [
-                ("company_id", "=", self.company_id.id),
-                ("type", "in", ("bank", "cash")),
-            ]
+            [("company_id", "=", self.company_id.id), ("type", "in", ("bank", "cash")),]
         )
         sale_journals = ajo.search(
-            [
-                ("company_id", "=", self.company_id.id),
-                ("type", "=", "sale"),
-            ]
+            [("company_id", "=", self.company_id.id), ("type", "=", "sale"),]
         )
         today = fields.Date.context_today(self)
         min_interval_date = today - relativedelta(days=self.min_interval_days)
@@ -242,17 +236,11 @@ class OverdueReminderStart(models.TransientModel):
             ("matched_credit_ids", "=", False),
         ]
         unrec_payments = amlo.search(
-            unrec_domain
-            + [
-                ("journal_id", "in", payment_journals.ids),
-            ]
+            unrec_domain + [("journal_id", "in", payment_journals.ids),]
         )
         unrec_refunds = amlo.search(
             unrec_domain
-            + [
-                ("journal_id", "in", sale_journals.ids),
-                ("credit", ">", 0),
-            ]
+            + [("journal_id", "in", sale_journals.ids), ("credit", ">", 0),]
         )
         warn_unrec = unrec_payments + unrec_refunds
         if self.partner_policy == "last_reminder":
@@ -365,11 +353,7 @@ class OverdueReminderStep(models.TransientModel):
     )
     interface = fields.Char(readonly=True)
     state = fields.Selection(
-        [
-            ("draft", "Draft"),
-            ("skipped", "Skipped"),
-            ("done", "Done"),
-        ],
+        [("draft", "Draft"), ("skipped", "Skipped"), ("done", "Done"),],
         default="draft",
         readonly=True,
     )
@@ -395,10 +379,7 @@ class OverdueReminderStep(models.TransientModel):
         )[step.id]
         mail_body = tools.html_sanitize(mail_body)
         step.write(
-            {
-                "mail_subject": mail_subject,
-                "mail_body": mail_body,
-            }
+            {"mail_subject": mail_subject, "mail_body": mail_body,}
         )
         return step
 
