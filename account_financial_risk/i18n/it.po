@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2022-01-28 12:31+0000\n"
+"PO-Revision-Date: 2022-01-28 19:31+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -34,7 +34,7 @@ msgstr "Movimenti Contabili"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
-msgstr "Permettere la validazione di fatture oltre il rischio"
+msgstr "Permettere la validazione di fatture oltre il fido"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -48,7 +48,7 @@ msgstr ""
 "Permettere sempre la validazione di fatture bozza.\n"
 "                            Utile quando il flusso proviene dagli ordini di "
 "vendita e\n"
-"                                rischio eccessivo\n"
+"                                superamento del fido\n"
 "                            è già stato consentito al momento della conferma "
 "di questi."
 
@@ -67,7 +67,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
 msgid "Can Overpass Partner Risk Exceptions"
-msgstr "Può superare le eccezioni di rischio per i partner"
+msgstr "Può superare le eccezioni di fido per i partner"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -156,7 +156,7 @@ msgid ""
 msgstr ""
 "Giorni dopo la scadenza per impostare una fattura come non pagata.\n"
 "                            La modifica di questo campo ricalcola tutti i "
-"rischi dei partner, sii\n"
+"fidi dei partner, sii\n"
 "                                paziente."
 
 #. module: account_financial_risk
@@ -393,12 +393,12 @@ msgstr "Oggetto"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
-msgstr "Procedura guidata di superamento del rischio del partner"
+msgstr "Procedura guidata di superamento del fido del partner"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
 msgid "Partner Risk Manager"
-msgstr "Partner Responsabile del rischio"
+msgstr "Partner Responsabile del fido"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
@@ -468,14 +468,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_allow_edit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
 msgid "Risk Allow Edit"
-msgstr "Consenti modifica rischio"
+msgstr "Consenti modifica fido"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr "Importo totale del rischio"
+msgstr "Importo totale del fido"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
@@ -484,19 +484,19 @@ msgstr "Importo totale del rischio"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr "Valuta Rischio"
+msgstr "Valuta fido"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_exception
 msgid "Risk Exception"
-msgstr "Eccezione di Rischio"
+msgstr "Eccezione di fido"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
 msgid "Risk Over Limit"
-msgstr "Rischio oltre il limite"
+msgstr "Fido oltre il limite"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -526,7 +526,7 @@ msgstr "Fidi Specifici"
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
-msgstr "Somma del rischio totale inclusa"
+msgstr "Somma del fido totale inclusa"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/account_invoice.py:0
@@ -535,7 +535,7 @@ msgid ""
 "The partner %s is in risk exception.\n"
 "You must post his invoices from form view to allow over risk"
 msgstr ""
-"Il partner %s è in eccezione di rischio.\n"
+"Il partner %s è in eccezione di fido.\n"
 "È necessario registrare le sue fatture dalla vista modulo per consentire un "
 "rischio eccessivo"
 
@@ -584,7 +584,7 @@ msgstr "Totale Altri Importi Contabili Non Pagati"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_total
 msgid "Total Risk"
-msgstr "Rischio Totale"
+msgstr "Totale fido"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
