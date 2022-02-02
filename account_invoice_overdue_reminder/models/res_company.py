@@ -52,6 +52,6 @@ class ResCompany(models.Model):
         (
             "overdue_reminder_min_interval_days_positive",
             "CHECK(overdue_reminder_min_interval_days > 0)",
-            "Overdue Reminder Trigger Delay must always be strictly positive",
+            "Overdue Reminder Minimum Interval must always be strictly positive",
         ),
     ]
