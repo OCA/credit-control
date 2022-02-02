@@ -1,4 +1,4 @@
-# Copyright 2021 Akretion France (http://www.akretion.com/)
+# Copyright 2021-2022 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -35,7 +35,7 @@ class TestOverdueWarn(TransactionCase):
         self.out_invoice1 = self.env["account.move"].create(
             {
                 "partner_id": self.bad_payer.id,
-                "move_type": "out_invoice",
+                "type": "out_invoice",
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
                 "invoice_date": today - timedelta(days=5),
@@ -58,7 +58,7 @@ class TestOverdueWarn(TransactionCase):
         self.out_invoice2 = self.env["account.move"].create(
             {
                 "partner_id": self.bad_payer.id,
-                "move_type": "out_invoice",
+                "type": "out_invoice",
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
                 "invoice_date": datetime.now().date(),

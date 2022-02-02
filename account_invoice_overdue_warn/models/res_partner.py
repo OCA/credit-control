@@ -1,4 +1,4 @@
-# Copyright 2021 Akretion France (http://www.akretion.com/)
+# Copyright 2021-2022 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -14,7 +14,7 @@ class ResPartner(models.Model):
         compute_sudo=True,
     )
     # the currency_id field on res.partner =
-    # partner.company_id.currency_id or self.env.company.cueency_id
+    # partner.company_id.currency_id or self.env.company.currency_id
     overdue_invoice_amount = fields.Monetary(
         compute="_compute_overdue_invoice_count_amount",
         string="Overdue Invoices Residual",
@@ -55,24 +55,24 @@ class ResPartner(models.Model):
         if company_id is None:
             company_id = self.env.company.id
         domain = [
-            ("move_type", "=", "out_invoice"),
+            ("type", "=", "out_invoice"),
             ("company_id", "=", company_id),
             ("commercial_partner_id", "=", self.commercial_partner_id.id),
             ("invoice_date_due", "<", today),
             ("state", "=", "posted"),
-            ("payment_state", "in", ("not_paid", "partial")),
+            ("invoice_payment_state", "=", "not_paid"),
         ]
         return domain
 
     def _prepare_jump_to_overdue_invoices(self, company_id):
-        action = self.env["ir.actions.actions"]._for_xml_id(
-            "account.action_move_out_invoice_type"
+        action = self.env["ir.actions.act_window"].for_xml_id(
+            "account", "action_move_out_invoice_type"
         )
         action["domain"] = self._prepare_overdue_invoice_domain(company_id)
         action["context"] = {
             "journal_type": "sale",
-            "move_type": "out_invoice",
-            "default_move_type": "out_invoice",
+            "type": "out_invoice",
+            "default_type": "out_invoice",
             "default_partner_id": self.id,
         }
         return action

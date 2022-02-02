@@ -1,10 +1,10 @@
-# Copyright 2021 Akretion France (http://www.akretion.com/)
+# Copyright 2021-2022 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Warning on Overdue Invoices",
-    "version": "14.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Sales",
     "license": "AGPL-3",
     "summary": "Show warning on customer form view if it has overdue invoices",
@@ -12,8 +12,6 @@
     "maintainers": ["alexis-via"],
     "website": "https://github.com/OCA/credit-control",
     "depends": ["account"],
-    "data": [
-        "views/res_partner.xml",
-    ],
+    "data": ["views/res_partner.xml"],
     "installable": True,
 }
