@@ -863,13 +863,13 @@ msgid "Overdue Reminder Count"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_start_days_positive
-msgid "Overdue Reminder Trigger Delay must always be positive"
+#: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_min_interval_days_positive
+msgid "Overdue Reminder Minimum Interval must always be strictly positive"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_min_interval_days_positive
-msgid "Overdue Reminder Trigger Delay must always be strictly positive"
+#: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_start_days_positive
+msgid "Overdue Reminder Trigger Delay must always be positive"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
