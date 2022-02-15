@@ -67,7 +67,7 @@
         <form>
             <group name="main" col="4">
                 <field name="commercial_partner_id"/>
-                <field name="counter"/>
+                <field name="counter" force_save="1"/>
                 <field name="partner_id" domain="[('id', 'child_of', commercial_partner_id)]"/>
                 <field name="partner_phone" widget="phone"/>
                 <field name="partner_email" widget="email"/>
@@ -84,7 +84,7 @@
             </group>
             <group name="invoices">
                 <field name="invoice_ids" nolabel="1" context="{'form_view_ref': 'account.invoice_form'}">
-                    <tree default_order="date_invoice">
+                    <tree default_order="date_invoice" create="false">
                         <field name="partner_id" string="Invoicing Contact"/>
                         <field name="number"/>
                         <field name="date_invoice"/>
@@ -120,6 +120,17 @@
             </group>
             <group name="mail" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}">
                 <field name="mail_cc_partner_ids" domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id), ('email', '!=', False)]" widget="many2many_tags"/>
+                <field name="display_button_recompute_mail_info" invisible="1"/>
+                <div
+                    class="alert alert-warning" role="alert" colspan="2"
+                    attrs="{'invisible': [('display_button_recompute_mail_info', '=', False)]}"
+                >Click on <button
+                        string="this link"
+                        type="object"
+                        name="button_compute_mail_info"
+                        class="oe_link"
+                    />to recompute the mail informations
+                </div>
                 <field name="mail_subject"/>
                 <field name="mail_body" colspan="2" nolabel="1"/>
             </group>
