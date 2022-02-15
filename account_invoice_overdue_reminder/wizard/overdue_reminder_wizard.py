@@ -348,8 +348,7 @@ class OverdueReminderStep(models.TransientModel):
     )
     letter_printed = fields.Boolean(readonly=True)
     invoice_ids = fields.Many2many(
-        "account.move", string="Overdue Invoices", readonly=True
-    )
+        'account.invoice', string='Overdue Invoices')
     company_id = fields.Many2one(
         "res.company",
         readonly=True,
@@ -378,28 +377,44 @@ class OverdueReminderStep(models.TransientModel):
     def _reminder_type_selection(self):
         return self.env["overdue.reminder.action"]._reminder_type_selection()
 
+    @api.onchange("invoice_ids")
+    def onchange_invoice_ids(self):
+        if not self.invoice_ids:
+            raise UserError(_(
+                "You cannot make a reminder without selecting invoices."
+                " Instead you can click on the 'Skip' button."))
+        self.display_button_recompute_mail_info = True
+        self.counter = 1 + max([
+            inv.overdue_reminder_counter
+            for inv in self.invoice_ids
+        ])
+
+    def button_compute_mail_info(self):
+        for step in self:
+            xmlid = self._get_overdue_invoice_reminder_template()
+            mail_tpl = self.env.ref(xmlid)
+            mail_tpl_lang = mail_tpl.with_context(
+                lang=step.commercial_partner_id.lang or "en_US"
+            )
+
+            # recompute subject
+            step.mail_subject = mail_tpl_lang._render_template(
+                mail_tpl_lang.subject, step._name, [step.id]
+            )[step.id]
+
+            # recompute body
+            mail_body = mail_tpl_lang._render_template(
+                mail_tpl_lang.body_html, step._name, [step.id]
+            )[step.id]
+            step.mail_body = tools.html_sanitize(mail_body)
+
+            # Hide button
+            step.display_button_recompute_mail_info = False
+
     @api.model
     def create(self, vals):
         step = super().create(vals)
-        commercial_partner = self.env["res.partner"].browse(
-            vals["commercial_partner_id"]
-        )
-        xmlid = self._get_overdue_invoice_reminder_template()
-        mail_tpl = self.env.ref(xmlid)
-        mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or "en_US")
-        mail_subject = mail_tpl_lang._render_template(
-            mail_tpl_lang.subject, self._name, [step.id]
-        )[step.id]
-        mail_body = mail_tpl_lang._render_template(
-            mail_tpl_lang.body_html, self._name, [step.id]
-        )[step.id]
-        mail_body = tools.html_sanitize(mail_body)
-        step.write(
-            {
-                "mail_subject": mail_subject,
-                "mail_body": mail_body,
-            }
-        )
+        step.button_compute_mail_info()
         return step
 
     @api.onchange("reminder_type")
