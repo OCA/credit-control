@@ -8,7 +8,11 @@
         <field name="priority" eval="50" />
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page string="Credit Insurance" name="credit_insurance">
+                <page
+                    string="Credit Insurance"
+                    name="credit_insurance"
+                    attrs="{'invisible': [('is_company','=',False), ('parent_id','!=',False)]}"
+                >
                     <group name="credit_insurance_main">
                         <group name="credit_insurance_limit">
                             <field name="company_credit_limit" />
