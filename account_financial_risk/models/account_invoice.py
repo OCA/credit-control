@@ -68,10 +68,17 @@ class AccountMove(models.Model):
         ):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
-                # When we post from validate.account.move wizard, validate_move returns
-                # 'ir.actions.act_window_close'
-                # Check active model to raise exception instead of returns wizard
-                if self.env.context.get("active_model") == "account.move":
+                # Active active_model is False if we click in form view header buttons
+                # as 'Post'.
+                # Active model is "account.move" if we select moves from tree view and
+                # we use validate.account.move wizard.
+                # We can not return "partner.risk.exceeded.wiz" because validate_move
+                # don't save post method return and it always returns
+                # "{'type': 'ir.actions.act_window_close'}"
+                # Therefore the only way to show the notice is with raise and to be able
+                # to validate invoices with exceeded risk it must be done from the
+                # form view
+                if not self.env.context.get("active_model", False):
                     return (
                         self.env["partner.risk.exceeded.wiz"]
                         .create(
