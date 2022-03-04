@@ -14,6 +14,9 @@ class TestPartnerFinancialRisk(TransactionCase):
         super(TestPartnerFinancialRisk, cls).setUpClass()
         (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
         cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
+        cls.env.user.groups_id |= cls.env.ref(
+            "account_financial_risk.group_account_financial_risk_manager"
+        )
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
         main_company = cls.env.ref("base.main_company")
         cls.cr.execute(
