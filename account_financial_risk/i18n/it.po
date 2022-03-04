@@ -65,9 +65,9 @@ msgstr ""
 "permesso quando questi sono stati confermati."
 
 #. module: account_financial_risk
-#: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
-msgid "Can Overpass Partner Risk Exceptions"
-msgstr "Può superare le eccezioni di fido per i partner"
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
+msgid "Can edit risk limit and overpass partner risk exceptions"
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -181,6 +181,7 @@ msgid "Exception Msg"
 msgstr "Msg di eccezione"
 
 #. module: account_financial_risk
+#: model:ir.module.category,name:account_financial_risk.category_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
@@ -370,6 +371,11 @@ msgid "Limit Other Account Unpaid Amount"
 msgstr "Fido Altri Importi Contabili Scaduti"
 
 #. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
+msgid "Manager"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
@@ -393,11 +399,6 @@ msgid "Partner Risk Exceeded Wizard"
 msgstr "Procedura guidata di superamento del fido del partner"
 
 #. module: account_financial_risk
-#: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
-msgid "Partner Risk Manager"
-msgstr "Partner Responsabile del fido"
-
-#. module: account_financial_risk
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
@@ -407,6 +408,11 @@ msgstr "Fido Partner Superato"
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
 msgstr "Valuta listino prezzi"
+
+#. module: account_financial_risk
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
+msgid "Read only access to financial risk info"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
@@ -594,6 +600,17 @@ msgstr "Totale Fatture Scadute/Saldo Principale"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Totale Importo Fatture in Bozza o Pro-forma"
+
+#. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
+msgid "User"
+msgstr ""
+
+#~ msgid "Can Overpass Partner Risk Exceptions"
+#~ msgstr "Può superare le eccezioni di fido per i partner"
+
+#~ msgid "Partner Risk Manager"
+#~ msgstr "Partner Responsabile del fido"
 
 #, fuzzy
 #~ msgid ""

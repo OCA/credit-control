@@ -43,13 +43,10 @@ msgstr "Permite validar facturas con riesgo excedido"
 msgid ""
 "Always allow the validation of draft invoices.\n"
 "                            Useful when the flow comes from sales orders and "
-"the over-risk\n"
+"the\n"
+"                                over-risk\n"
 "                            has already been allowed when confirming these."
 msgstr ""
-"Permite siempre la validación de facturas borrador.\n"
-"                            Útil cuando el flujo viene de pedidos de venta y "
-"sobrepasar el riesgo\n"
-"                            ha sido permitido al confirmar estos."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -87,7 +84,6 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
 msgstr "Moneda de la compañía"
@@ -150,12 +146,9 @@ msgstr "Cliente"
 msgid ""
 "Days after due date to set an invoice as unpaid.\n"
 "                            The change of this field recompute all partners "
-"risk, be patient."
+"risk, be\n"
+"                                patient."
 msgstr ""
-"Días después de la fecha de vencimiento para establecer una factura como "
-"impagada.\n"
-"                            El cambio de este campo recalcula el riesgo de "
-"todos los clientes, sea paciente."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -323,8 +316,8 @@ msgstr "Indica si se ha excedido el riesgo"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
-msgid "Journal Entries"
-msgstr "Asientos contables"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move____last_update
@@ -610,3 +603,28 @@ msgstr "Importe total de facturas borrador o pro-forma"
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
 msgid "User"
 msgstr "Usuario"
+
+#~ msgid ""
+#~ "Always allow the validation of draft invoices.\n"
+#~ "                            Useful when the flow comes from sales orders "
+#~ "and the over-risk\n"
+#~ "                            has already been allowed when confirming "
+#~ "these."
+#~ msgstr ""
+#~ "Permite siempre la validación de facturas borrador.\n"
+#~ "                            Útil cuando el flujo viene de pedidos de "
+#~ "venta y sobrepasar el riesgo\n"
+#~ "                            ha sido permitido al confirmar estos."
+
+#~ msgid ""
+#~ "Days after due date to set an invoice as unpaid.\n"
+#~ "                            The change of this field recompute all "
+#~ "partners risk, be patient."
+#~ msgstr ""
+#~ "Días después de la fecha de vencimiento para establecer una factura como "
+#~ "impagada.\n"
+#~ "                            El cambio de este campo recalcula el riesgo "
+#~ "de todos los clientes, sea paciente."
+
+#~ msgid "Journal Entries"
+#~ msgstr "Asientos contables"
