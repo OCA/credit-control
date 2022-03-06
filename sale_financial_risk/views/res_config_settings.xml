@@ -12,19 +12,17 @@
                 expr="//field[@name='allow_overrisk_invoice_validation']/../.."
                 position="inside"
             >
-                <div class="row col-xs-12 o_setting_box">
-                    <div class="o_setting_left_pane">
+                <div class="o_setting_left_pane">
 
-                        <field name="include_risk_sale_order_done" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label
-                            string="Include orders in done state"
-                            for="include_risk_sale_order_done"
-                        />
-                        <div class="text-muted">
-                            Include locked sale orders into risk calculation
-                        </div>
+                    <field name="include_risk_sale_order_done" />
+                </div>
+                <div class="o_setting_right_pane">
+                    <label
+                        string="Include orders in done state"
+                        for="include_risk_sale_order_done"
+                    />
+                    <div class="text-muted">
+                        Include locked sale orders into risk calculation
                     </div>
                 </div>
             </xpath>
