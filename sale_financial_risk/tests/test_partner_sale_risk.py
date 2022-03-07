@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.odoo.tests import TransactionCase
+from odoo.tests import TransactionCase
 
 
 class TestPartnerSaleRisk(TransactionCase):
@@ -95,10 +95,18 @@ class TestPartnerSaleRisk(TransactionCase):
         # After that, if we create and validate a Credit Note from the invoice
         # then the amount to be invoiced must be 100 again
         # and risk_exception must be True
+        journal = self.env["account.journal"].search(
+            [
+                ("type", "=", "sale"),
+                ("company_id", "=", self.env.company.id),
+            ]
+        )
         ref_wiz_obj = self.env["account.move.reversal"].with_context(
             active_model="account.move", active_ids=[invoice.id]
         )
-        ref_wiz = ref_wiz_obj.create({"reason": "testing", "refund_method": "modify"})
+        ref_wiz = ref_wiz_obj.create(
+            {"reason": "testing", "refund_method": "modify", "journal_id": journal.id}
+        )
         res = ref_wiz.reverse_moves()
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
