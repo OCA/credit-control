@@ -12,9 +12,7 @@ class ResPartner(models.Model):
                 partner.company_credit_limit + partner.insurance_credit_limit
             )
 
-    credit_limit = fields.Float(
-        "Credit Limit", store=True, compute="_compute_credit_limit"
-    )
+    credit_limit = fields.Float(store=True, compute="_compute_credit_limit")
     company_credit_limit = fields.Float(
         "Company's Credit Limit",
         help="Credit limit granted by the company.",
