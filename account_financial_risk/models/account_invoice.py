@@ -59,46 +59,58 @@ class AccountMove(models.Model):
             exception_msg = _("This invoice exceeds the financial risk.\n")
         return exception_msg
 
-    def _post(self, soft=True):
+    def _first_invoice_exception_msg(self):
+        """
+        Method used to return the first invoice with exception message.
+        """
+        ret = False, False
         if (
             self.env.context.get("bypass_risk", False)
             or self.company_id.allow_overrisk_invoice_validation
         ):
-            return super()._post(soft)
+            return ret
         for invoice in self.filtered(lambda x: x.move_type == "out_invoice"):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
-                # Active active_model is False if we click in form view header buttons
-                # as 'Post'.
-                # Active model is "account.move" if we select moves from tree view and
-                # we use validate.account.move wizard.
-                # We can not return "partner.risk.exceeded.wiz" because validate_move
-                # don't save post method return and it always returns
-                # "{'type': 'ir.actions.act_window_close'}"
-                # Therefore the only way to show the notice is with raise and to be able
-                # to validate invoices with exceeded risk it must be done from the
-                # form view
-                if not self.env.context.get("active_model", False):
-                    return (
-                        self.env["partner.risk.exceeded.wiz"]
-                        .create(
-                            {
-                                "exception_msg": exception_msg,
-                                "partner_id": invoice.partner_id.commercial_partner_id.id,
-                                "origin_reference": "{},{}".format(
-                                    "account.move", invoice.id
-                                ),
-                                "continue_method": "_post",
-                            }
-                        )
-                        .action_show()
-                    )
-                else:
-                    raise ValidationError(
-                        _(
-                            "The partner %s is in risk exception.\n"
-                            "You must post his invoices from form view to allow over risk"
-                        )
-                        % invoice.partner_id.commercial_partner_id.display_name
-                    )
+                ret = invoice, exception_msg
+                break
+        return ret
+
+    def _post(self, soft=True):
+        invoice, exception_msg = self._first_invoice_exception_msg()
+        if exception_msg and self.env.context.get("active_model", False):
+            # Active model is "account.move" if we select moves from tree view and
+            # we use validate.account.move wizard.
+            # We can not return "partner.risk.exceeded.wiz" because validate_move
+            # don't save post method return and it always returns
+            # "{'type': 'ir.actions.act_window_close'}"
+            # Therefore the only way to show the notice is with raise and to be able
+            # to validate invoices with exceeded risk it must be done from the
+            # form view
+            raise ValidationError(
+                _(
+                    "The partner %s is in risk exception.\n"
+                    "You must post his invoices from form view to allow over risk"
+                )
+                % invoice.partner_id.commercial_partner_id.display_name
+            )
         return super()._post(soft)
+
+    def action_post(self):
+        invoice, exception_msg = self._first_invoice_exception_msg()
+        if exception_msg and not self.env.context.get("active_model", False):
+            # Active active_model is False if we click in form view header buttons
+            # as 'Confirm'.
+            return (
+                self.env["partner.risk.exceeded.wiz"]
+                .create(
+                    {
+                        "exception_msg": exception_msg,
+                        "partner_id": invoice.partner_id.commercial_partner_id.id,
+                        "origin_reference": "{},{}".format("account.move", invoice.id),
+                        "continue_method": "action_post",
+                    }
+                )
+                .action_show()
+            )
+        return super().action_post()
