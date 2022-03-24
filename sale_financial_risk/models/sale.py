@@ -1,3 +1,4 @@
+# Update 2022 Ooops - Ashish Hirpara
 # Copyright 2016-2020 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -7,6 +8,20 @@ from odoo.tools import float_round
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
+
+    remaining_risk = fields.Float(
+        "Remaining Customer Financial Risk", compute="_compute_remaining_risk"
+    )
+
+    @api.depends("amount_total", "partner_id", "partner_id.risk_total")
+    def _compute_remaining_risk(self):
+        for record in self:
+            if record.partner_id:
+                record.remaining_risk = (
+                    record.partner_id.risk_total - record.amount_total
+                )
+            else:
+                record.remaining_risk = 0
 
     def evaluate_risk_message(self, partner):
         self.ensure_one()

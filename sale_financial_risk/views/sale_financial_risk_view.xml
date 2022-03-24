@@ -13,4 +13,24 @@
             </pivot>
         </field>
     </record>
+
+    <record id="financial_risk_sale_order_form_view" model="ir.ui.view">
+        <field name="name">financial.risk.sale.order.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="remaining_risk"
+                    style="color:red;"
+                    attrs="{'invisible':[('remaining_risk','&gt;=', 0)]}"
+                />
+                <field
+                    name="remaining_risk"
+                    attrs="{'invisible':[('remaining_risk','&lt;', 0)]}"
+                />
+
+            </field>
+        </field>
+    </record>
 </odoo>
