@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 
 
 class CreditControlMarker(models.TransientModel):
-    """ Change the state of lines in mass """
+    """Change the state of lines in mass"""
 
     _name = "credit.control.marker"
     _description = "Mass marker"
@@ -44,14 +44,14 @@ class CreditControlMarker(models.TransientModel):
 
     @api.model
     def _filter_lines(self, lines):
-        """ get line to be marked filter done lines """
+        """get line to be marked filter done lines"""
         line_obj = self.env["credit.control.line"]
         domain = [("state", "!=", "sent"), ("id", "in", lines.ids)]
         return line_obj.search(domain)
 
     @api.model
     def _mark_lines(self, filtered_lines, state):
-        """ write hook """
+        """write hook"""
         assert state
         filtered_lines.write({"state": state})
         return filtered_lines

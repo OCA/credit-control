@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 
 class CreditControlPrinter(models.TransientModel):
-    """ Print lines """
+    """Print lines"""
 
     _name = "credit.control.printer"
     _rec_name = "id"

@@ -108,7 +108,7 @@ class CreditControlCommunication(models.Model):
     def _get_credit_lines(
         self, line_ids, partner_id, level_id, currency_id, company_id
     ):
-        """ Return credit lines related to a partner and a policy level """
+        """Return credit lines related to a partner and a policy level"""
         cr_line_obj = self.env["credit.control.line"]
         cr_lines = cr_line_obj.search(
             [
@@ -174,7 +174,7 @@ class CreditControlCommunication(models.Model):
         return comms
 
     def _generate_emails(self):
-        """ Generate email message using template related to level """
+        """Generate email message using template related to level"""
         for comm in self:
             comm.message_post_with_template(
                 comm.policy_level_id.email_template_id.id,

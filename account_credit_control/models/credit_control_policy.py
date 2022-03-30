@@ -9,7 +9,7 @@ CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
 
 
 class CreditControlPolicy(models.Model):
-    """ Define a policy of reminder """
+    """Define a policy of reminder"""
 
     _name = "credit.control.policy"
     _description = """Define a reminder policy"""
@@ -34,7 +34,7 @@ class CreditControlPolicy(models.Model):
     active = fields.Boolean(default=True)
 
     def _move_lines_domain(self, credit_control_run):
-        """ Build the default domain for searching move lines """
+        """Build the default domain for searching move lines"""
         self.ensure_one()
         # We need to set the company in order to work properly with multi-companies.
         # If we have Company A and Company B (child of A), we might be able to run this
@@ -166,7 +166,7 @@ class CreditControlPolicy(models.Model):
         return different_lines
 
     def check_policy_against_account(self, account):
-        """ Ensure that the policy corresponds to account relation """
+        """Ensure that the policy corresponds to account relation"""
         allowed = self.search(
             ["|", ("account_ids", "in", account.ids), ("do_nothing", "=", True)]
         )
@@ -331,7 +331,7 @@ class CreditControlPolicyLevel(models.Model):
             )
 
     def _get_sql_level_part(self):
-        """ Return a where clauses statement for the previous line level """
+        """Return a where clauses statement for the previous line level"""
         self.ensure_one()
         previous_level = self._previous_level()
         if previous_level:
@@ -340,7 +340,7 @@ class CreditControlPolicyLevel(models.Model):
             return "cr_line.id IS NULL"
 
     def _get_level_move_lines(self, controlling_date, lines):
-        """ Retrieve the move lines for all levels. """
+        """Retrieve the move lines for all levels."""
         self.ensure_one()
         move_line_obj = self.env["account.move.line"]
         if not lines:
@@ -379,7 +379,7 @@ class CreditControlPolicyLevel(models.Model):
         return move_line_obj
 
     def get_level_lines(self, controlling_date, lines):
-        """ get all move lines in entry lines that match the current level """
+        """get all move lines in entry lines that match the current level"""
         self.ensure_one()
         matching_lines = self.env["account.move.line"]
         matching_lines |= self._get_level_move_lines(controlling_date, lines)

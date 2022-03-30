@@ -149,7 +149,7 @@ class CreditControlLine(models.Model):
     def _prepare_from_move_line(
         self, move_line, level, controlling_date, open_amount, default_lines_vals
     ):
-        """ Create credit control line """
+        """Create credit control line"""
         channel = level.channel
         partner = move_line.partner_id
         # Fallback to letter

@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 
 class CreditControlEmailer(models.TransientModel):
-    """ Send emails for each selected credit control lines. """
+    """Send emails for each selected credit control lines."""
 
     _name = "credit.control.emailer"
     _description = """Mass credit line emailer"""
@@ -34,7 +34,7 @@ class CreditControlEmailer(models.TransientModel):
 
     @api.model
     def _filter_lines(self, lines):
-        """ filter lines to use in the wizard """
+        """filter lines to use in the wizard"""
         line_obj = self.env["credit.control.line"]
         domain = [
             ("state", "=", "to_be_sent"),

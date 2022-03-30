@@ -86,7 +86,7 @@ class CreditControlPolicyChanger(models.TransientModel):
 
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
-        """ Force policy on invoice """
+        """Force policy on invoice"""
         invoices = move_lines.mapped("move_id")
         invoices.write({"credit_policy_id": policy.id})
 
