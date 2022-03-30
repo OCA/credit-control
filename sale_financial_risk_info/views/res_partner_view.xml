@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_partner_view_risk" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account_financial_risk.res_partner_view_risk" />
+        <field name="arch" type="xml">
+            <field name="risk_exception" position="after">
+                <field name="risk_percent_warning" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
