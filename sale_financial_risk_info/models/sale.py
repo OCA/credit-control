@@ -7,17 +7,19 @@ from odoo import _, api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # partner_credit_limit = fields.Monetary(
-    #     compute="_compute_risk_info",
-    # )
-    # partner_risk_total = fields.Monetary(
-    #     compute="_compute_risk_info",
-    # )
-    # partner_risk_percent = fields.Float(digits=(16, 0), compute='_compute_risk_info')
     risk_info = fields.Html(compute="_compute_risk_info")
 
     @api.depends("partner_invoice_id")
     def _compute_risk_info(self):
+        ICP = self.env["ir.config_parameter"].sudo()
+        info_pattern = ICP.get_param(
+            "sale_financial_risk_info.info_pattern",
+            default="<h5{text_class}>{risk_total}{symbol} / {credit_limit}{symbol} ("
+            "{risk_percent}%)</h5>",
+        )
+        info_decimals = int(
+            ICP.get_param("sale_financial_risk_info.info_decimals", default="0")
+        )
         for sale in self:
             partner = sale.partner_invoice_id.commercial_partner_id
             if not partner.credit_limit:
@@ -29,11 +31,13 @@ class SaleOrder(models.Model):
                 text_class = ' class="text-danger"'
             else:
                 text_class = ""
-            sale.risk_info = _("<h5%s>%s%s of %s%s (%s%%)</h5>") % (
-                text_class,
-                round(partner.risk_total),
-                symbol,
-                round(partner.credit_limit),
-                symbol,
-                risk_percent,
+            sale.risk_info = info_pattern.format(
+                text_class=text_class,
+                risk_total=round(partner.risk_total, info_decimals),
+                symbol=symbol,
+                credit_limit=round(partner.credit_limit, info_decimals),
+                risk_percent=risk_percent,
+                risk_available=round(
+                    partner.credit_limit - partner.risk_total, info_decimals
+                ),
             )

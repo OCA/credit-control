@@ -7,11 +7,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='validity_date']" position="before">
                 <field name="risk_info" readonly="1" />
-<!--                <h5 class="oe_right oe_botom">-->
-<!--                    <field name="partner_risk_total" readonly="1"/> de-->
-<!--                    <field name="partner_credit_limit" readonly="1"/>-->
-<!--                    (<field name="partner_risk_percent" readonly="1" class="o_field_monetary"/>%)-->
-<!--                </h5>-->
             </xpath>
         </field>
     </record>
