@@ -14,12 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_financial_risk_info
-#: code:addons/sale_financial_risk_info/models/sale.py:0
-#, python-format
-msgid "<h5%s>%s%s of %s%s (%s%%)</h5>"
-msgstr ""
-
-#. module: sale_financial_risk_info
 #: model:ir.model,name:sale_financial_risk_info.model_res_partner
 msgid "Contact"
 msgstr ""
