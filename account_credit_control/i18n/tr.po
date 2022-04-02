@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2022-04-02 14:05+0000\n"
+"PO-Revision-Date: 2022-04-02 16:53+0000\n"
 "Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
@@ -1137,64 +1137,66 @@ msgstr "Kredi kontrol satırı seçilmedi."
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.no_follow_1
 msgid "No follow"
-msgstr ""
+msgstr "Takip etme"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__do_nothing
 msgid "No follow policy"
-msgstr ""
+msgstr "Takip politikası yok"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:69
 #, python-format
 msgid "No lines will be changed. All the selected lines are already done."
-msgstr ""
+msgstr "Hiçbir satır değiştirilmeyecektir. Seçilen tüm satırlar zaten yapıldı."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Eylem Sayısı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_error_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_error_counter
 msgid "Number of error"
-msgstr ""
+msgstr "Hata sayısı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "İşlem gerektiren mesaj sayısı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Teslim hatası olan mesaj sayısı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_unread_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "okunmamış mesaj sayısı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_printer__mark_as_sent
 msgid "Only letter lines will be marked."
-msgstr ""
+msgstr "Sadece Mektup satırları işaretlenecektir."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
-msgstr ""
+msgstr "Açık meblağ"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
 msgid ""
 "Open balance on credit control linesof same partner, policy and currency"
 msgstr ""
+"Aynı iş ortağının, politikanın ve para biriminin kredi kontrol limitlerinde "
+"açık bakiye"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1203,6 +1205,8 @@ msgid ""
 "Optionally you can assign a user to this field, which will make him "
 "responsible for the action."
 msgstr ""
+"İsteğe bağlı olarak bu alana bir kullanıcı atayabilirsiniz, bu da onu "
+"eylemden sorumlu kılar."
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_1
@@ -1218,6 +1222,14 @@ msgid ""
 "\n"
 "            Best regards"
 msgstr ""
+"Kayıtlarımız, aşağıda belirtilen faturanın ödemesini almadığımızı "
+"göstermektedir.\n"
+"             Ödeme zaten gönderildiyse, lütfen bu uyarıyı dikkate almayın. "
+"Değilse, lütfen 10 gün içinde ödemeyi gerçekleştirin.\n"
+"\n"
+"             Bu konuda işbirliğiniz için şimdiden teşekkür ederiz.\n"
+"\n"
+"             Saygılarımızla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
@@ -1232,6 +1244,15 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Kayıtlarımız, aşağıda belirtilen faturanın ödemesini almadığımızı "
+"göstermektedir.<br>\n"
+"  <br>\n"
+" Ödeme zaten gönderildiyse, lütfen bu uyarıyı dikkate almayın. Değilse, "
+"lütfen 10 gün içinde ödemeyi gerçekleştirin.<br>\n"
+"  <br>\n"
+"  Bu konuda işbirliğiniz için şimdiden teşekkür ederiz.<br>\n"
+"  <br>\n"
+"     Saygılarımızla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
@@ -1245,6 +1266,14 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Kayıtlarımız, aşağıda belirtilen faturanın ödemesini almadığımızı "
+"göstermektedir.<br>\n"
+"Ödeme zaten gönderildiyse, lütfen bu uyarıyı dikkate almayın. Değilse, "
+"lütfen 10 gün içinde ödemeyi gerçekleştirin.<br>\n"
+"  <br>\n"
+"  Bu konuda işbirliğiniz için şimdiden teşekkür ederiz.<br>\n"
+"  <br>\n"
+"     Saygılarımızla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_2
@@ -1259,6 +1288,14 @@ msgid ""
 "\n"
 "            Best regards"
 msgstr ""
+"Kayıtlarımız, aşağıda belirtilen faturanın ödemesini almadığımızı "
+"göstermektedir.<br>\n"
+"Ödeme zaten gönderildiyse, lütfen bu uyarıyı dikkate almayın. Değilse, "
+"lütfen 5 gün içinde ödemeyi gerçekleştirin.<br>\n"
+"  <br>\n"
+"  Bu konuda işbirliğiniz için şimdiden teşekkür ederiz.<br>\n"
+"  <br>\n"
+"     Saygılarımızla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
@@ -1272,6 +1309,14 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Kayıtlarımız, aşağıda belirtilen faturanın ödemesini almadığımızı "
+"göstermektedir.<br>\n"
+"Ödeme zaten gönderildiyse, lütfen bu uyarıyı dikkate almayın. Değilse, "
+"lütfen 10 gün içinde ödemeyi gerçekleştirin.<br>\n"
+"  <br>\n"
+"  Bu konuda işbirliğiniz için şimdiden teşekkür ederiz.<br>\n"
+"  <br>\n"
+"     Saygılarımızla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -1292,6 +1337,22 @@ msgid ""
 "\n"
 "            Best regards"
 msgstr ""
+"Kayıtlarımız, iki hatırlatmamıza rağmen aşağıda belirtilen faturanın "
+"ödemesinin hala tarafımıza ulaşmadığını göstermektedir.\n"
+"             Ödeme zaten gönderildiyse, lütfen bu bildirimi dikkate almayın. "
+"Değilse, lütfen ödemenizi gerçekleştirin..\n"
+"             Önümüzdeki 5 gün içinde ödemeniz alınmazsa, dosyanız tahsilat "
+"acentemize aktarılacaktır.\n"
+"\n"
+"             Sizin için bir ödeme planı düzenlememize ihtiyacınız olursa, "
+"lütfen öneride bulunun.\n"
+"             Size kolaylık sağlamak için bir müşteri hesap ekstresi "
+"eklenmiştir.\n"
+"\n"
+"             Bu konuda beklediğiniz işbirliği için şimdiden teşekkür ederiz."
+"\n"
+"\n"
+"             Saygılarımla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1313,6 +1374,23 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Kayıtlarımız, hatırlatmamıza rağmen ekli belgede belirtilen faturaların "
+"ödemesinin hala tarafımıza ulaşmadığını göstermektedir.\n"
+"   <br>\n"
+"   <br>\n"
+"   Ödeme zaten gönderildiyse, lütfen bu bildirimi dikkate almayın. Değilse, "
+"lütfen ödemenizi gerçekleştirin. <br>\n"
+"   Önümüzdeki 5 gün içinde ödemeniz alınmazsa dosyanız borcumuza "
+"aktarılacaktır <br>\n"
+"   tahsilat ajansı. <br>\n"
+"   <br>\n"
+"   Sizin için bir ödeme planı düzenlememize ihtiyacınız olursa, lütfen bize "
+"bildirin. <br>\n"
+"   Size kolaylık olması için bir müşteri hesap ekstresi eklenmiştir. <br>\n"
+"   <br>\n"
+"   Bu konuda beklediğiniz işbirliği için şimdiden teşekkür ederiz. <br>\n"
+"   <br>\n"
+"   Saygılarımla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
@@ -1331,6 +1409,20 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Kayıtlarımız, iki hatırlatmamıza rağmen ekli belgede belirtilen faturaların "
+"ödemesinin hala tarafımıza ulaşmadığını göstermektedir. <br>\n"
+"   Ödeme zaten gönderildiyse, lütfen bu bildirimi dikkate almayın. Değilse, "
+"lütfen ödemenizi gerçekleştirin. <br>\n"
+"   Önümüzdeki 5 gün içinde ödemeniz alınmazsa dosyanız tahsilat acentemize "
+"aktarılacaktır. <br>\n"
+"   <br>\n"
+"   Sizin için bir ödeme planı düzenlememize ihtiyacınız olursa, lütfen bize "
+"bildirin. <br>\n"
+"   Size kolaylık olması için bir müşteri hesap ekstresi eklenmiştir. <br>\n"
+"   <br>\n"
+"   Bu konuda beklediğiniz işbirliği için şimdiden teşekkür ederiz. <br>\n"
+"   <br>\n"
+"   Saygılarımla"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -1352,28 +1444,45 @@ msgid ""
 "\n"
 "            Best regards"
 msgstr ""
+"Kayıtlarımız, hatırlatmamıza rağmen aşağıdaki faturanın ödemesinin hala "
+"tarafımıza ulaşmadığını göstermektedir.\n"
+"\n"
+"             Ödeme zaten gönderildiyse, lütfen bu bildirimi dikkate almayın. "
+"Değilse, lütfen ödemenizi grçekleştirin.\n"
+"             Önümüzdeki 5 gün içinde ödemeniz alınmazsa, dosyanız tahsilat "
+"acentemize aktarılacaktır.\n"
+"\n"
+"             Sizin için bir ödeme planı düzenlememize ihtiyacınız olursa, "
+"lütfen öneride bulunun.\n"
+"             Size kolaylık sağlamak için bir müşteri hesap ekstresi "
+"eklenmiştir.\n"
+"\n"
+"             Bu konuda beklediğiniz işbirliği için şimdiden teşekkür ederiz."
+"\n"
+"\n"
+"             Saygılarımla"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Giden Postalar"
 
 #. module: account_credit_control
 #: selection:credit.control.communication,activity_state:0
 #: selection:credit.control.line,activity_state:0
 msgid "Overdue"
-msgstr ""
+msgstr "vadesi geçmiş"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__open_balance
 msgid "Overdue Balance"
-msgstr ""
+msgstr "Gecikmiş Bakiye"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__policy_level_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__policy_level_id
 msgid "Overdue Level"
-msgstr ""
+msgstr "Gecikme Seviyesi"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_id
@@ -1389,246 +1498,248 @@ msgstr "İş Ortağı"
 #: model:ir.model,name:account_credit_control.model_res_partner_payment_action_type
 #: model:ir.ui.menu,name:account_credit_control.res_partner_payment_action_type_menu
 msgid "Partner Payment Action Types"
-msgstr ""
+msgstr "İş Ortağı Ödeme Eylem Türleri"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
-#, fuzzy
 msgid "Partner Ref"
-msgstr "Cari"
+msgstr "İş Ortağı Ref"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
-#, fuzzy
 msgid "Partners"
-msgstr "Cari"
+msgstr "İş Ortakları"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_note
 #: model:ir.model.fields,help:account_credit_control.field_res_users__payment_note
 msgid "Payment Note"
-msgstr ""
+msgstr "Ödeme Notu"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: account_credit_control
 #: selection:credit.control.communication,activity_state:0
 #: selection:credit.control.line,activity_state:0
 msgid "Planned"
-msgstr ""
+msgstr "planlı"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:136
 #, python-format
 msgid "Please select a policy"
-msgstr ""
+msgstr "Lütfen bir politika seçin"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:35
 #, python-format
 msgid "Please use wizard on customer invoices"
-msgstr ""
+msgstr "Lütfen müşteri faturalarında sihirbazı kullanın"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__policy_ids
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Policies"
-msgstr ""
+msgstr "Politikalar"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__policy_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Policy"
-msgstr ""
+msgstr "Politikalar"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:258
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
+"\"<b>% s </b>\" politikası, <b>% d adet Kredi Kontrol satırı </b> "
+"oluşturdu.  <br/>"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:263
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
+"\"<b>%s </b>\" politikası herhangi bir Kredi Kontrol satırı oluşturmadı. <br/"
+">"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__level_ids
 msgid "Policy Levels"
-msgstr ""
+msgstr "Politika Düzeyleri"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__policy_sign
 msgid "Policy Sign"
-msgstr ""
+msgstr "Politika İşareti"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
 msgid "Policy level"
-msgstr ""
+msgstr "Politika düzeyi"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Policy levels"
-msgstr ""
+msgstr "Politika seviyeleri"
 
 #. module: account_credit_control
 #: selection:credit.control.policy,policy_sign:0
 msgid "Positive"
-msgstr ""
+msgstr "Pozitif"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Previous Reminder"
-msgstr ""
+msgstr "Önceki Hatırlatıcı"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print"
-msgstr ""
+msgstr "Yazdır"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard_menu_action
 msgid "Print Lines"
-msgstr ""
+msgstr "Satırları Yazdır"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
 msgid "Print selected lines"
-msgstr ""
+msgstr "Seçili satırları yazdır"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print the selected lines"
-msgstr ""
+msgstr "Seçili satırları yazdır"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 msgid "Queued"
-msgstr ""
+msgstr "sıraya alındı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__policy_id
 msgid "Related Policy"
-msgstr ""
+msgstr "İlgili Politika"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_sent
 msgid "Reminded date"
-msgstr ""
+msgstr "Hatırlatılan tarih"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__report
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Report"
-msgstr ""
+msgstr "Rapor"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__report_date
 msgid "Report Date"
-msgstr ""
+msgstr "Rapor Tarihi"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_user_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Sorumlu Kullanıcı"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Run channel action"
-msgstr ""
+msgstr "Kanal işlemini çalıştır"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Run date"
-msgstr ""
+msgstr "Çalıştırma Tarihi"
 
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_run_menu
 msgid "Runs"
-msgstr ""
+msgstr "Çalıştırmalar"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Salesperson"
-msgstr ""
+msgstr "Satis elemanı"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_line.py:315
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
-msgstr ""
+msgstr "Etkinlik planla"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
-msgstr ""
+msgstr "E-posta ile göndermek"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
 msgid "Send an email for the selected lines."
-msgstr ""
+msgstr "Seçilen hatlar için bir e-posta gönderin."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send emails for the selected lines"
-msgstr ""
+msgstr "Seçili satırlar için e-posta gönder"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send the emails"
-msgstr ""
+msgstr "e-postaları gönder"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 msgid "Sending"
-msgstr ""
+msgstr "gönderiliyor"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sıra"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set current credit level"
-msgstr ""
+msgstr "Mevcut kredi seviyesini ayarla"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
-msgstr ""
+msgstr "Yeni politika belirle"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Set to ready all"
-msgstr ""
+msgstr "Hepsini hazır olarak ayarla"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__run_id
 msgid "Source"
-msgstr ""
+msgstr "Kaynak"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__state
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__state
 msgid "State"
-msgstr ""
+msgstr "Durum"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__activity_state
@@ -1639,11 +1750,15 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Faaliyetlere dayalı durum\n"
+"Gecikme: Son tarih zaten geçti\n"
+"Bugün: Etkinlik tarihi bugün\n"
+"Planlanan: Gelecekteki faaliyetler."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
-msgstr ""
+msgstr "Özet"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.credit_control_communication_action
@@ -1651,6 +1766,8 @@ msgid ""
 "That's the most common way of creating these records. However, you can do it "
 "from here too if you want, by pressing <i>Create</i>."
 msgstr ""
+"Bu kayıtları oluşturmanın en yaygın yolu budur. Ancak isterseniz <i> Oluştur "
+"</i>'a basarak buradan da yapabilirsiniz."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_invoice__credit_policy_id
@@ -1658,6 +1775,8 @@ msgid ""
 "The Credit Control Policy used for this invoice. If nothing is defined, it "
 "will use the account setting or the partner setting."
 msgstr ""
+"Bu fatura için kullanılan Kredi Kontrol Politikası. Hiçbir şey "
+"tanımlanmadıysa, hesap ayarını veya ortak ayarını kullanır."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__credit_policy_id
@@ -1666,6 +1785,8 @@ msgid ""
 "The Credit Control Policy used for this partner. This setting can be forced "
 "on the invoice. If nothing is defined, it will use the company setting."
 msgstr ""
+"Bu ortak için kullanılan Kredi Kontrol Politikası. Bu ayar fatura üzerinde "
+"zorlanabilir. Hiçbir şey tanımlanmadıysa şirket ayarını kullanır."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_company__credit_policy_id
@@ -1674,32 +1795,35 @@ msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
 "overridden on partners or invoices."
 msgstr ""
+"Varsayılan olarak ortaklarda kullanılan Kredi Kontrol Politikası. Bu ayar, "
+"ortaklarda veya faturalarda geçersiz kılınabilir."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The line was deprecated by a manual change of policy on invoice."
 msgstr ""
+"Satır, faturadaki manüel bir politika değişikliğiyle kullanımdan kaldırıldı."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__currency_id
 msgid "The optional other currency if it is a multi-currency entry."
-msgstr ""
+msgstr "Çoklu para birimi girişiyse, isteğe bağlı diğer para birimi."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The partner had a manual followup."
-msgstr ""
+msgstr "İş ortağının manuel takibi vardı."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:342
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
-msgstr ""
+msgstr "En küçük seviye türünde olamaz Önceki Hatırlatma"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are to do using the Actions."
-msgstr ""
+msgstr "Bu satırlar, Eylemleri kullanarak yapmak içindir."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1707,80 +1831,82 @@ msgid ""
 "This allows credit control team to chase overdue payments with different "
 "means"
 msgstr ""
+"Bu, kredi kontrol ekibinin vadesi geçmiş ödemeleri farklı yollarla takip "
+"etmesine olanak tanır"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_next_action
 #: model:ir.model.fields,help:account_credit_control.field_res_users__payment_next_action
 msgid "This is the next action to be taken."
-msgstr ""
+msgstr "Bu, yapılacak bir sonraki eylemdir."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_next_action_date
 #: model:ir.model.fields,help:account_credit_control.field_res_users__payment_next_action_date
 msgid "This is when the manual follow-up is needed."
-msgstr ""
+msgstr "Bu, manuel takibe ihtiyaç duyulduğu zamandır."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__account_ids
 msgid "This policy will be active only for the selected accounts"
-msgstr ""
+msgstr "Bu politika yalnızca seçilen hesaplar için etkin olacaktır"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "To Do"
-msgstr ""
+msgstr "Yapmak"
 
 #. module: account_credit_control
 #: selection:credit.control.communication,activity_state:0
 #: selection:credit.control.line,activity_state:0
 msgid "Today"
-msgstr ""
+msgstr "Bugün"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Tolerance"
-msgstr ""
+msgstr "Tolerans"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__total_due
 msgid "Total Due"
-msgstr ""
+msgstr "Vadesi Geçmiş"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__total_invoiced
 msgid "Total Invoiced"
-msgstr ""
+msgstr "Toplam Ödenmiş"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_unread
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Okunmamış Mesajlar"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_unread_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Okunmamış Mesaj Sayacı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__user_id
 #: model:res.groups,name:account_credit_control.group_account_credit_control_user
 msgid "User"
-msgstr ""
+msgstr "kullanıcı"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Web Sitesi Mesajları"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Web sitesi iletişim geçmişi"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_line.py:293
@@ -1789,6 +1915,7 @@ msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
 "state."
 msgstr ""
+"Taslak durumunda olmayan bir kredi kontrol satırını silmenize izin verilmez."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:226
@@ -1798,6 +1925,9 @@ msgid ""
 "Please choose one of the following policies:\n"
 " %s"
 msgstr ""
+"Yalnızca %s hesabında ayarlanmış bir politika kullanabilirsiniz.\n"
+"Lütfen aşağıdaki politikalardan birini seçin:\n"
+" %s"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/account_invoice.py:44
@@ -1807,3 +1937,6 @@ msgid ""
 "A payment reminder has already been sent to the customer.\n"
 "You must create a credit note and issue a new invoice."
 msgstr ""
+"Bu faturayı iptal edemezsiniz.\n"
+"Müşteriye zaten bir ödeme hatırlatıcısı gönderildi.\n"
+"Bir alacak dekontu oluşturmanız ve yeni bir fatura düzenlemeniz gerekir."
