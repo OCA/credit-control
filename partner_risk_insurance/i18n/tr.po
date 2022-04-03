@@ -6,161 +6,163 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-04-03 07:04+0000\n"
+"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
 "Language-Team: none\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
 msgid "Code assigned to this partner by the risk insurance company."
-msgstr ""
+msgstr "Risk sigortası şirketi tarafından bu ortağa atanan kod."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
 msgid "Company's Credit Limit"
-msgstr ""
+msgstr "Şirketin Kredi Limiti"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontak"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturuldu"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
 msgid "Credit Insurance"
-msgstr ""
+msgstr "Kredi sigortası"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_limit
 msgid "Credit Limit"
-msgstr ""
+msgstr "Kredi limiti"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
 msgid "Credit limit granted by the company."
-msgstr ""
+msgstr "Şirket tarafından verilen kredi limiti."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
 msgid "Credit limit granted by the insurance company."
-msgstr ""
+msgstr "Sigorta şirketi tarafından verilen kredi limiti."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_grant_date
 msgid "Date when the insurance was granted by the insurance company."
-msgstr ""
+msgstr "Sigortanın sigorta şirketi tarafından verildiği tarih."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen Ad"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code
 msgid "Insurance Code"
-msgstr ""
+msgstr "Sigorta Kodu"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code_2
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Insurance Code 2"
-msgstr ""
+msgstr "Sigorta Kodu 2"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_grant_date
 msgid "Insurance Grant Date"
-msgstr ""
+msgstr "Sigorta Hibe Tarihi"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid "Insurance Requested"
-msgstr ""
+msgstr "Sigorta Talep Edildi"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Insurance's Credit Coverage"
-msgstr ""
+msgstr "Sigortanın Kredi Kapsamı"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
 msgid "Insurance's Credit Limit"
-msgstr ""
+msgstr "Sigorta Kredi Limiti"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son Güncelleme"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Son Güncelleyen"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Son Güncelleme"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid "Mark this field if an insurance was requested for the credit of this partner."
-msgstr ""
+msgstr "Bu ortağın kredisi için sigorta talep edilmişse bu alanı işaretleyiniz."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
 msgid "Name"
-msgstr ""
+msgstr "Adı"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Percentage of the credit covered by the insurance."
-msgstr ""
+msgstr "Sigortanın kapsadığı kredinin yüzdesi."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_state_id
 msgid "Policy State"
-msgstr ""
+msgstr "Poliçe Durumu"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Secondary code assigned to this partner by the risk insurance company."
-msgstr ""
+msgstr "Risk sigortası şirketi tarafından bu ortağa atanan ikincil kod."
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
-msgstr ""
+msgstr "Kredi politikalarının durumu"
