@@ -20,6 +20,17 @@ class TestSaleFinancialRiskInfo(TransactionCase):
                 "risk_invoice_draft_include": True,
             }
         )
+        self.default_account_revenue = self.env["account.account"].search(
+            [
+                ("company_id", "=", self.env.user.company_ids[0].id),
+                (
+                    "user_type_id",
+                    "=",
+                    self.env.ref("account.data_account_type_revenue").id,
+                ),
+            ],
+            limit=1,
+        )
         self.invoice_partner_1 = self.create_invoice(self.partner_1)
 
     # Create some invoices for partner
@@ -31,6 +42,7 @@ class TestSaleFinancialRiskInfo(TransactionCase):
         move_form.partner_id = partner
         with move_form.invoice_line_ids.new() as line_form:
             line_form.product_id = self.product_1
+            line_form.account_id = self.default_account_revenue
         return move_form.save()
 
     def test_sale_order_risk_info(self):
