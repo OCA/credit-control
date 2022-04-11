@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_return_financial_risk',
         'odoo14-addon-partner_risk_insurance',
         'odoo14-addon-sale_financial_risk',
+        'odoo14-addon-sale_financial_risk_info',
         'odoo14-addon-stock_financial_risk',
     ],
     classifiers=[
