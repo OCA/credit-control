@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [partner_risk_insurance](partner_risk_insurance/) | 13.0.1.2.0 | [![Daniel-CA](https://github.com/Daniel-CA.png?size=30px)](https://github.com/Daniel-CA) [![sergio-teruel](https://github.com/sergio-teruel.png?size=30px)](https://github.com/sergio-teruel) [![omar7r](https://github.com/omar7r.png?size=30px)](https://github.com/omar7r) [![Tardo](https://github.com/Tardo.png?size=30px)](https://github.com/Tardo) | Risk insurance partner information
 [sale_exception_financial_risk](sale_exception_financial_risk/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Exception financial_risk
 [sale_financial_risk](sale_financial_risk/) | 13.0.2.1.0 |  | Manage partner risk in sales orders
+[sale_financial_risk_info](sale_financial_risk_info/) | 13.0.1.0.0 |  | Adds risk consumption info in sales orders.
 [stock_financial_risk](stock_financial_risk/) | 13.0.1.0.1 |  | Manage partner risk in stock moves
 
 [//]: # (end addons)
