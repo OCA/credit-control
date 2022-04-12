@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_financial_risk_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-04-12 17:05+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: sale_financial_risk_info
+#: model:ir.model,name:sale_financial_risk_info.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__display_name
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__display_name
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__id
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner____last_update
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_info
+msgid "Risk Info"
+msgstr "Informazioni sul rischio"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__risk_percent_warning
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_users__risk_percent_warning
+msgid "Risk percent warning"
+msgstr "Avviso percentuale di rischio"
+
+#. module: sale_financial_risk_info
+#: model:ir.model,name:sale_financial_risk_info.model_sale_order
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: sale_financial_risk_info
+#: code:addons/sale_financial_risk_info/models/sale.py:0
+#, python-format
+msgid "Unlimited"
+msgstr "Illimitato"
