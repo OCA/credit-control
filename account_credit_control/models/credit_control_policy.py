@@ -264,7 +264,7 @@ class CreditControlPolicyLevel(models.Model):
         string="Custom Message after details", translate=True
     )
 
-    _sql_constraint = [
+    _sql_constraints = [
         ("unique level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
     ]
 

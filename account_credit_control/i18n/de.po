@@ -966,6 +966,12 @@ msgid "Level"
 msgstr "Stufe"
 
 #. module: account_credit_control
+#: model:ir.model.constraint,message:account_credit_control.constraint_credit_control_policy_level_unique
+#: level
+msgid "Level must be unique per policy"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
