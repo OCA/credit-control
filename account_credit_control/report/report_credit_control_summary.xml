@@ -53,7 +53,7 @@
                             <td>
                                 <span t-field="l.date_due" />
                             </td>
-                            <td class="text-right">
+                            <td class="text-righcbt">
                                 <span
                                     t-field="l.amount_due"
                                     t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"
