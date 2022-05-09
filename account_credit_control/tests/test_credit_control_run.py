@@ -132,6 +132,30 @@ class TestCreditControlRun(TransactionCase):
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
+    def test_generate_credit_lines_multicompany(self):
+        """
+        Test the method generate_credit_lines
+        """
+        control_run = self.env["credit.control.run"].create(
+            {
+                "date": fields.Date.today(),
+                "policy_ids": [(6, 0, [self.policy.id])],
+                "company_id": False,
+            }
+        )
+
+        control_run.with_context(lang="en_US").generate_credit_lines()
+
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
+        self.assertEqual(control_run.state, "done")
+
+        report_regex = (
+            r'<p>Policy "<b>%s</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+        )
+        regex_result = re.match(report_regex, control_run.report)
+        self.assertIsNotNone(regex_result)
+
     def test_multi_credit_control_run(self):
         """
         Generate several control run

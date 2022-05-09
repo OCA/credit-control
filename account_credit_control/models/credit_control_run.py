@@ -132,14 +132,15 @@ class CreditControlRun(models.Model):
 
             if policy.do_nothing:
                 continue
-            (
-                policy_manual_lines,
-                policy_lines_generated,
-                policy_report,
-            ) = policy._generate_credit_lines(self, {"run_id": self.id})
-            manually_managed_lines |= policy_manual_lines
-            generated |= policy_lines_generated
-            report += policy_report
+            for company in self.company_id or self.env.companies:
+                (
+                    policy_manual_lines,
+                    policy_lines_generated,
+                    policy_report,
+                ) = policy._generate_credit_lines(self, company, {"run_id": self.id})
+                manually_managed_lines |= policy_manual_lines
+                generated |= policy_lines_generated
+                report += policy_report
 
         vals = {
             "state": "done",

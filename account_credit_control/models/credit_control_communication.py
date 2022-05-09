@@ -114,15 +114,15 @@ class CreditControlCommunication(models.Model):
     ):
         """ Return credit lines related to a partner and a policy level """
         cr_line_obj = self.env["credit.control.line"]
-        cr_lines = cr_line_obj.search(
-            [
-                ("id", "in", line_ids),
-                ("partner_id", "=", partner_id),
-                ("policy_level_id", "=", level_id),
-                ("currency_id", "=", currency_id),
-                ("company_id", "=", company_id),
-            ]
-        )
+        domain = [
+            ("id", "in", line_ids),
+            ("partner_id", "=", partner_id),
+            ("policy_level_id", "=", level_id),
+            ("currency_id", "=", currency_id),
+        ]
+        if company_id:
+            domain.append(("company_id", "=", company_id))
+        cr_lines = cr_line_obj.search(domain)
         return cr_lines
 
     @api.model
