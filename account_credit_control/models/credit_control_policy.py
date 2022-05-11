@@ -257,7 +257,7 @@ class CreditControlPolicyLevel(models.Model):
     )
 
     _sql_constraints = [
-        ("unique level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
+        ("unique_level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
     ]
 
     @api.constrains("level", "computation_mode")
