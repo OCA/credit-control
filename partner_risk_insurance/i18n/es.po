@@ -7,20 +7,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-21 11:54+0000\n"
-"PO-Revision-Date: 2019-11-21 11:54+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2022-06-10 18:06+0000\n"
+"Last-Translator: Dept. Técnico <tecnico@extrememicro.es>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
 msgid "Code assigned to this partner by the risk insurance company."
-msgstr "Código asignado a este partner por la aseguradora"
+msgstr "Código asignado a este partner por la aseguradora."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
@@ -58,19 +59,19 @@ msgstr "Crédito límite"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
 msgid "Credit limit granted by the company."
-msgstr "Límite de crédito de la compañía"
+msgstr "Límite de crédito de la compañía."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
 msgid "Credit limit granted by the insurance company."
-msgstr "Crédito concedido por el seguro"
+msgstr "Crédito concedido por el seguro."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_grant_date
 msgid "Date when the insurance was granted by the insurance company."
-msgstr "Fecha en la que se concedió el seguro"
+msgstr "Fecha en la que se concedió el seguro."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
@@ -82,7 +83,7 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
@@ -143,7 +144,7 @@ msgid ""
 "Mark this field if an insurance was requested for the credit of this partner."
 msgstr ""
 "Marque este campo si se ha solicitado un seguro para el crédito de esta "
-"empresa"
+"empresa."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
@@ -154,7 +155,7 @@ msgstr "Nombre"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Percentage of the credit covered by the insurance."
-msgstr "Porcentaje del crédito cubierto por el seguro"
+msgstr "Porcentaje del crédito cubierto por el seguro."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
@@ -166,7 +167,7 @@ msgstr "Estado de la póliza"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Secondary code assigned to this partner by the risk insurance company."
-msgstr "Código secundario asignado a este partner por la compoañía de seguros"
+msgstr "Código secundario asignado a este partner por la compoañía de seguros."
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
