@@ -11,6 +11,8 @@ setuptools.setup(
         'odoo13-addon-account_credit_control',
         'odoo13-addon-account_financial_risk',
         'odoo13-addon-account_invoice_overdue_reminder',
+        'odoo13-addon-account_invoice_overdue_warn',
+        'odoo13-addon-account_invoice_overdue_warn_sale',
         'odoo13-addon-account_payment_return_financial_risk',
         'odoo13-addon-partner_credit_limit_history',
         'odoo13-addon-partner_risk_insurance',
