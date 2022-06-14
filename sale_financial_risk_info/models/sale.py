@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.tools.misc import format_amount
 
 
 class SaleOrder(models.Model):
@@ -14,11 +15,8 @@ class SaleOrder(models.Model):
         ICP = self.env["ir.config_parameter"].sudo()
         info_pattern = ICP.get_param(
             "sale_financial_risk_info.info_pattern",
-            default="<h5{text_class}>{risk_total}{symbol} / {credit_limit}{symbol} ("
+            default="<h5{text_class}>{risk_total} / {credit_limit} ("
             "{risk_percent}%)</h5>",
-        )
-        info_decimals = int(
-            ICP.get_param("sale_financial_risk_info.info_decimals", default="0")
         )
         for sale in self:
             partner = sale.partner_invoice_id.commercial_partner_id
@@ -26,18 +24,22 @@ class SaleOrder(models.Model):
                 sale.risk_info = _("Unlimited")
                 continue
             risk_percent = round(partner.risk_total / partner.credit_limit * 100)
-            symbol = partner.risk_currency_id.symbol
             if risk_percent >= partner.risk_percent_warning:
                 text_class = ' class="text-danger"'
             else:
                 text_class = ""
             sale.risk_info = info_pattern.format(
                 text_class=text_class,
-                risk_total=round(partner.risk_total, info_decimals),
-                symbol=symbol,
-                credit_limit=round(partner.credit_limit, info_decimals),
+                risk_total=format_amount(
+                    self.env, partner.risk_total, partner.risk_currency_id
+                ),
+                credit_limit=format_amount(
+                    self.env, partner.credit_limit, partner.risk_currency_id
+                ),
                 risk_percent=risk_percent,
-                risk_available=round(
-                    partner.credit_limit - partner.risk_total, info_decimals
+                risk_available=format_amount(
+                    self.env,
+                    partner.credit_limit - partner.risk_total,
+                    partner.risk_currency_id,
                 ),
             )
