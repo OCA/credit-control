@@ -383,7 +383,7 @@ class OverdueReminderStep(models.TransientModel):
         commercial_partner = self.env["res.partner"].browse(
             vals["commercial_partner_id"]
         )
-        xmlid = MOD + ".overdue_invoice_reminder_mail_template"
+        xmlid = self._get_overdue_invoice_reminder_template()
         mail_tpl = self.env.ref(xmlid)
         mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or "en_US")
         mail_subject = mail_tpl_lang._render_template(
@@ -523,6 +523,9 @@ class OverdueReminderStep(models.TransientModel):
             else:
                 action = self.goto_list_view()
             return action
+
+    def _get_overdue_invoice_reminder_template(self):
+        return MOD + ".overdue_invoice_reminder_mail_template"
 
     def validate_mail(self):
         self.ensure_one()
