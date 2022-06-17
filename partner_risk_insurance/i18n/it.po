@@ -1,0 +1,178 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_risk_insurance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-12-16 14:39+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
+msgid "Code assigned to this partner by the risk insurance company."
+msgstr "Codice assegnato a questo cliente dall'azienda di copertura dei rischi."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
+msgid "Company's Credit Limit"
+msgstr "Limite di Credito dell'Azienda"
+
+#. module: partner_risk_insurance
+#: model:ir.model,name:partner_risk_insurance.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
+msgid "Credit Insurance"
+msgstr "Assicurazione del Credito"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_limit
+msgid "Credit Limit"
+msgstr "Limite di Credito"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
+msgid "Credit limit granted by the company."
+msgstr "Limite di credito garantito dall'azienda."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid "Credit limit granted by the insurance company."
+msgstr "Limite di credito garantito dall'azienda di assicurazione."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_grant_date
+msgid "Date when the insurance was granted by the insurance company."
+msgstr ""
+"Data in cui l'assicurazione è stata garantita dall'azienda di assicurazione."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code
+msgid "Insurance Code"
+msgstr "Codice Assicurativo"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code_2
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code_2
+msgid "Insurance Code 2"
+msgstr "Codice Assicurativo 2"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_grant_date
+msgid "Insurance Grant Date"
+msgstr "Data di concessione dell'assicurazione"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_requested
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_requested
+msgid "Insurance Requested"
+msgstr "Assicurazione Richiesta"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
+msgid "Insurance's Credit Coverage"
+msgstr "Copertura del Credito dell'Assicurazione"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid "Insurance's Credit Limit"
+msgstr "Limite di Credito dell'Assicurazione"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
+msgid ""
+"Mark this field if an insurance was requested for the credit of this "
+"partner."
+msgstr ""
+"Attiva questo campo se è stata richiesta un'assicurazione per il credito di "
+"questo cliente."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
+msgid "Percentage of the credit covered by the insurance."
+msgstr "Percentuale del credito coperto dall'assicurazione."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_state_id
+msgid "Policy State"
+msgstr "Stato Polizza"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
+msgid "Secondary code assigned to this partner by the risk insurance company."
+msgstr ""
+"Codice secondario assegnato a questo cliente dall'azienda di copertura dei "
+"rischi."
+
+#. module: partner_risk_insurance
+#: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
+msgid "State of credit policies"
+msgstr "Stato delle polizze del credito"

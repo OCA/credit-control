@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * partner_risk_insurance
+#
+# Translators:
+# Albert Cervera i Areny <albert@nan-tic.com>, 2009
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-23 18:14:48+0000\n"
+"PO-Revision-Date: 2015-09-10 16:43+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/odoomrp-wip-8-0/"
+"language/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
+#, fuzzy
+msgid "Code assigned to this partner by the risk insurance company."
+msgstr "Crèdit concedit per la companyia asseguradora."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
+msgid "Company's Credit Limit"
+msgstr "Crèdit concedit per la companyia"
+
+#. module: partner_risk_insurance
+#: model:ir.model,name:partner_risk_insurance.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
+msgid "Credit Insurance"
+msgstr "Assegurança de risc"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_limit
+#, fuzzy
+msgid "Credit Limit"
+msgstr "Crèdit concedit per la companyia"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
+msgid "Credit limit granted by the company."
+msgstr "Crèdit concedit per la companyia"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid "Credit limit granted by the insurance company."
+msgstr "Crèdit concedit per la companyia asseguradora."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_grant_date
+msgid "Date when the insurance was granted by the insurance company."
+msgstr "Data en què es va concedir l'assegurança."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code
+msgid "Insurance Code"
+msgstr "Codi de l'assegurança"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code_2
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code_2
+msgid "Insurance Code 2"
+msgstr "Codi de l'assegurança 2"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_grant_date
+msgid "Insurance Grant Date"
+msgstr "Data de concessió de l'assegurança"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_requested
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_requested
+msgid "Insurance Requested"
+msgstr "Assegurança sol·licitada"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
+msgid "Insurance's Credit Coverage"
+msgstr "Cobertura de risc de l'assegurança"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid "Insurance's Credit Limit"
+msgstr "Crèdit concedit per l'assegurança"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
+msgid ""
+"Mark this field if an insurance was requested for the credit of this partner."
+msgstr ""
+"Marqueu aquest camp si s'ha demanat una assegurança pel crèdit d'aquesta "
+"empresa."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
+msgid "Name"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
+msgid "Percentage of the credit covered by the insurance."
+msgstr "Percentatge de cobertura del crèdit de l'assegurança."
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_state_id
+msgid "Policy State"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
+#, fuzzy
+msgid "Secondary code assigned to this partner by the risk insurance company."
+msgstr "Crèdit concedit per la companyia asseguradora."
+
+#. module: partner_risk_insurance
+#: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
+msgid "State of credit policies"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Credit Insurance"
+#~ msgid "Partner Risk Insurance"
+#~ msgstr "Assegurança de risc"
