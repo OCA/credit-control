@@ -1,6 +1,7 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=13.0)
-[![Build Status](https://travis-ci.com/OCA/credit-control.svg?branch=13.0)](https://travis-ci.com/OCA/credit-control)
+[![Pre-commit Status](https://github.com/OCA/credit-control/actions/workflows/pre-commit.yml/badge.svg?branch=13.0)](https://github.com/OCA/credit-control/actions/workflows/pre-commit.yml?query=branch%3A13.0)
+[![Build Status](https://github.com/OCA/credit-control/actions/workflows/test.yml/badge.svg?branch=13.0)](https://github.com/OCA/credit-control/actions/workflows/test.yml?query=branch%3A13.0)
 [![codecov](https://codecov.io/gh/OCA/credit-control/branch/13.0/graph/badge.svg)](https://codecov.io/gh/OCA/credit-control)
 [![Translation Status](https://translation.odoo-community.org/widgets/credit-control-13-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/credit-control-13-0/?utm_source=widget)
 
