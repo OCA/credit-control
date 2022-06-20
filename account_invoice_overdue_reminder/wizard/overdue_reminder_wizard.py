@@ -528,6 +528,32 @@ class OverdueReminderStep(models.TransientModel):
     def _get_overdue_invoice_reminder_template(self):
         return MOD + ".overdue_invoice_reminder_mail_template"
 
+    def _get_attachment_ids(self, inv_report, mail):
+        attachment_ids = []
+        iao = self.env["ir.attachment"]
+        for inv in self.invoice_ids:
+            if inv_report.report_type in ("qweb-html", "qweb-pdf"):
+                report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
+            else:
+                res = inv_report.render([inv.id])
+                if not res:
+                    raise UserError(
+                        _("Report format '%s' is not supported.")
+                        % inv_report.report_type
+                    )
+                report_bin, report_format = res
+            filename = "{}.{}".format(inv._get_report_base_filename(), report_format)
+            attach = iao.create(
+                {
+                    "name": filename,
+                    "datas": base64.b64encode(report_bin),
+                    "res_model": "mail.message",
+                    "res_id": mail.mail_message_id.id,
+                }
+            )
+            attachment_ids.append(attach.id)
+        return attachment_ids
+
     def validate_mail(self):
         self.ensure_one()
         if not self.partner_id.email:
@@ -542,7 +568,6 @@ class OverdueReminderStep(models.TransientModel):
 
     def generate_mail_vals(self):
         self.ensure_one()
-        iao = self.env["ir.attachment"]
         xmlid = self._get_overdue_invoice_reminder_template()
         mvals = self.env.ref(xmlid).generate_email(
             self.id, ["email_from", "email_to", "partner_to", "reply_to"]
@@ -566,30 +591,7 @@ class OverdueReminderStep(models.TransientModel):
             "account.report_invoice_with_payments"
         )
         if self.company_id.overdue_reminder_attach_invoice:
-            attachment_ids = []
-            for inv in self.invoice_ids:
-                if inv_report.report_type in ("qweb-html", "qweb-pdf"):
-                    report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
-                else:
-                    res = inv_report.render([inv.id])
-                    if not res:
-                        raise UserError(
-                            _("Report format '%s' is not supported.")
-                            % inv_report.report_type
-                        )
-                    report_bin, report_format = res
-                filename = "{}.{}".format(
-                    inv._get_report_base_filename(), report_format
-                )
-                attach = iao.create(
-                    {
-                        "name": filename,
-                        "datas": base64.b64encode(report_bin),
-                        "res_model": "mail.message",
-                        "res_id": mail.mail_message_id.id,
-                    }
-                )
-                attachment_ids.append(attach.id)
+            attachment_ids = self._get_attachment_ids(inv_report, mail)
             mail.write({"attachment_ids": [(6, 0, attachment_ids)]})
         vals = {"mail_id": mail.id}
         return vals
