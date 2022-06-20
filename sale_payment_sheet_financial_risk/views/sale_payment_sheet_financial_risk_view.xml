@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="financial_risk_sale_payment_sheet_line_pivot_view" model="ir.ui.view">
+        <field name="name">Account financial risk sale payment sheet pivot view</field>
+        <field name="model">sale.payment.sheet.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Sale Payment Sheet Lines">
+                <field name="partner_id" type="row" />
+                <field name="invoice_id" type="row" />
+                <field name="sheet_id" type="col" />
+                <field name="amount" type="measure" />
+            </pivot>
+        </field>
+    </record>
+</odoo>
