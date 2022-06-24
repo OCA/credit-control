@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo13-addon-sale_exception_financial_risk',
         'odoo13-addon-sale_financial_risk',
         'odoo13-addon-sale_financial_risk_info',
+        'odoo13-addon-sale_payment_sheet_financial_risk',
         'odoo13-addon-stock_financial_risk',
     ],
     classifiers=[
