@@ -33,7 +33,6 @@ class CreditControlEmailer(models.TransientModel):
     )
 
     @api.model
-    @api.returns("credit.control.line")
     def _filter_lines(self, lines):
         """filter lines to use in the wizard"""
         line_obj = self.env["credit.control.line"]

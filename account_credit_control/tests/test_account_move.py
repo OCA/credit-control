@@ -5,30 +5,22 @@ from datetime import datetime
 
 from dateutil import relativedelta
 
-from odoo import fields, tools
+from odoo import fields
 from odoo.exceptions import UserError
-from odoo.modules.module import get_resource_path
 from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @tagged("post_install", "-at_install")
-class TestAccountInvoice(TransactionCase):
-    def _load(self, module, *args):
-        tools.convert_file(
-            self.cr,
-            module,
-            get_resource_path(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            self.registry._assertion_report,
+class TestAccountInvoice(AccountTestInvoicingCommon):
+    @classmethod
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+        cls.env.user.groups_id |= cls.env.ref(
+            "account_credit_control.group_account_credit_control_manager"
         )
-
-    def setUp(self):
-        super().setUp()
-        self._load("account", "test", "account_minimal_test.xml")
 
     def test_action_cancel(self):
         """
@@ -36,7 +28,7 @@ class TestAccountInvoice(TransactionCase):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.env.ref("account.sales_journal")
+        journal = self.company_data["default_journal_sale"]
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
@@ -82,7 +74,7 @@ class TestAccountInvoice(TransactionCase):
         # Create an invoice
         invoice_form = Form(
             self.env["account.move"].with_context(
-                default_type="out_invoice", check_move_validity=False
+                default_move_type="out_invoice", check_move_validity=False
             )
         )
         invoice_form.invoice_date = date_invoice
@@ -99,7 +91,7 @@ class TestAccountInvoice(TransactionCase):
             invoice_line_form.tax_ids.clear()
         invoice = invoice_form.save()
 
-        invoice.post()
+        invoice.action_post()
 
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}
@@ -130,7 +122,7 @@ class TestAccountInvoice(TransactionCase):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.env.ref("account.sales_journal")
+        journal = self.company_data["default_journal_sale"]
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
@@ -176,7 +168,7 @@ class TestAccountInvoice(TransactionCase):
         # Create an invoice
         invoice_form = Form(
             self.env["account.move"].with_context(
-                default_type="out_invoice", check_move_validity=False
+                default_move_type="out_invoice", check_move_validity=False
             )
         )
         invoice_form.invoice_date = date_invoice
@@ -193,7 +185,7 @@ class TestAccountInvoice(TransactionCase):
             invoice_line_form.tax_ids.clear()
         invoice = invoice_form.save()
 
-        invoice.post()
+        invoice.action_post()
 
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}
@@ -211,7 +203,7 @@ class TestAccountInvoice(TransactionCase):
         We will create an invoice, change credit policy and check
         if it has change the policy on invoice
         """
-        journal = self.env.ref("account.sales_journal")
+        journal = self.company_data["default_journal_sale"]
 
         account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
@@ -257,7 +249,7 @@ class TestAccountInvoice(TransactionCase):
         # Create an invoice
         invoice_form = Form(
             self.env["account.move"].with_context(
-                default_type="out_invoice", check_move_validity=False
+                default_move_type="out_invoice", check_move_validity=False
             )
         )
         invoice_form.invoice_date = date_invoice
@@ -274,7 +266,7 @@ class TestAccountInvoice(TransactionCase):
             invoice_line_form.tax_ids.clear()
         invoice = invoice_form.save()
 
-        invoice.post()
+        invoice.action_post()
 
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [policy.id])]}

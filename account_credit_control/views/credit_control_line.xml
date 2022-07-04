@@ -203,7 +203,6 @@
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
             <tree
-                string="Control Credit Lines"
                 editable="bottom"
                 decoration-danger="state in ('error', 'email_error')"
                 decoration-muted="state == 'ignored'"
