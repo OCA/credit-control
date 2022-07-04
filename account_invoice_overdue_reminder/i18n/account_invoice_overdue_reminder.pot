@@ -172,6 +172,11 @@ msgid "Change Reminder Type"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "Click on"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_end_form
 msgid "Close"
 msgstr ""
@@ -267,7 +272,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:414
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:443
 #, python-format
 msgid "Customer '%s' has unreconciled payments/refunds. You should reconcile these payments/refunds and start the overdue remind process again (or check the option to confirm that these unreconciled payments/refunds have a good reason not to be reconciled with an open invoice)."
 msgstr ""
@@ -349,6 +354,11 @@ msgid "Disable Overdue Reminder"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__display_button_recompute_mail_info
+msgid "Display Button Recompute Mail Info"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_action__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_end__display_name
@@ -390,7 +400,7 @@ msgid "E-mail Status"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:451
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:480
 #, python-format
 msgid "E-mail missing on partner '%s'."
 msgstr ""
@@ -406,13 +416,13 @@ msgid "Filters"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:390
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:419
 #, python-format
 msgid "For the reminder of customer '%s', the deadline is missing for the activity."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:386
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:415
 #, python-format
 msgid "For the reminder of customer '%s', you must assign someone for the activity."
 msgstr ""
@@ -631,13 +641,13 @@ msgid "Mail Body"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:456
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:485
 #, python-format
 msgid "Mail body is empty."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:454
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:483
 #, python-format
 msgid "Mail subject is empty."
 msgstr ""
@@ -877,7 +887,7 @@ msgid "Print Overdue Invoices"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:513
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:542
 #, python-format
 msgid "Remind letter hasn't been printed!"
 msgstr ""
@@ -899,7 +909,7 @@ msgid "Reminder Type"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:482
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:511
 #, python-format
 msgid "Report format '%s' is not supported."
 msgstr ""
@@ -1065,7 +1075,7 @@ msgid "User"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:408
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:437
 #, python-format
 msgid "User company is different from action company. This should never happen."
 msgstr ""
@@ -1098,7 +1108,13 @@ msgid "Wizard to reminder overdue customer invoice"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:597
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:326
+#, python-format
+msgid "You cannot make a reminder without selecting invoices. Instead you can click on the 'Skip' button."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:626
 #, python-format
 msgid "You must select the new reminder type."
 msgstr ""
@@ -1117,5 +1133,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_start_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "days"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "this link"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "to recompute the mail informations"
 msgstr ""
 
