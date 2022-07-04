@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class AccountAccount(models.Model):
-    """ Add a link to a credit control policy on account.account """
+    """Add a link to a credit control policy on account.account"""
 
     _inherit = "account.account"
 

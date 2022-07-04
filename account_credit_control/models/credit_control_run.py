@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 
 class CreditControlRun(models.Model):
-    """ Credit Control run generate all credit control lines and reject """
+    """Credit Control run generate all credit control lines and reject"""
 
     _name = "credit.control.run"
     _rec_name = "date"
@@ -88,7 +88,7 @@ class CreditControlRun(models.Model):
 
     @api.model
     def _check_run_date(self, controlling_date):
-        """ Ensure that there is no credit line in the future
+        """Ensure that there is no credit line in the future
         using controlling_date
 
         """
@@ -117,7 +117,7 @@ class CreditControlRun(models.Model):
 
     @api.returns("credit.control.line")
     def _generate_credit_lines(self):
-        """ Generate credit control lines. """
+        """Generate credit control lines."""
         self.ensure_one()
         manually_managed_lines = self.env["account.move.line"]
         self._check_run_date(self.date)
@@ -151,7 +151,7 @@ class CreditControlRun(models.Model):
         return generated
 
     def generate_credit_lines(self):
-        """ Generate credit control lines
+        """Generate credit control lines
 
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.
@@ -191,7 +191,7 @@ class CreditControlRun(models.Model):
         return action
 
     def open_credit_lines(self):
-        """ Open the generated lines """
+        """Open the generated lines"""
         self.ensure_one()
         action_name = "account_credit_control.credit_control_line_action"
         action = self.env.ref(action_name)

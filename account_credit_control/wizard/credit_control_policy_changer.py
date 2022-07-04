@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 
 class CreditControlPolicyChanger(models.TransientModel):
-    """ Wizard that is run from invoices and allows to set manually a policy
+    """Wizard that is run from invoices and allows to set manually a policy
     Policy are actually apply to related move lines availabe
     in selection widget
 
@@ -19,7 +19,7 @@ class CreditControlPolicyChanger(models.TransientModel):
 
     @api.model
     def _default_move_lines(self):
-        """ Get default lines for fields move_line_ids
+        """Get default lines for fields move_line_ids
         of wizard. Only take lines that are on the same account
         and move of the invoice and not reconciled
 
@@ -74,7 +74,7 @@ class CreditControlPolicyChanger(models.TransientModel):
     @api.model
     @api.returns("credit.control.line")
     def _mark_as_overridden(self, move_lines):
-        """ Mark `move_lines` related credit control line as overridden
+        """Mark `move_lines` related credit control line as overridden
         This is done by setting manually_overridden fields to True
 
         :param move_lines: move line to mark as overridden
@@ -88,7 +88,7 @@ class CreditControlPolicyChanger(models.TransientModel):
 
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
-        """ Force policy on invoice """
+        """Force policy on invoice"""
         invoices = move_lines.mapped("move_id")
         invoices.write({"credit_policy_id": policy.id})
 
@@ -101,7 +101,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         return True
 
     def set_new_policy(self):
-        """ Set new policy on an invoice.
+        """Set new policy on an invoice.
 
         This is done by creating a new credit control line
         related to the move line and the policy settled in

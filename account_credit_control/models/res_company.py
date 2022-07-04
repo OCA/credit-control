@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    """ Add credit control parameters """
+    """Add credit control parameters"""
 
     _inherit = "res.company"
 
