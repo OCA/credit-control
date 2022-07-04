@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_overdue_reminder
+# 	* account_invoice_overdue_reminder
 #
 msgid ""
 msgstr ""
@@ -18,104 +18,47 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,body_html:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
-msgid "\n"
+msgid ""
+"\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "<p>Dear customer,</p>\n"
 "\n"
 "<p>According to our books, the following invoices are overdue:</p>\n"
 "\n"
-"<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;\">\n"
-"    <tr>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Number</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Date</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Due Date</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Total</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Residual</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</th>\n"
-"    </tr>\n"
-"% for inv in object.invoice_ids.sorted(key='date_invoice'):\n"
-"    <tr>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_invoice)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.payment_term_id.name or ''}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_due)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or ''}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.residual_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.overdue_reminder_counter}</td>\n"
-"    </tr>\n"
-"% endfor\n"
-"% for (currency, total_residual) in object.total_residual():\n"
-"    <tr>\n"
-"        <td></td>\n"
-"        <td></td>\n"
-"        <td></td>\n"
-"        <td></td>\n"
-"        <td></td>\n"
-"        <td colspan=\"2\" style=\"padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;\">Total Residual in ${currency.name}:</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
-"        <td></td>\n"
-"    </tr>\n"
-"% endfor\n"
-"</table>\n"
-"\n"
-"<p>If you made a payment for these invoices a few days ago, please ignore this email.</p>\n"
-"\n"
-"% if object.company_id.overdue_reminder_attach_invoice:\n"
-"<p>You will find enclosed the overdue invoices.</p>\n"
-"% endif\n"
-"\n"
-"% if object.counter > 2:\n"
-"<p>Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>\n"
-"% endif\n"
-"\n"
-"<p>Regards,</p>\n"
-"\n"
-"</div>\n"
-""
-msgstr ""
-"\n"
-"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"<p> Sayın müşterimiz, </p>\n"
-"\n"
-"<p>Kayıtlarımıza göre, aşağıdaki faturaların vadesi geçmiş:</p>\n"
-"\n"
 "<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; "
 "text-align: center;\">\n"
 "    <tr>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Fatura No</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Fatura "
-"Tarihi</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Ödeme Şekli</th>"
-"\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Vadesi</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Sip Ref.</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Toplam "
-"Matrah</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Toplam</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Ödenecek</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Önceki "
-"Hatırlatmaları</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Number</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Date</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Due Date</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Total</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Residual</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</"
+"th>\n"
 "    </tr>\n"
 "% for inv in object.invoice_ids.sorted(key='date_invoice'):\n"
 "    <tr>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_invoice)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${inv."
-"number}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\""
-">${format_date(inv.date_invoice)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${"
-"inv.payment_term_id.name or ''}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\""
-">${format_date(inv.date_due)}</td>\n"
+"payment_term_id.name or ''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_due)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or "
 "''}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
-"\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</td>"
-"\n"
+"\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</"
+"td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
 "\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
@@ -132,10 +75,90 @@ msgstr ""
 "        <td></td>\n"
 "        <td></td>\n"
 "        <td colspan=\"2\" style=\"padding: 5px; border: 1px solid black; "
-"font-weight: bold; text-align: right;\">Toplam kalan tutar ${currency."
-"name}:</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; font-weight: bold;"
-" text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
+"font-weight: bold; text-align: right;\">Total Residual in ${currency.name}:</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; font-weight: "
+"bold; text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
+"        <td></td>\n"
+"    </tr>\n"
+"% endfor\n"
+"</table>\n"
+"\n"
+"<p>If you made a payment for these invoices a few days ago, please ignore "
+"this email.</p>\n"
+"\n"
+"% if object.company_id.overdue_reminder_attach_invoice:\n"
+"<p>You will find enclosed the overdue invoices.</p>\n"
+"% endif\n"
+"\n"
+"% if object.counter > 2:\n"
+"<p>Despite several reminders, we are disappointed to see that these overdue "
+"invoices are still unpaid. In order to avoid legal proceedings, we urge you "
+"to paid these overdue invoices in the next days.</p>\n"
+"% endif\n"
+"\n"
+"<p>Regards,</p>\n"
+"\n"
+"</div>\n"
+msgstr ""
+"\n"
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"<p> Sayın müşterimiz, </p>\n"
+"\n"
+"<p>Kayıtlarımıza göre, aşağıdaki faturaların vadesi geçmiş:</p>\n"
+"\n"
+"<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; "
+"text-align: center;\">\n"
+"    <tr>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Fatura No</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Fatura Tarihi</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Ödeme Şekli</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Vadesi</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Sip Ref.</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Toplam Matrah</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Toplam</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Ödenecek</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Önceki "
+"Hatırlatmaları</th>\n"
+"    </tr>\n"
+"% for inv in object.invoice_ids.sorted(key='date_invoice'):\n"
+"    <tr>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_invoice)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv."
+"payment_term_id.name or ''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_due)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or "
+"''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.residual_signed, inv.currency_id)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv."
+"overdue_reminder_counter}</td>\n"
+"    </tr>\n"
+"% endfor\n"
+"% for (currency, total_residual) in object.total_residual():\n"
+"    <tr>\n"
+"        <td></td>\n"
+"        <td></td>\n"
+"        <td></td>\n"
+"        <td></td>\n"
+"        <td></td>\n"
+"        <td colspan=\"2\" style=\"padding: 5px; border: 1px solid black; "
+"font-weight: bold; text-align: right;\">Toplam kalan tutar ${currency.name}:"
+"</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; font-weight: "
+"bold; text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
 "        <td></td>\n"
 "    </tr>\n"
 "% endfor\n"
@@ -151,8 +174,8 @@ msgstr ""
 "% if object.counter > 2:\n"
 "<p>Birkaç hatırlatmaya rağmen, vadesi geçmiş bu faturaların hala ödenmemiş "
 "olduğunu görmek bizi hayal kırıklığına uğrattı. Hukuki takibata uğramamak "
-"için vadesi geçmiş bu faturaları önümüzdeki günlerde ödemenizi rica "
-"ederiz.</p>\n"
+"için vadesi geçmiş bu faturaları önümüzdeki günlerde ödemenizi rica ederiz.</"
+"p>\n"
 "% endif\n"
 "\n"
 "<p>Saygılarımızla,</p>\n"
@@ -161,7 +184,8 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,subject:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
-msgid "${object.company_id.name} - Overdue invoice reminder n°${object.counter}"
+msgid ""
+"${object.company_id.name} - Overdue invoice reminder n°${object.counter}"
 msgstr ""
 "${object.company_id.name} - Vadesi geçmiş fatura hatırlatıcısı n °${object."
 "counter}"
@@ -255,6 +279,11 @@ msgstr "CC"
 #: selection:overdue.reminder.mass.update,update_action:0
 msgid "Change Reminder Type"
 msgstr "Hatırlatıcı Türünü Değiştir"
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "Click on"
+msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_end_form
@@ -352,12 +381,16 @@ msgid "Customer"
 msgstr "Müşteri"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:414
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:443
 #, python-format
-msgid "Customer '%s' has unreconciled payments/refunds. You should reconcile these payments/refunds and start the overdue remind process again (or check the option to confirm that these unreconciled payments/refunds have a good reason not to be reconciled with an open invoice)."
+msgid ""
+"Customer '%s' has unreconciled payments/refunds. You should reconcile these "
+"payments/refunds and start the overdue remind process again (or check the "
+"option to confirm that these unreconciled payments/refunds have a good "
+"reason not to be reconciled with an open invoice)."
 msgstr ""
-"'%s' müşterisinin mutabakatı yapılmamış ödemeleri/geri ödemeleri var. Bu ö"
-"demeleri/geri ödemeleri uzlaştırmalı ve vadesi geçmiş hatırlatma sürecini "
+"'%s' müşterisinin mutabakatı yapılmamış ödemeleri/geri ödemeleri var. Bu "
+"ödemeleri/geri ödemeleri uzlaştırmalı ve vadesi geçmiş hatırlatma sürecini "
 "yeniden başlatmalısınız (veya mutabakatı yapılmamış bu ödemelerin/geri "
 "ödemelerin açık bir faturayla uzlaştırılmaması için iyi bir nedeni olduğunu "
 "doğrulama seçeneğini işaretleyin)."
@@ -424,7 +457,10 @@ msgstr "Varsayılan Sihirbaz Arayüzü"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
-msgid "Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days."
+msgid ""
+"Despite several reminders, we are disappointed to see that these overdue "
+"invoices are still unpaid. In order to avoid legal proceedings, we urge you "
+"to paid these overdue invoices in the next days."
 msgstr ""
 "Birkaç hatırlatmaya rağmen, vadesi geçmiş bu faturaların hala ödenmediğini "
 "görmek bizi hayal kırıklığına uğrattı. Hukuki takibe uğramamak adına vadesi "
@@ -440,6 +476,11 @@ msgstr "Gecikmiş Fatura Hatırlatıcısını Devre Dışı Bırak"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice__no_overdue_reminder
 msgid "Disable Overdue Reminder"
 msgstr "Gecikme Hatırlatıcısını Devre Dışı Bırak"
+
+#. module: account_invoice_overdue_reminder
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__display_button_recompute_mail_info
+msgid "Display Button Recompute Mail Info"
+msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__display_name
@@ -483,7 +524,7 @@ msgid "E-mail Status"
 msgstr "E-posta Durumu"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:451
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:480
 #, python-format
 msgid "E-mail missing on partner '%s'."
 msgstr "'%s' iş ortağında e-posta eksik."
@@ -499,15 +540,17 @@ msgid "Filters"
 msgstr "Filtreler"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:390
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:419
 #, python-format
-msgid "For the reminder of customer '%s', the deadline is missing for the activity."
+msgid ""
+"For the reminder of customer '%s', the deadline is missing for the activity."
 msgstr "'%s' müşterisinin hatırlatması için etkinlik için son tarih eksik."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:386
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:415
 #, python-format
-msgid "For the reminder of customer '%s', you must assign someone for the activity."
+msgid ""
+"For the reminder of customer '%s', you must assign someone for the activity."
 msgstr ""
 "'%s' müşterisinin hatırlatması için, aktiviteye birini atamanız gerekir."
 
@@ -535,7 +578,9 @@ msgstr "ID"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
-msgid "If you made a payment for these invoices a few days ago, please ignore this letter."
+msgid ""
+"If you made a payment for these invoices a few days ago, please ignore this "
+"letter."
 msgstr ""
 "Bu faturalar için birkaç gün önce ödeme yaptıysanız, lütfen bu mektubu "
 "dikkate almayın."
@@ -543,7 +588,9 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:110
 #, python-format
-msgid "In order to start overdue reminders, you must make sure that customer payments are up-to-date."
+msgid ""
+"In order to start overdue reminders, you must make sure that customer "
+"payments are up-to-date."
 msgstr ""
 "Gecikme hatırlatmaları başlatmak için müşteri ödemelerinin güncel olduğundan "
 "emin olmalısınız."
@@ -729,13 +776,13 @@ msgid "Mail Body"
 msgstr "Mesaj İçeriği"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:456
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:485
 #, python-format
 msgid "Mail body is empty."
 msgstr "Mesaj İçeriği boş."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:454
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:483
 #, python-format
 msgid "Mail subject is empty."
 msgstr "Mesaj Başlığı boş."
@@ -794,7 +841,10 @@ msgstr "Fatura Sayısı"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_overdue_reminder_start__min_interval_days
-msgid "Odoo will not propose to send a reminder to a customer that already got a reminder for some of the same overdue invoices less than N days ago (N = Minimum Delay Since Last Reminder)."
+msgid ""
+"Odoo will not propose to send a reminder to a customer that already got a "
+"reminder for some of the same overdue invoices less than N days ago (N = "
+"Minimum Delay Since Last Reminder)."
 msgstr ""
 "Odoo, aynı vadesi geçmiş faturalardan bazıları için N günden daha kısa bir "
 "süre önce hatırlatıcı almış olan bir müşteriye hatırlatıcı göndermeyi "
@@ -802,7 +852,9 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_overdue_reminder_start__start_days
-msgid "Odoo will propose to send an overdue reminder to a customer if it has at least one invoice which is overdue for more than N days (N = trigger delay)."
+msgid ""
+"Odoo will propose to send an overdue reminder to a customer if it has at "
+"least one invoice which is overdue for more than N days (N = trigger delay)."
 msgstr ""
 "Odoo, vadesi N günden fazla olan en az bir faturası varsa (N = tetikleme "
 "gecikmesi) bir müşteriye vadesi geçmiş bir hatırlatma göndermeyi önerecektir."
@@ -982,7 +1034,7 @@ msgid "Print Overdue Invoices"
 msgstr "Vadesi Geçmiş Faturaları Yazdır"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:513
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:542
 #, python-format
 msgid "Remind letter hasn't been printed!"
 msgstr "Hatırlatma mektubu yazdırılmadı!"
@@ -1004,7 +1056,7 @@ msgid "Reminder Type"
 msgstr "Hatırlatma Türü"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:482
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:511
 #, python-format
 msgid "Report format '%s' is not supported."
 msgstr "Rapor biçimi '%s' desteklenmiyor."
@@ -1086,7 +1138,8 @@ msgstr "Vergi Hariç"
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:117
 #, python-format
 msgid "The minimum delay since last reminder must be strictly positive."
-msgstr "Son hatırlatmadan bu yana minimum gecikme kesinlikle pozitif olmalıdır."
+msgstr ""
+"Son hatırlatmadan bu yana minimum gecikme kesinlikle pozitif olmalıdır."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:114
@@ -1112,7 +1165,9 @@ msgstr "Bu gecikmiş hatırlatma sonucu zaten var"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__unreconciled_move_line_normal
-msgid "To check if unreconciled payments/refunds above have a good reason not to be reconciled with an open invoice"
+msgid ""
+"To check if unreconciled payments/refunds above have a good reason not to be "
+"reconciled with an open invoice"
 msgstr ""
 "Yukarıdaki mutabakata varılmamış ödemelerin/geri ödemelerin açık bir "
 "faturayla mutabık kılınmaması için iyi bir nedeni olup olmadığını kontrol "
@@ -1173,9 +1228,10 @@ msgid "User"
 msgstr "Kullanıcı"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:408
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:437
 #, python-format
-msgid "User company is different from action company. This should never happen."
+msgid ""
+"User company is different from action company. This should never happen."
 msgstr "Kullanıcı şirket, eylem şirketinden farklıdır. Bu asla olmamalı."
 
 #. module: account_invoice_overdue_reminder
@@ -1206,7 +1262,15 @@ msgid "Wizard to reminder overdue customer invoice"
 msgstr "Vadesi geçmiş müşteri faturasını hatırlatma sihirbazı"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:597
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:326
+#, python-format
+msgid ""
+"You cannot make a reminder without selecting invoices. Instead you can click "
+"on the 'Skip' button."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:626
 #, python-format
 msgid "You must select the new reminder type."
 msgstr "Yeni hatırlatıcı türünü seçmelisiniz."
@@ -1226,3 +1290,13 @@ msgstr "Saygılarımla,"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "days"
 msgstr "gün"
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "this link"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "to recompute the mail informations"
+msgstr ""
