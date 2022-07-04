@@ -33,7 +33,7 @@ class CreditControlPolicyChanger(models.TransientModel):
             return False
         selected_lines = self.env["account.move.line"]
         for invoice in invoice_obj.browse(active_ids):
-            if invoice.type in ("in_invoice", "in_refund", "out_refund"):
+            if invoice.move_type in ("in_invoice", "in_refund", "out_refund"):
                 raise UserError(_("Please use wizard on customer invoices"))
 
             domain = [
@@ -60,7 +60,7 @@ class CreditControlPolicyChanger(models.TransientModel):
     do_nothing = fields.Boolean(string="No follow policy")
     move_line_ids = fields.Many2many(
         comodel_name="account.move.line",
-        rel="credit_changer_ml_rel",
+        relation="credit_changer_ml_rel",
         string="Move line to change",
         default=lambda self: self._default_move_lines(),
     )
@@ -72,7 +72,6 @@ class CreditControlPolicyChanger(models.TransientModel):
         self.do_nothing = self.new_policy_id.do_nothing
 
     @api.model
-    @api.returns("credit.control.line")
     def _mark_as_overridden(self, move_lines):
         """Mark `move_lines` related credit control line as overridden
         This is done by setting manually_overridden fields to True

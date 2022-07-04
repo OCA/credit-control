@@ -57,4 +57,4 @@ class AccountMove(models.Model):
             draft_domain = [("invoice_id", "=", invoice.id), ("state", "=", "draft")]
             cc_draft_line = cc_line_obj.search(draft_domain)
             cc_draft_line.unlink()
-        return super(AccountMove, self).button_cancel()
+        return super().button_cancel()
