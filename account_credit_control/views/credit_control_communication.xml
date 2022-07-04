@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 Tecnativa - Jairo Llopis
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-<data>
+<odoo>
     <record id="credit_control_communication_form_view" model="ir.ui.view">
         <field name="name">credit.control.communication.form</field>
         <field name="model">credit.control.communication</field>
@@ -33,9 +33,9 @@
                     </group>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
                 </div>
             </form>
         </field>
@@ -103,7 +103,7 @@
         <field name="name">credit.control.communication.tree</field>
         <field name="model">credit.control.communication</field>
         <field name="arch" type="xml">
-            <tree string="Control Credit Communications">
+            <tree>
                 <field name="partner_id" />
                 <field name="user_id" />
                 <field name="company_id" />
@@ -137,4 +137,4 @@
         sequence="25"
         id="credit_control_communication_action_menu"
     />
-</data>
+</odoo>
