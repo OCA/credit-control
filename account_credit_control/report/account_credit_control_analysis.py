@@ -12,10 +12,8 @@ class AccountCreditControlAnalysis(models.Model):
     _rec_name = "partner_id"
 
     partner_id = fields.Many2one(comodel_name="res.partner", readonly=True)
-    partner_ref = fields.Char(string="Partner Ref", readonly=True)
-    policy_id = fields.Many2one(
-        comodel_name="credit.control.policy", string="Policy", readonly=True
-    )
+    partner_ref = fields.Char(readonly=True)
+    policy_id = fields.Many2one(comodel_name="credit.control.policy", readonly=True)
     currency_id = fields.Many2one(comodel_name="res.currency", readonly=True)
     policy_level_id = fields.Many2one(
         comodel_name="credit.control.policy.level",

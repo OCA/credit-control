@@ -23,13 +23,13 @@ class CreditControlPolicy(models.Model):
     do_nothing = fields.Boolean(
         help="For policies which should not generate lines or are obsolete"
     )
-    company_id = fields.Many2one(comodel_name="res.company", string="Company")
+    company_id = fields.Many2one(comodel_name="res.company")
     account_ids = fields.Many2many(
         comodel_name="account.account",
         string="Accounts",
         required=True,
         domain="[('internal_type', '=', 'receivable')]",
-        help="This policy will be active only" " for the selected accounts",
+        help="This policy will be active only for the selected accounts",
     )
     active = fields.Boolean(default=True)
 
@@ -48,7 +48,6 @@ class CreditControlPolicy(models.Model):
             ("company_id", "=", credit_control_run.company_id.id),
         ]
 
-    @api.returns("account.move.line")
     def _due_move_lines(self, credit_control_run):
         """Get the due move lines for the policy of the company.
 
@@ -67,7 +66,6 @@ class CreditControlPolicy(models.Model):
         domain_line = self._move_lines_domain(credit_control_run)
         return move_l_obj.search(domain_line)
 
-    @api.returns("account.move.line")
     def _move_lines_subset(self, credit_control_run, model, move_relation_field):
         """Get the move lines related to one model for a policy.
 
@@ -113,7 +111,6 @@ class CreditControlPolicy(models.Model):
             to_remove = to_remove.search(domain)
         return to_add, to_remove
 
-    @api.returns("account.move.line")
     def _get_partner_related_lines(self, credit_control_run):
         """Get the move lines for a policy related to a partner.
 
@@ -123,7 +120,6 @@ class CreditControlPolicy(models.Model):
         """
         return self._move_lines_subset(credit_control_run, "res.partner", "partner_id")
 
-    @api.returns("account.move.line")
     def _get_invoice_related_lines(self, credit_control_run):
         """Get the move lines for a policy related to an invoice.
 
@@ -133,7 +129,6 @@ class CreditControlPolicy(models.Model):
         """
         return self._move_lines_subset(credit_control_run, "account.move", "move_id")
 
-    @api.returns("account.move.line")
     def _get_move_lines_to_process(self, credit_control_run):
         """Build a list of move lines ids to include in a run
         for a policy at a given date.
@@ -150,7 +145,6 @@ class CreditControlPolicy(models.Model):
         lines = (lines | to_add) - to_remove
         return lines
 
-    @api.returns("account.move.line")
     def _lines_different_policy(self, lines):
         """Return a set of move lines ids for which there is an
         existing credit line but with a different policy.
@@ -181,11 +175,11 @@ class CreditControlPolicy(models.Model):
             raise UserError(
                 _(
                     "You can only use a policy set on "
-                    "account %s.\n"
+                    "account %(account_name)s.\n"
                     "Please choose one of the following "
-                    "policies:\n %s"
+                    "policies:\n %(allowed_names)s"
                 )
-                % (account.name, allowed_names)
+                % {"account_name": account.name, "allowed_names": allowed_names}
             )
         return True
 
@@ -212,9 +206,13 @@ class CreditControlPolicy(models.Model):
                 )
         if policy_lines_generated:
             report = _(
-                'Policy "<b>%s</b>" has generated <b>%d Credit '
+                'Policy "<b>%(name)s</b>" has generated <b>'
+                "%(len_policy_lines_generated)d Credit "
                 "Control Lines.</b><br/>"
-            ) % (self.name, len(policy_lines_generated))
+            ) % {
+                "name": self.name,
+                "len_policy_lines_generated": len(policy_lines_generated),
+            }
         else:
             report = (
                 _(
@@ -252,9 +250,7 @@ class CreditControlPolicyLevel(models.Model):
         required=True,
     )
     delay_days = fields.Integer(string="Delay (in days)", required=True)
-    email_template_id = fields.Many2one(
-        comodel_name="mail.template", string="Email Template", required=True
-    )
+    email_template_id = fields.Many2one(comodel_name="mail.template", required=True)
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     custom_mail_text = fields.Html(
@@ -265,7 +261,7 @@ class CreditControlPolicyLevel(models.Model):
     )
 
     _sql_constraints = [
-        ("unique level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
+        ("unique_level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
     ]
 
     @api.constrains("level", "computation_mode")
@@ -347,7 +343,6 @@ class CreditControlPolicyLevel(models.Model):
         else:
             return "cr_line.id IS NULL"
 
-    @api.returns("account.move.line")
     def _get_level_move_lines(self, controlling_date, lines):
         """Retrieve the move lines for all levels."""
         self.ensure_one()
@@ -387,7 +382,6 @@ class CreditControlPolicyLevel(models.Model):
             return move_line_obj.browse([row[0] for row in res])
         return move_line_obj
 
-    @api.returns("account.move.line")
     def get_level_lines(self, controlling_date, lines):
         """get all move lines in entry lines that match the current level"""
         self.ensure_one()

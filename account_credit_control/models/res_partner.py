@@ -12,16 +12,14 @@ class ResPartnerPaymentActionType(models.Model):
     _order = "sequence, id"
 
     name = fields.Char()
-    sequence = fields.Integer("Sequence", default=10)
+    sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     partner_ids = fields.One2many(
         comodel_name="res.partner",
         inverse_name="payment_next_action_type",
         string="Partners",
     )
-    company_id = fields.Many2one(
-        "res.company", "Company", default=lambda self: self.env.user.company_id
-    )
+    company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
 
 
 class ResPartner(models.Model):
@@ -106,4 +104,4 @@ class ResPartner(models.Model):
                 policy.check_policy_against_account(account)
             except UserError as err:
                 # constrains should raise ValidationError exceptions
-                raise ValidationError(err)
+                raise ValidationError(err) from err
