@@ -152,7 +152,7 @@ class CreditControlLine(models.Model):
     def _prepare_from_move_line(
         self, move_line, level, controlling_date, open_amount, default_lines_vals
     ):
-        """ Create credit control line """
+        """Create credit control line"""
         channel = level.channel
         partner = move_line.partner_id
         # Fallback to letter
@@ -188,7 +188,7 @@ class CreditControlLine(models.Model):
         check_tolerance=True,
         default_lines_vals=None,
     ):
-        """ Create or update line based on levels
+        """Create or update line based on levels
 
         if check_tolerance is true credit line will not be
         created if open amount is too small.
