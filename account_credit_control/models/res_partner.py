@@ -25,7 +25,7 @@ class ResPartnerPaymentActionType(models.Model):
 
 
 class ResPartner(models.Model):
-    """ Add a settings on the credit control policy to use on the partners,
+    """Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines.
     """
 
@@ -52,7 +52,9 @@ class ResPartner(models.Model):
         tracking=True,
     )
     payment_note = fields.Text(
-        string="Customer Payment Promise", help="Payment Note", tracking=True,
+        string="Customer Payment Promise",
+        help="Payment Note",
+        tracking=True,
     )
     payment_next_action_type = fields.Many2one(
         comodel_name="res.partner.payment.action.type",
@@ -89,7 +91,7 @@ class ResPartner(models.Model):
 
     @api.constrains("credit_policy_id", "property_account_receivable_id")
     def _check_credit_policy(self):
-        """ Ensure that policy on partner are limited to the account policy """
+        """Ensure that policy on partner are limited to the account policy"""
         # sudo needed for those w/o permission that duplicate records
         for partner in self:
             if (
