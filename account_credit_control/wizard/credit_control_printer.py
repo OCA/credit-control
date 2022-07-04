@@ -37,7 +37,6 @@ class CreditControlPrinter(models.TransientModel):
         return True
 
     @api.model
-    @api.returns("credit.control.line")
     def _get_lines(self, lines, predicate):
         return lines.filtered(predicate)
 

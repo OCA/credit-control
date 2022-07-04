@@ -7,36 +7,28 @@ from datetime import datetime
 
 from dateutil import relativedelta
 
-from odoo import fields, tools
+from odoo import fields
 from odoo.exceptions import UserError
-from odoo.modules.module import get_resource_path
 from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @tagged("post_install", "-at_install")
-class TestCreditControlRun(TransactionCase):
-    def _load(self, module, *args):
-        tools.convert_file(
-            self.cr,
-            module,
-            get_resource_path(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            self.registry._assertion_report,
+class TestCreditControlRun(AccountTestInvoicingCommon):
+    @classmethod
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+
+        cls.env.user.groups_id |= cls.env.ref(
+            "account_credit_control.group_account_credit_control_manager"
         )
 
-    def setUp(self):
-        super(TestCreditControlRun, self).setUp()
+        journal = cls.company_data["default_journal_sale"]
 
-        self._load("account", "test", "account_minimal_test.xml")
-
-        journal = self.env.ref("account.sales_journal")
-
-        account_type_rec = self.env.ref("account.data_account_type_receivable")
-        account = self.env["account.account"].create(
+        account_type_rec = cls.env.ref("account.data_account_type_receivable")
+        account = cls.env["account.account"].create(
             {
                 "code": "TEST430001",
                 "name": "Clients (test)",
@@ -45,9 +37,9 @@ class TestCreditControlRun(TransactionCase):
             }
         )
 
-        tag_operation = self.env.ref("account.account_tag_operating")
-        account_type_inc = self.env.ref("account.data_account_type_revenue")
-        analytic_account = self.env["account.account"].create(
+        tag_operation = cls.env.ref("account.account_tag_operating")
+        account_type_inc = cls.env.ref("account.data_account_type_revenue")
+        analytic_account = cls.env["account.account"].create(
             {
                 "code": "TEST701001",
                 "name": "Ventes en Belgique (test)",
@@ -56,12 +48,12 @@ class TestCreditControlRun(TransactionCase):
                 "tag_ids": [(6, 0, [tag_operation.id])],
             }
         )
-        payment_term = self.env.ref("account.account_payment_term_immediate")
+        payment_term = cls.env.ref("account.account_payment_term_immediate")
 
-        product = self.env["product.product"].create({"name": "Product test"})
+        product = cls.env["product.product"].create({"name": "Product test"})
 
-        self.policy = self.env.ref("account_credit_control.credit_control_3_time")
-        self.policy.write({"account_ids": [(6, 0, [account.id])]})
+        cls.policy = cls.env.ref("account_credit_control.credit_control_3_time")
+        cls.policy.write({"account_ids": [(6, 0, [account.id])]})
 
         # There is a bug with Odoo ...
         # The field "credit_policy_id" is considered as an "old field" and
@@ -69,17 +61,17 @@ class TestCreditControlRun(TransactionCase):
         # The ORM will create the record with old field
         # and update the record with new fields.
         # However constrains are applied after the first creation.
-        partner = self.env["res.partner"].create(
+        partner = cls.env["res.partner"].create(
             {"name": "Partner", "property_account_receivable_id": account.id}
         )
-        partner.credit_policy_id = self.policy.id
+        partner.credit_policy_id = cls.policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
 
         # Create an invoice
         invoice_form = Form(
-            self.env["account.move"].with_context(
-                default_type="out_invoice", check_move_validity=False
+            cls.env["account.move"].with_context(
+                default_move_type="out_invoice", check_move_validity=False
             )
         )
         invoice_form.invoice_date = date_invoice
@@ -94,9 +86,9 @@ class TestCreditControlRun(TransactionCase):
             invoice_line_form.price_unit = 500
             invoice_line_form.account_id = analytic_account
             invoice_line_form.tax_ids.clear()
-        self.invoice = invoice_form.save()
+        cls.invoice = invoice_form.save()
 
-        self.invoice.post()
+        cls.invoice.action_post()
 
     def test_check_run_date(self):
         """

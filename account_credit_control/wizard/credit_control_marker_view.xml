@@ -12,7 +12,8 @@
                 <newline />
                 <span
                     class="o_form_label"
-                >Warning: you will maybe not be able to revert this operation.</span>
+                >Warning: you will maybe not be able to revert this operation.
+                </span>
                 <group name="markername">
                     <field name="name" />
                 </group>
@@ -35,14 +36,19 @@
         </field>
     </record>
     <!-- for menu -->
-    <act_window
-        name="Change Lines' State"
-        res_model="credit.control.marker"
-        binding_model="credit.control.line"
-        view_mode="form"
-        target="new"
+
+    <record
         id="open_credit_line_marker_wizard_menu_action"
-    />
+        model="ir.actions.act_window"
+    >
+        <field name="name">Change Lines' State</field>
+        <field name="res_model">credit.control.marker</field>
+        <field name="binding_model_id" ref="model_credit_control_line" />
+        <field name="binding_view_types">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
     <record id="open_credit_line_marker_wizard" model="ir.actions.act_window">
         <field name="name">Change Lines' State</field>
         <field name="res_model">credit.control.marker</field>

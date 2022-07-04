@@ -23,7 +23,7 @@
                 <notebook colspan="4">
                     <page string="Policy levels">
                         <field name="level_ids" nolabel="1" colspan="4">
-                            <tree string="Credit control policy Level">
+                            <tree>
                                 <field name="name" />
                                 <field name="level" />
                                 <field name="channel" />
@@ -74,7 +74,7 @@
         <field name="name">credit.control.policy.tree</field>
         <field name="model">credit.control.policy</field>
         <field name="arch" type="xml">
-            <tree string="Credit control policy">
+            <tree>
                 <field name="name" />
                 <field name="do_nothing" />
             </tree>
@@ -130,7 +130,7 @@
         <field name="name">credit.control.policy.level.tree</field>
         <field name="model">credit.control.policy.level</field>
         <field name="arch" type="xml">
-            <tree string="Credit control policy level">
+            <tree>
                 <field name="name" />
                 <field name="level" />
                 <field name="channel" />

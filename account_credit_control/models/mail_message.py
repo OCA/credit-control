@@ -9,7 +9,7 @@ class MailMessage(models.Model):
 
     def message_format(self):
         result = super().message_format()
-        credit_control = self.env["ir.model.data"].xmlid_to_res_id(
+        credit_control = self.env["ir.model.data"]._xmlid_to_res_id(
             "account_credit_control.mt_request"
         )
         for message in result:
