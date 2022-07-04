@@ -298,7 +298,7 @@ class OverdueReminderStep(models.TransientModel):
         'res.users', string='Assigned to', default=lambda self: self.env.user)
     letter_printed = fields.Boolean(readonly=True)
     invoice_ids = fields.Many2many(
-        'account.invoice', string='Overdue Invoices', readonly=True)
+        'account.invoice', string='Overdue Invoices')
     company_id = fields.Many2one(
         'res.company', readonly=True, required=True,
         default=lambda self: self.env['res.company']._company_default_get())
@@ -308,6 +308,7 @@ class OverdueReminderStep(models.TransientModel):
     unreconciled_move_line_normal = fields.Boolean(
         string='To check if unreconciled payments/refunds above have a good '
                'reason not to be reconciled with an open invoice')
+    display_button_recompute_mail_info = fields.Boolean(default=False)
     interface = fields.Char(readonly=True)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -319,29 +320,57 @@ class OverdueReminderStep(models.TransientModel):
     def _reminder_type_selection(self):
         return self.env['overdue.reminder.action']._reminder_type_selection()
 
+    @api.onchange("invoice_ids")
+    def onchange_invoice_ids(self):
+        if not self.invoice_ids:
+            raise UserError(_(
+                "You cannot make a reminder without selecting invoices."
+                " Instead you can click on the 'Skip' button."))
+        self.display_button_recompute_mail_info = True
+        self.counter = 1 + max([
+            inv.overdue_reminder_counter
+            for inv in self.invoice_ids
+        ])
+
+    @api.multi
+    def button_compute_mail_info(self):
+        # This button is a workaround to avoid to use onchange function
+        # because in an onchange context, self.id = NewId
+        # so the call to render_template with res_id = NewId fails.
+        for step in self:
+            xmlid = MOD + '.overdue_invoice_reminder_mail_template'
+            mail_tpl = self.env.ref(xmlid)
+            mail_tpl_lang = mail_tpl.with_context(
+                lang=step.commercial_partner_id.lang or 'en_US'
+            )
+
+            # recompute subject
+            step.mail_subject = mail_tpl_lang._render_template(
+                mail_tpl_lang.subject, self._name, step.id)
+
+            # recompute body
+            mail_body = mail_tpl_lang._render_template(
+                mail_tpl_lang.body_html, self._name, step.id)
+            if mail_tpl.user_signature:
+                signature = self.env.user.signature
+                if signature:
+                    mail_body = tools.append_content_to_html(
+                        mail_body, signature, plaintext=False)
+            step.mail_body = tools.html_sanitize(mail_body)
+
+            # Hide button
+            step.display_button_recompute_mail_info = False
+
+        action = self.env.ref(
+            MOD + '.overdue_reminder_step_onebyone_action').read()[0]
+        action['res_id'] = self.ids[0]
+        return action
+
     @api.model
     def create(self, vals):
-        action = super().create(vals)
-        commercial_partner = self.env['res.partner'].browse(
-            vals['commercial_partner_id'])
-        xmlid = MOD + '.overdue_invoice_reminder_mail_template'
-        mail_tpl = self.env.ref(xmlid)
-        mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or 'en_US')
-        mail_subject = mail_tpl_lang._render_template(
-            mail_tpl_lang.subject, self._name, action.id)
-        mail_body = mail_tpl_lang._render_template(
-            mail_tpl_lang.body_html, self._name, action.id)
-        if mail_tpl.user_signature:
-            signature = self.env.user.signature
-            if signature:
-                mail_body = tools.append_content_to_html(
-                    mail_body, signature, plaintext=False)
-        mail_body = tools.html_sanitize(mail_body)
-        action.write({
-            'mail_subject': mail_subject,
-            'mail_body': mail_body,
-            })
-        return action
+        step = super().create(vals)
+        step.button_compute_mail_info()
+        return step
 
     @api.onchange('reminder_type')
     def reminder_type_change(self):
