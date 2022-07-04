@@ -13,9 +13,7 @@ class CreditControlCommunication(models.Model):
     _description = "credit control communication"
     _rec_name = "partner_id"
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", required=True, index=True
-    )
+    partner_id = fields.Many2one(comodel_name="res.partner", required=True, index=True)
     policy_id = fields.Many2one(
         related="policy_level_id.policy_id",
         store=True,
@@ -28,7 +26,7 @@ class CreditControlCommunication(models.Model):
         index=True,
     )
     currency_id = fields.Many2one(
-        comodel_name="res.currency", string="Currency", required=True, index=True
+        comodel_name="res.currency", required=True, index=True
     )
     credit_control_line_ids = fields.One2many(
         comodel_name="credit.control.line",
@@ -42,15 +40,13 @@ class CreditControlCommunication(models.Model):
 
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
-        default=lambda self: self.env.company,
+        default=lambda self: self._default_company(),
         required=True,
         index=True,
     )
     user_id = fields.Many2one(
         comodel_name="res.users",
         default=lambda self: self.env.user,
-        string="User",
         index=True,
     )
     total_invoiced = fields.Float(compute="_compute_total")
@@ -58,8 +54,7 @@ class CreditControlCommunication(models.Model):
 
     @api.model
     def _default_company(self):
-        company_obj = self.env["res.company"]
-        return company_obj._company_default_get("credit.control.policy")
+        return self.env.company
 
     @api.model
     def _get_total(self):
@@ -110,7 +105,6 @@ class CreditControlCommunication(models.Model):
         return contact and contact.email
 
     @api.model
-    @api.returns("credit.control.line")
     def _get_credit_lines(
         self, line_ids, partner_id, level_id, currency_id, company_id
     ):
@@ -179,7 +173,6 @@ class CreditControlCommunication(models.Model):
         comms._onchange_partner_id()
         return comms
 
-    @api.returns("mail.mail")
     def _generate_emails(self):
         """Generate email message using template related to level"""
         for comm in self:
@@ -194,7 +187,6 @@ class CreditControlCommunication(models.Model):
                 lambda line: line.state == "to_be_sent"
             ).write({"state": "queued"})
 
-    @api.returns("credit.control.line")
     def _mark_credit_line_as_sent(self):
         lines = self.mapped("credit_control_line_ids")
         lines.write({"state": "sent"})
