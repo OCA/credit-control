@@ -72,12 +72,9 @@ class CreditControlLine(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
-    invoice_id = fields.Many2one(
-        comodel_name="account.move", string="Invoice", readonly=True
-    )
+    invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
         comodel_name="res.partner",
-        string="Partner",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -272,10 +269,10 @@ class CreditControlLine(models.Model):
                         "line that is not in draft state."
                     )
                 )
-        return super(CreditControlLine, self).unlink()
+        return super().unlink()
 
     def write(self, values):
-        res = super(CreditControlLine, self).write(values)
+        res = super().write(values)
         if "manual_followup" in values:
             self.partner_id.write({"manual_followup": values.get("manual_followup")})
         return res

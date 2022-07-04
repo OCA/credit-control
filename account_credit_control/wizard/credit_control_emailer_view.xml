@@ -15,25 +15,31 @@
                 <newline />
                 <footer>
                     <button
-                        class="oe_highlight"
+                        class="btn-primary"
                         name="email_lines"
                         string="Send the emails"
                         type="object"
                     />
-                    <button class="oe_link" special="cancel" string="Cancel" />
+                    <button class="btn-link" special="cancel" string="Cancel" />
                 </footer>
             </form>
         </field>
     </record>
     <!-- for menu -->
-    <act_window
-        name="Send By Email"
-        res_model="credit.control.emailer"
-        binding_model="credit.control.line"
-        view_mode="form"
-        target="new"
+
+
+    <record
         id="open_credit_line_emailer_wizard_menu_action"
-    />
+        model="ir.actions.act_window"
+    >
+        <field name="name">Send By Email</field>
+        <field name="res_model">credit.control.emailer</field>
+        <field name="binding_model_id" ref="model_credit_control_line" />
+        <field name="binding_view_types">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
     <!-- for button -->
     <record id="open_credit_line_emailer_wizard" model="ir.actions.act_window">
         <field name="name">Send By Email</field>

@@ -43,7 +43,6 @@ class CreditControlMarker(models.TransientModel):
     )
 
     @api.model
-    @api.returns("credit.control.line")
     def _filter_lines(self, lines):
         """get line to be marked filter done lines"""
         line_obj = self.env["credit.control.line"]
@@ -51,7 +50,6 @@ class CreditControlMarker(models.TransientModel):
         return line_obj.search(domain)
 
     @api.model
-    @api.returns("credit.control.line")
     def _mark_lines(self, filtered_lines, state):
         """write hook"""
         assert state
