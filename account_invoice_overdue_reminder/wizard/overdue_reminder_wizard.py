@@ -524,6 +524,8 @@ class OverdueReminderStep(models.TransientModel):
         cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
         if mvals.get("email_cc"):
             cc_list.append(mvals["email_cc"])
+        if mvals.get("partner_ids"):
+            mvals["recipient_ids"] = mvals.pop("partner_ids")
         mvals.update(
             {
                 "subject": self.mail_subject,
