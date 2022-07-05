@@ -531,6 +531,7 @@ class OverdueReminderStep(models.TransientModel):
                 "email_cc": ", ".join(cc_list),
                 "model": "res.partner",
                 "res_id": self.commercial_partner_id.id,
+                "body": self.mail_body,
             }
         )
         mvals.pop("attachment_ids", None)
