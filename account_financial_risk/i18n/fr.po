@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-20 03:40+0000\n"
-"PO-Revision-Date: 2021-03-25 18:46+0000\n"
-"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
+"PO-Revision-Date: 2022-07-05 17:05+0000\n"
+"Last-Translator: ClementChaumienneC2C <clement.chaumienne@camptocamp.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/fr/)\n"
 "Language: fr\n"
@@ -28,14 +28,12 @@ msgstr "Pièces comptables"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
-#, fuzzy
 msgid "Account move lines"
 msgstr "Pièces comptables"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
-#, fuzzy
 msgid "Allow invoice validation over the risk"
 msgstr "Autoriser la validation de la facture sur le risque"
 
@@ -47,6 +45,10 @@ msgid ""
 "the over-risk\n"
 "                            has already been allowed when confirming these."
 msgstr ""
+"Toujours autoriser la validation des factures brouillon.\n"
+"                            Utile quand le flux de validation vient des "
+"commandes de ventes et du dépassement de limite\n"
+"                            a déjà été autorisé quand on les confirme."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -63,7 +65,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
 msgid "Can Overpass Partner Risk Exceptions"
-msgstr ""
+msgstr "Outrepasser les exceptions de risque partenaire"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -142,15 +144,15 @@ msgstr "Client"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-#, fuzzy
 msgid ""
 "Days after due date to set an invoice as unpaid.\n"
 "                            The change of this field recompute all partners "
 "risk, be patient."
 msgstr ""
 "Nombre de jours après la date d'échéance pour mettre une facture comme "
-"impayée. Le changement de ce champ recalcule le risque de tous les "
-"partenaires, soyez patient."
+"impayée.\n"
+" Le changement de ce champ recalcule le risque de tous les partenaires, "
+"soyez patient."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
