@@ -120,6 +120,7 @@ class OverdueReminderStart(models.TransientModel):
 
     def run(self):
         self.ensure_one()
+        reminder_cron_execution = self.env.context.get("reminder_cron_execution", False)
         if not self.up_to_date:
             raise UserError(
                 _(
@@ -180,7 +181,10 @@ class OverdueReminderStart(models.TransientModel):
                 action = orso.create(vals)
                 action_ids.append(action.id)
         if not action_ids:
-            raise UserError(_("There are no overdue reminders."))
+            if reminder_cron_execution:
+                return False
+            else:
+                raise UserError(_("There are no overdue reminders."))
         if self.interface == "onebyone":
             xid = MOD + ".overdue_reminder_step_onebyone_action"
             action = self.env.ref(xid).sudo().read()[0]
@@ -482,7 +486,9 @@ class OverdueReminderStep(models.TransientModel):
     def validate(self):
         orao = self.env["overdue.reminder.action"]
         mao = self.env["mail.activity"]
-        self.check_warnings()
+        reminder_cron_execution = self.env.context.get("reminder_cron_execution", False)
+        if not reminder_cron_execution:
+            self.check_warnings()
         for rec in self:
             vals = {}
             if rec.reminder_type == "mail":
@@ -602,7 +608,9 @@ class OverdueReminderStep(models.TransientModel):
             vals["reminder_ids"].append((0, 0, rvals))
 
     def print_letter(self):
-        self.check_warnings()
+        reminder_cron_execution = self.env.context.get("reminder_cron_execution", False)
+        if not reminder_cron_execution:
+            self.check_warnings()
         self.write({"letter_printed": True})
         action = action = (
             self.env.ref(MOD + ".overdue_reminder_step_report")
