@@ -19,7 +19,7 @@
                     >
                         <div class="o_setting_left_pane" />
                         <div class="o_setting_right_pane">
-                            <div class="text-muted">
+                        <div class="text-muted">
                             Default credit control policy to partners
                         </div>
                             <div class="row mt16">
@@ -38,9 +38,9 @@
                     >
                         <div class="o_setting_left_pane" />
                         <div class="o_setting_right_pane">
-                            <div class="text-muted">
-                              Credit Tolerance Limit
-                          </div>
+                        <div class="text-muted">
+                            Credit Tolerance Limit
+                        </div>
                             <div class="row mt16">
                                 <label
                                     string="Tolerance"
