@@ -411,6 +411,11 @@ msgid "Email"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
+#: model:ir.model,name:account_invoice_overdue_reminder.model_mail_template
+msgid "Email Templates"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_start_form
 msgid "Filters"
 msgstr ""
@@ -1105,6 +1110,12 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_start
 msgid "Wizard to reminder overdue customer invoice"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: code:addons/account_invoice_overdue_reminder/models/mail_template.py:12
+#, python-format
+msgid "You can't delete Overdue Invoice Reminder, it is needed by the module"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
