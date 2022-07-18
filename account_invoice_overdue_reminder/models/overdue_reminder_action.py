@@ -46,6 +46,7 @@ class OverdueReminderAction(models.Model):
             ('mail', _('E-mail')),
             ('phone', _('Phone')),
             ('post', _('Letter')),
+            ('other', _('Other')),
             ]
 
     @api.depends('reminder_ids')
