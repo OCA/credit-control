@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="act_partner_credit_relation_relation" model="ir.actions.act_window">
+        <field name="name">Credit Lines</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+        <field name="res_model">credit.control.line</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_view_types">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="partner_view_buttons" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.partner_view_buttons" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="arch" type="xml">
+            <button name="action_view_partner_invoices" position="after">
+                <button
+                    class="oe_stat_button"
+                    type="action"
+                    name="%(act_partner_credit_relation_relation)d"
+                    context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}"
+                    attrs="{'invisible': [('credit_control_count', '=', 0)]}"
+                    icon="fa-tasks"
+                >
+                    <field
+                        string="Credit Control"
+                        name="credit_control_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </button>
+        </field>
+    </record>
+    <record id="partner_followup_form_view" model="ir.ui.view">
+        <field name="name">partner.credit_control.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="arch" type="xml">
+            <page name="accounting" position="after">
+                <page
+                    string="Credit Control"
+                    name="credit_control"
+                    attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"
+                    groups="account.group_account_invoice"
+                >
+                    <group name="followup">
+                        <field name="credit_policy_id" widget="selection" />
+                        <field name="payment_responsible_id" />
+                        <field name="payment_note" />
+                        <field name="payment_next_action_type" />
+                        <field name="payment_next_action" />
+                        <field name="payment_next_action_date" />
+                        <field
+                            name="credit_control_analysis_ids"
+                            nolabel="1"
+                            colspan="2"
+                        >
+                            <tree editable="bottom">
+                                <field name="policy_id" />
+                                <field name="policy_level_id" />
+                                <field name="level" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+    <record id="customer_followup_tree" model="ir.ui.view">
+        <field name="name">res.partner.followup.inherit.tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="20" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="display_name" />
+                <field name="payment_next_action_type" />
+                <field name="payment_next_action_date" />
+                <field name="payment_next_action" />
+                <field name="payment_responsible_id" />
+                <field name="payment_note" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_customer_followup" model="ir.actions.act_window">
+        <field name="name">Manual Follow-Ups</field>
+        <field name="view_id" ref="customer_followup_tree" />
+        <field name="res_model">res.partner</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('manual_followup', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+    <record id="action_view_customer_followup_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="customer_followup_tree" />
+        <field name="act_window_id" ref="action_customer_followup" />
+    </record>
+    <menuitem
+        name="Do Manual Follow-Ups"
+        parent="base_credit_control_menu"
+        action="action_customer_followup"
+        sequence="30"
+        id="credit_control_manual_action_menu"
+    />
+    <!-- Partner Payment Action Types -->
+    <record model="ir.ui.view" id="res_partner_payment_action_type_form_view">
+        <field name="name">res.partner.payment.action.type.form</field>
+        <field name="model">res.partner.payment.action.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <widget
+                            name="web_ribbon"
+                            title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"
+                        />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1" />
+                            <field name="name" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="res_partner_payment_action_type_tree_view">
+        <field name="name">res.partner.payment.action.type.form</field>
+        <field name="model">res.partner.payment.action.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record
+        model="ir.actions.act_window"
+        id="res_partner_payment_action_type_act_window"
+    >
+        <field name="name">Partner Payment Action Types</field>
+        <field name="res_model">res.partner.payment.action.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.ui.menu" id="res_partner_payment_action_type_menu">
+        <field name="name">Partner Payment Action Types</field>
+        <field
+            name="parent_id"
+            ref="account_credit_control.base_credit_control_configuration_menu"
+        />
+        <field name="action" ref="res_partner_payment_action_type_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>
