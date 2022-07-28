@@ -21,6 +21,12 @@
                         nolabel="1"
                         widget='monetary'
                         options="{'currency_field': 'risk_currency_id'}"
+                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '!=', '')]}"
+                    />
+                    <field
+                        name="risk_sale_payment_sheet_info"
+                        nolabel="1"
+                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '=', '')]}"
                     />
                 </button>
             </field>
