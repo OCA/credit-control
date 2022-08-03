@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-06-18 15:26+0000\n"
-"PO-Revision-Date: 2022-06-18 17:27+0200\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"PO-Revision-Date: 2022-08-03 10:06+0000\n"
+"Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -297,9 +297,8 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_communication_action_menu
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-#, fuzzy
 msgid "Communications"
-msgstr "comunicaciones"
+msgstr "Comunicaciones"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
@@ -348,7 +347,7 @@ msgstr "Dirección de contacto"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_tree_view
 msgid "Control Credit Communications"
-msgstr ""
+msgstr "Comunicaciones de control de crédito"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
@@ -430,7 +429,7 @@ msgstr "Líneas de control de crédito"
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_communication_action
 msgid "Credit Control Communications"
-msgstr ""
+msgstr "Comunicaciones de control de crédito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
@@ -779,7 +778,7 @@ msgstr "Para políticas que no deben generar líneas o están obsoletas"
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:0
 #, python-format
 msgid "Generated communications"
-msgstr ""
+msgstr "Comunicaciones generadas"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__line_ids
