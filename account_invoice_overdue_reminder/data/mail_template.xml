@@ -16,7 +16,9 @@
     <field name="lang">{{object.partner_id.lang}}</field>
     <field name="email_from">{{object.user_id.email or object.company_id.email}}</field>
     <field name="email_to">{{object.partner_id.email}}</field>
-    <field name="subject" >{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}</field>
+    <field
+            name="subject"
+        >{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}</field>
     <field name="body_html" type="html">
 
 <div style="margin: 0px; padding: 0px;">
@@ -25,7 +27,9 @@
 
 <p>According to our books, the following invoices are overdue:</p>
 
-<table style="border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;">
+<table
+                        style="border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;"
+                    >
     <tr>
         <th style="padding: 5px; border: 1px solid black;">Invoice Number</th>
         <th style="padding: 5px; border: 1px solid black;">Invoice Date</th>
@@ -41,59 +45,72 @@
     <t t-foreach="object.invoice_ids.sorted(key='invoice_date')" t-as="inv">
         <tr>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="inv.name"></t>
+                <t t-out="inv.name" />
             </td>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="format_date(inv.invoice_date)"></t>
+                <t t-out="format_date(inv.invoice_date)" />
             </td>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="inv.invoice_payment_term_id.name or ''"></t>
+                <t t-out="inv.invoice_payment_term_id.name or ''" />
             </td>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="format_date(inv.invoice_date_due)"></t>
+                <t t-out="format_date(inv.invoice_date_due)" />
             </td>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="inv.ref or ''"></t>
+                <t t-out="inv.ref or ''" />
             </td>
             <td style="padding: 5px; border: 1px solid black; text-align: right;">
-                <t t-out="format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"></t>
+                <t
+                                        t-out="format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                    />
             </td>
             <td style="padding: 5px; border: 1px solid black; text-align: right;">
-                <t t-out="format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"></t>
+                <t
+                                        t-out="format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                    />
             </td>
             <td style="padding: 5px; border: 1px solid black; text-align: right;">
-                <t t-out="format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"></t>
+                <t
+                                        t-out="format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                    />
             </td>
             <td style="padding: 5px; border: 1px solid black;">
-                <t t-out="inv.overdue_reminder_counter"></t>
+                <t t-out="inv.overdue_reminder_counter" />
             </td>
         </tr>
     </t>
 
     <t t-foreach="object.total_residual()" t-as="currency_residual">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td colspan="2" style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;">
-            Total Residual in <t t-out="currency_residual[0].name"></t>:
+        <td />
+        <td />
+        <td />
+        <td />
+        <td />
+        <td
+                                colspan="2"
+                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                            >
+            Total Residual in <t t-out="currency_residual[0].name" />:
         </td>
-        <td style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;">
-            <t t-out="format_amount(currency_residual[1], currency_residual[0])"></t>
+        <td
+                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                            >
+            <t t-out="format_amount(currency_residual[1], currency_residual[0])" />
         </td>
-        <td></td>
+        <td />
     </t>
 </table>
 
-<p>If you made a payment for these invoices a few days ago, please ignore this email.</p>
+<p
+                    >If you made a payment for these invoices a few days ago, please ignore this email.</p>
 
 <t t-if="object.company_id.overdue_reminder_attach_invoice">
 <p>You will find enclosed the overdue invoices.</p>
 </t>
 
 <t t-if="object.counter > 2">
-    <p>Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>
+    <p
+                        >Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>
 </t>
 
 <p>Regards,</p>

@@ -8,7 +8,7 @@ from collections import defaultdict
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models, tools
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 logger = logging.getLogger(__name__)
@@ -233,7 +233,7 @@ class OverdueReminderStart(models.TransientModel):
                 fields.Date.to_string(min_interval_date),
             )
             return False
-        max_counter = max([inv.overdue_reminder_counter for inv in invs])
+        max_counter = max(inv.overdue_reminder_counter for inv in invs)
         unrec_domain = [
             ("account_id", "=", commercial_partner.property_account_receivable_id.id),
             ("partner_id", "=", commercial_partner.id),
@@ -391,7 +391,9 @@ class OverdueReminderStep(models.TransientModel):
             mail_tpl_lang.subject, self._name, [step.id]
         )[step.id]
 
-        mail_body = mail_tpl_lang._render_field('body_html', step.ids, post_process=True)[step.id]
+        mail_body = mail_tpl_lang._render_field(
+            "body_html", step.ids, post_process=True
+        )[step.id]
 
         step.write(
             {
