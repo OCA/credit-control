@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+
+<record id="view_partner_property_form" model="ir.ui.view">
+    <field name="name">overdue.reminder.res.partner.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="account.view_partner_property_form" />
+    <field name="arch" type="xml">
+        <group name="accounting_entries" position="after">
+            <group
+                    name="overdue_reminder"
+                    string="Overdue Reminder"
+                    attrs="{'invisible': [('customer_rank', '&lt;=', 0)]}"
+                >
+                <field name="no_overdue_reminder" />
+                <field name="customer_rank" invisible="1" />
+            </group>
+        </group>
+    </field>
+</record>
+
+<record id="action_overdue_reminder_action" model="ir.actions.act_window">
+    <field name="name">Overdue Reminder Actions</field>
+    <field name="context">{'search_default_commercial_partner_id': [active_id]}</field>
+    <field name="res_model">overdue.reminder.action</field>
+    <field name="binding_model_id" ref="base.model_res_partner" />
+    <field name="binding_view_types">form</field>
+</record>
+
+
+</odoo>
