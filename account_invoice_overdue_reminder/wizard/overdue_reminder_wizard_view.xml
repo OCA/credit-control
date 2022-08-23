@@ -138,6 +138,24 @@
                 <button name="print_letter" type="object" string="Print Letter" class="btn-primary"/>
                 <button name="print_invoices" type="object" string="Print Overdue Invoices" class="btn-primary"/>
             </group>
+            <group
+                name="reminder_manual_configuration"
+                attrs="{
+                    'invisible': [
+                        ('reminder_type', '!=', 'manual'),
+                    ],
+                }"
+            >
+                <field
+                    name="reminder_notes"
+                    string="Notes"
+                    attrs="{
+                        'required': [
+                            ('reminder_type', '=', 'manual'),
+                        ],
+                    }"
+                />
+            </group>
             <footer>
                 <button name="validate" type="object" string="Validate" class="btn-primary"/>
                 <button name="skip" type="object" string="Skip" class="btn-default"/>

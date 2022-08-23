@@ -24,6 +24,10 @@ class OverdueReminderAction(models.Model):
     reminder_type = fields.Selection(
         '_reminder_type_selection', default='mail', string='Type',
         required=True, readonly=True)
+    reminder_notes = fields.Text(
+        string="Reminder Notes",
+        translate=True,
+    )
     result_id = fields.Many2one(
         'overdue.reminder.result', ondelete='restrict',
         string='Info/Result')
@@ -46,7 +50,7 @@ class OverdueReminderAction(models.Model):
             ('mail', _('E-mail')),
             ('phone', _('Phone')),
             ('post', _('Letter')),
-            ('other', _('Other')),
+            ('manual', _('Manual')),
             ]
 
     @api.depends('reminder_ids')
