@@ -9,6 +9,10 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     risk_info = fields.Html(compute="_compute_risk_info")
+    risk_remaining_value = fields.Monetary(related="partner_id.risk_remaining_value")
+    risk_remaining_percentage = fields.Float(
+        related="partner_id.risk_remaining_percentage"
+    )
 
     @api.depends("partner_invoice_id")
     def _compute_risk_info(self):
