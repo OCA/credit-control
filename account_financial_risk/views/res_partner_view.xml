@@ -111,6 +111,28 @@
                                         options="{'currency_field': 'risk_currency_id'}"
                                     />
                                 </button>
+
+                                <label
+                                    for="risk_remaining_percentage"
+                                    string="Risk Remaining"
+                                />
+                                <div class="oe_inline" colspan="2">
+                                    <field
+                                        class="oe_inline"
+                                        name="risk_remaining_value"
+                                        nolabel="1"
+                                        widget='monetary'
+                                        options="{'currency_field': 'risk_currency_id'}"
+                                    />
+                                    <span class="oe_inline"> (</span>
+                                    <field
+                                        class="oe_inline"
+                                        name="risk_remaining_percentage"
+                                        nolabel="1"
+                                    />
+                                    <span class="oe_inline">%)</span>
+                                </div>
+
                                 <field
                                     name="risk_total"
                                     colspan="3"
