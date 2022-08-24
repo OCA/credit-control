@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Solvti (http://www.solvti.pl).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">invoice.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account_credit_control.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="credit_control_line_ids" position="after">
+                <separator string="Dunning Block" colspan="4" />
+                <group>
+                    <group>
+                        <label for="dunning_block_active" />
+                        <div class="o_row" name="update_cost_price">
+                            <field name="dunning_block_active" class="oe_inline" />
+                            <button
+                                string="Activate Dunning Block"
+                                type="action"
+                                name="%(dunning_block_open_wizard_action)d"
+                                attrs="{'invisible': [('dunning_block_active', '=', True)]}"
+                                groups="account_credit_control.group_account_credit_control_user"
+                                class="oe_link oe_inline"
+                            />
+                            <button
+                                string="Update Or Remove Dunning Block"
+                                type="action"
+                                name="%(dunning_block_open_wizard_action)d"
+                                attrs="{'invisible': [('dunning_block_active', '=', False)]}"
+                                groups="account_credit_control.group_account_credit_control_user"
+                                class="oe_link oe_inline"
+                            />
+                        </div>
+                        <label
+                            for="dunning_block_end_date"
+                            attrs="{'invisible': [('dunning_block_active', '=', False)]}"
+                        />
+                        <div
+                            class="o_row"
+                            name="update_cost_price"
+                            attrs="{'invisible': [('dunning_block_active', '=', False)]}"
+                        >
+                            <field name="dunning_block_end_date" class="oe_inline" />
+                            <span class="o_stat_value ml-5 oe_read_only">Days left
+                            (
+                                <field
+                                    name="dunning_block_days_left"
+                                    class="oe_inline"
+                                    attrs="{'invisible': [('dunning_block_days_left', '=', 0)]}"
+                                />
+                                <span
+                                    attrs="{'invisible': [('dunning_block_days_left', '!=', 0)]}"
+                                >Ends Today</span>
+                            )
+                            </span>
+                        </div>
+                    </group>
+                    <group>
+                        <field
+                            name="dunning_block_reason_id"
+                            attrs="{'invisible': [('dunning_block_active', '=', False)]}"
+                        />
+                        <field
+                            name="dunning_block_note"
+                            attrs="{'invisible': [('dunning_block_active', '=', False)]}"
+                        />
+                    </group>
+                </group>
+
+                <field name="dunning_block_history_ids" colspan="4" nolabel="1">
+                    <tree
+                        decoration-muted="status == 'interrupted'"
+                        decoration-success="status == 'active'"
+                    >
+                        <field name="create_date" />
+                        <field name="dunning_block_end_date" />
+                        <field name="dunning_block_reason_id" />
+                        <field name="dunning_block_note" />
+                        <field name="status" />
+                    </tree>
+                </field>
+
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Solvti (http://www.solvti.pl).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo noupdate="1">
+        <record id="ir_cron_deactivate_dunning_block" model="ir.cron">
+            <field name="name">Deactivate Dunning Block</field>
+            <field name="model_id" ref="model_account_move" />
+            <field name="state">code</field>
+            <field name="code">model._cron_dunning_block_disable()</field>
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field
+            name="nextcall"
+            eval="datetime.now().replace(hour=00,minute=00,second=00) + timedelta(days=1)"
+        />
+            <field name="numbercall">-1</field>
+        </record>
+
+</odoo>

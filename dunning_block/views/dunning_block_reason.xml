@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Solvti (http://www.solvti.pl).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+        <record id="dunning_block_reason_form" model="ir.ui.view">
+            <field name="name">Dunning Block Form View</field>
+            <field name="model">dunning.block.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="dunning_block_reason_tree" model="ir.ui.view">
+            <field name="name">Dunning Block Reason Tree</field>
+            <field name="model">dunning.block.reason</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="dunning_block_reason_action" model="ir.actions.act_window">
+            <field name="name">Dunning Block Reason</field>
+            <field name="res_model">dunning.block.reason</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+        id="dunning_block_reason_menu"
+        name="Dunning block Reason"
+        parent="account_credit_control.base_credit_control_menu"
+        action="dunning_block_reason_action"
+        sequence="100"
+    />
+</odoo>

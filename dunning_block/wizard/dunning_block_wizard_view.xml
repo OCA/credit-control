@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Solvti (http://www.solvti.pl).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="dunning_block_wizard_form_view" model="ir.ui.view">
+        <field name="name">dunning.block.wizard.form</field>
+        <field name="model">dunning.block.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Dunning block">
+                <field name="is_dunning_block_active" invisible="1" />
+                <group>
+                    <field name="dunning_block_end_date" />
+                    <field name="dunning_block_reason_id" />
+                    <field name="dunning_block_note" />
+                </group>
+                <footer>
+                    <button
+                        name="set_dunning_block_action"
+                        string="Set Dunning block"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible': [('is_dunning_block_active', '=', True)]}"
+                    />
+                    <button
+                        name="set_dunning_block_action"
+                        string="Update Dunning block"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible': [('is_dunning_block_active', '=', False)]}"
+                    />
+                    <button
+                        string="Remove Dunning block"
+                        name="remove_dunning_block_action"
+                        type="object"
+                        attrs="{'invisible': [('is_dunning_block_active', '=', False)]}"
+                        class="btn btn-warning"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="dunning_block_open_wizard_action" model="ir.actions.act_window">
+        <field name="name">Set Dunning block</field>
+        <field name="res_model">dunning.block.wizard</field>
+        <field name="view_mode">form</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>
