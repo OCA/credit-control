@@ -45,6 +45,16 @@ msgid "Risk Info"
 msgstr "Informazioni sul rischio"
 
 #. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_percentage
+msgid "Risk Remaining (Percentage)"
+msgstr ""
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_value
+msgid "Risk Remaining (Value)"
+msgstr ""
+
+#. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__risk_percent_warning
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_users__risk_percent_warning
 msgid "Risk percent warning"
