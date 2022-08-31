@@ -456,12 +456,10 @@ class OverdueReminderStep(models.TransientModel):
     def check_warnings(self):
         self.ensure_one()
         for rec in self:
-            if rec.company_id != self.env.company:
+            if rec.company_id not in self.env.companies:
                 raise UserError(
-                    _(
-                        "User company is different from action company. "
-                        "This should never happen."
-                    )
+                    _("The user is not allowed to access company %s")
+                    % rec.company_id.name
                 )
             if (
                 rec.warn_unreconciled_move_line_ids
