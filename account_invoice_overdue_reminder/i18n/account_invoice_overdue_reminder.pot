@@ -1032,6 +1032,12 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 #, python-format
+msgid "The user is not allowed to access company %s"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+#, python-format
 msgid "There are no overdue reminders."
 msgstr ""
 
@@ -1109,13 +1115,6 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__user_id
 msgid "User"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-#, python-format
-msgid ""
-"User company is different from action company. This should never happen."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
