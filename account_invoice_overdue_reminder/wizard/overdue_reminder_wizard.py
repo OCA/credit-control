@@ -507,8 +507,8 @@ class OverdueReminderStep(models.TransientModel):
         self.check_warnings()
         for rec in self:
             vals = {}
-            if rec.reminder_type == "mail":
-                vals = rec.validate_mail()
+            if rec.reminder_type == "mail" and rec.validate_mail():
+                vals = rec.generate_mail_vals()
             elif rec.reminder_type == "phone":
                 vals = rec.validate_phone()
             elif rec.reminder_type == "post":
@@ -527,7 +527,6 @@ class OverdueReminderStep(models.TransientModel):
 
     def validate_mail(self):
         self.ensure_one()
-        iao = self.env["ir.attachment"]
         if not self.partner_id.email:
             raise UserError(
                 _("E-mail missing on partner '%s'.") % self.partner_id.display_name
@@ -536,6 +535,11 @@ class OverdueReminderStep(models.TransientModel):
             raise UserError(_("Mail subject is empty."))
         if not self.mail_body:
             raise UserError(_("Mail body is empty."))
+        return True
+
+    def generate_mail_vals(self):
+        self.ensure_one()
+        iao = self.env["ir.attachment"]
         xmlid = MOD + ".overdue_invoice_reminder_mail_template"
         mvals = self.env.ref(xmlid).generate_email(
             self.id, ["email_from", "email_to", "partner_to", "reply_to"]
