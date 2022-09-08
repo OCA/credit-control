@@ -233,7 +233,7 @@ class OverdueReminderStart(models.TransientModel):
                 fields.Date.to_string(min_interval_date),
             )
             return False
-        max_counter = max([inv.overdue_reminder_counter for inv in invs])
+        max_counter = max(inv.overdue_reminder_counter for inv in invs)
         unrec_domain = [
             ("account_id", "=", commercial_partner.property_account_receivable_id.id),
             ("partner_id", "=", commercial_partner.id),
