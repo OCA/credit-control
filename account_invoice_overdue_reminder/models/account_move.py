@@ -45,7 +45,8 @@ class AccountMove(models.Model):
             if (
                 move.move_type == "out_invoice"
                 and move.state == "posted"
-                and move.payment_state not in ("paid", "reversed", "in_payment")
+                and move.invoice_payment_state == "not_paid"
+                and move.invoice_date_due
                 and move.invoice_date_due < today
             ):
                 overdue = True
