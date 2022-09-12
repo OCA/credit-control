@@ -330,7 +330,6 @@ class OverdueReminderStep(models.TransientModel):
     reminder_type = fields.Selection(
         "_reminder_type_selection",
         default="mail",
-        string="Reminder Type",
         required=True,
     )
     mail_cc_partner_ids = fields.Many2many("res.partner", string="Cc")
@@ -391,7 +390,7 @@ class OverdueReminderStep(models.TransientModel):
             mail_tpl_lang.subject, self._name, [step.id]
         )[step.id]
         mail_body = mail_tpl_lang._render_template(
-            mail_tpl_lang.body_html, self._name, [step.id]
+            mail_tpl_lang.body_html, self._name, [step.id], "qweb"
         )[step.id]
         mail_body = tools.html_sanitize(mail_body)
         step.write(
@@ -629,7 +628,7 @@ class OverdueReminderStep(models.TransientModel):
         self.write({"letter_printed": True})
         action = action = (
             self.env.ref(MOD + ".overdue_reminder_step_report")
-            .with_context({"discard_logo_check": True})
+            .with_context(discard_logo_check=True)
             .report_action(self)
         )
         return action
@@ -639,7 +638,7 @@ class OverdueReminderStep(models.TransientModel):
         # doesn't work
         action = (
             self.env.ref("account.account_invoices")
-            .with_context({"discard_logo_check": True})
+            .with_context(discard_logo_check=True)
             .report_action(self.invoice_ids.ids)
         )
         return action
