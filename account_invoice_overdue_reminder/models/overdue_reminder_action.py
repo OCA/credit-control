@@ -74,9 +74,11 @@ class OverdueReminderAction(models.Model):
     def name_get(self):
         res = []
         for action in self:
-            name = _("%s, Reminder %s") % (
-                action.commercial_partner_id.display_name,
-                action.date,
+            name = _("%(partner_name)s, Reminder %(date)s") % (
+                {
+                    "partner_name": action.commercial_partner_id.display_name,
+                    "date": action.date,
+                }
             )
             res.append((action.id, name))
         return res
