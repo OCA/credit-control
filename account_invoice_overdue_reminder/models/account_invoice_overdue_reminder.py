@@ -60,6 +60,8 @@ class AccountInvoiceOverdueReminder(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = _("%s Reminder %d") % (rec.invoice_id.name, rec.counter)
+            name = _("%(invoice_name)s Reminder %(counter)d") % (
+                {"invoice_name": rec.invoice_id.name, "counter": rec.counter}
+            )
             res.append((rec.id, name))
         return res
