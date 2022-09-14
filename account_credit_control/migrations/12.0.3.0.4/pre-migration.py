@@ -11,5 +11,9 @@ def migrate(env, version):
     This patch release fixes a bug whose result may be stored in database, so
     although it's still a patch, we need to clear the database, just in case.
     """
-    action = env.ref("account_credit_control.credit_control_communication_action")
-    action.domain = []
+    action = env.ref("account_credit_control.credit_control_communication_action",
+                     raise_if_not_found=False)
+    # if not found, this XML id has not been created,
+    # so clearing the database is not needed.
+    if action:
+        action.domain = []
