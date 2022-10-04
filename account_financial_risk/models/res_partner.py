@@ -230,6 +230,13 @@ class ResPartner(models.Model):
     def _risk_account_groups(self):
         max_date = self._max_risk_date_due()
         company_domain = self._get_risk_company_domain()
+        fields = [
+            "partner_id",
+            "account_id",
+            "amount_residual",
+            "amount_residual_currency",
+        ]
+        groupby = ["partner_id", "account_id", "currency_id"]
         return {
             "draft": {
                 "domain": company_domain
@@ -238,8 +245,8 @@ class ResPartner(models.Model):
                     ("account_internal_type", "=", "receivable"),
                     ("parent_state", "in", ["draft", "proforma", "proforma2"]),
                 ],
-                "fields": ["partner_id", "account_id", "amount_residual"],
-                "group_by": ["partner_id", "account_id"],
+                "fields": fields,
+                "group_by": groupby,
             },
             "open": {
                 "domain": company_domain
@@ -255,8 +262,8 @@ class ResPartner(models.Model):
                     ("date", ">=", max_date),
                     ("parent_state", "=", "posted"),
                 ],
-                "fields": ["partner_id", "account_id", "amount_residual"],
-                "group_by": ["partner_id", "account_id"],
+                "fields": fields,
+                "group_by": groupby,
             },
             "unpaid": {
                 "domain": company_domain
@@ -272,8 +279,8 @@ class ResPartner(models.Model):
                     ("date", "<", max_date),
                     ("parent_state", "=", "posted"),
                 ],
-                "fields": ["partner_id", "account_id", "amount_residual"],
-                "group_by": ["partner_id", "account_id"],
+                "fields": fields,
+                "group_by": groupby,
             },
         }
 
@@ -336,44 +343,42 @@ class ResPartner(models.Model):
                 continue  # pragma: no cover
             account = self.env["account.account"].browse(reg["account_id"][0])
             if self.property_account_receivable_id.id == reg["account_id"][0]:
-                vals["risk_invoice_open"] += account.company_id.currency_id._convert(
-                    reg["amount_residual"],
-                    self.risk_currency_id,
-                    account.company_id,
-                    fields.Date.context_today(self),
-                    round=False,
+                vals["risk_invoice_open"] += self._get_amount_in_risk_currency(
+                    reg, account
                 )
             else:
-                vals["risk_account_amount"] += account.company_id.currency_id._convert(
-                    reg["amount_residual"],
-                    self.risk_currency_id,
-                    account.company_id,
-                    fields.Date.context_today(self),
-                    round=False,
+                vals["risk_account_amount"] += self._get_amount_in_risk_currency(
+                    reg, account
                 )
         for reg in groups["unpaid"]["read_group"]:
             if reg["partner_id"][0] not in self.ids:
                 continue  # pragma: no cover
             account = self.env["account.account"].browse(reg["account_id"][0])
             if self.property_account_receivable_id.id == reg["account_id"][0]:
-                vals["risk_invoice_unpaid"] += account.company_id.currency_id._convert(
-                    reg["amount_residual"],
-                    self.risk_currency_id,
-                    account.company_id,
-                    fields.Date.context_today(self),
-                    round=False,
+                vals["risk_invoice_unpaid"] += self._get_amount_in_risk_currency(
+                    reg, account
                 )
             else:
-                vals[
-                    "risk_account_amount_unpaid"
-                ] += account.company_id.currency_id._convert(
-                    reg["amount_residual"],
-                    self.risk_currency_id,
-                    account.company_id,
-                    fields.Date.context_today(self),
-                    round=False,
+                vals["risk_account_amount_unpaid"] += self._get_amount_in_risk_currency(
+                    reg, account
                 )
         return vals
+
+    def _get_amount_in_risk_currency(self, group, account):
+        acc_currency_id = account.company_id.currency_id.id
+        risk_currency_id = self.risk_currency_id.id
+        group_currency_id = group["currency_id"][0]
+        if group_currency_id == risk_currency_id:
+            return group["amount_residual_currency"]
+        elif acc_currency_id == risk_currency_id:
+            return group["amount_residual"]
+        return account.company_id.currency_id._convert(
+            group["amount_residual"],
+            self.risk_currency_id,
+            account.company_id,
+            fields.Date.context_today(self),
+            round=False,
+        )
 
     @api.depends(lambda x: x._get_depends_compute_risk_exception())
     def _compute_risk_exception(self):
