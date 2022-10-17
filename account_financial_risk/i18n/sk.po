@@ -40,7 +40,8 @@ msgstr ""
 msgid ""
 "Always allow the validation of draft invoices.\n"
 "                            Useful when the flow comes from sales orders and "
-"the over-risk\n"
+"the\n"
+"                                over-risk\n"
 "                            has already been allowed when confirming these."
 msgstr ""
 
@@ -75,7 +76,6 @@ msgid "Companies"
 msgstr "Spoločnosti"
 
 #. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__company_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
 msgstr ""
@@ -138,7 +138,8 @@ msgstr "Zákazník"
 msgid ""
 "Days after due date to set an invoice as unpaid.\n"
 "                            The change of this field recompute all partners "
-"risk, be patient."
+"risk, be\n"
+"                                patient."
 msgstr ""
 
 #. module: account_financial_risk
@@ -276,7 +277,7 @@ msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_financial_risk
@@ -411,12 +412,16 @@ msgid "Risk Allow Edit"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
 msgid "Risk Amount Total"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
@@ -426,6 +431,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_exception
 msgid "Risk Exception"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
+msgid "Risk Over Limit"
 msgstr ""
 
 #. module: account_financial_risk
@@ -456,6 +467,14 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
+msgstr ""
+
+#. module: account_financial_risk
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid ""
+"The partner %s is in risk exception.\n"
+"You must post his invoices from form view to allow over risk"
 msgstr ""
 
 #. module: account_financial_risk
@@ -515,6 +534,11 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_validate_account_move
+msgid "Validate Account Move"
 msgstr ""
 
 #~ msgid "Partner"
