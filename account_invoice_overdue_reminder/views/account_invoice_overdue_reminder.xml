@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+
+<record id="account_invoice_overdue_reminder_form" model="ir.ui.view">
+    <field name="name">account.invoice.overdue.reminder.form</field>
+    <field name="model">account.invoice.overdue.reminder</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="main">
+                <field
+                        name="counter"
+                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
+                    />
+                <field
+                        name="action_commercial_partner_id"
+                        invisible="not context.get('overdue_reminder_main_view')"
+                    />
+                <field name="action_partner_id" context="{'show_email': True}" />
+                <field
+                        name="invoice_id"
+                        invisible="not context.get('overdue_reminder_main_view')"
+                    />
+                <field name="action_date" />
+                <field name="action_user_id" />
+                <field name="action_reminder_type" />
+                <field
+                        name="action_mail_id"
+                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                    />
+                <field
+                        name="action_mail_cc"
+                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                    />
+                <field
+                        name="action_mail_state"
+                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                    />
+            </group>
+            <group string="Info/Result" name="result">
+                <field name="action_result_id" widget="selection" />
+                <field name="action_result_notes" string="Notes" />
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="account_invoice_overdue_reminder_norelated_form" model="ir.ui.view">
+    <field name="name">account.invoice.overdue.reminder.norelated.form</field>
+    <field name="model">account.invoice.overdue.reminder</field>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="main">
+                <field name="invoice_id" />
+                <field name="action_reminder_type" invisible="1" />
+                <field
+                        name="counter"
+                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
+                    />
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="account_invoice_overdue_reminder_tree" model="ir.ui.view">
+    <field name="name">account.invoice.overdue.reminder.tree</field>
+    <field name="model">account.invoice.overdue.reminder</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="counter" />
+            <field name="action_date" />
+            <field
+                    name="action_partner_id"
+                    invisible="not context.get('overdue_reminder_main_view')"
+                />
+            <field
+                    name="invoice_id"
+                    invisible="not context.get('overdue_reminder_main_view')"
+                />
+            <field name="action_user_id" widget="many2one_avatar_user" />
+            <field
+                    name="action_reminder_type"
+                    widget="badge"
+                    decoration-info="action_reminder_type == 'phone'"
+                    decoration-success="action_reminder_type == 'mail'"
+                    decoration-danger="action_reminder_type == 'post'"
+                />
+            <field name="action_result_id" />
+            <field name="action_result_notes" />
+        </tree>
+    </field>
+</record>
+
+<record id="account_invoice_overdue_reminder_norelated_tree" model="ir.ui.view">
+    <field name="name">account.invoice.overdue.reminder.norelated.tree</field>
+    <field name="model">account.invoice.overdue.reminder</field>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="invoice_id" />
+            <field name="counter" />
+        </tree>
+    </field>
+</record>
+
+<record id="account_invoice_overdue_reminder_search" model="ir.ui.view">
+    <field name="name">account.invoice.overdue.reminder.search</field>
+    <field name="model">account.invoice.overdue.reminder</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="action_commercial_partner_id" />
+            <field name="invoice_id" />
+            <field name="action_date" />
+            <field name="action_user_id" />
+            <filter
+                    name="mail"
+                    string="E-mail"
+                    domain="[('action_reminder_type', '=', 'mail')]"
+                />
+            <filter
+                    name="phone"
+                    string="Phone"
+                    domain="[('action_reminder_type', '=', 'phone')]"
+                />
+            <filter
+                    name="post"
+                    string="Post"
+                    domain="[('action_reminder_type', '=', 'post')]"
+                />
+            <group name="groupby">
+                <filter
+                        name="action_commercial_partner_groupby"
+                        string="Customer"
+                        context="{'group_by': 'action_commercial_partner_id'}"
+                    />
+                <filter
+                        name="invoice_groupby"
+                        string="Invoice"
+                        context="{'group_by': 'invoice_id'}"
+                    />
+                <filter
+                        name="action_reminder_type_groupby"
+                        string="Type"
+                        context="{'group_by': 'action_reminder_type'}"
+                    />
+                <filter
+                        name="action_result_groupby"
+                        string="Result/Info"
+                        context="{'group_by': 'action_result_id'}"
+                    />
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="account_invoice_overdue_reminder_action" model="ir.actions.act_window">
+    <field name="name">Invoice Reminder Counters</field>
+    <field name="res_model">account.invoice.overdue.reminder</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">{'overdue_reminder_main_view': True}</field>
+</record>
+
+
+</odoo>
