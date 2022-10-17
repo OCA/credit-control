@@ -520,3 +520,8 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_validate_account_move
+msgid "Validate Account Move"
+msgstr ""
