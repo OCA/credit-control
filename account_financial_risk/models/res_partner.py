@@ -146,6 +146,31 @@ class ResPartner(models.Model):
     risk_currency_id = fields.Many2one(
         comodel_name="res.currency", compute="_compute_credit_currency"
     )
+    risk_remaining_value = fields.Monetary(
+        compute="_compute_risk_remaining",
+        string="Risk Remaining (Value)",
+        currency_field="risk_currency_id",
+        store=True,
+    )
+
+    risk_remaining_percentage = fields.Float(
+        compute="_compute_risk_remaining",
+        string="Risk Remaining (Percentage)",
+        store=True,
+    )
+
+    @api.depends("credit_limit", "risk_total")
+    def _compute_risk_remaining(self):
+        for record in self:
+            record.risk_remaining_value = record.credit_limit - record.risk_total
+            if record.credit_limit:
+                record.risk_remaining_percentage = round(
+                    100
+                    * (record.credit_limit - record.risk_total)
+                    / record.credit_limit
+                )
+            else:
+                record.risk_remaining_percentage = 0
 
     @api.depends(
         "credit_currency",
