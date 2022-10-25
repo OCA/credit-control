@@ -498,6 +498,23 @@ msgid "Risk Over Limit"
 msgstr ""
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "Risk Remaining"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
+msgid "Risk Remaining (Percentage)"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
+msgid "Risk Remaining (Value)"
+msgstr ""
+
+#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Risk exceeded"
 msgstr "Risque dépassé"
