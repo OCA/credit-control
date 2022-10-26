@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2022-04-12 17:05+0000\n"
+"PO-Revision-Date: 2022-10-26 15:44+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
@@ -506,19 +506,19 @@ msgstr "Fido oltre il limite"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Risk Remaining"
-msgstr ""
+msgstr "Rischio rimanente"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Rischio rimanente (%)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Rischio rimanente (valore)"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
