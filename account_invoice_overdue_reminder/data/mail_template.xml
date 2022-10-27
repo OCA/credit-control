@@ -43,6 +43,7 @@
                         <th
                             style="padding: 5px; border: 1px solid black;"
                         >Order Ref.</th>
+                        <th style="padding: 5px; border: 1px solid black;">Type</th>
                         <th
                             style="padding: 5px; border: 1px solid black;"
                         >Total Untaxed</th>
@@ -56,7 +57,13 @@
                         t-foreach="object.invoice_ids.sorted(key='invoice_date')"
                         t-as="inv"
                     >
-                        <tr>
+                        <tr
+                            style="background-color:
+                            % if inv.move_type == 'out_refund':
+                                LightGray
+                            % endif
+                        "
+                        >
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.name" />
                             </td>
@@ -72,6 +79,9 @@
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.ref or ''" />
                             </td>
+                            <td style="padding: 5px; border: 1px solid black;"><t
+                                    t-out="dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]"
+                                /></td>
                             <td
                                 style="padding: 5px; border: 1px solid black; text-align: right;"
                             >
@@ -100,6 +110,7 @@
                     </t>
                     <t t-foreach="object.total_residual()" t-as="total_residual">
                         <tr>
+                            <td />
                             <td />
                             <td />
                             <td />
@@ -152,6 +163,5 @@
             </div>
         </field>
     </record>
-
 
 </odoo>
