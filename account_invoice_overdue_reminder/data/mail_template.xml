@@ -35,18 +35,24 @@
         <th style="padding: 5px; border: 1px solid black;">Payment Terms</th>
         <th style="padding: 5px; border: 1px solid black;">Due Date</th>
         <th style="padding: 5px; border: 1px solid black;">Order Ref.</th>
+        <th style="padding: 5px; border: 1px solid black;">Type</th>
         <th style="padding: 5px; border: 1px solid black;">Total Untaxed</th>
         <th style="padding: 5px; border: 1px solid black;">Total</th>
         <th style="padding: 5px; border: 1px solid black;">Residual</th>
         <th style="padding: 5px; border: 1px solid black;">Past Reminders</th>
     </tr>
 % for inv in object.invoice_ids.sorted(key='invoice_date'):
-    <tr>
+    <tr style="background-color:
+        % if inv.move_type == 'out_refund':
+            LightGray
+        % endif
+    ">
         <td style="padding: 5px; border: 1px solid black;">${inv.name}</td>
         <td style="padding: 5px; border: 1px solid black;">${format_date(inv.invoice_date)}</td>
         <td style="padding: 5px; border: 1px solid black;">${inv.invoice_payment_term_id.name or ''}</td>
         <td style="padding: 5px; border: 1px solid black;">${format_date(inv.invoice_date_due)}</td>
         <td style="padding: 5px; border: 1px solid black;">${inv.ref or ''}</td>
+        <td style="padding: 5px; border: 1px solid black;">${dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)}</td>
@@ -55,6 +61,7 @@
 % endfor
 % for (currency, total_residual) in object.total_residual():
     <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
