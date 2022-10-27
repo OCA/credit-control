@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-04-12 17:05+0000\n"
+"PO-Revision-Date: 2022-10-27 18:43+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: sale_financial_risk_info
 #: model:ir.model,name:sale_financial_risk_info.model_res_partner
@@ -47,12 +47,12 @@ msgstr "Informazioni sul rischio"
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Rischio rimanente (%)"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Rischio rimanente (valore)"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__risk_percent_warning
