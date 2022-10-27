@@ -7,6 +7,9 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
+    openupgrade.lift_constraints(
+        env.cr, "account_invoice_overdue_reminder", "invoice_id"
+    )
     openupgrade.rename_columns(
         env.cr, {"account_invoice_overdue_reminder": [("invoice_id", None)]}
     )
