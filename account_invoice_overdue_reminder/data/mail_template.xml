@@ -30,18 +30,24 @@
         <th style="padding: 5px; border: 1px solid black;">Payment Terms</th>
         <th style="padding: 5px; border: 1px solid black;">Due Date</th>
         <th style="padding: 5px; border: 1px solid black;">Order Ref.</th>
+        <th style="padding: 5px; border: 1px solid black;">Type</th>
         <th style="padding: 5px; border: 1px solid black;">Total Untaxed</th>
         <th style="padding: 5px; border: 1px solid black;">Total</th>
         <th style="padding: 5px; border: 1px solid black;">Residual</th>
         <th style="padding: 5px; border: 1px solid black;">Past Reminders</th>
     </tr>
 % for inv in object.invoice_ids.sorted(key='date_invoice'):
-    <tr>
+    <tr style="background-color:
+        % if inv.type == 'out_refund':
+            LightGray
+        % endif
+    ">
         <td style="padding: 5px; border: 1px solid black;">${inv.number}</td>
         <td style="padding: 5px; border: 1px solid black;">${format_date(inv.date_invoice)}</td>
         <td style="padding: 5px; border: 1px solid black;">${inv.payment_term_id.name or ''}</td>
         <td style="padding: 5px; border: 1px solid black;">${format_date(inv.date_due)}</td>
         <td style="padding: 5px; border: 1px solid black;">${inv.name or ''}</td>
+        <td style="padding: 5px; border: 1px solid black;">${dict(inv.fields_get(allfields=['type'])['type']['selection'])[inv.type]}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>
         <td style="padding: 5px; border: 1px solid black; text-align: right;">${format_amount(inv.residual_signed, inv.currency_id)}</td>
@@ -50,6 +56,7 @@
 % endfor
 % for (currency, total_residual) in object.total_residual():
     <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

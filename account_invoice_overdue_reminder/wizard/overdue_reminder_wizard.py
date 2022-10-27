@@ -86,7 +86,7 @@ class OverdueReminderStart(models.TransientModel):
     def _prepare_base_domain(self):
         base_domain = [
             ('company_id', '=', self.company_id.id),
-            ('type', '=', 'out_invoice'),
+            ('type', 'in', ['out_invoice', 'out_refund']),
             ('state', '=', 'open'),
             ('no_overdue_reminder', '=', False),
             ]
