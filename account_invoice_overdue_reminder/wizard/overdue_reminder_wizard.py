@@ -373,10 +373,6 @@ class OverdueReminderStep(models.TransientModel):
     warn_unreconciled_move_line_ids = fields.Many2many(
         "account.move.line", string="Unreconciled Payments/Refunds", readonly=True
     )
-    unreconciled_move_line_normal = fields.Boolean(
-        string="To check if unreconciled payments/refunds above have a good "
-        "reason not to be reconciled with an open invoice"
-    )
     interface = fields.Char(readonly=True)
     state = fields.Selection(
         [
@@ -502,21 +498,6 @@ class OverdueReminderStep(models.TransientModel):
                         "User company is different from action company. "
                         "This should never happen."
                     )
-                )
-            if (
-                rec.warn_unreconciled_move_line_ids
-                and not rec.unreconciled_move_line_normal
-            ):
-                raise UserError(
-                    _(
-                        "Customer '%s' has unreconciled payments/refunds. "
-                        "You should reconcile these payments/refunds and start the "
-                        "overdue remind process again "
-                        "(or check the option to confirm that these unreconciled "
-                        "payments/refunds have a good reason not to be "
-                        "reconciled with an open invoice)."
-                    )
-                    % rec.commercial_partner_id.display_name
                 )
 
     def validate(self):
