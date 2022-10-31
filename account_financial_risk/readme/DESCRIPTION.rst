@@ -6,3 +6,6 @@ unless you are authorized (Account Billing Manager group).
 You can click in risk amount to view amount origin.
 
 .. figure:: ../static/description/financial_risk_click.png
+
+When a non-zero credit limit is set, the last modification date is saved and
+displayed next to the credit limit.

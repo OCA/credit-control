@@ -309,6 +309,12 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
+msgid "Last Credit Limit Date"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
