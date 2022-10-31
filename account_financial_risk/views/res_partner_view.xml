@@ -186,12 +186,22 @@
                             options="{'no_create': True}"
                             attrs="{'readonly': [('risk_allow_edit', '=', False)], 'invisible': [('credit_currency', '!=', 'manual')]}"
                         />
-                        <field
-                            name="credit_limit"
-                            widget="monetary"
-                            options="{'currency_field': 'risk_currency_id'}"
-                            attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
-                        />
+                        <label for="credit_limit" />
+                        <div class="o_row">
+                            <field
+                                name="credit_limit"
+                                widget="monetary"
+                                options="{'currency_field': 'risk_currency_id'}"
+                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                            />
+                            <span
+                                attrs="{'invisible': [('date_credit_limit', '=', False)]}"
+                            >
+                                (
+                            <field name="date_credit_limit" widget="date" nolabel="1" />
+                                )
+                            </span>
+                        </div>
                         <field
                             name="credit_policy"
                             attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
