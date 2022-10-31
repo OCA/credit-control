@@ -1,6 +1,8 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
@@ -145,6 +147,19 @@ class ResPartner(models.Model):
     risk_currency_id = fields.Many2one(
         comodel_name="res.currency", compute="_compute_credit_currency"
     )
+    date_credit_limit = fields.Date(
+        compute="_compute_date_credit_limit",
+        store=True,
+        readonly=False,
+        string="Last Credit Limit Date",
+    )
+
+    @api.depends("credit_limit")
+    def _compute_date_credit_limit(self):
+        self.filtered(lambda x: x.credit_limit == 0.00).date_credit_limit = False
+        self.filtered(
+            lambda x: x.credit_limit != 0.00
+        ).date_credit_limit = datetime.today()
 
     @api.depends(
         "credit_currency",

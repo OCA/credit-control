@@ -34,6 +34,9 @@ You can click in risk amount to view amount origin.
 
 .. figure:: https://raw.githubusercontent.com/OCA/credit-control/15.0/account_financial_risk/static/description/financial_risk_click.png
 
+When a non-zero credit limit is set, the last modification date is saved and
+displayed next to the credit limit.
+
 **Table of contents**
 
 .. contents::
