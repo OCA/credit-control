@@ -194,13 +194,17 @@
                                 options="{'currency_field': 'risk_currency_id'}"
                                 attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
                             />
-                            <span
+                            <div
                                 attrs="{'invisible': [('date_credit_limit', '=', False)]}"
                             >
-                                (
-                            <field name="date_credit_limit" widget="date" nolabel="1" />
-                                )
-                            </span>
+                                <span class="oe_read_only">(</span>
+                                <field
+                                    name="date_credit_limit"
+                                    widget="date"
+                                    nolabel="1"
+                                />
+                                <span class="oe_read_only">)</span>
+                            </div>
                         </div>
                         <field
                             name="credit_policy"
