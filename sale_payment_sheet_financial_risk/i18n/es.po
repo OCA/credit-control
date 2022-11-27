@@ -32,7 +32,9 @@ msgstr "Deducir hoja de pago de ventas"
 #: model:ir.model.fields,help:sale_payment_sheet_financial_risk.field_res_partner__risk_sale_payment_sheet_include
 #: model:ir.model.fields,help:sale_payment_sheet_financial_risk.field_res_users__risk_sale_payment_sheet_include
 msgid "Deduct pending payments in each field depending of sheet invoice status"
-msgstr "Deducir pagos pendientes en cada campo dependiendo del tipo de deuda de la factura informada en la hoja de pagos"
+msgstr ""
+"Deducir pagos pendientes en cada campo dependiendo del tipo de deuda de la "
+"factura informada en la hoja de pagos"
 
 #. module: sale_payment_sheet_financial_risk
 #: model:ir.model.fields,field_description:sale_payment_sheet_financial_risk.field_res_partner__risk_sale_payment_sheet_limit
@@ -66,8 +68,11 @@ msgstr "Establece 0 si no está bloqueado"
 #. module: sale_payment_sheet_financial_risk
 #: model:ir.model.fields,help:sale_payment_sheet_financial_risk.field_res_partner__risk_sale_payment_sheet_info
 #: model:ir.model.fields,help:sale_payment_sheet_financial_risk.field_res_users__risk_sale_payment_sheet_info
-msgid "Sheet payment amounts grouped by reduce field (amount field in brackets)"
-msgstr "Importes de la hoja de pagos agrupados por campo reducido (importe del campo entre paréntesis)"
+msgid ""
+"Sheet payment amounts grouped by reduce field (amount field in brackets)"
+msgstr ""
+"Importes de la hoja de pagos agrupados por campo reducido (importe del campo "
+"entre paréntesis)"
 
 #. module: sale_payment_sheet_financial_risk
 #: model:ir.model.fields,help:sale_payment_sheet_financial_risk.field_res_partner__risk_sale_payment_sheet
