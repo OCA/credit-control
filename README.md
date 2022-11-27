@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [sale_exception_financial_risk](sale_exception_financial_risk/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Exception financial_risk
 [sale_financial_risk](sale_financial_risk/) | 13.0.2.1.0 |  | Manage partner risk in sales orders
 [sale_financial_risk_info](sale_financial_risk_info/) | 13.0.1.0.0 |  | Adds risk consumption info in sales orders.
-[sale_payment_sheet_financial_risk](sale_payment_sheet_financial_risk/) | 13.0.1.0.0 |  | Manage partner risk in sale payment sheet
+[sale_payment_sheet_financial_risk](sale_payment_sheet_financial_risk/) | 13.0.1.1.0 |  | Manage partner risk in sale payment sheet
 [stock_financial_risk](stock_financial_risk/) | 13.0.1.0.1 |  | Manage partner risk in stock moves
 
 [//]: # (end addons)
