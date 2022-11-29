@@ -35,7 +35,7 @@
                         <field name="journal_id"/>
                         <field name="last_entry_date"/>
                         <field name="last_entry_create_date"/>
-                        <field name="last_entry_create_uid"/>
+                        <field name="last_entry_create_user_name"/>
                     </tree>
                 </field>
                 <div name="up_to_date">

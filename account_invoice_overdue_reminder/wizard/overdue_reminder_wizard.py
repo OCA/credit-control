@@ -72,7 +72,7 @@ class OverdueReminderStart(models.TransientModel):
                 'journal_id': journal.id,
                 'last_entry_date': last and last.date or False,
                 'last_entry_create_date': last and last.create_date or False,
-                'last_entry_create_uid': last and last.create_uid.id or False,
+                'last_entry_create_user_name': last and last.create_uid.sudo().name or False,
                 }
             payments.append((0, 0, vals))
         res.update({
@@ -261,8 +261,8 @@ class OverdueReminderStartPayment(models.TransientModel):
         string='Last Entry', readonly=True)
     last_entry_create_date = fields.Datetime(
         string='Last Entry Created on', readonly=True)
-    last_entry_create_uid = fields.Many2one(
-        'res.users', string='Last Entry Created by', readonly=True)
+    last_entry_create_user_name = fields.Char(
+        string='Last Entry Created by', readonly=True)
 
 
 class OverdueReminderStep(models.TransientModel):
