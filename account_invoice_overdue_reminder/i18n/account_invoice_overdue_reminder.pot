@@ -46,13 +46,14 @@ msgid ""
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Due Date</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">Type</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Total</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Residual</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</th>\n"
 "                    </tr>\n"
 "                    <t t-foreach=\"object.invoice_ids.sorted(key='invoice_date')\" t-as=\"inv\">\n"
-"                        <tr>\n"
+"                        <tr style=\"background-color:                             % if inv.move_type == 'out_refund':                                 LightGray                             % endif                         \">\n"
 "                            <td style=\"padding: 5px; border: 1px solid black;\">\n"
 "                                <t t-out=\"inv.name\"></t>\n"
 "                            </td>\n"
@@ -68,6 +69,7 @@ msgid ""
 "                            <td style=\"padding: 5px; border: 1px solid black;\">\n"
 "                                <t t-out=\"inv.ref or ''\"></t>\n"
 "                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid black;\"><t t-out=\"dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]\"></t></td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">\n"
 "                                <t t-out=\"format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)\"></t>\n"
 "                            </td>\n"
@@ -84,6 +86,7 @@ msgid ""
 "                    </t>\n"
 "                    <t t-foreach=\"object.total_residual()\" t-as=\"total_residual\">\n"
 "                        <tr>\n"
+"                            <td></td>\n"
 "                            <td></td>\n"
 "                            <td></td>\n"
 "                            <td></td>\n"
@@ -152,7 +155,9 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:0
 #, python-format
-msgid "An overdue reminder can only be attached to a customer invoice"
+msgid ""
+"An overdue reminder can only be attached to a customer invoice or credit "
+"note"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -293,14 +298,13 @@ msgid "Customer"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid ""
-"Customer '%s' has unreconciled payments/refunds. You should reconcile these "
-"payments/refunds and start the overdue remind process again (or check the "
-"option to confirm that these unreconciled payments/refunds have a good "
-"reason not to be reconciled with an open invoice)."
+"Customer has unreconciled payments/refunds. You should\n"
+"                    reconcile these payments/refunds and start the overdue\n"
+"                    reminder process again, or manually verify that these\n"
+"                    unreconciled payments/refunds have a good reason not to\n"
+"                    be reconciled with an open invoice."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -1073,13 +1077,6 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_overdue_reminder_result_name_unique
 msgid "This overdue reminder result already exists"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__unreconciled_move_line_normal
-msgid ""
-"To check if unreconciled payments/refunds above have a good reason not to be"
-" reconciled with an open invoice"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
