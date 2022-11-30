@@ -22,7 +22,7 @@ class TestSaleFinancialRiskInfo(TransactionCase):
         )
         self.default_account_revenue = self.env["account.account"].search(
             [
-                ("company_id", "=", self.env.user.company_ids[0].id),
+                ("company_id", "=", self.env.company.id),
                 (
                     "user_type_id",
                     "=",
