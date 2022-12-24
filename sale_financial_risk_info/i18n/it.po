@@ -22,24 +22,6 @@ msgid "Contact"
 msgstr "Contatto"
 
 #. module: sale_financial_risk_info
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__display_name
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__display_name
-msgid "Display Name"
-msgstr "Nome da visualizzare"
-
-#. module: sale_financial_risk_info
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__id
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__id
-msgid "ID"
-msgstr "ID"
-
-#. module: sale_financial_risk_info
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner____last_update
-#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_info
 msgid "Risk Info"
 msgstr "Informazioni sul rischio"
@@ -70,3 +52,12 @@ msgstr "Ordine di vendita"
 #, python-format
 msgid "Unlimited"
 msgstr "Illimitato"
+
+#~ msgid "Display Name"
+#~ msgstr "Nome da visualizzare"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
