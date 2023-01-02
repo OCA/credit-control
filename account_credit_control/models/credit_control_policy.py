@@ -28,8 +28,11 @@ class CreditControlPolicy(models.Model):
         comodel_name="account.account",
         string="Accounts",
         required=True,
-        domain="[('internal_type', '=', 'receivable')]",
+        domain="[('account_type', '=', 'asset_receivable')]",
         help="This policy will be active only for the selected accounts",
+        groups="account.group_account_invoice,"
+        "account.group_account_manager,"
+        "account.group_account_readonly",
     )
     active = fields.Boolean(default=True)
 
@@ -250,7 +253,11 @@ class CreditControlPolicyLevel(models.Model):
         required=True,
     )
     delay_days = fields.Integer(string="Delay (in days)", required=True)
-    email_template_id = fields.Many2one(comodel_name="mail.template", required=True)
+    email_template_id = fields.Many2one(
+        comodel_name="mail.template",
+        domain=[("model_id.model", "=", "credit.control.communication")],
+        required=True,
+    )
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     custom_mail_text = fields.Html(

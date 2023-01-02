@@ -32,11 +32,16 @@ class ResPartner(models.Model):
     credit_policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
         string="Credit Control Policy",
-        domain="[('account_ids', 'in', property_account_receivable_id)]",
+        # domain="[('account_ids', 'in', property_account_receivable_id)]",
         help="The Credit Control Policy used for this "
         "partner. This setting can be forced on the "
         "invoice. If nothing is defined, it will use "
         "the company setting.",
+        groups="account.group_account_invoice,"
+        "account.group_account_manager,"
+        "account.group_account_readonly,"
+        "account_credit_control.group_account_credit_control_manager,"
+        "account_credit_control.group_account_credit_control_user",
     )
     credit_control_count = fields.Integer(
         compute="_compute_credit_control_count", string="# of Credit Control Lines"

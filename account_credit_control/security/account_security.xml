@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data noupdate="0">
+    <data>
         <record id="category_credit_control" model="ir.module.category">
             <field name="name">Credit Control</field>
             <field name="sequence" eval="99" />
