@@ -64,12 +64,12 @@ class AccountMove(models.Model):
         Method used to return the first invoice with exception message.
         """
         ret = False, False
-        if (
-            self.env.context.get("bypass_risk", False)
-            or self.company_id.allow_overrisk_invoice_validation
-        ):
+        if self.env.context.get("bypass_risk", False):
             return ret
-        for invoice in self.filtered(lambda x: x.move_type == "out_invoice"):
+        for invoice in self.filtered(
+            lambda x: x.move_type == "out_invoice"
+            and not x.company_id.allow_overrisk_invoice_validation
+        ):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
                 ret = invoice, exception_msg
