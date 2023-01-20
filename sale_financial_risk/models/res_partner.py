@@ -39,7 +39,6 @@ class ResPartner(models.Model):
             domain=self._get_risk_sale_order_domain(),
             fields=["risk_partner_id", "company_id", "risk_amount"],
             groupby=["risk_partner_id", "company_id"],
-            orderby="id",
             lazy=False,
         )
         for group in orders_group:
