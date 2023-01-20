@@ -11,9 +11,9 @@
     "website": "https://github.com/OCA/credit-control",
     "depends": ["sale", "account_financial_risk"],
     "data": [
-        "views/res_partner_view.xml",
-        "views/sale_financial_risk_view.xml",
-        "views/res_config_settings.xml",
+        "views/res_partner_views.xml",
+        "views/sale_financial_risk_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "installable": True,
     "pre_init_hook": "pre_init_hook",
