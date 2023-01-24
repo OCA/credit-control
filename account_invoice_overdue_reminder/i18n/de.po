@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 14.0-23.01.09\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-24 09:08+0000\n"
+"PO-Revision-Date: 2023-01-24 09:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -149,8 +151,8 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,subject:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
 msgid ""
-"${object.company_id.name} - Mahnung an überfälligen Rechnungen n°${object.counter}"
-msgstr ""
+"${object.company_id.name} - Overdue invoice reminder n°${object.counter}"
+msgstr "${object.company_id.name} - Überfällige Mahnung n°${object.counter}"
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:0
@@ -352,10 +354,11 @@ msgid ""
 "option to confirm that these unreconciled payments/refunds have a good "
 "reason not to be reconciled with an open invoice)."
 msgstr ""
-"Der Kunde '%s' hat nicht abgestimmte Zahlungen/Erstattungen. Sie sollten diese "
-"Zahlungen/Erstattungen abgleichen und den Prozess der überfälligen Mahnung erneut starten "
-"(oder die Option aktivieren, um zu bestätigen, dass diese nicht abgestimmten Zahlungen/Erstattungen "
-" einen guten Grund haben, nicht mit einer offenen Rechnung abgestimmt zu werden)."
+"Der Kunde '%s' hat nicht abgestimmte Zahlungen/Erstattungen. Sie sollten "
+"diese Zahlungen/Erstattungen abgleichen und den Prozess der überfälligen "
+"Mahnung erneut starten (oder die Option aktivieren, um zu bestätigen, dass "
+"diese nicht abgestimmten Zahlungen/Erstattungen  einen guten Grund haben, "
+"nicht mit einer offenen Rechnung abgestimmt zu werden)."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__partner_ids
@@ -424,8 +427,9 @@ msgid ""
 "invoices are still unpaid. In order to avoid legal proceedings, we urge you "
 "to paid these overdue invoices in the next days."
 msgstr ""
-"Trotz mehrerer Mahnungen müssen wir feststellen, dass diese überfälligen Rechnungen "
-"immer noch nicht bezahlt wurden. Um rechtliche Schritte zu vermeiden, bitten wir Sie diese umgehend zu bezahlen."
+"Trotz mehrerer Mahnungen müssen wir feststellen, dass diese überfälligen "
+"Rechnungen immer noch nicht bezahlt wurden. Um rechtliche Schritte zu "
+"vermeiden, bitten wir Sie diese umgehend zu bezahlen."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_partner__no_overdue_reminder
@@ -506,8 +510,7 @@ msgstr "Filter"
 #, python-format
 msgid ""
 "For the reminder of customer '%s', the deadline is missing for the activity."
-msgstr ""
-"Für die Erinnerung des Kunden '%s', fehlt die Frist."
+msgstr "Für die Erinnerung des Kunden '%s', fehlt die Frist."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
@@ -515,7 +518,8 @@ msgstr ""
 msgid ""
 "For the reminder of customer '%s', you must assign someone for the activity."
 msgstr ""
-"Für die Erinnerung des Kunden '%s', müssen Sie jemanden für die Aktivität zuweisen."
+"Für die Erinnerung des Kunden '%s', müssen Sie jemanden für die Aktivität "
+"zuweisen."
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_end_form
@@ -549,7 +553,8 @@ msgid ""
 "If you made a payment for these invoices a few days ago, please ignore this "
 "letter."
 msgstr ""
-"Falls sie die Rechnungen bereits schon Bezahlt haben, sehen Sie diesen Brief als gegenstandslos an."
+"Falls sie die Rechnungen bereits schon Bezahlt haben, sehen Sie diesen Brief"
+" als gegenstandslos an."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
@@ -558,8 +563,8 @@ msgid ""
 "In order to start overdue reminders, you must make sure that customer "
 "payments are up-to-date."
 msgstr ""
-"Um Mahnungen zu starten, müssen Sie sicherstellen, dass die Zahlungen Ihrer Kunden "
-"auf den neuesten Stand sind."
+"Um Mahnungen zu starten, müssen Sie sicherstellen, dass die Zahlungen Ihrer "
+"Kunden auf den neuesten Stand sind."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__action_result_id
@@ -823,9 +828,8 @@ msgid ""
 "Minimum Delay Since Last Reminder)."
 msgstr ""
 "Odoo schlägt nicht vor, eine Mahnung an einen Kunden zu senden, der bereits "
-"vor weniger als N Tagen eine Mahnung für einige der gleichen überfälligen Rechnungen "
-"erhalten hat (N = Mindestverzögerung seit der letzten Mahnung)."
-
+"vor weniger als N Tagen eine Mahnung für einige der gleichen überfälligen "
+"Rechnungen erhalten hat (N = Mindestverzögerung seit der letzten Mahnung)."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_overdue_reminder_start__start_days
@@ -833,8 +837,9 @@ msgid ""
 "Odoo will propose to send an overdue reminder to a customer if it has at "
 "least one invoice which is overdue for more than N days (N = trigger delay)."
 msgstr ""
-"Odoo schlägt vor, eine überfällige Mahnung an einen Kunden zu senden, wenn dieser "
-"mindestens eine Rechnung hat, die seit mehr als N Tagen überfällig ist (N = Verzögerung)."
+"Odoo schlägt vor, eine überfällige Mahnung an einen Kunden zu senden, wenn "
+"dieser mindestens eine Rechnung hat, die seit mehr als N Tagen überfällig "
+"ist (N = Verzögerung)."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
@@ -922,7 +927,6 @@ msgstr "Überfällige Mahnung"
 msgid "Overdue Reminder Action"
 msgstr "Überfällige Mahnungen Aktion"
 
-
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_action
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_bank_statement_line__overdue_reminder_ids
@@ -936,7 +940,6 @@ msgstr "Überfällige Erinnerung Aktionsverlauf"
 msgid "Overdue Reminder Actions"
 msgstr "Überfällige Erinnerungsmaßnahmen"
 
-
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_bank_statement_line__overdue_reminder_counter
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_move__overdue_reminder_counter
@@ -948,7 +951,9 @@ msgstr "Anzahl der überfälligen Mahnungen"
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_min_interval_days_positive
 msgid "Overdue Reminder Minimum Interval must always be strictly positive"
-msgstr "Das Mindestzeitintervall für die Überfälligkeitserinnerung muss immer positiv sein."
+msgstr ""
+"Das Mindestzeitintervall für die Überfälligkeitserinnerung muss immer "
+"positiv sein."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_start_days_positive
@@ -1163,8 +1168,8 @@ msgid ""
 "To check if unreconciled payments/refunds above have a good reason not to be"
 " reconciled with an open invoice"
 msgstr ""
-"Um zu überprüfen, ob nicht abgestimmte Zahlungen/Erstattungen oben einen Grund haben, "
-"nicht mit einer offenen Rechnung abgestimmt zu werden."
+"Um zu überprüfen, ob nicht abgestimmte Zahlungen/Erstattungen oben einen "
+"Grund haben, nicht mit einer offenen Rechnung abgestimmt zu werden."
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
@@ -1226,7 +1231,8 @@ msgstr "BenutzerIn"
 msgid ""
 "User company is different from action company. This should never happen."
 msgstr ""
-"Das Unternehmen ist ein anderes als es für die Aktion. Dies sollte nicht sein."
+"Das Unternehmen ist ein anderes als es für die Aktion. Dies sollte nicht "
+"sein."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.mass_update_validate_action
