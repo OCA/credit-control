@@ -985,12 +985,6 @@ msgid "Reminder Type"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-#, python-format
-msgid "Report format '%s' is not supported."
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Residual"
 msgstr ""

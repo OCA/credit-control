@@ -531,16 +531,7 @@ class OverdueReminderStep(models.TransientModel):
         attachment_ids = []
         iao = self.env["ir.attachment"]
         for inv in self.invoice_ids:
-            if inv_report.report_type in ("qweb-html", "qweb-pdf"):
-                report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
-            else:
-                res = inv_report.render([inv.id])
-                if not res:
-                    raise UserError(
-                        _("Report format '%s' is not supported.")
-                        % inv_report.report_type
-                    )
-                report_bin, report_format = res
+            report_bin, report_format = inv_report._render([inv.id])
             filename = "{}.{}".format(inv._get_report_base_filename(), report_format)
             attach = iao.create(
                 {
