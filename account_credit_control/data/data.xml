@@ -59,6 +59,7 @@
 
             Best regards
         </field>
+        <field name="mail_show_invoice_detail" eval="True" />
         <field
             name="custom_mail_text"
         ><![CDATA[
@@ -88,6 +89,7 @@
 
             Best regards
         </field>
+        <field name="mail_show_invoice_detail" eval="True" />
         <field
             name="custom_mail_text"
         ><![CDATA[
@@ -119,6 +121,7 @@
 
             Best regards
         </field>
+        <field name="mail_show_invoice_detail" eval="True" />
         <field
             name="custom_mail_text"
         ><![CDATA[
@@ -155,6 +158,7 @@
 
             Best regards
         </field>
+        <field name="mail_show_invoice_detail" eval="True" />
         <field
             name="custom_mail_text"
         ><![CDATA[
@@ -188,6 +192,7 @@
 
             Best regards
         </field>
+        <field name="mail_show_invoice_detail" eval="True" />
         <field
             name="custom_mail_text"
         ><![CDATA[

@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-13 07:34+0000\n"
+"PO-Revision-Date: 2023-02-13 07:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -186,6 +188,12 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
 msgid "Allows to manually change credit level"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Amount Due"
 msgstr ""
 
 #. module: account_credit_control
@@ -655,7 +663,9 @@ msgid "Due balance"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_due
+#, python-format
 msgid "Due date"
 msgstr ""
 
@@ -668,6 +678,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__email_template_id
 msgid "Email Template"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_mail_compose_message
+msgid "Email composition wizard"
 msgstr ""
 
 #. module: account_credit_control
@@ -824,18 +839,34 @@ msgid "Invoice"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoice amount"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice date"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice number"
 msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Invoiced amount"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoices summary"
 msgstr ""
 
 #. module: account_credit_control
@@ -1567,6 +1598,11 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Set to ready all"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
+msgid "Show Invoice Details in mail"
 msgstr ""
 
 #. module: account_credit_control
