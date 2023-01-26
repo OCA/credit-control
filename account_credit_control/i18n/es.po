@@ -15,7 +15,7 @@ msgstr ""
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.3\n"
 
@@ -202,6 +202,12 @@ msgid "Allows to manually change credit level"
 msgstr "Permite cambiar manualmente el nivel de crédito"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Amount Due"
+msgstr "Importe pendiente"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr "Ha ocurrido un error durante el envío del correo electrónico."
@@ -323,9 +329,8 @@ msgstr "Modo de cálculo"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_config_settings
-#, fuzzy
 msgid "Config Settings"
-msgstr "res.config.settings"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_partner
@@ -700,7 +705,9 @@ msgid "Due balance"
 msgstr "Saldo vencido"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_due
+#, python-format
 msgid "Due date"
 msgstr "Fecha de vencimiento"
 
@@ -714,6 +721,11 @@ msgstr "Correo electrónico"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__email_template_id
 msgid "Email Template"
 msgstr "Plantilla de correo"
+
+#. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__email_error
@@ -866,12 +878,22 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoice amount"
+msgstr "Importe factura"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice date"
 msgstr "Fecha de factura"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice number"
 msgstr "Nº de factura"
 
@@ -879,6 +901,12 @@ msgstr "Nº de factura"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Invoiced amount"
 msgstr "Importe facturado"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoices summary"
+msgstr "Resumen de facturas"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_is_follower
@@ -1068,7 +1096,6 @@ msgstr "Marcar como"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__mark_as_sent
-#, fuzzy
 msgid "Mark letter lines as done"
 msgstr "Marcar líneas de carta como enviadas"
 
@@ -1337,6 +1364,15 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Nuestros registros indica de que no hemos recibido todavía el pago de las "
+"facturas encionadas en el documento adjuntado a pesar de nuestro primer "
+"aviso.<br>\n"
+"  si ya lo ha enviado, por favor ignore este aviso. si no, por favor proceda "
+"con el pagamiento en un término de 5 dias.<br>\n"
+"  gracias por adelantado por su participacion anticipada en este asunto."
+"<br>\n"
+"  <br>\n"
+"  Saludos coordiales"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1652,6 +1688,11 @@ msgid "Set to ready all"
 msgstr "Establecer el nivel de crédito actual"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
+msgid "Show Invoice Details in mail"
+msgstr "Mostrar detalles de la factura en el correo electrónico"
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__run_id
 msgid "Source"
 msgstr "Origen"
@@ -1732,11 +1773,8 @@ msgstr "El menor nivel no puede ser de tipo Recordatorio previo"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-#, fuzzy
 msgid "These lines are to do using the Actions."
 msgstr ""
-"Estas líneas están disponibles para ser enviadas por correo electrónico o "
-"por carta usando las acciones."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1861,60 +1899,3 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
-
-#~ msgid ""
-#~ "\n"
-#~ "  Dear ${object.contact_address.name or ''}\n"
-#~ "  <br/>\n"
-#~ "  <br/>\n"
-#~ "  ${object.current_policy_level.custom_mail_text | safe}\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "  Estimado/a ${object.contact_address.name or ''}\n"
-#~ "  <br/>\n"
-#~ "  <br/>\n"
-#~ "  ${object.current_policy_level.custom_mail_text | safe}\n"
-#~ "  "
-
-#, fuzzy
-#~ msgid "Control Lines"
-#~ msgstr "Líneas de control de crédito"
-
-#~ msgid ""
-#~ "Credit Control:\n"
-#~ "            (${object.current_policy_level.name or 'n/a'})\n"
-#~ "        "
-#~ msgstr ""
-#~ "Control de crédito:\n"
-#~ "            (${object.current_policy_level.name or 'n/a'})\n"
-#~ "        "
-
-#~ msgid "Sent Email"
-#~ msgstr "Correo electrónico enviado"
-
-#, fuzzy
-#~| msgid "Overdue Level"
-#~ msgid "Overdue"
-#~ msgstr "Nivel de retraso"
-
-#~ msgid "The optional other currency if it is a multi-currency entry."
-#~ msgstr "La otra moneda opcional si es un asiento multi-moneda."
-
-#~ msgid "Ready To Send"
-#~ msgstr "Listo para ser enviado"
-
-#~ msgid "Sent"
-#~ msgstr "Enviado"
-
-#~ msgid "Sent date"
-#~ msgstr "Fecha de envío"
-
-#~ msgid "Follow-up"
-#~ msgstr "Seguimiento"
-
-#~ msgid "credit.control.policy.changer"
-#~ msgstr "credit.control.policy.changer"
-
-#~ msgid "Open Credit Control Lines"
-#~ msgstr "Abrir líneas de control de crédito"
