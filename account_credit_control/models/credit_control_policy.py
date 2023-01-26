@@ -257,6 +257,7 @@ class CreditControlPolicyLevel(models.Model):
     )
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
+    mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
     custom_mail_text = fields.Html(
         string="Custom Mail Message", required=True, translate=True
     )
