@@ -54,6 +54,10 @@
                                             />
                                             <newline />
                                             <field
+                                                name="mail_show_invoice_detail"
+                                                attrs="{'invisible': [('channel', '!=', 'email')]}"
+                                            />
+                                            <field
                                                 name="custom_mail_text"
                                                 colspan="4"
                                             />
