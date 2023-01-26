@@ -2,8 +2,10 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # Copyright 2020 Manuel Calero - Tecnativa
+# Copyright 2023 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.tools.misc import format_amount, format_date
 
 
 class CreditControlCommunication(models.Model):
@@ -173,9 +175,44 @@ class CreditControlCommunication(models.Model):
         comms._onchange_partner_id()
         return comms
 
+    def _get_credit_control_communication_table(self):
+        th_style = "padding: 5px; border: 1px solid black;"
+        tr_content = "<th style='%s'>%s</th>" % (th_style, _("Invoice number"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice date"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Due date"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice amount"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Amount Due"))
+        table_style = "border-spacing: 0; border-collapse: collapse; width: 100%;"
+        table_style += "text-align: center;"
+        table_content = "<br/><h3>%s</h3>" % _("Invoices summary")
+        table_content += "<table style='%s'><tr>%s</tr>" % (table_style, tr_content)
+        for line in self.credit_control_line_ids:
+            tr_content = "<td style='%s'>%s</td>" % (th_style, line.invoice_id.name)
+            tr_content += "<td style='%s'>%s</td>" % (
+                th_style,
+                format_date(self.env, line.invoice_id.invoice_date),
+            )
+            tr_content += "<td style='%s'>%s</td>" % (
+                th_style,
+                format_date(self.env, line.date_due),
+            )
+            tr_content += "<td style='%s'>%s</td>" % (
+                th_style,
+                format_amount(self.env, line.invoice_id.amount_total, line.currency_id),
+            )
+            tr_content += "<td style='%s'>%s</td>" % (
+                th_style,
+                format_amount(self.env, line.amount_due, line.currency_id),
+            )
+            table_content += "<tr>%s</tr>" % tr_content
+        table_content += "</table>"
+        return table_content
+
     def _generate_emails(self):
         """Generate email message using template related to level"""
         for comm in self:
+            if comm.policy_level_id.mail_show_invoice_detail:
+                comm = comm.with_context(inject_credit_control_communication_table=True)
             comm.message_post_with_template(
                 comm.policy_level_id.email_template_id.id,
                 composition_mode="mass_post",
