@@ -16,20 +16,25 @@ class ResPartner(models.Model):
         comodel_name="account.move.line",
         inverse_name="partner_id",
         string="Account Moves",
+        groups="account.group_account_manager",
     )
     risk_invoice_draft_include = fields.Boolean(
-        string="Include Draft Invoices", help="Full risk computation"
+        string="Include Draft Invoices",
+        help="Full risk computation",
+        groups="account.group_account_manager",
     )
     risk_invoice_draft_limit = fields.Monetary(
         string="Limit In Draft Invoices",
         currency_field="risk_currency_id",
         help="Set 0 if it is not locked",
+        groups="account.group_account_manager",
     )
     risk_invoice_draft = fields.Monetary(
         compute="_compute_risk_account_amount",
         string="Total Draft Invoices",
         currency_field="risk_currency_id",
         help="Total amount of invoices in Draft or Pro-forma state",
+        groups="account.group_account_manager",
     )
     risk_invoice_open_include = fields.Boolean(
         string="Include Open Invoices/Principal Balance",
@@ -37,11 +42,13 @@ class ResPartner(models.Model):
         "Residual amount of move lines not reconciled with the same "
         "account that is set as partner receivable and date maturity "
         "not exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_invoice_open_limit = fields.Monetary(
         string="Limit In Open Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Set 0 if it is not locked",
+        groups="account.group_account_manager",
     )
     risk_invoice_open = fields.Monetary(
         compute="_compute_risk_account_amount",
@@ -50,6 +57,7 @@ class ResPartner(models.Model):
         help="Residual amount of move lines not reconciled with the same "
         "account that is set as partner receivable and date maturity "
         "not exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_invoice_unpaid_include = fields.Boolean(
         string="Include Unpaid Invoices/Principal Balance",
@@ -57,11 +65,13 @@ class ResPartner(models.Model):
         "Residual amount of move lines not reconciled with the same "
         "account that is set as partner receivable and date maturity "
         "exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_invoice_unpaid_limit = fields.Monetary(
         string="Limit In Unpaid Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Set 0 if it is not locked",
+        groups="account.group_account_manager",
     )
     risk_invoice_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
@@ -70,6 +80,7 @@ class ResPartner(models.Model):
         help="Residual amount of move lines not reconciled with the same "
         "account that is set as partner receivable and date maturity "
         "exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_account_amount_include = fields.Boolean(
         string="Include Other Account Open Amount",
@@ -77,11 +88,13 @@ class ResPartner(models.Model):
         "Residual amount of move lines not reconciled with distinct "
         "account that is set as partner receivable and date maturity "
         "not exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_account_amount_limit = fields.Monetary(
         string="Limit Other Account Open Amount",
         currency_field="risk_currency_id",
         help="Set 0 if it is not locked",
+        groups="account.group_account_manager",
     )
     risk_account_amount = fields.Monetary(
         compute="_compute_risk_account_amount",
@@ -90,6 +103,7 @@ class ResPartner(models.Model):
         help="Residual amount of move lines not reconciled with distinct "
         "account that is set as partner receivable and date maturity "
         "not exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_account_amount_unpaid_include = fields.Boolean(
         string="Include Other Account Unpaid Amount",
@@ -102,6 +116,7 @@ class ResPartner(models.Model):
         string="Limit Other Account Unpaid Amount",
         currency_field="risk_currency_id",
         help="Set 0 if it is not locked",
+        groups="account.group_account_manager",
     )
     risk_account_amount_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
@@ -110,26 +125,32 @@ class ResPartner(models.Model):
         help="Residual amount of move lines not reconciled with distinct "
         "account that is set as partner receivable and date maturity "
         "exceeded, considering Due Margin set in account settings.",
+        groups="account.group_account_manager",
     )
     risk_total = fields.Monetary(
         compute="_compute_risk_exception",
         string="Total Risk",
         currency_field="risk_currency_id",
         help="Sum of total risk included",
+        groups="account.group_account_manager",
     )
     risk_exception = fields.Boolean(
         compute="_compute_risk_exception",
         search="_search_risk_exception",
         help="It Indicate if partner risk exceeded",
+        groups="account.group_account_manager",
     )
     risk_amount_exceeded = fields.Monetary(
         string="Risk Over Limit",
         currency_field="risk_currency_id",
         compute="_compute_risk_exception",
+        groups="account.group_account_manager",
     )
-    credit_policy = fields.Char()
-    risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
-    credit_limit = fields.Float(tracking=True)
+    credit_policy = fields.Char(groups="account.group_account_manager")
+    risk_allow_edit = fields.Boolean(
+        compute="_compute_risk_allow_edit", groups="account.group_account_manager"
+    )
+    credit_limit = fields.Float(tracking=True, groups="account.group_account_manager")
     credit_currency = fields.Selection(
         selection=[
             ("company", "Company Currency"),
@@ -139,31 +160,38 @@ class ResPartner(models.Model):
         ],
         default="company",
         tracking=True,
+        groups="account.group_account_manager",
     )
     manual_credit_currency_id = fields.Many2one(
         comodel_name="res.currency",
         string="Manual Credit Currency",
+        groups="account.group_account_manager",
     )
     risk_currency_id = fields.Many2one(
-        comodel_name="res.currency", compute="_compute_credit_currency"
+        comodel_name="res.currency",
+        compute="_compute_credit_currency",
+        groups="account.group_account_manager",
     )
     date_credit_limit = fields.Date(
         compute="_compute_date_credit_limit",
         store=True,
         readonly=False,
         string="Last Credit Limit Date",
+        groups="account.group_account_manager",
     )
     risk_remaining_value = fields.Monetary(
         compute="_compute_risk_remaining",
         string="Risk Remaining (Value)",
         currency_field="risk_currency_id",
         store=True,
+        groups="account.group_account_manager",
     )
 
     risk_remaining_percentage = fields.Float(
         compute="_compute_risk_remaining",
         string="Risk Remaining (Percentage)",
         store=True,
+        groups="account.group_account_manager",
     )
 
     @api.depends("credit_limit")
@@ -282,7 +310,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "receivable"),
                     ("parent_state", "in", ["draft", "proforma", "proforma2"]),
                 ],
                 "fields": fields,
@@ -292,7 +320,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "receivable"),
                     "|",
                     "&",
                     ("date_maturity", "!=", False),
@@ -309,7 +337,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "receivable"),
                     "|",
                     "&",
                     ("date_maturity", "!=", False),
