@@ -23,7 +23,7 @@ Account Financial Risk
     :target: https://runbot.odoo-community.org/runbot/262/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 Adds a new page in partner to manage its *Financial Risk*.
 
@@ -120,7 +120,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-carlosdauden| 
+|maintainer-carlosdauden|
 
 This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/15.0/account_financial_risk>`_ project on GitHub.
 
