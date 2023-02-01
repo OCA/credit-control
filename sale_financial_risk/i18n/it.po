@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
-"PO-Revision-Date: 2022-10-13 12:35+0000\n"
+"PO-Revision-Date: 2023-02-01 16:48+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__commercial_partner_id
@@ -97,7 +97,7 @@ msgstr "Righe ordini"
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Righe Ordini vendita"
+msgstr "Riga ordine di vendita"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,help:sale_financial_risk.field_res_partner__risk_sale_order_limit
