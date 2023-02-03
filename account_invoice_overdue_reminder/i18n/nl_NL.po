@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-02-02 14:45+0000\n"
+"PO-Revision-Date: 2023-02-03 12:45+0000\n"
 "Last-Translator: Gijs-Jan Otten <gj@sunflowerweb.nl>\n"
 "Language-Team: none\n"
 "Language: nl_NL\n"
@@ -103,8 +103,8 @@ msgstr ""
 "        <th style=\"padding: 5px; border: 1px solid black;\">Vervaldatum</th>"
 "\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Orderref.</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Subtotaal "
-"onbelast</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Exclusief "
+"BTW</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Totaal</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Resterend</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Aantal "
@@ -318,7 +318,7 @@ msgstr "Contact"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__overdue_reminder_partner_policy
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_partner_policy
 msgid "Contact to Remind"
-msgstr "Te herinneren contact"
+msgstr "Herinneringsbeleid"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__counter
@@ -362,7 +362,7 @@ msgstr "Aangemaakt op"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid "Current Remind Counter"
-msgstr "Huidige herinneringsteller"
+msgstr "Huidig aantal herinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__action_commercial_partner_id
@@ -391,7 +391,7 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__partner_ids
 msgid "Customers"
-msgstr "Klanten"
+msgstr "Klant(en)"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__action_date
@@ -680,7 +680,7 @@ msgstr "Facturen"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__partner_id
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid "Invoicing Contact"
-msgstr "Factureringscontact"
+msgstr "Factuuradres"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start_payment__journal_id
@@ -824,7 +824,7 @@ msgstr "Naam"
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__counter
 msgid "New Remind Counter"
-msgstr "Nieuwe herinneringsteller"
+msgstr "Volgende aantal herinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_mass_update__reminder_type
@@ -856,7 +856,7 @@ msgid ""
 msgstr ""
 "Odoo zal niet voorstellen om een herinnering te sturen naar een klant die "
 "minder dan N dagen geleden al een herinnering heeft ontvangen voor (een "
-"aantal van) dezelfde, achterstallige facturen(N = Minimale vertraging sinds "
+"aantal van) dezelfde, achterstallige facturen (N = Minimale vertraging sinds "
 "laatste herinnering)."
 
 #. module: account_invoice_overdue_reminder
@@ -911,22 +911,22 @@ msgstr "Einde achterstallige facturen"
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.overdue_reminder_start_action
 #: model:ir.ui.menu,name:account_invoice_overdue_reminder.overdue_reminder_start_menu
 msgid "Overdue Invoice Remind"
-msgstr "Herinnering achterstallige facturen"
+msgstr "Betalingsherinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "Overdue Invoice Reminder"
-msgstr "Herinnering achterstallige factuur"
+msgstr "Betalingsherinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_account_invoice_overdue_reminder
 msgid "Overdue Invoice Reminder Action History"
-msgstr "Actiehistorie herinnering achterstallige factuur"
+msgstr "Actiehistorie betalingsherinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_result
 msgid "Overdue Invoice Reminder Result/Info"
-msgstr "Resultaten/info herinnering achterstallige factuur"
+msgstr "Resultaten/info betalingsherinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.overdue_reminder_step_mass_action
@@ -948,12 +948,12 @@ msgstr "Achterstallige brief"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_move_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_partner_property_form
 msgid "Overdue Reminder"
-msgstr "Achterstallige herinnering"
+msgstr "Betalingsherinnering"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__action_id
 msgid "Overdue Reminder Action"
-msgstr "Actie achterstallige herinnering"
+msgstr "Actie betalingsherinnering"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_action
@@ -961,12 +961,12 @@ msgstr "Actie achterstallige herinnering"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_move__overdue_reminder_ids
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_payment__overdue_reminder_ids
 msgid "Overdue Reminder Action History"
-msgstr "Actiehistorie achterstallige herinnering"
+msgstr "Actiehistorie betalingsherinnering"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.action_overdue_reminder_action
 msgid "Overdue Reminder Actions"
-msgstr "Acties achterstallige herinnering"
+msgstr "Acties betalingsherinnering"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_bank_statement_line__overdue_reminder_counter
@@ -974,23 +974,22 @@ msgstr "Acties achterstallige herinnering"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_payment__overdue_reminder_counter
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_invoice_filter
 msgid "Overdue Reminder Count"
-msgstr "Aantal achterstallige herinneringen"
+msgstr "Aantal betalingsherinneringen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_min_interval_days_positive
 msgid "Overdue Reminder Minimum Interval must always be strictly positive"
-msgstr "Minimuminterval achterstallige herinneringen moet strikt positief zijn"
+msgstr "Minimuminterval betalingsherinneringen moet strikt positief zijn"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.constraint,message:account_invoice_overdue_reminder.constraint_res_company_overdue_reminder_start_days_positive
 msgid "Overdue Reminder Trigger Delay must always be positive"
-msgstr ""
-"Triggervertraging achterstallige herinneringen moet altijd positief zijn"
+msgstr "Triggervertraging betalingsherinneringen moet altijd positief zijn"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_step
 msgid "Overdue reminder wizard step"
-msgstr "Wizardstap achterstallige herinnering"
+msgstr "Wizardstap betalingsherinnering"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
@@ -1015,7 +1014,7 @@ msgstr "Betaling verzonden"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_start_form
 msgid "Payments up-to-date ?"
-msgstr "Betalingn up-to-date ?"
+msgstr "Betalingen up-to-date?"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__action_user_id
@@ -1089,7 +1088,7 @@ msgstr "Draai"
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__user_ids
 msgid "Salesman"
-msgstr "Verkoper"
+msgstr "Verkoper(s)"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_move_form
