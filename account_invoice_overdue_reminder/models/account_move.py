@@ -28,6 +28,7 @@ class AccountMove(models.Model):
         help="This counter is not increased in case of phone reminder.",
     )
     overdue = fields.Boolean(compute="_compute_overdue")
+    result_id = fields.Many2one("overdue.reminder.result", string="Result/Info")
 
     _sql_constraints = [
         (

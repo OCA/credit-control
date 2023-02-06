@@ -95,6 +95,44 @@
             </group>
             <group name="invoices">
                 <field name="invoice_ids" nolabel="1">
+                    <form>
+                        <sheet string="Invoice">
+                            <group col="2">
+                                <field name="partner_id"
+                                       string="Invoicing Contact"/>
+                                <field name="name"/>
+                                <field name="invoice_date"/>
+                                <field name="invoice_payment_term_id"/>
+                                <field name="invoice_date_due"/>
+                                <field name="ref" string="Order Ref"/>
+                                <field name="user_id"/>
+                                <!-- Should we display in company currency with sum or in invoice current (in this case, it should be without sum...) ?  -->
+                                <field
+                                        name="amount_untaxed_signed"
+                                        string="Tax Excluded"
+                                />
+                                <field name="amount_total_signed" string="Total"/>
+                                <field
+                                        name="amount_residual_signed"
+                                        string="Amount Due"
+                                />
+                                <field name="currency_id" invisible="1"/>
+                                <field name="company_currency_id"
+                                       invisible="1"/>
+                                <field
+                                        name="overdue_reminder_counter"
+                                        string="Current Remind Counter"
+                                />
+                                <field
+                                        name="overdue_reminder_last_date"
+                                        string="Last Reminder"
+                                />
+                                <field name="state" invisible="1"/>
+                                <field name="payment_state" invisible="1"/>
+                                <field name="result_id"/>
+                            </group>
+                        </sheet>
+                    </form>
                     <tree default_order="invoice_date">
                         <field name="partner_id" string="Invoicing Contact" />
                         <field name="name" />
@@ -127,6 +165,7 @@
                             />
                         <field name="state" invisible="1" />
                         <field name="payment_state" invisible="1" />
+                        <field name="result_id"/>
                     </tree>
                 </field>
             </group>
