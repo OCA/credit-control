@@ -42,9 +42,8 @@
                     <field name="commercial_partner_id" invisible="1" />
                     <field name="overdue" invisible="1" />
                 </group>
-                <group name="overdue_reminder_lines">
-                    <field name="overdue_reminder_ids" nolabel="1" />
-                </group>
+
+                <field name="overdue_reminder_ids" nolabel="1" />
             </page>
         </notebook>
     </field>

@@ -12,40 +12,42 @@
     <field name="model">account.invoice.overdue.reminder</field>
     <field name="arch" type="xml">
         <form>
-            <group name="main">
-                <field
-                        name="counter"
-                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
-                    />
-                <field
-                        name="action_commercial_partner_id"
-                        invisible="not context.get('overdue_reminder_main_view')"
-                    />
-                <field name="action_partner_id" context="{'show_email': True}" />
-                <field
-                        name="invoice_id"
-                        invisible="not context.get('overdue_reminder_main_view')"
-                    />
-                <field name="action_date" />
-                <field name="action_user_id" />
-                <field name="action_reminder_type" />
-                <field
-                        name="action_mail_id"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
-                    />
-                <field
-                        name="action_mail_cc"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
-                    />
-                <field
-                        name="action_mail_state"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
-                    />
-            </group>
-            <group string="Info/Result" name="result">
-                <field name="action_result_id" widget="selection" />
-                <field name="action_result_notes" string="Notes" />
-            </group>
+            <sheet>
+                <group name="main">
+                    <field
+                            name="counter"
+                            attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
+                        />
+                    <field
+                            name="action_commercial_partner_id"
+                            invisible="not context.get('overdue_reminder_main_view')"
+                        />
+                    <field name="action_partner_id" context="{'show_email': True}" />
+                    <field
+                            name="invoice_id"
+                            invisible="not context.get('overdue_reminder_main_view')"
+                        />
+                    <field name="action_date" />
+                    <field name="action_user_id" />
+                    <field name="action_reminder_type" />
+                    <field
+                            name="action_mail_id"
+                            attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        />
+                    <field
+                            name="action_mail_cc"
+                            attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        />
+                    <field
+                            name="action_mail_state"
+                            attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        />
+                </group>
+                <group string="Info/Result" name="result">
+                    <field name="action_result_id" widget="selection" />
+                    <field name="action_result_notes" string="Notes" />
+                </group>
+            </sheet>
         </form>
     </field>
 </record>
@@ -56,14 +58,16 @@
     <field name="priority">100</field>
     <field name="arch" type="xml">
         <form>
-            <group name="main">
-                <field name="invoice_id" />
-                <field name="action_reminder_type" invisible="1" />
-                <field
-                        name="counter"
-                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
-                    />
-            </group>
+            <sheet>
+                <group name="main">
+                    <field name="invoice_id" />
+                    <field name="action_reminder_type" invisible="1" />
+                    <field
+                            name="counter"
+                            attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
+                        />
+                </group>
+            </sheet>
         </form>
     </field>
 </record>

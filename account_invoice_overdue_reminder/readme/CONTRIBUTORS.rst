@@ -1,2 +1,2 @@
 * Alexis de Lattre <alexis.delattre@akretion.com>
-* Kevin kamau <kevkamaa96@gmail.com>
+* Kevin Kamau <kevkamaa96@gmail.com>
