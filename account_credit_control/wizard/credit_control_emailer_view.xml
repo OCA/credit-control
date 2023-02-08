@@ -35,7 +35,7 @@
         <field name="name">Send By Email</field>
         <field name="res_model">credit.control.emailer</field>
         <field name="binding_model_id" ref="model_credit_control_line" />
-        <field name="binding_view_types">form</field>
+        <field name="binding_view_types">form,list</field>
         <field name="target">new</field>
         <field name="view_mode">form</field>
     </record>
