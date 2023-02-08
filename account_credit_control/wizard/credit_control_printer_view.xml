@@ -31,16 +31,16 @@
     <!-- for menu -->
 
 
-            <record
+    <record
         id="open_credit_line_printer_wizard_menu_action"
         model="ir.actions.act_window"
     >
         <field name="name">Print Lines</field>
         <field name="res_model">credit.control.printer</field>
         <field name="binding_model_id" ref="model_credit_control_line" />
-        <field name="binding_view_types">form</field>
-            <field name="target">new</field>
-                <field name="view_mode">form</field>
+        <field name="binding_view_types">form,list</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
     </record>
 
     <record id="open_credit_line_printer_wizard" model="ir.actions.act_window">
