@@ -250,7 +250,11 @@ class CreditControlPolicyLevel(models.Model):
         required=True,
     )
     delay_days = fields.Integer(string="Delay (in days)", required=True)
-    email_template_id = fields.Many2one(comodel_name="mail.template", required=True)
+    email_template_id = fields.Many2one(
+        comodel_name="mail.template",
+        domain=[("model_id.model", "=", "credit.control.communication")],
+        required=True,
+    )
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     custom_mail_text = fields.Html(
