@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Account Credit Control",
-    "version": "15.0.1.1.0",
+    "version": "15.0.1.1.1",
     "author": "Camptocamp,"
     "Odoo Community Association (OCA),"
     "Okia,"
