@@ -114,6 +114,7 @@ Contributors
   * Pedro M. Baeza
   * Jairo Llopis
   * João Marques
+  * Víctor Martínez
 
 * Enric Tobella <etobella@creublanca.es>
 * Naglis Jonaitis (Versada UAB) <naglis@versada.eu>
