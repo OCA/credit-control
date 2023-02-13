@@ -618,9 +618,11 @@ class OverdueRemindMassUpdate(models.TransientModel):
         actions = self.env['overdue.reminder.step'].browse(
             self._context.get('active_ids'))
         if self.update_action == 'validate':
-            actions.validate()
+            for action in actions:
+                action.validate()
         elif self.update_action == 'skip':
-            actions.skip()
+            for action in actions:
+                action.skip()
         elif self.update_action == 'reminder_type':
             if not self.reminder_type:
                 raise UserError(_("You must select the new reminder type."))
