@@ -206,6 +206,12 @@ msgid "Allows to manually change credit level"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Amount Due"
+msgstr ""
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr ""
@@ -605,6 +611,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_message__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company__display_name
@@ -674,7 +681,9 @@ msgid "Due balance"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_due
+#, python-format
 msgid "Due date"
 msgstr ""
 
@@ -687,6 +696,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__email_template_id
 msgid "Email Template"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_mail_compose_message
+msgid "Email composition wizard"
 msgstr ""
 
 #. module: account_credit_control
@@ -787,6 +801,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__id
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__id
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__id
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_message__id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company__id
@@ -850,12 +865,22 @@ msgid "Invoice"
 msgstr ""
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoice amount"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice date"
 msgstr "Faktura dato"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
+#, python-format
 msgid "Invoice number"
 msgstr "Faktura nummer"
 
@@ -863,6 +888,12 @@ msgstr "Faktura nummer"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Invoiced amount"
 msgstr "Beløb"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Invoices summary"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_is_follower
@@ -893,6 +924,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run____last_update
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_mail____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_mail_message____last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company____last_update
@@ -1622,6 +1654,11 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Set to ready all"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
+msgid "Show Invoice Details in mail"
 msgstr ""
 
 #. module: account_credit_control
