@@ -130,7 +130,7 @@ class ResPartner(models.Model):
             else:
                 partner["risk_account_amount"] -= sheet_line.amount
             # Set for each sheet line to avoid NewId iterable issue if fill dict
-            self.risk_sale_payment_sheet_info = partner.get_risk_sale_payment_sheet_info(
-                info_dic[partner_id]
+            self.risk_sale_payment_sheet_info = (
+                partner.get_risk_sale_payment_sheet_info(info_dic[partner_id])
             )
         return res
