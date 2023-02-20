@@ -7,8 +7,8 @@ from odoo import models
 class MailMessage(models.Model):
     _inherit = "mail.message"
 
-    def message_format(self):
-        result = super().message_format()
+    def message_format(self, format_reply=True):
+        result = super().message_format(format_reply=format_reply)
         credit_control = self.env["ir.model.data"]._xmlid_to_res_id(
             "account_credit_control.mt_request"
         )
