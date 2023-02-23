@@ -63,6 +63,7 @@
         <field name="res_model">credit.control.policy.changer</field>
         <field name="binding_model_id" ref="account.model_account_move" />
         <field name="binding_view_types">form</field>
+        <field name="view_id" ref="credit_control_policy_changer_form" />
             <field name="target">new</field>
     </record>
 
