@@ -28,7 +28,7 @@ class CreditControlPolicy(models.Model):
         comodel_name="account.account",
         string="Accounts",
         required=True,
-        domain="[('internal_type', '=', 'receivable')]",
+        domain="[('account_type', '=', 'asset_receivable')]",
         help="This policy will be active only for the selected accounts",
     )
     active = fields.Boolean(default=True)
@@ -222,6 +222,29 @@ class CreditControlPolicy(models.Model):
                 % self.name
             )
         return (manual_lines, policy_lines_generated, report)
+
+    @api.model
+    def _name_search(
+        self, name="", args=None, operator="ilike", limit=100, name_get_uid=None
+    ):
+        """Alternative implementation for domain on account, equivalent to
+        domain="[('account_ids', 'in', property_account_receivable_id)]"
+        """
+        account_receivable = self.env["account.account"].browse()
+        if self.env.context.get("account_receivable_partner_id"):
+            partner = self.env["res.partner"].browse(
+                self.env.context["account_receivable_partner_id"]
+            )
+            account_receivable = partner.property_account_receivable_id
+
+        ids = super()._name_search(name, args, operator, limit, name_get_uid)
+        policies = self.browse(ids)
+        policy_ids = []
+        if account_receivable:
+            for policy in policies:
+                if account_receivable.id in policy.account_ids.ids:
+                    policy_ids.append(policy.id)
+        return policy_ids if account_receivable else ids
 
 
 class CreditControlPolicyLevel(models.Model):
