@@ -39,7 +39,7 @@ class OverdueReminderAction(models.Model):
     result_id = fields.Many2one(
         "overdue.reminder.result", ondelete="restrict", string="Info/Result"
     )
-    result_notes = fields.Text(string="Info/Result Notes")
+    result_notes = fields.Html(string="Info/Result Notes")
     mail_id = fields.Many2one("mail.mail", string="Reminder E-mail", readonly=True)
     mail_state = fields.Selection(related="mail_id.state", string="E-mail Status")
     mail_cc = fields.Char(related="mail_id.email_cc", readonly=True)

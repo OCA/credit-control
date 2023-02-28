@@ -53,13 +53,13 @@
                             <td class="text-center">
                                 <span t-field="inv.ref" />
                             </td>
-                            <td class="text-right">
+                            <td t-attf-class="text-end">
                                 <span t-field="inv.amount_untaxed" />
                             </td>
-                            <td class="text-right">
+                            <td t-attf-class="text-end">
                                 <span t-field="inv.amount_total" />
                             </td>
-                            <td class="text-right">
+                            <td t-attf-class="text-end">
                                 <span t-field="inv.amount_residual" />
                             </td>
                             <td class="text-center">
@@ -75,7 +75,7 @@
                             <td class="text-center">
                                 Total in <span t-esc="tot[0].name" />:
                             </td>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span
                                 t-esc="tot[1]"
                                 t-options='{"widget": "monetary", "display_currency": tot[0]}'
