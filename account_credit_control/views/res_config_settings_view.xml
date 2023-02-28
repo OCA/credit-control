@@ -4,14 +4,13 @@
         <field name="name">res.config.settings.view.form.inherit.credit.control</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
-        <field
-            name="groups_id"
-            eval="[(4, ref('account_credit_control.group_account_credit_control_manager'))]"
-        />
         <field name="arch" type="xml">
             <xpath expr="//div[@id='invoicing_settings']" position="after">
                 <h2>Credit Control</h2>
-                <div class="row mt16 o_settings_container">
+                <div
+                    class="row mt16 o_settings_container"
+                    groups="account_credit_control.group_account_credit_control_manager"
+                >
                     <div
                         class="row col-md-6 o_setting_box"
                         id="credit_control_policy"
