@@ -20,8 +20,7 @@
         <field name="email_to">{{object.partner_id.email}}</field>
         <field
             name="subject"
-        >{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}
-        </field>
+        >{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}</field>
         <field name="body_html" type="html">
             <div style="margin: 0px; padding: 0px; font-size: 13px;">
                 <p>Dear customer,</p>
