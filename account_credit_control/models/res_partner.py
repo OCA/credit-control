@@ -32,7 +32,6 @@ class ResPartner(models.Model):
     credit_policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
         string="Credit Control Policy",
-        domain="[('account_ids', 'in', property_account_receivable_id)]",
         help="The Credit Control Policy used for this "
         "partner. This setting can be forced on the "
         "invoice. If nothing is defined, it will use "

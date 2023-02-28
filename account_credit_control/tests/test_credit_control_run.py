@@ -27,23 +27,21 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
 
         journal = cls.company_data["default_journal_sale"]
 
-        account_type_rec = cls.env.ref("account.data_account_type_receivable")
         account = cls.env["account.account"].create(
             {
                 "code": "TEST430001",
                 "name": "Clients (test)",
-                "user_type_id": account_type_rec.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
 
         tag_operation = cls.env.ref("account.account_tag_operating")
-        account_type_inc = cls.env.ref("account.data_account_type_revenue")
         analytic_account = cls.env["account.account"].create(
             {
                 "code": "TEST701001",
                 "name": "Ventes en Belgique (test)",
-                "user_type_id": account_type_inc.id,
+                "account_type": "income",
                 "reconcile": True,
                 "tag_ids": [(6, 0, [tag_operation.id])],
             }

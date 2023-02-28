@@ -30,23 +30,21 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         """
         journal = self.company_data["default_journal_sale"]
 
-        account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
                 "code": "TEST430",
                 "name": "Clients (test)",
-                "user_type_id": account_type_rec.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
 
         tag_operation = self.env.ref("account.account_tag_operating")
-        account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
                 "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
-                "user_type_id": account_type_inc.id,
+                "account_type": "income",
                 "reconcile": True,
                 "tag_ids": [(6, 0, [tag_operation.id])],
             }
@@ -124,23 +122,21 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         """
         journal = self.company_data["default_journal_sale"]
 
-        account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
                 "code": "TEST430",
                 "name": "Clients (test)",
-                "user_type_id": account_type_rec.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
 
         tag_operation = self.env.ref("account.account_tag_operating")
-        account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
                 "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
-                "user_type_id": account_type_inc.id,
+                "account_type": "income",
                 "reconcile": True,
                 "tag_ids": [(6, 0, [tag_operation.id])],
             }
@@ -205,23 +201,21 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         """
         journal = self.company_data["default_journal_sale"]
 
-        account_type_rec = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
                 "code": "TEST430",
                 "name": "Clients (test)",
-                "user_type_id": account_type_rec.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
 
         tag_operation = self.env.ref("account.account_tag_operating")
-        account_type_inc = self.env.ref("account.data_account_type_revenue")
         analytic_account = self.env["account.account"].create(
             {
                 "code": "TEST700",
                 "name": "Ventes en Belgique (test)",
-                "user_type_id": account_type_inc.id,
+                "account_type": "income",
                 "reconcile": True,
                 "tag_ids": [(6, 0, [tag_operation.id])],
             }
