@@ -36,7 +36,7 @@
                         <field name="last_entry_create_uid" />
                     </tree>
                 </field>
-                <div name="up_to_date">
+                <div name="up_to_date" colspan="2">
                     <field name="up_to_date" class="oe_inline" />
                     <label for="up_to_date" />
                 </div>
@@ -63,6 +63,45 @@
         parent="account.menu_finance_receivables"
     />
 
+<record id="mass_update_reminder_type_action" model="ir.actions.act_window">
+    <field name="name">Change Reminder Type</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'reminder_type'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
+<record id="mass_update_validate_action" model="ir.actions.act_window">
+    <field name="name">Validate</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'validate'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
+<record id="mass_update_skip_action" model="ir.actions.act_window">
+    <field name="name">Skip</field>
+    <field name="res_model">overdue.reminder.mass.update</field>
+    <field name="view_mode">form</field>
+    <field name="context">{'default_update_action': 'skip'}</field>
+    <field
+            name="binding_model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+    <field name="binding_view_types">list</field>
+    <field name="target">new</field>
+</record>
+
 <record id="overdue_reminder_step_form" model="ir.ui.view">
     <field name="name">overdue.reminder.step.form</field>
     <field name="model">overdue.reminder.step</field>
@@ -83,18 +122,23 @@
                     attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
                     string="WARNING: unreconciled payments/refunds"
                 >
-                <field name="warn_unreconciled_move_line_ids" nolabel="1" />
+                <field name="warn_unreconciled_move_line_ids" nolabel="1" colspan="2" />
             </group>
             <group
                     attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
                 >
-                <div name="unreconciled_move_line_normal">
+                <div name="unreconciled_move_line_normal" colspan="2">
                     <field name="unreconciled_move_line_normal" class="oe_inline" />
                     <label for="unreconciled_move_line_normal" />
                 </div>
             </group>
             <group name="invoices">
-                <field name="invoice_ids" nolabel="1">
+                <field
+                        name="invoice_ids"
+                        nolabel="1"
+                        colspan="2"
+                        context="{'form_view_ref': 'account.view_move_form', 'default_move_type': 'out_invoice'}"
+                    >
                     <tree default_order="invoice_date">
                         <field name="partner_id" string="Invoicing Contact" />
                         <field name="name" />
@@ -207,6 +251,23 @@
     <field name="model">overdue.reminder.step</field>
     <field name="arch" type="xml">
         <tree>
+            <header>
+                <button
+                        name="%(mass_update_validate_action)d"
+                        type="action"
+                        string="Validate"
+                    />
+                <button
+                        name="%(mass_update_reminder_type_action)d"
+                        type="action"
+                        string="Change Reminder Type"
+                    />
+                <button
+                        name="%(mass_update_skip_action)d"
+                        type="action"
+                        string="Skip"
+                    />
+            </header>
             <field name="commercial_partner_id" />
             <field name="partner_id" />
             <field name="counter" />
@@ -273,45 +334,6 @@
             </footer>
         </form>
     </field>
-</record>
-
-<record id="mass_update_reminder_type_action" model="ir.actions.act_window">
-    <field name="name">Change Reminder Type</field>
-    <field name="res_model">overdue.reminder.mass.update</field>
-    <field name="view_mode">form</field>
-    <field name="context">{'default_update_action': 'reminder_type'}</field>
-    <field
-            name="binding_model_id"
-            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
-        />
-    <field name="binding_view_types">list</field>
-    <field name="target">new</field>
-</record>
-
-<record id="mass_update_validate_action" model="ir.actions.act_window">
-    <field name="name">Validate</field>
-    <field name="res_model">overdue.reminder.mass.update</field>
-    <field name="view_mode">form</field>
-    <field name="context">{'default_update_action': 'validate'}</field>
-    <field
-            name="binding_model_id"
-            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
-        />
-    <field name="binding_view_types">list</field>
-    <field name="target">new</field>
-</record>
-
-<record id="mass_update_skip_action" model="ir.actions.act_window">
-    <field name="name">Skip</field>
-    <field name="res_model">overdue.reminder.mass.update</field>
-    <field name="view_mode">form</field>
-    <field name="context">{'default_update_action': 'skip'}</field>
-    <field
-            name="binding_model_id"
-            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
-        />
-    <field name="binding_view_types">list</field>
-    <field name="target">new</field>
 </record>
 
 </odoo>

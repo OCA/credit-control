@@ -39,6 +39,7 @@
                 <field
                         name="reminder_ids"
                         nolabel="1"
+                        colspan="2"
                         context="{'form_view_ref': 'account_invoice_overdue_reminder.account_invoice_overdue_reminder_norelated_form', 'tree_view_ref': 'account_invoice_overdue_reminder.account_invoice_overdue_reminder_norelated_tree'}"
                     />
             </group>

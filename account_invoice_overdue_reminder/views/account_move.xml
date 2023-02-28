@@ -43,7 +43,7 @@
                     <field name="overdue" invisible="1" />
                 </group>
                 <group name="overdue_reminder_lines">
-                    <field name="overdue_reminder_ids" nolabel="1" />
+                    <field name="overdue_reminder_ids" nolabel="1" colspan="2" />
                 </group>
             </page>
         </notebook>
