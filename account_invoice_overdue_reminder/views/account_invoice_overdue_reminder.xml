@@ -73,7 +73,10 @@
     <field name="model">account.invoice.overdue.reminder</field>
     <field name="arch" type="xml">
         <tree>
-            <field name="counter" />
+            <field
+                    name="counter"
+                    attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
+                />
             <field name="action_date" />
             <field
                     name="action_partner_id"
