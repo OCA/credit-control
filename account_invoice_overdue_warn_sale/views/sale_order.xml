@@ -14,6 +14,7 @@
                                           <div
                     class="alert alert-warning"
                     role="alert"
+                    groups="account.group_account_invoice,account.group_account_readonly"
                     attrs="{'invisible': [('overdue_invoice_count', '=', 0)]}"
                 >
                                                   The invoicing partner <field
