@@ -336,9 +336,13 @@ class OverdueReminderStep(models.TransientModel):
     mail_subject = fields.Char(string="Subject")
     mail_body = fields.Html()
     result_id = fields.Many2one("overdue.reminder.result", string="Call Result/Info")
-    result_notes = fields.Text(string="Call Notes")
+    result_notes = fields.Html(string="Call Notes")
     create_activity = fields.Boolean()
-    activity_type_id = fields.Many2one("mail.activity.type", string="Activity")
+    activity_type_id = fields.Many2one(
+        "mail.activity.type",
+        string="Activity",
+        domain=[("res_model", "in", (False, "overdue.reminder.step"))],
+    )
     activity_summary = fields.Char(string="Summary")
     activity_deadline = fields.Date("Deadline")
     activity_note = fields.Html(string="Note")
@@ -377,29 +381,30 @@ class OverdueReminderStep(models.TransientModel):
     def _reminder_type_selection(self):
         return self.env["overdue.reminder.action"]._reminder_type_selection()
 
-    @api.model
-    def create(self, vals):
-        step = super().create(vals)
-        commercial_partner = self.env["res.partner"].browse(
-            vals["commercial_partner_id"]
-        )
-        xmlid = self._get_overdue_invoice_reminder_template()
-        mail_tpl = self.env.ref(xmlid)
-        mail_tpl_lang = mail_tpl.with_context(lang=commercial_partner.lang or "en_US")
-        mail_subject = mail_tpl_lang._render_template(
-            mail_tpl_lang.subject, self._name, [step.id]
-        )[step.id]
-        mail_body = mail_tpl_lang._render_template(
-            mail_tpl_lang.body_html, self._name, [step.id], "qweb"
-        )[step.id]
-        mail_body = tools.html_sanitize(mail_body)
-        step.write(
-            {
-                "mail_subject": mail_subject,
-                "mail_body": mail_body,
-            }
-        )
-        return step
+    @api.model_create_multi
+    def create(self, vals_list):
+        steps = super().create(vals_list)
+        for step in steps:
+            commercial_partner = step.commercial_partner_id
+            xmlid = self._get_overdue_invoice_reminder_template()
+            mail_tpl = self.env.ref(xmlid)
+            mail_tpl_lang = mail_tpl.with_context(
+                lang=commercial_partner.lang or "en_US"
+            )
+            mail_subject = mail_tpl_lang._render_template(
+                mail_tpl_lang.subject, self._name, [step.id]
+            )[step.id]
+            mail_body = mail_tpl_lang._render_template(
+                mail_tpl_lang.body_html, self._name, [step.id], "qweb"
+            )[step.id]
+            mail_body = tools.html_sanitize(mail_body)
+            step.write(
+                {
+                    "mail_subject": mail_subject,
+                    "mail_body": mail_body,
+                }
+            )
+        return steps
 
     @api.onchange("reminder_type")
     def reminder_type_change(self):
@@ -475,7 +480,6 @@ class OverdueReminderStep(models.TransientModel):
         return vals
 
     def check_warnings(self):
-        self.ensure_one()
         for rec in self:
             if rec.company_id != self.env.company:
                 raise UserError(
@@ -527,20 +531,14 @@ class OverdueReminderStep(models.TransientModel):
     def _get_overdue_invoice_reminder_template(self):
         return MOD + ".overdue_invoice_reminder_mail_template"
 
-    def _get_attachment_ids(self, inv_report, mail):
+    def _get_attachment_ids(self, mail):
         attachment_ids = []
         iao = self.env["ir.attachment"]
+        iaro = self.env["ir.actions.report"]
         for inv in self.invoice_ids:
-            if inv_report.report_type in ("qweb-html", "qweb-pdf"):
-                report_bin, report_format = inv_report._render_qweb_pdf([inv.id])
-            else:
-                res = inv_report.render([inv.id])
-                if not res:
-                    raise UserError(
-                        _("Report format '%s' is not supported.")
-                        % inv_report.report_type
-                    )
-                report_bin, report_format = res
+            report_bin, report_format = iaro._render(
+                "account.report_invoice_with_payments", [inv.id]
+            )
             filename = "{}.{}".format(inv._get_report_base_filename(), report_format)
             attach = iao.create(
                 {
@@ -585,12 +583,9 @@ class OverdueReminderStep(models.TransientModel):
         )
         mvals.pop("attachment_ids", None)
         mvals.pop("attachments", None)
-        mail = self.env["mail.mail"].create(mvals)
-        inv_report = self.env["ir.actions.report"]._get_report_from_name(
-            "account.report_invoice_with_payments"
-        )
+        mail = self.env["mail.mail"].sudo().create(mvals)
         if self.company_id.overdue_reminder_attach_invoice:
-            attachment_ids = self._get_attachment_ids(inv_report, mail)
+            attachment_ids = self._get_attachment_ids(mail)
             mail.write({"attachment_ids": [(6, 0, attachment_ids)]})
         vals = {"mail_id": mail.id}
         return vals
