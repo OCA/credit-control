@@ -30,7 +30,7 @@ class AccountInvoiceOverdueReminder(models.Model):
         related="action_id.reminder_type", store=True
     )
     action_result_id = fields.Many2one(related="action_id.result_id", readonly=False)
-    action_result_notes = fields.Text(related="action_id.result_notes", readonly=False)
+    action_result_notes = fields.Html(related="action_id.result_notes", readonly=False)
     action_mail_id = fields.Many2one(related="action_id.mail_id")
     action_mail_cc = fields.Char(
         related="action_id.mail_id.email_cc", readonly=True, string="Cc"
