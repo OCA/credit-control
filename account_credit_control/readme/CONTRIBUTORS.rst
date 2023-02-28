@@ -18,3 +18,4 @@
 
 * Enric Tobella <etobella@creublanca.es>
 * Naglis Jonaitis (Versada UAB) <naglis@versada.eu>
+* Andrea Stirpe <a.stirpe@onestein.nl>

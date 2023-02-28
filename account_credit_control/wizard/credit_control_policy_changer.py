@@ -37,7 +37,7 @@ class CreditControlPolicyChanger(models.TransientModel):
                 raise UserError(_("Please use wizard on customer invoices"))
 
             domain = [
-                ("account_id.internal_type", "=", "receivable"),
+                ("account_id.account_type", "=", "asset_receivable"),
                 ("move_id", "=", invoice.id),
                 ("reconciled", "=", False),
             ]

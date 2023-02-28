@@ -13,12 +13,11 @@ class TestCreditControlPolicy(TransactionCase):
         """
         policy = self.env.ref("account_credit_control.credit_control_3_time")
 
-        account_type = self.env.ref("account.data_account_type_receivable")
         account = self.env["account.account"].create(
             {
                 "code": "400001",
                 "name": "Test",
-                "user_type_id": account_type.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
