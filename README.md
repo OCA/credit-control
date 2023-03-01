@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [partner_risk_insurance](partner_risk_insurance/) | 15.0.1.0.1 | [![Daniel-CA](https://github.com/Daniel-CA.png?size=30px)](https://github.com/Daniel-CA) [![sergio-teruel](https://github.com/sergio-teruel.png?size=30px)](https://github.com/sergio-teruel) [![omar7r](https://github.com/omar7r.png?size=30px)](https://github.com/omar7r) [![Tardo](https://github.com/Tardo.png?size=30px)](https://github.com/Tardo) | Risk insurance partner information
 [sale_financial_risk](sale_financial_risk/) | 15.0.1.1.0 |  | Manage partner risk in sales orders
 [sale_financial_risk_info](sale_financial_risk_info/) | 15.0.1.0.0 |  | Adds risk consumption info in sales orders.
+[sale_payment_sheet_financial_risk](sale_payment_sheet_financial_risk/) | 15.0.1.0.0 |  | Manage partner risk in sale payment sheet
 
 [//]: # (end addons)
 
