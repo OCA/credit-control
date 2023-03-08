@@ -1204,6 +1204,5 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,subject:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
 msgid ""
-"{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}\n"
-"        "
+"{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}"
 msgstr ""
