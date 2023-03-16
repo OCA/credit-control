@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "application": False,
     "website": "https://github.com/OCA/credit-control",
-    "depends": ["base"],
+    "depends": ["mail"],  # required for tracking=True attribute
     "category": "Credit Control",
     "data": ["security/ir.model.access.csv", "views/res_partner_view.xml"],
     "installable": True,
