@@ -10,11 +10,10 @@ class CreditControlLine(models.Model):
 
     dunning_fees_amount = fields.Float(string="Fees")
     balance_due_total = fields.Float(
-        string="Balance due with fees", compute="compute_balance_due"
+        string="Balance due with fees", compute="_compute_balance_due"
     )
 
-    @api.multi
     @api.depends("dunning_fees_amount", "balance_due")
-    def compute_balance_due(self):
+    def _compute_balance_due(self):
         for line in self:
             line.balance_due_total = line.balance_due + line.dunning_fees_amount

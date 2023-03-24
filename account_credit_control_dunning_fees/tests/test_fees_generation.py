@@ -8,16 +8,24 @@ class FixedFeesTester(common.TransactionCase):
         """Initialize credit control level mock to test fees computations"""
         super().setUp()
         self.currency_model = self.env["res.currency"]
-        self.euro = self.currency_model.search([("name", "=", "EUR")])
+        self.euro = self.env.ref("base.EUR")
         self.assertTrue(self.euro)
-        self.usd = self.currency_model.search([("name", "=", "USD")])
+        self.usd = self.env.ref("base.USD")
         self.assertTrue(self.usd)
 
-        self.company = self.browse_ref("base.main_company")
-        self.env.cr.execute(
-            """UPDATE res_company SET currency_id = %s
-            WHERE id = %s""",
-            (self.company.id, self.euro.id),
+        self.company = self.env["res.company"].create(
+            {
+                "name": "company_data",
+            }
+        )
+        self.company.currency_id = self.euro
+        self.euro_rate = self.env["res.currency.rate"].create(
+            {
+                "name": "2020-01-01",
+                "rate": 0.654,
+                "currency_id": self.euro.id,
+                "company_id": self.company.id,
+            }
         )
 
         level_obj = self.env["credit.control.policy.level"]
@@ -26,7 +34,7 @@ class FixedFeesTester(common.TransactionCase):
                 "name": "Euro Level",
                 "dunning_fixed_amount": 5.0,
                 "dunning_currency_id": self.euro,
-                "dunning_type": "fixed",
+                "dunning_fees_type": "fixed",
             }
         )
 
@@ -35,7 +43,7 @@ class FixedFeesTester(common.TransactionCase):
                 "name": "USD Level",
                 "dunning_fixed_amount": 5.0,
                 "dunning_currency_id": self.usd,
-                "dunning_type": "fixed",
+                "dunning_fees_type": "fixed",
             }
         )
         self.dunning_model = self.env["credit.control.dunning.fees.computer"]
@@ -73,7 +81,9 @@ class FixedFeesTester(common.TransactionCase):
             }
         )
         fees = self.dunning_model.compute_fixed_fees(credit_line)
-        self.assertNotEqual(fees, self.euro_level.dunning_fixed_amount)
+        self.assertAlmostEqual(
+            fees, self.euro_level.dunning_fixed_amount / self.euro_rate.rate, 2
+        )
 
     def test_computation_credit_currency_empty(self):
         """Test that fees are correctly computed with empty credit currency"""
@@ -96,7 +106,7 @@ class FixedFeesTester(common.TransactionCase):
                 "company_id": self.company,
             }
         )
-        self.euro_level.currency_id = False
+        self.euro_level.dunning_currency_id = False
         fees = self.dunning_model.compute_fixed_fees(credit_line)
         self.assertEqual(fees, self.euro_level.dunning_fixed_amount)
 
@@ -109,7 +119,7 @@ class FixedFeesTester(common.TransactionCase):
                 "company_id": self.company,
             }
         )
-        self.euro_level.currency_id = False
+        self.euro_level.dunning_currency_id = False
         fees = self.dunning_model.compute_fixed_fees(credit_line)
         self.assertEqual(fees, self.euro_level.dunning_fixed_amount)
 

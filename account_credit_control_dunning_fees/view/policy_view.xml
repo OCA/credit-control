@@ -14,7 +14,11 @@
             <group>
               <field name="dunning_fixed_amount" />
               <field name="dunning_product_id" />
-              <field name="dunning_currency_id" />
+              <field
+                                name="dunning_currency_id"
+                                options="{'no_create': True}"
+                                groups="base.group_multi_currency"
+                            />
             </group>
           </group>
         </page>

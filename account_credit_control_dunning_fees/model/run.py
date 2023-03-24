@@ -8,7 +8,6 @@ class CreditControlRun(models.Model):
 
     _inherit = "credit.control.run"
 
-    @api.multi
     @api.returns("credit.control.line")
     def _generate_credit_lines(self):
         """Override method to add fees computation"""

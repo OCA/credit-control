@@ -1,6 +1,6 @@
 # Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, models
+from odoo import _, api, fields, models
 
 
 class FeesComputer(models.BaseModel):
@@ -37,8 +37,7 @@ class FeesComputer(models.BaseModel):
         """
         if level_fees_type == "fixed":
             return self.compute_fixed_fees
-        else:
-            raise NotImplementedError("fees type %s is not supported" % level_fees_type)
+        raise NotImplementedError(_("fees type %s is not supported") % level_fees_type)
 
     @api.model
     def _compute_fees(self, credit_lines):
@@ -51,8 +50,6 @@ class FeesComputer(models.BaseModel):
         :returns: recordset of `credit.control.line`
 
         """
-        if not credit_lines:
-            return credit_lines
         for credit in credit_lines:
             # if there is no dependence between generated credit lines
             # this could be threaded
@@ -70,6 +67,8 @@ class FeesComputer(models.BaseModel):
         :returns: `credit_line` record
         """
         fees_type = credit_line.policy_level_id.dunning_fees_type
+        if not fees_type:
+            return 0.0
         compute = self._get_compute_fun(fees_type)
         fees = compute(credit_line)
         if fees:
@@ -101,4 +100,9 @@ class FeesComputer(models.BaseModel):
         if fees_currency == credit_currency:
             return fees_amount
         else:
-            return fees_currency.compute(fees_amount, credit_currency)
+            return fees_currency._convert(
+                fees_amount,
+                credit_currency,
+                credit_line.company_id,
+                fields.Date.today(),
+            )

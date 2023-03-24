@@ -9,6 +9,7 @@
       <field name="balance_due" position="after">
         <field
                     name="dunning_fees_amount"
+                    widget="monetary"
                     attrs="{'readonly': [('state', '!=', 'draft')]}"
                 />
       </field>
@@ -23,6 +24,7 @@
       <field name="balance_due" position="after">
         <field
                     name="dunning_fees_amount"
+                    widget="monetary"
                     attrs="{'readonly': [('state', '!=', 'draft')]}"
                 />
       </field>
