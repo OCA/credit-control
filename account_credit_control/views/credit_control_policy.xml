@@ -14,10 +14,9 @@
                     />
                 </div>
                 <group>
-                    <field name="active" invisible="1" />
                     <field name="name" />
                     <field name="do_nothing" />
-                    <field name="company_id" />
+                    <field name="company_id" groups="base.group_multi_company" />
                     <field name="active" />
                 </group>
                 <notebook colspan="4">
