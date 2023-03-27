@@ -36,25 +36,24 @@ class AccountMove(models.Model):
         """Prevent to cancel invoice related to credit line"""
         # We will search if this invoice is linked with credit
         cc_line_obj = self.env["credit.control.line"]
-        for invoice in self:
-            nondraft_domain = [
-                ("invoice_id", "=", invoice.id),
-                ("state", "!=", "draft"),
-            ]
+        nondraft_domain = [
+            ("invoice_id", "in", self.ids),
+            ("state", "!=", "draft"),
+        ]
 
-            cc_nondraft_lines = cc_line_obj.search(nondraft_domain)
+        cc_nondraft_lines = cc_line_obj.search(nondraft_domain, limit=1)
 
-            if cc_nondraft_lines:
-                raise UserError(
-                    _(
-                        "You cannot cancel this invoice.\n"
-                        "A payment reminder has already been "
-                        "sent to the customer.\n"
-                        "You must create a credit note and "
-                        "issue a new invoice."
-                    )
+        if cc_nondraft_lines:
+            raise UserError(
+                _(
+                    "You cannot cancel this invoice.\n"
+                    "A payment reminder has already been "
+                    "sent to the customer.\n"
+                    "You must create a credit note and "
+                    "issue a new invoice."
                 )
-            draft_domain = [("invoice_id", "=", invoice.id), ("state", "=", "draft")]
-            cc_draft_line = cc_line_obj.search(draft_domain)
-            cc_draft_line.unlink()
+            )
+        draft_domain = [("invoice_id", "in", self.ids), ("state", "=", "draft")]
+        cc_draft_line = cc_line_obj.search(draft_domain)
+        cc_draft_line.unlink()
         return super().button_cancel()
