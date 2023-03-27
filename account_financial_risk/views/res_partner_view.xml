@@ -7,22 +7,19 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="priority" eval="20" />
-        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]" />
         <field name="arch" type="xml">
             <page name="sales_purchases" position="after">
                 <page
                     name="financial_risk"
                     string="Financial Risk"
                     attrs="{'invisible': [('is_company','=',False), ('parent_id','!=',False)]}"
+                    groups="account.group_account_manager"
                 >
-                    <group name="risk_general" col="3" class="oe_risk_group">
-                        <group
-                            string="General Limits"
-                            name="risk_include"
-                            class="o_group_col_6"
-                        >
+                    <group name="risk_general" class="oe_risk_group">
+                        <group name="risk_include" class="o_group_col_6">
                             <group
                                 col="3"
+                                string="General Limits"
                                 class="oe_subtotal_footer"
                                 style="float: left !important;"
                             >
@@ -142,12 +139,9 @@
                                 />
                             </group>
                         </group>
-                        <group
-                            string="Specific Limits"
-                            name="risk_limits"
-                            class="o_group_col_6"
-                        >
+                        <group name="risk_limits" class="o_group_col_6">
                             <group
+                                string="Specific Limits"
                                 class="oe_subtotal_footer"
                                 style="float: left !important;"
                             >
@@ -185,54 +179,87 @@
                             </group>
                         </group>
                     </group>
-                    <group string="Info" col="4">
-                        <label for="credit_currency" />
-                        <div class="o_row">
-                            <field
-                                name="credit_currency"
-                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
-                                nolabel="1"
-                            />
-                            <span>
-                                (
-                                <field
-                                    name="risk_currency_id"
-                                    readonly="1"
-                                    nolabel="1"
+                    <group string="Info">
+                        <group>
+                            <div colspan="4">
+                                <label
+                                    for="credit_currency"
+                                    class="oe_inline"
+                                    colspan="2"
                                 />
-                                )
-                            </span>
-                        </div>
-                        <field
-                            name="manual_credit_currency_id"
-                            options="{'no_create': True}"
-                            attrs="{'readonly': [('risk_allow_edit', '=', False)], 'invisible': [('credit_currency', '!=', 'manual')]}"
-                        />
-                        <label for="credit_limit" />
-                        <div class="o_row">
-                            <field
-                                name="credit_limit"
-                                widget="monetary"
-                                options="{'currency_field': 'risk_currency_id'}"
-                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
-                            />
+                                <field
+                                    name="credit_currency"
+                                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                                    colspan="1"
+                                    class="oe_inline"
+                                />
+                                <span class="oe_inline">
+                                    (<field
+                                        name="risk_currency_id"
+                                        nolabel="1"
+                                        readonly="1"
+                                        class="oe_inline"
+                                    />)
+                                </span>
+                            </div>
+                            <div colspan="4">
+                                <field
+                                    name="manual_credit_currency_id"
+                                    options="{'no_create': True}"
+                                    attrs="{'readonly': [('risk_allow_edit', '=', False)], 'invisible': [('credit_currency', '!=', 'manual')]}"
+                                    class="oe_inline"
+                                />
+                            </div>
+                            <div colspan="4">
+                                <label
+                                    for="credit_limit"
+                                    class="oe_inline"
+                                    colspan="2"
+                                />
+                                <field
+                                    name="credit_limit"
+                                    widget="monetary"
+                                    options="{'currency_field': 'risk_currency_id'}"
+                                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                                    colspan="1"
+                                    class="oe_inline"
+                                />
+                                <span
+                                    class="oe_inline"
+                                    attrs="{'invisible': [('date_credit_limit', '=', False)]}"
+                                >
+                                    (<field
+                                        name="date_credit_limit"
+                                        nolabel="1"
+                                        widget="date"
+                                        class="oe_inline"
+                                    />)
+                                </span>
+                            </div>
                             <div
+                                colspan="4"
                                 attrs="{'invisible': [('date_credit_limit', '=', False)]}"
                             >
-                                <span class="oe_read_only">(</span>
-                                <field
-                                    name="date_credit_limit"
-                                    widget="date"
-                                    nolabel="1"
-                                />
-                                <span class="oe_read_only">)</span>
+                                <span class="oe_inline oe_read_only">
+                                    (<field
+                                        name="date_credit_limit"
+                                        nolabel="1"
+                                        widget="date"
+                                        class="oe_inline"
+                                    />)
+                                </span>
                             </div>
-                        </div>
-                        <field
-                            name="credit_policy"
-                            attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
-                        />
-                        <field name="risk_exception" />
+                            <div colspan="4">
+                                <label for="risk_exception" colspan="2" />
+                                <field name="risk_exception" />
+                            </div>
+                        </group>
+                        <group>
+                            <field
+                                name="credit_policy"
+                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                            />
+                        </group>
                     </group>
                 </page>
             </page>

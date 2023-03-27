@@ -13,10 +13,11 @@ class TestPartnerFinancialRisk(TransactionCase):
     def setUpClass(cls):
         super(TestPartnerFinancialRisk, cls).setUpClass()
         cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
-        type_revenue = cls.env.ref("account.data_account_type_revenue")
-        type_receivable = cls.env.ref("account.data_account_type_receivable")
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
         main_company = cls.env.ref("base.main_company")
+        # Activate currency to avoid fail iterator
+        (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
+
         cls.cr.execute(
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
             [cls.env.ref("base.USD").id, main_company.id],
@@ -24,24 +25,24 @@ class TestPartnerFinancialRisk(TransactionCase):
         cls.account_sale = cls.env["account.account"].create(
             {
                 "name": "Sale",
-                "code": "XX_700",
-                "user_type_id": type_revenue.id,
+                "code": "XX700",
+                "account_type": "income",
                 "reconcile": True,
             }
         )
         cls.account_customer = cls.env["account.account"].create(
             {
                 "name": "Customer",
-                "code": "XX_430",
-                "user_type_id": type_receivable.id,
+                "code": "XX430",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
         cls.other_account_customer = cls.env["account.account"].create(
             {
                 "name": "Other Account Customer",
-                "code": "XX_431",
-                "user_type_id": type_receivable.id,
+                "code": "XX431",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
