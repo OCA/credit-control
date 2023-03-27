@@ -12,7 +12,10 @@
                         <group>
                             <field name="partner_id" />
                             <field name="contact_address_id" />
-                            <field name="company_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
                             <field name="user_id" />
                         </group>
                         <group>
@@ -23,14 +26,25 @@
                     </group>
                     <group>
                         <group>
-                            <field name="total_invoiced" />
-                            <field name="total_due" />
-                            <field name="currency_id" />
+                            <field name="total_invoiced" widget="monetary" />
+                            <field name="total_due" widget="monetary" />
+                            <field
+                                name="currency_id"
+                                groups="base.group_multi_currency"
+                            />
                         </group>
                     </group>
-                    <group string="Lines">
-                        <field name="credit_control_line_ids" colspan="4" nolabel="1" />
-                    </group>
+                    <field name="credit_control_line_ids" nolabel="1">
+                        <tree>
+                            <field name="date" />
+                            <field name="level" />
+                            <field name="state" />
+                            <field name="channel" />
+                            <field name="balance_due" />
+                            <field name="policy_level_id" />
+                            <field name="policy_id" />
+                        </tree>
+                    </field>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />
@@ -48,7 +62,7 @@
                 <group>
                     <field name="partner_id" />
                     <field name="user_id" />
-                    <field name="company_id" />
+                    <field name="company_id" groups="base.group_multi_company" />
                     <separator />
                     <field name="policy_level_id" />
                     <field name="policy_id" />
@@ -75,6 +89,7 @@
                         context="{'group_by': 'company_id'}"
                         icon="terp-company"
                         string="Company"
+                        groups="base.group_multi_company"
                     />
                     <filter
                         name="group_by_policy"
@@ -106,7 +121,7 @@
             <tree>
                 <field name="partner_id" />
                 <field name="user_id" />
-                <field name="company_id" />
+                <field name="company_id" groups="base.group_multi_company" />
                 <field name="policy_level_id" />
                 <field name="policy_id" />
                 <field name="report_date" />
