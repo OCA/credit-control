@@ -347,8 +347,7 @@ class OverdueReminderStep(models.TransientModel):
         "res.users", string="Assigned to", default=lambda self: self.env.user
     )
     letter_printed = fields.Boolean(readonly=True)
-    invoice_ids = fields.Many2many(
-        'account.invoice', string='Overdue Invoices')
+    invoice_ids = fields.Many2many("account.move", string="Overdue Invoices")
     company_id = fields.Many2one(
         "res.company",
         readonly=True,
@@ -362,6 +361,7 @@ class OverdueReminderStep(models.TransientModel):
         string="To check if unreconciled payments/refunds above have a good "
         "reason not to be reconciled with an open invoice"
     )
+    display_button_recompute_mail_info = fields.Boolean(default=False)
     interface = fields.Char(readonly=True)
     state = fields.Selection(
         [
@@ -380,14 +380,16 @@ class OverdueReminderStep(models.TransientModel):
     @api.onchange("invoice_ids")
     def onchange_invoice_ids(self):
         if not self.invoice_ids:
-            raise UserError(_(
-                "You cannot make a reminder without selecting invoices."
-                " Instead you can click on the 'Skip' button."))
+            raise UserError(
+                _(
+                    "You cannot make a reminder without selecting invoices."
+                    " Instead you can click on the 'Skip' button."
+                )
+            )
         self.display_button_recompute_mail_info = True
-        self.counter = 1 + max([
-            inv.overdue_reminder_counter
-            for inv in self.invoice_ids
-        ])
+        self.counter = 1 + max(
+            [inv.overdue_reminder_counter for inv in self.invoice_ids]
+        )
 
     def button_compute_mail_info(self):
         for step in self:
@@ -410,6 +412,9 @@ class OverdueReminderStep(models.TransientModel):
 
             # Hide button
             step.display_button_recompute_mail_info = False
+        action = self.env.ref(MOD + ".overdue_reminder_step_onebyone_action").read()[0]
+        action["res_id"] = self.ids[0]
+        return action
 
     @api.model
     def create(self, vals):
