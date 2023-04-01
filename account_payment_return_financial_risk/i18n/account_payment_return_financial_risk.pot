@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,11 +19,6 @@ msgid "Contact"
 msgstr ""
 
 #. module: account_payment_return_financial_risk
-#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return_include
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_users__risk_payment_return_include
 msgid ""
@@ -32,19 +27,9 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_financial_risk
-#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__id
-msgid "ID"
-msgstr ""
-
-#. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return_include
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return_include
 msgid "Include Payments Returns"
-msgstr ""
-
-#. module: account_payment_return_financial_risk
-#: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: account_payment_return_financial_risk
