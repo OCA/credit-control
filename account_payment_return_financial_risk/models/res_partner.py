@@ -1,4 +1,5 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -26,7 +27,7 @@ class ResPartner(models.Model):
     @api.depends("move_line_ids.partial_reconcile_returned_ids")
     def _compute_risk_account_amount(self):
         self.update({"risk_payment_return": 0.0})
-        super()._compute_risk_account_amount()
+        return super()._compute_risk_account_amount()
 
     @api.model
     def _risk_account_groups(self):

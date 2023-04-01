@@ -1,13 +1,14 @@
 # Copyright 2017-2018 Tecnativa - Carlos Dauden
+# Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import Form, common
 
 
-class TestPartnerPaymentReturnRisk(common.SavepointCase):
+class TestPartnerPaymentReturnRisk(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPartnerPaymentReturnRisk, cls).setUpClass()
+        super().setUpClass()
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
@@ -73,9 +74,7 @@ class TestPartnerPaymentReturnRisk(common.SavepointCase):
             )
         )
         cls.payment = payment_register.save()._create_payments()
-
         cls.payment_move = cls.payment.move_id
-
         cls.payment_line = cls.payment.move_id.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
