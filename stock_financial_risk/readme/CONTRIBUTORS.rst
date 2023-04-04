@@ -12,3 +12,5 @@
 * `Versada <https://www.versada.eu>`_:
 
   * Ugne Sinkeviciene
+
+* Urvisha Desai <udesai@opensourceintegrators.com>
