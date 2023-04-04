@@ -3,10 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
-from odoo.tests import common
+from odoo.tests import TransactionCase
 
 
-class TestStockFinancialRisk(common.SavepointCase):
+class TestStockFinancialRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestStockFinancialRisk, cls).setUpClass()
