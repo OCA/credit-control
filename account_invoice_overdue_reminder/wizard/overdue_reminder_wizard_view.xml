@@ -70,7 +70,7 @@
         <form>
             <group name="main" col="4">
                 <field name="commercial_partner_id" />
-                <field name="counter" force_save="1" />
+                <field name="counter" />
                 <field
                         name="partner_id"
                         domain="[('id', 'child_of', commercial_partner_id)]"

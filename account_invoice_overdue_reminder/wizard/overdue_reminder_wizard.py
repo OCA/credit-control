@@ -325,7 +325,9 @@ class OverdueReminderStep(models.TransientModel):
         "res.partner", string="Customer", readonly=True, required=True
     )
     user_id = fields.Many2one("res.users", required=True, readonly=True)
-    counter = fields.Integer(string="New Remind Counter", readonly=True)
+    counter = fields.Integer(
+        string="New Remind Counter", compute="_compute_counter", readonly=True
+    )
     date = fields.Date(default=fields.Date.context_today, readonly=True)
     reminder_type = fields.Selection(
         "_reminder_type_selection",
@@ -361,7 +363,12 @@ class OverdueReminderStep(models.TransientModel):
         string="To check if unreconciled payments/refunds above have a good "
         "reason not to be reconciled with an open invoice"
     )
-    display_button_recompute_mail_info = fields.Boolean(default=False)
+    display_button_recompute_mail_info = fields.Boolean(
+        default=False,
+        compute="_compute_display_button_recompute_mail_info",
+        readonly=False,
+        store=True,
+    )
     interface = fields.Char(readonly=True)
     state = fields.Selection(
         [
@@ -377,19 +384,24 @@ class OverdueReminderStep(models.TransientModel):
     def _reminder_type_selection(self):
         return self.env["overdue.reminder.action"]._reminder_type_selection()
 
-    @api.onchange("invoice_ids")
-    def onchange_invoice_ids(self):
-        if not self.invoice_ids:
-            raise UserError(
-                _(
-                    "You cannot make a reminder without selecting invoices."
-                    " Instead you can click on the 'Skip' button."
-                )
+    @api.depends("invoice_ids")
+    def _compute_counter(self):
+        for rec in self:
+            rec.counter = 1 + max(
+                [inv.overdue_reminder_counter for inv in rec.invoice_ids]
             )
-        self.display_button_recompute_mail_info = True
-        self.counter = 1 + max(
-            [inv.overdue_reminder_counter for inv in self.invoice_ids]
-        )
+
+    @api.depends("invoice_ids")
+    def _compute_display_button_recompute_mail_info(self):
+        for rec in self:
+            if not rec.invoice_ids:
+                raise UserError(
+                    _(
+                        "You cannot make a reminder without selecting invoices."
+                        " Instead you can click on the 'Skip' button."
+                    )
+                )
+            rec.display_button_recompute_mail_info = True
 
     def button_compute_mail_info(self):
         for step in self:
