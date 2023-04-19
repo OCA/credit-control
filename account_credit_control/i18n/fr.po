@@ -58,17 +58,6 @@ msgstr ""
 "        "
 
 #. module: account_credit_control
-#: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
-msgid ""
-"\n"
-"  Dear ${object.contact_address_id.name or ''}\n"
-"  <br/>\n"
-"  <br/>\n"
-"  ${object.policy_level_id.custom_mail_text | safe}\n"
-"  "
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
 msgid "# of Credit Control Communications"
 msgstr ""
@@ -101,6 +90,16 @@ msgstr "30 jours fin de mois"
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
 msgstr "Dernier rappel à 60 jours"
+
+#. module: account_credit_control
+#: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
+msgid ""
+"<p>Dear <t t.out=\"object.contact_address_id.name or ''\"/></p>\n"
+"            <br/>\n"
+"            <br/>\n"
+"            <t t-out=\"object.policy_level_id.custom_mail_text\"/>\n"
+"        "
+msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -515,7 +514,7 @@ msgstr "Pas de relance inférieure à : "
 
 #. module: account_credit_control
 #: model:mail.template,subject:account_credit_control.email_template_credit_control_base
-msgid "Credit Control: (${object.policy_level_id.name or 'n/a'})"
+msgid "Credit Control: ({{object.policy_level_id.name or 'n/a'}})"
 msgstr ""
 
 #. module: account_credit_control
