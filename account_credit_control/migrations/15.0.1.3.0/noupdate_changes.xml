@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="email_template_credit_control_base" model="mail.template">
+        <field name="email_from">{{user.company_id.email or ''}}</field>
+        <field
+            name="subject"
+        >Credit Control: ({{object.policy_level_id.name or 'n/a'}})</field>
+        <field name="partner_to">{{object.get_emailing_contact().id or ''}}</field>
+        <field name="lang">{{object.contact_address_id.lang or 'en_US'}}</field>
+        <field name="body_html" type="html">
+            <p>Dear <t t.out="object.contact_address_id.name or ''" /></p>
+            <br />
+            <br />
+            <t t-out="object.policy_level_id.custom_mail_text" />
+        </field>
+    </record>
+</odoo>
