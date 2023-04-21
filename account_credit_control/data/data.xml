@@ -12,15 +12,14 @@
         <field name="auto_delete" eval="False" />
         <field name="lang">{{ object.contact_address_id.lang or 'en_US' }}</field>
         <field name="report_template" ref="credit_control_summary" />
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                    Dear <t t-out="object.contact_address_id.name or ''" />
-                    <br /><br />
-                    <t t-out="object.policy_level_id.custom_mail_text or ''" />
-                </p>
-            </div>
-        </field>
+         <field
+            name="body_html"
+        ><![CDATA[
+  Dear ${object.contact_address_id.name or ''}
+  <br/>
+  <br/>
+  ${object.policy_level_id.custom_mail_text | safe}
+  ]]></field>
     </record>
     <!-- policy no follow -->
     <record model="credit.control.policy" id="credit_control_no_follow">
