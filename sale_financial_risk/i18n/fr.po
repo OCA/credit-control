@@ -40,6 +40,7 @@ msgid "Contact"
 msgstr "Contact"
 
 #. module: sale_financial_risk
+#. odoo-python
 #: code:addons/sale_financial_risk/models/sale.py:0
 #, python-format
 msgid "Financial risk exceeded.\n"
@@ -109,12 +110,14 @@ msgid "Set 0 if it is not locked"
 msgstr "Mettre 0 s'il n'est pas verrouillé"
 
 #. module: sale_financial_risk
+#. odoo-python
 #: code:addons/sale_financial_risk/models/sale.py:0
 #, python-format
 msgid "This sale order exceeds the financial risk.\n"
 msgstr "Ce bon de commande dépasse le risque financier.\n"
 
 #. module: sale_financial_risk
+#. odoo-python
 #: code:addons/sale_financial_risk/models/sale.py:0
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
