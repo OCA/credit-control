@@ -3,6 +3,7 @@
   * Carlos Dauden
   * Pedro M. Baeza
   * Ernesto Tejeda
+  * Stefan Ungureanu
 
 * Agathe Mollé <agathe.molle@savoirfairelinux.com>
 
