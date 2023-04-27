@@ -36,10 +36,6 @@
                         <field name="last_entry_create_uid" />
                     </tree>
                 </field>
-                <div name="up_to_date" colspan="2">
-                    <field name="up_to_date" class="oe_inline" />
-                    <label for="up_to_date" />
-                </div>
             </group>
             <footer>
                 <button name="run" type="object" string="Start" class="btn-primary" />
@@ -117,6 +113,8 @@
                 <field name="partner_phone" widget="phone" />
                 <field name="partner_email" widget="email" />
                 <field name="partner_mobile" widget="phone" />
+                <field name="date" invisible="1" />
+                <field name="company_id" invisible="1" />
             </group>
             <group
                     attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
@@ -291,29 +289,6 @@
     <field name="res_model">overdue.reminder.step</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[('state', '=', 'draft'), ('user_id', '=', uid)]</field>
-</record>
-
-<record id="overdue_reminder_end_form" model="ir.ui.view">
-    <field name="name">overdue.reminder.end.form</field>
-    <field name="model">overdue.reminder.end</field>
-    <field name="arch" type="xml">
-        <form>
-            <div>
-                <h2>Good job !</h2>
-                <p>You processed all your overdue invoice reminders.</p>
-            </div>
-            <footer>
-                <button special="cancel" string="Close" class="btn-primary" />
-            </footer>
-        </form>
-    </field>
-</record>
-
-<record id="overdue_reminder_end_action" model="ir.actions.act_window">
-    <field name="name">Overdue Invoice End</field>
-    <field name="res_model">overdue.reminder.end</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
 </record>
 
 <record id="overdue_reminder_mass_update_form" model="ir.ui.view">

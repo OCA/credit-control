@@ -55,23 +55,14 @@ class AccountMove(models.Model):
     @api.depends(
         "overdue_reminder_ids.action_id.date",
         "overdue_reminder_ids.counter",
-        "overdue_reminder_ids.action_id.reminder_type",
     )
     def _compute_overdue_reminder(self):
-        aioro = self.env["account.invoice.overdue.reminder"]
         for move in self:
-            reminder = aioro.search(
-                [("invoice_id", "=", move.id)], order="action_date desc", limit=1
-            )
-            date = reminder and reminder.action_date or False
-            counter_reminder = aioro.search(
-                [
-                    ("invoice_id", "=", move.id),
-                    ("action_reminder_type", "in", ("mail", "post")),
-                ],
-                order="action_date desc, id desc",
-                limit=1,
-            )
-            counter = counter_reminder and counter_reminder.counter or False
-            move.overdue_reminder_last_date = date
-            move.overdue_reminder_counter = counter
+            all_dates = []
+            all_counters = []
+            # faster than 2 list comprehension because we loop only once?
+            for reminder in move.overdue_reminder_ids:
+                all_dates.append(reminder.action_date)
+                all_counters.append(reminder.counter or 0)
+            move.overdue_reminder_last_date = all_dates and max(all_dates) or False
+            move.overdue_reminder_counter = all_counters and max(all_counters) or 0
