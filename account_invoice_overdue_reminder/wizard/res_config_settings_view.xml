@@ -36,7 +36,7 @@
                 </div>
                 <div
                         class="col-12 col-md-12 o_setting_box"
-                        id="overdue_reminder_attach_invoice"
+                        id="overdue_reminder_other_fields"
                     >
                         <div class="o_setting_left_pane" />
                     <div class="o_setting_right_pane">
