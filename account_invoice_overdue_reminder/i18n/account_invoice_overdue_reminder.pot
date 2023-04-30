@@ -28,18 +28,24 @@ msgid "\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Due Date</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Type</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Total</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Residual</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</th>\n"
 "    </tr>\n"
 "% for inv in object.invoice_ids.sorted(key='date_invoice'):\n"
-"    <tr>\n"
+"    <tr style=\"background-color:\n"
+"        % if inv.type == 'out_refund':\n"
+"            LightGray\n"
+"        % endif\n"
+"    \">\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_invoice)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${inv.payment_term_id.name or ''}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_due)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or ''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${dict(inv.fields_get(allfields=['type'])['type']['selection'])[inv.type]}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
 "        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.residual_signed, inv.currency_id)}</td>\n"
@@ -48,6 +54,7 @@ msgid "\n"
 "% endfor\n"
 "% for (currency, total_residual) in object.total_residual():\n"
 "    <tr>\n"
+"        <td></td>\n"
 "        <td></td>\n"
 "        <td></td>\n"
 "        <td></td>\n"
@@ -82,7 +89,7 @@ msgid "${object.company_id.name} - Overdue invoice reminder n°${object.counter}
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:61
+#: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:64
 #, python-format
 msgid "%s Reminder %d"
 msgstr ""
@@ -114,9 +121,9 @@ msgid "Amount Due"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:53
+#: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:56
 #, python-format
-msgid "An overdue reminder can only be attached to a customer invoice"
+msgid "An overdue reminder can only be attached to a customer invoice or credit note"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -272,9 +279,12 @@ msgid "Customer"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:443
-#, python-format
-msgid "Customer '%s' has unreconciled payments/refunds. You should reconcile these payments/refunds and start the overdue remind process again (or check the option to confirm that these unreconciled payments/refunds have a good reason not to be reconciled with an open invoice)."
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "Customer has unreconciled payments/refunds. You should\n"
+"                    reconcile these payments/refunds and start the overdue\n"
+"                    remind process again, or manually verify that these\n"
+"                    unreconciled payments/refunds have a good reason not to\n"
+"                    be reconciled with an open invoice."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -400,7 +410,7 @@ msgid "E-mail Status"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:480
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:466
 #, python-format
 msgid "E-mail missing on partner '%s'."
 msgstr ""
@@ -421,13 +431,13 @@ msgid "Filters"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:419
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:416
 #, python-format
 msgid "For the reminder of customer '%s', the deadline is missing for the activity."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:415
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:412
 #, python-format
 msgid "For the reminder of customer '%s', you must assign someone for the activity."
 msgstr ""
@@ -646,13 +656,13 @@ msgid "Mail Body"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:485
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:471
 #, python-format
 msgid "Mail body is empty."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:483
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:469
 #, python-format
 msgid "Mail subject is empty."
 msgstr ""
@@ -892,7 +902,7 @@ msgid "Print Overdue Invoices"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:542
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:528
 #, python-format
 msgid "Remind letter hasn't been printed!"
 msgstr ""
@@ -914,7 +924,7 @@ msgid "Reminder Type"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:511
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:497
 #, python-format
 msgid "Report format '%s' is not supported."
 msgstr ""
@@ -1021,11 +1031,6 @@ msgid "This overdue reminder result already exists"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__unreconciled_move_line_normal
-msgid "To check if unreconciled payments/refunds above have a good reason not to be reconciled with an open invoice"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Total"
@@ -1080,7 +1085,7 @@ msgid "User"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:437
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:434
 #, python-format
 msgid "User company is different from action company. This should never happen."
 msgstr ""
@@ -1119,13 +1124,13 @@ msgid "You can't delete Overdue Invoice Reminder, it is needed by the module"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:326
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:323
 #, python-format
 msgid "You cannot make a reminder without selecting invoices. Instead you can click on the 'Skip' button."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:626
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:612
 #, python-format
 msgid "You must select the new reminder type."
 msgstr ""
