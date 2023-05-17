@@ -45,7 +45,7 @@ class StockPicking(models.Model):
     def action_confirm(self):
         if not self.env.context.get("bypass_risk"):
             if (
-                self.location_dest_id.usage == "customer"
+                self.location_dest_id[0].usage == "customer"
                 and self.partner_id.commercial_partner_id.risk_exception
             ):
                 return self.show_risk_wizard("action_confirm")
