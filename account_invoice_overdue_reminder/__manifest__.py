@@ -28,6 +28,6 @@
         "data/mail_template.xml",
     ],
     "installable": True,
-    "application": True,
+    "application": False,
     "pre_init_hook": "pre_init_hook",
 }
