@@ -19,6 +19,7 @@ class ResPartner(models.Model):
     )
     risk_payment_return = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Payments Returns",
         help="Residual amount of move lines not reconciled with returned "
         "lines related.",
