@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-credit-control Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-account_credit_control>=16.0dev,<16.1dev',
         'odoo-addon-account_invoice_overdue_reminder>=16.0dev,<16.1dev',
     ],
     classifiers=[
