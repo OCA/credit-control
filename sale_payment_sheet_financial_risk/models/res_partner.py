@@ -102,10 +102,8 @@ class ResPartner(models.Model):
     def _compute_risk_account_amount(self):
         res = super()._compute_risk_account_amount()
         self.update({"risk_sale_payment_sheet_info": ""})
-        sheet_lines = (
-            self.env["sale.payment.sheet.line"]
-            .sudo()
-            .search(self._get_risk_sale_payment_sheet_domain())
+        sheet_lines = self.env["sale.payment.sheet.line"].search(
+            self._get_risk_sale_payment_sheet_domain()
         )
         # Get all account risk fields with empty dummy group
         dummy_groups = defaultdict(lambda: {"read_group": []})
