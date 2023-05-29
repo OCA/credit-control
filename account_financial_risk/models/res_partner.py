@@ -27,6 +27,7 @@ class ResPartner(models.Model):
     )
     risk_invoice_draft = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Draft Invoices",
         currency_field="risk_currency_id",
         help="Total amount of invoices in Draft or Pro-forma state",
@@ -45,6 +46,7 @@ class ResPartner(models.Model):
     )
     risk_invoice_open = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Open Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with the same "
@@ -65,6 +67,7 @@ class ResPartner(models.Model):
     )
     risk_invoice_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Unpaid Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with the same "
@@ -85,6 +88,7 @@ class ResPartner(models.Model):
     )
     risk_account_amount = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Other Account Open Amount",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with distinct "
@@ -105,6 +109,7 @@ class ResPartner(models.Model):
     )
     risk_account_amount_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
+        compute_sudo=True,
         string="Total Other Account Unpaid Amount",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with distinct "
@@ -339,7 +344,6 @@ class ResPartner(models.Model):
                 "risk_account_amount_unpaid": 0.0,
             }
         )
-        AccountMoveLine = self.env["account.move.line"].sudo()
         customers = self.filtered(
             lambda p: p == p.commercial_partner_id
             or (p._origin and p._origin.id in p.commercial_partner_id.ids)
@@ -348,7 +352,7 @@ class ResPartner(models.Model):
             return  # pragma: no cover
         groups = self._risk_account_groups()
         for _key, group in groups.items():
-            group["read_group"] = AccountMoveLine.read_group(
+            group["read_group"] = self.env["account.move.line"].read_group(
                 group["domain"] + [("partner_id", "in", customers.ids)],
                 group["fields"],
                 group["group_by"],
