@@ -23,33 +23,20 @@ msgstr ""
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
 msgid ""
 "\n"
-"            Our records indicate that we still have not received the payment "
-"of the invoice mentioned below despite our two reminders.\n"
-"            If payment have already been sent, please disregard this notice. "
-"If not, please proceed with payment.\n"
-"            If your payment has not been received in the next 5 days, your "
-"file will be transfered to our debt collection agency.\n"
+"Our records indicate that we still have not received the payment of the "
+"invoice mentioned below despite our two reminders.\n"
+"If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.\n"
+"If your payment has not been received in the next 5 days, your file will be "
+"transferred to our debt collection agency.\n"
 "\n"
-"            Should you need us to arrange a payment plan for you, please "
-"advise.\n"
-"            A customer account statement is enclosed for you convenience.\n"
+"Should you need us to arrange a payment plan for you, please advise.\n"
+"A customer account statement is enclosed for you convenience.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
+"Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"            Best regards\n"
+"Best regards\n"
 "        "
-msgstr ""
-
-#. module: account_credit_control
-#: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
-msgid ""
-"\n"
-"  Dear ${object.contact_address_id.name or ''}\n"
-"  <br/>\n"
-"  <br/>\n"
-"  ${object.policy_level_id.custom_mail_text | safe}\n"
-"  "
 msgstr ""
 
 #. module: account_credit_control
@@ -85,6 +72,16 @@ msgstr "30 días fin de mes"
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
 msgstr "Último recordatorio a los 60 días"
+
+#. module: account_credit_control
+#: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
+msgid ""
+"<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
+"  <br>\n"
+"  <br>\n"
+"  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></p>\n"
+"        "
+msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -126,6 +123,7 @@ msgid "A credit control line"
 msgstr "Una línea de control de crédito"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 #, python-format
 msgid ""
@@ -139,6 +137,7 @@ msgid "A credit control policy level"
 msgstr "Un nivel de política de control de crédito"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 #, python-format
 msgid ""
@@ -148,6 +147,7 @@ msgstr ""
 "intente más tarde."
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 #, fuzzy, python-format
 msgid "A run has already been executed more recently (%s)"
@@ -210,6 +210,7 @@ msgid "Allows to manually change credit level"
 msgstr "Permite cambiar manualmente el nivel de crédito"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #, python-format
 msgid "Amount Due"
@@ -243,6 +244,16 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
+msgid "Best regards"
+msgstr ""
+
+#. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
@@ -357,6 +368,7 @@ msgid "Control Credit Communications"
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #, fuzzy, python-format
 msgid "Control Credit Line"
@@ -498,7 +510,7 @@ msgstr "Tolerancia de control de crédito"
 
 #. module: account_credit_control
 #: model:mail.template,subject:account_credit_control.email_template_credit_control_base
-msgid "Credit Control: (${object.policy_level_id.name or 'n/a'})"
+msgid "Credit Control: ({{object.policy_level_id.name or 'n/a'}})"
 msgstr ""
 
 #. module: account_credit_control
@@ -692,6 +704,7 @@ msgid "Due balance"
 msgstr "Saldo vencido"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_due
 #, python-format
@@ -766,6 +779,7 @@ msgid "For policies which should not generate lines or are obsolete"
 msgstr "Para políticas que no deben generar líneas o están obsoletas"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:0
 #, python-format
 msgid "Generated communications"
@@ -838,9 +852,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_unread
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_needaction
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -850,6 +862,16 @@ msgstr ""
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
+msgid ""
+"If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.<br>\n"
+"  If your payment has not been received in the next 5 days, your file will "
+"be transferred to our debt\n"
+"  collection agency."
 msgstr ""
 
 #. module: account_credit_control
@@ -871,12 +893,14 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #, python-format
 msgid "Invoice amount"
 msgstr "Importe factura"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, python-format
@@ -884,6 +908,7 @@ msgid "Invoice date"
 msgstr "Fecha de factura"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, python-format
@@ -896,6 +921,7 @@ msgid "Invoiced amount"
 msgstr "Importe facturado"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #, python-format
 msgid "Invoices summary"
@@ -982,7 +1008,6 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
@@ -1208,6 +1233,7 @@ msgid "Next Activity Type"
 msgstr "Fecha de la siguiente acción"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:0
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:0
@@ -1227,6 +1253,7 @@ msgid "No follow policy"
 msgstr "Sin política de seguimiento"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #, python-format
 msgid "No lines will be changed. All the selected lines are already done."
@@ -1261,12 +1288,6 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_unread_counter
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_printer__mark_as_sent
 msgid "Only letter lines will be marked."
 msgstr "Solo se marcarán las líneas de carta."
@@ -1298,13 +1319,12 @@ msgstr ""
 msgid ""
 "Our records indicate that we have not received the payment of the invoice "
 "mentioned below.\n"
-"            If it has already been sent, please disregard this notice. If "
-"not, please proceed with payment within 10 days.\n"
+"If it has already been sent, please disregard this notice. If not, please "
+"proceed with payment within 10 days.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
+"Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"            Best regards\n"
+"Best regards\n"
 "        "
 msgstr ""
 
@@ -1312,14 +1332,10 @@ msgstr ""
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
 msgid ""
 "Our records indicate that we have not received the payment of the invoices "
-"mentioned in the attached document.<br>\n"
+"mentioned in the attached document.\n"
 "  <br>\n"
 "  If it has already been sent, please disregard this notice. If not, please "
-"proceed with payment within 10 days.<br>\n"
-"  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"proceed with payment within 10 days."
 msgstr ""
 
 #. module: account_credit_control
@@ -1328,11 +1344,7 @@ msgid ""
 "Our records indicate that we have not received the payment of the invoices "
 "mentioned in the attached document.<br>\n"
 "  If it has already been sent, please disregard this notice. If not, please "
-"proceed with payment within 10 days.<br>\n"
-"  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"proceed with payment within 10 days."
 msgstr ""
 
 #. module: account_credit_control
@@ -1340,13 +1352,12 @@ msgstr ""
 msgid ""
 "Our records indicate that we have not yet received the payment of the "
 "invoice mentioned below despite our first reminder.\n"
-"            If it has already been sent, please disregard this notice. If "
-"not, please proceed with payment within 5 days.\n"
+"If it has already been sent, please disregard this notice. If not, please "
+"proceed with payment within 5 days.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
+"Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"            Best regards\n"
+"Best regards\n"
 "        "
 msgstr ""
 
@@ -1356,41 +1367,14 @@ msgid ""
 "Our records indicate that we have not yet received the payment of the "
 "invoices mentioned in the attached document despite our first reminder.<br>\n"
 "  If it has already been sent, please disregard this notice. If not, please "
-"proceed with payment within 5 days.<br>\n"
-"  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"proceed with payment within 5 days."
 msgstr ""
-"Nuestros registros indica de que no hemos recibido todavía el pago de las "
-"facturas encionadas en el documento adjuntado a pesar de nuestro primer "
-"aviso.<br>\n"
-"  si ya lo ha enviado, por favor ignore este aviso. si no, por favor proceda "
-"con el pagamiento en un término de 5 dias.<br>\n"
-"  gracias por adelantado por su participacion anticipada en este asunto."
-"<br>\n"
-"  <br>\n"
-"  Saludos coordiales"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
 msgid ""
 "Our records indicate that we still have not received the payment of the "
-"invoices mentioned in the attached document despite our reminder.\n"
-"  <br>\n"
-"  <br>\n"
-"  If payment have already been sent, please disregard this notice. If not, "
-"please proceed with payment.<br>\n"
-"  If your payment has not been received in the next 5 days, your file will "
-"be transfered to our debt<br>\n"
-"  collection agency.<br>\n"
-"  <br>\n"
-"  Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"  A customer account statement is enclosed for you convenience.<br>\n"
-"  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"invoices mentioned in the attached document despite our reminder."
 msgstr ""
 
 #. module: account_credit_control
@@ -1401,14 +1385,7 @@ msgid ""
 "  If payment have already been sent, please disregard this notice. If not, "
 "please proceed with payment.<br>\n"
 "  If your payment has not been received in the next 5 days, your file will "
-"be transfered to our debt collection agency.<br>\n"
-"  <br>\n"
-"  Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"  A customer account statement is enclosed for you convenience.<br>\n"
-"  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"be transferred to our debt collection agency."
 msgstr ""
 
 #. module: account_credit_control
@@ -1417,19 +1394,17 @@ msgid ""
 "Our records indicate that we still have not received the payment of the "
 "mentioned below invoice despite our reminder.\n"
 "\n"
-"            If payment have already been sent, please disregard this notice. "
-"If not, please proceed with payment.\n"
-"            If your payment has not been received in the next 5 days, your "
-"file will be transfered to our debt collection agency.\n"
+"If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.\n"
+"If your payment has not been received in the next 5 days, your file will be "
+"transferred to our debt collection agency.\n"
 "\n"
-"            Should you need us to arrange a payment plan for you, please "
-"advise.\n"
-"            A customer account statement is enclosed for you convenience.\n"
+"Should you need us to arrange a payment plan for you, please advise.\n"
+"A customer account statement is enclosed for you convenience.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
+"Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"            Best regards\n"
+"Best regards\n"
 "        "
 msgstr ""
 
@@ -1491,12 +1466,14 @@ msgid "Phone"
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 #, python-format
 msgid "Please select a policy"
 msgstr "Seleccione por favor una política"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:0
 #, python-format
 msgid "Please use wizard on customer invoices"
@@ -1515,6 +1492,7 @@ msgid "Policy"
 msgstr "Política"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 #, python-format
 msgid ""
@@ -1523,6 +1501,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
@@ -1637,6 +1616,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_line.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
@@ -1686,6 +1666,14 @@ msgid "Set to ready all"
 msgstr "Establecer el nivel de crédito actual"
 
 #. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
+msgid ""
+"Should you need us to arrange a payment plan for you, please advise.<br>\n"
+"  A customer account statement is enclosed for you convenience."
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
 msgid "Show Invoice Details in mail"
 msgstr "Mostrar detalles de la factura en el correo electrónico"
@@ -1715,6 +1703,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
 msgstr "Resumen"
+
+#. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
+msgid "Thank you in advance for your anticipated cooperation in this matter."
+msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.credit_control_communication_action
@@ -1766,6 +1763,7 @@ msgid "The partner had a manual followup."
 msgstr "La empresa tiene un seguimiento manual."
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
@@ -1831,18 +1829,6 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_unread
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_unread_counter
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__user_id
 #: model:res.groups,name:account_credit_control.group_account_credit_control_user
 msgid "User"
@@ -1862,6 +1848,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_line.py:0
 #, python-format
 msgid ""
@@ -1872,6 +1859,7 @@ msgstr ""
 "en estado borrador."
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 #, python-format
 msgid ""
@@ -1881,6 +1869,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/account_move.py:0
 #, python-format
 msgid ""
@@ -1896,6 +1885,28 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
+
+#~ msgid ""
+#~ "Our records indicate that we have not yet received the payment of the "
+#~ "invoices mentioned in the attached document despite our first reminder."
+#~ "<br>\n"
+#~ "  If it has already been sent, please disregard this notice. If not, "
+#~ "please proceed with payment within 5 days.<br>\n"
+#~ "  <br>\n"
+#~ "  Thank you in advance for your anticipated cooperation in this matter."
+#~ "<br>\n"
+#~ "  <br>\n"
+#~ "  Best regards"
+#~ msgstr ""
+#~ "Nuestros registros indica de que no hemos recibido todavía el pago de las "
+#~ "facturas encionadas en el documento adjuntado a pesar de nuestro primer "
+#~ "aviso.<br>\n"
+#~ "  si ya lo ha enviado, por favor ignore este aviso. si no, por favor "
+#~ "proceda con el pagamiento en un término de 5 dias.<br>\n"
+#~ "  gracias por adelantado por su participacion anticipada en este asunto."
+#~ "<br>\n"
+#~ "  <br>\n"
+#~ "  Saludos coordiales"
 
 #, fuzzy
 #~ msgid ""
