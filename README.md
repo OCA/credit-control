@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_credit_control](account_credit_control/) | 16.0.1.0.0 |  | Account Credit Control
+[account_credit_control](account_credit_control/) | 16.0.1.0.1 |  | Account Credit Control
 [account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 16.0.1.1.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Simple mail/letter/phone overdue customer invoice reminder
 
 [//]: # (end addons)
