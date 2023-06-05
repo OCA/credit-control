@@ -182,10 +182,8 @@ class CreditControlRun(models.Model):
     def open_credit_communications(self):
         """Open the generated communications."""
         self.ensure_one()
-        action = self.env.ref(
-            "account_credit_control.credit_control_communication_action"
-        )
-        action = action.read()[0]
+        action_name = "account_credit_control.credit_control_communication_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_name)
         action["domain"] = [
             ("id", "in", self.mapped("line_ids.communication_id").ids),
         ]
@@ -195,8 +193,7 @@ class CreditControlRun(models.Model):
         """Open the generated lines"""
         self.ensure_one()
         action_name = "account_credit_control.credit_control_line_action"
-        action = self.env.ref(action_name)
-        action = action.read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_name)
         action["domain"] = [("id", "in", self.line_ids.ids)]
         return action
 
