@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-09 20:34+0000\n"
+"PO-Revision-Date: 2023-06-10 09:08+0000\n"
 "Last-Translator: Claude R Perrin <claude@perrin.it>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
@@ -95,7 +95,7 @@ msgstr "Identifiant chez l’assureur"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code_2
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Insurance Code 2"
-msgstr "2ème code de l’assureur"
+msgstr "Second identifiant de l’assureur"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
@@ -168,7 +168,8 @@ msgstr "État de la garantie"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Secondary code assigned to this partner by the risk insurance company."
 msgstr ""
-"Code secondaire attribué à ce contact par la compagnie d'assurance risques."
+"Identifiant secondaire attribué à ce contact par la compagnie d'assurance "
+"risques."
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
