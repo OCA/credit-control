@@ -8,6 +8,11 @@ from odoo.tools import float_round
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    # Index this field is affected by the related field risk_partner_id. Mainly when
+    # commercial fields in the partner are written and thus recomputation of that
+    # relation is triggered.
+    partner_invoice_id = fields.Many2one(index=True)
+
     def evaluate_risk_message(self, partner):
         self.ensure_one()
         risk_amount = self.currency_id._convert(
