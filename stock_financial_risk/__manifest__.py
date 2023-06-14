@@ -4,7 +4,7 @@
 {
     "name": "Partner Stock Risk",
     "summary": "Manage partner risk in stock moves",
-    "version": "14.0.1.0.1",
+    "version": "15.0.1.0.0",
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "Tecnativa, " "Odoo Community Association (OCA)",

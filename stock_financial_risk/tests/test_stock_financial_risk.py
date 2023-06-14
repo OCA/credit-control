@@ -6,7 +6,7 @@ from odoo import exceptions
 from odoo.tests import common
 
 
-class TestStockFinancialRisk(common.SavepointCase):
+class TestStockFinancialRisk(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestStockFinancialRisk, cls).setUpClass()
