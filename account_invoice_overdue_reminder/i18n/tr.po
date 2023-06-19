@@ -1195,7 +1195,7 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:612
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:614
 #, python-format
 msgid "You must select the new reminder type."
 msgstr "Yeni hatırlatıcı türünü seçmelisiniz."
