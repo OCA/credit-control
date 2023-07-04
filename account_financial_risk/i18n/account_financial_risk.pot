@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -79,6 +79,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Choose Manual Credit Currency."
@@ -143,6 +144,12 @@ msgid "Credit Policy"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
 msgid "Customer"
 msgstr ""
@@ -180,12 +187,14 @@ msgid "Financial Risk"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "Financial risk exceeded.\n"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Financial risk information"
@@ -365,6 +374,7 @@ msgid "Partner Risk Manager"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
@@ -498,6 +508,7 @@ msgid "Sum of total risk included"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid ""
@@ -511,12 +522,14 @@ msgid "The partner has exceeded his risk"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the financial risk.\n"
 msgstr ""
 
 #. module: account_financial_risk
+#. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "This invoice exceeds the open invoices risk.\n"
