@@ -4,7 +4,7 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 from odoo.tests import TransactionCase
 
 
@@ -12,9 +12,8 @@ class TestPartnerFinancialRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestPartnerFinancialRisk, cls).setUpClass()
+        (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
         cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
-        type_revenue = cls.env.ref("account.data_account_type_revenue")
-        type_receivable = cls.env.ref("account.data_account_type_receivable")
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
         main_company = cls.env.ref("base.main_company")
         cls.cr.execute(
@@ -24,24 +23,24 @@ class TestPartnerFinancialRisk(TransactionCase):
         cls.account_sale = cls.env["account.account"].create(
             {
                 "name": "Sale",
-                "code": "XX_700",
-                "user_type_id": type_revenue.id,
+                "code": "XX700",
+                "account_type": "income_other",
                 "reconcile": True,
             }
         )
         cls.account_customer = cls.env["account.account"].create(
             {
                 "name": "Customer",
-                "code": "XX_430",
-                "user_type_id": type_receivable.id,
+                "code": "XX430",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
         cls.other_account_customer = cls.env["account.account"].create(
             {
                 "name": "Other Account Customer",
-                "code": "XX_431",
-                "user_type_id": type_receivable.id,
+                "code": "XX431",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -219,7 +218,7 @@ class TestPartnerFinancialRisk(TransactionCase):
             .with_context(active_model="account.move", active_ids=invoice2.ids)
             .create({})
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             invoice2.action_post()
             validate_wiz.validate_move()
         self.assertEqual(invoice2.state, "draft")

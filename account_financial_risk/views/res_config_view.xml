@@ -10,7 +10,7 @@
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='module_account_payment']/../../.."
+                expr="//div[@data-key='account']/div[@id='pay_invoice_online_setting_container']"
                 position="after"
             >
                 <h2>Financial Risk</h2>
