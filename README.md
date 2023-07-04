@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_credit_control](account_credit_control/) | 15.0.1.3.0 |  | Account Credit Control
+[account_credit_control](account_credit_control/) | 15.0.1.3.1 |  | Account Credit Control
 [account_financial_risk](account_financial_risk/) | 15.0.1.5.1 | [![carlosdauden](https://github.com/carlosdauden.png?size=30px)](https://github.com/carlosdauden) | Manage customer risk
 [account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 15.0.1.1.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Simple mail/letter/phone overdue customer invoice reminder
 [account_payment_return_financial_risk](account_payment_return_financial_risk/) | 15.0.1.0.1 |  | Partner Payment Return Risk
