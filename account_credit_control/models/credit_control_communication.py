@@ -178,6 +178,7 @@ class CreditControlCommunication(models.Model):
     def _get_credit_control_communication_table(self):
         th_style = "padding: 5px; border: 1px solid black;"
         tr_content = "<th style='%s'>%s</th>" % (th_style, _("Invoice number"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Payment Reference"))
         tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice date"))
         tr_content += "<th style='%s'>%s</th>" % (th_style, _("Due date"))
         tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice amount"))
@@ -188,6 +189,10 @@ class CreditControlCommunication(models.Model):
         table_content += "<table style='%s'><tr>%s</tr>" % (table_style, tr_content)
         for line in self.credit_control_line_ids:
             tr_content = "<td style='%s'>%s</td>" % (th_style, line.invoice_id.name)
+            tr_content += "<td style='%s'>%s</td>" % (
+                th_style,
+                line.invoice_id.payment_reference or "",
+            )
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
                 format_date(self.env, line.invoice_id.invoice_date),
