@@ -1453,6 +1453,13 @@ msgid "Payment Note"
 msgstr "Betalingsnotitie"
 
 #. module: account_credit_control
+#. odoo-python
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Payment Reference"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__channel__phone
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_policy_level__channel__phone
 msgid "Phone"
