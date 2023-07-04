@@ -287,7 +287,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "asset_receivable"),
                     ("parent_state", "in", ["draft", "proforma", "proforma2"]),
                 ],
                 "fields": fields,
@@ -297,7 +297,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "asset_receivable"),
                     "|",
                     "&",
                     ("date_maturity", "!=", False),
@@ -314,7 +314,7 @@ class ResPartner(models.Model):
                 "domain": company_domain
                 + [
                     ("reconciled", "=", False),
-                    ("account_internal_type", "=", "receivable"),
+                    ("account_type", "=", "asset_receivable"),
                     "|",
                     "&",
                     ("date_maturity", "!=", False),
