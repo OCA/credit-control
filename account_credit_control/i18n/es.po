@@ -1460,6 +1460,7 @@ msgid "Payment Note"
 msgstr "Nota del pago"
 
 #. module: account_credit_control
+#. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #, python-format
 msgid "Payment Reference"
