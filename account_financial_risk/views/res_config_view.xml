@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.view.form.inherit.partner.financial.risk
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@data-key='account']/div[@id='pay_invoice_online_setting_container']"
+                position="after"
+            >
+                <h2>Financial Risk</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <label for="invoice_unpaid_margin" />
+                            <div class="text-muted">
+                                Days after due date to set an invoice as unpaid.
+                            The change of this field recompute all partners risk, be
+                                patient.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16 ml4">
+                                    <field name="invoice_unpaid_margin" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="allow_overrisk_invoice_validation" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="allow_overrisk_invoice_validation" />
+                            <div class="text-muted">
+                                Always allow the validation of draft invoices.
+                            Useful when the flow comes from sales orders and the
+                                over-risk
+                            has already been allowed when confirming these.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
