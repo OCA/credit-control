@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-04 00:25+0000\n"
-"PO-Revision-Date: 2020-06-04 02:28+0200\n"
-"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"PO-Revision-Date: 2023-07-06 20:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
 "Language: es\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\"> (</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\">%)</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\">%)</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">(</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">(</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">)</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">)</span>"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
@@ -67,6 +67,13 @@ msgid ""
 "                                over-risk\n"
 "                            has already been allowed when confirming these."
 msgstr ""
+"Permitir siempre la validación de los borradores de facturas.\n"
+"                                                           Útil cuando el "
+"flujo procede de pedidos de venta y el\n"
+"                                                                    sobre "
+"riesgo\n"
+"                                                           ya se ha "
+"permitido al confirmarlos."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -83,7 +90,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
 msgid "Can Overpass Partner Risk Exceptions"
-msgstr ""
+msgstr "Puede superar las excepciones de riesgo de los socios"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -94,7 +101,7 @@ msgstr "Cancelar"
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Seleccione Divisa de crédito manual."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -104,7 +111,7 @@ msgstr "Compañías"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr ""
+msgstr "divisa de la compañía"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
@@ -140,7 +147,7 @@ msgstr "Creado en"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr ""
+msgstr "Divisa de crédito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -167,6 +174,12 @@ msgid ""
 "risk, be\n"
 "                                patient."
 msgstr ""
+"Días después de la fecha de vencimiento para establecer una factura como "
+"impagada.\n"
+"                                                            El cambio de "
+"este campo recompute todos los socios de riesgo, ser\n"
+"                                                                      "
+"pacientes."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -211,7 +224,7 @@ msgstr "Información de riesgo financiero"
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft_include
 msgid "Full risk computation"
-msgstr "Computar en riesgo total."
+msgstr "Computar en riesgo total"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
@@ -326,13 +339,13 @@ msgstr "Indica si se ha excedido el riesgo"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Entrada Diaria"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
-msgstr ""
+msgstr "Última fecha de límite de crédito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
@@ -384,7 +397,7 @@ msgstr "Límite en otro saldo contable impagado"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Divisa de crédito manual"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -405,7 +418,7 @@ msgstr "Asistente de riesgo excedido de socio"
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
 msgid "Partner Risk Manager"
-msgstr ""
+msgstr "Gestor de riesgos para socios"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
@@ -416,12 +429,12 @@ msgstr "Empresa con riesgo excedido"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Divisa de la lista de precios"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Divisa a cobrar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -485,7 +498,7 @@ msgstr "Permitir editar riesgo"
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr ""
+msgstr "importe total del riesgo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
@@ -494,7 +507,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr ""
+msgstr "Divisa de riesgo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
@@ -506,24 +519,24 @@ msgstr "Excepción por riesgo"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
 msgid "Risk Over Limit"
-msgstr ""
+msgstr "Riesgo sobre el límite"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Risk Remaining"
-msgstr ""
+msgstr "Riesgo restante"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Riesgo restante (porcentaje)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Riesgo restante (valor)"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -562,6 +575,9 @@ msgid ""
 "The partner %s is in risk exception.\n"
 "You must post his invoices from form view to allow over risk"
 msgstr ""
+"El socio %s está en excepción de riesgo.\n"
+"Debe contabilizar sus facturas desde la vista formulario para permitir la "
+"superación del riesgo"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -625,7 +641,7 @@ msgstr "Importe total de facturas borrador o pro-forma"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
-msgstr ""
+msgstr "Validar movimiento de cuenta"
 
 #~ msgid ""
 #~ "Always allow the validation of draft invoices.\n"
