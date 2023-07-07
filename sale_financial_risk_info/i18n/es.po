@@ -49,6 +49,7 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: sale_financial_risk_info
+#. odoo-python
 #: code:addons/sale_financial_risk_info/models/sale.py:0
 #, python-format
 msgid "Unlimited"
