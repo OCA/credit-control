@@ -183,23 +183,15 @@
                         </group>
                     </group>
                     <group string="Info" col="4">
-                        <label for="credit_currency" />
-                        <div class="o_row">
-                            <field
-                                name="credit_currency"
-                                attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
-                                nolabel="1"
-                            />
-                            <span>
-                                (
-                                <field
-                                    name="risk_currency_id"
-                                    readonly="1"
-                                    nolabel="1"
-                                />
-                                )
-                            </span>
-                        </div>
+                        <field
+                            name="credit_currency"
+                            attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                        />
+                        <field
+                            name="risk_currency_id"
+                            readonly="1"
+                            attrs="{'invisible': [('credit_currency', '=', 'manual')]}"
+                        />
                         <field
                             name="manual_credit_currency_id"
                             options="{'no_create': True}"
