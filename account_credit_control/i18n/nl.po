@@ -6,15 +6,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2018-12-04 12:09+0000\n"
-"Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
+"PO-Revision-Date: 2023-07-12 20:10+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -97,6 +97,11 @@ msgid ""
 "            <t t-out=\"object.policy_level_id.custom_mail_text\"/>\n"
 "        "
 msgstr ""
+"<p>Beste <t t.out=\"object.contact_address_id.name or ''\"/></p>\n"
+"            <br/>\n"
+"            <br/>\n"
+"            <t t-out=\"object.policy_level_id.custom_mail_text\"/>\n"
+"        "
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
