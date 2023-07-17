@@ -30,19 +30,9 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line_balance_due_total
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line__balance_due_total
 msgid "Balance due with fees"
 msgstr ""
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_create_uid
-msgid "Created by"
-msgstr "Izveidoja"
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_create_date
-msgid "Created on"
-msgstr "Izveidots"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
@@ -50,65 +40,45 @@ msgid "Credit control line generator"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,help:account_credit_control_dunning_fees.field_credit_control_policy_level_dunning_currency_id
+#: model:ir.model.fields,help:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_currency_id
 msgid ""
 "Currency of the dunning fees. If empty, it takes the company's currency."
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line_dunning_fees_amount
-#: model:ir.ui.view,arch_db:account_credit_control_dunning_fees.add_dunning_fees_on_policy
-#: model:ir.ui.view,arch_db:account_credit_control_dunning_fees.report_credit_control_summary_document_fees
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line__dunning_fees_amount
+#: model_terms:ir.ui.view,arch_db:account_credit_control_dunning_fees.add_dunning_fees_on_policy
+#: model_terms:ir.ui.view,arch_db:account_credit_control_dunning_fees.report_credit_control_summary_document_fees
 msgid "Fees"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level_dunning_fixed_amount
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_fixed_amount
 msgid "Fees Fixed Amount"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level_dunning_product_id
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_product_id
 msgid "Fees Product"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level_dunning_currency_id
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_currency_id
 msgid "Fees currency"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: selection:credit.control.policy.level,dunning_fees_type:0
+#: model:ir.model.fields.selection,name:account_credit_control_dunning_fees.selection__credit_control_policy_level__dunning_fees_type__fixed
 msgid "Fixed"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer___last_update
-msgid "Last Modified on"
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
+msgid "Model that compute dunning fees"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_write_uid
-msgid "Last Updated by"
-msgstr "Pēdējo reizi atjaunoja"
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_dunning_fees_computer_write_date
-msgid "Last Updated on"
-msgstr "Pēdējās izmaiņas"
-
-#. module: account_credit_control_dunning_fees
-#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level_dunning_fees_type
+#: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_fees_type
 msgid "Type"
 msgstr "Tips"
 
@@ -118,6 +88,23 @@ msgid "credit control communication"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
-msgid "credit.control.dunning.fees.computer"
+#. odoo-python
+#: code:addons/account_credit_control_dunning_fees/model/dunning.py:0
+#, python-format
+msgid "fees type %s is not supported"
 msgstr ""
+
+#~ msgid "Created by"
+#~ msgstr "Izveidoja"
+
+#~ msgid "Created on"
+#~ msgstr "Izveidots"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Updated by"
+#~ msgstr "Pēdējo reizi atjaunoja"
+
+#~ msgid "Last Updated on"
+#~ msgstr "Pēdējās izmaiņas"
