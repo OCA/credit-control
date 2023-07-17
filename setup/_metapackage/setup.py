@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-account_credit_control>=16.0dev,<16.1dev',
+        'odoo-addon-account_credit_control_dunning_fees>=16.0dev,<16.1dev',
         'odoo-addon-account_financial_risk>=16.0dev,<16.1dev',
         'odoo-addon-account_invoice_overdue_reminder>=16.0dev,<16.1dev',
         'odoo-addon-sale_financial_risk_info>=16.0dev,<16.1dev',
