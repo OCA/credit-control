@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo-addon-account_invoice_overdue_reminder>=16.0dev,<16.1dev',
         'odoo-addon-sale_financial_risk>=16.0dev,<16.1dev',
         'odoo-addon-sale_financial_risk_info>=16.0dev,<16.1dev',
+        'odoo-addon-stock_financial_risk>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
