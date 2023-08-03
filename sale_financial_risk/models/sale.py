@@ -1,7 +1,7 @@
 # Copyright 2016-2020 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, exceptions, fields, models
 from odoo.tools import float_round
 
 
@@ -64,6 +64,34 @@ class SaleOrder(models.Model):
         if ICP.get_param("sale_financial_risk.include_risk_sale_order_done"):
             risk_states.append("done")
         return risk_states
+
+    def write(self, vals):
+        if self.env.context.get("bypass_risk", False):
+            return super().write(vals)
+        orders = self.filtered(lambda so: so.state in ("sale", "done"))
+        orders_dic = {so.id: so.amount_total for so in orders}
+        res = super().write(vals)
+        for order in orders:
+            if orders_dic.get(order.id, 0.0) < order.amount_total:
+                exception_msg = order.evaluate_risk_message(order.partner_id)
+                if exception_msg:
+                    action = self.sudo().env.ref(
+                        "sale_financial_risk.action_financial_risk_warning"
+                    )
+                    raise exceptions.RedirectWarning(
+                        exception_msg,
+                        action=action.id,
+                        button_text=_("Save"),
+                        additional_context={
+                            "default_partner_id": order.partner_id.id,
+                            "default_exception_msg": exception_msg,
+                            "default_continue_method": "write",
+                            "default_origin_reference": "%s,%s"
+                            % ("sale.order", order.id),
+                            "default_method_params": vals,
+                        },
+                    )
+        return res
 
 
 class SaleOrderLine(models.Model):

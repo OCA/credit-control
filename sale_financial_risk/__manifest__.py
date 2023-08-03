@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/credit-control",
     "depends": ["sale", "account_financial_risk"],
     "data": [
+        "data/financial_risk_warning.xml",
         "views/res_partner_view.xml",
         "views/sale_financial_risk_view.xml",
         "views/res_config_settings.xml",

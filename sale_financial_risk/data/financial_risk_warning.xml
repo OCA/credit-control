@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_financial_risk_warning" model="ir.actions.act_window">
+        <field name="name">Risk Warning</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">partner.risk.exceeded.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

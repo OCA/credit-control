@@ -1,6 +1,8 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from ast import literal_eval
+
 from odoo import _, fields, models
 
 
@@ -19,6 +21,7 @@ class PartnerRiskExceededWiz(models.TransientModel):
         string="Object",
     )
     continue_method = fields.Char()
+    method_params = fields.Char()
 
     def action_show(self):
         self.ensure_one()
@@ -33,6 +36,10 @@ class PartnerRiskExceededWiz(models.TransientModel):
 
     def button_continue(self):
         self.ensure_one()
-        return getattr(
+        continue_method = getattr(
             self.origin_reference.with_context(bypass_risk=True), self.continue_method
-        )()
+        )
+        if self.method_params:
+            return continue_method(literal_eval(self.method_params))
+        else:
+            return continue_method()
