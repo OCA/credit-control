@@ -1295,8 +1295,8 @@ msgstr "número de errores"
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "número de mensajes que requieren una acción"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error_counter
@@ -1416,8 +1416,8 @@ msgid ""
 "proceed with payment within 5 days."
 msgstr ""
 "Nuestros registros indican que aún no hemos recibido el pago de las facturas "
-"mencionadas en el documento adjunto a pesar de nuestro primer "
-"recordatorio.<br>\n"
+"mencionadas en el documento adjunto a pesar de nuestro primer recordatorio."
+"<br>\n"
 "    Si ya ha sido enviado, le rogamos que haga caso omiso de este aviso. En "
 "caso contrario, le rogamos que proceda al pago en un plazo de 5 días."
 
@@ -1441,8 +1441,8 @@ msgid ""
 "be transferred to our debt collection agency."
 msgstr ""
 "Nuestros registros indican que aún no hemos recibido el pago de las facturas "
-"mencionadas en el documento adjunto a pesar de nuestros dos "
-"recordatorios.<br>\n"
+"mencionadas en el documento adjunto a pesar de nuestros dos recordatorios."
+"<br>\n"
 "    Si ya se ha enviado el pago, ignore este aviso. De lo contrario, proceda "
 "con el pago.<br>\n"
 "    Si su pago no ha sido recibido en los próximos 5 días, su expediente "
@@ -1578,8 +1578,8 @@ msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
 msgstr ""
-"La política \"<b>%(name)s</b>\" ha generado <b>%(len_policy_lines_generated)"
-"d líneas de control de crédito.</b><br/>"
+"La política \"<b>%(name)s</b>\" ha generado <b>"
+"%(len_policy_lines_generated)d líneas de control de crédito.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1751,8 +1751,8 @@ msgid ""
 "Should you need us to arrange a payment plan for you, please advise.<br>\n"
 "  A customer account statement is enclosed for you convenience."
 msgstr ""
-"Si necesita que organicemos un plan de pago para usted, por favor, "
-"avísenos.<br>\n"
+"Si necesita que organicemos un plan de pago para usted, por favor, avísenos."
+"<br>\n"
 "    Se adjunta un extracto de cuenta del cliente para su comodidad."
 
 #. module: account_credit_control
@@ -1975,6 +1975,9 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "número de mensajes que requieren una acción"
 
 #~ msgid ""
 #~ "Our records indicate that we have not yet received the payment of the "
