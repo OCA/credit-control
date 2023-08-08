@@ -46,9 +46,6 @@
                                 <span t-field="inv.name"/>
                             </td>
                             <td class="text-right">
-                                <span t-field="inv.amount_untaxed_invoice_signed"/>
-                            </td>
-                            <td class="text-right">
                                 <span t-field="inv.amount_total_signed"/>
                             </td>
                             <td class="text-right">

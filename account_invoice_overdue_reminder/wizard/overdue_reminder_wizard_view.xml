@@ -93,7 +93,6 @@
                         <field name="date_due"/>
                         <field name="name" string="Order Ref"/>
                         <field name="user_id"/>
-                        <field name="amount_untaxed_invoice_signed" string="Tax Excluded" sum="Total"/>
                         <field name="amount_total_signed" string="Total" sum="Total"/>
                         <field name="residual_signed" string="Amount Due" sum="Amount Due"/>
                         <field name="currency_id" invisible="1"/>

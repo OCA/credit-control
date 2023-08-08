@@ -8,3 +8,9 @@
 
   Furthermore, the button toggle to allow to send a reminder with unreconciled
   payments has been removed. The warning remains. (`#226 <https://github.com/OCA/credit-control/issues/226>`_)
+
+
+11.0.1.0.0 (2023-08-07)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* [MIG] Migration to 11.0

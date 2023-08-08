@@ -4,7 +4,7 @@
 
 {
     'name': 'Overdue Invoice Reminder',
-    'version': '12.0.2.2.1',
+    'version': '11.0.1.0.0',
     'category': 'Accounting',
     'license': 'AGPL-3',
     'summary': 'Simple mail/letter/phone overdue customer invoice reminder ',

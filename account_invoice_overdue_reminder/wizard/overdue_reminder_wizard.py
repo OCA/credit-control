@@ -3,11 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, tools, _
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import UserError
-from dateutil.relativedelta import relativedelta
+from datetime import datetime, timedelta
 import base64
 import logging
 logger = logging.getLogger(__name__)
+
 
 MOD = 'account_invoice_overdue_reminder'
 
@@ -96,7 +98,7 @@ class OverdueReminderStart(models.TransientModel):
         today = fields.Date.context_today(self)
         limit_date = today
         if self.start_days:
-            limit_date -= relativedelta(days=self.start_days)
+            limit_date -= timedelta(days=self.start_days)
         domain = base_domain + [('date_due', '<', limit_date)]
         if self.partner_ids:
             domain.append(('commercial_partner_id', 'in', self.partner_ids.ids))
@@ -131,8 +133,12 @@ class OverdueReminderStart(models.TransientModel):
             ('company_id', '=', self.company_id.id),
             ('type', '=', 'sale'),
             ])
-        today = fields.Date.context_today(self)
-        min_interval_date = today - relativedelta(days=self.min_interval_days)
+        today = datetime.strptime(
+            fields.Date.context_today(self), DEFAULT_SERVER_DATE_FORMAT
+            )
+        min_interval_date = today - timedelta(
+            days=self.min_interval_days
+            )
         # It is important to understand this: there are 2 search on invoice :
         # 1. a first search to know if a partner must be reminded or not
         # 2. a second search to get the invoices to remind for that partner
@@ -185,11 +191,17 @@ class OverdueReminderStart(models.TransientModel):
                 ('commercial_partner_id', '=', commercial_partner.id),
                 ('date_due', '<', fields.Date.context_today(self))])
         assert invs
+
+        def _check_min_intervals(item):
+            if not item.overdue_reminder_last_date:
+                return False
+            overdue_reminder_last_date = datetime.strptime(
+                item.overdue_reminder_last_date, DEFAULT_SERVER_DATE_FORMAT
+                )
+            return overdue_reminder_last_date > min_interval_date
+
         # Check min interval
-        if any([
-                inv.overdue_reminder_last_date > min_interval_date
-                for inv in invs
-                if inv.overdue_reminder_last_date]):
+        if invs.filtered(_check_min_intervals):
             logger.info(
                 'Skipping customer %s that has at least one invoice '
                 'with last reminder after %s',
@@ -342,11 +354,11 @@ class OverdueReminderStep(models.TransientModel):
             )
 
             # recompute subject
-            step.mail_subject = mail_tpl_lang._render_template(
+            step.mail_subject = mail_tpl_lang.render_template(
                 mail_tpl_lang.subject, self._name, step.id)
 
             # recompute body
-            mail_body = mail_tpl_lang._render_template(
+            mail_body = mail_tpl_lang.render_template(
                 mail_tpl_lang.body_html, self._name, step.id)
             if mail_tpl.user_signature:
                 signature = self.env.user.signature
@@ -499,7 +511,7 @@ class OverdueReminderStep(models.TransientModel):
                             % inv_report.report_type)
                     report_bin, report_format = res
                 # WARN : update when backporting
-                filename = '%s.%s' % (inv._get_report_base_filename(), report_format)
+                filename = '%s.%s' % (inv._get_printed_report_name(), report_format)
                 attach = iao.create({
                     'name': filename,
                     'datas_fname': filename,
@@ -570,7 +582,7 @@ class OverdueReminderStep(models.TransientModel):
                 res[inv.currency_id] = inv.residual_signed
         return res.items()
 
-    def _get_report_base_filename(self):
+    def _get_printed_report_name(self):
         self.ensure_one()
         fname = 'overdue_letter-%s' % self.commercial_partner_id.name.replace(' ', '_')
         return fname
