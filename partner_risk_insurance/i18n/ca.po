@@ -175,8 +175,3 @@ msgstr "Crèdit concedit per la companyia asseguradora."
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Credit Insurance"
-#~ msgid "Partner Risk Insurance"
-#~ msgstr "Assegurança de risc"

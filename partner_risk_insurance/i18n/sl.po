@@ -178,19 +178,3 @@ msgstr ""
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Code assigned to this partner by the risk insurance company."
-#~ msgid ""
-#~ "This module adds a new tab in the partner form to introduce risk "
-#~ "insurance information."
-#~ msgstr ""
-#~ "Koda, ki jo je partnerju dodelila zavarovalnica za zavarovanje tveganj."
-
-#, fuzzy
-#~| msgid "Credit Insurance"
-#~ msgid "Partner Risk Insurance"
-#~ msgstr "Zavarovanje kredita"
-
-#~ msgid "Partner"
-#~ msgstr "Partner"
