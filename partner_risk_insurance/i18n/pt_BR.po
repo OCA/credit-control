@@ -169,6 +169,3 @@ msgstr ""
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
 msgstr ""
-
-#~ msgid "Partner"
-#~ msgstr "Parceiro"

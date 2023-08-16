@@ -174,8 +174,3 @@ msgstr "Limite de crédito concedido pela companhia de seguros."
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Credit Insurance"
-#~ msgid "Partner Risk Insurance"
-#~ msgstr "Seguro de Crédito"
