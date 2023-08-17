@@ -16,10 +16,14 @@ class TestPartnerFinancialRisk(TransactionCase):
         type_revenue = cls.env.ref("account.data_account_type_revenue")
         type_receivable = cls.env.ref("account.data_account_type_receivable")
         tax_group_taxes = cls.env.ref("account.tax_group_taxes")
-        main_company = cls.env.ref("base.main_company")
-        cls.cr.execute(
+        cls.currency_usd = cls.env.ref("base.USD")
+        cls.currency_usd.active = True
+        # Make sure the currency of the company is USD, as this not always happens
+        # To be removed in V17: https://github.com/odoo/odoo/pull/107113
+        cls.company = cls.env.company
+        cls.env.cr.execute(
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
-            [cls.env.ref("base.USD").id, main_company.id],
+            (cls.currency_usd.id, cls.company.id),
         )
         cls.account_sale = cls.env["account.account"].create(
             {
