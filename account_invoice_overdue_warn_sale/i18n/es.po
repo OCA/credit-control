@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_overdue_warn_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20210718\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-22 23:56+0000\n"
+"PO-Revision-Date: 2023-08-22 22:00-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_count
+msgid "# of Overdue Invoices"
+msgstr "# de Facturas Vencidas"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__commercial_partner_invoicing_id
+msgid "Commercial Invoicing Partner"
+msgstr "Contacto de Facturacion"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__company_currency_id
+msgid "Company Currency"
+msgstr "Moneda de la Compañia"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
+msgid "Overdue Invoices Residual"
+msgstr "Residual de Facturas vencidas"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,help:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
+msgid ""
+"Overdue invoices total residual amount of the invoicing partner in company "
+"currency."
+msgstr ""
+"Monto total residual de facturas vencidas del contacto de facturación en "
+"la moneda de la empresa."
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model,name:account_invoice_overdue_warn_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Ventas"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "The invoicing partner"
+msgstr "El contacto de facturación"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "for a total residual of"
+msgstr "por un total residual de"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "has"
+msgstr "tiene"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "overdue invoice(s)"
+msgstr "factura(s) vencida(s)"
