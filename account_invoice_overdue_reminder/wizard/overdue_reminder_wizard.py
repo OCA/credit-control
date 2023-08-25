@@ -96,10 +96,11 @@ class OverdueReminderStart(models.TransientModel):
 
     def _prepare_remind_trigger_domain(self, base_domain):
         today = fields.Date.context_today(self)
-        limit_date = today
+        limit_date = datetime.strptime(today, DEFAULT_SERVER_DATE_FORMAT)
         if self.start_days:
             limit_date -= timedelta(days=self.start_days)
-        domain = base_domain + [('date_due', '<', limit_date)]
+        formatted_limit_date = limit_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        domain = base_domain + [('date_due', '<', formatted_limit_date)]
         if self.partner_ids:
             domain.append(('commercial_partner_id', 'in', self.partner_ids.ids))
         if self.user_ids:
