@@ -135,8 +135,8 @@ msgid ""
 "A credit control line more recent than %(controlling_date)s exists at "
 "%(lines_date)s"
 msgstr ""
-"Er bestaat een debiteurenbeheer regel die recenter is dan %(controlling_date)"
-"s op %(lines_date)s"
+"Er bestaat een debiteurenbeheer regel die recenter is dan "
+"%(controlling_date)s op %(lines_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -872,7 +872,8 @@ msgstr "Als deze optie is ingeschakeld, vereisen nieuwe berichten uw aandacht."
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_sms_error
 #, fuzzy
 msgid "If checked, some messages have a delivery error."
-msgstr "Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
+msgstr ""
+"Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1285,7 +1286,7 @@ msgstr "Aantal fouten"
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: account_credit_control
