@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 import base64
 import logging
+import html
 logger = logging.getLogger(__name__)
 
 MOD = 'account_invoice_overdue_reminder'
@@ -342,8 +343,8 @@ class OverdueReminderStep(models.TransientModel):
             )
 
             # recompute subject
-            step.mail_subject = mail_tpl_lang._render_template(
-                mail_tpl_lang.subject, self._name, step.id)
+            step.mail_subject = html.unescape(mail_tpl_lang._render_template(
+                mail_tpl_lang.subject, self._name, step.id))
 
             # recompute body
             mail_body = mail_tpl_lang._render_template(
