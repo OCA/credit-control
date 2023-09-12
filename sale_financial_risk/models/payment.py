@@ -7,16 +7,16 @@ from odoo import models
 class PaymentTransaction(models.Model):
     _inherit = "payment.transaction"
 
-    def _set_transaction_authorized(self):
+    def _set_authorized(self):
         """Bypass risk for sale confirmation triggered by this method"""
         return super(
             PaymentTransaction, self.with_context(bypass_risk=True)
-        )._set_transaction_authorized()
+        )._set_authorized()
 
-    def _reconcile_after_transaction_done(self):
+    def _reconcile_after_done(self):
         """Bypass risk for sale confirmation and invoice creation triggered
         by this method
         """
         return super(
             PaymentTransaction, self.with_context(bypass_risk=True)
-        )._reconcile_after_transaction_done()
+        )._reconcile_after_done()
