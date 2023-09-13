@@ -1,10 +1,11 @@
 # Copyright 2021 Tecnativa - Carlos Dauden
+# Copyright 2023 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
     "name": "Sale Payment Sheet Financial Risk",
     "summary": "Manage partner risk in sale payment sheet",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.0",
     "category": "Account",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
