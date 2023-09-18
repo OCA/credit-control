@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
         self.ensure_one()
         risk_amount = self.currency_id._convert(
             self.amount_total,
-            self.company_id.currency_id,
+            partner.risk_currency_id,
             self.company_id,
             self.date_order
             and self.date_order.date()
@@ -128,7 +128,7 @@ class SaleOrderLine(models.Model):
                 risk_amount = line.price_reduce_taxinc * risk_qty
             line.risk_amount = line.order_id.currency_id._convert(
                 risk_amount,
-                line.company_id.currency_id,
+                line.order_id.partner_id.risk_currency_id,
                 line.company_id,
                 line.order_id.date_order
                 and line.order_id.date_order.date()
