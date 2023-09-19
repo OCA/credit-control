@@ -162,13 +162,11 @@ class ResPartner(models.Model):
         compute="_compute_risk_remaining",
         string="Risk Remaining (Value)",
         currency_field="risk_currency_id",
-        store=True,
     )
 
     risk_remaining_percentage = fields.Float(
         compute="_compute_risk_remaining",
         string="Risk Remaining (Percentage)",
-        store=True,
     )
 
     @api.depends("credit_limit")
