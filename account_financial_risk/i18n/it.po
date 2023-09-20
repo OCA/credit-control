@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2023-08-04 13:09+0000\n"
+"PO-Revision-Date: 2023-09-20 20:02+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -84,7 +84,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configurazione"
+msgstr "Impostazione di configurazione"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
