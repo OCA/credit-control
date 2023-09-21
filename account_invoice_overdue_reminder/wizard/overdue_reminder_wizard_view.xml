@@ -55,7 +55,7 @@
 <menuitem
         id="overdue_reminder_start_menu"
         action="overdue_reminder_start_action"
-        sequence="16"
+        sequence="30"
         parent="account.menu_finance_receivables"
     />
 
