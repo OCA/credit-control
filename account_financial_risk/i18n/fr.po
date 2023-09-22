@@ -86,9 +86,9 @@ msgstr ""
 "lors de la confirmation de celles-ci."
 
 #. module: account_financial_risk
-#: model:res.groups,comment:account_financial_risk.group_overpass_partner_risk_exception
-msgid "Can Overpass Partner Risk Exceptions"
-msgstr "Outrepasser les exceptions de risque partenaire"
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
+msgid "Can edit risk limit and overpass partner risk exceptions"
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -199,6 +199,7 @@ msgid "Exception Msg"
 msgstr "Message d'exception"
 
 #. module: account_financial_risk
+#: model:ir.module.category,name:account_financial_risk.category_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
@@ -386,6 +387,11 @@ msgid "Limit Other Account Unpaid Amount"
 msgstr "Limite du solde d'impayé des autres comptes"
 
 #. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
+msgid "Manager"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
@@ -410,11 +416,6 @@ msgid "Partner Risk Exceeded Wizard"
 msgstr "Assistant pour risque du partenaire dépassé"
 
 #. module: account_financial_risk
-#: model:res.groups,name:account_financial_risk.group_overpass_partner_risk_exception
-msgid "Partner Risk Manager"
-msgstr "Responsable des risques partenaires"
-
-#. module: account_financial_risk
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
@@ -424,6 +425,11 @@ msgstr "Risque partenaire dépassé"
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
 msgstr "Devise de la liste de prix"
+
+#. module: account_financial_risk
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
+msgid "Read only access to financial risk info"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
@@ -632,9 +638,20 @@ msgid "Total amount of invoices in Draft or Pro-forma state"
 msgstr "Montant total des factures brouillon ou pro forma"
 
 #. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
+msgid "User"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
 msgstr "Valider les écritures comptables"
+
+#~ msgid "Can Overpass Partner Risk Exceptions"
+#~ msgstr "Outrepasser les exceptions de risque partenaire"
+
+#~ msgid "Partner Risk Manager"
+#~ msgstr "Responsable des risques partenaires"
 
 #~ msgid ""
 #~ "Always allow the validation of draft invoices.\n"
