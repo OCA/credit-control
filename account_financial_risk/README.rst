@@ -29,10 +29,10 @@ Account Financial Risk
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 Adds a new page in partner to manage its *Financial Risk*.
+(Only visible for User or Manager Financial Risk groups)
 
 If any limit is exceeded, you won't be able to confirm any of its invoices
-unless you are authorized (Account Billing Manager group).
-
+unless you are authorized (Financial Risk Manager group).
 You can click in risk amount to view amount origin.
 
 .. figure:: https://raw.githubusercontent.com/OCA/credit-control/15.0/account_financial_risk/static/description/financial_risk_click.png
@@ -50,6 +50,7 @@ Configuration
 
 To configure this module, you need to:
 
+#. Go to User and set group User or Manager Financial Risk
 #. Go to *Invoicing/Accounting > Configuration > Settings > Accounting*
 #. In the *Customer Payments* section, fill *Maturity Margin* for setting the
    number of days to last after the due date to consider an invoice as unpaid.
