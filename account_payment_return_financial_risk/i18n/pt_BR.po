@@ -68,6 +68,3 @@ msgstr "Configure como 0 se não estiver bloqueado"
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return
 msgid "Total Payments Returns"
 msgstr "Total de Devoluções de Pagamentos"
-
-#~ msgid "Partner"
-#~ msgstr "Parceiro"
