@@ -12,14 +12,11 @@ class TestPartnerPaymentReturnRisk(common.TransactionCase):
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
-        cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable", "internal_group": "asset"}
-        )
         cls.account = cls.env["account.account"].create(
             {
                 "name": "Test account",
                 "code": "TEST",
-                "user_type_id": cls.account_type.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -30,11 +27,7 @@ class TestPartnerPaymentReturnRisk(common.TransactionCase):
             {
                 "name": "Test income account",
                 "code": "INCOME",
-                "user_type_id": cls.env["account.account.type"]
-                .create(
-                    {"name": "Test income", "type": "other", "internal_group": "income"}
-                )
-                .id,
+                "account_type": "income_other",
             }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test"})
@@ -54,6 +47,7 @@ class TestPartnerPaymentReturnRisk(common.TransactionCase):
                             "name": "Test line",
                             "price_unit": 50,
                             "quantity": 10,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -64,7 +58,7 @@ class TestPartnerPaymentReturnRisk(common.TransactionCase):
         )
         cls.invoice.action_post()
         cls.receivable_line = cls.invoice.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
+            lambda x: x.account_type == "asset_receivable"
         )
         # Create payment from invoice
         cls.payment_register_model = cls.env["account.payment.register"]
@@ -76,7 +70,7 @@ class TestPartnerPaymentReturnRisk(common.TransactionCase):
         cls.payment = payment_register.save()._create_payments()
         cls.payment_move = cls.payment.move_id
         cls.payment_line = cls.payment.move_id.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
+            lambda x: x.account_type == "asset_receivable"
         )
         # Create payment return
         cls.payment_return = cls.env["payment.return"].create(

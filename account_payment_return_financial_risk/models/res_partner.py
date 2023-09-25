@@ -43,7 +43,7 @@ class ResPartner(models.Model):
             "domain": self._get_risk_company_domain()
             + [
                 ("reconciled", "=", False),
-                ("account_internal_type", "=", "receivable"),
+                ("account_type", "=", "asset_receivable"),
                 ("partial_reconcile_returned_ids", "!=", False),
             ],
             "fields": ["partner_id", "account_id", "amount_residual"],
