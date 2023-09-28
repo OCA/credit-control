@@ -22,6 +22,7 @@ class ResPartner(models.Model):
         compute="_compute_risk_sale_payment_sheet",
         currency_field="risk_currency_id",
         compute_sudo=True,
+        store=True,
         string="Total Sale Payment Sheet",
         help="Sum of payment sheet amount pending to validate",
     )
