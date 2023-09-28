@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-28 21:53+0000\n"
+"PO-Revision-Date: 2023-09-28 21:59+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
@@ -367,7 +367,7 @@ msgstr "Contacto"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__overdue_reminder_partner_policy
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_partner_policy
 msgid "Contact to Remind"
-msgstr "Contacto para Lembrar"
+msgstr "Contacto para Avisar"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__counter
@@ -932,7 +932,7 @@ msgstr "O contador de faturas vencidas deve sempre ser positivo"
 #: model:ir.actions.act_window,name:account_invoice_overdue_reminder.overdue_reminder_start_action
 #: model:ir.ui.menu,name:account_invoice_overdue_reminder.overdue_reminder_start_menu
 msgid "Overdue Invoice Remind"
-msgstr "Lembrar faturas vencidas"
+msgstr "Avisos de Faturas Vencidas"
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,name:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
@@ -1162,7 +1162,7 @@ msgstr "Assunto"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Subject: Overdue invoice reminder n°"
-msgstr "Assunto: Aviso de Cobrança de fatura nº"
+msgstr "Assunto: Aviso de faturas vencidas nº"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__activity_summary
@@ -1202,7 +1202,7 @@ msgstr "Não há faturas para lembrar ao cliente '%s'."
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 #, python-format
 msgid "There are no overdue reminders."
-msgstr "Não existem Avisos de Cobrança."
+msgstr "Não existem avisos de faturas vencidas."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_account_bank_statement_line__overdue_reminder_counter
@@ -1239,7 +1239,7 @@ msgstr "Total"
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Total Untaxed"
-msgstr "Total sem impostos"
+msgstr "Total s/ Impostos"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
