@@ -28,6 +28,7 @@ class ResPartner(models.Model):
     risk_invoice_draft = fields.Monetary(
         compute="_compute_risk_account_amount",
         compute_sudo=True,
+        store=True,
         string="Total Draft Invoices",
         currency_field="risk_currency_id",
         help="Total amount of invoices in Draft or Pro-forma state",
@@ -47,6 +48,7 @@ class ResPartner(models.Model):
     risk_invoice_open = fields.Monetary(
         compute="_compute_risk_account_amount",
         compute_sudo=True,
+        store=True,
         string="Total Open Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with the same "
@@ -68,6 +70,7 @@ class ResPartner(models.Model):
     risk_invoice_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
         compute_sudo=True,
+        store=True,
         string="Total Unpaid Invoices/Principal Balance",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with the same "
@@ -89,6 +92,7 @@ class ResPartner(models.Model):
     risk_account_amount = fields.Monetary(
         compute="_compute_risk_account_amount",
         compute_sudo=True,
+        store=True,
         string="Total Other Account Open Amount",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with distinct "
@@ -110,6 +114,7 @@ class ResPartner(models.Model):
     risk_account_amount_unpaid = fields.Monetary(
         compute="_compute_risk_account_amount",
         compute_sudo=True,
+        store=True,
         string="Total Other Account Unpaid Amount",
         currency_field="risk_currency_id",
         help="Residual amount of move lines not reconciled with distinct "
@@ -118,12 +123,14 @@ class ResPartner(models.Model):
     )
     risk_total = fields.Monetary(
         compute="_compute_risk_exception",
+        store=True,
         string="Total Risk",
         currency_field="risk_currency_id",
         help="Sum of total risk included",
     )
     risk_exception = fields.Boolean(
         compute="_compute_risk_exception",
+        store=True,
         search="_search_risk_exception",
         help="It Indicate if partner risk exceeded",
     )
@@ -131,6 +138,7 @@ class ResPartner(models.Model):
         string="Risk Over Limit",
         currency_field="risk_currency_id",
         compute="_compute_risk_exception",
+        store=True,
     )
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
@@ -150,7 +158,9 @@ class ResPartner(models.Model):
         string="Manual Credit Currency",
     )
     risk_currency_id = fields.Many2one(
-        comodel_name="res.currency", compute="_compute_credit_currency"
+        comodel_name="res.currency",
+        compute="_compute_credit_currency",
+        store=True,
     )
     date_credit_limit = fields.Date(
         compute="_compute_date_credit_limit",
@@ -160,12 +170,14 @@ class ResPartner(models.Model):
     )
     risk_remaining_value = fields.Monetary(
         compute="_compute_risk_remaining",
+        store=True,
         string="Risk Remaining (Value)",
         currency_field="risk_currency_id",
     )
 
     risk_remaining_percentage = fields.Float(
         compute="_compute_risk_remaining",
+        store=True,
         string="Risk Remaining (Percentage)",
     )
 
@@ -331,6 +343,10 @@ class ResPartner(models.Model):
         "move_line_ids.amount_residual",
         "move_line_ids.date_maturity",
         "company_id.invoice_unpaid_margin",
+        "move_line_ids.parent_state",
+        "move_line_ids.account_id",
+        "move_line_ids.currency_id",
+        "move_line_ids.partner_id",
     )
     def _compute_risk_account_amount(self):
         self.update(
