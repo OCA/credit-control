@@ -20,12 +20,14 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: stock_financial_risk
+#. odoo-python
 #: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid "Financial risk exceeded \n"
 msgstr ""
 
 #. module: stock_financial_risk
+#. odoo-python
 #: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid ""
