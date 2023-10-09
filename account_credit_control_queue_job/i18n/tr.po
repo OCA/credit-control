@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_credit_control_queue_job
+# 	* account_credit_control_queue_job
 #
 msgid ""
 msgstr ""
@@ -43,7 +43,8 @@ msgstr "Taslak"
 
 #. module: account_credit_control_queue_job
 #: model:ir.model.fields,help:account_credit_control_queue_job.field_credit_control_line__state
-msgid "Draft lines need to be triaged.\n"
+msgid ""
+"Draft lines need to be triaged.\n"
 "Ignored lines are lines for which we do not want to send something.\n"
 "Draft and ignored lines will be generated again on the next run."
 msgstr ""
