@@ -76,11 +76,13 @@ msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -122,6 +124,7 @@ msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr ""
 

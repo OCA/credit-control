@@ -141,8 +141,7 @@ msgstr "Dernière Mise à Jour le"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid ""
-"Mark this field if an insurance was requested for the credit of this "
-"partner."
+"Mark this field if an insurance was requested for the credit of this partner."
 msgstr ""
 "Cochez ce champ si une demande de garantie a été déposée pour ce contact."
 
