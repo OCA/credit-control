@@ -142,7 +142,8 @@ msgstr "Atualizado pela última vez em"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid ""
 "Mark this field if an insurance was requested for the credit of this partner."
-msgstr "Marque este campo se o seguro foi pedido para o crédito deste terceiro."
+msgstr ""
+"Marque este campo se o seguro foi pedido para o crédito deste terceiro."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name

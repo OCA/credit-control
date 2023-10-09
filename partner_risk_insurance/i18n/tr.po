@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_risk_insurance
+# 	* partner_risk_insurance
 #
 msgid ""
 msgstr ""
@@ -136,8 +136,10 @@ msgstr "Son Güncelleme"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
-msgid "Mark this field if an insurance was requested for the credit of this partner."
-msgstr "Bu ortağın kredisi için sigorta talep edilmişse bu alanı işaretleyiniz."
+msgid ""
+"Mark this field if an insurance was requested for the credit of this partner."
+msgstr ""
+"Bu ortağın kredisi için sigorta talep edilmişse bu alanı işaretleyiniz."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
