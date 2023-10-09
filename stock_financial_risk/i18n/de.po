@@ -20,12 +20,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_financial_risk
+#. odoo-python
 #: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid "Financial risk exceeded \n"
 msgstr "Finanzielles Risiko überschritten\n"
 
 #. module: stock_financial_risk
+#. odoo-python
 #: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid ""
