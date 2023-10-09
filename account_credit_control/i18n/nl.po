@@ -152,8 +152,8 @@ msgid ""
 "A credit control line more recent than %(controlling_date)s exists at "
 "%(lines_date)s"
 msgstr ""
-"Er bestaat een debiteurenbeheer regel die recenter is dan %(controlling_date)"
-"s op %(lines_date)s"
+"Er bestaat een debiteurenbeheer regel die recenter is dan "
+"%(controlling_date)s op %(lines_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -875,7 +875,8 @@ msgstr "Als deze optie is ingeschakeld, vereisen nieuwe berichten uw aandacht."
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_sms_error
 #, fuzzy
 msgid "If checked, some messages have a delivery error."
-msgstr "Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
+msgstr ""
+"Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__ignored
@@ -1591,6 +1592,12 @@ msgstr "Relatie"
 #: model:ir.model.fields,help:account_credit_control.field_res_users__payment_note
 msgid "Payment Note"
 msgstr "Betalingsnotitie"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_communication.py:0
+#, python-format
+msgid "Payment Reference"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__channel__phone
