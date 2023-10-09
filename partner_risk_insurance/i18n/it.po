@@ -20,7 +20,8 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
 msgid "Code assigned to this partner by the risk insurance company."
-msgstr "Codice assegnato a questo cliente dall'azienda di copertura dei rischi."
+msgstr ""
+"Codice assegnato a questo cliente dall'azienda di copertura dei rischi."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
@@ -75,13 +76,11 @@ msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
@@ -123,7 +122,6 @@ msgstr "Limite di Credito dell'Assicurazione"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
@@ -141,8 +139,7 @@ msgstr "Ultimo aggiornamento il"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid ""
-"Mark this field if an insurance was requested for the credit of this "
-"partner."
+"Mark this field if an insurance was requested for the credit of this partner."
 msgstr ""
 "Attiva questo campo se è stata richiesta un'assicurazione per il credito di "
 "questo cliente."
