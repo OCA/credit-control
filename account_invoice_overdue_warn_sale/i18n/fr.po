@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-08-28 16:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -55,7 +56,9 @@ msgstr "Solde des factures échues impayées"
 msgid ""
 "Overdue invoices total residual amount of the invoicing partner in company "
 "currency."
-msgstr "Total des soldes des factures échues impayées du partenaire de facturation dans la devise de la société."
+msgstr ""
+"Total des soldes des factures échues impayées du partenaire de facturation "
+"dans la devise de la société."
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model,name:account_invoice_overdue_warn_sale.model_sale_order
