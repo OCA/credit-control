@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-08-28 16:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -31,21 +32,6 @@ msgid "Company Currency"
 msgstr "Devise de la société"
 
 #. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__id
-msgid "ID"
-msgstr ""
-
-#. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
 msgid "Overdue Invoices Residual"
 msgstr "Solde des factures échues impayées"
@@ -55,12 +41,14 @@ msgstr "Solde des factures échues impayées"
 msgid ""
 "Overdue invoices total residual amount of the invoicing partner in company "
 "currency."
-msgstr "Total des soldes des factures échues impayées du partenaire de facturation dans la devise de la société."
+msgstr ""
+"Total des soldes des factures échues impayées du partenaire de facturation "
+"dans la devise de la société."
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model,name:account_invoice_overdue_warn_sale.model_sale_order
-msgid "Sales Order"
-msgstr "Bon de commande"
+msgid "Sale Order"
+msgstr ""
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
@@ -81,3 +69,12 @@ msgstr "a"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "overdue invoice(s)"
 msgstr "facture(s) échue(s) impayées(s)"
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid "Sales Order"
+#~ msgstr "Bon de commande"

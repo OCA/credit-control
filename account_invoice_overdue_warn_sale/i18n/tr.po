@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_overdue_warn_sale
+# 	* account_invoice_overdue_warn_sale
 #
 msgid ""
 msgstr ""
@@ -38,7 +38,9 @@ msgstr "Gecikmiş Faturalar Kalan"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,help:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
-msgid "Overdue invoices total residual amount of the invoicing partner in company currency."
+msgid ""
+"Overdue invoices total residual amount of the invoicing partner in company "
+"currency."
 msgstr ""
 "Vadesi geçmiş faturalar, faturalandırma ortağının şirket para birimi "
 "cinsinden kalan toplam tutarı."
