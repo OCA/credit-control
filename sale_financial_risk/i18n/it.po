@@ -115,7 +115,8 @@ msgstr "Questo ordine di vendita eccede il rischio finanziario.\n"
 #: code:addons/sale_financial_risk/models/sale.py:25
 #, python-format
 msgid "This sale order exceeds the sales orders risk.\n"
-msgstr "Questo ordine di vendita eccede il rischio finanziario delle vendite.\n"
+msgstr ""
+"Questo ordine di vendita eccede il rischio finanziario delle vendite.\n"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order
