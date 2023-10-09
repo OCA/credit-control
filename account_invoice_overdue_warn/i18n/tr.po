@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_overdue_warn
+# 	* account_invoice_overdue_warn
 #
 msgid ""
 msgstr ""
