@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-04 00:25+0000\n"
-"PO-Revision-Date: 2023-07-06 20:09+0000\n"
+"PO-Revision-Date: 2023-10-10 22:56+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
@@ -91,6 +91,8 @@ msgstr ""
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
 msgid "Can edit risk limit and overpass partner risk exceptions"
 msgstr ""
+"Puede editar los límites de riesgo financiero y saltar las excepciones de "
+"riesgo excedido"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -166,7 +168,7 @@ msgstr "Póliza de crédito"
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Límite de crédito específico para este socio."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
@@ -404,7 +406,7 @@ msgstr "Límite en otro saldo contable impagado"
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
 msgid "Manager"
-msgstr ""
+msgstr "Gerente"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
@@ -444,7 +446,7 @@ msgstr "Divisa de la lista de precios"
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
 msgid "Read only access to financial risk info"
-msgstr ""
+msgstr "Acceso de solo lectura a información de riesgo financiero"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
@@ -659,7 +661,7 @@ msgstr "Importe total de facturas borrador o pro-forma"
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
