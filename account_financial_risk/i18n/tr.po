@@ -25,8 +25,8 @@ msgid ""
 "<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
 "button.</strong>"
 msgstr ""
-"<strong>Eğer Yönetici iseniz, Tümünü Onayla butonunu kullanabilirsiniz. "
-"</strong>"
+"<strong>Eğer Yönetici iseniz, Tümünü Onayla butonunu kullanabilirsiniz. </"
+"strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
@@ -35,8 +35,8 @@ msgid ""
 "will be confirmed.</strong>"
 msgstr ""
 "<strong>Fauraları Onayla tuşuna basıldığında sadece risk "
-"derecelendirmesinden geçen iş ortaklarınını faturaları "
-"onaylanacaktır.</strong>"
+"derecelendirmesinden geçen iş ortaklarınını faturaları onaylanacaktır.</"
+"strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.account_invoice_confirm_view
