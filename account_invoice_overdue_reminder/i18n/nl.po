@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_overdue_reminder
+# 	* account_invoice_overdue_reminder
 #
 msgid ""
 msgstr ""
@@ -18,24 +18,32 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,body_html:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
-msgid "\n"
+msgid ""
+"\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "<p>Dear customer,</p>\n"
 "\n"
 "<p>According to our books, the following invoices are overdue:</p>\n"
 "\n"
-"<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;\">\n"
+"<table style=\"border-spacing: 0; border-collapse: collapse; width: 100%; "
+"text-align: center;\">\n"
 "    <tr>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Number</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Date</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Number</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Invoice Date</"
+"th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Payment Terms</"
+"th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Due Date</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Order Ref.</"
+"th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Type</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Total Untaxed</"
+"th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Total</th>\n"
 "        <th style=\"padding: 5px; border: 1px solid black;\">Residual</th>\n"
-"        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</th>\n"
+"        <th style=\"padding: 5px; border: 1px solid black;\">Past Reminders</"
+"th>\n"
 "    </tr>\n"
 "% for inv in object.invoice_ids.sorted(key='date_invoice'):\n"
 "    <tr style=\"background-color:\n"
@@ -43,16 +51,27 @@ msgid "\n"
 "            LightGray\n"
 "        % endif\n"
 "    \">\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_invoice)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.payment_term_id.name or ''}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${format_date(inv.date_due)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or ''}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${dict(inv.fields_get(allfields=['type'])['type']['selection'])[inv.type]}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;\">${format_amount(inv.residual_signed, inv.currency_id)}</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.overdue_reminder_counter}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.number}</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_invoice)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv."
+"payment_term_id.name or ''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">"
+"${format_date(inv.date_due)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv.name or "
+"''}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${dict(inv."
+"fields_get(allfields=['type'])['type']['selection'])[inv.type]}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.amount_untaxed_invoice_signed, inv.currency_id)}</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.amount_total_signed, inv.currency_id)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; text-align: right;"
+"\">${format_amount(inv.residual_signed, inv.currency_id)}</td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black;\">${inv."
+"overdue_reminder_counter}</td>\n"
 "    </tr>\n"
 "% endfor\n"
 "% for (currency, total_residual) in object.total_residual():\n"
@@ -63,32 +82,38 @@ msgid "\n"
 "        <td></td>\n"
 "        <td></td>\n"
 "        <td></td>\n"
-"        <td colspan=\"2\" style=\"padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;\">Total Residual in ${currency.name}:</td>\n"
-"        <td style=\"padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
+"        <td colspan=\"2\" style=\"padding: 5px; border: 1px solid black; "
+"font-weight: bold; text-align: right;\">Total Residual in ${currency.name}:</"
+"td>\n"
+"        <td style=\"padding: 5px; border: 1px solid black; font-weight: "
+"bold; text-align: right;\">${format_amount(total_residual, currency)}</td>\n"
 "        <td></td>\n"
 "    </tr>\n"
 "% endfor\n"
 "</table>\n"
 "\n"
-"<p>If you made a payment for these invoices a few days ago, please ignore this email.</p>\n"
+"<p>If you made a payment for these invoices a few days ago, please ignore "
+"this email.</p>\n"
 "\n"
 "% if object.company_id.overdue_reminder_attach_invoice:\n"
 "<p>You will find enclosed the overdue invoices.</p>\n"
 "% endif\n"
 "\n"
 "% if object.counter > 2:\n"
-"<p>Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days.</p>\n"
+"<p>Despite several reminders, we are disappointed to see that these overdue "
+"invoices are still unpaid. In order to avoid legal proceedings, we urge you "
+"to paid these overdue invoices in the next days.</p>\n"
 "% endif\n"
 "\n"
 "<p>Regards,</p>\n"
 "\n"
 "</div>\n"
-""
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,subject:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
-msgid "${object.company_id.name} - Overdue invoice reminder n°${object.counter}"
+msgid ""
+"${object.company_id.name} - Overdue invoice reminder n°${object.counter}"
 msgstr "${object.company_id.name} - Betalingsherinnering nr. ${object.counter}"
 
 #. module: account_invoice_overdue_reminder
@@ -126,7 +151,8 @@ msgstr "Openstaand"
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:56
 #, python-format
-msgid "An overdue reminder can only be attached to a customer invoice or credit note"
+msgid ""
+"An overdue reminder can only be attached to a customer invoice or credit note"
 msgstr ""
 "Een betalings herinnering kan alleen worden gekoppeld aan een klantfactuur "
 "of creditnota"
@@ -285,7 +311,8 @@ msgstr "Klant"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
-msgid "Customer has unreconciled payments/refunds. You should\n"
+msgid ""
+"Customer has unreconciled payments/refunds. You should\n"
 "                    reconcile these payments/refunds and start the overdue\n"
 "                    remind process again, or manually verify that these\n"
 "                    unreconciled payments/refunds have a good reason not to\n"
@@ -354,7 +381,10 @@ msgstr "Standaard Wizard-interface"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
-msgid "Despite several reminders, we are disappointed to see that these overdue invoices are still unpaid. In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next days."
+msgid ""
+"Despite several reminders, we are disappointed to see that these overdue "
+"invoices are still unpaid. In order to avoid legal proceedings, we urge you "
+"to paid these overdue invoices in the next days."
 msgstr ""
 "Ondanks eerdere herinneringen zijn deze facturen nog niet voldaan. Om extra "
 "kosten te voorkomen verzoeken wij u vriendelijk doch dringend het "
@@ -441,14 +471,16 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:416
 #, python-format
-msgid "For the reminder of customer '%s', the deadline is missing for the activity."
+msgid ""
+"For the reminder of customer '%s', the deadline is missing for the activity."
 msgstr ""
 "Ter herinnering aan klant '%s' ontbreekt de deadline voor de activiteit."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:412
 #, python-format
-msgid "For the reminder of customer '%s', you must assign someone for the activity."
+msgid ""
+"For the reminder of customer '%s', you must assign someone for the activity."
 msgstr ""
 "Ter herinnering aan klant '%s' moet u iemand aanwijzen voor de activiteit."
 
@@ -476,13 +508,17 @@ msgstr "ID"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
-msgid "If you made a payment for these invoices a few days ago, please ignore this letter."
+msgid ""
+"If you made a payment for these invoices a few days ago, please ignore this "
+"letter."
 msgstr "Mocht uw betaling onderweg zijn, dan kunt u deze brief negeren."
 
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:110
 #, python-format
-msgid "In order to start overdue reminders, you must make sure that customer payments are up-to-date."
+msgid ""
+"In order to start overdue reminders, you must make sure that customer "
+"payments are up-to-date."
 msgstr ""
 "Om betalingsherinnering te starten, moet u ervoor zorgen dat de betalingen "
 "van klanten up-to-date zijn."
@@ -733,7 +769,10 @@ msgstr "Aantal facturen"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_overdue_reminder_start__min_interval_days
-msgid "Odoo will not propose to send a reminder to a customer that already got a reminder for some of the same overdue invoices less than N days ago (N = Minimum Delay Since Last Reminder)."
+msgid ""
+"Odoo will not propose to send a reminder to a customer that already got a "
+"reminder for some of the same overdue invoices less than N days ago (N = "
+"Minimum Delay Since Last Reminder)."
 msgstr ""
 "Odoo zal niet voorstellen om een herinnering te sturen naar een klant die al "
 "een herinnering heeft gekregen voor een aantal van dezelfde vervallen "
@@ -742,7 +781,9 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_overdue_reminder_start__start_days
-msgid "Odoo will propose to send an overdue reminder to a customer if it has at least one invoice which is overdue for more than N days (N = trigger delay)."
+msgid ""
+"Odoo will propose to send an overdue reminder to a customer if it has at "
+"least one invoice which is overdue for more than N days (N = trigger delay)."
 msgstr ""
 "Odoo zal voorstellen om een achterstallige herinnering naar een klant te "
 "sturen als hij minstens één factuur heeft die meer dan N dagen te laat is (N "
@@ -857,7 +898,8 @@ msgstr "Betalingsherinnering Triggervertraging moet altijd positief zijn"
 #. module: account_invoice_overdue_reminder
 #: sql_constraint:res.company:0
 msgid "Overdue Reminder Trigger Delay must always be strictly positive"
-msgstr "Betalingsherinnering Triggervertraging moet altijd strikt positief zijn"
+msgstr ""
+"Betalingsherinnering Triggervertraging moet altijd strikt positief zijn"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model,name:account_invoice_overdue_reminder.model_overdue_reminder_step
@@ -1108,7 +1150,8 @@ msgstr "Gebruiker"
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:434
 #, python-format
-msgid "User company is different from action company. This should never happen."
+msgid ""
+"User company is different from action company. This should never happen."
 msgstr "Klant verschilt van het actiebedrijf. Dit mag nooit gebeuren."
 
 #. module: account_invoice_overdue_reminder
@@ -1147,7 +1190,9 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:323
 #, python-format
-msgid "You cannot make a reminder without selecting invoices. Instead you can click on the 'Skip' button."
+msgid ""
+"You cannot make a reminder without selecting invoices. Instead you can click "
+"on the 'Skip' button."
 msgstr ""
 "Je kunt geen herinnering maken zonder facturen te selecteren. In plaats "
 "daarvan kun je op de knop 'Overslaan' klikken."
