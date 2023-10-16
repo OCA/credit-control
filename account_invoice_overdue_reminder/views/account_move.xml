@@ -24,7 +24,7 @@
                         string="Send an overdue reminder"
                         type="action"
                         context="{'default_partner_ids': [commercial_partner_id]}"
-                        attrs="{'invisible': ['|', ('overdue', '=', False), ('no_overdue_reminder', '=', True)]}"
+                        attrs="{'invisible': ['|', '|', ('overdue', '=', False), ('no_overdue_reminder', '=', True), ('overdue_remind_sent', '=', True)]}"
                         class="oe_link"
                     />
 
@@ -41,6 +41,7 @@
                     <field name="no_overdue_reminder" />
                     <field name="commercial_partner_id" invisible="1" />
                     <field name="overdue" invisible="1" />
+                    <field name="overdue_remind_sent" invisible="1" />
                 </group>
                 <group name="overdue_reminder_lines">
                     <field name="overdue_reminder_ids" nolabel="1" colspan="2" />
