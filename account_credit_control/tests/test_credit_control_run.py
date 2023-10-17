@@ -13,6 +13,7 @@ from odoo.tests import tagged
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 
 
 @tagged("post_install", "-at_install")
@@ -20,11 +21,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
-
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
         )
-
         journal = cls.company_data["default_journal_sale"]
 
         account = cls.env["account.account"].create(
@@ -35,7 +35,6 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
                 "reconcile": True,
             }
         )
-
         tag_operation = cls.env.ref("account.account_tag_operating")
         analytic_account = cls.env["account.account"].create(
             {
@@ -47,9 +46,7 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             }
         )
         payment_term = cls.env.ref("account.account_payment_term_immediate")
-
         product = cls.env["product.product"].create({"name": "Product test"})
-
         cls.policy = cls.env.ref("account_credit_control.credit_control_3_time")
         cls.policy.write({"account_ids": [(6, 0, [account.id])]})
 
@@ -63,7 +60,6 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             {"name": "Partner", "property_account_receivable_id": account.id}
         )
         partner.credit_policy_id = cls.policy.id
-
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
 
         # Create an invoice
@@ -77,7 +73,6 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         invoice_form.partner_id = partner
         invoice_form.journal_id = journal
         invoice_form.invoice_payment_term_id = payment_term
-
         with invoice_form.invoice_line_ids.new() as invoice_line_form:
             invoice_line_form.product_id = product
             invoice_line_form.quantity = 1
@@ -85,7 +80,6 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             invoice_line_form.account_id = analytic_account
             invoice_line_form.tax_ids.clear()
         cls.invoice = invoice_form.save()
-
         cls.invoice.action_post()
 
     def test_check_run_date(self):
