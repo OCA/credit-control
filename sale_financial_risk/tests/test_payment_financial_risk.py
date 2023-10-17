@@ -7,6 +7,7 @@ from odoo.tests import tagged
 from odoo.tools import mute_logger
 
 from odoo.addons.account_payment.tests.common import AccountPaymentCommon
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 from odoo.addons.payment.tests.http_common import PaymentHttpCommon
 from odoo.addons.sale.tests.common import SaleCommon
 
@@ -16,9 +17,7 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(cls.env.context, tracking_disable=True, mail_create_nolog=True)
-        )
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.partner.risk_sale_order_limit = 1
         cls.partner.risk_sale_order_include = True
         cls.pricelist = cls.env["product.pricelist"].search(
