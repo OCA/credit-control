@@ -11,6 +11,7 @@ from odoo.tests import tagged
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 
 
 @tagged("post_install", "-at_install")
@@ -18,6 +19,7 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
         )
