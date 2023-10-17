@@ -14,7 +14,14 @@ class TestRiskSalePayment(PaymentCommon, PaymentHttpCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(
-            context=dict(cls.env.context, tracking_disable=True, mail_create_nolog=True)
+            context=dict(
+                cls.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
         )
         cls.partner.risk_sale_order_limit = 1
         cls.partner.risk_sale_order_include = True
