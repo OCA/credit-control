@@ -3,11 +3,14 @@
 
 from odoo.tests import TransactionCase
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 
 class TestPartnerSaleRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestPartnerSaleRisk, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
