@@ -50,7 +50,7 @@ class AccountMove(models.Model):
             if (
                 move.move_type == "out_invoice"
                 and move.state == "posted"
-                and move.payment_state == "not_paid"
+                and move.payment_state in ("not_paid", "partial")
                 and move.invoice_date_due
                 and move.invoice_date_due < today
             ):
