@@ -4,7 +4,7 @@
 {
     "name": "Sale Financial Risk Info",
     "summary": "Adds risk consumption info in sales orders.",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
