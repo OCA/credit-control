@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-04 00:25+0000\n"
-"PO-Revision-Date: 2023-09-28 17:30+0000\n"
+"PO-Revision-Date: 2023-10-28 15:45+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
@@ -89,7 +89,7 @@ msgstr "Transacción de pago"
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_amount
 msgid "Risk Amount"
-msgstr "Importede riesgo"
+msgstr "Importe de Riesgo"
 
 #. module: sale_financial_risk
 #: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
