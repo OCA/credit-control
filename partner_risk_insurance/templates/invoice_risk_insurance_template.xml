@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_invoice_risk_insurance_document">
+        <t t-call="web.external_layout">
+            <t t-set="insurance_total_amount" t-value="0" />
+            <t t-set="insurance_country_total" t-value="0" />
+            <t t-set="insurance_partial_total" t-value="0" />
+            <div class="page">
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td colspan="5">
+                                <center>
+                                    <h2>INVOICE LIST - COUNTRY - INSURED</h2>
+                                </center>
+                            </td>
+                        </tr>
+                        <t t-foreach="docs" t-as="move">
+                            <t t-if="move_first">
+                                <tr>
+                                    <td colspan="5">
+                                        <h2
+                                            t-if=" not move.partner_id.risk_insurance_grant_date"
+                                        >UNINSURED PARTNERS</h2>
+                                        <h2 t-else="">INSURED PARTNERS</h2>
+                                    </td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td><strong>Invoice</strong></td>
+                                    <td><strong>Partner Ref.</strong></td>
+                                    <td><strong>Partner Name</strong></td>
+                                    <td><strong>Total Amount</strong></td>
+                                    <td><strong>Date</strong></td>
+                                </tr>
+                            </t>
+                            <t
+                                t-if="move_first or move.partner_id.country_id != docs[move_index -1].partner_id.country_id"
+                            >
+                                <tr>
+                                    <td colspan="5">
+                                        <strong>
+                                            <t
+                                                t-out="move.partner_id.country_id.code"
+                                            />
+                                            -
+                                            <t
+                                                t-out="move.partner_id.country_id.name"
+                                            />
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td t-out="move.name" style="border: 1px solid black" />
+                                <td
+                                    t-out="move.partner_id.ref or ''"
+                                    style="border: 1px solid black"
+                                />
+                                <td
+                                    t-out="move.partner_id.name"
+                                    style="border: 1px solid black"
+                                />
+                                <td
+                                    t-out="move.amount_total"
+                                    t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                    style="border: 1px solid black"
+                                    align="right"
+                                >
+                                </td>
+                                <td
+                                    t-out="move.date"
+                                    style="border: 1px solid black"
+                                    align="right"
+                                />
+                                <t
+                                    t-set="insurance_country_total"
+                                    t-value="insurance_country_total + move.amount_total"
+                                />
+                            </tr>
+                            <t
+                                t-if="move_last or move.partner_id.country_id != docs[move_index + 1].partner_id.country_id"
+                            >
+                                <tr>
+                                    <td colspan="5" align="right">
+                                        <strong>
+                                            Total by country:
+                                            <t
+                                                t-out="insurance_country_total"
+                                                t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                            >
+                                            </t>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <t
+                                    t-set="insurance_partial_total"
+                                    t-value="insurance_partial_total + insurance_country_total"
+                                />
+                            </t>
+                            <t t-if="move_last">
+                                <tr>
+                                    <td colspan="5" align="right">
+                                        <strong>
+                                            Total insured customers:
+                                            <t
+                                                t-out="insurance_partial_total"
+                                                t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                                align="right"
+                                            >
+                                            </t>
+                                        </strong>
+                                        <t
+                                            t-set="insurance_total_amount"
+                                            t-value="insurance_total_amount + insurance_partial_total"
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <t
+                                    t-if="docs[move_index+1].partner_id.risk_insurance_grant_date and  not move.partner_id.risk_insurance_grant_date"
+                                >
+                                    <tr>
+                                        <td colspan="5" align="right">
+                                            <strong>
+                                                Total by country:
+                                                <t
+                                                    t-out="insurance_country_total"
+                                                    t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                                >
+                                                </t>
+                                            </strong>
+                                            <t
+                                                t-set="insurance_partial_total"
+                                                t-value="insurance_partial_total + insurance_country_total"
+                                            />
+                                            <t
+                                                t-set="insurance_country_total"
+                                                t-value="0"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" align="right">
+                                            <strong>
+                                                Total not insured customers:
+                                                <t
+                                                    t-out="insurance_partial_total"
+                                                    t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                                    align="right"
+                                                >
+                                                </t>
+                                            </strong>
+                                            <t
+                                                t-set="insurance_total_amount"
+                                                t-value="insurance_total_amount + insurance_partial_total"
+                                            />
+                                            <t
+                                                t-set="insurance_partial_total"
+                                                t-value="0"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <h2>INSURED PARTNERS</h2>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                            <tr>
+                                <td colspan="5" align="right">
+                                    <strong>
+                                        Total amount:
+                                        <t
+                                        t-out="insurance_total_amount"
+                                        t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
+                                    >
+                                        </t>
+                                     </strong>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_invoice_risk_insurance">
+        <t t-call="web.html_container">
+            <page>
+                <t
+                    t-call="partner_risk_insurance.report_invoice_risk_insurance_document"
+                />
+            </page>
+        </t>
+    </template>
+
+    <record
+        id="action_report_invoice_risk_insurance_template"
+        model="ir.actions.report"
+    >
+        <field name="name">Invoice Risk Insurance Report</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >partner_risk_insurance.report_invoice_risk_insurance</field>
+        <field
+            name="report_file"
+        >partner_risk_insurance.report_invoice_risk_insurance</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
