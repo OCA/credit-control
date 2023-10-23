@@ -12,9 +12,14 @@
     "license": "AGPL-3",
     "application": False,
     "website": "https://github.com/OCA/credit-control",
-    "depends": ["mail"],  # required for tracking=True attribute
+    "depends": ["mail", "account"],  # required for tracking=True attribute
     "category": "Credit Control",
-    "data": ["security/ir.model.access.csv", "views/res_partner_view.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/res_partner_view.xml",
+        "wizard/invoice_risk_insurance_wizard.xml",
+        "templates/invoice_risk_insurance_template.xml",
+    ],
     "installable": True,
     "maintainers": ["Daniel-CA", "sergio-teruel", "omar7r", "Tardo"],
 }
