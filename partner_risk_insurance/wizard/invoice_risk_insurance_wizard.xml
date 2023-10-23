@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="invoice_risk_insurance_form" model="ir.ui.view">
+        <field name="name">invoice.risk.insurance.form</field>
+        <field name="model">partner.risk.insurance.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="dates" string="Dates">
+                    <field name="date_from" />
+                    <field name="date_to" />
+                </group>
+                <footer>
+                    <button
+                        name="action_print_report"
+                        type="object"
+                        string="Print"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="invoice_risk_insurance_action" model="ir.actions.act_window">
+        <field name="name">Invoice Risk Insurance Report</field>
+        <field name="res_model">partner.risk.insurance.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="invoice_risk_insurance_menu"
+        action="invoice_risk_insurance_action"
+        sequence="10"
+        parent="account.account_reports_management_menu"
+    />
+</odoo>
