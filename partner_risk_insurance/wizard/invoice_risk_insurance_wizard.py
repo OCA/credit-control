@@ -33,8 +33,8 @@ class InvoiceRiskInsuranceWizard(models.TransientModel):
             )
         moves = moves.sorted(
             lambda m: (
-                m.partner_id.risk_insurance_grant_date and 1 or 0,
-                m.partner_id.country_id,
+                m.commercial_partner_id.risk_insurance_grant_date and 1 or 0,
+                m.commercial_partner_id.country_id,
                 m.name,
             )
         )
