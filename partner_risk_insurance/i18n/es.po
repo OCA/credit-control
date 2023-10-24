@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 10:15+0000\n"
-"PO-Revision-Date: 2023-10-24 12:16+0200\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-10-24 13:16+0000\n"
+"PO-Revision-Date: 2023-10-24 15:19+0200\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
@@ -30,17 +30,27 @@ msgstr "<strong>Factura</strong>"
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Partner Name</strong>"
-msgstr "<strong>Nombre del socio</strong>"
+msgstr "<strong>Nombre del cliente</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Partner Ref.</strong>"
-msgstr "<strong>Referencia del socio</strong>"
+msgstr "<strong>Ref. Cliente</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Total Amount</strong>"
 msgstr "<strong>Importe total</strong>"
+
+#. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
+msgid "<strong>Total amount:</strong>"
+msgstr "<strong>Importe total:</strong>"
+
+#. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
+msgid "<strong>Total by country:</strong>"
+msgstr "<strong>Total por país</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
@@ -128,9 +138,8 @@ msgid "ID"
 msgstr "ID"
 
 #. module: partner_risk_insurance
-#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.insurance_move_rows
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
-msgid "INSURED PARTNERS"
+msgid "INSURED CUSTOMERS"
 msgstr "CLIENTES ASEGURADOS"
 
 #. module: partner_risk_insurance
@@ -258,18 +267,8 @@ msgstr "Para"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
-msgid "Total amount:"
-msgstr "Importe total:"
-
-#. module: partner_risk_insurance
-#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
-msgid "Total by country:"
-msgstr "Total por país:"
-
-#. module: partner_risk_insurance
-#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "Total insured customers:"
-msgstr "Total clientes asegurados."
+msgstr "Total clientes asegurados:"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
@@ -277,24 +276,11 @@ msgid "Total not insured customers:"
 msgstr "Total clientes no asegurados:"
 
 #. module: partner_risk_insurance
-#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.insurance_move_rows
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
-msgid "UNINSURED PARTNERS"
+msgid "UNINSURED CUSTOMERS"
 msgstr "CLIENTES NO ASEGURADOS"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_partner_risk_insurance_wizard
 msgid "Wizard to see invoices sorted by risk"
 msgstr "Asistente para ver las facturas clasificadas por riesgo"
-
-#~ msgid "Total"
-#~ msgstr "Total"
-
-#~ msgid "customers:"
-#~ msgstr "clientes:"
-
-#~ msgid "insured"
-#~ msgstr "asegurado"
-
-#~ msgid "not insured"
-#~ msgstr "no asegurado"
