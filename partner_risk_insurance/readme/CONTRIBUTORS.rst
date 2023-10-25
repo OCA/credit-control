@@ -5,6 +5,7 @@
   * Sergio Teruel
   * Alexandre Díaz
   * Carlos Roca
+  * Stefan Ungureanu
 
 * `Greenice <https://www.greenice.com>`_:
 
