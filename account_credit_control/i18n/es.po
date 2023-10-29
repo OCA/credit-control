@@ -884,9 +884,7 @@ msgstr "Si están marcados, nuevos mensajes requiere su atención."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_sms_error
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si esta marcado, algunos mensajes ha tenido un error de envío."
 
@@ -1697,12 +1695,6 @@ msgid "Runs"
 msgstr "Ejecutar"
 
 #. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_sms_error
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error de envio SMS"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -1976,3 +1968,6 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error de envio SMS"

@@ -862,9 +862,7 @@ msgstr "Jos valittuna, uudet viestit vaativat toimenpiteitäsi."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_sms_error
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Jos valittuna, joidenkin viestien toimituksessa on virhe."
 
@@ -1627,12 +1625,6 @@ msgid "Runs"
 msgstr "Ajokerrat"
 
 #. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_sms_error
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Tekstiviestin toimitusvirhe"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -1902,3 +1894,6 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "luotonhallinnan kommunikaatio"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Tekstiviestin toimitusvirhe"
