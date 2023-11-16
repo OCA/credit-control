@@ -30,7 +30,7 @@ class AccountMove(models.Model):
         help="This counter is not increased in case of phone reminder.",
     )
     overdue_remind_sent = fields.Boolean(
-        compute="_compute_overdue_reminder", compute_sudo=True
+        compute="_compute_overdue_reminder_sent",
     )
     overdue = fields.Boolean(compute="_compute_overdue")
 
@@ -71,7 +71,13 @@ class AccountMove(models.Model):
                 all_counters.append(reminder.counter or 0)
             move.overdue_reminder_last_date = all_dates and max(all_dates) or False
             move.overdue_reminder_counter = all_counters and max(all_counters) or 0
-            # Overdue remind sent
+
+    @api.depends(
+        "company_id.overdue_reminder_min_interval_days",
+        "overdue_reminder_last_date",
+    )
+    def _compute_overdue_reminder_sent(self):
+        for move in self:
             today = fields.Date.context_today(self)
             min_interval_days = move.company_id.overdue_reminder_min_interval_days
             interval_date = today - relativedelta(days=min_interval_days)
