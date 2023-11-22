@@ -433,7 +433,7 @@ class ResPartner(models.Model):
                 field_value = getattr(partner, risk_field[0], 0.0)
                 max_value = getattr(partner, risk_field[1], 0.0)
                 include = getattr(partner, risk_field[2], False)
-                if include and max_value and field_value > max_value:
+                if max_value and field_value > max_value:
                     risk_exception = True
                     amount_exceeded += field_value - max_value
                 if include:
