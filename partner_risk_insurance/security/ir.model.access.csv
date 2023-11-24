@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_credit_policy_state_user,access_credit_policy_state_user,model_credit_policy_state,base.group_user,1,1,1,1
+partner_risk_insurance.access_partner_risk_insurance_wizard,access_partner_risk_insurance_wizard,partner_risk_insurance.model_partner_risk_insurance_wizard,base.group_user,1,1,1,1

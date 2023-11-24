@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_invoice_risk_insurance_document">
+        <t t-call="web.external_layout">
+            <t t-set="insurance_total_amount" t-value="0" />
+            <t t-set="insurance_country_total" t-value="0" />
+            <t t-set="insurance_partial_total" t-value="0" />
+            <t
+                t-set="is_insured_partner"
+                t-value="lambda move: move.commercial_partner_id.risk_insurance_grant_date"
+            />
+            <div class="page">
+                <table class="table table-sm o_main_table">
+                    <tbody>
+                        <tr>
+                            <td colspan="5" align="center">
+                                <h2>INVOICE LIST - COUNTRY - INSURED</h2>
+                            </td>
+                        </tr>
+                        <t t-foreach="docs" t-as="move">
+                            <t
+                                t-if="move_first or is_insured_partner(move) != is_insured_partner(docs[move_index-1])"
+                            >
+                                <tr>
+                                    <td colspan="5">
+                                        <h6
+                                            t-if="is_insured_partner(move)"
+                                        >INSURED CUSTOMERS</h6>
+                                        <h6 t-else="">UNINSURED CUSTOMERS</h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Invoice</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Partner Ref.</strong></td>
+                                    <td><strong>Partner Name</strong></td>
+                                    <td class="text-right"><strong
+                                        >Total Amount</strong></td>
+                                </tr>
+                            </t>
+                            <t
+                                t-if="move_first or move.commercial_partner_id.country_id != docs[move_index -1].partner_id.country_id"
+                            >
+                                <tr>
+                                    <td colspan="5">
+                                        <strong>
+                                            <t
+                                                t-out="move.commercial_partner_id.country_id.code"
+                                            />
+                                            -
+                                            <t
+                                                t-out="move.commercial_partner_id.country_id.name"
+                                            />
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span t-field="move.name" />
+                                </td>
+                                <td>
+                                    <span t-field="move.date" />
+                                </td>
+                                <td>
+                                    <span t-field="move.commercial_partner_id.ref" />
+                                </td>
+                                <td>
+                                    <span t-field="move.commercial_partner_id" />
+                                </td>
+                                <td align="right">
+                                    <span t-field="move.amount_total" />
+                                </td>
+                                <t
+                                    t-set="insurance_country_total"
+                                    t-value="insurance_country_total + move.amount_total"
+                                />
+                            </tr>
+                            <t
+                                t-if="move_last or move.commercial_partner_id.country_id != docs[move_index + 1].partner_id.country_id"
+                            >
+                                <tr>
+                                    <td colspan="4" align="right">
+                                        <strong>Total by country:</strong>
+                                    </td>
+                                    <td align="right">
+                                        <strong
+                                            t-out="insurance_country_total"
+                                            t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                        >
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <t
+                                    t-set="insurance_partial_total"
+                                    t-value="insurance_partial_total + insurance_country_total"
+                                />
+                                <t t-set="insurance_country_total" t-value="0" />
+                            </t>
+                            <t
+                                t-if="move_last or is_insured_partner(move) != is_insured_partner(docs[move_index+1])"
+                            >
+                                <tr>
+                                    <td colspan="4" align="right" class="text-bold">
+                                        <strong
+                                            t-if="is_insured_partner(move)"
+                                        >Total insured customers:</strong>
+                                        <strong
+                                            t-else=""
+                                        >Total not insured customers:</strong>
+                                    </td>
+                                    <td align="right">
+                                        <strong
+                                            t-out="insurance_partial_total"
+                                            t-options='{"widget": "monetary", "display_currency": move.currency_id}'
+                                            align="right"
+                                        />
+                                    </td>
+                                </tr>
+                                <t
+                                    t-set="insurance_total_amount"
+                                    t-value="insurance_total_amount + insurance_partial_total"
+                                />
+                                <t t-set="insurance_partial_total" t-value="0" />
+                            </t>
+                        </t>
+                        <tr>
+                            <td colspan="4" align="right">
+                                <strong>Total amount:</strong>
+                            </td>
+                            <td align="right">
+                                <strong
+                                    t-out="insurance_total_amount"
+                                    t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_invoice_risk_insurance">
+        <t t-call="web.html_container">
+            <page>
+                <t
+                    t-call="partner_risk_insurance.report_invoice_risk_insurance_document"
+                />
+            </page>
+        </t>
+    </template>
+
+    <record
+        id="action_report_invoice_risk_insurance_template"
+        model="ir.actions.report"
+    >
+        <field name="name">Invoice Risk Insurance Report</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >partner_risk_insurance.report_invoice_risk_insurance</field>
+        <field
+            name="report_file"
+        >partner_risk_insurance.report_invoice_risk_insurance</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
