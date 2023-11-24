@@ -61,7 +61,7 @@ class AccountMove(models.Model):
             all_dates = []
             all_counters = []
             # faster than 2 list comprehension because we loop only once?
-            for reminder in move.overdue_reminder_ids:
+            for reminder in move.overdue_reminder_ids.filtered(lambda m: m.action_date):
                 all_dates.append(reminder.action_date)
                 all_counters.append(reminder.counter or 0)
             move.overdue_reminder_last_date = all_dates and max(all_dates) or False
