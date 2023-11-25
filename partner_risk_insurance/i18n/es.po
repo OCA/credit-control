@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 13:16+0000\n"
-"PO-Revision-Date: 2023-10-24 15:19+0200\n"
-"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"PO-Revision-Date: 2023-11-25 10:36+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
@@ -237,7 +237,7 @@ msgstr "Estado de la póliza"
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
 msgid "Print"
-msgstr ""
+msgstr "Imprimir"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
