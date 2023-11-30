@@ -18,6 +18,7 @@
                                 context="{'default_partner_id': active_id, 'default_amount': credit_limit}"
                                 type="action"
                                 string="Change Limit"
+                                class="btn btn-secondary ml-2"
                             />
                         </div>
                     </group>
