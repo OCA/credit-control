@@ -57,6 +57,8 @@ msgid ""
 "                        <th style=\"padding: 5px; border: 1px solid black;"
 "\">Order Ref.</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Type</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
 "\">Total Untaxed</th>\n"
 "                        <th style=\"padding: 5px; border: 1px solid black;"
 "\">Total</th>\n"
@@ -67,7 +69,10 @@ msgid ""
 "                    </tr>\n"
 "                    <t t-foreach=\"object.invoice_ids."
 "sorted(key='invoice_date')\" t-as=\"inv\">\n"
-"                        <tr>\n"
+"                        <tr style=\"background-"
+"color:                             % if inv.move_type == "
+"'out_refund':                                 "
+"LightGray                             % endif                         \">\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black;\">\n"
 "                                <t t-out=\"inv.name\"></t>\n"
@@ -89,6 +94,9 @@ msgid ""
 "black;\">\n"
 "                                <t t-out=\"inv.ref or ''\"></t>\n"
 "                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\"><t t-out=\"dict(inv.fields_get(allfields=['move_type'])['move_type']"
+"['selection'])[inv.move_type]\"></t></td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black; text-align: right;\">\n"
 "                                <t t-out=\"format_amount(inv.amount_untaxed "
@@ -114,6 +122,7 @@ msgid ""
 "                    <t t-foreach=\"object.total_residual()\" t-as="
 "\"total_residual\">\n"
 "                        <tr>\n"
+"                            <td></td>\n"
 "                            <td></td>\n"
 "                            <td></td>\n"
 "                            <td></td>\n"
@@ -191,8 +200,9 @@ msgstr "Montant dû"
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:0
 #, python-format
-msgid "An overdue reminder can only be attached to a customer invoice"
-msgstr "Une relance d'impayé ne peut être attachée qu'à une facture client"
+msgid ""
+"An overdue reminder can only be attached to a customer invoice or credit note"
+msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_result_form
@@ -332,19 +342,14 @@ msgid "Customer"
 msgstr "Client"
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-#, python-format
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid ""
-"Customer '%s' has unreconciled payments/refunds. You should reconcile these "
-"payments/refunds and start the overdue remind process again (or check the "
-"option to confirm that these unreconciled payments/refunds have a good "
-"reason not to be reconciled with an open invoice)."
+"Customer has unreconciled payments/refunds. You should\n"
+"                    reconcile these payments/refunds and start the overdue\n"
+"                    reminder process again, or manually verify that these\n"
+"                    unreconciled payments/refunds have a good reason not to\n"
+"                    be reconciled with an open invoice."
 msgstr ""
-"Le client '%s' a des paiements/avoirs non lettrés. Veuillez lettrer ces "
-"paiements/avoirs et recommencer le process de relance d'impayés (ou cochez "
-"l'option qui confirme que ces paiments/avoirs non lettrés ont une bonne "
-"raison de ne pas être lettrés avec une facture ouverte)."
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__partner_ids
@@ -1135,15 +1140,6 @@ msgid "This overdue reminder result already exists"
 msgstr "Ce résultat de relance client existe déjà"
 
 #. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__unreconciled_move_line_normal
-msgid ""
-"To check if unreconciled payments/refunds above have a good reason not to be "
-"reconciled with an open invoice"
-msgstr ""
-"A cocher si les paiements/avoirs ci-dessus ont une bonne raison de ne pas "
-"être lettrés avec une facture ouverte"
-
-#. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
 msgid "Total"
@@ -1267,6 +1263,29 @@ msgstr "jours"
 msgid ""
 "{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}"
 msgstr ""
+
+#, python-format
+#~ msgid "An overdue reminder can only be attached to a customer invoice"
+#~ msgstr "Une relance d'impayé ne peut être attachée qu'à une facture client"
+
+#, python-format
+#~ msgid ""
+#~ "Customer '%s' has unreconciled payments/refunds. You should reconcile "
+#~ "these payments/refunds and start the overdue remind process again (or "
+#~ "check the option to confirm that these unreconciled payments/refunds have "
+#~ "a good reason not to be reconciled with an open invoice)."
+#~ msgstr ""
+#~ "Le client '%s' a des paiements/avoirs non lettrés. Veuillez lettrer ces "
+#~ "paiements/avoirs et recommencer le process de relance d'impayés (ou "
+#~ "cochez l'option qui confirme que ces paiments/avoirs non lettrés ont une "
+#~ "bonne raison de ne pas être lettrés avec une facture ouverte)."
+
+#~ msgid ""
+#~ "To check if unreconciled payments/refunds above have a good reason not to "
+#~ "be reconciled with an open invoice"
+#~ msgstr ""
+#~ "A cocher si les paiements/avoirs ci-dessus ont une bonne raison de ne pas "
+#~ "être lettrés avec une facture ouverte"
 
 #~ msgid "Close"
 #~ msgstr "Fermer"
