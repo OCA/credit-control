@@ -80,16 +80,16 @@
             <group
                     attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
                     string="WARNING: unreconciled payments/refunds"
+                    col="1"
                 >
+                <p>
+                    Customer has unreconciled payments/refunds. You should
+                    reconcile these payments/refunds and start the overdue
+                    remind process again, or manually verify that these
+                    unreconciled payments/refunds have a good reason not to
+                    be reconciled with an open invoice.
+                </p>
                 <field name="warn_unreconciled_move_line_ids" nolabel="1" />
-            </group>
-            <group
-                    attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
-                >
-                <div name="unreconciled_move_line_normal">
-                    <field name="unreconciled_move_line_normal" class="oe_inline" />
-                    <label for="unreconciled_move_line_normal" />
-                </div>
             </group>
             <group name="invoices">
                 <field name="invoice_ids" nolabel="1">
