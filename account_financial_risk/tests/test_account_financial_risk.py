@@ -13,14 +13,13 @@ from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 class TestPartnerFinancialRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPartnerFinancialRisk, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
         cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
         cls.env.user.groups_id |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
-        tax_group_taxes = cls.env.ref("account.tax_group_taxes")
         main_company = cls.env.ref("base.main_company")
         cls.cr.execute(
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
@@ -77,7 +76,14 @@ class TestPartnerFinancialRisk(TransactionCase):
             {
                 "name": "Tax for sale 10%",
                 "type_tax_use": "sale",
-                "tax_group_id": tax_group_taxes.id,
+                "tax_group_id": cls.env["account.tax.group"]
+                .with_company(cls.env.company.id)
+                .create(
+                    {
+                        "name": "Tax Group TEST",
+                    }
+                )
+                .id,
                 "amount_type": "percent",
                 "amount": 10.0,
             }

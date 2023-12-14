@@ -60,18 +60,12 @@ msgstr "Autoriser la validation de la facture sur le risque"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
-"Always allow the validation of draft invoices.\n"
-"                            Useful when the flow comes from sales orders and "
-"the\n"
-"                                over-risk\n"
-"                            has already been allowed when confirming these."
+"Always allow the validation of draft "
+"invoices.                                 Useful when the flow comes from "
+"sales orders and the                                     over-"
+"risk                                 has already been allowed when "
+"confirming these."
 msgstr ""
-"Toujours autoriser la validation des factures brouillons.\n"
-"                            Utile quand le flux vient des commandes de "
-"ventes et que\n"
-"                                le sur-risque\n"
-"                            a déjà été autorisé quand la commande a été "
-"confirmée."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -172,21 +166,9 @@ msgid "Customer"
 msgstr "Client"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"Days after due date to set an invoice as unpaid.\n"
-"                            The change of this field recompute all partners "
-"risk, be\n"
-"                                patient."
-msgstr ""
-"Journées après la mdate d'échéance pour marquer une facture comme impayée.\n"
-"                            Un changement dans ce champ recalcule tous les "
-"risques sur les contacts, soyez\n"
-"                                patient."
-
-#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
@@ -349,11 +331,6 @@ msgstr "Pièces comptables"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
 msgstr ""
-
-#. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
@@ -659,6 +636,36 @@ msgstr ""
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
 msgstr "Valider les écritures comptables"
+
+#~ msgid ""
+#~ "Always allow the validation of draft invoices.\n"
+#~ "                            Useful when the flow comes from sales orders "
+#~ "and the\n"
+#~ "                                over-risk\n"
+#~ "                            has already been allowed when confirming "
+#~ "these."
+#~ msgstr ""
+#~ "Toujours autoriser la validation des factures brouillons.\n"
+#~ "                            Utile quand le flux vient des commandes de "
+#~ "ventes et que\n"
+#~ "                                le sur-risque\n"
+#~ "                            a déjà été autorisé quand la commande a été "
+#~ "confirmée."
+
+#~ msgid ""
+#~ "Days after due date to set an invoice as unpaid.\n"
+#~ "                            The change of this field recompute all "
+#~ "partners risk, be\n"
+#~ "                                patient."
+#~ msgstr ""
+#~ "Journées après la mdate d'échéance pour marquer une facture comme "
+#~ "impayée.\n"
+#~ "                            Un changement dans ce champ recalcule tous "
+#~ "les risques sur les contacts, soyez\n"
+#~ "                                patient."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
 
 #~ msgid "Can Overpass Partner Risk Exceptions"
 #~ msgstr "Outrepasser les exceptions de risque partenaire"

@@ -4,7 +4,7 @@
 {
     "name": "Account Financial Risk",
     "summary": "Manage customer risk",
-    "version": "16.0.1.2.2",
+    "version": "17.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
