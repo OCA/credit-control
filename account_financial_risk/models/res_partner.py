@@ -274,10 +274,8 @@ class ResPartner(models.Model):
         max_date = self._max_risk_date_due()
         company_domain = self._get_risk_company_domain()
         fields = [
-            "partner_id",
-            "account_id",
-            "amount_residual",
-            "amount_residual_currency",
+            "amount_residual:sum",
+            "amount_residual_currency:sum",
         ]
         groupby = ["partner_id", "account_id", "currency_id"]
         return {
@@ -350,12 +348,10 @@ class ResPartner(models.Model):
             return  # pragma: no cover
         groups = self._risk_account_groups()
         for _key, group in groups.items():
-            group["read_group"] = self.env["account.move.line"].read_group(
-                group["domain"] + [("partner_id", "in", customers.ids)],
-                group["fields"],
-                group["group_by"],
-                orderby="id",
-                lazy=False,
+            group["read_group"] = self.env["account.move.line"]._read_group(
+                domain=group["domain"] + [("partner_id", "in", customers.ids)],
+                groupby=group["group_by"],
+                aggregates=group["fields"],
             )
         for partner in customers:
             partner.update(partner._prepare_risk_account_vals(groups))
@@ -369,53 +365,69 @@ class ResPartner(models.Model):
             "risk_account_amount_unpaid": 0.0,
         }
         # Partner receivable account determines if amount is in invoice field
-        for reg in groups["draft"]["read_group"]:
-            if reg["partner_id"][0] not in self.ids:
+        for (
+            partner,
+            account,
+            currency,  # noqa: B007
+            amount_residual,
+            amount_residual_currency,  # noqa: B007
+        ) in groups["draft"]["read_group"]:
+            if partner.id not in self.ids:
                 continue  # pragma: no cover
-            account = self.env["account.account"].browse(reg["account_id"][0])
             vals["risk_invoice_draft"] += account.company_id.currency_id._convert(
-                reg["amount_residual"],
+                amount_residual,
                 self.risk_currency_id,
                 account.company_id,
                 fields.Date.context_today(self),
                 round=False,
             )
-        for reg in groups["open"]["read_group"]:
-            if reg["partner_id"][0] not in self.ids:
+        for (
+            partner,
+            account,
+            currency,
+            amount_residual,
+            amount_residual_currency,
+        ) in groups["open"]["read_group"]:
+            if partner.id not in self.ids:
                 continue  # pragma: no cover
-            account = self.env["account.account"].browse(reg["account_id"][0])
-            if self.property_account_receivable_id.id == reg["account_id"][0]:
+            if self.property_account_receivable_id.id == account.id:
                 vals["risk_invoice_open"] += self._get_amount_in_risk_currency(
-                    reg, account
+                    currency, amount_residual_currency, amount_residual, account
                 )
             else:
                 vals["risk_account_amount"] += self._get_amount_in_risk_currency(
-                    reg, account
+                    currency, amount_residual_currency, amount_residual, account
                 )
-        for reg in groups["unpaid"]["read_group"]:
-            if reg["partner_id"][0] not in self.ids:
+        for (
+            partner,
+            account,
+            currency,
+            amount_residual,
+            amount_residual_currency,
+        ) in groups["unpaid"]["read_group"]:
+            if partner.id not in self.ids:
                 continue  # pragma: no cover
-            account = self.env["account.account"].browse(reg["account_id"][0])
-            if self.property_account_receivable_id.id == reg["account_id"][0]:
+            if self.property_account_receivable_id.id == account.id:
                 vals["risk_invoice_unpaid"] += self._get_amount_in_risk_currency(
-                    reg, account
+                    currency, amount_residual_currency, amount_residual, account
                 )
             else:
                 vals["risk_account_amount_unpaid"] += self._get_amount_in_risk_currency(
-                    reg, account
+                    currency, amount_residual_currency, amount_residual, account
                 )
         return vals
 
-    def _get_amount_in_risk_currency(self, group, account):
+    def _get_amount_in_risk_currency(
+        self, currency, amount_residual_currency, amount_residual, account
+    ):
         acc_currency_id = account.company_id.currency_id.id
         risk_currency_id = self.risk_currency_id.id
-        group_currency_id = group["currency_id"][0]
-        if group_currency_id == risk_currency_id:
-            return group["amount_residual_currency"]
+        if currency.id == risk_currency_id:
+            return amount_residual_currency
         elif acc_currency_id == risk_currency_id:
-            return group["amount_residual"]
+            return amount_residual
         return account.company_id.currency_id._convert(
-            group["amount_residual"],
+            amount_residual,
             self.risk_currency_id,
             account.company_id,
             fields.Date.context_today(self),
