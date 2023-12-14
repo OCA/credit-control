@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+        <!-- Account Tax Group -->
+        <record id="tax_group_taxes" model="account.tax.group">
+            <field name="name">Taxes</field>
+            <field name="sequence">0</field>
+        </record>
+</odoo>
