@@ -59,11 +59,11 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
-"Always allow the validation of draft invoices.\n"
-"                            Useful when the flow comes from sales orders and "
-"the\n"
-"                                over-risk\n"
-"                            has already been allowed when confirming these."
+"Always allow the validation of draft "
+"invoices.                                 Useful when the flow comes from "
+"sales orders and the                                     over-"
+"risk                                 has already been allowed when "
+"confirming these."
 msgstr ""
 
 #. module: account_financial_risk
@@ -166,17 +166,9 @@ msgid "Customer"
 msgstr "Kunde"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
-msgid ""
-"Days after due date to set an invoice as unpaid.\n"
-"                            The change of this field recompute all partners "
-"risk, be\n"
-"                                patient."
-msgstr ""
-
-#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
@@ -337,11 +329,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
 msgstr ""
-
-#. module: account_financial_risk
-#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
-msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
@@ -651,6 +638,9 @@ msgstr ""
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zuletzt geändert am"
 
 #, fuzzy
 #~ msgid "Info Risk"
