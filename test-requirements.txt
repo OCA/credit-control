@@ -1,0 +1,4 @@
+odoo14-addon-base-upflow @ git+https://github.com/OCA/credit-control.git@refs/pull/344/head#subdirectory=setup/base_upflow
+# Those PRs allows to save HTTP responses on EDI Exchange
+odoo14-addon-webservice @ git+https://github.com/OCA/web-api.git@refs/pull/22/head#subdirectory=setup/webservice
+odoo14-addon-edi_webservice_oca @ git+https://github.com/OCA/edi.git@refs/pull/787/head#subdirectory=setup/edi_webservice_oca

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Foodles (http://www.foodles.co).
+     @author Pierre Verkest <pierreverkest84@gmail.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record model="ir.ui.view" id="webservice_backend_form_view">
+        <field name="name">webservice.backend.form (in webservice)</field>
+        <field name="model">webservice.backend</field>
+        <field name="inherit_id" ref="webservice.webservice_backend_form_view" />
+        <field name="arch" type="xml">
+            <field name="api_key_header" position="after">
+                <field
+                    name="upflow_api_key"
+                    attrs="{
+                        'invisible': [('auth_type', '!=', 'upflow')],
+                        'required': [('auth_type', '=', 'upflow')],
+                    }"
+                />
+                <field
+                    name="upflow_api_secret"
+                    attrs="{
+                        'invisible': [('auth_type', '!=', 'upflow')],
+                        'required': [('auth_type', '=', 'upflow')],
+                    }"
+                    password="True"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
