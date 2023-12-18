@@ -1,0 +1,250 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_upflow
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__card
+msgid "Card"
+msgstr "Carte"
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__cash
+msgid "Cash"
+msgstr "Espèces"
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__check
+msgid "Check"
+msgstr "Chèque"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_res_currency
+msgid "Currency"
+msgstr "Devise"
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__direct_debit
+msgid "Direct Debit"
+msgstr "Prélèvement bancaire"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_full_reconcile__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_account_journal__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_account_move__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment_method__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_res_currency__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__display_name
+#: model:ir.model.fields,field_description:base_upflow.field_upflow_mixin__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_account_full_reconcile
+msgid "Full Reconcile"
+msgstr "Lettrage (complet)"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_full_reconcile__id
+#: model:ir.model.fields,field_description:base_upflow.field_account_journal__id
+#: model:ir.model.fields,field_description:base_upflow.field_account_move__id
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment__id
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment_method__id
+#: model:ir.model.fields,field_description:base_upflow.field_res_currency__id
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__id
+#: model:ir.model.fields,field_description:base_upflow.field_upflow_mixin__id
+msgid "ID"
+msgstr ""
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_full_reconcile____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_account_journal____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_account_move____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment_method____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_res_currency____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner____last_update
+#: model:ir.model.fields,field_description:base_upflow.field_upflow_mixin____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_account_payment_method
+msgid "Payment Methods"
+msgstr "Méthode de paiement"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__unknown
+msgid "Unknown"
+msgstr "Non spécifié"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_bank_statement_line__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_account_move__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_fsm_location__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_fsm_person__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_res_users__upflow_direct_url
+#: model:ir.model.fields,field_description:base_upflow.field_upflow_mixin__upflow_direct_url
+msgid "Upflow Direct Url"
+msgstr "Lien direct upflow"
+
+#. module: base_upflow
+#: model_terms:ir.ui.view,arch_db:base_upflow.view_move_form
+#: model_terms:ir.ui.view,arch_db:base_upflow.view_partner_form
+msgid "Upflow Info"
+msgstr "Info upflow"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_bank_statement_line__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_account_move__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_fsm_location__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_fsm_person__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_res_users__upflow_uuid
+#: model:ir.model.fields,field_description:base_upflow.field_upflow_mixin__upflow_uuid
+msgid "Upflow Uuid"
+msgstr "Identifiant upflow"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_journal__upflow_bank_account_uuid
+msgid "Upflow bank account technical id"
+msgstr "Identifiant technique upflow compte en banque."
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_account_payment_method__upflow_instrument
+msgid "Upflow instrument"
+msgstr "Moyen de paiement upflow"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_upflow_mixin
+msgid "Upflow mixin to add common fields and behaviour"
+msgstr "Mixin pour l'ajout de champs et comportement commun lié à upflow"
+
+#. module: base_upflow
+#: model:ir.model.fields,help:base_upflow.field_account_journal__upflow_bank_account_uuid
+msgid "Upflow.io bank account UUID linked to payment done in this journal."
+msgstr "Identifant technique upflow du compte bancaire lié aux paiements effectué dans ce journal."
+
+#. module: base_upflow
+#: model:ir.model.fields,help:base_upflow.field_account_payment_method__upflow_instrument
+msgid "Used by upflow.io integration to set payment instrument field"
+msgstr "Utilisé par l'intégration avec upflow.ui pour définir le moyen de paiement."
+
+#. module: base_upflow
+#: model:ir.model.fields.selection,name:base_upflow.selection__account_payment_method__upflow_instrument__wire_transfer
+msgid "Wire Transfer"
+msgstr "Virement bancaire"
+
+#. module: base_upflow
+#: code:addons/base_upflow/models/account_move.py:0
+#, python-format
+msgid ""
+"You try to get upflow PDF payload on account entry %s with an unexpected "
+"type %s (expected out_invoice or out_refund)"
+msgstr ""
+"Vous essayez de générer le PDF pour upflow sur une pièce comptable %s "
+"dont le type %s n'est pas reconnu (attendu out_invoice out out_refund)"
+
+#. module: base_upflow
+#: code:addons/base_upflow/models/account_move.py:0
+#, python-format
+msgid ""
+"You try to get upflow invoice payload on account entry %s with an other type"
+" %s (expected out_invoice)"
+msgstr ""
+"Vous essayez de générer des données pour upflow pour la facture %s "
+"dont le type %s n'est pas reconnu (attendu out_invoice)"
+
+
+#. module: base_upflow
+#: code:addons/base_upflow/models/account_move.py:0
+#, python-format
+msgid ""
+"You try to get upflow refund payload on account entry %s with an other type "
+"%s (expected out_refund)"
+msgstr ""
+"Vous essayez de générer des données pour upflow pour l'avoir %s "
+"dont le type %s n'est pas reconnu (attendu out_refund)"
+
+#. module: base_upflow
+#: model:res.partner.upflow.position,name:base_upflow.upflow_res_partner_upflow_position_accounting
+msgid "Accounting"
+msgstr "Comptable"
+
+#. module: base_upflow
+#: model:res.partner.upflow.position,name:base_upflow.upflow_res_partner_upflow_position_payer
+msgid "Payer"
+msgstr "Payeur"
+
+#. module: base_upflow
+#: model:res.partner.upflow.position,name:base_upflow.upflow_res_partner_upflow_position_purchaser
+msgid "Purchaser"
+msgstr "Acheteur"
+
+#. module: base_upflow
+#: model:res.partner.upflow.position,name:base_upflow.upflow_res_partner_upflow_position_sales
+msgid "Sales"
+msgstr "Commerciale"
+
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner_upflow_position__name
+#: model:ir.ui.menu,name:base_upflow.base_upflow_menu_position
+#: model:ir.actions.act_window,name:base_upflow.action_res_partner_position
+msgid "Position"
+msgstr "Fonction"
+
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__upflow_position_id
+msgid "Position (Upflow)"
+msgstr "Fonction (Upflow)"
+
+#. module: base_upflow
+#: model:ir.model.fields,help:base_upflow.field_res_partner__upflow_position_id
+msgid "Position of the contact in the company"
+msgstr "Fonction du contact au sein de la société"
+
+#. module: base_upflow
+#: model:ir.model,name:base_upflow.model_res_partner_upflow_position
+msgid "Upflow Partner Position"
+msgstr "Fonction du contact upflow"
+
+#. module: base_upflow
+#: model:ir.model.fields,field_description:base_upflow.field_res_partner__main_contact_id
+msgid "Main contact"
+msgstr "Contact principal"
