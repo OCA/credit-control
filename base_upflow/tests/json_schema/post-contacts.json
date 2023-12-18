@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "source: https://upflow.docs.apiary.io/#reference/0/contacts/create-customer-contact",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "position": {
+      "enum": ["ACCOUNTING", "SALES", "PAYER", "PURCHASER"]
+    },
+    "externalId": {
+      "type": "string"
+    },
+    "isMain": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": "string"
+    }
+  },
+  "$comment": "TODO: I'm (PV) not sure in customers API endpoint if id is required",
+  "required": ["email"]
+}
