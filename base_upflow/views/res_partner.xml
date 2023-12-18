@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Foodles (http://www.foodles.co).
+     @author Pierre Verkest <pierreverkest84@gmail.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <page name='internal_notes' position="before">
+               <page
+                    id="upflow"
+                    string="Upflow Info"
+                    attrs="{'invisible': [('upflow_uuid', '=', False)]}"
+                >
+                    <group>
+                         <field name="upflow_uuid" groups="base.group_no_one" />
+
+                         <field
+                            class="text-wrap"
+                            name="upflow_direct_url"
+                            widget="url"
+                            options="{'website_path': True}"
+                            text="Click to see it in upfow.io"
+                        />
+                    </group>
+               </page>
+            </page>
+            <field name="function" position="after">
+                <field
+                    name="upflow_position_id"
+                    widget="selection"
+                    attrs="{'invisible': [('parent_id', '=', False)]}"
+                />
+            </field>
+
+            <xpath
+                expr="//page[@name='contact_addresses']/field[@name='child_ids']/form[1]//field[@name='function']"
+                position="after"
+            >
+                 <field name="upflow_position_id" widget="selection" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_account_property_form">
+        <field name="name">res.partner.form.account.property</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='accounting']//group[@name='accounting_entries']"
+                position="after"
+            >
+                <group>
+                    <field
+                        name="main_contact_id"
+                        options="{'no_quick_create':True,'no_create_edit':True,}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

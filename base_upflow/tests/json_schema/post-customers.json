@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "source: https://upflow.docs.apiary.io/#reference/0/customers/import-customer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "vatNumber": {
+      "type": "string"
+    },
+    "accountingRef": {
+      "type": "string"
+    },
+    "externalId": {
+      "type": "string"
+    },
+    "accountManagerId": {
+      "type": "string"
+    },
+    "dunningPlanId": {
+      "type": "string"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    },
+    "parent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentMethods": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "check": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "achDebit": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "sepaDebit": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "goCardless": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "wireTransfer": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "bankAccount": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            },
+            "bankAccounts": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "customFields": {
+      "type": "array"
+    },
+    "contacts": {
+      "type": "array"
+    }
+  },
+  "required": ["name"]
+}
