@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-22 07:46+0000\n"
-"PO-Revision-Date: 2023-07-18 16:09+0000\n"
+"PO-Revision-Date: 2023-12-19 15:06+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
@@ -368,7 +368,7 @@ msgstr "Modo de cálculo"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de Config"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_partner
@@ -741,7 +741,7 @@ msgstr "Plantilla de correo"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Asistente de redacción de correo electrónico"
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__email_error
@@ -792,7 +792,7 @@ msgstr "Seguidores (socios)"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__activity_type_icon
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icono de fuente impresionante, por ejemplo fa-tasks"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__do_nothing
@@ -1315,6 +1315,8 @@ msgstr "Importe pendiente"
 msgid ""
 "Open balance on credit control linesof same partner, policy and currency"
 msgstr ""
+"Saldo pendiente en las líneas de control de crédito del mismo socio, póliza "
+"y divisa"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1461,6 +1463,22 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Nuestros registros indican que aún no hemos recibido el pago de las facturas "
+"mencionadas en el documento adjunto a pesar de nuestro recordatorio.\n"
+"  <br>\n"
+"  <br>\n"
+"  Si el pago ya se ha enviado, ignore este aviso. De lo contrario, proceda "
+"con el pago.<br>\n"
+"  Si su pago no ha sido recibido en los próximos 5 días, su expediente será "
+"transferido a nuestra deuda<br>\n"
+"  agencia de cobranza.<br>\n"
+"  <br>\n"
+"  Si necesita que le organicemos un plan de pago, infórmenos.<br>\n"
+"  Se adjunta un estado de cuenta del cliente para su comodidad.<br>\n"
+"  <br>\n"
+"  Gracias de antemano por su cooperación anticipada en este asunto.<br>\n"
+"  <br>\n"
+"  Atentamente"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
@@ -1479,6 +1497,20 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Nuestros registros indican que aún no hemos recibido el pago de las facturas "
+"mencionadas en el documento adjunto a pesar de nuestros dos "
+"recordatorios.<br>\n"
+"  Si el pago ya se ha enviado, ignore este aviso. De lo contrario, proceda "
+"con el pago.<br>\n"
+"  Si su pago no ha sido recibido en los próximos 5 días, su expediente será "
+"transferido a nuestra agencia de cobro de deudas.<br>\n"
+"  <br>\n"
+"  Si necesita que le organicemos un plan de pago, infórmenos.<br>\n"
+"  Se adjunta un estado de cuenta del cliente para su comodidad.<br>\n"
+"  <br>\n"
+"  Gracias de antemano por su cooperación anticipada en este asunto.<br>\n"
+"  <br>\n"
+"  Atentamente"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -1501,6 +1533,23 @@ msgid ""
 "            Best regards\n"
 "        "
 msgstr ""
+"Nuestros registros indican que todavía no hemos recibido el pago de la "
+"factura mencionada a continuación a pesar de nuestro recordatorio.\n"
+"\n"
+"            Si el pago ya se ha enviado, ignore este aviso. En caso "
+"contrario, proceda con el pago.\n"
+"            Si su pago no ha sido recibido en los próximos 5 días, su "
+"expediente será transferido a nuestra agencia de cobro de deudas.\n"
+"\n"
+"            Si necesita que le organicemos un plan de pago, por favor "
+"avísenos.\n"
+"            Se adjunta un estado de cuenta del cliente para su comodidad.\n"
+"\n"
+"            Gracias de antemano por su cooperación anticipada en este asunto."
+"\n"
+"\n"
+"            Atentamente\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
@@ -1747,7 +1796,7 @@ msgstr "Establecer nueva política"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Set to ready all"
-msgstr ""
+msgstr "Establecer como preparado todo"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
@@ -1844,7 +1893,7 @@ msgstr "El menor nivel no puede ser de tipo Recordatorio previo"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are to do using the Actions."
-msgstr ""
+msgstr "Estas líneas se deben hacer utilizando las Acciones."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
