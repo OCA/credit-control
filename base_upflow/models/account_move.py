@@ -3,13 +3,31 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import base64
 
-from odoo import _, models
+from odoo import _,fields, models
 from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
     _name = "account.move"
     _inherit = ["account.move", "upflow.mixin"]
+
+    upflow_commercial_partner_id = fields.Many2one(
+        "res.partner",
+        compute="_compute_upflow_commercial_partner_id",
+        help="Technical field to get the upflow customer to use on account move",
+    )
+
+    def _compute_upflow_commercial_partner_id(self):
+        # while using OD as counter part or bank statement
+        # there are chance that partner_id is not set on account.move
+        # so we try to get the information on first receivable account.move.line
+        for move in self:
+            self.upflow_commercial_partner_id = (
+                self.partner_id.commercial_partner_id
+                or self.line_ids.filtered(
+                    lambda line: line.account_id.user_type_id.type == "receivable"
+                ).partner_id.commercial_partner_id
+            )
 
     def _format_upflow_amount(self, amount, currency=None):
         if not currency:
@@ -29,7 +47,7 @@ class AccountMove(models.Model):
                 "netAmount": self._format_upflow_amount(self.amount_untaxed),
                 "customer": {
                     # "id": self.partner_id.commercial_partner_id.upflow_uuid,
-                    "externalId": str(self.partner_id.commercial_partner_id.id),
+                    "externalId": str(self.upflow_commercial_partner_id.id),
                 },
             }
         )
@@ -101,8 +119,6 @@ class AccountMove(models.Model):
         return self._prepare_upflow_payment_api_payload()
 
     def _prepare_upflow_payment_api_payload(self):
-        # TODO: we probably wants to check we are linked to a bank journal
-        # assert self.journal_id.type == 'bank'
         payload = self.prepare_base_payload()
         payload.update(
             {
@@ -111,7 +127,7 @@ class AccountMove(models.Model):
                 "validatedAt": self.date.isoformat(),
                 "customer": {
                     # "id": self.partner_id.commercial_partner_id.upflow_uuid,
-                    "externalId": str(self.partner_id.commercial_partner_id.id),
+                    "externalId": str(self.upflow_commercial_partner_id.id),
                 },
             }
         )
