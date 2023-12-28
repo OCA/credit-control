@@ -2,6 +2,8 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 
@@ -26,6 +28,9 @@ class AccountMove(models.Model):
         store=True,
         compute="_compute_overdue_reminder",
         help="This counter is not increased in case of phone reminder.",
+    )
+    overdue_remind_sent = fields.Boolean(
+        compute="_compute_overdue_reminder_sent",
     )
     overdue = fields.Boolean(compute="_compute_overdue")
 
@@ -66,3 +71,15 @@ class AccountMove(models.Model):
                 all_counters.append(reminder.counter or 0)
             move.overdue_reminder_last_date = all_dates and max(all_dates) or False
             move.overdue_reminder_counter = all_counters and max(all_counters) or 0
+
+    @api.depends(
+        "company_id.overdue_reminder_min_interval_days",
+        "overdue_reminder_last_date",
+    )
+    def _compute_overdue_reminder_sent(self):
+        for move in self:
+            today = fields.Date.context_today(self)
+            min_interval_days = move.company_id.overdue_reminder_min_interval_days
+            interval_date = today - relativedelta(days=min_interval_days)
+            last_date = move.overdue_reminder_last_date
+            move.overdue_remind_sent = last_date and last_date > interval_date
