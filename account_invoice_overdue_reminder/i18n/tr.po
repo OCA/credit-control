@@ -448,7 +448,7 @@ msgid "E-mail Status"
 msgstr "E-posta Durumu"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:466
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:467
 #, python-format
 msgid "E-mail missing on partner '%s'."
 msgstr "'%s' iş ortağında e-posta eksik."
@@ -469,14 +469,14 @@ msgid "Filters"
 msgstr "Filtreler"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:416
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:417
 #, python-format
 msgid ""
 "For the reminder of customer '%s', the deadline is missing for the activity."
 msgstr "'%s' müşterisinin hatırlatması için etkinlik için son tarih eksik."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:412
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:413
 #, python-format
 msgid ""
 "For the reminder of customer '%s', you must assign someone for the activity."
@@ -515,7 +515,7 @@ msgstr ""
 "dikkate almayın."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:110
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:111
 #, python-format
 msgid ""
 "In order to start overdue reminders, you must make sure that customer "
@@ -705,13 +705,13 @@ msgid "Mail Body"
 msgstr "Mesaj İçeriği"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:471
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:472
 #, python-format
 msgid "Mail body is empty."
 msgstr "Mesaj İçeriği boş."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:469
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:470
 #, python-format
 msgid "Mail subject is empty."
 msgstr "Mesaj Başlığı boş."
@@ -963,7 +963,7 @@ msgid "Print Overdue Invoices"
 msgstr "Vadesi Geçmiş Faturaları Yazdır"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:528
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:529
 #, python-format
 msgid "Remind letter hasn't been printed!"
 msgstr "Hatırlatma mektubu yazdırılmadı!"
@@ -985,7 +985,7 @@ msgid "Reminder Type"
 msgstr "Hatırlatma Türü"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:497
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:498
 #, python-format
 msgid "Report format '%s' is not supported."
 msgstr "Rapor biçimi '%s' desteklenmiyor."
@@ -1064,20 +1064,20 @@ msgid "Tax Excluded"
 msgstr "Vergi Hariç"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:117
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:118
 #, python-format
 msgid "The minimum delay since last reminder must be strictly positive."
 msgstr ""
 "Son hatırlatmadan bu yana minimum gecikme kesinlikle pozitif olmalıdır."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:114
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:115
 #, python-format
 msgid "The trigger delay cannot be negative."
 msgstr "Tetik gecikmesi negatif olamaz."
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:164
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:165
 #, python-format
 msgid "There are no overdue reminders."
 msgstr "Gecikmiş hatırlatıcı yok."
@@ -1147,7 +1147,7 @@ msgid "User"
 msgstr "Kullanıcı"
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:434
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:435
 #, python-format
 msgid ""
 "User company is different from action company. This should never happen."
@@ -1187,7 +1187,7 @@ msgid "You can't delete Overdue Invoice Reminder, it is needed by the module"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:323
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:324
 #, python-format
 msgid ""
 "You cannot make a reminder without selecting invoices. Instead you can click "
@@ -1195,7 +1195,7 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:614
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:615
 #, python-format
 msgid "You must select the new reminder type."
 msgstr "Yeni hatırlatıcı türünü seçmelisiniz."
