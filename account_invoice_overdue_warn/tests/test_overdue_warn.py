@@ -21,14 +21,10 @@ class TestOverdueWarn(TransactionCase):
             }
         )
         today = datetime.now().date()
-        revenue_acc = self.env["account.account"].search(
+        acc = self.env["account.account"].search(
             [
                 ("company_id", "=", self.company.id),
-                (
-                    "user_type_id",
-                    "=",
-                    self.env.ref("account.data_account_type_revenue").id,
-                ),
+                ("account_type", "=", "income"),
             ],
             limit=1,
         )
@@ -46,9 +42,11 @@ class TestOverdueWarn(TransactionCase):
                         0,
                         {
                             "name": "test line",
+                            "display_type": "product",
                             "price_unit": 500,
                             "quantity": 1,
-                            "account_id": revenue_acc.id,
+                            "account_id": acc.id,
+                            "tax_ids": [],
                         },
                     )
                 ],
@@ -69,9 +67,11 @@ class TestOverdueWarn(TransactionCase):
                         0,
                         {
                             "name": "test line",
+                            "display_type": "product",
                             "price_unit": 1000,
                             "quantity": 1,
-                            "account_id": revenue_acc.id,
+                            "account_id": acc.id,
+                            "tax_ids": [],
                         },
                     )
                 ],
