@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2023-09-20 19:38+0000\n"
+"PO-Revision-Date: 2024-01-03 10:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -193,7 +193,7 @@ msgstr "Rischio finanziario"
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 #, python-format
 msgid "Financial risk exceeded.\n"
-msgstr "Rischio finanziario superato.\n"
+msgstr "Superato rischio finanziario.\n"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:0
@@ -404,7 +404,7 @@ msgstr "Procedura guidata di superamento del fido del partner"
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 #, python-format
 msgid "Partner risk exceeded"
-msgstr "Fido Partner Superato"
+msgstr "Fido partner superato"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
