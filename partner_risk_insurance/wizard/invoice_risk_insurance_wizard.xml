@@ -8,6 +8,7 @@
                 <group name="dates" string="Dates">
                     <field name="date_from" />
                     <field name="date_to" />
+                    <field name="only_unpaid" />
                 </group>
                 <footer>
                     <button
