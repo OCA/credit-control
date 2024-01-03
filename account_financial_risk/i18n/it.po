@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2023-09-20 20:02+0000\n"
+"PO-Revision-Date: 2024-01-03 10:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -429,7 +429,7 @@ msgstr "Manager Rischio Partner"
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:25
 #, python-format
 msgid "Partner risk exceeded"
-msgstr "Fido Partner Superato"
+msgstr "Fido partner superato"
 
 #. module: account_financial_risk
 #: selection:res.partner,credit_currency:0
