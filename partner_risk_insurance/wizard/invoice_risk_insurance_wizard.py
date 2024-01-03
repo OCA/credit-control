@@ -13,17 +13,23 @@ class InvoiceRiskInsuranceWizard(models.TransientModel):
         string="From", required=True, default=fields.Date.context_today
     )
     date_to = fields.Date(string="To", required=True, default=fields.Date.context_today)
+    only_unpaid = fields.Boolean(
+        help="If check, includes only invoices in state not paid"
+    )
+
+    def get_moves_domain(self):
+        domain = [
+            ("state", "=", "posted"),
+            ("move_type", "in", ("out_invoice", "out_refund")),
+            ("date", ">=", self.date_from),
+            ("date", "<=", self.date_to),
+        ]
+        if self.only_unpaid:
+            domain.append(("payment_state", "=", "not_paid"))
+        return domain
 
     def action_print_report(self):
-        moves = self.env["account.move"].search(
-            [
-                ("state", "=", "posted"),
-                ("move_type", "in", ("out_invoice", "out_refund")),
-                ("payment_state", "=", "not_paid"),
-                ("date", ">=", self.date_from),
-                ("date", "<=", self.date_to),
-            ]
-        )
+        moves = self.env["account.move"].search(self.get_moves_domain())
         if not moves:
             raise ValidationError(
                 _(
@@ -31,13 +37,6 @@ class InvoiceRiskInsuranceWizard(models.TransientModel):
                     "Please, select different dates"
                 )
             )
-        moves = moves.sorted(
-            lambda m: (
-                m.commercial_partner_id.risk_insurance_grant_date and 1 or 0,
-                m.commercial_partner_id.country_id,
-                m.name,
-            )
-        )
         return self.env.ref(
             "partner_risk_insurance.action_report_invoice_risk_insurance_template"
         ).report_action(moves, False)
