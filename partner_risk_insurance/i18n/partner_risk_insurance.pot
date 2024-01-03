@@ -144,6 +144,11 @@ msgid "INVOICE LIST - COUNTRY - INSURED"
 msgstr ""
 
 #. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
+msgid "If check, includes only invoices in state not paid"
+msgstr ""
+
+#. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_code
 msgid "Insurance Code"
@@ -215,6 +220,11 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
 msgid "Name"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
+msgid "Only Unpaid"
 msgstr ""
 
 #. module: partner_risk_insurance
