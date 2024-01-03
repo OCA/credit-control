@@ -7,7 +7,7 @@
             <t t-set="insurance_partial_total" t-value="0" />
             <t
                 t-set="is_insured_partner"
-                t-value="lambda move: move.commercial_partner_id.risk_insurance_grant_date"
+                t-value="lambda move: move.commercial_partner_id.risk_insurance_grant_date and -1 or 0"
             />
             <div class="page">
                 <table class="table table-sm o_main_table">
@@ -17,9 +17,13 @@
                                 <h2>INVOICE LIST - COUNTRY - INSURED</h2>
                             </td>
                         </tr>
-                        <t t-foreach="docs" t-as="move">
+                        <t
+                            t-set="moves"
+                            t-value="docs.sorted(lambda doc: (is_insured_partner(doc), doc.commercial_partner_id.country_code, doc.name))"
+                        />
+                        <t t-foreach="moves" t-as="move">
                             <t
-                                t-if="move_first or is_insured_partner(move) != is_insured_partner(docs[move_index-1])"
+                                t-if="move_first or is_insured_partner(move) != is_insured_partner(moves[move_index-1])"
                             >
                                 <tr>
                                     <td colspan="5">
@@ -39,7 +43,7 @@
                                 </tr>
                             </t>
                             <t
-                                t-if="move_first or move.commercial_partner_id.country_id != docs[move_index -1].partner_id.country_id"
+                                t-if="move_first or move.commercial_partner_id.country_id != moves[move_index -1].partner_id.country_id"
                             >
                                 <tr>
                                     <td colspan="5">
@@ -69,15 +73,15 @@
                                     <span t-field="move.commercial_partner_id" />
                                 </td>
                                 <td align="right">
-                                    <span t-field="move.amount_total" />
+                                    <span t-field="move.amount_total_signed" />
                                 </td>
                                 <t
                                     t-set="insurance_country_total"
-                                    t-value="insurance_country_total + move.amount_total"
+                                    t-value="insurance_country_total + move.amount_total_signed"
                                 />
                             </tr>
                             <t
-                                t-if="move_last or move.commercial_partner_id.country_id != docs[move_index + 1].partner_id.country_id"
+                                t-if="move_last or move.commercial_partner_id.country_id != moves[move_index + 1].partner_id.country_id"
                             >
                                 <tr>
                                     <td colspan="4" align="right">
@@ -98,7 +102,7 @@
                                 <t t-set="insurance_country_total" t-value="0" />
                             </t>
                             <t
-                                t-if="move_last or is_insured_partner(move) != is_insured_partner(docs[move_index+1])"
+                                t-if="move_last or is_insured_partner(move) != is_insured_partner(moves[move_index+1])"
                             >
                                 <tr>
                                     <td colspan="4" align="right" class="text-bold">
