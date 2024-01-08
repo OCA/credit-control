@@ -1,5 +1,6 @@
 from odoo.tests.common import SavepointCase
 
+
 class TestAccountMove(SavepointCase):
     @classmethod
     def setUpClass(cls):
@@ -14,10 +15,19 @@ class TestAccountMove(SavepointCase):
             {"name": "Test product", "type": "service"}
         )
         cls.account_user_type = cls.env["account.account.type"].create(
-            {"name": "Test account type", "type": "receivable", "internal_group": "asset"}
+            {
+                "name": "Test account type",
+                "type": "receivable",
+                "internal_group": "asset",
+            }
         )
         cls.account = cls.env["account.account"].create(
-            {"name": "Test account", "code": "TEST", "user_type_id": cls.account_user_type.id, "reconcile": True}
+            {
+                "name": "Test account",
+                "code": "TEST",
+                "user_type_id": cls.account_user_type.id,
+                "reconcile": True,
+            }
         )
         cls.entry_move = cls.env["account.move"].create(
             {
@@ -47,7 +57,13 @@ class TestAccountMove(SavepointCase):
         )
 
     def test_compute_upflow_commercial_partner_id_entry(self):
-        self.assertEqual(self.entry_move.upflow_commercial_partner_id, self.partner.commercial_partner_id)
+        self.assertEqual(
+            self.entry_move.upflow_commercial_partner_id,
+            self.partner.commercial_partner_id,
+        )
 
     def test_compute_upflow_commercial_partner_id_invoice(self):
-        self.assertEqual(self.account_move.upflow_commercial_partner_id, self.partner.commercial_partner_id)
+        self.assertEqual(
+            self.account_move.upflow_commercial_partner_id,
+            self.partner.commercial_partner_id,
+        )

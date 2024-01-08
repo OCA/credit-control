@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import base64
 
-from odoo import _,fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -22,9 +22,9 @@ class AccountMove(models.Model):
         # there are chance that partner_id is not set on account.move
         # so we try to get the information on first receivable account.move.line
         for move in self:
-            self.upflow_commercial_partner_id = (
-                self.partner_id.commercial_partner_id
-                or self.line_ids.filtered(
+            move.upflow_commercial_partner_id = (
+                move.partner_id.commercial_partner_id
+                or move.line_ids.filtered(
                     lambda line: line.account_id.user_type_id.type == "receivable"
                 ).partner_id.commercial_partner_id
             )
