@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_view_risk" model="ir.ui.view">
+        <field name="name">res.partner.view.risk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account_financial_risk.res_partner_view_risk" />
+        <field name="arch" type="xml">
+            <field name="risk_total" position="before">
+                <field
+                    name="risk_sale_payment_sheet_include"
+                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                />
+                <button
+                    name="open_risk_pivot_info"
+                    type="object"
+                    class="oe_link"
+                    context="{'open_risk_field': 'risk_sale_payment_sheet'}"
+                >
+                    <field
+                        name="risk_sale_payment_sheet"
+                        nolabel="1"
+                        widget='monetary'
+                        options="{'currency_field': 'risk_currency_id'}"
+                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '!=', '')]}"
+                    />
+                    <field
+                        name="risk_sale_payment_sheet_info"
+                        nolabel="1"
+                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '=', '')]}"
+                    />
+                </button>
+            </field>
+        </field>
+    </record>
+</odoo>
