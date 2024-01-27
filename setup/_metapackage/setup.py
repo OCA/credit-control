@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo-addon-partner_risk_insurance>=16.0dev,<16.1dev',
         'odoo-addon-sale_financial_risk>=16.0dev,<16.1dev',
         'odoo-addon-sale_financial_risk_info>=16.0dev,<16.1dev',
+        'odoo-addon-sale_payment_sheet_financial_risk>=16.0dev,<16.1dev',
         'odoo-addon-stock_financial_risk>=16.0dev,<16.1dev',
     ],
     classifiers=[
