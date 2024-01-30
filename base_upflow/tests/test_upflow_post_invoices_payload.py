@@ -382,9 +382,9 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         """customer invoice 600€ reconciled with 3 kind :
 
         * customer payment 100€ (Using GUI manual interface or batch payment)
+        * customer refund 300€
         * customer payment from bank statement 200€
           (in such case there are no account.payment generated)
-        * customer refund 300€
         """
         vat_ids = (
             self.env["account.tax"]
@@ -435,61 +435,85 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         direct_transfer_move.upflow_uuid = str(uuid4())
         self.assertEqual(invoice.amount_residual, 0)
         full_reconcile = invoice.mapped("line_ids.full_reconcile_id")
-        reconcile_content = full_reconcile.get_upflow_api_post_reconcile_payload()
-        self.assertValidUpflowPayload(
-            "post-reconcile",
-            reconcile_content,
-        )
+        self.maxDiff = None
 
         def convert_to_cent(euro_amount):
             return int(euro_amount * 100)
 
-        expected = {
-            "externalId": str(full_reconcile.id),
-            "invoices": [
-                {
-                    "id": invoice.upflow_uuid,
-                    "externalId": str(invoice.id),
-                    "customId": invoice.name,
-                    "amountLinked": convert_to_cent(100),
-                },
-                {
-                    "id": invoice.upflow_uuid,
-                    "externalId": str(invoice.id),
-                    "customId": invoice.name,
-                    "amountLinked": convert_to_cent(refund.amount_total),
-                },
-                {
-                    "id": invoice.upflow_uuid,
-                    "externalId": str(invoice.id),
-                    "customId": invoice.name,
-                    "amountLinked": convert_to_cent(direct_transfer_amount),
-                },
-            ],
-            "payments": [
-                {
-                    "id": manual_payment_move.upflow_uuid,
-                    "externalId": str(manual_payment_move.id),
-                    "amountLinked": convert_to_cent(100),
-                },
-                {
-                    "id": direct_transfer_move.upflow_uuid,
-                    "externalId": str(direct_transfer_move.id),
-                    "amountLinked": convert_to_cent(direct_transfer_amount),
-                },
-            ],
-            "creditNotes": [
-                {
-                    "id": refund.upflow_uuid,
-                    "externalId": str(refund.id),
-                    "customId": refund.name,
-                    "amountLinked": convert_to_cent(refund.amount_total),
-                }
-            ],
-            "refunds": [],
-        }
-        self.maxDiff = None
-        self.assertEqual(reconcile_content, expected)
+        expected_payloads = [
+            {
+                "invoices": [
+                    {
+                        "id": invoice.upflow_uuid,
+                        "externalId": str(invoice.id),
+                        "customId": invoice.name,
+                        "amountLinked": convert_to_cent(100),
+                    },
+                ],
+                "payments": [
+                    {
+                        "id": manual_payment_move.upflow_uuid,
+                        "externalId": str(manual_payment_move.id),
+                        "amountLinked": convert_to_cent(100),
+                    },
+                ],
+                "creditNotes": [],
+                "refunds": [],
+            },
+            {
+                "invoices": [
+                    {
+                        "id": invoice.upflow_uuid,
+                        "externalId": str(invoice.id),
+                        "customId": invoice.name,
+                        "amountLinked": convert_to_cent(refund.amount_total),
+                    },
+                ],
+                "payments": [],
+                "creditNotes": [
+                    {
+                        "id": refund.upflow_uuid,
+                        "externalId": str(refund.id),
+                        "customId": refund.name,
+                        "amountLinked": convert_to_cent(refund.amount_total),
+                    }
+                ],
+                "refunds": [],
+            },
+            {
+                "invoices": [
+                    {
+                        "id": invoice.upflow_uuid,
+                        "externalId": str(invoice.id),
+                        "customId": invoice.name,
+                        "amountLinked": convert_to_cent(direct_transfer_amount),
+                    },
+                ],
+                "payments": [
+                    {
+                        "id": direct_transfer_move.upflow_uuid,
+                        "externalId": str(direct_transfer_move.id),
+                        "amountLinked": convert_to_cent(direct_transfer_amount),
+                    },
+                ],
+                "creditNotes": [],
+                "refunds": [],
+            },
+        ]
+
+        for partial_reconcile, expected_payload in zip(
+            full_reconcile.partial_reconcile_ids, expected_payloads
+        ):
+            reconcile_content = (
+                partial_reconcile.get_upflow_api_post_reconcile_payload()
+            )
+            self.assertValidUpflowPayload(
+                "post-reconcile",
+                reconcile_content,
+            )
+
+            expected_payload["externalId"] = str(partial_reconcile.id)
+            self.assertEqual(reconcile_content, expected_payload)
 
     def test_get_upflow_api_post_reconcile_refund_payload(self):
         """customer refund reconciled refund payment"""
@@ -517,14 +541,16 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
             refund, amount=refund.amount_total
         )
         full_reconcile = refund.mapped("line_ids.full_reconcile_id")
-        reconcile_content = full_reconcile.get_upflow_api_post_reconcile_payload()
+        reconcile_content = (
+            full_reconcile.partial_reconcile_ids.get_upflow_api_post_reconcile_payload()
+        )
         self.assertValidUpflowPayload(
             "post-reconcile",
             reconcile_content,
         )
 
         expected = {
-            "externalId": str(full_reconcile.id),
+            "externalId": str(full_reconcile.partial_reconcile_ids.id),
             "invoices": [],
             "payments": [],
             "creditNotes": [
@@ -547,10 +573,19 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         self.assertEqual(reconcile_content, expected)
 
     def test_post_reconcile_payload_add_upflow_id_if_present(self):
+        uuid = str(uuid4())
+        self.invoice.upflow_uuid = uuid
         self._register_manual_payment_reconciled(self.invoice)
-        full_reconcile = self.invoice.mapped("line_ids.full_reconcile_id")
-        payload = full_reconcile.get_upflow_api_post_reconcile_payload()
-        self.assertEqual(payload["externalId"], str(full_reconcile.id))
+        reconciles = self.invoice.line_ids.full_reconcile_id.partial_reconcile_ids
+        payloads = [
+            reconcile.get_upflow_api_post_reconcile_payload()
+            for reconcile in reconciles
+        ]
+
+        self.assertEqual({i["id"] for p in payloads for i in p["invoices"]}, {uuid})
+        self.assertTrue(
+            all(["id" not in p for payload in payloads for p in payload["payments"]])
+        )
 
     def test_get_upflow_api_post_contacts_payload_without_main_id(self):
         self.customer_company.main_contact_id = False

@@ -1,8 +1,8 @@
 from . import upflow_mixin
 from . import (
-    account_full_reconcile,
     account_journal,
     account_move,
+    account_partial_reconcile,
     account_payment,
     account_payment_method,
     res_currency,
