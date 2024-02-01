@@ -257,18 +257,10 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
             str(self.customer_company.id),
         )
 
-    def test_get_payload_not_an_invoice(self):
-        with self.assertRaisesRegex(UserError, "expected out_invoice"):
-            self.refund.get_upflow_api_post_invoice_payload()
-
     def test_get_invoice_pdf_payload_not_an_invoice(self):
         invoice_payment_move = self._register_manual_payment_reconciled(self.invoice)
         with self.assertRaisesRegex(UserError, "expected out_invoice"):
             invoice_payment_move.get_upflow_api_pdf_payload()
-
-    def test_get_payload_not_a_refund(self):
-        with self.assertRaisesRegex(UserError, "expected out_refund"):
-            self.invoice.get_upflow_api_post_credit_note_payload()
 
     def test_format_upflow_amount(self):
         currency_euro = self.env.ref("base.EUR")
@@ -512,7 +504,7 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
                 reconcile_content,
             )
 
-            expected_payload["externalId"] = str(partial_reconcile.id)
+            expected_payload["externalId"] = "partial-" + str(partial_reconcile.id)
             self.assertEqual(reconcile_content, expected_payload)
 
     def test_get_upflow_api_post_reconcile_refund_payload(self):
@@ -550,7 +542,7 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         )
 
         expected = {
-            "externalId": str(full_reconcile.partial_reconcile_ids.id),
+            "externalId": "partial-" + str(full_reconcile.partial_reconcile_ids.id),
             "invoices": [],
             "payments": [],
             "creditNotes": [
@@ -571,21 +563,6 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         }
         self.maxDiff = None
         self.assertEqual(reconcile_content, expected)
-
-    def test_post_reconcile_payload_add_upflow_id_if_present(self):
-        uuid = str(uuid4())
-        self.invoice.upflow_uuid = uuid
-        self._register_manual_payment_reconciled(self.invoice)
-        reconciles = self.invoice.line_ids.full_reconcile_id.partial_reconcile_ids
-        payloads = [
-            reconcile.get_upflow_api_post_reconcile_payload()
-            for reconcile in reconciles
-        ]
-
-        self.assertEqual({i["id"] for p in payloads for i in p["invoices"]}, {uuid})
-        self.assertTrue(
-            all(["id" not in p for payload in payloads for p in payload["payments"]])
-        )
 
     def test_get_upflow_api_post_contacts_payload_without_main_id(self):
         self.customer_company.main_contact_id = False

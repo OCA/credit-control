@@ -5,18 +5,31 @@ from odoo import models
 
 
 class AccountPartialReconcile(models.Model):
-
-    _inherit = ["account.partial.reconcile"]
+    _name = "account.partial.reconcile"
+    _inherit = ["account.partial.reconcile", "upflow.mixin"]
 
     def _prepare_reconcile_payload(self):
         payload = {
-            "externalId": str(self.id),
+            "externalId": "partial-" + str(self.id),
             "invoices": [],
             "payments": [],
             "creditNotes": [],
             "refunds": [],
         }
         return payload
+
+    def _get_part_payload(self, move_line):
+        data = {
+            "externalId": str(move_line.move_id.id),
+            "amountLinked": self.company_currency_id.to_lowest_division(self.amount),
+        }
+        if move_line.move_id.upflow_uuid:
+            data["id"] = move_line.move_id.upflow_uuid
+
+        if move_line.move_id.upflow_type in ["invoices", "creditNotes"]:
+            data["customId"] = move_line.move_id.name
+
+        return data
 
     def get_upflow_api_post_reconcile_payload(self):
         """expect to be called from account move type:
@@ -28,32 +41,11 @@ class AccountPartialReconcile(models.Model):
         """
         payload = self._prepare_reconcile_payload()
 
-        data = {
-            "externalId": str(self.debit_move_id.move_id.id),
-            "amountLinked": self.company_currency_id.to_lowest_division(self.amount),
-        }
-        if self.debit_move_id.move_id.upflow_uuid:
-            data["id"] = self.debit_move_id.move_id.upflow_uuid
-        if self.debit_move_id.move_id.move_type == "out_invoice":
-            kind = "invoices"
-            data["customId"] = self.debit_move_id.move_id.name
-        else:
-            kind = "refunds"
-
-        payload[kind].append(data)
-
-        data = {
-            "externalId": str(self.credit_move_id.move_id.id),
-            "amountLinked": self.company_currency_id.to_lowest_division(self.amount),
-        }
-        if self.credit_move_id.move_id.upflow_uuid:
-            data["id"] = self.credit_move_id.move_id.upflow_uuid
-        if self.credit_move_id.move_id.move_type == "out_refund":
-            kind = "creditNotes"
-            data["customId"] = self.credit_move_id.move_id.name
-        else:
-            kind = "payments"
-
-        payload[kind].append(data)
+        payload[self.debit_move_id.move_id.upflow_type].append(
+            self._get_part_payload(self.debit_move_id)
+        )
+        payload[self.credit_move_id.move_id.upflow_type].append(
+            self._get_part_payload(self.credit_move_id)
+        )
 
         return payload
