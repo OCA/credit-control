@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Tecnativa - Stefan Ungureanu
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="invoice_risk_insurance_form" model="ir.ui.view">
         <field name="name">invoice.risk.insurance.form</field>
