@@ -4,7 +4,7 @@
 
 {
     "name": "Warning on Overdue Invoices",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Sales",
     "license": "AGPL-3",
     "summary": "Show warning on customer form view if it has overdue invoices",
