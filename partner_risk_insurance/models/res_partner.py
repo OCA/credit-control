@@ -1,3 +1,5 @@
+# Copyright 2016-2018 Tecnativa - Sergio Teruel
+# Copyright 2024 Moduon Team S.L. <info@moduon.team>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
@@ -47,5 +49,17 @@ class ResPartner(models.Model):
         "company.",
     )
     credit_policy_state_id = fields.Many2one(
-        string="Policy State", comodel_name="credit.policy.state", ondelete="restrict"
+        string="Policy State",
+        comodel_name="credit.policy.state",
+        ondelete="restrict",
+    )
+    credit_policy_insure_invoices = fields.Boolean(
+        string="Insure Invoices",
+        related="credit_policy_state_id.insure_invoices",
+        store=False,
+    )
+    credit_policy_company_id = fields.Many2one(
+        string="Credit Policy Company",
+        comodel_name="credit.policy.company",
+        ondelete="restrict",
     )
