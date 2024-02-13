@@ -1,7 +1,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Partner Risk Insurance",
-    "version": "15.0.2.2.0",
+    "version": "15.0.3.0.0",
     "development_status": "Production/Stable",
     "summary": "Risk insurance partner information",
     "author": "AvanzOSC,"
