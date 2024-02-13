@@ -151,7 +151,7 @@ class CreditControlLine(models.Model):
     ):
         """Create credit control line"""
         channel = level.channel
-        partner = move_line.partner_id
+        partner = move_line.invoice_user_id.partner_id or move_line.partner_id
         # Fallback to letter
         if channel == "email" and partner and not partner.email:
             channel = "letter"
