@@ -84,7 +84,7 @@ class Partner(models.Model):
         payload = self.prepare_base_payload()
         payload.update(
             {
-                "firstName": self.name,
+                "firstName": self.name or "",
                 # "lastName": "",
                 "phone": self.mobile or "",
                 "email": self.email,

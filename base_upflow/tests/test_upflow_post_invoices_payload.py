@@ -47,6 +47,44 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
                 ).id,
             }
         )
+        cls.customer_company2 = cls.env["res.partner"].create(
+            {
+                "name": "My customer company2",
+                "is_company": True,
+                "vat": "FR23334175221",
+                "street": "Street 1",
+                "street2": "and more",
+                "zip": "45500",
+                "city": "Customer city",
+            }
+        )
+        cls.contact_without_name = cls.env["res.partner"].create(
+            {
+                "name": False,
+                "type": "other",  # name is mandatory for type "contact"
+                "parent_id": cls.customer_company2.id,
+                "email": "noname@customer-company.com",
+            }
+        )
+        cls.customer_company3 = cls.env["res.partner"].create(
+            {
+                "name": "My customer company3",
+                "is_company": True,
+                "vat": "FR23334175221",
+                "street": "Street 1",
+                "street2": "and more",
+                "zip": "45500",
+                "city": "Customer city",
+            }
+        )
+        cls.contact_with_spacename = cls.env["res.partner"].create(
+            {
+                "name": " ",
+                "type": "other",  # name is mandatory for type "contact"
+                "parent_id": cls.customer_company3.id,
+                "email": "spacename@customer-company.com",
+            }
+        )
         cls.invoice = cls._create_invoice(
             date_invoice="2022-01-01",
             partner_id=cls.contact.id,
@@ -203,6 +241,14 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         self.assertEqual(content["position"], "ACCOUNTING")
         self.assertEqual(content["externalId"], str(self.contact.id))
         # self.assertEqual(content["isMain"], True)
+
+    def test_get_upflow_api_post_contacts_no_name_payload_content(self):
+        content = self.contact_without_name.get_upflow_api_post_contacts_payload()
+        self.assertEqual(content["firstName"], "")
+
+    def test_get_upflow_api_post_contacts_space_name_payload_content(self):
+        content = self.contact_with_spacename.get_upflow_api_post_contacts_payload()
+        self.assertEqual(content["firstName"], " ")
 
     def test_get_upflow_api_post_contacts_payload_without_position(self):
         self.contact.upflow_position_id = False
