@@ -36,14 +36,15 @@ class AccountMove(models.Model):
     @api.depends("partner_id", "move_type")
     def _compute_insured_with_credit_policy(self):
         """Compute the insured_with_credit_policy field when partner changes."""
-        self.update(
+        self_w_ctx = self.with_context(check_move_validity=False)
+        self_w_ctx.update(
             {
                 "insured_with_credit_policy": False,
                 "credit_policy_state_id": False,
                 "credit_policy_company_id": False,
             }
         )
-        for record in self:
+        for record in self_w_ctx:
             if record.move_type != "out_invoice":
                 continue
             partner = record.partner_id.commercial_partner_id
@@ -56,13 +57,14 @@ class AccountMove(models.Model):
     def _compute_credit_policy(self):
         """Compute if the invoice is insured by a credit policy if
         `credit_policy_insure_invoices` field changes."""
-        self.update(
+        self_w_ctx = self.with_context(check_move_validity=False)
+        self_w_ctx.update(
             {
                 "credit_policy_state_id": False,
                 "credit_policy_company_id": False,
             }
         )
-        for record in self:
+        for record in self_w_ctx:
             if record.move_type != "out_invoice":
                 continue
             if record.insured_with_credit_policy:
@@ -74,8 +76,9 @@ class AccountMove(models.Model):
     def onchange_insured_with_credit_policy(self):
         """Check if the partner has a credit policy to insure
         invoices and raise an error if not ."""
-        partner = self.partner_id.commercial_partner_id
-        if not partner or not self.insured_with_credit_policy:
+        self_w_ctx = self.with_context(check_move_validity=False)
+        partner = self_w_ctx.partner_id.commercial_partner_id
+        if not partner or not self_w_ctx.insured_with_credit_policy:
             return
         if not partner.credit_policy_insure_invoices:
             raise exceptions.UserError(
