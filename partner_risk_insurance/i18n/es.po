@@ -139,6 +139,12 @@ msgid "Credit limit granted by the insurance company."
 msgstr "Crédito concedido por el seguro."
 
 #. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr ""
+
+#. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_grant_date
 msgid "Date when the insurance was granted by the insurance company."
@@ -177,11 +183,6 @@ msgstr "CLIENTES ASEGURADOS"
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "INVOICE LIST - COUNTRY - INSURED"
 msgstr "LISTA DE FACTURAS - PAÍS - ASEGURADO"
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,help:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
-msgid "If check, includes only invoices in state not paid"
-msgstr "Si está marcado, incluye solo las facturas en estado no pagado"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_credit_policy_state__insure_invoices
@@ -308,8 +309,7 @@ msgstr "Última actualización el"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid ""
-"Mark this field if an insurance was requested for the credit of this "
-"partner."
+"Mark this field if an insurance was requested for the credit of this partner."
 msgstr ""
 "Marque este campo si se ha solicitado un seguro para el crédito de esta "
 "empresa."
@@ -319,11 +319,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
 msgid "Name"
 msgstr "Nombre"
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
-msgid "Only Unpaid"
-msgstr "Solo impagadas"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
@@ -346,8 +341,7 @@ msgstr "Imprimir"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code_2
 msgid "Secondary code assigned to this partner by the risk insurance company."
-msgstr ""
-"Código secundario asignado a este partner por la compoañía de seguros."
+msgstr "Código secundario asignado a este partner por la compoañía de seguros."
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
@@ -369,14 +363,15 @@ msgid "The insurance policy that insures the invoices of the partner."
 msgstr "La política de crédito que asegura las facturas de éste partner."
 
 #. module: partner_risk_insurance
+#. odoo-python
 #: code:addons/partner_risk_insurance/models/account_move.py:0
 #, python-format
 msgid "The partner %s has no credit policy to insure invoices."
 msgstr ""
-"El cliente %s no tiene una política de crédito que permita asegurar "
-"facturas."
+"El cliente %s no tiene una política de crédito que permita asegurar facturas."
 
 #. module: partner_risk_insurance
+#. odoo-python
 #: code:addons/partner_risk_insurance/wizard/invoice_risk_insurance_wizard.py:0
 #, python-format
 msgid ""
@@ -410,3 +405,9 @@ msgstr "CLIENTES NO ASEGURADOS"
 #: model:ir.model,name:partner_risk_insurance.model_partner_risk_insurance_wizard
 msgid "Wizard to see invoices sorted by risk"
 msgstr "Asistente para ver las facturas clasificadas por riesgo"
+
+#~ msgid "If check, includes only invoices in state not paid"
+#~ msgstr "Si está marcado, incluye solo las facturas en estado no pagado"
+
+#~ msgid "Only Unpaid"
+#~ msgstr "Solo impagadas"
