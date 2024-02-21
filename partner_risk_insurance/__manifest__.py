@@ -24,6 +24,13 @@
         "templates/invoice_risk_insurance_template.xml",
     ],
     "installable": True,
-    "maintainers": ["Daniel-CA", "sergio-teruel", "omar7r", "Tardo", "Shide"],
-    "pre_init_hook": "pre_init_hook",
+    "maintainers": [
+        "Daniel-CA",
+        "sergio-teruel",
+        "omar7r",
+        "Tardo",
+        "Shide",
+        "rafaelbn",
+        "yajo",
+    ],
 }

@@ -14,13 +14,18 @@
                 <page
                     string="Credit Insurance"
                     name="credit_insurance"
-                    attrs="{'invisible': [('is_company','=',False), ('parent_id','!=',False)]}"
-                    groups="account.group_account_user"
+                    attrs="{'invisible': ['|', ('show_credit_limit', '=', False), '&amp;', ('is_company','=',False), ('parent_id','!=',False)]}"
+                    groups='account.group_account_invoice,account.group_account_readonly'
                 >
                     <group name="credit_insurance_main">
                         <group name="credit_insurance_limit">
                             <field name="company_credit_limit" />
                             <field name="insurance_credit_limit" />
+                            <field
+                                name="credit_limit"
+                                string="Total credit limit"
+                                help="The overall credit limit available to a client, set by the user. It includes both the company's own credit limit and the insured credit limit."
+                            />
                         </group>
                         <group name="credit_insurance_request">
                             <field name="risk_insurance_requested" />
