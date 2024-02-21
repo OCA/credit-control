@@ -1,4 +1,7 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2018 Tecnativa - Sergio Teruel
+     Copyright 2024 Moduon Team S.L. <info@moduon.team>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!--Add risk insurance tab in partner form. -->
     <record model="ir.ui.view" id="view_partner_form">
@@ -12,6 +15,7 @@
                     string="Credit Insurance"
                     name="credit_insurance"
                     attrs="{'invisible': [('is_company','=',False), ('parent_id','!=',False)]}"
+                    groups="account.group_account_user"
                 >
                     <group name="credit_insurance_main">
                         <group name="credit_insurance_limit">
@@ -29,6 +33,11 @@
                             <field name="risk_insurance_code" />
                             <field name="risk_insurance_code_2" />
                             <field name="credit_policy_state_id" />
+                            <field name="credit_policy_insure_invoices" invisible="1" />
+                            <field
+                                name="credit_policy_company_id"
+                                attrs="{'required': [('credit_policy_insure_invoices', '=', True)]}"
+                            />
                         </group>
                     </group>
                 </page>
