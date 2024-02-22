@@ -4,7 +4,7 @@
 {
     "name": "Sale Financial Risk",
     "summary": "Manage partner risk in sales orders",
-    "version": "15.0.1.2.2",
+    "version": "15.0.1.2.3",
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
