@@ -25,9 +25,7 @@ class TestPartnerSaleRisk(TransactionCase):
         )
         cls.main_currency = cls.env.company.currency_id
         cls.EUR = cls.env.ref("base.EUR")
-        cls.other_company = cls.env["res.company"].create(
-            {"name": "Company 2", "currency_id": cls.EUR.id}
-        )
+        cls.USD = cls.env.ref("base.USD")
         cls.sale_order = cls.create_sale_order(cls.main_currency, cls.env.company)
         cls.env.user.lang = "en_US"
 
@@ -186,7 +184,12 @@ class TestPartnerSaleRisk(TransactionCase):
         self.assertTrue(action["domain"])
 
     def test_manual_currency_risk_not_exceeded(self):
-        self.product_pricelist.currency_id = self.EUR
+        if self.env.company.currency_id == self.EUR:
+            self.product_pricelist.currency_id = self.USD
+            currency = self.USD
+        else:
+            self.product_pricelist.currency_id = self.EUR
+            currency = self.EUR
         self.partner.write(
             {
                 "risk_sale_order_limit": 99,
@@ -201,19 +204,22 @@ class TestPartnerSaleRisk(TransactionCase):
                 "currency_id": self.main_currency.id,
                 "name": fields.Date.today(),
                 "rate": 0.5,
-                "company_id": self.other_company.id,
+                "company_id": self.env.company.id,
             }
         )
-        sale_order = self.create_sale_order(
-            currency=self.EUR, company=self.other_company
-        )
+        sale_order = self.create_sale_order(currency=currency, company=self.env.company)
         result = sale_order.action_confirm()
 
         # Limit not exceeded
         self.assertEqual(result, True)
 
     def test_manual_currency_risk_exceeded(self):
-        self.product_pricelist.currency_id = self.EUR
+        if self.env.company.currency_id == self.EUR:
+            self.product_pricelist.currency_id = self.USD
+            currency = self.USD
+        else:
+            self.product_pricelist.currency_id = self.EUR
+            currency = self.EUR
         self.partner.write(
             {
                 "risk_sale_order_limit": 99,
@@ -223,18 +229,15 @@ class TestPartnerSaleRisk(TransactionCase):
                 "manual_credit_currency_id": self.main_currency.id,
             }
         )
-        self.product_pricelist.currency_id = self.EUR
         self.env["res.currency.rate"].create(
             {
                 "currency_id": self.main_currency.id,
                 "name": fields.Date.today(),
-                "rate": 1.5,
-                "company_id": self.other_company.id,
+                "rate": 2.0,
+                "company_id": self.env.company.id,
             }
         )
-        sale_order = self.create_sale_order(
-            currency=self.EUR, company=self.other_company
-        )
+        sale_order = self.create_sale_order(currency=currency, company=self.env.company)
         result = sale_order.action_confirm()
 
         # Limit exceeded
