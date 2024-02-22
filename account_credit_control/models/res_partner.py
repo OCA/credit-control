@@ -70,7 +70,10 @@ class ResPartner(models.Model):
     )
     manual_followup = fields.Boolean()
     credit_control_analysis_ids = fields.One2many(
-        "credit.control.analysis", "partner_id", string="Credit Control Levels"
+        "credit.control.analysis",
+        "partner_id",
+        string="Credit Control Levels",
+        groups="account_credit_control.group_account_credit_control_info",
     )
 
     def _compute_credit_control_count(self):
