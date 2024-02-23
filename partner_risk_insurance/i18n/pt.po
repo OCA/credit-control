@@ -66,6 +66,15 @@ msgid "Active"
 msgstr ""
 
 #. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
+msgid ""
+"Calculated as the Total minus Insured credit limits, reflecting the credit "
+"limit the company is willing to offer to the client, excluding the insured "
+"portion."
+msgstr ""
+
+#. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
 msgid "Cancel"
 msgstr ""
@@ -83,15 +92,15 @@ msgid "Company"
 msgstr ""
 
 #. module: partner_risk_insurance
-#: model:ir.model,name:partner_risk_insurance.model_credit_policy_company
-msgid "Company of Credit Policies"
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
+msgid "Company Credit Limit"
 msgstr ""
 
 #. module: partner_risk_insurance
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
-msgid "Company's Credit Limit"
-msgstr "Limite de Crédito da Empresa"
+#: model:ir.model,name:partner_risk_insurance.model_credit_policy_company
+msgid "Company of Credit Policies"
+msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_res_partner
@@ -129,18 +138,6 @@ msgstr "Limite de Crédito da Empresa"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_company_id
 msgid "Credit Policy Company"
 msgstr ""
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
-#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__company_credit_limit
-msgid "Credit limit granted by the company."
-msgstr "Limite de crédito concedido pela empresa."
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
-#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
-msgid "Credit limit granted by the insurance company."
-msgstr "Limite de crédito concedido pela companhia de seguros."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__credit_limit
@@ -245,14 +242,8 @@ msgstr "Seguro Requerido"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
-msgid "Insurance's Credit Coverage"
-msgstr "Cobertura do Seguro de Crédito"
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
-msgid "Insurance's Credit Limit"
-msgstr "Limite do Seguro de Crédito"
+msgid "Insurance coverage (%)"
+msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__insure_invoices
@@ -272,6 +263,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__insured_with_credit_policy
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__insured_with_credit_policy
 msgid "Insured by a Credit Policy"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid "Insured credit limit"
 msgstr ""
 
 #. module: partner_risk_insurance
@@ -324,8 +321,8 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
-msgid "Percentage of the credit covered by the insurance."
-msgstr "Percentual do crédito coberto pelo seguro."
+msgid "Percentage of the credit that is covered by the insurance."
+msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
@@ -365,10 +362,25 @@ msgid "The insurance policy that insures the invoices of the partner."
 msgstr ""
 
 #. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
+msgid ""
+"The overall credit limit available to a client, set by the user. It includes "
+"both the company's own credit limit and the insured credit limit."
+msgstr ""
+
+#. module: partner_risk_insurance
 #. odoo-python
 #: code:addons/partner_risk_insurance/models/account_move.py:0
 #, python-format
 msgid "The partner %s has no credit policy to insure invoices."
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
+#: model:ir.model.fields,help:partner_risk_insurance.field_res_users__insurance_credit_limit
+msgid ""
+"The portion of credit that is covered by insurance, set by the user. It "
+"represents the amount of credit that an insurance policy guarantees."
 msgstr ""
 
 #. module: partner_risk_insurance
@@ -383,6 +395,11 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__date_to
 msgid "To"
+msgstr ""
+
+#. module: partner_risk_insurance
+#: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
+msgid "Total credit limit"
 msgstr ""
 
 #. module: partner_risk_insurance
@@ -404,3 +421,21 @@ msgstr ""
 #: model:ir.model,name:partner_risk_insurance.model_partner_risk_insurance_wizard
 msgid "Wizard to see invoices sorted by risk"
 msgstr ""
+
+#~ msgid "Company's Credit Limit"
+#~ msgstr "Limite de Crédito da Empresa"
+
+#~ msgid "Credit limit granted by the company."
+#~ msgstr "Limite de crédito concedido pela empresa."
+
+#~ msgid "Credit limit granted by the insurance company."
+#~ msgstr "Limite de crédito concedido pela companhia de seguros."
+
+#~ msgid "Insurance's Credit Coverage"
+#~ msgstr "Cobertura do Seguro de Crédito"
+
+#~ msgid "Insurance's Credit Limit"
+#~ msgstr "Limite do Seguro de Crédito"
+
+#~ msgid "Percentage of the credit covered by the insurance."
+#~ msgstr "Percentual do crédito coberto pelo seguro."
