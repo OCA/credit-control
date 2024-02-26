@@ -1,0 +1,1 @@
+odoo-addon-account_invoice_overdue_warn @ git+https://github.com/OCA/credit-control.git@refs/pull/356/head#subdirectory=setup/account_invoice_overdue_warn
