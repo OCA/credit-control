@@ -1,0 +1,135 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_credit_limit_history
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-05 14:18+0000\n"
+"PO-Revision-Date: 2021-08-05 16:19+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: partner_credit_limit_history
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.partner_credit_limit_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: partner_credit_limit_history
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.view_partner_credit_form
+msgid "Change Limit"
+msgstr "Cambiar límite"
+
+#. module: partner_credit_limit_history
+#: model:ir.model,name:partner_credit_limit_history.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__create_uid
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__create_date
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner__credit_history_ids
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_users__credit_history_ids
+msgid "Credit History"
+msgstr "Historial de límite de crédito"
+
+#. module: partner_credit_limit_history
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.view_partner_credit_form
+msgid "Credit Info"
+msgstr "Información de límite de crédito"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__display_name
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__id
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard____last_update
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__write_uid
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__write_uid
+msgid "Last Updated by"
+msgstr "Últ. actualización por"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__write_date
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__write_date
+msgid "Last Updated on"
+msgstr "Última modificación el"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__amount
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__new_amount
+msgid "New Amount"
+msgstr "Nuevo Importe"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__partner_id
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: partner_credit_limit_history
+#: model:ir.model,name:partner_credit_limit_history.model_partner_credit_limit_wizard
+msgid "Partner Credit History"
+msgstr "Historial de límite de crédito de contacto"
+
+#. module: partner_credit_limit_history
+#: model:ir.actions.act_window,name:partner_credit_limit_history.action_partner_credit_limit_wizard
+msgid "Partner credit limit wizard"
+msgstr "Partner credit limit wizard"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__previous_amount
+msgid "Previous Amount"
+msgstr "Importe previo"
+
+#. module: partner_credit_limit_history
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_partner_credit_limit_wizard__note
+#: model:ir.model.fields,field_description:partner_credit_limit_history.field_res_partner_credit_history__note
+msgid "Reason"
+msgstr "Motivo"
+
+#. module: partner_credit_limit_history
+#: model:ir.model,name:partner_credit_limit_history.model_res_partner_credit_history
+msgid "Res partner credit history"
+msgstr "Historial de límite de crédito de contacto"
+
+#. module: partner_credit_limit_history
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.partner_credit_limit_wizard_form
+msgid "Submit"
+msgstr "Confirmar"
+
+#. module: partner_credit_limit_history
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.view_partner_credit_form
+#: model_terms:ir.ui.view,arch_db:partner_credit_limit_history.view_partner_credit_history_tree
+msgid "User"
+msgstr "Usuario"
