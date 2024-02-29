@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record
+        id="upflow_res_partner_upflow_position_accounting"
+        model="res.partner.upflow.position"
+    >
+        <field name="name">Accounting</field>
+        <field name="code">ACCOUNTING</field>
+    </record>
+    <record
+        id="upflow_res_partner_upflow_position_payer"
+        model="res.partner.upflow.position"
+    >
+        <field name="name">Payer</field>
+        <field name="code">PAYER</field>
+    </record>
+    <record
+        id="upflow_res_partner_upflow_position_purchaser"
+        model="res.partner.upflow.position"
+    >
+        <field name="name">Purchaser</field>
+        <field name="code">PURCHASER</field>
+    </record>
+    <record
+        id="upflow_res_partner_upflow_position_sales"
+        model="res.partner.upflow.position"
+    >
+        <field name="name">Sales</field>
+        <field name="code">SALES</field>
+    </record>
+</odoo>

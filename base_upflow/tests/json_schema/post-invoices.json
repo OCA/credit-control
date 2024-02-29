@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "source: https://upflow.docs.apiary.io/#reference/0/invoices/import-invoice",
+  "type": "object",
+  "properties": {
+    "customId": {
+      "type": "string"
+    },
+    "externalId": {
+      "type": "string"
+    },
+    "issuedAt": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "currency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": ["EUR", "CHF", "USD", "CAD", "GBP"]
+        }
+      ]
+    },
+    "grossAmount": {
+      "type": "number"
+    },
+    "netAmount": {
+      "type": "number"
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "customId",
+    "issuedAt",
+    "dueDate",
+    "currency",
+    "grossAmount",
+    "netAmount",
+    "customer"
+  ]
+}
