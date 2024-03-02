@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-28 16:52+0000\n"
-"PO-Revision-Date: 2021-08-28 16:52+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-03-02 14:37+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_count
@@ -24,7 +25,7 @@ msgstr "Nb de factures échues impayées"
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__commercial_partner_invoicing_id
 msgid "Commercial Invoicing Partner"
-msgstr ""
+msgstr "Entité commerciale facturée"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__company_currency_id
@@ -49,7 +50,7 @@ msgstr "Dernière modification le"
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
 msgid "Overdue Invoices Residual"
-msgstr "Solde des factures échues impayées"
+msgstr "Montant impayé des factures échues"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,help:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
@@ -57,7 +58,7 @@ msgid ""
 "Overdue invoices total residual amount of the invoicing partner in company "
 "currency."
 msgstr ""
-"Total des soldes des factures échues impayées du partenaire de facturation "
+"Total des montants impayés des factures échues du partenaire de facturation "
 "dans la devise de la société."
 
 #. module: account_invoice_overdue_warn_sale
@@ -73,7 +74,7 @@ msgstr "Le partenaire de facturation"
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "for a total residual of"
-msgstr "pour un solde à payer total de"
+msgstr "pour un montant impayé de"
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
