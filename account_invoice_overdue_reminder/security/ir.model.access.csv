@@ -9,3 +9,4 @@ access_overdue_reminder_start,Full access on overdue.reminder.start (wizard),mod
 access_overdue_reminder_start_payment,Full access on overdue.reminder.start.payment (wizard),model_overdue_reminder_start_payment,account.group_account_invoice,1,1,1,1
 access_overdue_reminder_step,Full access on overdue.reminder.step (wizard),model_overdue_reminder_step,account.group_account_invoice,1,1,1,1
 access_overdue_reminder_mass_update,Full access on overdue.reminder.mass.update (wizard),model_overdue_reminder_mass_update,account.group_account_invoice,1,1,1,1
+access_mail_mail_read,Read access on mail.mail,model_mail_mail,account.group_account_invoice,1,0,0,0
