@@ -352,7 +352,7 @@ class CreditControlPolicyLevel(models.Model):
         date and computation mode of the level
         """
         self.ensure_one()
-        fname = "_{}_get_boundary".format(self.computation_mode)
+        fname = f"_{self.computation_mode}_get_boundary"
         if hasattr(self, fname):
             fnc = getattr(self, fname)
             return fnc()
@@ -367,7 +367,7 @@ class CreditControlPolicyLevel(models.Model):
         self.ensure_one()
         previous_level = self._previous_level()
         if previous_level:
-            return "cr_line.level = {}".format(previous_level.level)
+            return f"cr_line.level = {previous_level.level}"
         else:
             return "cr_line.id IS NULL"
 

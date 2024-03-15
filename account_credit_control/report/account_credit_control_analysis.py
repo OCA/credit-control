@@ -78,18 +78,13 @@ class AccountCreditControlAnalysis(models.Model):
             """
 
     def _get_sql_query(self):
-        return """
+        return f"""
             CREATE VIEW credit_control_analysis
             AS
-            (SELECT DISTINCT ON ({}) {}
-            {}
-            ORDER BY {})
-            """.format(
-            self._distinct_fields(),
-            self._fields_to_select(),
-            self._from_tables(),
-            self._order_by(),
-        )
+            (SELECT DISTINCT ON ({self._distinct_fields()}) {self._fields_to_select()}
+            {self._from_tables()}
+            ORDER BY {self._order_by()})
+            """
 
     def init(self):
         tools.drop_view_if_exists(self._cr, "credit_control_analysis")

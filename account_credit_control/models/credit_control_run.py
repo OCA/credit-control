@@ -130,7 +130,6 @@ class CreditControlRun(models.Model):
         report = ""
         generated = self.env["credit.control.line"]
         for policy in policies:
-
             if policy.do_nothing:
                 continue
             (
