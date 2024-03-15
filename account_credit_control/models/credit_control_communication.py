@@ -176,6 +176,7 @@ class CreditControlCommunication(models.Model):
         return comms
 
     def _get_credit_control_communication_table(self):
+        # ruff: noqa
         th_style = "padding: 5px; border: 1px solid black;"
         tr_content = "<th style='%s'>%s</th>" % (th_style, _("Invoice number"))
         tr_content += "<th style='%s'>%s</th>" % (th_style, _("Payment Reference"))
@@ -218,12 +219,11 @@ class CreditControlCommunication(models.Model):
         for comm in self:
             if comm.policy_level_id.mail_show_invoice_detail:
                 comm = comm.with_context(inject_credit_control_communication_table=True)
-            comm.message_post_with_template(
-                comm.policy_level_id.email_template_id.id,
-                composition_mode="mass_post",
-                is_log=False,
-                notify=True,
-                subtype_id=self.env.ref("account_credit_control.mt_request").id,
+            comm.message_mail_with_source(
+                comm.policy_level_id.email_template_id,
+                subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
+                    "account_credit_control.mt_request"
+                ),
             )
             comm.credit_control_line_ids.filtered(
                 lambda line: line.state == "to_be_sent"
