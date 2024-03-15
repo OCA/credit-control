@@ -15,17 +15,17 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="partner_id" />
-                            <field name="policy_level_id" />
+                            <field name="partner_id" readonly="state != 'draft'" />
+                            <field name="policy_level_id" readonly="state != 'draft'" />
                             <field name="policy_id" />
                             <field name="level" />
                             <field name="manually_overridden" />
                         </group>
                         <group>
-                            <field name="date" />
-                            <field name="date_due" />
-                            <field name="channel" />
-                            <field name="date_sent" />
+                            <field name="date" readonly="state != 'draft'" />
+                            <field name="date_due" readonly="state != 'draft'" />
+                            <field name="channel" readonly="state != 'draft'" />
+                            <field name="date_sent" readonly="state != 'draft'" />
                             <field name="communication_id" />
                         </group>
                     </group>

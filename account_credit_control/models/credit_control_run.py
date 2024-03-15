@@ -22,8 +22,7 @@ class CreditControlRun(models.Model):
     date = fields.Date(
         string="Controlling Date",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     policy_ids = fields.Many2many(
         comodel_name="credit.control.policy",
@@ -31,8 +30,7 @@ class CreditControlRun(models.Model):
         column1="run_id",
         column2="policy_id",
         string="Policies",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
         default=lambda self: self._default_policies(),
     )
     report = fields.Html(readonly=True, copy=False)
@@ -69,8 +67,7 @@ class CreditControlRun(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self.env.company,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
         index=True,
     )
 
@@ -130,7 +127,6 @@ class CreditControlRun(models.Model):
         report = ""
         generated = self.env["credit.control.line"]
         for policy in policies:
-
             if policy.do_nothing:
                 continue
             (
