@@ -6,7 +6,6 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class ResPartnerPaymentActionType(models.Model):
-
     _name = "res.partner.payment.action.type"
     _description = "Partner Payment Action Types"
     _order = "sequence, id"
