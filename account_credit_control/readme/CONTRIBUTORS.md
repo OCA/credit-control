@@ -16,4 +16,5 @@
   - Víctor Martínez
 - Enric Tobella \<<etobella@creublanca.es>\>
 - Naglis Jonaitis (Versada UAB) \<<naglis@versada.eu>\>
-- Andrea Stirpe \<<a.stirpe@onestein.nl>\>
+- [360ERP](https://www.360erp.com):
+  - Andrea Stirpe

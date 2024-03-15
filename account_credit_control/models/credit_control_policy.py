@@ -224,9 +224,7 @@ class CreditControlPolicy(models.Model):
         return (manual_lines, policy_lines_generated, report)
 
     @api.model
-    def _name_search(
-        self, name="", args=None, operator="ilike", limit=100, name_get_uid=None
-    ):
+    def _name_search(self, name, domain=None, operator="ilike", limit=None, order=None):
         """Alternative implementation for domain on account, equivalent to
         domain="[('account_ids', 'in', property_account_receivable_id)]"
         """
@@ -237,7 +235,7 @@ class CreditControlPolicy(models.Model):
             )
             account_receivable = partner.property_account_receivable_id
 
-        ids = super()._name_search(name, args, operator, limit, name_get_uid)
+        ids = super()._name_search(name, domain, operator, limit, order)
         policies = self.browse(ids)
         policy_ids = []
         if account_receivable:

@@ -28,8 +28,7 @@ class CreditControlLine(models.Model):
         string="Controlling date",
         required=True,
         index=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     # maturity date of related move line we do not use
     # a related field in order to
@@ -37,15 +36,12 @@ class CreditControlLine(models.Model):
     date_due = fields.Date(
         string="Due date",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     date_entry = fields.Date(
         string="Entry date", related="move_line_id.date", store=True
     )
-    date_sent = fields.Date(
-        string="Reminded date", readonly=True, states={"draft": [("readonly", False)]}
-    )
+    date_sent = fields.Date(string="Reminded date", readonly=False)
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -69,15 +65,13 @@ class CreditControlLine(models.Model):
     channel = fields.Selection(
         selection=CHANNEL_LIST,
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
         comodel_name="res.partner",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     commercial_partner_id = fields.Many2one(
         comodel_name="res.partner",
@@ -117,8 +111,7 @@ class CreditControlLine(models.Model):
         comodel_name="credit.control.policy.level",
         string="Overdue Level",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
     )
     policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
