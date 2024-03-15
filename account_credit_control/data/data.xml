@@ -11,7 +11,10 @@
         <field name="model_id" ref="model_credit_control_communication" />
         <field name="auto_delete" eval="False" />
         <field name="lang">{{object.contact_address_id.lang or 'en_US'}}</field>
-        <field name="report_template" ref="credit_control_summary" />
+        <field
+            name="report_template_ids"
+            eval="[(4, ref('account_credit_control.credit_control_summary'))]"
+        />
         <field name="body_html" type="html">
   <p>Dear <t t-out="object.contact_address_id.name or '' " />,</p>
   <br />

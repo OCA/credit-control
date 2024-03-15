@@ -8,6 +8,9 @@
             eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
         />
         <field name="domain">[('partner_id', '=', active_id)]</field>
+        <field
+            name="context"
+        >{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
         <field name="res_model">credit.control.line</field>
         <field name="binding_model_id" ref="base.model_res_partner" />
         <field name="binding_view_types">form</field>
@@ -24,8 +27,7 @@
                     class="oe_stat_button"
                     type="action"
                     name="%(act_partner_credit_relation_relation)d"
-                    context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}"
-                    attrs="{'invisible': [('credit_control_count', '=', 0)]}"
+                    invisible="credit_control_count == 0"
                     icon="fa-tasks"
                     groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
                 >
@@ -48,7 +50,7 @@
                 <page
                     string="Credit Control"
                     name="credit_control"
-                    attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}"
+                    invisible="not is_company and parent_id"
                     groups="account.group_account_invoice,account.group_account_readonly,account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
                 >
                     <group name="followup">
@@ -145,7 +147,7 @@
                             name="web_ribbon"
                             title="Archived"
                             bg_color="bg-danger"
-                            attrs="{'invisible': [('active', '=', True)]}"
+                            invisible="active"
                         />
                     </div>
                     <group>
