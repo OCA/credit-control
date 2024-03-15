@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_credit_control_summary_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <t t-set="address">
+                <address
+                    t-field="doc.contact_address_id"
+                    t-options="{'widget':'contact', 'fields': ['address', 'name'], 'no_marker': True}"
+                />
+            </t>
+            <div class="page">
+                <h2 id="policy_level">
+                    <span t-field="doc.policy_level_id.name" />
+                </h2>
+                <div id="informations" class="row my-3">
+                    <div class="col-auto mw-100 mb-2" name="date">
+                        <strong>Date:</strong>
+                        <p class="m-0" t-field="doc.report_date" />
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span t-field="doc.policy_level_id.custom_text" />
+                    </div>
+                </div>
+                <h3>Summary</h3>
+                <table class="table table-sm" id="summary_table">
+                    <thead>
+                        <tr>
+                            <th>Invoice number</th>
+                            <th>Invoice date</th>
+                            <th>Date due</th>
+                            <th class="text-right">Invoiced amount</th>
+                            <th class="text-right">Open amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.credit_control_line_ids" t-as="l">
+                            <t t-if="l.invoice_id">
+                                <td>
+                                    <span t-field="l.invoice_id.name" />
+                                </td>
+                            </t>
+                            <t t-if="not l.invoice_id">
+                                <td>
+                                    <span t-field="l.move_line_id.name" />
+                                </td>
+                            </t>
+                            <td>
+                                <span t-field="l.date_entry" />
+                            </td>
+                            <td>
+                                <span t-field="l.date_due" />
+                            </td>
+                            <td class="text-right">
+                                <span
+                                    t-field="l.amount_due"
+                                    t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"
+                                />
+                            </td>
+                            <td class="text-right">
+                                <span
+                                    t-field="l.balance_due"
+                                    t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div
+                        t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto"
+                    >
+                        <table class="table table-sm">
+                            <tr>
+                                <td>
+                                    <strong>Total Invoiced</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-field="doc.total_invoiced"
+                                        t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Total Due</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-field="doc.total_due"
+                                        t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <t t-if="doc.policy_level_id.custom_text_after_details">
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <p
+                                t-field="doc.policy_level_id.custom_text_after_details"
+                            />
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+    <template id="report_credit_control_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="account_credit_control.report_credit_control_summary_document"
+                    t-lang="doc.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>
