@@ -176,6 +176,7 @@ class CreditControlCommunication(models.Model):
         return comms
 
     def _get_credit_control_communication_table(self):
+        # ruff: noqa
         th_style = "padding: 5px; border: 1px solid black;"
         tr_content = "<th style='%s'>%s</th>".format(th_style, _("Invoice number"))
         tr_content += "<th style='%s'>%s</th>".format(th_style, _("Payment Reference"))
