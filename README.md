@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_credit_control](account_credit_control/) | 12.0.3.0.4 |  | Account Credit Control
+[account_credit_control](account_credit_control/) | 12.0.3.0.5 |  | Account Credit Control
 [account_credit_control_queue_job](account_credit_control_queue_job/) | 12.0.2.0.0 |  | This addon adds the opportunity to run some credit control tasks in jobs
 [account_financial_risk](account_financial_risk/) | 12.0.3.1.0 |  | Manage customer risk
 [account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 12.0.2.2.2 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Simple mail/letter/phone overdue customer invoice reminder

@@ -4,7 +4,7 @@
 # Copyright 2019-2020 Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
- 'version': '12.0.3.0.4',
+ 'version': '12.0.3.0.5',
  'author': "Camptocamp,"
            "Odoo Community Association (OCA),"
            "Okia,"
