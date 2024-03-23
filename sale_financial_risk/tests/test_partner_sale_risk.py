@@ -1,6 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import fields
 from odoo.tests import TransactionCase
 
 from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
@@ -22,10 +23,20 @@ class TestPartnerSaleRisk(TransactionCase):
         cls.product_pricelist = cls.env["product.pricelist"].create(
             {"name": "pricelist for sale_financial_risk test"}
         )
-        cls.sale_order = cls.env["sale.order"].create(
+        cls.main_currency = cls.env.company.currency_id
+        cls.EUR = cls.env.ref("base.EUR")
+        cls.USD = cls.env.ref("base.USD")
+        cls.sale_order = cls.create_sale_order(cls.main_currency, cls.env.company)
+        cls.env.user.lang = "en_US"
+
+    @classmethod
+    def create_sale_order(cls, currency, company):
+        return cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,
                 "pricelist_id": cls.product_pricelist.id,
+                "currency_id": currency.id,
+                "company_id": company.id,
                 "order_line": [
                     (
                         0,
@@ -36,12 +47,12 @@ class TestPartnerSaleRisk(TransactionCase):
                             "product_uom_qty": 1,
                             "product_uom": cls.product.uom_id.id,
                             "price_unit": 100.0,
+                            "company_id": company.id,
                         },
                     )
                 ],
             }
         )
-        cls.env.user.lang = "en_US"
 
     def test_sale_order(self):
         self.sale_order.action_confirm()
@@ -171,3 +182,64 @@ class TestPartnerSaleRisk(TransactionCase):
         self.assertEqual(action["res_model"], "sale.order.line")
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
+
+    def test_manual_currency_risk_not_exceeded(self):
+        if self.env.company.currency_id == self.EUR:
+            self.product_pricelist.currency_id = self.USD
+            currency = self.USD
+        else:
+            self.product_pricelist.currency_id = self.EUR
+            currency = self.EUR
+        self.partner.write(
+            {
+                "risk_sale_order_limit": 99,
+                "credit_limit": 99,
+                "risk_sale_order_include": True,
+                "credit_currency": "manual",
+                "manual_credit_currency_id": self.main_currency.id,
+            }
+        )
+        self.env["res.currency.rate"].create(
+            {
+                "currency_id": self.main_currency.id,
+                "name": fields.Date.today(),
+                "rate": 0.5,
+                "company_id": self.env.company.id,
+            }
+        )
+        sale_order = self.create_sale_order(currency=currency, company=self.env.company)
+        result = sale_order.action_confirm()
+
+        # Limit not exceeded
+        self.assertEqual(result, True)
+
+    def test_manual_currency_risk_exceeded(self):
+        if self.env.company.currency_id == self.EUR:
+            self.product_pricelist.currency_id = self.USD
+            currency = self.USD
+        else:
+            self.product_pricelist.currency_id = self.EUR
+            currency = self.EUR
+        self.partner.write(
+            {
+                "risk_sale_order_limit": 99,
+                "credit_limit": 99,
+                "risk_sale_order_include": True,
+                "credit_currency": "manual",
+                "manual_credit_currency_id": self.main_currency.id,
+            }
+        )
+        self.env["res.currency.rate"].create(
+            {
+                "currency_id": self.main_currency.id,
+                "name": fields.Date.today(),
+                "rate": 2.0,
+                "company_id": self.env.company.id,
+            }
+        )
+        sale_order = self.create_sale_order(currency=currency, company=self.env.company)
+        result = sale_order.action_confirm()
+
+        # Limit exceeded
+        self.assertNotEqual(result, True)
+        self.assertEqual(result["res_model"], "partner.risk.exceeded.wiz")
