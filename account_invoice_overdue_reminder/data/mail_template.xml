@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+    <record id="overdue_invoice_reminder_mail_template" model="mail.template">
+        <field name="name">Overdue Invoice Reminder</field>
+        <field
+            name="model_id"
+            ref="account_invoice_overdue_reminder.model_overdue_reminder_step"
+        />
+        <field name="auto_delete" eval="False" />
+        <field name="lang">{{object.partner_id.lang}}</field>
+        <field
+            name="email_from"
+        >{{object.user_id.email or object.company_id.email}}</field>
+        <field name="email_to">{{object.partner_id.email}}</field>
+        <field
+            name="subject"
+        >{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                <p>Dear customer,</p>
+                <p>According to our books, the following invoices are overdue:</p>
+
+                <table
+                    style="border-spacing: 0; border-collapse: collapse; width: 100%; text-align: center;"
+                >
+                    <tr>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Invoice Number</th>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Invoice Date</th>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Payment Terms</th>
+                        <th style="padding: 5px; border: 1px solid black;">Due Date</th>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Order Ref.</th>
+                        <th style="padding: 5px; border: 1px solid black;">Type</th>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Total Untaxed</th>
+                        <th style="padding: 5px; border: 1px solid black;">Total</th>
+                        <th style="padding: 5px; border: 1px solid black;">Residual</th>
+                        <th
+                            style="padding: 5px; border: 1px solid black;"
+                        >Past Reminders</th>
+                    </tr>
+                    <t
+                        t-foreach="object.invoice_ids.sorted(key='invoice_date')"
+                        t-as="inv"
+                    >
+                        <tr
+                            style="background-color:
+                            % if inv.move_type == 'out_refund':
+                                LightGray
+                            % endif
+                        "
+                        >
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.name" />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.invoice_date" />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.invoice_payment_term_id.name or ''" />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.invoice_date_due" />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.ref or ''" />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;"><t
+                                    t-out="dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]"
+                                /></td>
+                            <td
+                                style="padding: 5px; border: 1px solid black; text-align: right;"
+                            >
+                                <t
+                                    t-out="format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                />
+                            </td>
+                            <td
+                                style="padding: 5px; border: 1px solid black; text-align: right;"
+                            >
+                                <t
+                                    t-out="format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                />
+                            </td>
+                            <td
+                                style="padding: 5px; border: 1px solid black; text-align: right;"
+                            >
+                                <t
+                                    t-out="format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                                />
+                            </td>
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t t-out="inv.overdue_reminder_counter" />
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-foreach="object.total_residual()" t-as="total_residual">
+                        <tr>
+                            <td />
+                            <td />
+                            <td />
+                            <td />
+                            <td />
+                            <td />
+                            <td
+                                colspan="2"
+                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                            >
+                                Total
+                                Residual in
+                                <t t-out="total_residual[0].name" />:
+                            </td>
+                            <td
+                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                            >
+                                <t
+                                    t-out="format_amount(total_residual[1], total_residual[0])"
+                                />
+                            </td>
+                            <td />
+                        </tr>
+                    </t>
+                </table>
+
+                <p
+                >If you made a payment for these invoices a few days ago, please ignore this email.</p>
+
+                <t t-if="object.company_id.overdue_reminder_attach_invoice">
+                    <p>You will find enclosed the overdue invoices.</p>
+                </t>
+
+                <t t-if="object.counter > 2">
+                    <p
+                    >Despite several reminders, we are disappointed to see that these overdue invoices are still
+                        unpaid.
+                        In order to avoid legal proceedings, we urge you to paid these overdue invoices in the next
+                        days.
+                    </p>
+                </t>
+
+                <p>Regards,</p>
+
+                <t t-if="user.signature">
+                    <p>
+                        <t t-out="user.signature or ''" />
+                    </p>
+                </t>
+
+            </div>
+        </field>
+    </record>
+
+</odoo>
