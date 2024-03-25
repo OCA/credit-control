@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -368,33 +369,70 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:035454490eecf4385ca96941aa0384e312617ac3464e9921721b26337032d866
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/credit-control/tree/16.0/account_invoice_overdue_reminder"><img alt="OCA/credit-control" src="https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/credit-control-16-0/credit-control-16-0-account_invoice_overdue_reminder"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/credit-control&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This Odoo module is designed to send overdue invoice reminders to customers. It handles reminders by e-mail, letter and phone.</p>
-<p>This module is an alternative to the OCA module <em>account_credit_control</em>. Why another module for invoice reminders ? Because the module <em>account_credit_control</em> is quite complex (we experienced that some users find it too complex and eventually stop using it) and its interface is designed to send massive volume of reminders.</p>
-<p>This module has been designed from the start with the following priorities:</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_reminder"><img alt="OCA/credit-control" src="https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/credit-control-17-0/credit-control-17-0-account_invoice_overdue_reminder"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/credit-control&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This Odoo module is designed to send overdue invoice reminders to
+customers. It handles reminders by e-mail, letter and phone.</p>
+<p>This module is an alternative to the OCA module
+<em>account_credit_control</em>. Why another module for invoice reminders ?
+Because the module <em>account_credit_control</em> is quite complex (we
+experienced that some users find it too complex and eventually stop
+using it) and its interface is designed to send massive volume of
+reminders.</p>
+<p>This module has been designed from the start with the following
+priorities:</p>
 <ul class="simple">
-<li><strong>keep control</strong>: you must keep tight control on the overdue invoice reminders that you send. Overdue invoice reminders are part of the communication with your customers, and this is very important to keep a good relation with your customers.</li>
+<li><strong>keep control</strong>: you must keep tight control on the overdue invoice
+reminders that you send. Overdue invoice reminders are part of the
+communication with your customers, and this is very important to keep
+a good relation with your customers.</li>
 <li><strong>usability</strong>: the module is easy to configure and easy to use.</li>
-<li><strong>no accounting skills needed</strong>: the module can be used by users without accounting skills. It can even be used by salesman!</li>
-<li><strong>multi-currency</strong>: if you invoice your customer in another currency that your company currency, the invoice reminders only mention the currency of the invoices. And if you invoice a customer with different currencies, the reminder is clear and easy-to-understand by your customer, with a total residual per currency.</li>
-<li><strong>multi-channel</strong>: supports overdue invoice reminders by e-mail (default), phone and letter.</li>
-<li><strong>simplicity</strong>: for the developers, the code is small and easy to understand.</li>
+<li><strong>no accounting skills needed</strong>: the module can be used by users
+without accounting skills. It can even be used by salesman!</li>
+<li><strong>multi-currency</strong>: if you invoice your customer in another currency
+that your company currency, the invoice reminders only mention the
+currency of the invoices. And if you invoice a customer with
+different currencies, the reminder is clear and easy-to-understand by
+your customer, with a total residual per currency.</li>
+<li><strong>multi-channel</strong>: supports overdue invoice reminders by e-mail
+(default), phone and letter.</li>
+<li><strong>simplicity</strong>: for the developers, the code is small and easy to
+understand.</li>
 </ul>
-<p>The specifications written before starting the development of this module are written in this <a class="reference external" href="https://docs.google.com/document/d/1JIIAP5QsItbJ1zLiaGHuR0RAQplEGv3diOl-d4mS__I/edit?usp=sharing">document</a> (in French).</p>
-<p>The module has one important limitation: it sends a reminder for an invoice when it has past it’s <em>Due Date</em> (which is in fact the <em>Final Due Date</em>): if the invoice has a payment term with several lines, it won’t send a reminder before the last term is overdue.</p>
-<p>An overdue reminder for a customer always include all the overdue invoices of that customer.</p>
+<p>The specifications written before starting the development of this
+module are written in this
+<a class="reference external" href="https://docs.google.com/document/d/1JIIAP5QsItbJ1zLiaGHuR0RAQplEGv3diOl-d4mS__I/edit?usp=sharing">document</a>
+(in French).</p>
+<p>The module has one important limitation: it sends a reminder for an
+invoice when it has past it’s <em>Due Date</em> (which is in fact the <em>Final
+Due Date</em>): if the invoice has a payment term with several lines, it
+won’t send a reminder before the last term is overdue.</p>
+<p>An overdue reminder for a customer always include all the overdue
+invoices of that customer.</p>
 <p>The module supports a clever per-invoice reminder counter mechanism:</p>
 <ul class="simple">
 <li>the reminder counter is a property of an invoice,</li>
-<li>the reminder counter of each overdue invoice is incremented when sending a reminder by email or by post. It is not incremented for reminders by phone.</li>
-<li>in an email or a letter, the subject will be <em>Overdue invoice reminder n°N</em> where N is the maximum value of the counter of the overdue invoices plus one.</li>
+<li>the reminder counter of each overdue invoice is incremented when
+sending a reminder by email or by post. It is not incremented for
+reminders by phone.</li>
+<li>in an email or a letter, the subject will be <em>Overdue invoice
+reminder n°N</em> where N is the maximum value of the counter of the
+overdue invoices plus one.</li>
 </ul>
 <p>There are two user interfaces to send reminders:</p>
 <ul class="simple">
-<li>the <strong>one-by-one</strong> interface, which displays one screen for each customer that has overdue invoices, one after the other. You should use this interface when you have a reasonable volume of reminders to send (less than 100 overdue reminders for example). It gives you a tight control on the reminders and the possibility to easily and rapidly customize the reminder e-mails.</li>
-<li>the <strong>mass</strong> interface, which displays a list view of all customers that have overdue invoices, and you can process several reminders at the same time (via the <em>Actions</em> menu).</li>
+<li>the <strong>one-by-one</strong> interface, which displays one screen for each
+customer that has overdue invoices, one after the other. You should
+use this interface when you have a reasonable volume of reminders to
+send (less than 100 overdue reminders for example). It gives you a
+tight control on the reminders and the possibility to easily and
+rapidly customize the reminder e-mails.</li>
+<li>the <strong>mass</strong> interface, which displays a list view of all customers
+that have overdue invoices, and you can process several reminders at
+the same time (via the <em>Actions</em> menu).</li>
 </ul>
-<p>This video tutorial in English will show you how to configure and use the module: <a class="reference external" href="https://www.youtube.com/watch?v=MaOoVAi7Tc0">Youtube link</a>.</p>
+<p>This video tutorial in English will show you how to configure and use
+the module: <a class="reference external" href="https://www.youtube.com/watch?v=MaOoVAi7Tc0">Youtube
+link</a>.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -414,16 +452,21 @@ ul.auto-toc {
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
-<p>Of course, before sending invoice reminders, you must import your bank statements and process them, so that you are up-to-date on customer payments.</p>
-<p>Then, go to the menu <em>Invoicing &gt; Customers &gt; Overdue Invoice Remind</em>: you will get the start screen where you can:</p>
+<p>Of course, before sending invoice reminders, you must import your bank
+statements and process them, so that you are up-to-date on customer
+payments.</p>
+<p>Then, go to the menu <em>Invoicing &gt; Customers &gt; Overdue Invoice Remind</em>:
+you will get the start screen where you can:</p>
 <ul class="simple">
-<li>filter the customers that you want to remind (filter by customer or by salesman),</li>
+<li>filter the customers that you want to remind (filter by customer or
+by salesman),</li>
 <li>check that your bank journals are up-to-date,</li>
 <li>choose between the <em>one-by-one</em> and <em>mass</em> interfaces,</li>
 <li>customize some parameters.</li>
 </ul>
 <p>Then follow the process until the end.</p>
-<p>You can also start the invoice reminder wizard via the button <em>Overdue Reminder</em> on an overdue invoice.</p>
+<p>You can also start the invoice reminder wizard via the button <em>Overdue
+Reminder</em> on an overdue invoice.</p>
 </div>
 <div class="section" id="changelog">
 <h1><a class="toc-backref" href="#toc-entry-2">Changelog</a></h1>
@@ -431,10 +474,11 @@ ul.auto-toc {
 <h2><a class="toc-backref" href="#toc-entry-3">16.0.1.2.0 (2023-12-11)</a></h2>
 <p><strong>Features</strong></p>
 <ul>
-<li><p class="first">Credit notes have been added to the e-mail summary that are sent to the
-customer. They are marked in a different colour.</p>
-<p>Furthermore, the button toggle to allow to send a reminder with unreconciled
-payments has been removed. The warning remains. (<a class="reference external" href="https://github.com/OCA/credit-control/issues/226">#226</a>)</p>
+<li><p class="first">Credit notes have been added to the e-mail summary that are sent to
+the customer. They are marked in a different colour.</p>
+<p>Furthermore, the button toggle to allow to send a reminder with
+unreconciled payments has been removed. The warning remains.
+(<a class="reference external" href="https://github.com/OCA/credit-control/issues/226">#226</a>)</p>
 </li>
 </ul>
 </div>
@@ -444,7 +488,7 @@ payments has been removed. The warning remains. (<a class="reference external" h
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/credit-control/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_reminder%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_reminder%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -470,7 +514,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/alexis-via"><img alt="alexis-via" src="https://github.com/alexis-via.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/credit-control/tree/16.0/account_invoice_overdue_reminder">OCA/credit-control</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_reminder">OCA/credit-control</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
