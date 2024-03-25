@@ -567,38 +567,29 @@ class OverdueReminderStep(models.TransientModel):
     def generate_mail_vals(self):
         self.ensure_one()
         xmlid = self._get_overdue_invoice_reminder_template()
-        mvals = self.env.ref(xmlid).generate_email(
-            self.id, ["email_from", "email_to", "partner_to", "reply_to"]
-        )
+        template = self.env.ref(xmlid)
         cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
-        if mvals.get("email_cc"):
-            cc_list.append(mvals["email_cc"])
-        mvals.update(
-            {
-                "subject": self.mail_subject,
-                "body_html": self.mail_body,
-                "email_cc": ", ".join(cc_list),
-                "model": "res.partner",
-                "res_id": self.commercial_partner_id.id,
-            }
-        )
-        mvals.pop("attachment_ids", None)
-        mvals.pop("attachments", None)
-        mail = self.env["mail.mail"].sudo().create(mvals)
+        if template.email_cc:
+            cc_list.append(template.email_cc)
+        cc = ", ".join(cc_list)
+        mail_vals = {
+            "email_from": self.user_id.email,
+            "email_to": self.partner_id.email,
+            "subject": self.mail_subject,
+            "body_html": self.mail_body,
+            "email_cc": cc,
+            "model": "res.partner",
+            "res_id": self.commercial_partner_id.id,
+        }
+        mail_vals.pop("attachment_ids", None)
+        mail_vals.pop("attachments", None)
+        mail = self.env["mail.mail"].sudo().create(mail_vals)
+
         if self.company_id.overdue_reminder_attach_invoice:
             attachment_ids = self._get_attachment_ids(mail)
             mail.write({"attachment_ids": [(6, 0, attachment_ids)]})
-        vals = {"mail_id": mail.id}
-        return vals
 
-    def validate_phone(self):
-        self.ensure_one()
-        assert self.reminder_type == "phone"
-        vals = {
-            "result_id": self.result_id.id or False,
-            "result_notes": self.result_notes,
-        }
-        return vals
+        return {"mail_id": mail.id}
 
     def validate_post(self):
         self.ensure_one()
