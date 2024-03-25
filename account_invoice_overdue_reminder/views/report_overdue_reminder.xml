@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 <template id="account_invoice_overdue_reminder.report_overdue_reminder_document">
     <t t-call="web.external_layout">

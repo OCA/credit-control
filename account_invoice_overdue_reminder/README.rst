@@ -160,6 +160,7 @@ Contributors
 ------------
 
 -  Alexis de Lattre <alexis.delattre@akretion.com>
+-  Nils Coenen <nils.coenen@nico-solutions.de>
 
 Maintainers
 -----------
