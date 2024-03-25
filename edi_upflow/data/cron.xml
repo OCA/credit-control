@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+  <record id="edi_oca.cron_edi_backend_check_output_exchange" model="ir.cron">
+    <!-- TODO: probably needs to be moved in post install hooks because record declared with noupdate="1"-->
+    <!-- mitigate with the fact we are now creating a queue job task right after sending -->
+    <field
+            name="code"
+        >model.search([])._cron_check_output_exchange_sync(skip_sent=False)</field>
+  </record>
+
+</odoo>
