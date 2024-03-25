@@ -13,18 +13,14 @@
     <field name="inherit_id" ref="account.view_move_form" />
     <field name="arch" type="xml">
         <div role="alert" position="after">
-                <div
-                    class="alert alert-warning"
-                    role="alert"
-                    attrs="{'invisible': [('overdue', '=', False)]}"
-                >
+                <div class="alert alert-warning" role="alert" invisible="not overdue">
                         This customer invoice is overdue.
             <button
                         name="%(overdue_reminder_start_action)d"
                         string="Send an overdue reminder"
                         type="action"
                         context="{'default_partner_ids': [commercial_partner_id]}"
-                        attrs="{'invisible': ['|', '|', ('overdue', '=', False), ('no_overdue_reminder', '=', True), ('overdue_remind_sent', '=', True)]}"
+                        invisible="not overdue or no_overdue_reminder or overdue_remind_sent"
                         class="oe_link"
                     />
 
@@ -34,7 +30,7 @@
             <page
                     name="overdue_reminder"
                     string="Overdue Reminder"
-                    attrs="{'invisible': [('overdue', '=', False)]}"
+                    invisible="not overdue"
                 >
                 <group name="overdue_reminder_main" col="4">
                     <field name="overdue_reminder_counter" />

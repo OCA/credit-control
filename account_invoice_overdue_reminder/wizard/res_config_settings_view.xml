@@ -13,73 +13,55 @@
     <field name="inherit_id" ref="account.res_config_settings_view_form" />
     <field name="arch" type="xml">
         <xpath
-                expr="//div[@id='pay_invoice_online_setting_container']"
+                expr="//block[@id='pay_invoice_online_setting_container']"
                 position="after"
             >
-            <h2>Overdue Invoice Reminder</h2>
-            <div class="row mt16 o_settings_container" id="overdue_reminder">
-                <div
-                        class="col-12 col-md-12 o_setting_box"
-                        id="overdue_reminder_attach_invoice"
+            <block title="Overdue Invoice Reminder" id="overdue_reminder">
+                <setting
+                        id="overdue_reminder"
+                        string="Attach Invoices"
+                        help="Attach Invoices to Overdue Reminder E-mails"
                     >
-                        <div class="o_setting_left_pane">
-                                <field name="overdue_reminder_attach_invoice" />
-                        </div>
-                    <div class="o_setting_right_pane">
-                        <div class="row" name="overdue_reminder_attach_invoice">
-                            <label
-                                    for="overdue_reminder_attach_invoice"
-                                    class="col-md-5"
-                                />
-                    </div>
-                    </div>
-                </div>
-                <div
-                        class="col-12 col-md-12 o_setting_box"
-                        id="overdue_reminder_other_fields"
+                    <field name="overdue_reminder_attach_invoice" />
+                </setting>
+                <setting
+                        id="overdue_reminder_policy"
+                        string="Contact to Remind"
+                        help="Default Contact to Remind"
                     >
-                        <div class="o_setting_left_pane" />
-                    <div class="o_setting_right_pane">
-                        <div class="row" name="overdue_reminder_partner_policy">
-                            <label
-                                    for="overdue_reminder_partner_policy"
-                                    class="col-md-5"
-                                />
-                            <field name="overdue_reminder_partner_policy" />
-                        </div>
-                        <div class="row" name="overdue_reminder_interface">
-                            <label
-                                    for="overdue_reminder_interface"
-                                    class="col-md-5"
-                                    string="Default Wizard Interface"
-                                />
-                            <field name="overdue_reminder_interface" />
-                        </div>
-                        <div class="row" name="overdue_reminder_start_days">
+                    <field name="overdue_reminder_partner_policy" />
+                </setting>
+                <setting
+                        id="overdue_reminder_if"
+                        string="Reminder Wizard"
+                        help="Default Overdue Reminder Wizard Interface"
+                    >
+                    <field name="overdue_reminder_interface" />
+                </setting>
+                <setting
+                        id="overdue_reminder_days"
+                        string="Default Overdue Reminder Settings"
+                    >
+                    <div class="content-group">
+                        <div class="row mt8">
                             <label
                                     for="overdue_reminder_start_days"
-                                    class="col-md-5"
-                                    string="Default Reminder Trigger Delay"
+                                    string="Trigger Delay (days)"
+                                    class="col-lg-4 o_light_label"
                                 />
-                            <field
-                                    name="overdue_reminder_start_days"
-                                    class="col-md-1"
-                                /> days
+                            <field name="overdue_reminder_start_days" />
                         </div>
-                        <div class="row" name="overdue_reminder_min_interval_days">
+                        <div class="row mt8">
                             <label
                                     for="overdue_reminder_min_interval_days"
-                                    class="col-md-5"
-                                    string="Default Reminder Minimum Interval"
+                                    string="Minimum Interval (days)"
+                                    class="col-lg-4 o_light_label"
                                 />
-                            <field
-                                    name="overdue_reminder_min_interval_days"
-                                    class="col-md-1"
-                                /> days
+                            <field name="overdue_reminder_min_interval_days" />
                         </div>
                     </div>
-                </div>
-            </div>
+                </setting>
+            </block>
         </xpath>
     </field>
 </record>

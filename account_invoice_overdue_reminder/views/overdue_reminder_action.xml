@@ -18,18 +18,9 @@
                 <field name="date" />
                 <field name="user_id" />
                 <field name="reminder_type" />
-                <field
-                        name="mail_id"
-                        attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"
-                    />
-                <field
-                        name="mail_cc"
-                        attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"
-                    />
-                <field
-                        name="mail_state"
-                        attrs="{'invisible': [('reminder_type', '!=', 'mail')]}"
-                    />
+                <field name="mail_id" invisible="reminder_type != 'mail'" />
+                <field name="mail_cc" invisible="reminder_type != 'mail'" />
+                <field name="mail_state" invisible="reminder_type != 'mail'" />
             </group>
             <group name="result" string="Info/Result">
                 <field name="result_id" widget="selection" />

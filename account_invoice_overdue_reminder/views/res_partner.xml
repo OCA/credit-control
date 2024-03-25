@@ -16,7 +16,7 @@
             <group
                     name="overdue_reminder"
                     string="Overdue Reminder"
-                    attrs="{'invisible': [('customer_rank', '&lt;=', 0)]}"
+                    invisible="customer_rank &lt;= 0"
                 >
                 <field name="no_overdue_reminder" />
                 <field name="customer_rank" invisible="1" />
@@ -27,7 +27,7 @@
 
 <record id="action_overdue_reminder_action" model="ir.actions.act_window">
     <field name="name">Overdue Reminder Actions</field>
-    <field name="context">{'search_default_commercial_partner_id': [active_id]}</field>
+    <field name="context">{'search_default_commercial_partner_id': [id]}</field>
     <field name="res_model">overdue.reminder.action</field>
     <field name="binding_model_id" ref="base.model_res_partner" />
     <field name="binding_view_types">form</field>

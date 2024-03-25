@@ -117,7 +117,7 @@
                 <field name="company_id" invisible="1" />
             </group>
             <group
-                    attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
+                    invisible="not warn_unreconciled_move_line_ids"
                     string="WARNING: unreconciled payments/refunds"
                     col="1"
                 >
@@ -157,8 +157,8 @@
                                 string="Amount Due"
                                 sum="Amount Due"
                             />
-                        <field name="currency_id" invisible="1" />
-                        <field name="company_currency_id" invisible="1" />
+                        <field name="currency_id" column_invisible="1" />
+                        <field name="company_currency_id" column_invisible="1" />
                         <field
                                 name="overdue_reminder_counter"
                                 string="Current Remind Counter"
@@ -167,47 +167,35 @@
                                 name="overdue_reminder_last_date"
                                 string="Last Reminder"
                             />
-                        <field name="state" invisible="1" />
-                        <field name="payment_state" invisible="1" />
+                        <field name="state" column_invisible="1" />
+                        <field name="payment_state" column_invisible="1" />
                     </tree>
                 </field>
             </group>
             <group name="reminder_type">
                 <field name="reminder_type" />
             </group>
-            <group
-                    name="phone"
-                    attrs="{'invisible': [('reminder_type', '!=', 'phone')]}"
-                >
+            <group name="phone" invisible="reminder_type != 'phone'">
                 <field
                         name="result_id"
                         widget="selection"
-                        attrs="{'required': [('reminder_type', '=', 'phone')]}"
+                        required="reminder_type == 'phone'"
                     />
                 <field name="result_notes" />
                 <field name="create_activity" />
             </group>
             <group
                     name="phone_activity"
-                    attrs="{'invisible': ['|', ('reminder_type', '!=', 'phone'), ('create_activity', '=', False)]}"
+                    invisible="reminder_type != 'phone' or create_activity == 'False'"
                     col="4"
                 >
-                <field
-                        name="activity_type_id"
-                        attrs="{'required': [('create_activity', '=', True)]}"
-                    />
-                <field
-                        name="activity_deadline"
-                        attrs="{'required': [('create_activity', '=', True)]}"
-                    />
+                <field name="activity_type_id" required="create_activity" />
+                <field name="activity_deadline" required="create_activity" />
                 <field name="activity_summary" />
-                <field
-                        name="activity_user_id"
-                        attrs="{'required': [('create_activity', '=', True)]}"
-                    />
+                <field name="activity_user_id" required="create_activity" />
                 <field name="activity_note" colspan="4" nolabel="1" />
             </group>
-            <group name="mail" attrs="{'invisible': [('reminder_type', '!=', 'mail')]}">
+            <group name="mail" invisible="reminder_type != 'mail'">
                 <field
                         name="mail_cc_partner_ids"
                         domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id), ('email', '!=', False)]"
@@ -216,7 +204,7 @@
                 <field name="mail_subject" />
                 <field name="mail_body" colspan="2" nolabel="1" />
             </group>
-            <group attrs="{'invisible': [('reminder_type', '!=', 'post')]}" col="1">
+            <group invisible="reminder_type != 'post'" col="1">
                 <button
                         name="print_letter"
                         type="object"
@@ -272,7 +260,7 @@
             <field name="reminder_type" />
             <field name="invoice_ids" />
             <field name="warn_unreconciled_move_line_ids" />
-            <field name="state" invisible="1" />
+            <field name="state" column_invisible="1" />
         </tree>
     </field>
 </record>
@@ -300,7 +288,8 @@
                 <field name="update_action" />
                 <field
                         name="reminder_type"
-                        attrs="{'required': [('update_action', '=', 'reminder_type')], 'invisible': [('update_action', '!=', 'reminder_type')]}"
+                        required="update_action == reminder_type"
+                        invisible="update_action != reminder_type"
                     />
             </group>
             <footer>
