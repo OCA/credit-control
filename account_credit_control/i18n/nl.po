@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2023-08-08 18:11+0000\n"
-"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
+"PO-Revision-Date: 2024-04-02 16:35+0000\n"
+"Last-Translator: Thijs van Oers <thijsvanoers@yahoo.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -87,13 +87,12 @@ msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
-#, fuzzy
 msgid ""
 "<span class=\"o_form_label\">This wizard will let you set the overdue policy "
 "and level for selected invoices</span>"
 msgstr ""
-"Deze wizard maakt het mogelijk om de vervallen beleid en niveau van de "
-"geselecteerde facturen aan te passen."
+"<span class=\"o_form_label\">Deze wizard maakt het mogelijk om de vervallen "
+"beleid en niveau van de geselecteerde facturen aan te passen.</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
