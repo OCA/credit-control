@@ -219,15 +219,15 @@ class CreditControlCommunication(models.Model):
         for comm in self:
             if comm.policy_level_id.mail_show_invoice_detail:
                 comm = comm.with_context(inject_credit_control_communication_table=True)
+            comm.credit_control_line_ids.filtered(
+                lambda line: line.state == "to_be_sent"
+            ).write({"state": "queued"})
             comm.message_mail_with_source(
                 comm.policy_level_id.email_template_id,
                 subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                     "account_credit_control.mt_request"
                 ),
             )
-            comm.credit_control_line_ids.filtered(
-                lambda line: line.state == "to_be_sent"
-            ).write({"state": "queued"})
 
     def _mark_credit_line_as_sent(self):
         lines = self.mapped("credit_control_line_ids")
