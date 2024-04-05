@@ -69,6 +69,9 @@ class AccountMove(models.Model):
         for invoice in self.filtered(
             lambda x: x.move_type == "out_invoice"
             and not x.company_id.allow_overrisk_invoice_validation
+            and not self.env.user.has_group(
+                "account_financial_risk.group_account_financial_risk_ignore_limit"
+            )
         ):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:
