@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_overdue_warn_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-05-02 13:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_count
+msgid "# of Overdue Invoices"
+msgstr "N° di fatture scadute"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__commercial_partner_invoicing_id
+msgid "Commercial Invoicing Partner"
+msgstr "Partner commerciale fattura"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__company_currency_id
+msgid "Company Currency"
+msgstr "Valuta aziendale"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
+msgid "Overdue Invoices Residual"
+msgstr "Residuo fatture scadute"
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model.fields,help:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
+msgid ""
+"Overdue invoices total residual amount of the invoicing partner in company "
+"currency."
+msgstr ""
+"Valore residuo totale fatture scadute del partner fattura in valute "
+"dell'azienda."
+
+#. module: account_invoice_overdue_warn_sale
+#: model:ir.model,name:account_invoice_overdue_warn_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "The invoicing partner"
+msgstr "Partner fatturazione"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "for a total residual of"
+msgstr "per un totale residuo di"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "has"
+msgstr "ha"
+
+#. module: account_invoice_overdue_warn_sale
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
+msgid "overdue invoice(s)"
+msgstr "fattura(e) scaduta(e)"
