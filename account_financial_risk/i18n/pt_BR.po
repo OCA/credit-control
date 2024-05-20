@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2023-10-26 16:32+0000\n"
-"Last-Translator: felipemotter <felipkin@gmail.com>\n"
+"PO-Revision-Date: 2024-05-20 16:40+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
 "OCA-partner-contact-9-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -59,11 +60,15 @@ msgid ""
 "from sales orders and the over-risk has already been allowed when confirming "
 "these."
 msgstr ""
+"Permitir sempre a validação de projetos de faturas. Útil quando o fluxo "
+"provém de pedidos de venda e o risco excessivo já foi permitido na "
+"confirmação destes."
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
 msgid "Can edit risk limit and overpass partner risk exceptions"
 msgstr ""
+"Pode editar o limite de risco e ultrapassar exceções de risco do parceiro"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -74,7 +79,7 @@ msgstr "Cancelar"
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Escolha Moeda de crédito manual."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -103,9 +108,8 @@ msgstr "Continuar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__continue_method
-#, fuzzy
 msgid "Continue Method"
-msgstr "Continuar"
+msgstr "Continuar método"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
@@ -192,9 +196,9 @@ msgstr "Risco financeiro excedido.\n"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/res_partner.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Financial risk information"
-msgstr "Risco Financeiro"
+msgstr "Informação de Risco Financeiro"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
