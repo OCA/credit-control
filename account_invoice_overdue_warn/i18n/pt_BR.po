@@ -6,8 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-26 13:49+0000\n"
-"Last-Translator: felipemotter <felipkin@gmail.com>\n"
+"PO-Revision-Date: 2024-05-20 19:36+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgstr "Nome de Exibição"
 #. module: account_invoice_overdue_warn
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "Identificação"
 
 #. module: account_invoice_overdue_warn
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner____last_update
