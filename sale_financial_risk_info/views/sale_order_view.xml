@@ -7,8 +7,7 @@
             <xpath expr="//field[@name='validity_date']" position="before">
                 <field
                     name="risk_info"
-                    readonly="1"
-                    groups="account_financial_risk.group_account_financial_risk_user,account_financial_risk.group_account_financial_risk_manager"
+                    groups="account_financial_risk.group_account_financial_risk_user"
                 />
             </xpath>
         </field>
