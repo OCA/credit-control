@@ -1,0 +1,748 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_financial_risk
+#
+# Translators:
+# leemannd <denis.leemann@camptocamp.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: partner-contact (9.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-20 03:40+0000\n"
+"PO-Revision-Date: 2022-10-18 17:44+0000\n"
+"Last-Translator: ClementChaumienneC2C <clement.chaumienne@camptocamp.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
+"language/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "<span class=\"oe_inline\"> (</span>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "<span class=\"oe_inline\">%)</span>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "<span class=\"oe_read_only\">(</span>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "<span class=\"oe_read_only\">)</span>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
+msgid "Account Moves"
+msgstr "Pièces comptables"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
+msgid "Account move lines"
+msgstr "Pièces comptables"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid "Allow invoice validation over the risk"
+msgstr "Autoriser la validation de la facture sur le risque"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Always allow the validation of draft invoices.\n"
+"                            Useful when the flow comes from sales orders and "
+"the\n"
+"                                over-risk\n"
+"                            has already been allowed when confirming these."
+msgstr ""
+"Toujours autoriser la validation des factures brouillons.\n"
+"                            Utile quand le flux vient des commandes de "
+"ventes et que\n"
+"                                le sur-risque\n"
+"                            a déjà été autorisé quand la commande a été "
+"confirmée."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
+msgid ""
+"Always allow the validation of draft invoices. Useful when the flow comes "
+"from sales orders and the over-risk has already been allowed when confirming "
+"these."
+msgstr ""
+"Toujours permettre la validation des factures en brouillon. Utile lorsque le "
+"flux provient de commandes clients et que le sur-risque a déjà été autorisé "
+"lors de la confirmation de celles-ci."
+
+#. module: account_financial_risk
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
+msgid "Can edit risk limit and overpass partner risk exceptions"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/res_partner.py:0
+#, python-format
+msgid "Choose Manual Credit Currency."
+msgstr "Choisir la devise manuelle de crédit."
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_financial_risk
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
+msgid "Company Currency"
+msgstr "Devise de l'entreprise"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
+msgid "Continue"
+msgstr "Continuer"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__continue_method
+msgid "Continue Method"
+msgstr "Continuer la méthode"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
+msgid "Credit Currency"
+msgstr "Devise de crédit"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_limit
+msgid "Credit Limit"
+msgstr "Limite de crédit"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
+msgid "Credit Policy"
+msgstr "Politique de crédit"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
+msgid "Customer"
+msgstr "Client"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"Days after due date to set an invoice as unpaid.\n"
+"                            The change of this field recompute all partners "
+"risk, be\n"
+"                                patient."
+msgstr ""
+"Journées après la mdate d'échéance pour marquer une facture comme impayée.\n"
+"                            Un changement dans ce champ recalcule tous les "
+"risques sur les contacts, soyez\n"
+"                                patient."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
+msgid ""
+"Days after due date to set an invoice as unpaid. The change of this field "
+"recompute all partners risk, be patient."
+msgstr ""
+"Nombre de jours après la date d'échéance pour mettre une facture comme "
+"impayée. Le changement de ce champ recalcule le risque de tous les "
+"partenaires, soyez patient."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__exception_msg
+msgid "Exception Msg"
+msgstr "Message d'exception"
+
+#. module: account_financial_risk
+#: model:ir.module.category,name:account_financial_risk.category_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "Financial Risk"
+msgstr "Risque Financier"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid "Financial risk exceeded.\n"
+msgstr "Risque financier dépassé.\n"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/res_partner.py:0
+#, fuzzy, python-format
+msgid "Financial risk information"
+msgstr "Risque Financier"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft_include
+msgid "Full risk computation"
+msgstr "Calcul complet du risque"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
+msgid ""
+"Full risk computation.\n"
+"Residual amount of move lines not reconciled with distinct account that is "
+"set as partner receivable and date maturity exceeded, considering Due Margin "
+"set in account settings."
+msgstr ""
+"Calcul complet du risque.\n"
+"Montant restant à payer sur les écritures comptables non rapprochées avec un "
+"compte client  distinct et dont la date d'échéance est dépassée  en prenant "
+"en compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_include
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_include
+msgid ""
+"Full risk computation.\n"
+"Residual amount of move lines not reconciled with distinct account that is "
+"set as partner receivable and date maturity not exceeded, considering Due "
+"Margin set in account settings."
+msgstr ""
+"Calcul complet du risque.\n"
+"Montant restant à payer sur les écritures comptables non rapprochées avec un "
+"compte client distinct et dont la date d'échéance n'est pas dépassée en "
+"prenant en compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_include
+msgid ""
+"Full risk computation.\n"
+"Residual amount of move lines not reconciled with the same account that is "
+"set as partner receivable and date maturity exceeded, considering Due Margin "
+"set in account settings."
+msgstr ""
+"Calcul complet du risque.\n"
+"Montant restant à payer sur les écritures comptables non rapprochés avec le "
+"même compte client et dont la date d'échéance est dépassée en prenant en "
+"compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open_include
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open_include
+msgid ""
+"Full risk computation.\n"
+"Residual amount of move lines not reconciled with the same account that is "
+"set as partner receivable and date maturity not exceeded, considering Due "
+"Margin set in account settings."
+msgstr ""
+"Calcul complet du risque.\n"
+"Montant restant à payer sur les écritures comptables non rapprochés avec le "
+"même compte client et dont la date d'échéance n'est pas dépassée en prenant "
+"en compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "General Limits"
+msgstr "Limites Générales"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
+msgid "ID"
+msgstr "Id"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_include
+msgid "Include Draft Invoices"
+msgstr "Inclure les Factures Brouillon"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_include
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_include
+msgid "Include Open Invoices/Principal Balance"
+msgstr "Inclure les factures en cours / solde principal"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
+msgid "Include Other Account Open Amount"
+msgstr "Inclure l'encours des autres comptes"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
+msgid "Include Other Account Unpaid Amount"
+msgstr "Inclure le montant impayé des autres comptes"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
+msgid "Include Unpaid Invoices/Principal Balance"
+msgstr "Inclure les factures impayées / solde principal"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "Info"
+msgstr "Info"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
+msgid "It Indicate if partner risk exceeded"
+msgstr "Indique si le risque du partenaire a été dépassé"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_account_move
+msgid "Journal Entry"
+msgstr "Pièces comptables"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
+msgid "Last Credit Limit Date"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_limit
+msgid "Limit In Draft Invoices"
+msgstr "Limite des factures brouillon"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
+msgid "Limit In Open Invoices/Principal Balance"
+msgstr "Limite des factures en cours/solde principal"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
+msgid "Limit In Unpaid Invoices/Principal Balance"
+msgstr "Limite des factures impayées/solde principal"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
+msgid "Limit Other Account Open Amount"
+msgstr "Limite de l'encours des autres comptes"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
+msgid "Limit Other Account Unpaid Amount"
+msgstr "Limite du solde d'impayé des autres comptes"
+
+#. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
+msgid "Manager"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
+#, fuzzy
+msgid "Manual Credit Currency"
+msgstr "Devise manuelle de crédit"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
+msgid "Maturity Margin"
+msgstr "Marge pour la date d'échéance"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__origin_reference
+msgid "Object"
+msgstr "Objet"
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
+msgid "Partner Risk Exceeded Wizard"
+msgstr "Assistant pour risque du partenaire dépassé"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
+#, python-format
+msgid "Partner risk exceeded"
+msgstr "Risque partenaire dépassé"
+
+#. module: account_financial_risk
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
+msgid "Pricelist Currency"
+msgstr "Devise de la liste de prix"
+
+#. module: account_financial_risk
+#: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
+msgid "Read only access to financial risk info"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
+msgid "Receivable Currency"
+msgstr "Devise acceptée"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_unpaid
+msgid ""
+"Residual amount of move lines not reconciled with distinct account that is "
+"set as partner receivable and date maturity exceeded, considering Due Margin "
+"set in account settings."
+msgstr ""
+"Montant restant à payer sur les écritures comptables non rapprochées avec un "
+"compte client distinct et dont la date d'échéance est dépassée en prenant en "
+"compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount
+msgid ""
+"Residual amount of move lines not reconciled with distinct account that is "
+"set as partner receivable and date maturity not exceeded, considering Due "
+"Margin set in account settings."
+msgstr ""
+"Montant restant à payer sur les écritures comptables non rapprochées avec un "
+"compte client distinct et dont la date d'échéance n'est pas dépassée en "
+"prenant en compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid
+msgid ""
+"Residual amount of move lines not reconciled with the same account that is "
+"set as partner receivable and date maturity exceeded, considering Due Margin "
+"set in account settings."
+msgstr ""
+"Montant restant à payer sur les écritures comptables non rapprochées avec le "
+"même compte client et dont la date d'échéance est dépassée en prenant en "
+"compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open
+msgid ""
+"Residual amount of move lines not reconciled with the same account that is "
+"set as partner receivable and date maturity not exceeded, considering Due "
+"Margin set in account settings."
+msgstr ""
+"Montant restant à payer sur les écritures comptables non rapprochées avec le "
+"même compte client et dont la date d'échéance n'est pas dépassée en prenant "
+"en compte la marge définie dans les paramètres du compte."
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_allow_edit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
+msgid "Risk Allow Edit"
+msgstr "Modifier le risque autorisé"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
+msgid "Risk Amount Total"
+msgstr "Montant total du risque"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
+msgid "Risk Currency"
+msgstr "Devises du risque financier"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_exception
+msgid "Risk Exception"
+msgstr "Exception de risque"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
+msgid "Risk Over Limit"
+msgstr "Sur-Limite du risque"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "Risk Remaining"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
+msgid "Risk Remaining (Percentage)"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
+msgid "Risk Remaining (Value)"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
+msgid "Risk exceeded"
+msgstr "Risque dépassé"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open_limit
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
+msgid "Set 0 if it is not locked"
+msgstr "Mettre 0 si vous ne voulez pas bloquer"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
+msgid "Specific Limits"
+msgstr "Limite Spécifique"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
+msgid "Sum of total risk included"
+msgstr "Somme du risque total inclus"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid ""
+"The partner %s is in risk exception.\n"
+"You must post his invoices from form view to allow over risk"
+msgstr ""
+"Le partenaire %s a un risque financier.\n"
+"Vous devez confirmer ses factures depuis la vue formulaire opur autoriser le "
+"sur-risque"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
+msgid "The partner has exceeded his risk"
+msgstr "Le partenaire a dépassé sa limite de risque"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid "This invoice exceeds the financial risk.\n"
+msgstr "Cette facture dépasse la limite du risque financier.\n"
+
+#. module: account_financial_risk
+#. odoo-python
+#: code:addons/account_financial_risk/models/account_invoice.py:0
+#, python-format
+msgid "This invoice exceeds the open invoices risk.\n"
+msgstr ""
+"Cette facture dépasse la limite du risque financier pour les factures en "
+"cours.\n"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft
+msgid "Total Draft Invoices"
+msgstr "Total des Factures Brouillon"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open
+msgid "Total Open Invoices/Principal Balance"
+msgstr "Total des factures en cours / solde principal"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount
+msgid "Total Other Account Open Amount"
+msgstr "Montant total des encours des autres comptes"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid
+msgid "Total Other Account Unpaid Amount"
+msgstr "Montant total des impayés des autres comptes"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_total
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_total
+msgid "Total Risk"
+msgstr "Risque Total"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid
+msgid "Total Unpaid Invoices/Principal Balance"
+msgstr "Total des factures impayées / solde du capital"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
+msgid "Total amount of invoices in Draft or Pro-forma state"
+msgstr "Montant total des factures brouillon ou pro forma"
+
+#. module: account_financial_risk
+#: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
+msgid "User"
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model,name:account_financial_risk.model_validate_account_move
+msgid "Validate Account Move"
+msgstr "Valider les écritures comptables"
+
+#~ msgid "Can Overpass Partner Risk Exceptions"
+#~ msgstr "Outrepasser les exceptions de risque partenaire"
+
+#~ msgid "Partner Risk Manager"
+#~ msgstr "Responsable des risques partenaires"
+
+#~ msgid ""
+#~ "Always allow the validation of draft invoices.\n"
+#~ "                            Useful when the flow comes from sales orders "
+#~ "and the over-risk\n"
+#~ "                            has already been allowed when confirming "
+#~ "these."
+#~ msgstr ""
+#~ "Toujours autoriser la validation des factures brouillon.\n"
+#~ "                            Utile quand le flux de validation vient des "
+#~ "commandes de ventes et du dépassement de limite\n"
+#~ "                            a déjà été autorisé quand on les confirme."
+
+#~ msgid ""
+#~ "Days after due date to set an invoice as unpaid.\n"
+#~ "                            The change of this field recompute all "
+#~ "partners risk, be patient."
+#~ msgstr ""
+#~ "Nombre de jours après la date d'échéance pour mettre une facture comme "
+#~ "impayée.\n"
+#~ " Le changement de ce champ recalcule le risque de tous les partenaires, "
+#~ "soyez patient."
+
+#~ msgid ""
+#~ "<strong>If you are an Billing Manager you can use Confirm ALL Invoices "
+#~ "button.</strong>"
+#~ msgstr ""
+#~ "<strong>Si vous êtes responsable de la facturation, vous pouvez utiliser "
+#~ "le bouton Confirmer toutes les factures.</strong>"
+
+#~ msgid ""
+#~ "<strong>With Confirm Invoices button only not risk exceeded partner "
+#~ "invoices will be confirmed.</strong>"
+#~ msgstr ""
+#~ "<strong>Avec le bouton Confirmer les factures, vous ne risquez pas de "
+#~ "dépasser la limite pour les factures des partenaires qui seront validées."
+#~ "</strong>"
+
+#~ msgid ""
+#~ "<strong>Your selection includes partners with risk exceeded.</strong>"
+#~ msgstr ""
+#~ "<strong>Votre sélection inclut des partenaires dont la limite du risque a "
+#~ "été dépassé.</strong>"
+
+#~ msgid "Confirm ALL Invoices"
+#~ msgstr "Confirmer toutes les factures"
+
+#~ msgid "Confirm the selected invoices"
+#~ msgstr "Confirmer les factures sélectionnées"
+
+#~ msgid "Info Risk"
+#~ msgstr "Info Risque"
+
+#~ msgid "Invoice"
+#~ msgstr "Facture"
+
+#, fuzzy
+#~| msgid "Invoice"
+#~ msgid "Invoices"
+#~ msgstr "Facture"
+
+#~ msgid "Financial risk: Process due invoices"
+#~ msgstr "Risque financier: Traiter les factures échues"
+
+#~ msgid ""
+#~ "<span class=\"o_form_label\">Financial Risk</span>\n"
+#~ "                    <span class=\"fa fa-lg fa-building-o\" title=\"Values "
+#~ "set here are company-specific.\" aria-label=\"Values set here are company-"
+#~ "specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+#~ msgstr ""
+#~ "<span class=\"o_form_label\">Risque financier</span>\n"
+#~ "                    <span class=\"fa fa-lg fa-building-o\" title=\"Les "
+#~ "valeurs définies ici sont spécifiques à la société.\" aria-label=\"Les "
+#~ "valeurs définies ici sont spécifiques à la société.\" groups=\"base."
+#~ "group_multi_company\" role=\"img\"/>"
+
+#~ msgid "Set options applied to financial risk"
+#~ msgstr "Définir les options appliquées au risque financier"
+
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
