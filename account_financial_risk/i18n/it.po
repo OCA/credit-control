@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2024-01-03 10:36+0000\n"
+"PO-Revision-Date: 2024-05-29 10:38+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -48,7 +48,7 @@ msgstr ""
 "Permettere sempre la validazione di fatture bozza.\n"
 "                            Utile quando il flusso proviene dagli ordini di "
 "vendita e\n"
-"                                superamento del fido\n"
+"                                il superamento del fido\n"
 "                            è già stato consentito al momento della conferma "
 "di questi."
 
@@ -110,7 +110,7 @@ msgstr "Continua"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__continue_method
 msgid "Continue Method"
-msgstr "Continua Metodo"
+msgstr "Continua metodo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
@@ -126,7 +126,7 @@ msgstr "Creato il"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr "Valuta del Credito"
+msgstr "Valuta del credito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -138,7 +138,7 @@ msgstr "Fido"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
 msgid "Credit Policy"
-msgstr "Regole di Credito"
+msgstr "Regole di credito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
@@ -419,7 +419,7 @@ msgstr "Accesso in sola lettura alle informazioni sul rischio finanziario"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr "Valuta Crediti"
+msgstr "Valuta crediti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
