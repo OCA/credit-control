@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2024-01-03 10:37+0000\n"
+"PO-Revision-Date: 2024-05-29 10:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
@@ -168,7 +168,7 @@ msgstr "Fido"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
 msgid "Credit Policy"
-msgstr "Regole di Credito"
+msgstr "Regole di credito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
@@ -222,7 +222,7 @@ msgstr "Superato rischio finanziario.\n"
 #: code:addons/account_financial_risk/models/res_partner.py:414
 #, python-format
 msgid "Financial risk information"
-msgstr "Informazioni rischio finanziario"
+msgstr "Informazioni sul rischio finanziario"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -408,7 +408,7 @@ msgstr "Valuta di credito manuale"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
 msgid "Maturity Margin"
-msgstr "Margine maturazione"
+msgstr "Margine di maturità"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__origin_reference
@@ -439,7 +439,7 @@ msgstr "Valuta listino prezzi"
 #. module: account_financial_risk
 #: selection:res.partner,credit_currency:0
 msgid "Receivable Currency"
-msgstr "Valuta Crediti"
+msgstr "Valuta crediti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -462,7 +462,7 @@ msgid ""
 "Margin set in account settings."
 msgstr ""
 "Importo residuo delle righe di movimento non riconciliate con un diverso "
-"conto impostato come credito partner e data di scadenza superata, "
+"conto impostato come credito partner e data di scadenza non superata, "
 "considerando il margine dovuto impostato nelle impostazioni del conto."
 
 #. module: account_financial_risk
@@ -473,8 +473,8 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
-"Importo residuo delle righe di movimento non riconciliate con un diverso "
-"conto impostato come credito partner e data di scadenza non superata, "
+"Importo residuo delle righe di movimento non riconciliate con lo stesso "
+"conto impostato come credito partner e data di scadenza superata, "
 "considerando il margine dovuto impostato nelle impostazioni del conto."
 
 #. module: account_financial_risk
