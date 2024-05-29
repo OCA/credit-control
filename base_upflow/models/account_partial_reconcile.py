@@ -9,6 +9,7 @@ class AccountPartialReconcile(models.Model):
     _inherit = ["account.partial.reconcile", "upflow.mixin"]
 
     def _prepare_reconcile_payload(self):
+        self.ensure_one()
         payload = {
             "externalId": "partial-" + str(self.id),
             "invoices": [],
@@ -39,6 +40,7 @@ class AccountPartialReconcile(models.Model):
 
         Once there are considered fully paid
         """
+        self.ensure_one()
         payload = self._prepare_reconcile_payload()
 
         payload[self.debit_move_id.move_id.upflow_type].append(
