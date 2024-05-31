@@ -4,7 +4,7 @@
 import base64
 import logging
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
@@ -42,59 +42,47 @@ class AccountMove(models.Model):
 
     def _compute_upflow_type(self):
         for move in self:
-            if move.move_type.startswith("in_") or move.state != "posted":
-                move.upflow_type = "none"
-                continue
-            if move.move_type == "out_invoice":
-                move.upflow_type = "invoices"
-            elif move.move_type == "out_refund":
-                move.upflow_type = "creditNotes"
-            else:
-                receivables_lines = move.line_ids.filtered(
-                    lambda line: line.account_id.user_type_id.type == "receivable"
-                )
-                if not receivables_lines:
-                    move.upflow_type = "none"
-                    continue
-                debit = sum(receivables_lines.mapped("debit"))
-                credit = sum(receivables_lines.mapped("credit"))
-                if (
-                    float_compare(
-                        debit,
-                        0,
-                        precision_rounding=move.currency_id.rounding,
-                    )
-                    == 0
-                    and float_compare(
-                        credit,
-                        0,
-                        precision_rounding=move.currency_id.rounding,
-                    )
-                    != 0
-                ):
-                    move.upflow_type = "payments"
-                elif (
-                    float_compare(
-                        debit,
-                        0,
-                        precision_rounding=move.currency_id.rounding,
-                    )
-                    != 0
-                    and float_compare(
-                        credit,
-                        0,
-                        precision_rounding=move.currency_id.rounding,
-                    )
-                    == 0
-                ):
-                    move.upflow_type = "refunds"
-                else:
-                    _logger.error(
-                        "Sum of receivable move lines on %s have credit (%d) and debit(%d). "
-                        "Which sounds suspicious and can't set upflow type",
-                        move.name,
-                    )
-                    move.upflow_type = "none"
+            move.upflow_type = self._get_upflow_type_for_move(move)
+
+    @api.model
+    def _get_upflow_type_for_move(self, move):
+        if move.move_type.startswith("in_") or move.state != "posted":
+            return "none"
+        if move.move_type == "out_invoice":
+            return "invoices"
+        if move.move_type == "out_refund":
+            return "creditNotes"
+        receivables_lines = move.line_ids.filtered(
+            lambda line: line.account_id.user_type_id.type == "receivable"
+        )
+        if not receivables_lines:
+            return "none"
+        rounding = move.currency_id.rounding
+
+        debit = sum(receivables_lines.mapped("debit"))
+        has_debit = float_compare(debit, 0, precision_rounding=rounding) != 0
+
+        credit = sum(receivables_lines.mapped("credit"))
+        has_credit = float_compare(credit, 0, precision_rounding=rounding) != 0
+
+        if not has_debit and has_credit:
+            if move.upflow_commercial_partner_id:
+                return "payments"
+            _logger.debug(
+                "Payment move without customer on %s. Can't set upflow type",
+                move.name,
+            )
+            return "none"
+        if has_debit and not has_credit:
+            return "refunds"
+        _logger.error(
+            "Sum of receivable move lines on %s have credit (%d) and debit(%d). "
+            "Which sounds suspicious and can't set upflow type",
+            move.name,
+            credit,
+            debit,
+        )
+        return "none"
 
     def _compute_upflow_commercial_partner_id(self):
         # while using OD as counter part or bank statement
