@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2024-05-27 08:37+0000\n"
+"PO-Revision-Date: 2024-06-12 15:38+0000\n"
 "Last-Translator: PaoloYam <pyammoun@student.42lausanne.ch>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -917,7 +917,7 @@ msgstr "Facture"
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #, python-format
 msgid "Invoice amount"
-msgstr "Total de la faction"
+msgstr "Total de la facture"
 
 #. module: account_credit_control
 #. odoo-python
