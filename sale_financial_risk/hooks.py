@@ -8,20 +8,19 @@ from odoo.tools import sql
 logger = logging.getLogger(__name__)
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     """
     The objective of this hook is to speed up the installation
     of the module on an existing Odoo instance.
     """
-    create_risk_partner_id_column(cr)
+    create_risk_partner_id_column(env)
 
 
-def create_risk_partner_id_column(cr):
-    if not sql.column_exists(cr, "sale_order_line", "risk_partner_id"):
-        sql.create_column(cr, "sale_order_line", "risk_partner_id", "int4")
-
+def create_risk_partner_id_column(env):
+    if not sql.column_exists(env.cr, "sale_order_line", "risk_partner_id"):
+        sql.create_column(env.cr, "sale_order_line", "risk_partner_id", "int4")
     logger.info("Computing field risk_partner_id on sale.order.line")
-    cr.execute(
+    env.cr.execute(
         """
         UPDATE sale_order_line sol
         SET risk_partner_id = p.commercial_partner_id
