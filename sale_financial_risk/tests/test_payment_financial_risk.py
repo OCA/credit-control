@@ -66,22 +66,22 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
             "odoo.addons.payment.controllers.portal.PaymentPortal"
             "._compute_show_tokenize_input_mapping"
         ) as patched:
-            tx_context = self._get_tx_checkout_context(**route_values)
-            patched.assert_called_once_with(ANY, logged_in=ANY, sale_order_id=ANY)
-        route_values.update(
-            {
-                "flow": "direct",
-                "payment_option_id": self.provider.id,
-                "tokenization_requested": False,
-                "validation_route": False,
-                "reference_prefix": None,  # Force empty prefix to fallback on SO reference
-                "landing_route": tx_context["landing_route"],
-                "amount": tx_context["amount"],
-                "currency_id": tx_context["currency_id"],
-            }
-        )
+            tx_context = self._get_portal_pay_context(**route_values)
+            patched.assert_called_once_with(ANY, sale_order_id=ANY)
+        tx_route_values = {
+            "provider_id": self.provider.id,
+            "payment_method_id": self.payment_method_id,
+            "token_id": None,
+            "amount": tx_context["amount"],
+            "flow": "direct",
+            "tokenization_requested": False,
+            "landing_route": tx_context["landing_route"],
+            "access_token": tx_context["access_token"],
+        }
         with mute_logger("odoo.addons.payment.models.payment_transaction"):
-            processing_values = self._get_processing_values(**route_values)
+            processing_values = self._get_processing_values(
+                tx_route=tx_context["transaction_route"], **tx_route_values
+            )
         tx_sudo = self._get_tx(processing_values["reference"])
         # Check validation of transaction correctly confirms the SO
         self.assertEqual(self.order.state, "draft")

@@ -35,21 +35,15 @@ class ResPartner(models.Model):
     )
     def _compute_risk_sale_order(self):
         self.update({"risk_sale_order": 0.0})
-        orders_group = self.env["sale.order.line"].read_group(
+        orders_group = self.env["sale.order.line"]._read_group(
             domain=self._get_risk_sale_order_domain(),
-            fields=["risk_partner_id", "company_id", "risk_amount"],
             groupby=["risk_partner_id", "company_id"],
-            orderby="id",
-            lazy=False,
+            aggregates=["risk_amount:sum"],
         )
-        for group in orders_group:
-            partner = self.browse(group["risk_partner_id"][0])
-            company = self.env["res.company"].browse(
-                group["company_id"][0] or self.env.company.id
-            )
+        for partner, company, risk_amount in orders_group:
             company_currency = company.currency_id
             partner.risk_sale_order = company_currency._convert(
-                group["risk_amount"],
+                risk_amount,
                 partner.risk_currency_id,
                 company,
                 fields.Date.context_today(self),

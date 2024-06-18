@@ -49,7 +49,7 @@ class SaleOrder(models.Model):
                             {
                                 "exception_msg": exception_msg,
                                 "partner_id": partner.id,
-                                "origin_reference": "%s,%s" % ("sale.order", order.id),
+                                "origin_reference": f"{order._name},{order.id}",
                                 "continue_method": "action_confirm",
                             }
                         )
