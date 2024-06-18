@@ -10,7 +10,7 @@ from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 class TestPartnerSaleRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPartnerSaleRisk, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
@@ -56,7 +56,7 @@ class TestPartnerSaleRisk(TransactionCase):
 
     def test_sale_order(self):
         self.sale_order.action_confirm()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
         self.assertFalse(self.partner.risk_exception)
         self.partner.risk_sale_order_limit = 99.0
         self.partner.risk_sale_order_include = True
@@ -76,12 +76,10 @@ class TestPartnerSaleRisk(TransactionCase):
         self.partner.credit_limit = 100.0
         wiz_dic = sale_order2.action_confirm()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(
-            wiz.exception_msg, "This sale order exceeds the financial risk.\n"
-        )
+        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.assertTrue(self.partner.risk_allow_edit)
         wiz.button_continue()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 200.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
 
     def test_sale_order_auto_done(self):
         self.env["ir.config_parameter"].create(
@@ -95,7 +93,7 @@ class TestPartnerSaleRisk(TransactionCase):
         )
         self.sale_order.action_confirm()
         self.partner.risk_sale_order_include = True
-        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
         self.assertFalse(self.partner.risk_exception)
         self.partner.risk_sale_order_limit = 99.0
         self.assertTrue(self.partner.risk_exception)
@@ -114,17 +112,15 @@ class TestPartnerSaleRisk(TransactionCase):
         self.partner.credit_limit = 100.0
         wiz_dic = sale_order2.action_confirm()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(
-            wiz.exception_msg, "This sale order exceeds the financial risk.\n"
-        )
+        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.assertTrue(self.partner.risk_allow_edit)
         wiz.button_continue()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 200.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
 
     def test_compute_risk_amount(self):
         self.sale_order.action_confirm()
-        # Now the amount to be invoiced must 100
-        self.assertEqual(self.partner.risk_sale_order, 100.0)
+        # Now the amount to be invoiced must 115
+        self.assertEqual(self.partner.risk_sale_order, 115.0)
         self.assertFalse(self.partner.risk_exception)
         # If we set a risk_sale_order_limit to 99, risk_exception must be True
         self.partner.risk_sale_order_limit = 99.0
@@ -138,13 +134,13 @@ class TestPartnerSaleRisk(TransactionCase):
             .create({})
         )
         inv_wiz.create_invoices()
-        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 115.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         invoice = self.sale_order.invoice_ids
         invoice.with_context(bypass_risk=True).action_post()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
-        self.assertAlmostEqual(self.partner.risk_invoice_open, 100.0)
+        self.assertAlmostEqual(self.partner.risk_invoice_open, 115.0)
         self.assertFalse(self.partner.risk_exception)
         # After that, if we create and validate a Credit Note from the invoice
         # then the amount to be invoiced must be 100 again
@@ -158,18 +154,15 @@ class TestPartnerSaleRisk(TransactionCase):
         ref_wiz_obj = self.env["account.move.reversal"].with_context(
             active_model="account.move", active_ids=[invoice.id]
         )
-        ref_wiz = ref_wiz_obj.create(
-            {"reason": "testing", "refund_method": "modify", "journal_id": journal.id}
-        )
+        ref_wiz = ref_wiz_obj.create({"reason": "testing", "journal_id": journal.id})
         res = ref_wiz.reverse_moves()
-        self.assertAlmostEqual(self.partner.risk_invoice_draft, 100.0)
-        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, -115.0)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 115)
         # The way to re-invoice a sale order is creating a refund with
         # modify option and cancel or remove draft invoice
         modify_invoice = invoice.browse(res["res_id"])
         modify_invoice.unlink()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
-        self.assertTrue(self.partner.risk_exception)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
         line = self.sale_order.order_line[:1]
         line.product_uom_qty = 0.0
         self.assertAlmostEqual(line.risk_amount, 0.0)
