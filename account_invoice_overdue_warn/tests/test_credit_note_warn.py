@@ -15,7 +15,7 @@ class TestOverdueWarn(TransactionCase):
         self.company = self.env.ref("base.main_company")
         self.partner = self.env.ref("base.res_partner_2")
         today = datetime.now().date()
-        
+
         self.credit_note_invoice1 = self.env["account.move"].create(
             {
                 "partner_id": self.partner.id,

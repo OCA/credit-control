@@ -35,7 +35,6 @@ class ResPartner(models.Model):
         compute_sudo=True,
     )
 
-
     def _compute_overdue_invoice_count_amount(self):
         for partner in self:
             company_id = partner.company_id.id or partner.env.company.id
@@ -111,7 +110,7 @@ class ResPartner(models.Model):
             ) = partner._prepare_credit_note_count_amount(company_id)
             partner.credit_note_count = count
             partner.credit_note_amount = amount_company_currency
-    
+
     def _prepare_credit_note_count_amount(self, company_id):
         self.ensure_one()
         domain = self._prepare_credit_note_domain(company_id)
@@ -123,9 +122,13 @@ class ResPartner(models.Model):
         overdue_invoice_amount = 0.0
         if rg_res:
             count = rg_res[0]["__count"]
-            overdue_invoice_amount = abs(rg_res[0]["amount_residual_signed"]) if rg_res[0]["amount_residual_signed"] else rg_res[0]["amount_residual_signed"]
+            overdue_invoice_amount = (
+                abs(rg_res[0]["amount_residual_signed"])
+                if rg_res[0]["amount_residual_signed"]
+                else rg_res[0]["amount_residual_signed"]
+            )
         return (count, overdue_invoice_amount)
-    
+
     def _prepare_credit_note_domain(self, company_id):
         # The use of commercial_partner_id is in this method
         self.ensure_one()
@@ -141,7 +144,7 @@ class ResPartner(models.Model):
             ("payment_state", "in", ("not_paid", "partial")),
         ]
         return domain
-    
+
     def _prepare_jump_to_credit_note(self, company_id):
         action = self.env["ir.actions.actions"]._for_xml_id(
             "account.action_move_out_refund_type"
@@ -154,7 +157,7 @@ class ResPartner(models.Model):
             "default_partner_id": self.id,
         }
         return action
-    
+
     def jump_to_credit_note(self):
         self.ensure_one()
         company_id = self.company_id.id or self.env.company.id
