@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
-"PO-Revision-Date: 2017-06-02 00:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-06-19 12:47+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model,name:account_payment_return_financial_risk.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return_include
@@ -30,18 +31,21 @@ msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with returned lines related."
 msgstr ""
+"Fullständig riskberäkning.\n"
+"Återstående belopp för flyttade rader inte avstämt med återlämnade rader "
+"relaterade."
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return_include
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return_include
 msgid "Include Payments Returns"
-msgstr ""
+msgstr "Inkludera Betalningar Returer"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return_limit
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return_limit
 msgid "Limit Payments Returns"
-msgstr ""
+msgstr "Begränsa betalningar Returnera"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return
@@ -49,15 +53,17 @@ msgstr ""
 msgid ""
 "Residual amount of move lines not reconciled with returned lines related."
 msgstr ""
+"Återstående belopp av flyttade rader som inte stämts av med återlämnade "
+"rader relaterade."
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return_limit
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_users__risk_payment_return_limit
 msgid "Set 0 if it is not locked"
-msgstr ""
+msgstr "Ställ in 0 om den inte är låst"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return
 msgid "Total Payments Returns"
-msgstr ""
+msgstr "Totala betalningar Avkastning"
