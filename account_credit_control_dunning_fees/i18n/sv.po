@@ -9,72 +9,73 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2024-06-19 09:27+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
 msgid "A credit control line"
-msgstr ""
+msgstr "En kreditkontrollrad"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
 msgid "A credit control policy level"
-msgstr ""
+msgstr "En policy för kreditkontroll"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line__balance_due_total
 msgid "Balance due with fees"
-msgstr ""
+msgstr "Skuld med avgifter"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
 msgid "Credit control line generator"
-msgstr ""
+msgstr "Generator för kreditkontrollrad"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,help:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_currency_id
 msgid ""
 "Currency of the dunning fees. If empty, it takes the company's currency."
-msgstr ""
+msgstr "Valuta för påminnelseavgifter. Om den är tom används företagets valuta."
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_line__dunning_fees_amount
 #: model_terms:ir.ui.view,arch_db:account_credit_control_dunning_fees.add_dunning_fees_on_policy
 #: model_terms:ir.ui.view,arch_db:account_credit_control_dunning_fees.report_credit_control_summary_document_fees
 msgid "Fees"
-msgstr ""
+msgstr "Avgifter"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_fixed_amount
 msgid "Fees Fixed Amount"
-msgstr ""
+msgstr "Arvoden Fast belopp"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_product_id
 msgid "Fees Product"
-msgstr ""
+msgstr "Avgifter Produkt"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_currency_id
 msgid "Fees currency"
-msgstr ""
+msgstr "Avgifter valuta"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields.selection,name:account_credit_control_dunning_fees.selection__credit_control_policy_level__dunning_fees_type__fixed
 msgid "Fixed"
-msgstr ""
+msgstr "Fast"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
 msgid "Model that compute dunning fees"
-msgstr ""
+msgstr "Modell som beräknar påminnelseavgifter"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model.fields,field_description:account_credit_control_dunning_fees.field_credit_control_policy_level__dunning_fees_type
@@ -84,14 +85,14 @@ msgstr "Typ"
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_communication
 msgid "credit control communication"
-msgstr ""
+msgstr "kommunikation om kreditkontroll"
 
 #. module: account_credit_control_dunning_fees
 #. odoo-python
 #: code:addons/account_credit_control_dunning_fees/model/dunning.py:0
 #, python-format
 msgid "fees type %s is not supported"
-msgstr ""
+msgstr "avgiftstyp %s stöds inte"
 
 #~ msgid "Created by"
 #~ msgstr "Skapad av"
