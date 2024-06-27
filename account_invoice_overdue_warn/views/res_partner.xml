@@ -10,7 +10,7 @@
                     class="alert alert-warning"
                     groups="account.group_account_invoice,account.group_account_readonly"
                     role="alert"
-                    attrs="{'invisible': [('overdue_invoice_count', '=', 0)]}"
+                    invisible="overdue_invoice_count == 0"
                 >
                   This customer has <field name="overdue_invoice_count" /><button
                         string="overdue invoice(s)"
