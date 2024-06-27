@@ -17,30 +17,39 @@ Warning on Overdue Invoices
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
-    :target: https://github.com/OCA/credit-control/tree/16.0/account_invoice_overdue_warn
+    :target: https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_warn
     :alt: OCA/credit-control
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/credit-control-16-0/credit-control-16-0-account_invoice_overdue_warn
+    :target: https://translation.odoo-community.org/projects/credit-control-17-0/credit-control-17-0-account_invoice_overdue_warn
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a warning banner on the customer form view when it has overdue invoices. The banner informs the user about the number of overdue invoices and the total overdue amount. It contains a link to see the corresponding overdue invoices.
+This module adds a warning banner on the customer form view when it has
+overdue invoices. The banner informs the user about the number of
+overdue invoices and the total overdue amount. It contains a link to see
+the corresponding overdue invoices.
 
-.. figure:: https://raw.githubusercontent.com/OCA/credit-control/16.0/account_invoice_overdue_warn/static/description/partner_overdue_invoice_warn.png
-   :scale: 80 %
-   :alt: Screenshot of partner form view
+|image1|
 
-If you also install the module *account_invoice_overdue_warn_sale*, you will have the same banner on the form view of quotations and sale orders.
+If you also install the module *account_invoice_overdue_warn_sale*, you
+will have the same banner on the form view of quotations and sale
+orders.
 
 Implementation details:
 
-* in a multi-company configuration, the overdue invoices taken into account are the invoices of the company of the partner, or, if the partner is not attached to a company, in the current company.
-* the overdue amount is in the company currency.
-* the overdue banner is displayed on the parent partner and also all its contacts. The overdue invoices taken into account are all the overdue invoices of the parent partners and all its contacts.
+-  in a multi-company configuration, the overdue invoices taken into
+   account are the invoices of the company of the partner, or, if the
+   partner is not attached to a company, in the current company.
+-  the overdue amount is in the company currency.
+-  the overdue banner is displayed on the parent partner and also all
+   its contacts. The overdue invoices taken into account are all the
+   overdue invoices of the parent partners and all its contacts.
+
+.. |image1| image:: https://raw.githubusercontent.com/OCA/credit-control/17.0/account_invoice_overdue_warn/static/description/partner_overdue_invoice_warn.png
 
 **Table of contents**
 
@@ -53,7 +62,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/credit-control/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_warn%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_warn%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -61,20 +70,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Alexis de Lattre <alexis.delattre@akretion.com>
-* `Sygel <https://sygel.es>`_:
+-  Alexis de Lattre <alexis.delattre@akretion.com>
+-  `Sygel <https://sygel.es>`__:
 
-  * Valentín Vinagre <valentin.vinagre@sygel.es>
+   -  Valentín Vinagre <valentin.vinagre@sygel.es>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -94,6 +103,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-alexis-via| 
 
-This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/16.0/account_invoice_overdue_warn>`_ project on GitHub.
+This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_warn>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
