@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_overdue_warn
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-12-19 15:06+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__overdue_invoice_count
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__overdue_invoice_count
+msgid "# of Overdue Invoices"
+msgstr "# de Facturas Atrasadas"
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model,name:account_invoice_overdue_warn.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__overdue_invoice_amount
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__overdue_invoice_amount
+msgid "Overdue Invoices Residual"
+msgstr "Residual de Facturas Vencidas"
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,help:account_invoice_overdue_warn.field_res_partner__overdue_invoice_amount
+#: model:ir.model.fields,help:account_invoice_overdue_warn.field_res_users__overdue_invoice_amount
+msgid "Overdue invoice total residual amount in company currency."
+msgstr ""
+"Importe residual total de la factura vencida en la moneda de la empresa."
+
+#. module: account_invoice_overdue_warn
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn.view_partner_form_overdue_warn
+msgid "This customer has"
+msgstr "Este cliente tiene"
+
+#. module: account_invoice_overdue_warn
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn.view_partner_form_overdue_warn
+msgid "for a total residual of"
+msgstr "para un residuo total de"
+
+#. module: account_invoice_overdue_warn
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn.view_partner_form_overdue_warn
+msgid "overdue invoice(s)"
+msgstr "factura(s) vencida(s)"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID (Identificación)"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
