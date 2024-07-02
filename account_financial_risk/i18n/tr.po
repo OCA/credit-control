@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-31 00:06+0000\n"
-"PO-Revision-Date: 2016-12-30 21:28+0000\n"
-"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
+"PO-Revision-Date: 2024-07-02 17:47+0000\n"
+"Last-Translator: Metin GÜLSOY <metin.gulsoy@kitayazilim.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/tr/)\n"
 "Language: tr\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -53,7 +54,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
-msgstr ""
+msgstr "Risk üzerinden fatura doğrulamaya izin ver"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -73,11 +74,14 @@ msgid ""
 "from sales orders and the over-risk has already been allowed when confirming "
 "these."
 msgstr ""
+"Taslak faturaların her zaman doğrulanmasına izin vermek, özellikle akışın "
+"satış siparişlerinden geldiği ve bu siparişlerin onaylanması sırasında aşırı "
+"riskin zaten izin verildiği durumlarda faydalı olabilir."
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
 msgid "Can edit risk limit and overpass partner risk exceptions"
-msgstr ""
+msgstr "Risk limitini düzenleyebilir ve İş ortak risk istisnalarını aşabilir."
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -89,7 +93,7 @@ msgstr "Vazgeç"
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Manuel Kredi Para Birimini Seçin"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -99,12 +103,12 @@ msgstr "Şirketler"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr ""
+msgstr "Şirket Para Birimi"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Sistem Ayarları"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
@@ -141,19 +145,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_limit
 msgid "Credit Limit"
-msgstr ""
+msgstr "Kredi Limiti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
 msgid "Credit Policy"
-msgstr ""
+msgstr "Kredi Politika"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Bu iş ortağına özgü risk limiti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
@@ -176,6 +180,9 @@ msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
 msgstr ""
+"Vade tarihinden sonra bir faturayı ödenmemiş olarak işaretlemek için günler. "
+"Bu alanın değiştirilmesi tüm ortak riskleri yeniden hesaplar, lütfen sabırlı "
+"olun."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
@@ -192,7 +199,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
-msgstr ""
+msgstr "Risk Limitleri"
 
 #. module: account_financial_risk
 #. odoo-python
@@ -206,7 +213,7 @@ msgstr ""
 #: code:addons/account_financial_risk/models/res_partner.py:0
 #, python-format
 msgid "Financial risk information"
-msgstr ""
+msgstr "Mali risk bilgileri"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -223,6 +230,10 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Tam risk hesaplama.\n"
+"Vade tarihi aşılmış ve ortak alacak hesabı olarak ayarlanmış belirli bir "
+"hesapla uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında "
+"belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_include
@@ -233,6 +244,10 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Tam risk hesaplama.\n"
+"Vade tarihi henüz geçmemiş ve ortak alacak hesabı olarak ayarlanmış belirli "
+"bir hesapla uzlaşılmamış hareket satırlarının kalan tutarı, hesap "
+"ayarlarında belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
@@ -243,6 +258,10 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Tam risk hesaplama.\n"
+"Vade tarihi aşılmış ve aynı ortak alacak hesabı olarak ayarlanmış hesapla "
+"uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında belirlenen "
+"Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open_include
@@ -253,11 +272,15 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Tam risk hesaplama.\n"
+"Vade tarihi henüz geçmemiş ve aynı ortak alacak hesabı olarak ayarlanmış "
+"hesapla uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında "
+"belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "General Limits"
-msgstr ""
+msgstr "Genel Limitler"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
@@ -268,31 +291,31 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_include
 msgid "Include Draft Invoices"
-msgstr ""
+msgstr "Taslak Faturaları Dahil Et"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_include
 msgid "Include Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Açık Faturaları/Asıl Bakiyeyi Dahil Et"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
 msgid "Include Other Account Open Amount"
-msgstr ""
+msgstr "Diğer Hesap Açık Tutarını Dahil Et"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
 msgid "Include Other Account Unpaid Amount"
-msgstr ""
+msgstr "Diğer Hesap Ödenmemiş Tutarını Dahil Et"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
 msgid "Include Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Ödenmemiş Faturaları/Asıl Bakiyeyi Dahil Et"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -303,7 +326,7 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
 msgid "It Indicate if partner risk exceeded"
-msgstr ""
+msgstr "İş Ortağı riskinin aşıldığını gösterir."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
@@ -314,7 +337,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
-msgstr ""
+msgstr "Son Kredi Limiti Tarihi"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz____last_update
@@ -335,36 +358,36 @@ msgstr "Son güncellenme"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_limit
 msgid "Limit In Draft Invoices"
-msgstr ""
+msgstr "Taslak Faturalarda Limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
 msgid "Limit In Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Açık Faturalarda/Asıl Bakiyede Limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Limit In Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Ödenmemiş Faturalarda/Asıl Bakiyede Limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
 msgid "Limit Other Account Open Amount"
-msgstr ""
+msgstr "Diğer Hesap Açık Tutarında Limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
 msgid "Limit Other Account Unpaid Amount"
-msgstr ""
+msgstr "Diğer Hesap Ödenmemiş Tutarında Limit"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
 msgid "Manager"
-msgstr ""
+msgstr "Yönetici"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
@@ -387,7 +410,7 @@ msgstr "Nesne"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
-msgstr ""
+msgstr "İş Ortağı Risk Aşımı Sihirbazı"
 
 #. module: account_financial_risk
 #. odoo-python
@@ -419,6 +442,9 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Belirli bir hesap olarak ayarlanmış olan ve vade tarihi aşılmış ortak alacak "
+"hesabıyla uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında "
+"belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount
@@ -428,6 +454,9 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Vade tarihi henüz geçmemiş olan ve ortak alacak hesabı olarak ayarlanmış "
+"belirli bir hesapla uzlaşılmamış hareket satırlarının kalan tutarı, hesap "
+"ayarlarında belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid
@@ -437,6 +466,9 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Vade tarihi aşılmış olan ve aynı hesap olarak ayarlanmış ortak alacak "
+"hesabıyla uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında "
+"belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open
@@ -446,19 +478,22 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Vade tarihi henüz geçmemiş olan ve aynı hesap olarak ayarlanmış ortak alacak "
+"hesabıyla uzlaşılmamış hareket satırlarının kalan tutarı, hesap ayarlarında "
+"belirlenen Vade Marjını dikkate alarak."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_allow_edit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
 msgid "Risk Allow Edit"
-msgstr ""
+msgstr "Risk Düzenlemeye İzin Ver"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_payment__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr ""
+msgstr "Toplam Risk Tutarı"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
@@ -560,43 +595,43 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total Draft Invoices"
-msgstr ""
+msgstr "Toplam Taslak Faturalar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open
 msgid "Total Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Toplam Açık Faturalar/Ana Bakiye"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount
 msgid "Total Other Account Open Amount"
-msgstr ""
+msgstr "Toplam Diğer Hesap Açık Tutar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid
 msgid "Total Other Account Unpaid Amount"
-msgstr ""
+msgstr "Toplam Diğer Hesap Ödenmemiş Tutar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_total
 msgid "Total Risk"
-msgstr ""
+msgstr "Toplam Limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid
 msgid "Total Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Toplam Ödenmemiş Faturalar/Ana Bakiye"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
-msgstr ""
+msgstr "Taslak veya Proforma durumundaki faturaların toplam tutarı"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
