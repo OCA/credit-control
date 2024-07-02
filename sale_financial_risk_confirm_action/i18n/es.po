@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_financial_risk_confirm_action
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-02 08:09+0000\n"
+"PO-Revision-Date: 2024-07-02 10:12+0200\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: sale_financial_risk_confirm_action
+#: model:ir.actions.server,name:sale_financial_risk_confirm_action.action_sale_order_changes_to_confirm
+msgid "Changes to confirm sale order in risk exception"
+msgstr "Cambios para confirmar un pedido de venta en excepción por riesgo"
+
+#. module: sale_financial_risk_confirm_action
+#: model:ir.model,name:sale_financial_risk_confirm_action.model_partner_risk_exceeded_wiz
+msgid "Partner Risk Exceeded Wizard"
+msgstr "Asistente de riesgo excedido de cliente"
+
+#. module: sale_financial_risk_confirm_action
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk_confirm_action.partner_risk_exceeded_wizard
+msgid "Update and continue"
+msgstr "Actualizar y continuar"
