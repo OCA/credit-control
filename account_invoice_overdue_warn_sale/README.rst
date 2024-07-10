@@ -33,7 +33,9 @@ when the invoicing partner has overdue invoices. The banner informs the
 user about the number of overdue invoices and the total overdue amount.
 It contains a link to see the corresponding overdue invoices.
 
-|image1|
+.. figure:: https://raw.githubusercontent.com/OCA/credit-control/17.0/account_invoice_overdue_warn/static/description/sale_order_overdue_invoice_warn.png
+   :scale: 80 %
+   :alt: Screenshot of partner form view
 
 This module depends on the module *account_invoice_overdue_warn* which
 adds the same banner on the form view of partners.
