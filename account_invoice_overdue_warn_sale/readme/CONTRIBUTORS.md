@@ -1,0 +1,3 @@
+- Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- [Sygel](https://sygel.es):
+  - Valentín Vinagre \<<valentin.vinagre@sygel.es>\>
