@@ -32,21 +32,6 @@ msgid "Company Currency"
 msgstr "Divisa de la Compañía"
 
 #. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__id
-msgid "ID"
-msgstr "ID (identificación)"
-
-#. module: account_invoice_overdue_warn_sale
-#: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
 msgid "Overdue Invoices Residual"
 msgstr "Residual de Facturas Vencidas"
@@ -84,3 +69,12 @@ msgstr "tiene"
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "overdue invoice(s)"
 msgstr "factura(s) vencida(s)"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID (identificación)"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
