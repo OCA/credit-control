@@ -524,6 +524,7 @@ class ResPartner(models.Model):
         view_name = "financial_risk_{}_pivot_view".format(model_name.replace(".", "_"))
         view_id = (
             self.env["ir.model.data"]
+            .sudo()
             .search(
                 [("name", "=", view_name), ("model", "=", "ir.ui.view")],
                 limit=1,
