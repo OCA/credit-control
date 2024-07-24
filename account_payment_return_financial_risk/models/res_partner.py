@@ -46,7 +46,7 @@ class ResPartner(models.Model):
                 ("account_type", "=", "asset_receivable"),
                 ("partial_reconcile_returned_ids", "!=", False),
             ],
-            "fields": ["partner_id", "account_id", "amount_residual"],
+            "fields": ["amount_residual:sum"],
             "group_by": ["partner_id", "account_id"],
         }
         return res
@@ -54,9 +54,9 @@ class ResPartner(models.Model):
     def _prepare_risk_account_vals(self, groups):
         vals = super()._prepare_risk_account_vals(groups)
         vals["risk_payment_return"] = sum(
-            reg["amount_residual"]
-            for reg in groups["returned"]["read_group"]
-            if reg["partner_id"][0] == self.id
+            amount_residual
+            for (partner, account, amount_residual) in groups["returned"]["read_group"]
+            if partner.id == self.id
         )
         return vals
 
