@@ -9,7 +9,7 @@
             <field name="risk_account_amount_include" position="before">
                 <field
                     name="risk_payment_return_include"
-                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                    readonly="not risk_allow_edit"
                 />
                 <button
                     name="open_risk_pivot_info"
@@ -23,7 +23,7 @@
             <field name="risk_account_amount_limit" position="before">
                 <field
                     name="risk_payment_return_limit"
-                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                    readonly="not risk_allow_edit"
                 />
             </field>
         </field>
