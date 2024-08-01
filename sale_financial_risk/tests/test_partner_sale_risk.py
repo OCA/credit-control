@@ -1,4 +1,5 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2024 Simone Rubino - Aion Tech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields
@@ -243,3 +244,35 @@ class TestPartnerSaleRisk(TransactionCase):
         # Limit exceeded
         self.assertNotEqual(result, True)
         self.assertEqual(result["res_model"], "partner.risk.exceeded.wiz")
+
+    def test_confirm_risk_send_email(self):
+        """When the risk is confirmed by the user, an email is sent."""
+        # Arrange
+        order = self.sale_order
+        order.action_confirm()
+        template_subject = "Risk exceeded"
+        template = self.env["mail.template"].create(
+            {
+                "name": "Test Risk exceeded template",
+                "model_id": self.env.ref("sale.model_sale_order").id,
+                "subject": template_subject,
+            }
+        )
+        order.company_id.sale_order_confirm_risk_template_id = template
+        partner = order.partner_id
+        partner.risk_sale_order_include = True
+        partner.credit_limit = order.amount_total - 1
+        # pre-condition
+        self.assertTrue(partner.risk_exception)
+        existing_emails = self.env["mail.mail"].search([])
+
+        # Act
+        risk_wizard_action = order.copy().action_confirm()
+        risk_wizard = self.env[risk_wizard_action["res_model"]].browse(
+            risk_wizard_action["res_id"]
+        )
+        risk_wizard.button_continue()
+
+        # Assert
+        new_emails = self.env["mail.mail"].search([]) - existing_emails
+        self.assertIn(template_subject, new_emails.mapped("subject"))

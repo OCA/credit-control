@@ -1,0 +1,1 @@
+If you want an email to be sent when risk is exceeded in sale orders, go to *Invoicing/Accounting > Configuration > Settings > Financial Risk* and fill the field `Email template sent when confirming sale order risk`.
