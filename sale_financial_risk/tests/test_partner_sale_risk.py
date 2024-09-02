@@ -18,7 +18,13 @@ class TestPartnerSaleRisk(TransactionCase):
         cls.partner = cls.env["res.partner"].create(
             {"name": "Partner test", "customer_rank": 1}
         )
-        cls.product = cls.env.ref("product.product_product_2")
+        cls.product = cls.env["product.product"].create(
+            {
+                "sale_ok": True,
+                "taxes_id": [],
+                "name": "Test Product",
+            }
+        )
         cls.product.invoice_policy = "order"
         cls.product_pricelist = cls.env["product.pricelist"].create(
             {"name": "pricelist for sale_financial_risk test"}
@@ -46,7 +52,8 @@ class TestPartnerSaleRisk(TransactionCase):
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
                             "product_uom": cls.product.uom_id.id,
-                            "price_unit": 100.0,
+                            "price_unit": 115.0,
+                            "tax_id": False,
                             "company_id": company.id,
                         },
                     )
