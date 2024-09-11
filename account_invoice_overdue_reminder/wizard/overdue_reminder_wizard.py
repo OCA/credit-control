@@ -565,7 +565,7 @@ class OverdueReminderStep(models.TransientModel):
         )
         mvals.pop("attachment_ids", None)
         mvals.pop("attachments", None)
-        mail = self.env["mail.mail"].create(mvals)
+        mail = self.env["mail.mail"].sudo().create(mvals)
         inv_report = self.env["ir.actions.report"]._get_report_from_name(
             "account.report_invoice_with_payments"
         )
