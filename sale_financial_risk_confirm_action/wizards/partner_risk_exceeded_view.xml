@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="partner_risk_exceeded_wizard" model="ir.ui.view">
+        <field name="name">Partner risk exceeded</field>
+        <field name="model">partner.risk.exceeded.wiz</field>
+        <field
+            name="inherit_id"
+            ref="account_financial_risk.partner_risk_exceeded_wizard"
+        />
+        <field name="arch" type="xml">
+            <button name="button_continue" position="after">
+                <button
+                    string="Update and continue"
+                    class="btn-primary"
+                    name="button_continue_with_action"
+                    type="object"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
