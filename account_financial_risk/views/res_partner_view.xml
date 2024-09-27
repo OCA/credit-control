@@ -13,7 +13,7 @@
                     name="financial_risk"
                     string="Financial Risk"
                     invisible="not is_company and not parent_id"
-                    groups="account.group_account_manager"
+                    groups="account_financial_risk.group_account_financial_risk_user"
                 >
                     <group name="risk_general">
                         <group name="risk_include" class="o_group_col_6">
