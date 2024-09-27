@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="credit_control_analysis_tree_view">
+        <field
+            name="name"
+        >credit.control.analysis.tree (in account_credit_control_analysis)</field>
+        <field name="model">credit.control.analysis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="partner_ref" />
+                <field name="policy_id" />
+                <field name="policy_level_id" />
+                <field name="level" />
+                <field name="open_balance" widget="monetary" />
+                <field name="currency_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record id="credit_control_analysis_pivot_view" model="ir.ui.view">
+        <field
+            name="name"
+        >credit.control.analysis.pivot (in account_credit_control_analysis)</field>
+        <field name="model">credit.control.analysis</field>
+        <field name="arch" type="xml">
+            <pivot string="Credit Control Analysis">
+                <field name="partner_id" type="row" />
+                <field name="policy_id" type="row" />
+                <field name="policy_level_id" type="col" />
+                <field name="level" type="col" />
+                <field name="open_balance" type="measure" />
+            </pivot>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="credit_control_analysis_act_window">
+        <field name="name">Credit Control Analysis</field>
+        <field name="res_model">credit.control.analysis</field>
+        <field name="view_mode">tree,pivot</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="credit_control_analysis_menu">
+        <field name="name">Credit Control Analysis</field>
+        <field name="parent_id" ref="account.menu_finance_reports" />
+        <field name="action" ref="credit_control_analysis_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>
