@@ -1,4 +1,5 @@
 # Copyright 2016-2019 Tecnativa - Carlos Dauden
+# Copyright 2024 Simone Rubino - Aion Tech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
@@ -290,3 +291,34 @@ class TestPartnerFinancialRisk(TransactionCase):
             self.partner.risk_amount_exceeded,
             self.partner.risk_total - self.partner.credit_limit,
         )
+
+    def test_confirm_risk_send_email(self):
+        """When the risk is confirmed by the user, an email is sent."""
+        # Arrange
+        invoice = self.invoice
+        template_subject = "Risk exceeded"
+        template = self.env["mail.template"].create(
+            {
+                "name": "Test Risk exceeded template",
+                "model_id": self.env.ref("account.model_account_move").id,
+                "subject": template_subject,
+            }
+        )
+        invoice.company_id.account_move_confirm_risk_template_id = template
+        partner = invoice.partner_id
+        partner.risk_invoice_draft_include = True
+        partner.credit_limit = invoice.amount_total - 1
+        # pre-condition
+        self.assertTrue(partner.risk_exception)
+        existing_emails = self.env["mail.mail"].search([])
+
+        # Act
+        risk_wizard_action = invoice.action_post()
+        risk_wizard = self.env[risk_wizard_action["res_model"]].browse(
+            risk_wizard_action["res_id"]
+        )
+        risk_wizard.button_continue()
+
+        # Assert
+        new_emails = self.env["mail.mail"].search([]) - existing_emails
+        self.assertIn(template_subject, new_emails.mapped("subject"))

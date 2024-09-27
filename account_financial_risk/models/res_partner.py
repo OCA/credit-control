@@ -1,4 +1,5 @@
 # Copyright 2016-2021 Tecnativa - Carlos Dauden
+# Copyright 2024 Simone Rubino - Aion Tech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
@@ -157,6 +158,7 @@ class ResPartner(models.Model):
         store=True,
         readonly=False,
         string="Last Credit Limit Date",
+        tracking=True,
     )
     risk_remaining_value = fields.Monetary(
         compute="_compute_risk_remaining",
