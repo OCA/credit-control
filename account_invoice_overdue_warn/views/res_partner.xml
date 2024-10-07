@@ -19,6 +19,20 @@
                         class="oe_link"
                     />for a total residual of <field name="overdue_invoice_amount" />
                 </div>
+                <field name="credit_note" invisible="1" />
+                <div
+                    class="alert alert-warning"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                    role="alert"
+                    attrs="{'invisible': ['|',('credit_note_count', '=', 0), ('credit_note', '!=', True)]}"
+                >
+                This customer has <field name="credit_note_count" /><button
+                        string="Credit Note"
+                        type="object"
+                        name="jump_to_credit_note"
+                        class="oe_link"
+                    />for a total residual of <field name="credit_note_amount" />
+                </div>
             </div>
         </field>
     </record>
