@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+
+<record id="view_account_config_settings" model="ir.ui.view">
+    <field name="name">overdue.reminder.res.config.settings.form</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="account.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+        <xpath
+                expr="//block[@id='pay_invoice_online_setting_container']"
+                position="after"
+            >
+            <block title="Overdue Invoice Reminder" id="overdue_reminder">
+                <setting
+                        id="overdue_reminder"
+                        string="Attach Invoices"
+                        help="Attach Invoices to Overdue Reminder E-mails"
+                    >
+                    <field name="overdue_reminder_attach_invoice" />
+                </setting>
+                <setting
+                        id="overdue_reminder_policy"
+                        string="Contact to Remind"
+                        help="Default Contact to Remind"
+                    >
+                    <field name="overdue_reminder_partner_policy" />
+                </setting>
+                <setting
+                        id="overdue_reminder_if"
+                        string="Reminder Wizard"
+                        help="Default Overdue Reminder Wizard Interface"
+                    >
+                    <field name="overdue_reminder_interface" />
+                </setting>
+                <setting
+                        id="overdue_reminder_days"
+                        string="Default Overdue Reminder Settings"
+                    >
+                    <div class="content-group">
+                        <div class="row mt8">
+                            <label
+                                    for="overdue_reminder_start_days"
+                                    string="Trigger Delay (days)"
+                                    class="col-lg-4 o_light_label"
+                                />
+                            <field name="overdue_reminder_start_days" />
+                        </div>
+                        <div class="row mt8">
+                            <label
+                                    for="overdue_reminder_min_interval_days"
+                                    string="Minimum Interval (days)"
+                                    class="col-lg-4 o_light_label"
+                                />
+                            <field name="overdue_reminder_min_interval_days" />
+                        </div>
+                    </div>
+                </setting>
+            </block>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>
