@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="edi_oca.job_edi_backend_record_generate" model="queue.job.function">
+    <!-- this record is probably set as no update so should be done manually
+          or using post init hooks
+
+          Before generating payload we are waiting related exchange to be
+          sent and processed
+    -->
+    <field name="edit_retry_pattern">{1: 5, 3: 30, 6: 60, 10: 600}</field>
+  </record>
+
+  <record id="upflow_ws_backend" model="webservice.backend">
+    <field name="name">Upflow webservice backend (Sandbox)</field>
+    <field name="url">https://api.sandbox.upflow.io/{endpoint}</field>
+    <field name="tech_name">upflow_ws</field>
+    <field name="protocol">http</field>
+    <field name="content_type">application/json</field>
+    <!-- TODO probably move to auth_type to manage X-Api-Key and X-Api-Secret  -->
+    <field name="auth_type">none</field>
+    <field name="save_response" eval="True" />
+  </record>
+
+  <record id="upflow_edi_backend_type" model="edi.backend.type">
+    <field name="name">Upflow.io backend type</field>
+    <field name="code">upflow</field>
+  </record>
+  <record id="upflow_edi_backend" model="edi.backend">
+    <field name="name">EDI upflow backend WebService</field>
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="webservice_backend_id" ref="upflow_ws_backend" />
+    <field name="output_sent_processed_auto">False</field>
+  </record>
+  <record id="upflow_edi_exchange_type_post_invoices" model="edi.exchange.type">
+    <field name="name">Send invoice to create or update (POST v1/invoices)</field>
+    <field name="code">upflow_post_invoice</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/invoices
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_invoices_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default Send invoice to create or update rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_invoices" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_invoices_pdf" model="edi.exchange.type">
+    <field name="name">Send PDF invoice (POST v1/invoices/{upflow_uuid}/pdf)</field>
+    <field name="code">upflow_post_invoice_pdf</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/invoices/{upflow_uuid}/pdf
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_invoices_pdf_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default Send PDF invoice rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_invoices_pdf" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_credit_notes" model="edi.exchange.type">
+    <field name="name">
+      Send Odoo refunds (upflow CreditNotes) to create or update
+      (POST v1/credit_notes)
+    </field>
+    <field name="code">upflow_post_credit_notes</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/credit_notes
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_credit_notes_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field
+            name="name"
+        >Default Send Odoo refunds (upflow CreditNotes) to create or update rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_credit_notes" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_credit_notes_pdf" model="edi.exchange.type">
+    <field name="name">
+      Send Odoo refunds pdf (upflow CreditNotes)
+      (POST v1/credit_notes/{upflow_uuid}/pdf)
+    </field>
+    <field name="code">upflow_post_credit_notes_pdf</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/credit_notes/{upflow_uuid}/pdf
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_credit_notes_pdf_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default Send Odoo refunds pdf (upflow CreditNotes) rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_credit_notes_pdf" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_payments" model="edi.exchange.type">
+    <field name="name">
+      Send customer payments to create or update
+      (POST v1/payments)
+    </field>
+    <field name="code">upflow_post_payments</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/payments
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_payments_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default send customer payments to create or update rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_payments" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_refunds" model="edi.exchange.type">
+    <field name="name">
+      Send refunds (credit note payments) to create or update
+      (POST v1/refunds)
+    </field>
+    <field name="code">upflow_post_refunds</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/refunds
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_refunds_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field
+            name="name"
+        >Default send refunds (credit note payments) to create or update rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_refunds" />
+    <field name="model_id" ref="account.model_account_move" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_post_reconcile" model="edi.exchange.type">
+    <field name="name">
+      Send reconcile between account entries
+      (POST v1/reconcile)
+    </field>
+    <field name="code">upflow_post_reconcile</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/reconcile
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_post_reconcile_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default send reconcile between account entries rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_post_reconcile" />
+    <field name="model_id" ref="account.model_account_full_reconcile" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_upflow_post_customers" model="edi.exchange.type">
+    <field name="name">
+      Send/update customers and contacts
+      (POST v1/upflow_post_customers)
+    </field>
+    <field name="code">upflow_post_customers</field>
+    <field name="backend_id" ref="upflow_edi_backend" />
+    <field name="backend_type_id" ref="upflow_edi_backend_type" />
+    <field name="direction">output</field>
+    <field name="exchange_file_auto_generate">False</field>
+    <field name="exchange_file_ext">json</field>
+    <field name="advanced_settings_edit">
+      components:
+        send:
+          usage: webservice.send
+          work_ctx:
+            webservice:
+              method: post
+              kwargs:
+                url_params:
+                  endpoint: v1/customers
+    </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_upflow_post_customers_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default Send/update customers and contacts rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_upflow_post_customers" />
+    <field name="model_id" ref="base.model_res_partner" />
+    <field name="kind">custom</field>
+  </record>
+
+  <record id="upflow_edi_exchange_type_upflow_put_contacts" model="edi.exchange.type">
+      <field name="name">
+        Update contacts
+        (Put v1/upflow_put_contacts)
+      </field>
+      <field name="code">upflow_put_contacts</field>
+      <field name="backend_id" ref="upflow_edi_backend" />
+      <field name="backend_type_id" ref="upflow_edi_backend_type" />
+      <field name="direction">output</field>
+      <field name="exchange_file_auto_generate">False</field>
+      <field name="exchange_file_ext">json</field>
+      <field name="advanced_settings_edit">
+        components:
+          send:
+            usage: webservice.send
+            work_ctx:
+              webservice:
+                method: put
+                kwargs:
+                  url_params:
+                    endpoint: v1/customers/{commercial_upflow_uuid}/contacts/{upflow_uuid}
+      </field>
+  </record>
+
+  <record
+        id="upflow_edi_exchange_type_upflow_put_contacts_rule_model"
+        model="edi.exchange.type.rule"
+    >
+    <field name="name">Default Update contacts rule</field>
+    <field name="type_id" ref="upflow_edi_exchange_type_upflow_put_contacts" />
+    <field name="model_id" ref="base.model_res_partner" />
+    <field name="kind">custom</field>
+  </record>
+
+  <!--
+      https://private-anon-ff2c4226af-upflow.apiary-mock.com/
+                             POST        /v1/customers/{customerId}/invoices
+upflow_post_invoice          POST        /v1/invoices
+                             GET         /v1/invoices/{invoiceId}
+                             GET         /v1/invoices?page={page}&limit={limit}
+upflow_post_invoice_pdf      POST        /v1/invoices/:{invoiceId}/pdf
+                             DELETE      /v1/invoices/:{invoiceId}
+upflow_post_customers        POST        /v1/customers
+                             PUT         /v1/customers/{customerId}
+                             GET         /v1/customers/{customerId}
+                             GET         /v1/customers?page={page}&limit={limit}&filters={filters}
+                             POST        /v1/customers/{customerId}/customer_summary
+                             DELETE      /v1/customers/:{customerId}
+                             POST        /v1/customers/{customer_id}/contacts
+                             PUT         /v1/customers/{customer_id}/contacts/{id}
+                             GET         /v1/customers/{customer_id}/contacts/{id}
+                             GET         /v1/customers/{customerId}/contacts?page={page}&limit={limit}
+                             DELETE      /v1/customers/:{customerId}/contacts/:{contactId}
+                             POST        /v1/customers/{customerId}/account-managers
+                             GET         /v1/customers/{customerId}/account-managers
+                             GET         /v1/payments/{paymentId}
+                             GET         /v1/payments?offs...
+upflow_post_payments         POST        /v1/payments
+                             DELETE      /v1/payments/:{paymentId}
+                             GET         /v1/credit_notes?offset={offset}&limit={limit}
+                             GET         /v1/credit_notes/{creditNoteId}
+upflow_post_credit_notes     POST        /v1/credit_notes
+upflow_post_credit_notes_pdf POST        /v1/credit_notes/:{creditNoteId}/pdf
+                             DELETE      /v1/credit_notes/:{creditNoteId}
+                             GET         /v1/users
+                             GET         /v1/bank_accounts
+                             GET         /v1/refunds?offset={offset}&limit={limit}&sortBy={sortBy}&sortOrder={sortOrder}
+                             GET         /v1/refunds/{refund_id}
+upflow_post_refunds          POST        /v1/refunds
+                             DELETE      /v1/refunds/{refund_id}
+upflow_post_reconcile        POST        /v1/reconcile
+                             POST        /v1/custom_fields
+                             GET         /v1/custom_fields?offset={offset}&limit={limit}
+                             DELETE      /v1/custom_fields/{customFieldId} -->
+
+</odoo>
