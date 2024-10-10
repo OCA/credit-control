@@ -27,6 +27,9 @@ class ResCompany(models.Model):
         default="last_reminder",
         string="Contact to Remind",
     )
+    overdue_reminder_sort_by_amount = fields.Boolean(
+        string="Sort Overdue reminder by remaining amount", default=True
+    )
 
     @api.model
     def _overdue_reminder_interface_selection(self):
