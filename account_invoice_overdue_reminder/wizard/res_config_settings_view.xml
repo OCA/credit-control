@@ -15,6 +15,9 @@
                     <setting id="overdue_reminder_attach_invoice">
                         <field name="overdue_reminder_attach_invoice" />
                     </setting>
+                    <setting id="overdue_reminder_sort_by_amount">
+                        <field name="overdue_reminder_sort_by_amount" />
+                    </setting>
                     <setting id="overdue_reminder_partner_policy">
                         <field name="overdue_reminder_partner_policy" />
                     </setting>

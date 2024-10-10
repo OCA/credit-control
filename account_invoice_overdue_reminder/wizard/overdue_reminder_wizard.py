@@ -116,6 +116,18 @@ class OverdueReminderStart(models.TransientModel):
             domain.append(("user_id", "in", self.user_ids.ids))
         return domain
 
+    def _sort_moves(self, moves):
+        # Use a config to sort by residual amount desc
+        # Config is set to true by default
+        if self.company_id.overdue_reminder_sort_by_amount:
+            return sorted(
+                moves,
+                key=lambda to_sort: to_sort[1],
+                reverse=True,
+            )
+        # Sorted by partner name
+        return moves
+
     def run(self):
         self.ensure_one()
         if self.start_days < 0:
@@ -159,8 +171,7 @@ class OverdueReminderStart(models.TransientModel):
             ["commercial_partner_id"],
             ["amount_residual_signed:sum"],
         )
-        # Sort by residual amount desc
-        rg_res_sorted = sorted(rg_res, key=lambda to_sort: to_sort[1], reverse=True)
+        rg_res_sorted = self._sort_moves(rg_res)
         action_ids = []
         for rg_re in rg_res_sorted:
             commercial_partner = rg_re[0]
