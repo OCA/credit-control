@@ -38,16 +38,23 @@
                         class="col-12 col-md-12 o_setting_box"
                         id="overdue_reminder_sort_by_amount"
                     >
-                        <div class="o_setting_left_pane">
-                                <field name="overdue_reminder_sort_by_amount" />
-                        </div>
+                    <div class="o_setting_left_pane">
+                            <field name="overdue_reminder_sort_by_amount" />
+                    </div>
                     <div class="o_setting_right_pane">
                         <div class="row" name="overdue_reminder_sort_by_amount">
                             <label
                                     for="overdue_reminder_sort_by_amount"
-                                    class="col-md-5"
+                                    class="col-md-4"
                                 />
-                    </div>
+                                <span
+                                    class="fa fa-lg fa-building-o col-md-1"
+                                    title="Values set here are company-specific."
+                                    aria-label="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                    role="img"
+                                />
+                        </div>
                     </div>
                 </div>
                 <div
