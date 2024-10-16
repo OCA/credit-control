@@ -23,3 +23,7 @@ class ResConfigSettings(models.TransientModel):
     overdue_reminder_partner_policy = fields.Selection(
         related="company_id.overdue_reminder_partner_policy", readonly=False
     )
+
+    overdue_reminder_sort_by_amount = fields.Boolean(
+        related="company_id.overdue_reminder_sort_by_amount", readonly=False
+    )
