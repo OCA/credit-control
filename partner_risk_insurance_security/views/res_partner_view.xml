@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Add risk insurance tab in partner form. -->
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">res.partner.form.risk_insurance_security</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="50" />
+        <field name="arch" type="xml">
+
+           <!-- Modify fields inside the credit insurance tab to be readonly if user is not in group -->
+           <xpath expr="//field[@name='company_credit_limit']" position="attributes">
+            <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='insurance_credit_limit']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='risk_insurance_requested']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='risk_insurance_grant_date']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='risk_insurance_coverage_percent']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='risk_insurance_code']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='risk_insurance_code_2']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='credit_policy_state_id']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_full_access_user', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='credit_policy_state_id']" position="after">
+                <field name="is_full_access_user" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
