@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Foodles (http://www.foodles.co).
+     @author Pierre Verkest <pierreverkest84@gmail.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record model="ir.ui.view" id="view_full_reconcile_form">
+        <field name="name">account.full.reconcile.form (in edi_account)</field>
+        <field name="model">account.full.reconcile</field>
+        <field name="inherit_id" ref="account.view_full_reconcile_form" />
+        <field name="arch" type="xml">
+            <field name="reconciled_line_ids" position="after">
+                <field
+                    name="partial_reconcile_ids"
+                    readonly="1"
+                    colspan="4"
+                    nolabel="1"
+                    groups="base.group_no_one"
+                    context="{'form_view_ref' : 'edi_upflow.account_partial_reconcile_form_view' ,}"
+                >
+                    <tree>
+                        <field name="id" />
+                        <field name="upflow_uuid" />
+                        <field name="debit_move_id" />
+                        <field name="credit_move_id" />
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+</odoo>
