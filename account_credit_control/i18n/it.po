@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2023-06-08 12:13+0000\n"
+"PO-Revision-Date: 2024-10-24 17:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -38,40 +38,55 @@ msgid ""
 "Best regards\n"
 "        "
 msgstr ""
+"\n"
+"I nostri archivi indicano che non abbiamo ancora ricevuto il pagamento della "
+"fattura di seguito indicata nonostante i nostri due solleciti.\n"
+"Se il pagamento è già stato inviato, ignori questa notifica. In caso "
+"contrario, proceda con il pagamento.\n"
+"Se il pagamento non sarà ricevuto nei prossimi 5 giorni, il tuo fascicolo "
+"verrà trasferito alla nostra agenzia di recupero crediti.\n"
+"\n"
+"Se si ha bisogno di impostare un piano di pagamento, preghiamo di avvisarci."
+"\n"
+"Un estratto conto cliente è allegato per sua comodità.\n"
+"\n"
+"Grazie in anticipo per la collaborazione in questa questione.\n"
+"\n"
+"Cordiali saluti\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
 msgid "# of Credit Control Communications"
-msgstr ""
+msgstr "N° di comunicazioni controllo credito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_count
-#, fuzzy
 msgid "# of Credit Control Lines"
-msgstr "Riga controllo di credito"
+msgstr "N° di righe controllo credito"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
-msgstr ""
+msgstr "10 giorni da ultimo promemoria"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_1
 msgid "10 days net"
-msgstr ""
+msgstr "10 giorni netto"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
 #: model:credit.control.policy.level,name:account_credit_control.3_time_2
 msgid "30 days end of month"
-msgstr ""
+msgstr "30 giorni fine mese"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
-msgstr ""
+msgstr "60 giorni da ultimo promemoria"
 
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
@@ -82,6 +97,11 @@ msgid ""
 "  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></p>\n"
 "        "
 msgstr ""
+"<p>Spettabile <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
+"  <br>\n"
+"  <br>\n"
+"  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></p>\n"
+"        "
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -89,6 +109,8 @@ msgid ""
 "<span class=\"o_form_label\">This wizard will let you set the overdue policy "
 "and level for selected invoices</span>"
 msgstr ""
+"<span class=\"o_form_label\">Questa procedura guidata consente di impostare "
+"la politica e il livello degli scaduti per le fatture selezionate</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
@@ -97,21 +119,24 @@ msgid ""
 "this operation.\n"
 "                </span>"
 msgstr ""
+"<span class=\"o_form_label\">Attenzione: non sarà possibile annullare questa "
+"operazione.\n"
+"                </span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Date:</strong>"
-msgstr ""
+msgstr "<strong>Data:</strong>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Total Due</strong>"
-msgstr ""
+msgstr "<strong>Totale dovuto</strong>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Total Invoiced</strong>"
-msgstr ""
+msgstr "<strong>Totale fatturato</strong>"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
@@ -126,6 +151,8 @@ msgid ""
 "A credit control line more recent than %(controlling_date)s exists at "
 "%(lines_date)s"
 msgstr ""
+"Esiste una riga controllo credito più recente di %(controlling_date)s al "
+"%(lines_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -138,7 +165,7 @@ msgstr "Livello del controllo credito"
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
-msgstr ""
+msgstr "Un controllo di credito automatico è già in corso, riprovare più tardi."
 
 #. module: account_credit_control
 #. odoo-python
