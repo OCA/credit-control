@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <odoo>
+        <record id="group_full_access_credit_policy_state" model="res.groups">
+            <field name="name">Full Access to Credit Insurance Fields</field>
+            <field name="category_id" ref="base.module_category_sales_management" />
+        </record>
+    </odoo>
+</odoo>
