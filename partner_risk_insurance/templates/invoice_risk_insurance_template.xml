@@ -10,7 +10,7 @@
                 t-value="lambda move: move.commercial_partner_id.risk_insurance_grant_date and -1 or 0"
             />
             <div class="page">
-                <table class="table table-sm o_main_table">
+                <table class="table table-borderless o_main_table">
                     <tbody>
                         <tr>
                             <td colspan="5" align="center">
@@ -19,7 +19,7 @@
                         </tr>
                         <t
                             t-set="moves"
-                            t-value="docs.sorted(lambda doc: (is_insured_partner(doc), doc.commercial_partner_id.country_code, doc.name))"
+                            t-value="docs.sorted(lambda doc: (is_insured_partner(doc), doc.commercial_partner_id.country_code or '', doc.name))"
                         />
                         <t t-foreach="moves" t-as="move">
                             <t
