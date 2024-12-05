@@ -194,11 +194,11 @@
                                 />
                                 <span class="oe_inline">
                                     (<field
-                                        class="oe_inline"
-                                        name="risk_currency_id"
-                                        readonly="1"
-                                        nolabel="1"
-                                    />)
+                                    class="oe_inline"
+                                    name="risk_currency_id"
+                                    readonly="1"
+                                    nolabel="1"
+                                />)
                                 </span>
                             </div>
                             <label for="credit_limit" />
