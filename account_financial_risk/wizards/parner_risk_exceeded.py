@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class PartnerRiskExceededWiz(models.TransientModel):
@@ -24,7 +24,7 @@ class PartnerRiskExceededWiz(models.TransientModel):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Partner risk exceeded"),
+            "name": self.env._("Partner risk exceeded"),
             "res_model": self._name,
             "res_id": self.id,
             "view_mode": "form",
