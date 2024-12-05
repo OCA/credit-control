@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -44,19 +44,19 @@ class AccountMove(models.Model):
         partner = self.partner_id.commercial_partner_id
         exception_msg = ""
         if partner.risk_exception:
-            exception_msg = _("Financial risk exceeded.\n")
+            exception_msg = self.env._("Financial risk exceeded.\n")
         elif partner.risk_invoice_open_limit and (
             (partner.risk_invoice_open + self.risk_amount_total_currency)
             > partner.risk_invoice_open_limit
         ):
-            exception_msg = _("This invoice exceeds the open invoices risk.\n")
+            exception_msg = self.env._("This invoice exceeds the open invoices risk.\n")
         # If risk_invoice_draft_include this invoice included in risk_total
         elif not partner.risk_invoice_draft_include and (
             partner.risk_invoice_open_include
             and (partner.risk_total + self.risk_amount_total_currency)
             > partner.credit_limit
         ):
-            exception_msg = _("This invoice exceeds the financial risk.\n")
+            exception_msg = self.env._("This invoice exceeds the financial risk.\n")
         return exception_msg
 
     def _first_invoice_exception_msg(self):
@@ -80,7 +80,7 @@ class AccountMove(models.Model):
         invoice, exception_msg = self._first_invoice_exception_msg()
         if exception_msg and self.env.context.get("from_validate_move_wiz", False):
             raise ValidationError(
-                _(
+                self.env._(
                     "The partner %s is in risk exception.\n"
                     "You must post his invoices from form view to allow over risk"
                 )

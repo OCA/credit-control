@@ -3,18 +3,16 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.exceptions import UserError
-from odoo.tests import TransactionCase
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestPartnerFinancialRisk(TransactionCase):
+class TestPartnerFinancialRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
         cls.env.user.groups_id |= cls.env.ref("account.group_account_manager")
         cls.env.user.groups_id |= cls.env.ref(
@@ -54,7 +52,7 @@ class TestPartnerFinancialRisk(TransactionCase):
                 "name": "Partner test",
                 "customer_rank": 1,
                 "property_account_receivable_id": cls.account_customer.id,
-                "company_id": cls.account_customer.company_id.id,
+                "company_id": cls.account_customer.company_ids[0].id,
             }
         )
         cls.invoice_address = cls.env["res.partner"].create(
@@ -78,11 +76,7 @@ class TestPartnerFinancialRisk(TransactionCase):
                 "type_tax_use": "sale",
                 "tax_group_id": cls.env["account.tax.group"]
                 .with_company(cls.env.company.id)
-                .create(
-                    {
-                        "name": "Tax Group TEST",
-                    }
-                )
+                .create({"name": "Tax Group TEST"})
                 .id,
                 "amount_type": "percent",
                 "amount": 10.0,
@@ -97,9 +91,7 @@ class TestPartnerFinancialRisk(TransactionCase):
                     "journal_id": cls.journal_sale.id,
                     "invoice_payment_term_id": False,
                     "invoice_line_ids": [
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "name": "Test product",
                                 "account_id": cls.account_sale.id,
@@ -174,9 +166,7 @@ class TestPartnerFinancialRisk(TransactionCase):
                     "journal_id": self.journal_sale.id,
                     "date": fields.Date.today(),
                     "line_ids": [
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "name": "Debit line",
                                 "partner_id": self.partner.id,
@@ -184,9 +174,7 @@ class TestPartnerFinancialRisk(TransactionCase):
                                 "debit": 100,
                             },
                         ),
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "name": "Credit line",
                                 "partner_id": self.partner.id,

@@ -5,7 +5,7 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -234,7 +234,7 @@ class ResPartner(models.Model):
                 partner.credit_currency == "manual"
                 and not partner.manual_credit_currency_id
             ):
-                raise ValidationError(_("Choose Manual Credit Currency."))
+                raise ValidationError(self.env._("Choose Manual Credit Currency."))
 
     def _compute_risk_allow_edit(self):
         self.update(
@@ -284,7 +284,7 @@ class ResPartner(models.Model):
                 + [
                     ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
                     ("account_type", "=", "asset_receivable"),
-                    ("parent_state", "in", ["draft", "proforma", "proforma2"]),
+                    ("parent_state", "in", ["draft"]),
                 ],
                 "fields": fields,
                 "group_by": groupby,
@@ -367,17 +367,17 @@ class ResPartner(models.Model):
         # Partner receivable account determines if amount is in invoice field
         for (
             partner,
-            account,
+            _account,
             currency,  # noqa: B007
             amount_residual,
             amount_residual_currency,  # noqa: B007
         ) in groups["draft"]["read_group"]:
             if partner.id not in self.ids:
                 continue  # pragma: no cover
-            vals["risk_invoice_draft"] += account.company_id.currency_id._convert(
+            vals["risk_invoice_draft"] += currency._convert(
                 amount_residual,
                 self.risk_currency_id,
-                account.company_id,
+                self.env.company,
                 fields.Date.context_today(self),
                 round=False,
             )
@@ -420,16 +420,16 @@ class ResPartner(models.Model):
     def _get_amount_in_risk_currency(
         self, currency, amount_residual_currency, amount_residual, account
     ):
-        acc_currency_id = account.company_id.currency_id.id
+        acc_currency_id = currency.id
         risk_currency_id = self.risk_currency_id.id
         if currency.id == risk_currency_id:
             return amount_residual_currency
         elif acc_currency_id == risk_currency_id:
             return amount_residual
-        return account.company_id.currency_id._convert(
+        return currency._convert(
             amount_residual,
             self.risk_currency_id,
-            account.company_id,
+            self.env.company,
             fields.Date.context_today(self),
             round=False,
         )
@@ -477,7 +477,7 @@ class ResPartner(models.Model):
     @api.model
     def _max_risk_date_due(self):
         return fields.Date.to_string(
-            fields.Date.today()
+            fields.Date.context_today(self)
             - relativedelta(days=self.env.company.invoice_unpaid_margin)
         )
 
@@ -520,9 +520,9 @@ class ResPartner(models.Model):
                     x[0],
                     x[1],
                     x[2],
-                    "child_ids.%s" % x[0],
-                    "child_ids.%s" % x[1],
-                    "child_ids.%s" % x[2],
+                    f"child_ids.{x[0]}",
+                    f"child_ids.{x[1]}",
+                    f"child_ids.{x[2]}",
                 )
             )
         res.extend(("credit_limit", "child_ids.credit_limit"))
@@ -544,7 +544,7 @@ class ResPartner(models.Model):
             .res_id
         )
         return {
-            "name": _("Financial risk information"),
+            "name": self.env._("Financial risk information"),
             "view_mode": "pivot",
             "res_model": model_name,
             "view_id": view_id,
