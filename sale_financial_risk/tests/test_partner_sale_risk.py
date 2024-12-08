@@ -2,12 +2,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields
-from odoo.tests import TransactionCase
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT, BaseCommon
 
 
-class TestPartnerSaleRisk(TransactionCase):
+class TestPartnerSaleRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

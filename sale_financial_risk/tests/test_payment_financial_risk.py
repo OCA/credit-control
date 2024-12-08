@@ -26,7 +26,7 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
         if not cls.pricelist:
             cls.pricelist = cls.env["product.pricelist"].create(
                 {
-                    "name": "Test Pricelist (%s)" % (cls.currency.name),
+                    "name": "Test Pricelist {cls.currency.name}",
                     "currency_id": cls.currency.id,
                 }
             )
@@ -86,9 +86,9 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
         # Check validation of transaction correctly confirms the SO
         self.assertEqual(self.order.state, "draft")
         tx_sudo._set_done()
-        tx_sudo._finalize_post_processing()
+        tx_sudo._post_process()
         self.assertEqual(self.order.state, "sale")
         self.assertTrue(tx_sudo.payment_id)
-        self.assertEqual(tx_sudo.payment_id.state, "posted")
+        self.assertEqual(tx_sudo.payment_id.state, "in_process")
         # The order gets confirmed despite the risk exception
         self.assertTrue(self.partner.risk_exception)

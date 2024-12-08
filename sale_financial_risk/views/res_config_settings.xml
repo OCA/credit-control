@@ -23,7 +23,7 @@
                 </setting>
                 <setting
                     id="allow_overrisk_sale_confirmation"
-                    string="Include orders in confirm state"
+                    string="Allow sale order confirm over the risk"
                 >
                     <field name="allow_overrisk_sale_confirmation" />
                     <div class="text-muted">
