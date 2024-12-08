@@ -13,10 +13,10 @@ class PaymentTransaction(models.Model):
             PaymentTransaction, self.with_context(bypass_risk=True)
         )._set_authorized()
 
-    def _reconcile_after_done(self):
+    def _post_process(self):
         """Bypass risk for sale confirmation and invoice creation triggered
         by this method
         """
         return super(
             PaymentTransaction, self.with_context(bypass_risk=True)
-        )._reconcile_after_done()
+        )._post_process()
