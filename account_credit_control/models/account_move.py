@@ -35,14 +35,12 @@ class AccountMove(models.Model):
     def button_cancel(self):
         """Prevent to cancel invoice related to credit line"""
         # We will search if this invoice is linked with credit
-        cc_line_obj = self.env["credit.control.line"]
+        cc_line_obj = self.env["credit.control.line"].sudo()
         nondraft_domain = [
             ("invoice_id", "in", self.ids),
             ("state", "!=", "draft"),
         ]
-
         cc_nondraft_lines = cc_line_obj.search(nondraft_domain, limit=1)
-
         if cc_nondraft_lines:
             raise UserError(
                 _(
