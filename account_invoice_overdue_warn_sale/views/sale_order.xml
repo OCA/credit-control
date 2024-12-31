@@ -17,14 +17,14 @@
                     invisible="overdue_invoice_count == 0"
                 >
                     The invoicing partner <field
-                        name="commercial_partner_invoicing_id"
-                    /> has <field name="overdue_invoice_count" />
+                    name="commercial_partner_invoicing_id"
+                /> has <field name="overdue_invoice_count" />
                     <button
-                        string="overdue invoice(s)"
-                        type="object"
-                        name="jump_to_overdue_invoices"
-                        class="oe_link"
-                    />
+                    string="overdue invoice(s)"
+                    type="object"
+                    name="jump_to_overdue_invoices"
+                    class="oe_link"
+                />
                     for a total residual of <field name="overdue_invoice_amount" />
                 </div>
             </xpath>
