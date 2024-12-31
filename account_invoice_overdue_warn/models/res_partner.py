@@ -46,7 +46,7 @@ class ResPartner(models.Model):
         if rg_res:
             count = rg_res[0]["__count"]
             overdue_invoice_amount = rg_res[0]["amount_residual_signed"]
-        return (count, overdue_invoice_amount)
+        return count, overdue_invoice_amount
 
     def _prepare_overdue_invoice_domain(self, company_id):
         # The use of commercial_partner_id is in this method

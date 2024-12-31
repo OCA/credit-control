@@ -4,6 +4,7 @@
 
 from datetime import datetime, timedelta
 
+from odoo import Command
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -37,9 +38,7 @@ class TestOverdueWarn(TransactionCase):
                 "invoice_date": today - timedelta(days=5),
                 "invoice_date_due": today - timedelta(days=5),
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "test line",
                             "display_type": "product",
@@ -48,7 +47,7 @@ class TestOverdueWarn(TransactionCase):
                             "account_id": acc.id,
                             "tax_ids": [],
                         },
-                    )
+                    ),
                 ],
             }
         )
@@ -62,9 +61,7 @@ class TestOverdueWarn(TransactionCase):
                 "invoice_date": datetime.now().date(),
                 "invoice_date_due": today + timedelta(days=30),
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "test line",
                             "display_type": "product",
@@ -73,7 +70,7 @@ class TestOverdueWarn(TransactionCase):
                             "account_id": acc.id,
                             "tax_ids": [],
                         },
-                    )
+                    ),
                 ],
             }
         )
