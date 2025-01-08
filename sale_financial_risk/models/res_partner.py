@@ -17,6 +17,7 @@ class ResPartner(models.Model):
     )
     risk_sale_order = fields.Monetary(
         compute="_compute_risk_sale_order",
+        compute_sudo=True,
         string="Total Sales Orders Not Invoiced",
         currency_field="risk_currency_id",
         help="Total not invoiced of sales orders in Sale Order state",
