@@ -137,11 +137,11 @@
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Go to <i
-                >Invoicing > Credit Control > Credit Control Run</i> to create a new credit control communication process.
+            >Invoicing > Credit Control > Credit Control Run</i> to create a new credit control communication process.
             </p>
             <p>
                 That's the most common way of creating these records. However, you can do it from here too if you want, by pressing <i
-                >Create</i>.
+            >Create</i>.
             </p>
         </field>
     </record>
