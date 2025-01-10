@@ -9,8 +9,7 @@ from dateutil import relativedelta
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
-from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
@@ -19,8 +18,8 @@ from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 @tagged("post_install", "-at_install")
 class TestCreditControlRun(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
@@ -110,8 +109,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -161,8 +160,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -196,8 +195,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)

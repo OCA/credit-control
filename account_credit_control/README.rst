@@ -128,6 +128,7 @@ Contributors
 -  `360ERP <https://www.360erp.com>`__:
 
    -  Andrea Stirpe
+   -  Kevin Khao
 
 Maintainers
 -----------

@@ -18,3 +18,4 @@
 - Naglis Jonaitis (Versada UAB) \<<naglis@versada.eu>\>
 - [360ERP](https://www.360erp.com):
   - Andrea Stirpe
+  - Kevin Khao
