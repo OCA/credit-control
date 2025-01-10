@@ -125,12 +125,14 @@ Contributors
   - João Marques
   - César A. Sánchez
   - Víctor Martínez
+  - Carlos Lopez
 
 - Enric Tobella <etobella@creublanca.es>
 - Naglis Jonaitis (Versada UAB) <naglis@versada.eu>
 - `360ERP <https://www.360erp.com>`__:
 
   - Andrea Stirpe
+  - Kevin Khao
 
 Maintainers
 -----------

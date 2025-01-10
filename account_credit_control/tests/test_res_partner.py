@@ -3,17 +3,25 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import BaseCommon
 
 
 @tagged("post_install", "-at_install")
-class TestCreditControlPolicyLevel(TransactionCase):
+class TestCreditControlPolicyLevel(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.partner = cls.env["res.partner"].create({"name": "Partner 1"})
+        cls.account = cls.env["account.account"].create(
+            {
+                "code": "400001",
+                "name": "Test",
+                "account_type": "asset_receivable",
+                "reconcile": True,
+            }
+        )
+        cls.partner.property_account_receivable_id = cls.account
 
     def test_check_credit_policy(self):
         """
@@ -24,20 +32,30 @@ class TestCreditControlPolicyLevel(TransactionCase):
         retry to assign this policy and this account on the partner
         """
         policy = self.env.ref("account_credit_control.credit_control_3_time")
-        partner = self.env["res.partner"].create({"name": "Partner 1"})
-        account = self.env["account.account"].create(
-            {
-                "code": "400001",
-                "name": "Test",
-                "account_type": "asset_receivable",
-                "reconcile": True,
-            }
-        )
-        partner.property_account_receivable_id = account
-
         with self.assertRaises(ValidationError):
-            partner.write({"credit_policy_id": policy.id})
+            self.partner.write({"credit_policy_id": policy.id})
 
-        policy.write({"account_ids": [(6, 0, [account.id])]})
-        partner.property_account_receivable_id = account.id
-        partner.credit_policy_id = policy.id
+        policy.write({"account_ids": [(6, 0, [self.account.id])]})
+        self.partner.property_account_receivable_id = self.account.id
+        self.partner.credit_policy_id = policy.id
+
+    def test_search_credit_policy(self):
+        """
+        Test the search of the credit policy
+        First we try to search a policy without account
+        After that we add the account in the policy and
+        retry to search the policy
+        """
+        Policy = self.env["credit.control.policy"].with_context(
+            account_receivable_partner_id=self.partner.id
+        )
+        policy = self.env.ref("account_credit_control.credit_control_3_time")
+        self.assertFalse(policy.account_ids)
+        domain = [("display_name", "=", "3 time policy")]
+        policy_find = Policy.search(domain)
+        self.assertFalse(policy_find)
+        # Add the account to the policy
+        policy.write({"account_ids": [(6, 0, [self.account.id])]})
+        policy_find = Policy.search(domain)
+        self.assertEqual(len(policy_find), 1)
+        self.assertEqual(policy_find, policy)
