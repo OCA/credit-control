@@ -16,10 +16,12 @@
             eval="[(4, ref('account_credit_control.credit_control_summary'))]"
         />
         <field name="body_html" type="html">
-  <p>Dear <t t-out="object.contact_address_id.name or '' " />,</p>
-  <br />
-  <br />
-  <p><t t-out="object.policy_level_id.custom_mail_text or '' " /></p>
+            <p>Dear <t t-out="object.contact_address_id.name or '' " />,</p>
+            <br />
+            <br />
+            <p>
+                <t t-out="object.policy_level_id.custom_mail_text or '' " />
+            </p>
         </field>
     </record>
     <!-- policy no follow -->
@@ -62,15 +64,15 @@ Best regards
         </field>
         <field name="mail_show_invoice_detail" eval="True" />
         <field name="custom_mail_text" type="html">
-  <p
+            <p
             >Our records indicate that we have not received the payment of the invoices mentioned in the attached document.
   <br />
   If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.</p>
-  <br />
-  <p>Thank you in advance for your anticipated cooperation in this matter.</p>
-  <br />
-  <p>Best regards</p>
-  </field>
+            <br />
+            <p>Thank you in advance for your anticipated cooperation in this matter.</p>
+            <br />
+            <p>Best regards</p>
+        </field>
     </record>
     <record model="credit.control.policy.level" id="3_time_2">
         <field name="name">30 days end of month</field>
@@ -91,15 +93,16 @@ Best regards
         </field>
         <field name="mail_show_invoice_detail" eval="True" />
         <field name="custom_mail_text" type="html">
-  <p
+            <p
             >Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br
-                />
+            />
   If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.</p>
-  <br />
-  <p>Thank you in advance for your anticipated cooperation in this matter.</p><br />
-  <br />
-  <p>Best regards</p>
-  </field>
+            <br />
+            <p>Thank you in advance for your anticipated cooperation in this matter.</p>
+            <br />
+            <br />
+            <p>Best regards</p>
+        </field>
     </record>
     <record model="credit.control.policy.level" id="3_time_3">
         <field name="name">10 days last reminder</field>
@@ -123,20 +126,21 @@ Best regards
         </field>
         <field name="mail_show_invoice_detail" eval="True" />
         <field name="custom_mail_text" type="html">
-  <p
+            <p
             >Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br
-                />
+            />
   If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br
-                />
+            />
   If your payment has not been received in the next 5 days, your file will be transferred to our debt collection agency.</p>
-  <br />
-  <p>Should you need us to arrange a payment plan for you, please advise.<br />
+            <br />
+            <p>Should you need us to arrange a payment plan for you, please advise.<br
+            />
   A customer account statement is enclosed for you convenience.</p>
-  <br />
-  <p>Thank you in advance for your anticipated cooperation in this matter.</p>
-  <br />
-  <p>Best regards</p>
-  </field>
+            <br />
+            <p>Thank you in advance for your anticipated cooperation in this matter.</p>
+            <br />
+            <p>Best regards</p>
+        </field>
     </record>
     <!-- policy 2 -->
     <record model="credit.control.policy" id="credit_control_2_time">
@@ -161,15 +165,15 @@ Best regards
         </field>
         <field name="mail_show_invoice_detail" eval="True" />
         <field name="custom_mail_text" type="html">
-  <p
+            <p
             >Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br
-                />
+            />
   If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.</p>
-  <br />
-  <p>Thank you in advance for your anticipated cooperation in this matter.</p>
-  <br />
-  <p>Best regards</p>
-  </field>
+            <br />
+            <p>Thank you in advance for your anticipated cooperation in this matter.</p>
+            <br />
+            <p>Best regards</p>
+        </field>
     </record>
     <record model="credit.control.policy.level" id="2_time_2">
         <field name="name">60 days last reminder</field>
@@ -194,22 +198,23 @@ Thank you in advance for your anticipated cooperation in this matter.
 Best regards
         </field>
         <field name="custom_mail_text" type="html">
-  <p
+            <p
             >Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.</p>
-  <br />
-  <p
+            <br />
+            <p
             >If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br
-                />
+            />
   If your payment has not been received in the next 5 days, your file will be transferred to our debt
   collection agency.</p>
-  <br />
-  <p>Should you need us to arrange a payment plan for you, please advise.<br />
+            <br />
+            <p>Should you need us to arrange a payment plan for you, please advise.<br
+            />
   A customer account statement is enclosed for you convenience.</p>
-  <br />
-  <p>Thank you in advance for your anticipated cooperation in this matter.</p>
-  <br />
-  <p>Best regards</p>
-  </field>
+            <br />
+            <p>Thank you in advance for your anticipated cooperation in this matter.</p>
+            <br />
+            <p>Best regards</p>
+        </field>
     </record>
     <record id="base.main_company" model="res.company">
         <field name="credit_policy_id" ref="credit_control_3_time" />
