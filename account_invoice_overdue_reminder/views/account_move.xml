@@ -35,19 +35,22 @@
                     name="overdue_reminder"
                     string="Overdue Reminder"
                     attrs="{'invisible': [('overdue', '=', False)]}"
+                    groups="account.group_account_invoice,account.group_account_readonly"
                 >
                 <group name="overdue_reminder_main" col="4">
                     <field name="overdue_reminder_counter" />
                     <field name="no_overdue_reminder" />
-                    <field name="commercial_partner_id" invisible="1" />
-                    <field name="overdue" invisible="1" />
-                    <field name="overdue_remind_sent" invisible="1" />
                 </group>
                 <group name="overdue_reminder_lines">
                     <field name="overdue_reminder_ids" nolabel="1" colspan="2" />
                 </group>
             </page>
         </notebook>
+        <field name="id" position="after">
+            <field name="overdue" invisible="1" />
+            <field name="overdue_remind_sent" invisible="1" />
+            <field name="no_overdue_reminder" invisible="1" />
+        </field>
     </field>
 </record>
 
