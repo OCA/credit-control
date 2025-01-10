@@ -119,7 +119,7 @@ class CreditControlLine(models.Model):
         store=True,
     )
     level = fields.Integer(
-        related="policy_level_id.level", group_operator="max", store=True
+        related="policy_level_id.level", aggregator="max", store=True
     )
     manually_overridden = fields.Boolean()
     run_id = fields.Many2one(comodel_name="credit.control.run", string="Source")

@@ -78,7 +78,7 @@ class CreditControlMarker(models.TransientModel):
         return {
             "domain": str([("id", "in", filtered_lines.ids)]),
             "binding_view_types": "form",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "view_id": False,
             "name": _("Control Credit Line"),
             "res_model": "credit.control.line",

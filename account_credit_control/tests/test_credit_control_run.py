@@ -9,19 +9,16 @@ from dateutil import relativedelta
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
-from odoo.tests import RecordCapturer, tagged
-from odoo.tests.common import Form
+from odoo.tests import Form, RecordCapturer, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 
 
 @tagged("post_install", "-at_install")
 class TestCreditControlRun(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+    def setUpClass(cls):
+        super().setUpClass()
         cls.env.user.groups_id |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
         )
@@ -130,8 +127,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         )
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -216,8 +213,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -251,8 +248,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -291,7 +288,9 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
         )
         marker.mark_lines()
-        emailer_obj = self.env["credit.control.emailer"]
+        emailer_obj = self.env["credit.control.emailer"].with_context(
+            domain_notifications_email="test@example.com"
+        )
         wiz_emailer = emailer_obj.create({})
         wiz_emailer.line_ids = control_lines
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
@@ -309,7 +308,6 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
         )
         marker.mark_lines()
-        emailer_obj = self.env["credit.control.emailer"]
         wiz_emailer = emailer_obj.create({})
         wiz_emailer.line_ids = control_lines
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:

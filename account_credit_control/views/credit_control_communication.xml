@@ -35,7 +35,7 @@
                         </group>
                     </group>
                     <field name="credit_control_line_ids" nolabel="1">
-                        <tree>
+                        <list>
                             <field name="date" />
                             <field name="level" />
                             <field name="state" />
@@ -43,14 +43,10 @@
                             <field name="balance_due" />
                             <field name="policy_level_id" />
                             <field name="policy_id" />
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -73,21 +69,18 @@
                         name="group_by_report_date"
                         domain='[]'
                         context="{'group_by': 'report_date'}"
-                        icon="terp-go-month"
                         string="Run date"
                     />
                     <filter
                         name="group_by_partner"
                         domain='[]'
                         context="{'group_by': 'partner_id'}"
-                        icon="terp-partner"
                         string="Partner"
                     />
                     <filter
                         name="group_by_company"
                         domain='[]'
                         context="{'group_by': 'company_id'}"
-                        icon="terp-company"
                         string="Company"
                         groups="base.group_multi_company"
                     />
@@ -95,14 +88,12 @@
                         name="group_by_policy"
                         domain='[]'
                         context="{'group_by': 'policy_id'}"
-                        icon="terp-document-new"
                         string="Credit policy"
                     />
                     <filter
                         name="group_by_policy_level"
                         domain='[]'
                         context="{'group_by': 'policy_level_id'}"
-                        icon="terp-document-new"
                         string="Credit policy level"
                     />
                     <filter
@@ -115,24 +106,24 @@
         </field>
     </record>
     <record id="credit_control_communication_tree_view" model="ir.ui.view">
-        <field name="name">credit.control.communication.tree</field>
+        <field name="name">credit.control.communication.list</field>
         <field name="model">credit.control.communication</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="partner_id" />
                 <field name="user_id" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="policy_level_id" />
                 <field name="policy_id" />
                 <field name="report_date" />
-            </tree>
+            </list>
         </field>
     </record>
     <record model="ir.actions.act_window" id="credit_control_communication_action">
         <field name="name">Credit Control Communications</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.communication</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <!-- <field name="view_id" ref="credit_control_communication_tree_view"/> -->
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">

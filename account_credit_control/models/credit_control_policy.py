@@ -6,6 +6,7 @@ from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.osv import expression
 
 CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
 
@@ -270,7 +271,7 @@ class CreditControlPolicy(models.Model):
         return policy_lines_generated
 
     @api.model
-    def _name_search(self, name, domain=None, operator="ilike", limit=None, order=None):
+    def _search_display_name(self, operator, value):
         """Alternative implementation for domain on account, equivalent to
         domain="[('account_ids', 'in', property_account_receivable_id)]"
         """
@@ -280,15 +281,12 @@ class CreditControlPolicy(models.Model):
                 self.env.context["account_receivable_partner_id"]
             )
             account_receivable = partner.property_account_receivable_id
-
-        ids = super()._name_search(name, domain, operator, limit, order)
-        policies = self.browse(ids)
-        policy_ids = []
+        domain = super()._search_display_name(operator, value)
         if account_receivable:
-            for policy in policies:
-                if account_receivable.id in policy.account_ids.ids:
-                    policy_ids.append(policy.id)
-        return policy_ids if account_receivable else ids
+            domain = expression.AND(
+                [domain, [("account_ids", "in", account_receivable.ids)]]
+            )
+        return domain
 
 
 class CreditControlPolicyLevel(models.Model):
