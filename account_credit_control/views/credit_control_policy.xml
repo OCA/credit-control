@@ -4,7 +4,7 @@
         <field name="name">credit.control.policy.form</field>
         <field name="model">credit.control.policy</field>
         <field name="arch" type="xml">
-            <form string="Credit control policy">
+            <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
                     <widget
@@ -30,15 +30,15 @@
                     <notebook colspan="4">
                         <page string="Policy levels">
                             <field name="level_ids" nolabel="1" colspan="4">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="level" />
                                     <field name="channel" />
                                     <field name="delay_days" />
                                     <field name="computation_mode" />
                                     <field name="email_template_id" />
-                                </tree>
-                                <form string="Policy level">
+                                </list>
+                                <form>
                                     <field name="name" />
                                     <notebook>
                                         <page string="Delay Setting">
@@ -78,13 +78,13 @@
                         </page>
                         <page string="Accounts">
                             <field name="account_ids" nolabel="1">
-                                <tree>
+                                <list>
                                     <field name="code" />
                                     <field name="name" />
                                     <field name="account_type" />
                                     <field name="currency_id" />
                                     <field name="tag_ids" widget="many2many_tags" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -93,13 +93,13 @@
         </field>
     </record>
     <record id="credit_control_policy_tree" model="ir.ui.view">
-        <field name="name">credit.control.policy.tree</field>
+        <field name="name">credit.control.policy.list</field>
         <field name="model">credit.control.policy</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="do_nothing" />
-            </tree>
+            </list>
         </field>
     </record>
     <menuitem
@@ -114,7 +114,7 @@
         <field name="res_model">credit.control.policy</field>
         <field name="domain" />
         <field name="binding_view_types">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="credit_control_policy_tree" />
     </record>
     <menuitem
@@ -127,7 +127,7 @@
         <field name="name">credit.mangement.policy.level.form</field>
         <field name="model">credit.control.policy.level</field>
         <field name="arch" type="xml">
-            <form string="Policy level">
+            <form>
                 <field name="name" />
                 <notebook colspan="4">
                     <page string="Delay Setting">
@@ -149,17 +149,17 @@
         </field>
     </record>
     <record id="credit_control_policy_level_tree" model="ir.ui.view">
-        <field name="name">credit.control.policy.level.tree</field>
+        <field name="name">credit.control.policy.level.list</field>
         <field name="model">credit.control.policy.level</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="level" />
                 <field name="channel" />
                 <field name="delay_days" />
                 <field name="computation_mode" />
                 <field name="email_template_id" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>

@@ -8,7 +8,7 @@
         >credit.control.analysis.tree (in account_credit_control_analysis)</field>
         <field name="model">credit.control.analysis</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="partner_id" />
                 <field name="partner_ref" />
                 <field name="policy_id" />
@@ -16,7 +16,7 @@
                 <field name="level" />
                 <field name="open_balance" widget="monetary" />
                 <field name="currency_id" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="credit_control_analysis_pivot_view" model="ir.ui.view">
@@ -37,7 +37,7 @@
     <record model="ir.actions.act_window" id="credit_control_analysis_act_window">
         <field name="name">Credit Control Analysis</field>
         <field name="res_model">credit.control.analysis</field>
-        <field name="view_mode">tree,pivot</field>
+        <field name="view_mode">list,pivot</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
