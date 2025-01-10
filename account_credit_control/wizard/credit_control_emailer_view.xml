@@ -27,7 +27,6 @@
     </record>
     <!-- for menu -->
 
-
     <record
         id="open_credit_line_emailer_wizard_menu_action"
         model="ir.actions.act_window"
