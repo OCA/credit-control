@@ -12,7 +12,8 @@
                     name="insured_with_credit_policy"
                     string="Insured"
                     widget="boolean_toggle"
-                    attrs="{'invisible': [('move_type', '!=', 'out_invoice')], 'readonly': [('state', '!=', 'draft')]}"
+                    invisible="move_type != 'out_invoice'"
+                    readonly="state != 'draft'"
                     groups="account.group_account_user"
                 />
             </xpath>
@@ -20,12 +21,12 @@
             <xpath expr="//group[@name='sale_info_group']" position="inside">
                 <label
                     for="credit_policy_state_id"
-                    attrs="{'invisible': ['|', ('move_type', '!=', 'out_invoice'), ('insured_with_credit_policy', '=', False)]}"
+                    invisible="move_type != 'out_invoice' or not insured_with_credit_policy"
                     groups="account.group_account_user"
                 />
                 <div
                     class="o_row"
-                    attrs="{'invisible': ['|', ('move_type', '!=', 'out_invoice'), ('insured_with_credit_policy', '=', False)]}"
+                    invisible="move_type != 'out_invoice' or not insured_with_credit_policy"
                     groups="account.group_account_user"
                 >
                     <field name="credit_policy_state_id" />
