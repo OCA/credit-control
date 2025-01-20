@@ -14,7 +14,7 @@
                 <page
                     string="Credit Insurance"
                     name="credit_insurance"
-                    attrs="{'invisible': ['|', ('show_credit_limit', '=', False), '&amp;', ('is_company','=',False), ('parent_id','!=',False)]}"
+                    invisible="not show_credit_limit or (not is_company and parent_id)"
                     groups='account.group_account_invoice,account.group_account_readonly'
                 >
                     <group name="credit_insurance_main">
@@ -41,7 +41,7 @@
                             <field name="credit_policy_insure_invoices" invisible="1" />
                             <field
                                 name="credit_policy_company_id"
-                                attrs="{'required': [('credit_policy_insure_invoices', '=', True)]}"
+                                required="credit_policy_insure_invoices"
                             />
                         </group>
                     </group>
