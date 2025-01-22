@@ -30,12 +30,21 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Invoice</strong></td>
-                                    <td><strong>Date</strong></td>
-                                    <td><strong>Partner Ref.</strong></td>
-                                    <td><strong>Partner Name</strong></td>
-                                    <td class="text-right"><strong
-                                        >Total Amount</strong></td>
+                                    <td>
+                                        <strong>Invoice</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Date</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Partner Ref.</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Partner Name</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>Total Amount</strong>
+                                    </td>
                                 </tr>
                             </t>
                             <t
@@ -45,12 +54,12 @@
                                     <td colspan="5">
                                         <strong>
                                             <t
-                                                t-out="move.commercial_partner_id.country_id.code"
-                                            />
+                                            t-out="move.commercial_partner_id.country_id.code"
+                                        />
                                             -
                                             <t
-                                                t-out="move.commercial_partner_id.country_id.name"
-                                            />
+                                            t-out="move.commercial_partner_id.country_id.name"
+                                        />
                                         </strong>
                                     </td>
                                 </tr>
@@ -87,8 +96,7 @@
                                         <strong
                                             t-out="insurance_country_total"
                                             t-options='{"widget": "monetary", "display_currency": move.currency_id}'
-                                        >
-                                        </strong>
+                                        />
                                     </td>
                                 </tr>
                                 <t
@@ -167,5 +175,4 @@
         <field name="binding_model_id" ref="account.model_account_move" />
         <field name="binding_type">report</field>
     </record>
-
 </odoo>
