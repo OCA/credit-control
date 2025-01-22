@@ -38,7 +38,6 @@
                             <field name="risk_insurance_code" />
                             <field name="risk_insurance_code_2" />
                             <field name="credit_policy_state_id" />
-                            <field name="credit_policy_insure_invoices" invisible="1" />
                             <field
                                 name="credit_policy_company_id"
                                 required="credit_policy_insure_invoices"
