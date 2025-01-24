@@ -919,21 +919,6 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run____last_update
-#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type____last_update
-msgid "Last Modified on"
-msgstr "تاریخ آخرین به‌روزرسانی"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__write_uid
@@ -1023,12 +1008,6 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Mailer"
-msgstr ""
-
-#. module: account_credit_control
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_main_attachment_id
-#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: account_credit_control
@@ -1723,13 +1702,6 @@ msgid "These lines are to do using the Actions."
 msgstr ""
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
-msgid ""
-"This allows credit control team to chase overdue payments with different "
-"means"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_next_action
 #: model:ir.model.fields,help:account_credit_control.field_res_users__payment_next_action
 msgid "This is the next action to be taken."
@@ -1825,3 +1797,6 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "تاریخ آخرین به‌روزرسانی"
