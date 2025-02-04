@@ -1,0 +1,2 @@
+- Telmo Santos \<<telmo.santos@camptocamp.com>\>
+- Victor Vermot-Petit-Outhenin \<<victorvermot@gmail.com>\>
