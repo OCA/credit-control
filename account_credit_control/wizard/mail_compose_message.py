@@ -3,22 +3,25 @@
 
 from markupsafe import Markup
 
-from odoo import models
+from odoo import api, models
 
 
 class MailComposer(models.TransientModel):
     _inherit = "mail.compose.message"
 
-    def _onchange_template_id(self, template_id, composition_mode, model, res_id):
-        res = super()._onchange_template_id(
-            template_id=template_id,
-            composition_mode=composition_mode,
-            model=model,
-            res_id=res_id,
-        )
+    @api.depends_context("inject_credit_control_communication_table")
+    def _compute_body(self):
+        res = super()._compute_body()
         if self.env.context.get("inject_credit_control_communication_table"):
-            record = self.env[model].browse(res_id)
-            res["value"]["body"] += Markup(
-                record._get_credit_control_communication_table()
-            )
+            for composer in self:
+                res_ids = composer._evaluate_res_ids()
+                if composer.model and len(res_ids) == 1:
+                    record = self.env[composer.model].browse(res_ids)
+                    credit_control_communication = Markup(
+                        record._get_credit_control_communication_table()
+                    )
+                    if composer.body:
+                        composer.body += credit_control_communication
+                    else:
+                        composer.body = credit_control_communication
         return res

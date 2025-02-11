@@ -128,6 +128,9 @@ class CreditControlCommunication(models.Model):
         """Aggregate credit control line by partner, level, and currency"""
         if not lines:
             return []
+        # Needed for related stored fields
+        # are recomputed before executing the SQL
+        lines.flush_recordset()
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
             " credit_control_line.currency_id, "
