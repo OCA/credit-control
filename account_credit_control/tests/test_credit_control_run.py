@@ -9,7 +9,7 @@ from dateutil import relativedelta
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
-from odoo.tests import tagged
+from odoo.tests import RecordCapturer, tagged
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -215,6 +215,55 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             active_model="credit.control.line", active_ids=control_lines.ids
         ).create({})
         wiz_printer.print_lines()
+
+    def test_sent_email_invoice_detail(self):
+        """
+        Verify that the email is sent and includes the invoice details
+        """
+        policy_level_expected = self.env.ref("account_credit_control.3_time_1")
+        # assign a email to ensure does not fallback to letter
+        self.invoice.partner_id.email = "test@test.com"
+        control_run = self.env["credit.control.run"].create(
+            {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        control_lines = self.invoice.credit_control_line_ids
+        self.assertEqual(control_lines.policy_level_id, policy_level_expected)
+        # CASE 1: set the policy level to show invoice details = True
+        control_lines.policy_level_id.mail_show_invoice_detail = True
+        marker = self.env["credit.control.marker"].create(
+            {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
+        )
+        marker.mark_lines()
+        emailer_obj = self.env["credit.control.emailer"]
+        wiz_emailer = emailer_obj.create({})
+        wiz_emailer.line_ids = control_lines
+        with RecordCapturer(self.env["credit.control.communication"], []) as capture:
+            wiz_emailer.email_lines()
+        new_communication = capture.records
+        self.assertEqual(len(new_communication), 1)
+        self.assertEqual(len(new_communication.message_ids), 1)
+        # Verify that the email include the invoice details.
+        self.assertIn("Invoices summary", new_communication.message_ids.body)
+        self.assertIn(self.invoice.name, new_communication.message_ids.body)
+        # CASE 2: set the policy level to show invoice details = False
+        control_lines.policy_level_id.mail_show_invoice_detail = False
+        marker = self.env["credit.control.marker"].create(
+            {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
+        )
+        marker.mark_lines()
+        emailer_obj = self.env["credit.control.emailer"]
+        wiz_emailer = emailer_obj.create({})
+        wiz_emailer.line_ids = control_lines
+        with RecordCapturer(self.env["credit.control.communication"], []) as capture:
+            wiz_emailer.email_lines()
+        new_communication = capture.records
+        self.assertEqual(len(new_communication), 1)
+        self.assertEqual(len(new_communication.message_ids), 1)
+        # Verify that the email does not include the invoice details.
+        self.assertNotIn("Invoices summary", new_communication.message_ids.body)
+        self.assertNotIn(self.invoice.name, new_communication.message_ids.body)
 
     def test_open_credit_lines(self):
         """
