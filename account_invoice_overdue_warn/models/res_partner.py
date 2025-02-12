@@ -38,14 +38,14 @@ class ResPartner(models.Model):
         self.ensure_one()
         domain = self._prepare_overdue_invoice_domain(company_id)
         # amount_residual_signed is in company currency
-        rg_res = self.env["account.move"].read_group(
-            domain, ["amount_residual_signed"], []
+        rg_res = self.env["account.move"]._read_group(
+            domain, groupby=[], aggregates=["__count", "amount_residual_signed:sum"]
         )
         count = 0
         overdue_invoice_amount = 0.0
         if rg_res:
-            count = rg_res[0]["__count"]
-            overdue_invoice_amount = rg_res[0]["amount_residual_signed"]
+            count = rg_res[0][0]
+            overdue_invoice_amount = rg_res[0][1]
         return (count, overdue_invoice_amount)
 
     def _prepare_overdue_invoice_domain(self, company_id):

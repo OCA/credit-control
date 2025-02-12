@@ -4,42 +4,43 @@
 
 from datetime import datetime, timedelta
 
+from odoo import Command
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 
 @tagged("post_install", "-at_install")
 class TestOverdueWarn(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.bad_payer = self.env["res.partner"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.env.ref("base.main_company")
+        cls.bad_payer = cls.env["res.partner"].create(
             {
                 "name": "Bad payer",
-                "country_id": self.env.ref("base.fr").id,
-                "company_id": self.company.id,
+                "country_id": cls.env.ref("base.fr").id,
+                "company_id": cls.company.id,
             }
         )
         today = datetime.now().date()
-        acc = self.env["account.account"].search(
+        acc = cls.env["account.account"].search(
             [
-                ("company_id", "=", self.company.id),
+                ("company_ids", "in", cls.company.id),
                 ("account_type", "=", "income"),
             ],
             limit=1,
         )
-        self.out_invoice1 = self.env["account.move"].create(
+        cls.out_invoice1 = cls.env["account.move"].create(
             {
-                "partner_id": self.bad_payer.id,
+                "partner_id": cls.bad_payer.id,
                 "move_type": "out_invoice",
-                "company_id": self.company.id,
-                "currency_id": self.company.currency_id.id,
+                "company_id": cls.company.id,
+                "currency_id": cls.company.currency_id.id,
                 "invoice_date": today - timedelta(days=5),
                 "invoice_date_due": today - timedelta(days=5),
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "test line",
                             "display_type": "product",
@@ -47,24 +48,22 @@ class TestOverdueWarn(TransactionCase):
                             "quantity": 1,
                             "account_id": acc.id,
                             "tax_ids": [],
-                        },
+                        }
                     )
                 ],
             }
         )
-        self.out_invoice1.action_post()
-        self.out_invoice2 = self.env["account.move"].create(
+        cls.out_invoice1.action_post()
+        cls.out_invoice2 = cls.env["account.move"].create(
             {
-                "partner_id": self.bad_payer.id,
+                "partner_id": cls.bad_payer.id,
                 "move_type": "out_invoice",
-                "company_id": self.company.id,
-                "currency_id": self.company.currency_id.id,
+                "company_id": cls.company.id,
+                "currency_id": cls.company.currency_id.id,
                 "invoice_date": datetime.now().date(),
                 "invoice_date_due": today + timedelta(days=30),
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "test line",
                             "display_type": "product",
@@ -72,12 +71,12 @@ class TestOverdueWarn(TransactionCase):
                             "quantity": 1,
                             "account_id": acc.id,
                             "tax_ids": [],
-                        },
+                        }
                     )
                 ],
             }
         )
-        self.out_invoice2.action_post()
+        cls.out_invoice2.action_post()
 
     def test_overdue_warn(self):
         self.assertEqual(self.bad_payer.overdue_invoice_count, 1)
