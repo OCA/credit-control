@@ -70,8 +70,6 @@ class ResPartner(models.Model):
         )
         action["domain"] = self._prepare_overdue_invoice_domain(company_id)
         action["context"] = {
-            "journal_type": "sale",
-            "move_type": "out_invoice",
             "default_move_type": "out_invoice",
             "default_partner_id": self.id,
         }
