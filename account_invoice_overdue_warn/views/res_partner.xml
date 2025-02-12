@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_partner_form_overdue_warn" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
@@ -13,14 +12,13 @@
                     invisible="overdue_invoice_count == 0"
                 >
                   This customer has <field name="overdue_invoice_count" /><button
-                        string="overdue invoice(s)"
-                        type="object"
-                        name="jump_to_overdue_invoices"
-                        class="oe_link"
-                    />for a total residual of <field name="overdue_invoice_amount" />
+                    string="overdue invoice(s)"
+                    type="object"
+                    name="jump_to_overdue_invoices"
+                    class="oe_link"
+                />for a total residual of <field name="overdue_invoice_amount" />
                 </div>
             </div>
         </field>
     </record>
-
 </odoo>
