@@ -23,6 +23,14 @@ class TestOverdueWarn(TransactionCase):
                 "company_id": cls.company.id,
             }
         )
+        cls.bad_payer_contact = cls.env["res.partner"].create(
+            {
+                "name": "Bad payer contact",
+                "type": "contact",
+                "parent_id": cls.bad_payer.id,
+                "company_id": cls.company.id,
+            }
+        )
         today = datetime.now().date()
         acc = cls.env["account.account"].search(
             [
@@ -81,3 +89,5 @@ class TestOverdueWarn(TransactionCase):
     def test_overdue_warn(self):
         self.assertEqual(self.bad_payer.overdue_invoice_count, 1)
         self.assertEqual(self.bad_payer.overdue_invoice_amount, 500)
+        self.assertEqual(self.bad_payer_contact.overdue_invoice_count, 1)
+        self.assertEqual(self.bad_payer_contact.overdue_invoice_amount, 500)
