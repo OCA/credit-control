@@ -5,7 +5,7 @@
 {
     "name": "Sale Payment Sheet Financial Risk",
     "summary": "Manage partner risk in sale payment sheet",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Account",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",

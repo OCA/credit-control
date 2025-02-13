@@ -41,6 +41,7 @@ class ResPartner(models.Model):
         )
         return [
             ("partner_id", "in", commercial_partners.ids),
+            ("invoice_id.payment_state", "!=", "paid"),
             "|",
             ("state", "=", "open"),
             ("statement_line_id.state", "=", "open"),
