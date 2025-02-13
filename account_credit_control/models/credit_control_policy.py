@@ -273,7 +273,7 @@ class CreditControlPolicyLevel(models.Model):
     delay_days = fields.Integer(string="Delay (in days)", required=True)
     email_template_id = fields.Many2one(
         comodel_name="mail.template",
-        domain=[("model_id.model", "=", "credit.control.communication")],
+        domain=[("model", "=", "credit.control.communication")],
         required=True,
     )
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
