@@ -45,6 +45,7 @@
                                         <group colspan="2">
                                             <field
                                                 name="email_template_id"
+                                                context="{'default_model': 'credit.control.communication'}"
                                                 colspan="2"
                                             />
                                             <field name="custom_text" colspan="2" />
