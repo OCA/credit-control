@@ -208,6 +208,16 @@ class CreditControlRun(models.Model):
             comm_obj = self.env["credit.control.communication"]
             comms = comm_obj._generate_comm_from_credit_lines(email_lines)
             comms._generate_emails()
+            # Notify user that the emails will be sent in background
+            self.env["bus.bus"]._sendone(
+                self.env.user.partner_id,
+                "simple_notification",
+                {
+                    "type": "info",
+                    "title": _("Notifications"),
+                    "message": _("The emails will be sent in the background"),
+                },
+            )
         if letter_lines:
             wiz = self.env["credit.control.printer"].create(
                 {"line_ids": letter_lines.ids}
