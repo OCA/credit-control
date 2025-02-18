@@ -4,7 +4,9 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # Copyright 2023 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+import threading
+
+from odoo import _, api, fields, models, modules, registry, tools
 from odoo.tools.misc import format_amount, format_date
 
 
@@ -225,12 +227,39 @@ class CreditControlCommunication(models.Model):
             comm.credit_control_line_ids.filtered(
                 lambda line: line.state == "to_be_sent"
             ).write({"state": "queued"})
+            comm._send_mails()
+
+    def _send_mails(self):
+        # Launch process in new thread to improve the user speedup
+        if not tools.config["test_enable"] and not modules.module.current_test:
+
+            @self.env.cr.postcommit.add
+            def _launch_print_thread():
+                threaded_calculation = threading.Thread(
+                    target=self.send_mails_threaded,
+                    args=self.ids,
+                )
+                threaded_calculation.start()
+        else:
+            self._send_communications_by_email()
+
+    def send_mails_threaded(self, record_ids):
+        with registry(self._cr.dbname).cursor() as cr:
+            self = self.with_env(self.env(cr=cr))
+            communications = self.browse(record_ids)
+            communications._send_communications_by_email()
+
+    def _send_communications_by_email(self):
+        for comm in self:
             comm.message_mail_with_source(
                 comm.policy_level_id.email_template_id,
                 subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                     "account_credit_control.mt_request"
                 ),
             )
+            comm.credit_control_line_ids.filtered(
+                lambda line: line.state == "queued"
+            ).state = "sent"
 
     def _mark_credit_line_as_sent(self):
         lines = self.mapped("credit_control_line_ids")
