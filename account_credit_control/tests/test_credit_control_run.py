@@ -249,6 +249,7 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertIn(self.invoice.name, new_communication.message_ids.body)
         # CASE 2: set the policy level to show invoice details = False
         control_lines.policy_level_id.mail_show_invoice_detail = False
+        control_lines.state = "to_be_sent"
         marker = self.env["credit.control.marker"].create(
             {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
         )

@@ -46,8 +46,8 @@ msgstr ""
 "Se il pagamento non sarà ricevuto nei prossimi 5 giorni, il tuo fascicolo "
 "verrà trasferito alla nostra agenzia di recupero crediti.\n"
 "\n"
-"Se si ha bisogno di impostare un piano di pagamento, preghiamo di avvisarci."
-"\n"
+"Se si ha bisogno di impostare un piano di pagamento, preghiamo di "
+"avvisarci.\n"
 "Un estratto conto cliente è allegato per sua comodità.\n"
 "\n"
 "Grazie in anticipo per la collaborazione in questa questione.\n"
@@ -165,7 +165,8 @@ msgstr "Livello del controllo credito"
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
-msgstr "Un controllo di credito automatico è già in corso, riprovare più tardi."
+msgstr ""
+"Un controllo di credito automatico è già in corso, riprovare più tardi."
 
 #. module: account_credit_control
 #. odoo-python
@@ -1253,6 +1254,13 @@ msgstr ""
 "Nessuna riga verrà modificata. Tutte le righe selezionate sono già evase."
 
 #. module: account_credit_control
+#. odoo-python
+#: code:addons/account_credit_control/models/credit_control_run.py:0
+#, python-format
+msgid "Notifications"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of Actions"
@@ -1413,8 +1421,8 @@ msgid ""
 "be transferred to our debt collection agency."
 msgstr ""
 "I nostri archivi indicano che non abbiamo ancora ricevuto il pagamento delle "
-"fatture menzionate nel documento allegato nonostante i nostri due "
-"solleciti.<br>\n"
+"fatture menzionate nel documento allegato nonostante i nostri due solleciti."
+"<br>\n"
 "Se il pagamento è già stato inviato, ignorare questa notifica. In caso "
 "contrario, procedere con il pagamento.<br>\n"
 "Se il pagamento non è verrà ricevuto nei prossimi 5 giorni, il vostro "
@@ -1551,8 +1559,8 @@ msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
 msgstr ""
-"La politica \"<b>%(name)s</b>\" ha generato <b>%(len_policy_lines_generated)"
-"d righe controllo credito.</b><br/>"
+"La politica \"<b>%(name)s</b>\" ha generato "
+"<b>%(len_policy_lines_generated)d righe controllo credito.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1808,6 +1816,13 @@ msgstr ""
 "La politica di controllo del credito utilizzata sui partner per impostazione "
 "predefinita. Questa impostazione può essere sovrascritta sui partner o sulle "
 "fatture."
+
+#. module: account_credit_control
+#. odoo-python
+#: code:addons/account_credit_control/models/credit_control_run.py:0
+#, python-format
+msgid "The emails will be sent in the background"
+msgstr ""
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
