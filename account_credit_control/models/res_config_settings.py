@@ -22,3 +22,9 @@ class ResConfigSettings(models.TransientModel):
         "This setting can be overridden"
         " on partners or invoices.",
     )
+    default_apply_max_policy_level = fields.Boolean(
+        string="Apply max policy level",
+        default_model="credit.control.policy",
+        help="Apply max policy lavel for one partner in a credit control run execution "
+        "to have all credit control lines on same communication level",
+    )

@@ -116,6 +116,41 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
+    def test_generate_credit_lines_with_max_level(self):
+        """
+        Test the method generate_credit_lines with max level group.
+        For more than one invoice with date different due we need various credit control
+        runs.
+        """
+        self.policy.apply_max_policy_level = True
+
+        invoice1 = self.invoice.copy()
+        invoice1.invoice_date = "2024-12-01"
+        invoice1.invoice_date_due = "2024-12-01"
+        invoice1.action_post()
+
+        invoice2 = self.invoice.copy()
+        invoice2.invoice_date = "2025-01-01"
+        invoice2.invoice_date_due = "2025-01-01"
+        invoice2.action_post()
+
+        control_run = self.env["credit.control.run"].create(
+            {"date": "2024-12-30", "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        control_run.set_to_ready_lines()
+        # This module uses SQL queries to search records so we have to
+        # store previous control lines
+        self.env.cr.flush()
+
+        control_run = self.env["credit.control.run"].create(
+            {"date": "2025-01-30", "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        self.assertEqual(len(control_run.line_ids.mapped("level")), 3)
+        # All control lines have the level 2
+        self.assertEqual(set(control_run.line_ids.mapped("level")), {2})
+
     def test_multi_credit_control_run(self):
         """
         Generate several control run
