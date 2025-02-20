@@ -12,10 +12,7 @@
             name="context"
         >{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
         <field name="res_model">credit.control.line</field>
-        <field name="binding_model_id" ref="base.model_res_partner" />
-        <field name="binding_view_types">form</field>
-        <field name="target">new</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree,form,activity</field>
     </record>
 
     <record id="partner_view_buttons" model="ir.ui.view">

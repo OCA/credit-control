@@ -210,23 +210,16 @@
                 decoration-danger="state in ('error', 'email_error')"
                 decoration-muted="state == 'ignored'"
                 decoration-success="state == 'sent'"
+                open_form_view="True"
             >
-                <button
-                    name="button_credit_control_line_form"
-                    aria-label="Control Credit Line Form"
-                    title="Control Credit Line Form"
-                    type="object"
-                    icon="fa-external-link"
-                    class="oe_stat_button"
-                />
-                <field name="date" />
-                <field name="date_due" />
+                <field name="date" readonly="state != 'draft'" />
+                <field name="date_due" readonly="state != 'draft'" />
                 <field name="level" />
-                <field name="manually_overridden" />
+                <field name="manually_overridden" readonly="state != 'draft'" />
                 <field name="state" />
-                <field name="channel" />
+                <field name="channel" readonly="state != 'draft'" />
                 <field name="invoice_id" />
-                <field name="partner_id" />
+                <field name="partner_id" readonly="True" />
                 <field name="manual_followup" />
                 <field name="amount_due" widget="monetary" optional="hide" />
                 <field name="balance_due" widget="monetary" />
@@ -237,17 +230,13 @@
                 />
                 <field name="move_line_id" optional="hide" />
                 <field name="account_id" optional="hide" />
-                <field name="policy_level_id" />
-                <field name="policy_id" />
-                <field name="activity_date_deadline" />
-                <button
-                    name="button_schedule_activity"
-                    type="object"
-                    aria-label="Schedule activity"
-                    title="Schedule activity"
-                    icon="fa-clock-o"
+                <field
+                    name="policy_level_id"
+                    readonly="state != 'draft'"
+                    domain="[('policy_id', '=', policy_id)]"
                 />
-                <field name="activity_summary" />
+                <field name="policy_id" readonly="state != 'draft'" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
             </tree>
         </field>
     </record>
@@ -264,7 +253,7 @@
         <field name="res_model">credit.control.line</field>
         <field name="domain" />
         <field name="binding_view_types">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,activity</field>
         <field name="view_id" ref="credit_control_line_tree" />
         <field name="context">{'search_default_filter_draft': 1,
             'search_default_filter_to_be_sent': 1}

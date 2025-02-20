@@ -38,6 +38,14 @@
                                 </div>
                             </div>
                         </setting>
+                        <setting
+                            id="default_apply_max_policy_level"
+                            help="Apply max policy level for one partner in a credit
+                            control run execution to have all credit control lines on
+                            same communication level"
+                        >
+                            <field name="default_apply_max_policy_level" />
+                        </setting>
                     </block>
                 </t>
             </xpath>
