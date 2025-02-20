@@ -2,6 +2,8 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from collections import defaultdict
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -19,6 +21,7 @@ class CreditControlPolicy(models.Model):
         comodel_name="credit.control.policy.level",
         inverse_name="policy_id",
         string="Policy Levels",
+        copy=True,
     )
     do_nothing = fields.Boolean(
         help="For policies which should not generate lines or are obsolete"
@@ -32,6 +35,11 @@ class CreditControlPolicy(models.Model):
         help="This policy will be active only for the selected accounts",
     )
     active = fields.Boolean(default=True)
+    apply_max_policy_level = fields.Boolean(
+        string="Apply max policy level",
+        help="Apply max policy lavel for one partner in a credit control run execution "
+        "to have all credit control lines on same communication level",
+    )
 
     def _move_lines_domain(self, credit_control_run):
         """Build the default domain for searching move lines"""
@@ -185,7 +193,6 @@ class CreditControlPolicy(models.Model):
 
     def _generate_credit_lines(self, credit_control_run, default_lines_vals=None):
         self.ensure_one()
-        controlling_date = credit_control_run.date
         credit_line_model = self.env["credit.control.line"]
         lines = self._get_move_lines_to_process(credit_control_run)
         manual_lines = self._lines_different_policy(lines)
@@ -195,15 +202,28 @@ class CreditControlPolicy(models.Model):
             # policy levels are sorted by level
             # so iteration is in the correct order
             create = policy_lines_generated.create_or_update_from_mv_lines
+            partner_level_dic = {}
             for level in reversed(self.level_ids):
-                level_lines = level.get_level_lines(controlling_date, lines)
-                policy_lines_generated += create(
-                    level_lines,
-                    level,
-                    controlling_date,
-                    credit_control_run.company_id,
-                    default_lines_vals=default_lines_vals,
-                )
+                level_lines = level.get_level_lines(credit_control_run.date, lines)
+                if self.apply_max_policy_level:
+                    policy_lines_generated += (
+                        self._generate_policy_lines_with_max_level(
+                            credit_control_run,
+                            policy_lines_generated,
+                            partner_level_dic,
+                            level_lines,
+                            level,
+                            default_lines_vals,
+                        )
+                    )
+                else:
+                    policy_lines_generated += create(
+                        level_lines,
+                        level,
+                        credit_control_run.date,
+                        credit_control_run.company_id,
+                        default_lines_vals=default_lines_vals,
+                    )
         if policy_lines_generated:
             report = _(
                 'Policy "<b>%(name)s</b>" has generated <b>'
@@ -222,6 +242,32 @@ class CreditControlPolicy(models.Model):
                 % self.name
             )
         return (manual_lines, policy_lines_generated, report)
+
+    def _generate_policy_lines_with_max_level(
+        self,
+        credit_control_run,
+        policy_lines_generated,
+        partner_level_dic,
+        level_lines,
+        level,
+        default_lines_vals,
+    ):
+        AccountMoveLine = self.env["account.move.line"]
+        create = policy_lines_generated.create_or_update_from_mv_lines
+        level_dic = defaultdict(list)
+        for level_line in level_lines:
+            if level_line.partner_id.id not in partner_level_dic:
+                partner_level_dic[level_line.partner_id.id] = level
+            level_dic[partner_level_dic[level_line.partner_id.id]].append(level_line.id)
+        for level, line_ids in level_dic.items():
+            policy_lines_generated += create(
+                AccountMoveLine.browse(line_ids),
+                level,
+                credit_control_run.date,
+                credit_control_run.company_id,
+                default_lines_vals=default_lines_vals,
+            )
+        return policy_lines_generated
 
     @api.model
     def _name_search(self, name, domain=None, operator="ilike", limit=None, order=None):
