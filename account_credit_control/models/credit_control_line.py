@@ -269,27 +269,3 @@ class CreditControlLine(models.Model):
         if "manual_followup" in values:
             self.partner_id.write({"manual_followup": values.get("manual_followup")})
         return res
-
-    def button_schedule_activity(self):
-        ctx = self.env.context.copy()
-        ctx.update({"default_res_id": self.ids[0], "default_res_model": self._name})
-        return {
-            "type": "ir.actions.act_window",
-            "name": _("Schedule activity"),
-            "res_model": "mail.activity",
-            "binding_view_types": "form",
-            "view_mode": "form",
-            "res_id": self.activity_ids and self.activity_ids.ids[0] or False,
-            "views": [[False, "form"]],
-            "context": ctx,
-            "target": "new",
-        }
-
-    def button_credit_control_line_form(self):
-        self.ensure_one()
-        action = self.env.ref("account_credit_control.credit_control_line_action")
-        form = self.env.ref("account_credit_control.credit_control_line_form")
-        action = action.read()[0]
-        action["views"] = [(form.id, "form")]
-        action["res_id"] = self.id
-        return action
