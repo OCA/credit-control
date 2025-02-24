@@ -100,14 +100,34 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         """
         Test the method generate_credit_lines
         """
+        self.env = self.env(
+            context=dict(
+                self.env.context,
+                tracking_disable=False,
+                mail_create_nosubscribe=False,
+            )
+        )
         control_run = self.env["credit.control.run"].create(
             {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        extra_partner = self.env["res.partner"].create({"name": "Test extra partner"})
+        self.invoice.partner_id.message_subscribe(
+            partner_ids=extra_partner.ids,
+            subtype_ids=self.env.ref(
+                "account_credit_control.mt_credit_control_new"
+            ).ids,
         )
 
         control_run.with_context(lang="en_US").generate_credit_lines()
 
         self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
         self.assertEqual(control_run.state, "done")
+        self.assertIn(
+            extra_partner,
+            self.invoice.credit_control_line_ids.message_follower_ids.mapped(
+                "partner_id"
+            ),
+        )
 
         report_regex = (
             r'<p>Policy "<b>%s</b>" has generated <b>'

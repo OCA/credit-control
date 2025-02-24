@@ -138,6 +138,26 @@ class CreditControlLine(models.Model):
         for line in self:
             line.partner_user_id = line.partner_id.user_id
 
+    def _message_auto_subscribe_followers(self, updated_values, default_subtype_ids):
+        """Intercept this method so that any change (create/write) auto-defines
+        the extra subscribers.
+        """
+        res = super()._message_auto_subscribe_followers(
+            updated_values=updated_values, default_subtype_ids=default_subtype_ids
+        )
+        if "partner_id" in list(updated_values.keys()):
+            credit_control_new_subtype = self.env.ref(
+                "account_credit_control.mt_credit_control_new"
+            )
+            for item in self:
+                partners = item.partner_id | item.partner_id.commercial_partner_id
+                partner_ids = partners.message_follower_ids.filtered(
+                    lambda x: credit_control_new_subtype in x.subtype_ids
+                ).partner_id
+                for partner in partner_ids:
+                    res += [(partner.id, default_subtype_ids, False)]
+        return res
+
     @api.model
     def _prepare_from_move_line(
         self, move_line, level, controlling_date, open_amount, default_lines_vals

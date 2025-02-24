@@ -214,6 +214,28 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
+#: model:ir.model.fields,help:account_credit_control.field_res_config_settings__default_apply_max_policy_level
+msgid ""
+"Apply max policy lavel for one partner in a credit control run execution to "
+"have all credit control lines on same communication level"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__apply_max_policy_level
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__default_apply_max_policy_level
+msgid "Apply max policy level"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid ""
+"Apply max policy level for one partner in a "
+"credit                             control run execution to have all credit "
+"control lines on                             same communication level"
+msgstr ""
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_partner_payment_action_type_form_view
 msgid "Archived"
@@ -362,11 +384,6 @@ msgstr ""
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #, python-format
 msgid "Control Credit Line"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
-msgid "Control Credit Line Form"
 msgstr ""
 
 #. module: account_credit_control
@@ -519,6 +536,7 @@ msgid "Credit Tolerance Limit"
 msgstr ""
 
 #. module: account_credit_control
+#: model:mail.message.subtype,name:account_credit_control.mt_credit_control_new
 #: model:mail.message.subtype,name:account_credit_control.mt_request
 msgid "Credit control"
 msgstr ""
@@ -1562,14 +1580,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Salesperson"
-msgstr ""
-
-#. module: account_credit_control
-#. odoo-python
-#: code:addons/account_credit_control/models/credit_control_line.py:0
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
-#, python-format
-msgid "Schedule activity"
 msgstr ""
 
 #. module: account_credit_control
