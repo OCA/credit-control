@@ -223,4 +223,9 @@ Best regards
         <field name="hidden" eval="False" />
         <field name="internal" eval="False" />
     </record>
+    <record id="mt_credit_control_new" model="mail.message.subtype">
+        <field name="name">Credit control</field>
+        <field name="res_model">res.partner</field>
+        <field name="default" eval="False" />
+    </record>
 </odoo>

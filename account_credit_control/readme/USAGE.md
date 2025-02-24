@@ -21,3 +21,6 @@ emails or letters for all linked lines.
 
 Then, use the *Communications* smart button to see all email
 communication processes that have been created and follow them.
+
+The 'Credit Control' followers of the linked partner will be automatically
+added as followers to the credit control lines.
