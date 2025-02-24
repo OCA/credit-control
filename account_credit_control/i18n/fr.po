@@ -244,6 +244,28 @@ msgid "An error has occured during the sending of the email."
 msgstr "Erreur lors de la génération des mails."
 
 #. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
+#: model:ir.model.fields,help:account_credit_control.field_res_config_settings__default_apply_max_policy_level
+msgid ""
+"Apply max policy lavel for one partner in a credit control run execution to "
+"have all credit control lines on same communication level"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__apply_max_policy_level
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__default_apply_max_policy_level
+msgid "Apply max policy level"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid ""
+"Apply max policy level for one partner in a "
+"credit                             control run execution to have all credit "
+"control lines on                             same communication level"
+msgstr ""
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_partner_payment_action_type_form_view
 msgid "Archived"
@@ -400,11 +422,6 @@ msgid "Control Credit Line"
 msgstr "Lignes de relance"
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
-msgid "Control Credit Line Form"
-msgstr "Formulaire des lignes de relance"
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_form
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Control Credit Lines"
@@ -551,6 +568,7 @@ msgid "Credit Tolerance Limit"
 msgstr "Tolérance de la limite de crédit"
 
 #. module: account_credit_control
+#: model:mail.message.subtype,name:account_credit_control.mt_credit_control_new
 #: model:mail.message.subtype,name:account_credit_control.mt_request
 msgid "Credit control"
 msgstr "Rappel de paiement"
@@ -1624,14 +1642,6 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#. odoo-python
-#: code:addons/account_credit_control/models/credit_control_line.py:0
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
-#, python-format
-msgid "Schedule activity"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
@@ -1894,6 +1904,9 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "Lettre de relance"
+
+#~ msgid "Control Credit Line Form"
+#~ msgstr "Formulaire des lignes de relance"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Dernière Modification le"
