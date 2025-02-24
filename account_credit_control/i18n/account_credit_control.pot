@@ -505,6 +505,7 @@ msgid "Credit Tolerance Limit"
 msgstr ""
 
 #. module: account_credit_control
+#: model:mail.message.subtype,name:account_credit_control.mt_credit_control_new
 #: model:mail.message.subtype,name:account_credit_control.mt_request
 msgid "Credit control"
 msgstr ""
