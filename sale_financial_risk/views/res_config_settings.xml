@@ -21,6 +21,15 @@
                         Include locked sale orders into risk calculation
                     </div>
                 </setting>
+                <setting
+                    id="allow_overrisk_sale_confirmation"
+                    string="Include orders in confirm state"
+                >
+                    <field name="allow_overrisk_sale_confirmation" />
+                    <div class="text-muted">
+                        Always allow the confirmation of sale orders.
+                    </div>
+                </setting>
             </xpath>
         </field>
     </record>
