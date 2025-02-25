@@ -9,3 +9,6 @@ class ResConfigSettings(models.TransientModel):
         "Include locked sale orders into risk calculation",
         config_parameter="sale_financial_risk.include_risk_sale_order_done",
     )
+    allow_overrisk_sale_confirmation = fields.Boolean(
+        related="company_id.allow_overrisk_sale_confirmation", readonly=False
+    )

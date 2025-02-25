@@ -39,7 +39,9 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         if not self.env.context.get("bypass_risk", False):
-            for order in self:
+            for order in self.filtered(
+                lambda so: not so.company_id.allow_overrisk_sale_confirmation
+            ):
                 partner = order.partner_invoice_id.commercial_partner_id
                 exception_msg = order.evaluate_risk_message(partner)
                 if exception_msg:
