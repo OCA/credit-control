@@ -14,7 +14,7 @@
   * Jairo Llopis
   * João Marques
   * César A. Sánchez
-  * Víctor Martínez
+  * Víctor Martínezz
 
 * Enric Tobella <etobella@creublanca.es>
 * Naglis Jonaitis (Versada UAB) <naglis@versada.eu>
