@@ -194,7 +194,10 @@ class CreditControlCommunication(models.Model):
         table_content = "<br/><h3>%s</h3>" % _("Invoices summary")
         table_content += "<table style='%s'><tr>%s</tr>" % (table_style, tr_content)
         for line in self.credit_control_line_ids:
-            tr_content = "<td style='%s'>%s</td>" % (th_style, line.invoice_id.name)
+            name = line.invoice_id.name
+            if line.move_line_id.ref and line.move_line_id.ref != name:
+                name += f" ({line.move_line_id.ref})"
+            tr_content = "<td style='%s'>%s</td>" % (th_style, name)
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
                 line.invoice_id.payment_reference or "",

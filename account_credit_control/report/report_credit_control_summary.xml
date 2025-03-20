@@ -40,6 +40,11 @@
                             <t t-if="l.invoice_id">
                                 <td>
                                     <span t-field="l.invoice_id.name" />
+                                    <t
+                                        t-if="l.move_line_id.ref and l.move_line_id.ref!=l.invoice_id.name"
+                                    >
+                                        (<span t-field="l.move_line_id.ref" />)
+                                    </t>
                                 </td>
                             </t>
                             <t t-if="not l.invoice_id">
