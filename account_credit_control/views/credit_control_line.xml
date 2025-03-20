@@ -23,6 +23,7 @@
                         </group>
                         <group>
                             <field name="date" readonly="state != 'draft'" />
+                            <field name="date_entry" />
                             <field name="date_due" readonly="state != 'draft'" />
                             <field name="channel" readonly="state != 'draft'" />
                             <field name="date_sent" readonly="state != 'draft'" />
@@ -213,6 +214,7 @@
                 open_form_view="True"
             >
                 <field name="date" readonly="state != 'draft'" />
+                <field name="date_entry" />
                 <field name="date_due" readonly="state != 'draft'" />
                 <field name="level" />
                 <field name="manually_overridden" readonly="state != 'draft'" />
