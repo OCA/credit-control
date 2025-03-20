@@ -201,7 +201,7 @@ class CreditControlCommunication(models.Model):
             )
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
-                format_date(self.env, line.invoice_id.invoice_date),
+                format_date(self.env, line.date_entry),
             )
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
@@ -209,11 +209,11 @@ class CreditControlCommunication(models.Model):
             )
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
-                format_amount(self.env, line.invoice_id.amount_total, line.currency_id),
+                format_amount(self.env, line.amount_due, line.currency_id),
             )
             tr_content += "<td style='%s'>%s</td>" % (
                 th_style,
-                format_amount(self.env, line.amount_due, line.currency_id),
+                format_amount(self.env, line.balance_due, line.currency_id),
             )
             table_content += "<tr>%s</tr>" % tr_content
         table_content += "</table>"
