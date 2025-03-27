@@ -12,7 +12,7 @@
                 <page
                     name="financial_risk"
                     string="Financial Risk"
-                    invisible="not is_company and not parent_id"
+                    invisible="not is_company and parent_id"
                     groups="account_financial_risk.group_account_financial_risk_user"
                 >
                     <group name="risk_general">
