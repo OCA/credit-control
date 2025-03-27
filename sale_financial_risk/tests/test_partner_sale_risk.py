@@ -134,16 +134,28 @@ class TestPartnerSaleRisk(BaseCommon):
         self.assertTrue(self.partner.risk_exception)
         # If we create and validate an invoice from the sale order then the
         # amount to be invoiced must be 0 and risk_exception must be False
-        inv_wiz = (
+        # Using down payment plus normal invoice to test both options
+        context = {"active_ids": [self.sale_order.id]}
+        downpayment = (
             self.env["sale.advance.payment.inv"]
-            .with_context(**{"active_ids": [self.sale_order.id]})
-            .create({})
+            .with_context(**context)
+            .create(
+                {
+                    "advance_payment_method": "fixed",
+                    "fixed_amount": 50,
+                }
+            )
         )
-        inv_wiz.create_invoices()
+        downpayment.create_invoices()
+        payment = (
+            self.env["sale.advance.payment.inv"].with_context(**context).create({})
+        )
+        payment.create_invoices()
+
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 115.0)
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
-        invoice = self.sale_order.invoice_ids
-        invoice.with_context(bypass_risk=True).action_post()
+        invoices = self.sale_order.invoice_ids
+        invoices.with_context(bypass_risk=True).action_post()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0)
         self.assertAlmostEqual(self.partner.risk_invoice_draft, 0.0)
         self.assertAlmostEqual(self.partner.risk_invoice_open, 115.0)
@@ -158,7 +170,7 @@ class TestPartnerSaleRisk(BaseCommon):
             ]
         )
         ref_wiz_obj = self.env["account.move.reversal"].with_context(
-            active_model="account.move", active_ids=[invoice.id]
+            active_model="account.move", active_ids=invoices.ids
         )
         ref_wiz = ref_wiz_obj.create({"reason": "testing", "journal_id": journal.id})
         res = ref_wiz.reverse_moves()
@@ -166,8 +178,8 @@ class TestPartnerSaleRisk(BaseCommon):
         self.assertAlmostEqual(self.partner.risk_sale_order, 115)
         # The way to re-invoice a sale order is creating a refund with
         # modify option and cancel or remove draft invoice
-        modify_invoice = invoice.browse(res["res_id"])
-        modify_invoice.unlink()
+        modify_invoices = invoices.browse(res["domain"][0][2])
+        modify_invoices.unlink()
         self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
         line = self.sale_order.order_line[:1]
         line.product_uom_qty = 0.0
