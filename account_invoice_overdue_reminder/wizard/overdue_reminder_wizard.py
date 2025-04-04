@@ -577,6 +577,15 @@ class OverdueReminderStep(models.TransientModel):
             {
                 "subject": self.mail_subject,
                 "body_html": self.mail_body,
+                # the body field is normally set automatically in
+                # mail.template.generate_email() when "body_html" is in the
+                # provided list of fields, but here, body_html is computed in
+                # ._compute_counter_and_mail() by calling
+                # mail.template._render_template() directly. because of this,
+                # it must be set here, otherwise the body of the mail.message
+                # would be empty (although the body of the sent mail.mail
+                # would not).
+                "body": tools.html_sanitize(self.mail_body),
                 "email_cc": ", ".join(cc_list),
                 "model": "res.partner",
                 "res_id": self.commercial_partner_id.id,
