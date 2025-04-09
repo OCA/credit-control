@@ -4,7 +4,7 @@
     "name": "Account credit control attach invoices",
     "summary": """Extend account credit control to print credit
         control summary with invoices""",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "category": "Finance",
     "website": "https://github.com/OCA/credit-control",
