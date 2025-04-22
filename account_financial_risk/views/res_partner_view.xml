@@ -21,7 +21,7 @@
                                 col="3"
                                 class="oe_subtotal_footer"
                                 string="General Limits"
-                                style="float: left !important;"
+                                style="float: left !important; border-top: none;"
                             >
                                 <field
                                     name="risk_invoice_draft_include"
@@ -30,7 +30,7 @@
                                 <button
                                     name="open_risk_pivot_info"
                                     type="object"
-                                    class="btn-link"
+                                    class="btn-link pt-0"
                                     context="{'open_risk_field': 'risk_invoice_draft'}"
                                 >
                                     <field
@@ -47,7 +47,7 @@
                                 <button
                                     name="open_risk_pivot_info"
                                     type="object"
-                                    class="btn-link"
+                                    class="btn-link pt-0"
                                     context="{'open_risk_field': 'risk_invoice_open'}"
                                 >
                                     <field
@@ -64,7 +64,7 @@
                                 <button
                                     name="open_risk_pivot_info"
                                     type="object"
-                                    class="btn-link"
+                                    class="btn-link pt-0"
                                     context="{'open_risk_field': 'risk_invoice_unpaid'}"
                                 >
                                     <field
@@ -81,7 +81,7 @@
                                 <button
                                     name="open_risk_pivot_info"
                                     type="object"
-                                    class="btn-link"
+                                    class="btn-link pt-0"
                                     context="{'open_risk_field': 'risk_account_amount'}"
                                 >
                                     <field
@@ -98,7 +98,7 @@
                                 <button
                                     name="open_risk_pivot_info"
                                     type="object"
-                                    class="btn-link"
+                                    class="btn-link pt-0"
                                     context="{'open_risk_field': 'risk_account_amount_unpaid'}"
                                 >
                                     <field
@@ -139,14 +139,11 @@
                                 />
                             </group>
                         </group>
-                        <group
-                            string="Specific Limits"
-                            name="risk_limits"
-                            class="o_group_col_6"
-                        >
+                        <group name="risk_limits" class="o_group_col_6">
                             <group
                                 class="oe_subtotal_footer"
-                                style="float: left !important;"
+                                string="Specific Limits"
+                                style="float: left !important; border-top: none; "
                             >
                                 <field
                                     name="risk_invoice_draft_limit"
@@ -184,8 +181,8 @@
                     </group>
                     <group string="Info">
                         <group>
-                            <div class="oe_inline" colspan="2">
-                                <label class="oe_inline" for="credit_currency" />
+                            <label class="o_label" for="credit_currency" />
+                            <div class="oe_inline">
                                 <field
                                     class="oe_inline"
                                     name="credit_currency"
