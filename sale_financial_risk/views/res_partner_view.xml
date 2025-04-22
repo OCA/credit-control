@@ -12,7 +12,7 @@
                 <button
                     name="open_risk_pivot_info"
                     type="object"
-                    class="btn-link"
+                    class="btn-link pt-0"
                     context="{'open_risk_field': 'risk_sale_order'}"
                 >
                     <field
