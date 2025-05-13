@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -48,14 +48,11 @@ class AccountInvoiceOverdueReminder(models.Model):
     @api.constrains("invoice_id")
     def invoice_id_check(self):
         for action in self:
-            if action.invoice_id and action.invoice_id.move_type not in [
-                "out_invoice",
-                "out_refund",
-            ]:
+            if action.invoice_id and action.invoice_id.move_type != "out_invoice":
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "An overdue reminder can only be attached "
-                        "to a customer invoice or credit note"
+                        "to a customer invoice"
                     )
                 )
 
@@ -63,7 +60,7 @@ class AccountInvoiceOverdueReminder(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = _("%(invoice_name)s Reminder %(counter)d") % (
+            name = self.env._("%(invoice_name)s Reminder %(counter)d") % (
                 {"invoice_name": rec.invoice_id.name, "counter": rec.counter}
             )
             res.append((rec.id, name))

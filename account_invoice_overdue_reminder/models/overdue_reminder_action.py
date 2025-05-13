@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class OverdueReminderAction(models.Model):
@@ -54,9 +54,9 @@ class OverdueReminderAction(models.Model):
     @api.model
     def _reminder_type_selection(self):
         return [
-            ("mail", _("E-mail")),
-            ("phone", _("Phone")),
-            ("post", _("Letter")),
+            ("mail", self.env._("E-mail")),
+            ("phone", self.env._("Phone")),
+            ("post", self.env._("Letter")),
         ]
 
     @api.depends("reminder_ids")
@@ -74,7 +74,7 @@ class OverdueReminderAction(models.Model):
     def name_get(self):
         res = []
         for action in self:
-            name = _("%(partner_name)s, Reminder %(date)s") % (
+            name = self.env._("%(partner_name)s, Reminder %(date)s") % (
                 {
                     "partner_name": action.commercial_partner_id.display_name,
                     "date": action.date,
