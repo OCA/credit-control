@@ -24,9 +24,9 @@ addon | version | maintainers | summary
 [account_credit_control](account_credit_control/) | 12.0.3.0.5 |  | Account Credit Control
 [account_credit_control_queue_job](account_credit_control_queue_job/) | 12.0.2.0.0 |  | This addon adds the opportunity to run some credit control tasks in jobs
 [account_financial_risk](account_financial_risk/) | 12.0.3.1.0 |  | Manage customer risk
-[account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 12.0.2.2.2 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Simple mail/letter/phone overdue customer invoice reminder
-[account_invoice_overdue_warn](account_invoice_overdue_warn/) | 12.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Show warning on customer form view if it has overdue invoices
-[account_invoice_overdue_warn_sale](account_invoice_overdue_warn_sale/) | 12.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Show overdue warning on sale order form view
+[account_invoice_overdue_reminder](account_invoice_overdue_reminder/) | 12.0.2.2.2 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Simple mail/letter/phone overdue customer invoice reminder
+[account_invoice_overdue_warn](account_invoice_overdue_warn/) | 12.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Show warning on customer form view if it has overdue invoices
+[account_invoice_overdue_warn_sale](account_invoice_overdue_warn_sale/) | 12.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Show overdue warning on sale order form view
 [account_payment_return_financial_risk](account_payment_return_financial_risk/) | 12.0.2.0.1 |  | Partner Payment Return Risk
 [partner_risk_insurance](partner_risk_insurance/) | 12.0.1.0.1 |  | Risk insurance partner information
 [sale_financial_risk](sale_financial_risk/) | 12.0.2.1.3 |  | Manage partner risk in sales orders
