@@ -91,17 +91,15 @@ msgstr "60 giorni da ultimo promemoria"
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
 msgid ""
-"<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
-"  <br>\n"
-"  <br>\n"
-"  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></p>\n"
+"<p>Dear <t t-out=\"object.contact_address_id.name or '' \"/>,</p>\n"
+"            <br/>\n"
+"            <br/>\n"
+"            <p>\n"
+"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/"
+">\n"
+"            </p>\n"
 "        "
 msgstr ""
-"<p>Spettabile <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
-"  <br>\n"
-"  <br>\n"
-"  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></p>\n"
-"        "
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -146,7 +144,6 @@ msgstr "Riga controllo di credito"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid ""
 "A credit control line more recent than %(controlling_date)s exists at "
 "%(lines_date)s"
@@ -162,7 +159,6 @@ msgstr "Livello del controllo credito"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
 msgstr ""
@@ -171,7 +167,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid "A run has already been executed more recently (%s)"
 msgstr "Un'esecuzione è già stata elaborata più di recente (%s)"
 
@@ -232,7 +227,6 @@ msgstr "Permette il cambio manuale del livello del controllo del credito"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
-#, python-format
 msgid "Amount Due"
 msgstr "Importo dovuto"
 
@@ -306,7 +300,6 @@ msgstr "Cordiali saluti"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
-#, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
 "Impossibile ottenere la funzione per la modalità di calcolo: %s non è "
@@ -421,15 +414,8 @@ msgstr "Comunicazioni controllo credito"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
-#, python-format
 msgid "Control Credit Line"
 msgstr "Riga controllo credito"
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_form
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Control Credit Lines"
-msgstr "Righe controllo credito"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__date
@@ -521,7 +507,6 @@ msgstr "Politica controllo credito"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_account_bank_statement_line__credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_account_move__credit_policy_id
-#: model:ir.model.fields,field_description:account_credit_control.field_account_payment__credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company__credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_policy_id
@@ -561,7 +546,6 @@ msgstr "Controllo credito: ({{object.policy_level_id.name or 'n/a'}})"
 #: model:ir.model.fields,field_description:account_credit_control.field_account_account__credit_control_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_account_bank_statement_line__credit_control_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_account_move__credit_control_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_account_payment__credit_control_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__credit_control_line_ids
 msgid "Credit Lines"
 msgstr "Riga credito"
@@ -592,16 +576,6 @@ msgstr "Generatore riga controllo credito"
 #: model:mail.message.subtype,description:account_credit_control.mt_request
 msgid "Credit control notification"
 msgstr "Notifica controllo credito"
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
-msgid "Credit control policy"
-msgstr "Politica controllo credito"
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-msgid "Credit control run"
-msgstr "Esecuzione controllo credito"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
@@ -750,7 +724,6 @@ msgstr "Saldo dovuto"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_due
-#, python-format
 msgid "Due date"
 msgstr "Scadenza"
 
@@ -823,7 +796,6 @@ msgstr "Per politiche che non dovrebbero generare righe o sono obsolete"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:0
-#, python-format
 msgid "Generated communications"
 msgstr "Comunicazioni generate"
 
@@ -942,7 +914,6 @@ msgstr "Fattura"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
-#, python-format
 msgid "Invoice amount"
 msgstr "Valore fattura"
 
@@ -950,7 +921,6 @@ msgstr "Valore fattura"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
-#, python-format
 msgid "Invoice date"
 msgstr "Data fattura"
 
@@ -958,7 +928,6 @@ msgstr "Data fattura"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
-#, python-format
 msgid "Invoice number"
 msgstr "Numero fattura"
 
@@ -970,7 +939,6 @@ msgstr "Importo fatturato"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
-#, python-format
 msgid "Invoices summary"
 msgstr "Riepilogo fatture"
 
@@ -1161,11 +1129,6 @@ msgid "Max Level"
 msgstr "Livello massimo"
 
 #. module: account_credit_control
-#: model:ir.model,name:account_credit_control.model_mail_message
-msgid "Message"
-msgstr "Messaggio"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_error
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_error
 msgid "Message Delivery error"
@@ -1256,7 +1219,6 @@ msgstr "Tipo prossima attività"
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:0
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:0
-#, python-format
 msgid "No credit control lines selected."
 msgstr "Nessuna riga controllo credito selezionata."
 
@@ -1273,7 +1235,6 @@ msgstr "Politica nessun richiamo"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
-#, python-format
 msgid "No lines will be changed. All the selected lines are already done."
 msgstr ""
 "Nessuna riga verrà modificata. Tutte le righe selezionate sono già evase."
@@ -1281,7 +1242,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid "Notifications"
 msgstr "Notifiche"
 
@@ -1540,7 +1500,6 @@ msgstr "Nota pagamento"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
-#, python-format
 msgid "Payment Reference"
 msgstr "Riferimento pagamento"
 
@@ -1553,14 +1512,12 @@ msgstr "Telefono"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid "Please select a policy"
 msgstr "Selezionare una politica"
 
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:0
-#, python-format
 msgid "Please use wizard on customer invoices"
 msgstr "Usare la procedura guidata nelle fatture cliente"
 
@@ -1579,7 +1536,6 @@ msgstr "Politica"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
-#, python-format
 msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
@@ -1590,7 +1546,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
-#, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
 "La politica \"<b>%s</b>\" non ha generato nessuna riga controllo credito.<br/"
@@ -1600,12 +1555,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__level_ids
 msgid "Policy Levels"
 msgstr "Livelli politica"
-
-#. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
-msgid "Policy level"
-msgstr "Livello politica"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
@@ -1803,7 +1752,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_bank_statement_line__credit_policy_id
 #: model:ir.model.fields,help:account_credit_control.field_account_move__credit_policy_id
-#: model:ir.model.fields,help:account_credit_control.field_account_payment__credit_policy_id
 msgid ""
 "The Credit Control Policy used for this invoice. If nothing is defined, it "
 "will use the account setting or the partner setting."
@@ -1837,7 +1785,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
-#, python-format
 msgid "The emails will be sent in the background"
 msgstr "Questa e-mail verrà spedita in background"
 
@@ -1856,7 +1803,6 @@ msgstr "Il partner ha effettuato una valutazione manuale."
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
-#, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Il livello inferiore non può essere del tipo Promemoria precedente"
 
@@ -1931,7 +1877,6 @@ msgstr "Cronologia comunicazioni sito web"
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_line.py:0
-#, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
 "state."
@@ -1942,7 +1887,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
-#, python-format
 msgid ""
 "You can only use a policy set on account %(account_name)s.\n"
 "Please choose one of the following policies:\n"
@@ -1955,7 +1899,6 @@ msgstr ""
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/account_move.py:0
-#, python-format
 msgid ""
 "You cannot cancel this invoice.\n"
 "A payment reminder has already been sent to the customer.\n"
@@ -1969,6 +1912,37 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicazione controllo credito"
+
+#~ msgid ""
+#~ "<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
+#~ "  <br>\n"
+#~ "  <br>\n"
+#~ "  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></"
+#~ "p>\n"
+#~ "        "
+#~ msgstr ""
+#~ "<p>Spettabile <t t-out=\"object.contact_address_id.name or '' \"></t>,</"
+#~ "p>\n"
+#~ "  <br>\n"
+#~ "  <br>\n"
+#~ "  <p><t t-out=\"object.policy_level_id.custom_mail_text or '' \"></t></"
+#~ "p>\n"
+#~ "        "
+
+#~ msgid "Control Credit Lines"
+#~ msgstr "Righe controllo credito"
+
+#~ msgid "Credit control policy"
+#~ msgstr "Politica controllo credito"
+
+#~ msgid "Credit control run"
+#~ msgstr "Esecuzione controllo credito"
+
+#~ msgid "Message"
+#~ msgstr "Messaggio"
+
+#~ msgid "Policy level"
+#~ msgstr "Livello politica"
 
 #~ msgid "Control Credit Line Form"
 #~ msgstr "Maschera riga controllo credito"
