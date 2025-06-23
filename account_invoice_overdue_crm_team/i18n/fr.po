@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_overdue_crm_team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-23 13:44+0000\n"
+"PO-Revision-Date: 2025-06-23 13:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_overdue_crm_team
+#: model:ir.model.fields,field_description:account_invoice_overdue_crm_team.field_overdue_reminder_start__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_invoice_overdue_crm_team
+#: model:ir.model.fields,field_description:account_invoice_overdue_crm_team.field_overdue_reminder_start__id
+msgid "ID"
+msgstr ""
+
+#. module: account_invoice_overdue_crm_team
+#: model:ir.model.fields,field_description:account_invoice_overdue_crm_team.field_overdue_reminder_start____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_invoice_overdue_crm_team
+#: model:ir.model.fields,field_description:account_invoice_overdue_crm_team.field_overdue_reminder_start__team_id
+msgid "Team"
+msgstr "Equipe commerciale"
+
+#. module: account_invoice_overdue_crm_team
+#: model:ir.model,name:account_invoice_overdue_crm_team.model_overdue_reminder_start
+msgid "Wizard to reminder overdue customer invoice"
+msgstr ""
