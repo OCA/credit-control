@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="overdue_reminder_start_form" model="ir.ui.view">
+        <field name="name">overdue.reminder.start.form</field>
+        <field name="model">overdue.reminder.start</field>
+        <field
+            name="inherit_id"
+            ref="account_invoice_overdue_reminder.overdue_reminder_start_form"
+        />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="before">
+                <field name="team_id" />
+            </field>
+            <field name="user_ids" position="attributes">
+                <attribute name="domain">[('sale_team_id', '=', team_id)]</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
