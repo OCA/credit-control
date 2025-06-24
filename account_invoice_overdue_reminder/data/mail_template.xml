@@ -5,7 +5,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo noupdate="1">
-
     <record id="overdue_invoice_reminder_mail_template" model="mail.template">
         <field name="name">Overdue Invoice Reminder</field>
         <field
@@ -79,9 +78,11 @@
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.ref or ''" />
                             </td>
-                            <td style="padding: 5px; border: 1px solid black;"><t
+                            <td style="padding: 5px; border: 1px solid black;">
+                                <t
                                     t-out="dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]"
-                                /></td>
+                                />
+                            </td>
                             <td
                                 style="padding: 5px; border: 1px solid black; text-align: right;"
                             >
@@ -159,9 +160,7 @@
                         <t t-out="user.signature or ''" />
                     </p>
                 </t>
-
             </div>
         </field>
     </record>
-
 </odoo>

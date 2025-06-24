@@ -5,7 +5,6 @@
   The licence is in the file __manifest__.py
 -->
 <odoo>
-
     <record id="overdue_reminder_step_report" model="ir.actions.report">
         <field name="name">Overdue Letter</field>
         <field name="model">overdue.reminder.step</field>
@@ -18,5 +17,4 @@
         >account_invoice_overdue_reminder.report_overdue_reminder</field>
         <field name="print_report_name">(object._get_report_base_filename())</field>
     </record>
-
 </odoo>
