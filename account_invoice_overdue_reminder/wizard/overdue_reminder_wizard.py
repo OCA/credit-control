@@ -540,7 +540,7 @@ class OverdueReminderStep(models.TransientModel):
             report_bin, report_format = iaro._render(
                 "account.report_invoice_with_payments", [inv.id]
             )
-            filename = "{}.{}".format(inv._get_report_base_filename(), report_format)
+            filename = f"{inv._get_report_base_filename()}.{report_format}"
             attach = iao.create(
                 {
                     "name": filename,
