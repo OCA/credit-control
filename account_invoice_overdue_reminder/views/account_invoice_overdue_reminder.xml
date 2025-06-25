@@ -11,10 +11,7 @@
         <field name="arch" type="xml">
             <form>
                 <group name="main">
-                    <field
-                        name="counter"
-                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
-                    />
+                    <field name="counter" invisible="action_reminder_type == 'phone'" />
                     <field
                         name="action_commercial_partner_id"
                         invisible="not context.get('overdue_reminder_main_view')"
@@ -29,15 +26,15 @@
                     <field name="action_reminder_type" />
                     <field
                         name="action_mail_id"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        invisible="action_reminder_type != 'mail'"
                     />
                     <field
                         name="action_mail_cc"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        invisible="action_reminder_type != 'mail'"
                     />
                     <field
                         name="action_mail_state"
-                        attrs="{'invisible': [('action_reminder_type', '!=', 'mail')]}"
+                        invisible="action_reminder_type != 'mail'"
                     />
                 </group>
                 <group string="Info/Result" name="result">
@@ -57,34 +54,32 @@
                 <group name="main">
                     <field name="invoice_id" />
                     <field name="action_reminder_type" invisible="1" />
-                    <field
-                        name="counter"
-                        attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
-                    />
+                    <field name="counter" invisible="action_reminder_type == 'phone'" />
                 </group>
             </form>
         </field>
     </record>
 
     <record id="account_invoice_overdue_reminder_tree" model="ir.ui.view">
-        <field name="name">account.invoice.overdue.reminder.tree</field>
+        <field name="name">account.invoice.overdue.reminder.list</field>
         <field name="model">account.invoice.overdue.reminder</field>
         <field name="arch" type="xml">
-            <tree>
-                <field
-                    name="counter"
-                    attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
-                />
+            <list>
+                <field name="counter" invisible="action_reminder_type == 'phone'" />
                 <field name="action_date" />
                 <field
                     name="action_partner_id"
-                    invisible="not context.get('overdue_reminder_main_view')"
+                    column_invisible="not context.get('overdue_reminder_main_view')"
                 />
                 <field
                     name="invoice_id"
-                    invisible="not context.get('overdue_reminder_main_view')"
+                    column_invisible="not context.get('overdue_reminder_main_view')"
                 />
-                <field name="action_user_id" widget="many2one_avatar_user" />
+                <field
+                    name="action_user_id"
+                    widget="many2one_avatar_user"
+                    optional="show"
+                />
                 <field
                     name="action_reminder_type"
                     widget="badge"
@@ -92,21 +87,26 @@
                     decoration-success="action_reminder_type == 'mail'"
                     decoration-danger="action_reminder_type == 'post'"
                 />
+                <field
+                    name="action_mail_state"
+                    invisible="action_reminder_type != 'mail'"
+                    optional="hide"
+                />
                 <field name="action_result_id" />
-                <field name="action_result_notes" />
-            </tree>
+                <field name="action_result_notes" optional="show" />
+            </list>
         </field>
     </record>
 
     <record id="account_invoice_overdue_reminder_norelated_tree" model="ir.ui.view">
-        <field name="name">account.invoice.overdue.reminder.norelated.tree</field>
+        <field name="name">account.invoice.overdue.reminder.norelated.list</field>
         <field name="model">account.invoice.overdue.reminder</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="invoice_id" />
                 <field name="counter" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -163,7 +163,7 @@
     <record id="account_invoice_overdue_reminder_action" model="ir.actions.act_window">
         <field name="name">Invoice Reminder Counters</field>
         <field name="res_model">account.invoice.overdue.reminder</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'overdue_reminder_main_view': True}</field>
     </record>
 </odoo>
