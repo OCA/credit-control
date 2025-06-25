@@ -12,10 +12,13 @@ class ResCompany(models.Model):
         string="Attach Invoices to Overdue Reminder E-mails", default=True
     )
     overdue_reminder_start_days = fields.Integer(
-        string="Default Overdue Reminder Trigger Delay (days)"
+        string="Default Overdue Reminder Trigger Delay",
+        help="Default overdue reminder trigger delay in days",
     )
     overdue_reminder_min_interval_days = fields.Integer(
-        string="Default Overdue Reminder Minimum Interval (days)", default=5
+        string="Default Overdue Reminder Minimum Interval",
+        default=5,
+        help="Default overdue reminder minimum interval in days",
     )
     overdue_reminder_interface = fields.Selection(
         "_overdue_reminder_interface_selection",

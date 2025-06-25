@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.tools.misc import format_date
 
 
 class OverdueReminderAction(models.Model):
@@ -71,14 +72,12 @@ class OverdueReminderAction(models.Model):
             rec.reminder_count = mapped_data.get(rec.id, 0)
 
     @api.depends("commercial_partner_id", "date")
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for action in self:
             name = _("%(partner_name)s, Reminder %(date)s") % (
                 {
                     "partner_name": action.commercial_partner_id.display_name,
-                    "date": action.date,
+                    "date": format_date(self.env, action.date),
                 }
             )
-            res.append((action.id, name))
-        return res
+            action.display_name = name

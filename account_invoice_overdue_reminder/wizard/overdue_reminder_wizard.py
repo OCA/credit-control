@@ -567,9 +567,10 @@ class OverdueReminderStep(models.TransientModel):
     def generate_mail_vals(self):
         self.ensure_one()
         xmlid = self._get_overdue_invoice_reminder_template()
-        mvals = self.env.ref(xmlid).generate_email(
-            self.id, ["email_from", "email_to", "partner_to", "reply_to"]
+        res_mail_tmpl = self.env.ref(xmlid)._generate_template(
+            [self.id], ["email_from", "email_to", "partner_to", "reply_to"]
         )
+        mvals = res_mail_tmpl[self.id]
         cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
         if mvals.get("email_cc"):
             cc_list.append(mvals["email_cc"])
@@ -655,7 +656,8 @@ class OverdueReminderStep(models.TransientModel):
 
     def _get_report_base_filename(self):
         self.ensure_one()
-        fname = "overdue_letter-%s" % self.commercial_partner_id.name.replace(" ", "_")
+        partner_name = self.commercial_partner_id.name.replace(" ", "_")
+        fname = _("overdue_letter-%s") % partner_name
         return fname
 
 
