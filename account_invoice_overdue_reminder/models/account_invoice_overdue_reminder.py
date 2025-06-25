@@ -60,11 +60,9 @@ class AccountInvoiceOverdueReminder(models.Model):
                 )
 
     @api.depends("invoice_id", "counter")
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for rec in self:
-            name = _("%(invoice_name)s Reminder %(counter)d") % (
+            name = _("%(invoice_name)s Reminder n°%(counter)d") % (
                 {"invoice_name": rec.invoice_id.name, "counter": rec.counter}
             )
-            res.append((rec.id, name))
-        return res
+            rec.display_name = name

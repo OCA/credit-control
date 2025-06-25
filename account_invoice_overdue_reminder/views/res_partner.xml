@@ -10,15 +10,8 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form" />
         <field name="arch" type="xml">
-            <group name="accounting_entries" position="after">
-                <group
-                    name="overdue_reminder"
-                    string="Overdue Reminder"
-                    attrs="{'invisible': [('customer_rank', '&lt;=', 0)]}"
-                >
-                    <field name="no_overdue_reminder" />
-                    <field name="customer_rank" invisible="1" />
-                </group>
+            <group id="invoice_send_settings" position="inside">
+                <field name="no_overdue_reminder" />
             </group>
         </field>
     </record>
