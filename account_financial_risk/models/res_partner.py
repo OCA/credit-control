@@ -450,7 +450,8 @@ class ResPartner(models.Model):
                     amount_exceeded += field_value - max_value
                 if include:
                     amount += field_value
-            if partner.credit_limit and amount > partner.credit_limit:
+            credit_limit = partner.sudo().credit_limit
+            if credit_limit and amount > credit_limit:
                 risk_exception = True
                 amount_exceeded = amount - partner.credit_limit
             partner.risk_total = amount
