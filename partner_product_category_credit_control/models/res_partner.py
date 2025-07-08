@@ -7,12 +7,12 @@ class ResPartner(models.Model):
     product_category_credit_ids = fields.One2many(
         "product.category.credit",
         "partner_id",
-        string="Líneas de crédito (cliente)",
+        string="Credit Lines (Customer)",
         domain=[("type", "=", "customer")],
     )
 
     supplier_credit_id = fields.Many2one(
         "product.category.credit",
-        string="Línea de crédito (proveedor)",
+        string="Credit Line (Supplier)",
         domain=[("type", "=", "supplier")],
     )

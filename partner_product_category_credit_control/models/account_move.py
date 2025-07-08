@@ -34,9 +34,9 @@ class AccountMove(models.Model):
                         )
                         if total > credit_line.credit:
                             raise ValidationError(
-                                f"El cliente excede su línea de crédito \
-                                      para la categoría \
-                                          '{credit_line.category_id.name}'."
+                                _(f"The customer has exceeded their credit limit \
+                                      for the category \
+                                          '{credit_line.category_id.name}'.")
                             )
 
             elif record.partner_id and record.move_type == "in_invoice":
@@ -57,9 +57,9 @@ class AccountMove(models.Model):
                     if total > credit_line.credit:
                         raise ValidationError(
                             _(
-                                "No se puede confirmar la factura porque \
-                                    se ha rebasado el crédito disponible \
-                                        con el proveedor."
+                                "Cannot confirm the invoice because the \
+                                    available credit with the vendor has \
+                                          been exceeded."
                             )
                         )
 

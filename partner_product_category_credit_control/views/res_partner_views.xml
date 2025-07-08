@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='accounting']" position="inside">
-                <group string="Límites de Crédito">
+                <group string="Credit Control">
                     <field
                         name="supplier_credit_id"
                         domain="[('type','=','supplier')]"

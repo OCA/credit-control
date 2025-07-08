@@ -15,14 +15,14 @@
     </record>
 
     <record id="action_product_category_credit" model="ir.actions.act_window">
-        <field name="name">Líneas de Crédito</field>
+        <field name="name">Credit Lines</field>
         <field name="res_model">product.category.credit</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <menuitem
         id="menu_product_category_credit"
-        name="Líneas de Crédito"
+        name="Credit Lines"
         parent="account.account_reports_legal_statements_menu"
         action="action_product_category_credit"
     />

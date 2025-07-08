@@ -3,23 +3,23 @@ from odoo import api, fields, models
 
 class ProductCategoryCredit(models.Model):
     _name = "product.category.credit"
-    _description = "Crédito por categoría de producto"
+    _description = "Credit by Product Category"
     _order = "partner_id, category_id"
 
-    name = fields.Char("Clave de crédito", required=True)
+    name = fields.Char("Credit Key", required=True)
     partner_id = fields.Many2one(
-        "res.partner", string="Contacto", required=True, ondelete="cascade"
+        "res.partner", string="Contact", required=True, ondelete="cascade"
     )
-    category_id = fields.Many2one("product.category", string="Categoría de producto")
-    credit = fields.Float("Monto autorizado")
+    category_id = fields.Many2one("product.category", string="Product Category")
+    credit = fields.Float("Authorized Amount")
     type = fields.Selection(
-        [("customer", "Cliente"), ("supplier", "Proveedor")], required=True
+        [("customer", "Customer"), ("supplier", "Supplier")], required=True
     )
     used_credit = fields.Float(
-        "Monto utilizado", compute="_compute_used_credit", store=True
+        "Used Amount", compute="_compute_used_credit", store=True
     )
     available_credit = fields.Float(
-        "Monto disponible", compute="_compute_available_credit", store=True
+        "Available Amount", compute="_compute_available_credit", store=True
     )
 
     @api.depends("credit", "used_credit")
@@ -53,7 +53,7 @@ class ProductCategoryCredit(models.Model):
         (
             "unique_credit_per_category",
             "UNIQUE(partner_id, category_id, type)",
-            "Solo puede existir una línea de crédito por \
-                categoría y tipo por contacto.",
+            "Only one credit line per category and type \
+                is allowed per contact.",
         )
     ]
