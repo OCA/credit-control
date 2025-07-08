@@ -1,16 +1,18 @@
-from odoo import models, fields
+from odoo import fields, models
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
     product_category_credit_ids = fields.One2many(
-        "product.category.credit", "partner_id",
+        "product.category.credit",
+        "partner_id",
         string="Líneas de crédito (cliente)",
-        domain=[("type", "=", "customer")]
+        domain=[("type", "=", "customer")],
     )
 
     supplier_credit_id = fields.Many2one(
         "product.category.credit",
         string="Línea de crédito (proveedor)",
-        domain=[("type", "=", "supplier")]
+        domain=[("type", "=", "supplier")],
     )
