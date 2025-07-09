@@ -254,15 +254,14 @@ class CreditControlCommunication(models.Model):
 
     def _send_communications_by_email(self):
         for comm in self:
-            comm.message_mail_with_source(
+            # in mass_mail mode, the subtype is dropped, which is used by the
+            # postprocessing that marks control lines as sent.lines
+            comm.message_post_with_source(
                 comm.policy_level_id.email_template_id,
                 subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                     "account_credit_control.mt_request"
                 ),
             )
-            comm.credit_control_line_ids.filtered(
-                lambda line: line.state == "queued"
-            ).state = "sent"
 
     def _mark_credit_line_as_sent(self):
         lines = self.mapped("credit_control_line_ids")
