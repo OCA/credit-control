@@ -58,11 +58,13 @@ class ResPartner(models.Model):
             domain=self._get_risk_sale_payment_sheet_domain(),
             fields=["partner_id", "amount"],
             groupby=["partner_id"],
-            orderby="id",
             lazy=False,
         )
         for group in payments_group:
-            partner = self.filtered(lambda p: p.ids[0] == group["partner_id"][0])
+            g_partner_id = group["partner_id"][0]
+            partner = self.filtered(
+                lambda p, partner_id=g_partner_id: p.ids[0] == partner_id
+            )
             if partner.risk_sale_payment_sheet_include:
                 continue
             company = self.env.user.company_id
@@ -113,7 +115,9 @@ class ResPartner(models.Model):
         info_dic = {}
         for sheet_line in sheet_lines:
             partner_id = sheet_line.partner_id.id
-            partner = self.filtered(lambda p: p.ids == [partner_id])
+            partner = self.filtered(
+                lambda p, partner_id=partner_id: p.ids[0] == partner_id
+            )
             if not partner.risk_sale_payment_sheet_include:
                 continue
             if partner_id not in info_dic:
@@ -129,7 +133,7 @@ class ResPartner(models.Model):
             else:
                 partner["risk_account_amount"] -= sheet_line.amount
             # Set for each sheet line to avoid NewId iterable issue if fill dict
-            self.risk_sale_payment_sheet_info = (
+            partner.risk_sale_payment_sheet_info = (
                 partner.get_risk_sale_payment_sheet_info(info_dic[partner_id])
             )
         return res

@@ -8,7 +8,7 @@
             <field name="risk_total" position="before">
                 <field
                     name="risk_sale_payment_sheet_include"
-                    attrs="{'readonly': [('risk_allow_edit', '=', False)]}"
+                    readonly="not risk_allow_edit"
                 />
                 <button
                     name="open_risk_pivot_info"
@@ -21,12 +21,12 @@
                         nolabel="1"
                         widget='monetary'
                         options="{'currency_field': 'risk_currency_id'}"
-                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '!=', '')]}"
+                        invisible="risk_sale_payment_sheet_info!=''"
                     />
                     <field
                         name="risk_sale_payment_sheet_info"
                         nolabel="1"
-                        attrs="{'invisible': [('risk_sale_payment_sheet_info', '=', '')]}"
+                        invisible="risk_sale_payment_sheet_info==''"
                     />
                 </button>
             </field>
