@@ -77,7 +77,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _risk_field_list(self):
-        res = super(ResPartner, self)._risk_field_list()
+        res = super()._risk_field_list()
         res.append(
             (
                 "risk_sale_payment_sheet",
@@ -96,7 +96,7 @@ class ResPartner(models.Model):
     def get_risk_sale_payment_sheet_info(self, info_values):
         # Not put space between values to avoid line break
         return "\n".join(
-            "{:.2f}({:.2f})".format(-v, self[k]) for k, v in info_values.items() if v
+            f"{-v:.2f}({self[k]:.2f})" for k, v in info_values.items() if v
         )
 
     @api.depends("risk_sale_payment_sheet_include")

@@ -17,30 +17,30 @@ Sale Payment Sheet Financial Risk
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
-    :target: https://github.com/OCA/credit-control/tree/16.0/sale_payment_sheet_financial_risk
+    :target: https://github.com/OCA/credit-control/tree/18.0/sale_payment_sheet_financial_risk
     :alt: OCA/credit-control
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/credit-control-16-0/credit-control-16-0-sale_payment_sheet_financial_risk
+    :target: https://translation.odoo-community.org/projects/credit-control-18-0/credit-control-18-0-sale_payment_sheet_financial_risk
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Extends Partner Financial Risk to allows you to deduct from the risk the amounts
-collected on sale payment sheets pending reconciliation.
+Extends Partner Financial Risk to allows you to deduct from the risk the
+amounts collected on sale payment sheets pending reconciliation.
 
-When *Deduct Sale Payment Sheet* is set each risk field is reduced depending of payment
-sheet invoice status (type of debt) and shows amounts grouped by field risk.
+When *Deduct Sale Payment Sheet* is set each risk field is reduced
+depending of payment sheet invoice status (type of debt) and shows
+amounts grouped by field risk.
 
-.. image:: https://raw.githubusercontent.com/OCA/credit-control/16.0/sale_payment_sheet_financial_risk/static/description/deduct_sale_payment_sheet_unset.png
-   :alt: When deduction not is set
-   :width: 400 px
+|When deduction not is set|
 
-.. image:: https://raw.githubusercontent.com/OCA/credit-control/16.0/sale_payment_sheet_financial_risk/static/description/deduct_sale_payment_sheet_set.png
-   :alt: When deduction is set
-   :width: 400 px
+|When deduction is set|
+
+.. |When deduction not is set| image:: https://raw.githubusercontent.com/OCA/credit-control/18.0/sale_payment_sheet_financial_risk/static/description/deduct_sale_payment_sheet_unset.png
+.. |When deduction is set| image:: https://raw.githubusercontent.com/OCA/credit-control/18.0/sale_payment_sheet_financial_risk/static/description/deduct_sale_payment_sheet_set.png
 
 **Table of contents**
 
@@ -52,11 +52,12 @@ Usage
 
 To use this module, you need to:
 
-#. Go to *Customers > Financial Risk*
-#. You will see the new Sale Payment Sheet field that accumulates in negative sign the
-   unreconciled payments so that this amount can be deducted from the risk.
-#. Set *Deduct Sale Payment Sheet* to reduce each risk field depending of payment sheet
-   invoice status (type of debt).
+1. Go to *Customers > Financial Risk*
+2. You will see the new Sale Payment Sheet field that accumulates in
+   negative sign the unreconciled payments so that this amount can be
+   deducted from the risk.
+3. Set *Deduct Sale Payment Sheet* to reduce each risk field depending
+   of payment sheet invoice status (type of debt).
 
 Bug Tracker
 ===========
@@ -64,7 +65,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/credit-control/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20sale_payment_sheet_financial_risk%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20sale_payment_sheet_financial_risk%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -72,21 +73,21 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Carlos Dauden
-  * Ernesto Tejeda
-  * Carolina Fernandez
+   -  Carlos Dauden
+   -  Ernesto Tejeda
+   -  Carolina Fernandez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -98,6 +99,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/16.0/sale_payment_sheet_financial_risk>`_ project on GitHub.
+This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/18.0/sale_payment_sheet_financial_risk>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
