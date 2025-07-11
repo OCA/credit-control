@@ -114,77 +114,79 @@ class CreditControlCommunication(models.Model):
     ):
         """Return credit lines related to a partner and a policy level"""
         cr_line_obj = self.env["credit.control.line"]
-        cr_lines = cr_line_obj.search(
-            [
-                ("id", "in", line_ids),
-                ("partner_id", "=", partner_id),
-                ("policy_level_id", "=", level_id),
-                ("currency_id", "=", currency_id),
-                ("company_id", "=", company_id),
-            ]
-        )
-        return cr_lines
+        domain = [
+            ("id", "in", line_ids),
+            ("partner_id", "=", partner_id),
+            ("currency_id", "=", currency_id),
+            ("company_id", "=", company_id),
+        ]
+        if level_id:
+            domain.append(("policy_level_id", "=", level_id))
+        return cr_line_obj.search(domain, order="level DESC")
 
     @api.model
-    def _group_lines(self, lines):
-        ordered_lines = lines.search(
-            [("id", "in", lines.ids)],
-            order="partner_id, currency_id, policy_id, company_id, state, level DESC",
+    def _sql_credit_lines_groups(self):
+        """Create a query to return:
+        partner, level, currency, company
+
+        Groups with policy in auto process return NULL instead of an ID for the level
+        """
+        return (
+            "SELECT DISTINCT"
+            " partner_id,"
+            " CASE"
+            "   WHEN policy.auto_process_lower_levels"
+            "    THEN NULL"
+            "    ELSE policy_level.id"
+            "   END AS policy_level_id,"
+            " line.currency_id,"
+            " line.company_id"
+            " FROM credit_control_line AS line"
+            " JOIN credit_control_policy_level as policy_level"
+            "   ON (line.policy_level_id = policy_level.id)"
+            " JOIN credit_control_policy as policy"
+            "   ON (policy_level.policy_id = policy.id)"
+            " WHERE line.id in %s"
         )
-        prev_group = None
-        prev_policy_level = None
-        group_lines = self.env["credit.control.line"].browse()
-        for line in ordered_lines:
-            group = (line.partner_id, line.currency_id, line.policy_id, line.company_id)
-            policy_level = line.policy_level_id
-            if prev_group and (
-                group != prev_group
-                or (
-                    not line.policy_id.autoprocess_lower_levels
-                    and policy_level != prev_policy_level
-                )
-            ):
-                yield (
-                    group_lines[0].partner_id,
-                    group_lines[0].currency_id,
-                    group_lines[0].policy_level_id,
-                    group_lines[0].company_id,
-                    group_lines,
-                )
-                group_lines = self.env["credit.control.line"].browse()
-            if line not in group_lines:
-                group_lines |= line._get_lower_related_lines() or line
-            prev_group = group
-            prev_policy_level = policy_level
-        yield (
-            group_lines[0].partner_id,
-            group_lines[0].currency_id,
-            group_lines[0].policy_level_id,
-            group_lines[0].company_id,
-            group_lines,
-        )
+
+    @api.model
+    def _get_credit_line_groups(self, lines):
+        """"""
+        # Needed for related stored fields
+        # are recomputed before executing the SQL
+        lines.flush_recordset()
+        sql = self._sql_credit_lines_groups()
+        cr = self.env.cr
+        cr.execute(sql, (tuple(lines.ids),))
+        return cr.dictfetchall()
 
     @api.model
     def _aggregate_credit_lines(self, lines):
         """Aggregate credit control line by partner, level, and currency"""
         if not lines:
             return []
-        company_currency = self.env.user.company_id.currency_id
         datas = []
-        for (
-            partner,
-            currency,
-            policy_level,
-            company,
-            grouped_lines,
-        ) in self._group_lines(lines):
-            data = {}
-            company = company or self.env.company
-            company_currency = company.currency_id
-            data["credit_control_line_ids"] = [(6, 0, grouped_lines.ids)]
-            data["partner_id"] = partner.id
-            data["policy_level_id"] = policy_level.id
-            data["currency_id"] = currency.id or company_currency.id
+        for group in self._get_credit_line_groups(lines):
+            grouped_lines = self._get_credit_lines(
+                lines.ids,
+                group["partner_id"],
+                group["policy_level_id"],
+                group["currency_id"],
+                group["company_id"],
+            )
+            company = (
+                self.env["res.company"].browse(group["company_id"])
+                if group["company_id"]
+                else self.env.company
+            )
+            max_policy_level = grouped_lines[0].policy_level_id
+            data = {
+                "credit_control_line_ids": [(6, 0, grouped_lines.ids)],
+                "partner_id": group["partner_id"],
+                "policy_level_id": max_policy_level.id,
+                "currency_id": group["currency_id"] or company.currency_id.id,
+                "company_id": group["company_id"],
+            }
             datas.append(data)
         return datas
 
