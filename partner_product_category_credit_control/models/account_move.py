@@ -17,7 +17,7 @@ class AccountMove(models.Model):
                         ],
                         limit=1,
                     )
-                    if credit_line:
+                    if credit_line and credit_line.credit > 0:
                         invoices = self.env["account.move"].search(
                             [
                                 ("partner_id", "=", record.partner_id.id),
