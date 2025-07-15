@@ -294,7 +294,7 @@ class TestCreditControlRun(TestCreditControlRunCase):
         wiz_emailer.line_ids = control_lines
         self.env.user.company_id.email = "test@example.com"
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
-            wiz_emailer.email_lines()
+            wiz_emailer.with_context(queue_job__no_delay=True).email_lines()
         new_communication = capture.records
         self.assertEqual(len(new_communication), 1)
         self.assertEqual(len(new_communication.message_ids), 1)
@@ -325,7 +325,7 @@ class TestCreditControlRun(TestCreditControlRunCase):
         wiz_emailer = self.env["credit.control.emailer"].create({})
         wiz_emailer.line_ids = control_lines
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
-            wiz_emailer.email_lines()
+            wiz_emailer.with_context(queue_job__no_delay=True).email_lines()
         new_communication = capture.records
         self.assertEqual(len(new_communication), 1)
         self.assertEqual(len(new_communication.message_ids), 1)
