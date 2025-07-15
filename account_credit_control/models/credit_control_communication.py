@@ -4,9 +4,8 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # Copyright 2023 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import threading
 
-from odoo import _, api, fields, models, modules, registry, tools
+from odoo import _, api, fields, models
 from odoo.tools.misc import format_amount, format_date
 
 
@@ -233,24 +232,9 @@ class CreditControlCommunication(models.Model):
             comm._send_mails()
 
     def _send_mails(self):
-        # Launch process in new thread to improve the user speedup
-        if not tools.config["test_enable"] and not modules.module.current_test:
-
-            @self.env.cr.postcommit.add
-            def _launch_print_thread():
-                threaded_calculation = threading.Thread(
-                    target=self.send_mails_threaded,
-                    args=self.ids,
-                )
-                threaded_calculation.start()
-        else:
-            self._send_communications_by_email()
-
-    def send_mails_threaded(self, record_ids):
-        with registry(self._cr.dbname).cursor() as cr:
-            self = self.with_env(self.env(cr=cr))
-            communications = self.browse(record_ids)
-            communications._send_communications_by_email()
+        # in account_credit_control_queue_job, override this method
+        # to loop over self and call _send_communications_by_email with delay
+        self._send_communications_by_email()
 
     def _send_communications_by_email(self):
         for comm in self:
