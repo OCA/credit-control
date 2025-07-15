@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.account_credit_control_queue_job</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="account_credit_control.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='credit_control']" position="inside">
+                <setting
+                    id="credit_control_batch_size"
+                    groups="account.group_account_user"
+                >
+                    <field name="credit_control_batch_size" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
