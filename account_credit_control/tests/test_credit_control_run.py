@@ -14,8 +14,7 @@ from odoo.tests import Form, RecordCapturer, tagged
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-@tagged("post_install", "-at_install")
-class TestCreditControlRun(AccountTestInvoicingCommon):
+class TestCreditControlRunCase(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -79,6 +78,9 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         cls.invoice = invoice_form.save()
         cls.invoice.action_post()
 
+
+@tagged("post_install", "-at_install")
+class TestCreditControlRun(TestCreditControlRunCase):
     def test_check_run_date(self):
         """
         Create a control run older than the last control run
