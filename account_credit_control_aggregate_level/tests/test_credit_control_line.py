@@ -9,7 +9,7 @@ from odoo.tests.common import TransactionCase
 
 @tagged("post_install", "-at_install")
 class TestCreditControlLine(TransactionCase):
-    def test_auto_process(self):
+    def test_aggregate_level(self):
         account = self.env["account.account"].create(
             {
                 "code": "400001",
@@ -38,7 +38,7 @@ class TestCreditControlLine(TransactionCase):
         policy.write(
             {
                 "account_ids": [(6, 0, [account.id])],
-                "auto_process_lower_levels": True,
+                "aggregate_levels": True,
             }
         )
         policy_level_1 = self.env.ref("account_credit_control.3_time_1")
@@ -73,7 +73,7 @@ class TestCreditControlLine(TransactionCase):
             }
         )
 
-        self.assertEqual(ccl_1.auto_process, "highest_level")
+        self.assertEqual(ccl_1.aggregation, "highest")
 
         ccl_2 = self.env["credit.control.line"].create(
             {
@@ -90,20 +90,20 @@ class TestCreditControlLine(TransactionCase):
             }
         )
 
-        self.assertEqual(ccl_1.auto_process, "low_level")
-        self.assertEqual(ccl_2.auto_process, "highest_level")
+        self.assertEqual(ccl_1.aggregation, "low")
+        self.assertEqual(ccl_2.aggregation, "highest")
         self.assertTrue(ccl_1 in ccl_2._get_lower_related_lines())
         ccl_1.write({"policy_level_id": policy_level_3.id})
 
-        self.assertEqual(ccl_1.auto_process, "highest_level")
-        self.assertEqual(ccl_2.auto_process, "low_level")
+        self.assertEqual(ccl_1.aggregation, "highest")
+        self.assertEqual(ccl_2.aggregation, "low")
         self.assertTrue(ccl_2 in ccl_1._get_lower_related_lines())
 
         ccl_1.unlink()
 
-        self.assertEqual(ccl_2.auto_process, "highest_level")
+        self.assertEqual(ccl_2.aggregation, "highest")
 
-        policy.write({"auto_process_lower_levels": False})
+        policy.write({"aggregate_levels": False})
 
         ccl_3 = self.env["credit.control.line"].create(
             {
@@ -120,5 +120,5 @@ class TestCreditControlLine(TransactionCase):
             }
         )
 
-        self.assertEqual(ccl_3.auto_process, "no_auto_process")
+        self.assertEqual(ccl_3.aggregation, "no")
         self.assertEqual(ccl_3, ccl_3._get_related_lines())

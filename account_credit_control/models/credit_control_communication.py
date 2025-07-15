@@ -3,6 +3,7 @@
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # Copyright 2020 Manuel Calero - Tecnativa
 # Copyright 2023 Tecnativa - Víctor Martínez
+# Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import threading
 
@@ -119,39 +120,32 @@ class CreditControlCommunication(models.Model):
             ("partner_id", "=", partner_id),
             ("currency_id", "=", currency_id),
             ("company_id", "=", company_id),
+            ("policy_level_id", "=", level_id),
         ]
-        if level_id:
-            domain.append(("policy_level_id", "=", level_id))
         return cr_line_obj.search(domain, order="level DESC")
 
     @api.model
     def _sql_credit_lines_groups(self):
         """Create a query to return:
         partner, level, currency, company
-
-        Groups with policy in auto process return NULL instead of an ID for the level
         """
         return (
             "SELECT DISTINCT"
             " partner_id,"
-            " CASE"
-            "   WHEN policy.auto_process_lower_levels"
-            "    THEN NULL"
-            "    ELSE policy_level.id"
-            "   END AS policy_level_id,"
+            " policy_level_id,"
+            " policy_level.level,"
             " line.currency_id,"
             " line.company_id"
             " FROM credit_control_line AS line"
             " JOIN credit_control_policy_level as policy_level"
             "   ON (line.policy_level_id = policy_level.id)"
-            " JOIN credit_control_policy as policy"
-            "   ON (policy_level.policy_id = policy.id)"
             " WHERE line.id in %s"
+            " ORDER BY policy_level.level, line.currency_id"
         )
 
     @api.model
     def _get_credit_line_groups(self, lines):
-        """"""
+        """Returns key groups to be processed"""
         # Needed for related stored fields
         # are recomputed before executing the SQL
         lines.flush_recordset()
@@ -159,6 +153,18 @@ class CreditControlCommunication(models.Model):
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids),))
         return cr.dictfetchall()
+
+    @api.model
+    def _prepare_communication_data(self, cr_lines):
+        line = cr_lines[0]
+        company = line.company_id or self.env.company
+        return {
+            "credit_control_line_ids": [(6, 0, cr_lines.ids)],
+            "partner_id": line.partner_id.id,
+            "policy_level_id": line.policy_level_id.id,
+            "currency_id": line.currency_id.id or company.currency_id.id,
+            "company_id": company.id,
+        }
 
     @api.model
     def _aggregate_credit_lines(self, lines):
@@ -174,19 +180,9 @@ class CreditControlCommunication(models.Model):
                 group["currency_id"],
                 group["company_id"],
             )
-            company = (
-                self.env["res.company"].browse(group["company_id"])
-                if group["company_id"]
-                else self.env.company
-            )
-            max_policy_level = grouped_lines[0].policy_level_id
-            data = {
-                "credit_control_line_ids": [(6, 0, grouped_lines.ids)],
-                "partner_id": group["partner_id"],
-                "policy_level_id": max_policy_level.id,
-                "currency_id": group["currency_id"] or company.currency_id.id,
-                "company_id": group["company_id"],
-            }
+            if not grouped_lines:
+                continue
+            data = self._prepare_communication_data(grouped_lines)
             datas.append(data)
         return datas
 

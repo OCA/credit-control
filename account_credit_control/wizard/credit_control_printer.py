@@ -16,13 +16,10 @@ class CreditControlPrinter(models.TransientModel):
 
     @api.model
     def _default_line_ids(self):
-        line_obj = self.env["credit.control.line"]
         context = self.env.context
         if context.get("active_model") != "credit.control.line":
             return False
-        lines = line_obj.browse(context.get("active_ids", False))
-        lines_and_related = lines.mapped(lambda l: l._get_lower_related_lines())
-        return lines_and_related.ids
+        return context.get("active_ids")
 
     mark_as_sent = fields.Boolean(
         string="Mark letter lines as done",

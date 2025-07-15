@@ -27,12 +27,6 @@ class CreditControlPolicy(models.Model):
     do_nothing = fields.Boolean(
         help="For policies which should not generate lines or are obsolete"
     )
-    auto_process_lower_levels = fields.Boolean(
-        string="Auto Process Lower levels",
-        help="When an action is performed on a credit control line generated "
-        "by this policy, lower level lines for the same partner and policy "
-        "will also be processed.",
-    )
     company_id = fields.Many2one(comodel_name="res.company")
     account_ids = fields.Many2many(
         comodel_name="account.account",

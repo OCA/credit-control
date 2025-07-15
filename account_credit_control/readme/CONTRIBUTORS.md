@@ -4,7 +4,9 @@
 - Akim Juillerat (Camptocamp) \<<akim.juillerat@camptocamp.com>\>
 - Kinner Vachhani (Access Bookings Ltd) \<<kin.vachhani@gmail.com>\>
 - Raf Ven \<<raf.ven@dynapps.be>\>
-- Quentin Groulard (ACSONE) \<<quentin.groulard@acsone.eu>\>
+- [Acsone](https://www.acsone.eu):
+  - Quentin Groulard
+  - Yannick Payot
 - [Tecnativa](https://www.tecnativa.com):
   - Vicent Cubells
   - Manuel Calero

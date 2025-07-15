@@ -133,22 +133,6 @@ class CreditControlLine(models.Model):
         compute="_compute_partner_user_id",
         store=True,
     )
-    auto_process = fields.Selection(
-        selection=[
-            ("no_auto_process", "No Auto Process"),
-            ("low_level", "Low Level"),
-            ("highest_level", "Highest Level"),
-        ],
-        help="'No Auto Process' lines are not automatically processed "
-        "with other lines.\n"
-        "'Low Level' lines are automatically processed "
-        "with higher level lines.\n"
-        "'Highest Level' indicates that all 'Low Level' lines for this "
-        "line's partner-policy combination will be automatically "
-        "processed with it.",
-        default="no_auto_process",
-        readonly=True,
-    )
 
     @api.depends("partner_id.user_id")
     def _compute_partner_user_id(self):
@@ -290,16 +274,6 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
-    def _update_auto_process(self, exclude_ids=None):
-        self.ensure_one()
-        if not self.policy_id.auto_process_lower_levels:
-            return
-        highest_related_line = self._get_highest_related_line(exclude_ids=exclude_ids)
-        highest_related_line.write({"auto_process": "highest_level"})
-        self._get_related_lines(
-            exclude_ids=((exclude_ids or []) + highest_related_line.ids)
-        ).write({"auto_process": "low_level"})
-
     def unlink(self):
         for line in self:
             if line.state != "draft":
@@ -309,112 +283,10 @@ class CreditControlLine(models.Model):
                         "line that is not in draft state."
                     )
                 )
-            line._update_auto_process(exclude_ids=line.ids)
         return super().unlink()
 
     def write(self, values):
         res = super().write(values)
         if "manual_followup" in values:
             self.partner_id.write({"manual_followup": values.get("manual_followup")})
-        for line in self:
-            if "state" in values and values.get("state") == "sent":
-                line.write({"auto_process": "no_auto_process"})
-            if "auto_process" not in values:
-                line._update_auto_process()
         return res
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super().create(vals_list)
-        for line in lines:
-            if line.state == "sent":
-                line.write({"auto_process": "no_auto_process"})
-            else:
-                line._update_auto_process()
-        return lines
-
-    def _get_highest_related_line(self, exclude_ids=None):
-        self.ensure_one()
-        return self._get_related_lines(exclude_ids=exclude_ids, limit=1)
-
-    def _get_related_lines_domain(self, exclude_ids=None, level=None):
-        domain = [
-            ("partner_id", "=", self.partner_id.id),
-            ("currency_id", "=", self.currency_id.id),
-            ("policy_id", "=", self.policy_id.id),
-            ("state", "in", ("draft", "to_be_sent")),
-        ]
-        if exclude_ids:
-            domain.append(("id", "not in", exclude_ids))
-        if level:
-            domain.append(("level", "<=", level))
-        return domain
-
-    def _get_related_lines(self, exclude_ids=None, limit=None, level=None):
-        """
-        Return lines from the same group if grouped
-        (ie with same partner, policy and currency).
-
-        The most important line (ie the one to display to the user)
-        is the first one of the returned recordset.
-        """
-        self.ensure_one()
-        if self.policy_id.auto_process_lower_levels:
-            return self.search(
-                self._get_related_lines_domain(exclude_ids, level),
-                limit=limit,
-                order="level DESC, date_due ASC",
-            )
-        else:
-            return self
-
-    def _get_lower_related_lines(self):
-        """
-        Return lines that will receive the same treatment
-        (ie lines of lower level from the same group if grouped).
-        """
-        self.ensure_one()
-        if self.policy_id.auto_process_lower_levels:
-            return self._get_related_lines(level=self.level)
-        else:
-            return self
-
-    def button_schedule_activity(self):
-        ctx = self.env.context.copy()
-        ctx.update(
-            {
-                "default_res_id": self.ids[0],
-                "default_res_model": self._name,
-            }
-        )
-        return {
-            "type": "ir.actions.act_window",
-            "name": _("Schedule activity"),
-            "res_model": "mail.activity",
-            "view_type": "form",
-            "view_mode": "form",
-            "res_id": self.activity_ids and self.activity_ids.ids[0] or False,
-            "views": [[False, "form"]],
-            "context": ctx,
-            "target": "new",
-        }
-
-    def button_credit_control_line_form(self):
-        self.ensure_one()
-        action = self.env.ref("account_credit_control.credit_control_line_action")
-        form = self.env.ref("account_credit_control.credit_control_line_form")
-        action = action.read()[0]
-        action["views"] = [(form.id, "form")]
-        action["res_id"] = self.id
-        return action
-
-    def act_show_auto_process_line(self):
-        self.ensure_one()
-        return {
-            "type": "ir.actions.act_window",
-            "name": _("Credit Control Lines"),
-            "res_model": "credit.control.line",
-            "domain": [("id", "in", self._get_lower_related_lines().ids)],
-            "view_mode": "list,form",
-            "context": self.env.context,
-        }

@@ -69,12 +69,6 @@
                 </group>
                 <group string="Filters" name="filters">
                     <filter
-                        name="filter_group_lines"
-                        string="Group Lines"
-                        domain="[('auto_process', 'in', ('no_auto_process', 'highest_level'))]"
-                    />
-                    <separator />
-                    <filter
                         name="filter_draft"
                         string="Draft"
                         domain="[('state', '=', 'draft')]"
@@ -198,20 +192,6 @@
                 decoration-success="state == 'sent'"
                 open_form_view="True"
             >
-                <button
-                    title="Highest Level"
-                    icon="fa-star"
-                    invisible="auto_process != 'highest_level'"
-                />
-                <button
-                    name="act_show_auto_process_line"
-                    title="Auto Process"
-                    type="object"
-                    icon="fa-list"
-                    class="oe_stat_button"
-                    invisible="auto_process == 'no_auto_process'"
-                />
-                <field name="auto_process" invisible="1" />
                 <field name="date" readonly="state != 'draft'" />
                 <field name="date_entry" />
                 <field name="date_due" readonly="state != 'draft'" />

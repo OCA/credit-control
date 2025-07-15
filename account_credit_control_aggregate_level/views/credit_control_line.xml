@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="credit_control_line_search" model="ir.ui.view">
+        <field name="name">Credit Control Lines</field>
+        <field name="model">credit.control.line</field>
+        <field
+            name="inherit_id"
+            ref="account_credit_control.credit_control_line_search"
+        />
+        <field name="arch" type="xml">
+            <filter name="filter_draft" position="before">
+                <filter
+                    name="filter_group_lines"
+                    string="Group Lines"
+                    domain="[('aggregation', 'in', ('no', 'highest'))]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+    <record id="credit_control_line_tree" model="ir.ui.view">
+        <field name="name">credit.control.line.list</field>
+        <field name="model">credit.control.line</field>
+        <field
+            name="inherit_id"
+            ref="account_credit_control.credit_control_line_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="date" position="before">
+                <field name="aggregation" column_invisible="1" />
+                <button
+                    title="Highest Level"
+                    icon="fa-star"
+                    invisible="aggregation != 'highest'"
+                />
+                <button
+                    name="act_show_aggregated_lines"
+                    title="Cross-Level aggregation"
+                    type="object"
+                    icon="fa-list"
+                    class="oe_stat_button"
+                    invisible="aggregation == 'no'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
