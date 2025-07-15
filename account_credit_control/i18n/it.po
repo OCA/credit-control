@@ -104,8 +104,8 @@ msgstr ""
 "            <br/>\n"
 "            <br/>\n"
 "            <p>\n"
-"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/>"
-"\n"
+"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/"
+">\n"
 "            </p>\n"
 "        "
 
@@ -1248,12 +1248,6 @@ msgstr ""
 "Nessuna riga verrà modificata. Tutte le righe selezionate sono già evase."
 
 #. module: account_credit_control
-#. odoo-python
-#: code:addons/account_credit_control/models/credit_control_run.py:0
-msgid "Notifications"
-msgstr "Notifiche"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of Actions"
@@ -1791,12 +1785,6 @@ msgstr ""
 "fatture."
 
 #. module: account_credit_control
-#. odoo-python
-#: code:addons/account_credit_control/models/credit_control_run.py:0
-msgid "The emails will be sent in the background"
-msgstr "Questa e-mail verrà spedita in background"
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The line was deprecated by a manual change of policy on invoice."
 msgstr ""
@@ -1920,6 +1908,12 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicazione controllo credito"
+
+#~ msgid "Notifications"
+#~ msgstr "Notifiche"
+
+#~ msgid "The emails will be sent in the background"
+#~ msgstr "Questa e-mail verrà spedita in background"
 
 #~ msgid ""
 #~ "<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
