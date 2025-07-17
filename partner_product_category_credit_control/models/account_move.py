@@ -7,7 +7,11 @@ class AccountMove(models.Model):
 
     def action_post(self):
         for record in self:
-            if record.partner_id and record.move_type == "out_invoice":
+            if (
+                not self.env.user.has_group("account.group_account_manager")
+                and record.partner_id
+                and record.move_type == "out_invoice"
+            ):
                 for line in record.invoice_line_ids:
                     credit_line = self.env["product.category.credit"].search(
                         [
@@ -39,7 +43,11 @@ class AccountMove(models.Model):
                                           '{credit_line.category_id.name}'.")
                             )
 
-            elif record.partner_id and record.move_type == "in_invoice":
+            elif (
+                not self.env.user.has_group("account.group_account_manager")
+                and record.partner_id
+                and record.move_type == "in_invoice"
+            ):
                 credit_line = record.partner_id.supplier_credit_id
                 if credit_line:
                     invoices = self.env["account.move"].search(
