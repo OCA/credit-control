@@ -14,7 +14,7 @@ class TestStockFinancialRisk(TransactionCase):
             {"name": "Partner test", "customer_rank": 1}
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "is_storable": True}
         )
         cls.location = cls.env["stock.location"].create(
             {"name": "Test location", "usage": "internal"}
@@ -88,12 +88,12 @@ class TestStockFinancialRisk(TransactionCase):
 
     def test_button_validate_ok(self):
         self.picking.action_assign()
-        self.picking.move_line_ids[:1].qty_done = 5
+        self.picking.move_line_ids[:1].quantity = 5
         self.picking.button_validate()
 
     def test_button_validate_error(self):
         self.picking.action_assign()
-        self.picking.move_line_ids[:1].qty_done = 5
+        self.picking.move_line_ids[:1].quantity = 5
         self.partner.risk_exception = True
         res = self.picking.button_validate()
         self.assertEqual(res["name"], "Partner risk exceeded")

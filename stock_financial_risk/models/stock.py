@@ -1,7 +1,7 @@
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, exceptions, models
+from odoo import exceptions, models
 
 
 class StockMove(models.Model):
@@ -17,7 +17,7 @@ class StockMove(models.Model):
             )
             if moves:
                 raise exceptions.UserError(
-                    _(
+                    self.env._(
                         "Financial risk exceeded in partner:\n%s",
                         moves.mapped("partner_id.name"),
                     )
@@ -33,7 +33,7 @@ class StockPicking(models.Model):
             self.env["partner.risk.exceeded.wiz"]
             .create(
                 {
-                    "exception_msg": _("Financial risk exceeded \n"),
+                    "exception_msg": self.env._("Financial risk exceeded \n"),
                     "partner_id": self.partner_id.id,
                     "origin_reference": f"{self._name},{self.id}",
                     "continue_method": continue_method,
