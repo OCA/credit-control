@@ -9,7 +9,7 @@ from odoo.tests import TransactionCase
 class TestStockFinancialRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockFinancialRisk, cls).setUpClass()
+        super().setUpClass()
         cls.partner = cls.env["res.partner"].create(
             {"name": "Partner test", "customer_rank": 1}
         )
