@@ -35,7 +35,7 @@ class StockPicking(models.Model):
                 {
                     "exception_msg": _("Financial risk exceeded \n"),
                     "partner_id": self.partner_id.id,
-                    "origin_reference": "{},{}".format(self._name, self.id),
+                    "origin_reference": f"{self._name},{self.id}",
                     "continue_method": continue_method,
                 }
             )
@@ -50,14 +50,14 @@ class StockPicking(models.Model):
                     and pick.partner_id.commercial_partner_id.risk_exception
                 ):
                     return pick.show_risk_wizard("action_confirm")
-        return super(StockPicking, self).action_confirm()
+        return super().action_confirm()
 
     def action_assign(self):
         if not self.env.context.get("bypass_risk") and self.filtered(
             "partner_id.commercial_partner_id.risk_exception"
         ):
             return self.show_risk_wizard("action_assign")
-        return super(StockPicking, self).action_assign()
+        return super().action_assign()
 
     def button_validate(self):
         if not self.env.context.get("bypass_risk"):
@@ -67,4 +67,4 @@ class StockPicking(models.Model):
                     and pick.partner_id.commercial_partner_id.risk_exception
                 ):
                     return self.show_risk_wizard("button_validate")
-        return super(StockPicking, self).button_validate()
+        return super().button_validate()
