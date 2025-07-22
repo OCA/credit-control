@@ -198,20 +198,19 @@ class ResPartner(models.Model):
 
     @api.depends("credit_limit")
     def _compute_date_credit_limit(self):
-        self.filtered(lambda x: x.credit_limit == 0.00).date_credit_limit = False
+        self.filtered(lambda x: x.sudo().credit_limit == 0.00).date_credit_limit = False
         self.filtered(
-            lambda x: x.credit_limit != 0.00
+            lambda x: x.sudo().credit_limit != 0.00
         ).date_credit_limit = datetime.today()
 
     @api.depends("credit_limit", "risk_total")
     def _compute_risk_remaining(self):
         for record in self:
-            record.risk_remaining_value = record.credit_limit - record.risk_total
-            if record.credit_limit:
+            credit_limit = record.sudo().credit_limit
+            record.risk_remaining_value = credit_limit - record.risk_total
+            if credit_limit:
                 record.risk_remaining_percentage = round(
-                    100
-                    * (record.credit_limit - record.risk_total)
-                    / record.credit_limit,
+                    100 * (credit_limit - record.risk_total) / credit_limit,
                     2,
                 )
             else:
@@ -481,7 +480,7 @@ class ResPartner(models.Model):
             credit_limit = partner.sudo().credit_limit
             if credit_limit and amount > credit_limit:
                 risk_exception = True
-                amount_exceeded = amount - partner.credit_limit
+                amount_exceeded = amount - credit_limit
             partner.risk_total = amount
             partner.risk_amount_exceeded = amount_exceeded
             partner.risk_exception = risk_exception
