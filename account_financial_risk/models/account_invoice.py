@@ -54,7 +54,7 @@ class AccountMove(models.Model):
         elif not partner.risk_invoice_draft_include and (
             partner.risk_invoice_open_include
             and (partner.risk_total + self.risk_amount_total_currency)
-            > partner.credit_limit
+            > partner.sudo().credit_limit
         ):
             exception_msg = self.env._("This invoice exceeds the financial risk.\n")
         return exception_msg
