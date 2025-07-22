@@ -24,10 +24,11 @@ class SaleOrder(models.Model):
         )
         for sale in self:
             partner = sale.partner_invoice_id.commercial_partner_id
-            if not partner.credit_limit:
+            credit_limit = partner.sudo().credit_limit
+            if not credit_limit:
                 sale.risk_info = _("Unlimited")
                 continue
-            risk_percent = round(partner.risk_total / partner.credit_limit * 100)
+            risk_percent = round(partner.risk_total / credit_limit * 100)
             if risk_percent >= partner.risk_percent_warning:
                 text_class = ' class="text-danger"'
             else:
@@ -38,12 +39,12 @@ class SaleOrder(models.Model):
                     self.env, partner.risk_total, partner.risk_currency_id
                 ),
                 credit_limit=format_amount(
-                    self.env, partner.credit_limit, partner.risk_currency_id
+                    self.env, credit_limit, partner.risk_currency_id
                 ),
                 risk_percent=risk_percent,
                 risk_available=format_amount(
                     self.env,
-                    partner.credit_limit - partner.risk_total,
+                    credit_limit - partner.risk_total,
                     partner.risk_currency_id,
                 ),
             )
