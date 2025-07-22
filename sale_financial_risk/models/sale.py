@@ -29,7 +29,7 @@ class SaleOrder(models.Model):
                 "This sale order exceeds the sales orders risk.\n"
             )
         elif partner.risk_sale_order_include and (
-            (partner.risk_total + risk_amount) > partner.credit_limit
+            (partner.risk_total + risk_amount) > partner.sudo().credit_limit
         ):
             exception_msg = self.env._("This sale order exceeds the financial risk.\n")
         return exception_msg
