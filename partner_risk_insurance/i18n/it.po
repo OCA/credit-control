@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-24 17:06+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2025-07-25 17:45+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
@@ -27,7 +27,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
 msgid "Company's Credit Limit"
-msgstr "Limite di Credito dell'Azienda"
+msgstr "Limite di credito dell'azienda"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_res_partner
@@ -47,7 +47,7 @@ msgstr "Creato il"
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
 msgid "Credit Insurance"
-msgstr "Assicurazione del Credito"
+msgstr "Assicurazione del credito"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
@@ -108,19 +108,19 @@ msgstr "Data di concessione dell'assicurazione"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_requested
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_requested
 msgid "Insurance Requested"
-msgstr "Assicurazione Richiesta"
+msgstr "Assicurazione richiesta"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Insurance's Credit Coverage"
-msgstr "Copertura del Credito dell'Assicurazione"
+msgstr "Copertura del credito dell'assicurazione"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
 msgid "Insurance's Credit Limit"
-msgstr "Limite di Credito dell'Assicurazione"
+msgstr "Limite di credito dell'assicurazione"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
@@ -162,7 +162,7 @@ msgstr "Percentuale del credito coperto dall'assicurazione."
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_state_id
 msgid "Policy State"
-msgstr "Stato Polizza"
+msgstr "Stato polizza"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
