@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2025-06-21 13:27+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2025-07-25 17:45+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
 "Language: it\n"
@@ -23,12 +23,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
-msgstr "Movimenti Contabili"
+msgstr "Movimenti contabili"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 msgid "Account move lines"
-msgstr "Movimenti Contabili"
+msgstr "Righe movimenti contabili"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -266,7 +266,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "General Limits"
-msgstr "Limite Generale"
+msgstr "Limite generale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__id
@@ -281,31 +281,31 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_include
 msgid "Include Draft Invoices"
-msgstr "Includi Fatture in Bozza"
+msgstr "Include fatture in bozza"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_include
 msgid "Include Open Invoices/Principal Balance"
-msgstr "Include Fatture Aperte/Saldo principale"
+msgstr "Include fatture aperte/saldo principale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
 msgid "Include Other Account Open Amount"
-msgstr "Include Altri Importi Contabili Aperti"
+msgstr "Include altri importi contabili aperti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
 msgid "Include Other Account Unpaid Amount"
-msgstr "Include Altri Importi Contabili Scaduti"
+msgstr "Include altri importi contabili scaduti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
 msgid "Include Unpaid Invoices/Principal Balance"
-msgstr "Include Fatture Non Pagate/Saldo Principale"
+msgstr "Include fatture non pagate/saldo principale"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -346,31 +346,31 @@ msgstr "Ultimo aggiornamento il"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_limit
 msgid "Limit In Draft Invoices"
-msgstr "Fido per Fatture Bozza"
+msgstr "Fido per fatture in bozza"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
 msgid "Limit In Open Invoices/Principal Balance"
-msgstr "Fido per Fatture Aperte/Saldo Principale"
+msgstr "Fido per fatture aperte/saldo principale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Limit In Unpaid Invoices/Principal Balance"
-msgstr "Fido per Fatture Scadute/Saldo Principale"
+msgstr "Fido per fatture scadute/saldo principale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
 msgid "Limit Other Account Open Amount"
-msgstr "Fido Altri Importi Contabili Aperti"
+msgstr "Fido per altri importi contabili aperti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
 msgid "Limit Other Account Unpaid Amount"
-msgstr "Fido Altri Importi Contabili Scaduti"
+msgstr "Fido per altri importi contabili scaduti"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
@@ -523,7 +523,7 @@ msgstr "Rischio rimanente (valore)"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Risk exceeded"
-msgstr "Fido Superato"
+msgstr "Fido superato"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_limit
@@ -542,7 +542,7 @@ msgstr "Imposta a 0 se non bloccato"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Specific Limits"
-msgstr "Fidi Specifici"
+msgstr "Fidi specifici"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
@@ -564,7 +564,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "The partner has exceeded his risk"
-msgstr "Il Partner ha superato il fido"
+msgstr "Il partner ha superato il fido"
 
 #. module: account_financial_risk
 #: code:addons/account_financial_risk/models/account_invoice.py:0
@@ -582,19 +582,19 @@ msgstr "Questa fattura supera il fido delle fatture aperte.\n"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total Draft Invoices"
-msgstr "Totale Fatture in Bozza"
+msgstr "Totale fatture in bozza"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open
 msgid "Total Open Invoices/Principal Balance"
-msgstr "Totale Fatture Aperte/Saldo Principale"
+msgstr "Totale fatture aperte/saldo principale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount
 msgid "Total Other Account Open Amount"
-msgstr "Totale Altri Importi Contabili Aperti"
+msgstr "Totale altri importi contabili aperti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -612,13 +612,13 @@ msgstr "Totale fido"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid
 msgid "Total Unpaid Invoices/Principal Balance"
-msgstr "Totale Fatture Scadute/Saldo Principale"
+msgstr "Totale fatture scadute/saldo principale"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
-msgstr "Totale Importo Fatture in Bozza o Pro-forma"
+msgstr "Totale importo fatture in bozza o pro-forma"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
