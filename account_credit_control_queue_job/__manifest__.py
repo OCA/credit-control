@@ -3,12 +3,12 @@
 
 {
     "name": "Account Credit Control",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "author": "360 ERP, Odoo Community Association (OCA)",
     "category": "Finance",
     "depends": [
         "account_credit_control",
-        "queue_job",
+        "queue_job_batch",
     ],
     "website": "https://github.com/OCA/credit-control",
     "data": ["wizard/res_config_settings.xml"],
