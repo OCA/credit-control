@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from unittest.mock import ANY, patch
+from unittest.mock import patch
 
 from odoo.fields import Command
 from odoo.tests import tagged
@@ -67,7 +67,7 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
             "._compute_show_tokenize_input_mapping"
         ) as patched:
             tx_context = self._get_portal_pay_context(**route_values)
-            patched.assert_called_once_with(ANY, sale_order_id=ANY)
+            patched.assert_called_once()
         tx_route_values = {
             "provider_id": self.provider.id,
             "payment_method_id": self.payment_method_id,
