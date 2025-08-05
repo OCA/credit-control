@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Pilar Varga
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="side_content" inherit_id="portal.side_content">
+        <xpath expr="//div[hasclass('o_my_contact')]" position="after">
+            <t t-set="partner" t-value="user_id.partner_id" />
+            <t t-set="commercial_partner" t-value="partner.commercial_partner_id" />
+            <div
+                t-if="partner.portal_show_financial_risk_visible and partner.show_financial_risk_in_portal and commercial_partner.sudo().credit_limit != 0"
+                class="o_portal_my_financial_risk mt-3"
+            >
+                <h5>Credit information</h5>
+                <hr class="mt-1 mb-1" />
+                <ul class="list-group">
+                    <li class="list-group-item bg-transparent border-0 ps-0">
+                        <strong>Credit limit </strong>
+                        <span
+                            t-field="commercial_partner.sudo().credit_limit"
+                            t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                        />
+                    </li>
+                    <li
+                        t-if="commercial_partner.risk_total != 0"
+                        class="list-group-item bg-transparent border-0 ps-0"
+                    >
+                        <strong>Consumed credit </strong>
+                        <span t-field="commercial_partner.risk_total" />
+                    </li>
+                    <li
+                        t-if="commercial_partner.risk_total != 0"
+                        class="list-group-item bg-transparent border-0 p-0"
+                    >
+                        <ul class="list-group border-top border-bottom">
+                            <li
+                                t-if="commercial_partner.risk_invoice_draft_include and commercial_partner.risk_invoice_draft != 0"
+                                class="list-group-item bg-transparent border-0"
+                            >
+                                <em>Draft Invoices </em>
+                                <span
+                                    t-field="commercial_partner.risk_invoice_draft"
+                                    t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                                />
+                            </li>
+                            <li
+                                t-if="commercial_partner.risk_invoice_open_include and commercial_partner.risk_invoice_open != 0"
+                                class="list-group-item bg-transparent border-0"
+                            >
+                                <em>Open Invoices </em>
+                                <span
+                                    t-field="commercial_partner.risk_invoice_open"
+                                    t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                                />
+                            </li>
+                            <li
+                                t-if="commercial_partner.risk_invoice_unpaid_include and commercial_partner.risk_invoice_unpaid != 0"
+                                class="list-group-item bg-transparent border-0"
+                            >
+                                <em>Unpaid Invoices </em>
+                                <span
+                                    t-field="commercial_partner.risk_invoice_unpaid"
+                                    t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                                />
+                            </li>
+                            <li
+                                t-if="commercial_partner.risk_account_amount_include and commercial_partner.risk_account_amount != 0"
+                                class="list-group-item bg-transparent border-0"
+                            >
+                                <em>Other Open Amount </em>
+                                <span
+                                    t-field="commercial_partner.risk_account_amount"
+                                    t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                                />
+                            </li>
+                            <li
+                                t-if="commercial_partner.risk_account_amount_unpaid_include and commercial_partner.risk_account_amount_unpaid != 0"
+                                class="list-group-item bg-transparent border-0"
+                            >
+                                <em>Other Unpaid Amount </em>
+                                <span
+                                    t-field="commercial_partner.risk_account_amount_unpaid"
+                                    t-options="{'widget': 'monetary', 'display_currency': risk_currency_id}"
+                                />
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        t-if="commercial_partner.risk_remaining_value != 0"
+                        class="list-group-item bg-transparent border-0 ps-0"
+                    ><strong>Remaining credit </strong><span
+                        class="me-1"
+                        t-field="commercial_partner.risk_remaining_value"
+                    />(<span
+                        t-field="commercial_partner.risk_remaining_percentage"
+                    />%)</li>
+                </ul>
+            </div>
+        </xpath>
+    </template>
+</odoo>
