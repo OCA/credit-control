@@ -184,7 +184,8 @@ class ResPartner(models.Model):
                 record.risk_remaining_percentage = round(
                     100
                     * (record.credit_limit - record.risk_total)
-                    / record.credit_limit
+                    / record.credit_limit,
+                    2,
                 )
             else:
                 record.risk_remaining_percentage = 0
