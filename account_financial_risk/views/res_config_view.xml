@@ -33,6 +33,12 @@
                     >
                         <field name="allow_overrisk_invoice_validation" />
                     </setting>
+                    <setting
+                        id="portal_show_financial_risk"
+                        help="If enabled, portal users will be able to see their credit information."
+                    >
+                        <field name="portal_show_financial_risk" />
+                    </setting>
                 </block>
             </xpath>
         </field>
