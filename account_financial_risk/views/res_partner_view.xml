@@ -8,6 +8,18 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
+            <field name="is_company" position="after">
+                <field name="portal_show_financial_risk_visible" invisible="1" />
+            </field>
+            <xpath
+                expr="//notebook/page/field/form//field[@name='mobile']"
+                position="after"
+            >
+                <field
+                    name="show_financial_risk_in_portal"
+                    invisible="not parent.portal_show_financial_risk_visible"
+                />
+            </xpath>
             <page name="sales_purchases" position="after">
                 <page
                     name="financial_risk"
@@ -228,6 +240,10 @@
                             <field
                                 name="credit_policy"
                                 readonly="not risk_allow_edit"
+                            />
+                            <field
+                                name="show_financial_risk_in_portal"
+                                invisible="not portal_show_financial_risk_visible"
                             />
                         </group>
                     </group>
