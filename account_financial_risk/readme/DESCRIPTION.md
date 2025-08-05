@@ -9,3 +9,8 @@ can click in risk amount to view amount origin.
 
 When a non-zero credit limit is set, the last modification date is saved
 and displayed next to the credit limit.
+
+Optionally, the credit information can be shown in the portal view
+for the customer, if configured accordingly.
+
+![](../static/description/financial_risk_portal.png)
