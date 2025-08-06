@@ -29,7 +29,7 @@ class CreditControlEmailer(models.TransientModel):
         comodel_name="credit.control.line",
         string="Credit Control Lines",
         default=lambda self: self._get_line_ids(),
-        domain=[("state", "=", "to_be_sent"), ("channel", "=", "email")],
+        domain=[("state", "=", "to_be_sent"), ("channel_email", "=", True)],
     )
 
     @api.model
@@ -39,7 +39,7 @@ class CreditControlEmailer(models.TransientModel):
         domain = [
             ("state", "=", "to_be_sent"),
             ("id", "in", lines.ids),
-            ("channel", "=", "email"),
+            ("channel_email", "=", True),
         ]
         return line_obj.search(domain)
 

@@ -8,8 +8,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
-CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
-
 
 class CreditControlPolicy(models.Model):
     """Define a policy of reminder"""
@@ -320,7 +318,9 @@ class CreditControlPolicyLevel(models.Model):
         domain=[("model", "=", "credit.control.communication")],
         required=True,
     )
-    channel = fields.Selection(selection=CHANNEL_LIST, required=True)
+    channel_email = fields.Boolean(string="By e-mail")
+    channel_letter = fields.Boolean(string="By post")
+    channel_phone = fields.Boolean(string="By phone")
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
     custom_mail_text = fields.Html(

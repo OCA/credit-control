@@ -6,8 +6,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from .credit_control_policy import CHANNEL_LIST
-
 
 class CreditControlLine(models.Model):
     """A credit control line describes an amount due by a customer
@@ -62,11 +60,15 @@ class CreditControlLine(models.Model):
         "Draft and ignored lines will be "
         "generated again on the next run.",
     )
-    channel = fields.Selection(
-        selection=CHANNEL_LIST,
-        required=True,
-        readonly=False,
-    )
+
+    channel_email = fields.Boolean(string="By e-mail")
+    channel_letter = fields.Boolean(string="By post")
+    channel_phone = fields.Boolean(string="By phone")
+
+    email_sent = fields.Boolean()
+    letter_sent = fields.Boolean()
+    phone_sent = fields.Boolean()
+
     invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
         comodel_name="res.partner",
@@ -163,18 +165,21 @@ class CreditControlLine(models.Model):
         self, move_line, level, controlling_date, open_amount, default_lines_vals
     ):
         """Create credit control line"""
-        channel = level.channel
+        channel_email = level.channel_email
+        channel_letter = level.channel_letter
         partner = move_line.partner_id
-        # Fallback to letter
-        if channel == "email" and partner and not partner.email:
-            channel = "letter"
+        # Fallback to letter on missing email address
+        if channel_email and partner and not partner.email:
+            channel_email = False
+            channel_letter = True
         data = default_lines_vals.copy()
         data.update(
             {
                 "date": controlling_date,
                 "date_due": move_line.date_maturity,
                 "state": "draft",
-                "channel": channel,
+                "channel_email": channel_email,
+                "channel_letter": channel_letter,
                 "invoice_id": (move_line.move_id.id if move_line.move_id else False),
                 "partner_id": partner.id,
                 "amount_due": (
@@ -272,6 +277,50 @@ class CreditControlLine(models.Model):
         lines_to_write.write({"state": "ignored"})
 
         return new_lines
+
+    def run_channel_letter(self):
+        if not self:
+            return
+        wiz = self.env["credit.control.printer"].create({"line_ids": self.ids})
+        wiz.print_lines()
+
+    def run_channel_email(self):
+        if not self:
+            return
+        comm_obj = self.env["credit.control.communication"]
+        comms = comm_obj._generate_comm_from_credit_lines(self)
+        comms._generate_emails()
+
+    def run_channel_action(self):
+        lines = self.filtered(lambda rec: rec.state == "to_be_sent")
+        letter_lines = lines.filtered("channel_letter")
+        letter_lines.run_channel_letter()
+
+        email_lines = lines.filtered("channel_email")
+        email_lines.run_channel_email()
+
+    def _channel_list(self):
+        return ["email", "letter", "phone"]
+
+    def _update_state_on_sent(self):
+        for rec in self:
+            sent = True
+            for chan in self._channel_list():
+                to_be_sent = rec[f"channel_{chan}"]
+                sent_ok = rec[f"{chan}_sent"]
+                if to_be_sent and not sent_ok:
+                    sent = False
+                    break
+            if sent:
+                rec.state = "sent"
+
+    def _set_sent(self, channel):
+        """Check all selected channels are done"""
+        channels = self._channel_list()
+        assert channel in channels
+        if channel:
+            self.write({f"{channel}_sent": True})
+        self._update_state_on_sent()
 
     def unlink(self):
         for line in self:

@@ -155,7 +155,7 @@ class CreditControlRun(models.Model):
         """
         try:
             self.env.cr.execute(
-                "SELECT id FROM credit_control_run" " LIMIT 1 FOR UPDATE NOWAIT"
+                "SELECT id FROM credit_control_run LIMIT 1 FOR UPDATE NOWAIT"
             )
         except Exception as err:
             # In case of exception openerp will do a rollback
@@ -200,16 +200,4 @@ class CreditControlRun(models.Model):
         self.hide_change_state_button = True
 
     def run_channel_action(self):
-        self.ensure_one()
-        lines = self.line_ids.filtered(lambda x: x.state == "to_be_sent")
-        letter_lines = lines.filtered(lambda x: x.channel == "letter")
-        email_lines = lines.filtered(lambda x: x.channel == "email")
-        if email_lines:
-            comm_obj = self.env["credit.control.communication"]
-            comms = comm_obj._generate_comm_from_credit_lines(email_lines)
-            comms._generate_emails()
-        if letter_lines:
-            wiz = self.env["credit.control.printer"].create(
-                {"line_ids": letter_lines.ids}
-            )
-            return wiz.print_lines
+        self.mapped("line_ids").run_channel_action()

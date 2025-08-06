@@ -18,8 +18,10 @@ class Mail(models.Model):
                 lines = self.env["credit.control.line"].search(
                     [("communication_id", "=", msg.res_id), ("state", "=", "queued")]
                 )
-                new_state = "sent" if mail.state == "sent" else "email_error"
-                lines.write({"state": new_state})
+                if mail.state == "sent":
+                    lines._set_sent("email")
+                else:
+                    lines.write({"state": "email_error"})
 
     def _postprocess_sent_message(
         self, success_pids, failure_reason=False, failure_type=None
