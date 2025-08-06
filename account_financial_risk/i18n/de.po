@@ -20,6 +20,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<em>Draft Invoices </em>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<em>Open Invoices </em>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<em>Other Open Amount </em>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<em>Other Unpaid Amount </em>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<em>Unpaid Invoices </em>"
+msgstr ""
+
+#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
 msgstr ""
@@ -37,6 +62,21 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">)</span>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<strong>Consumed credit </strong>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<strong>Credit limit </strong>"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "<strong>Remaining credit </strong>"
 msgstr ""
 
 #. module: account_financial_risk
@@ -153,6 +193,11 @@ msgstr "Kreditregel"
 #, fuzzy
 msgid "Credit Policy"
 msgstr "Kreditregel"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+msgid "Credit information"
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
@@ -278,9 +323,31 @@ msgid "General Limits"
 msgstr "Allgemeine Eingrenzung"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__portal_show_financial_risk_visible
+msgid ""
+"Helper field to control visibility of the partner option based on global "
+"config."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
 msgid "ID"
 msgstr "ID"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__portal_show_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid "If enabled, portal users will be able to see their credit information."
+msgstr ""
+
+#. module: account_financial_risk
+#: model:ir.model.fields,help:account_financial_risk.field_res_partner__show_financial_risk_in_portal
+#: model:ir.model.fields,help:account_financial_risk.field_res_users__show_financial_risk_in_portal
+msgid ""
+"If enabled, this partner will see their financial risk in the portal, "
+"provided the global setting is also enabled."
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -424,6 +491,12 @@ msgid "Partner risk exceeded"
 msgstr "Partnerrisiko überschritten"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
+msgid "Portal Show Financial Risk Visible"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
 msgstr ""
@@ -556,6 +629,13 @@ msgstr "Risikoüberschreitung"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Set 0 if it is not locked"
 msgstr "Setze 0, wenn nicht gesperrt"
+
+#. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
+msgid "Show credit information in portal"
+msgstr ""
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
