@@ -45,6 +45,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="portal_show_financial_risk" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="portal_show_financial_risk" />
+                            <div class="text-muted">
+                                If enabled, portal users will be able to see their credit information.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>
