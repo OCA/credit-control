@@ -21,11 +21,66 @@
                             <field name="level" />
                             <field name="manually_overridden" />
                         </group>
+                        <group string="Channels" name="channels">
+                            <label for="channel_email" />
+                            <div>
+                                <field
+                                    name="channel_email"
+                                    class="oe_inline"
+                                    readonly="state != 'draft'"
+                                />
+                                <i
+                                    class="fa fa-paper-plane fa-fw"
+                                    title="Email sent?"
+                                />
+                                <field
+                                    name="email_sent"
+                                    readonly="state != 'draft'"
+                                    nolabel="1"
+                                    class="oe_inline"
+                                />
+                            </div>
+                            <label for="channel_letter" />
+                            <div>
+                                <field
+                                    name="channel_letter"
+                                    class="oe_inline"
+                                    readonly="state != 'draft'"
+                                />
+                                <i
+                                    class="fa fa-paper-plane fa-fw"
+                                    title="Letter sent?"
+                                />
+                                <field
+                                    name="letter_sent"
+                                    class="oe_inline"
+                                    nolabel="1"
+                                    readonly="state != 'draft'"
+                                />
+                            </div>
+                            <label for="channel_phone" />
+                            <div>
+                                <field
+                                    name="channel_phone"
+                                    class="oe_inline"
+                                    readonly="state != 'draft'"
+                                />
+                                <i
+                                    class="fa fa-paper-plane fa-fw"
+                                    title="Phone done?"
+                                />
+                                <field
+                                    name="phone_sent"
+                                    class="oe_inline"
+                                    readonly="state != 'draft'"
+                                    nolabel="1"
+                                />
+                            </div>
+                        </group>
                         <group>
                             <field name="date" readonly="state != 'draft'" />
                             <field name="date_entry" />
                             <field name="date_due" readonly="state != 'draft'" />
-                            <field name="channel" readonly="state != 'draft'" />
                             <field name="date_sent" readonly="state != 'draft'" />
                             <field name="communication_id" />
                         </group>
@@ -57,7 +112,9 @@
             <search>
                 <group>
                     <field name="date" />
-                    <field name="channel" />
+                    <field name="channel_email" />
+                    <field name="channel_letter" />
+                    <field name="channel_phone" />
                     <field name="policy_id" />
                     <separator />
                     <field name="partner_id" />
@@ -155,12 +212,6 @@
                         string="Credit policy level"
                     />
                     <filter
-                        name="group_by_channel"
-                        domain='[]'
-                        context="{'group_by': 'channel'}"
-                        string="Channel"
-                    />
-                    <filter
                         name="group_by_overridden"
                         domain='[]'
                         context="{'group_by': 'manually_overridden'}"
@@ -198,7 +249,9 @@
                 <field name="level" />
                 <field name="manually_overridden" readonly="state != 'draft'" />
                 <field name="state" />
-                <field name="channel" readonly="state != 'draft'" />
+                <field name="channel_email" readonly="state != 'draft'" />
+                <field name="channel_letter" readonly="state != 'draft'" />
+                <field name="channel_phone" readonly="state != 'draft'" />
                 <field name="invoice_id" />
                 <field name="partner_id" readonly="True" />
                 <field name="manual_followup" />

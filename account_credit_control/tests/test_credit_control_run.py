@@ -333,6 +333,94 @@ class TestCreditControlRun(TestCreditControlRunCase):
         self.assertNotIn("Invoices summary", new_communication.message_ids.body)
         self.assertNotIn(self.invoice.name, new_communication.message_ids.body)
 
+    def test_sent_multi_channel_email_letter(self):
+        """
+        Verify lines sent states changes
+        """
+        policy_level = self.env.ref("account_credit_control.3_time_1")
+        policy_level.channel_letter = True
+        policy_level.channel_email = True
+
+        # assign a email to ensure does not fallback to letter
+        self.invoice.partner_id.email = "test@test.com"
+        control_run = self.env["credit.control.run"].create(
+            {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        control_lines = self.invoice.credit_control_line_ids
+
+        marker = self.env["credit.control.marker"].create(
+            {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
+        )
+        marker.mark_lines()
+
+        # Send the email
+        self.env.user.company_id.email = "test@example.com"
+        emailer_obj = self.env["credit.control.emailer"]
+        wiz_emailer = emailer_obj.create({})
+        wiz_emailer.line_ids = control_lines
+        wiz_emailer.email_lines()
+
+        self.assertEqual(control_lines[0].state, "queued")
+        self.assertEqual(control_lines[0].email_sent, True)
+        self.assertEqual(control_lines[0].letter_sent, False)
+
+        # Print the PDF
+        printer_obj = self.env["credit.control.printer"]
+        wiz_printer = printer_obj.with_context(
+            active_model="credit.control.line", active_ids=control_lines.ids
+        ).create({})
+        wiz_printer.print_lines()
+
+        self.assertEqual(control_lines[0].state, "sent")
+        self.assertEqual(control_lines[0].email_sent, True)
+        self.assertEqual(control_lines[0].letter_sent, True)
+
+    def test_sent_multi_channel_letter_email(self):
+        """
+        Verify lines sent states changes
+        """
+        policy_level = self.env.ref("account_credit_control.3_time_1")
+        policy_level.channel_letter = True
+        policy_level.channel_email = True
+
+        # assign a email to ensure does not fallback to letter
+        self.invoice.partner_id.email = "test@test.com"
+        control_run = self.env["credit.control.run"].create(
+            {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        control_lines = self.invoice.credit_control_line_ids
+
+        marker = self.env["credit.control.marker"].create(
+            {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
+        )
+        marker.mark_lines()
+
+        # Print the PDF
+        printer_obj = self.env["credit.control.printer"]
+        wiz_printer = printer_obj.with_context(
+            active_model="credit.control.line", active_ids=control_lines.ids
+        ).create({})
+        wiz_printer.print_lines()
+
+        self.assertEqual(control_lines[0].state, "to_be_sent")
+        self.assertEqual(control_lines[0].email_sent, False)
+        self.assertEqual(control_lines[0].letter_sent, True)
+
+        # Send the email
+        self.env.user.company_id.email = "test@example.com"
+        emailer_obj = self.env["credit.control.emailer"]
+        wiz_emailer = emailer_obj.create({})
+        wiz_emailer.line_ids = control_lines
+        wiz_emailer.email_lines()
+
+        self.assertEqual(control_lines[0].state, "queue")
+        self.assertEqual(control_lines[0].email_sent, True)
+        self.assertEqual(control_lines[0].letter_sent, True)
+
     def test_open_credit_lines(self):
         """
         Test access rights when invoking method open_credit_lines

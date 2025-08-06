@@ -247,7 +247,7 @@ class CreditControlCommunication(models.Model):
                 ),
             )
 
-    def _mark_credit_line_as_sent(self):
+    def _mark_credit_line_as_sent(self, channel):
         lines = self.mapped("credit_control_line_ids")
-        lines.write({"state": "sent"})
+        lines._set_sent(channel)
         return lines

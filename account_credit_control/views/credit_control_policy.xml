@@ -33,7 +33,9 @@
                                 <list>
                                     <field name="name" />
                                     <field name="level" />
-                                    <field name="channel" />
+                                    <field name="channel_email" />
+                                    <field name="channel_letter" />
+                                    <field name="channel_phone" />
                                     <field name="delay_days" />
                                     <field name="computation_mode" />
                                     <field name="email_template_id" />
@@ -44,9 +46,13 @@
                                         <page string="Delay Setting">
                                             <group>
                                                 <field name="level" />
-                                                <field name="channel" />
                                                 <field name="delay_days" />
                                                 <field name="computation_mode" />
+                                            </group>
+                                            <group string="Channels" name="channels">
+                                                <field name="channel_email" />
+                                                <field name="channel_letter" />
+                                                <field name="channel_phone" />
                                             </group>
                                         </page>
                                         <page string="Mail and reporting">
@@ -63,7 +69,7 @@
                                                 />
                                                 <field
                                                     name="mail_show_invoice_detail"
-                                                    invisible="channel != 'email'"
+                                                    invisible="channel_email"
                                                     colspan="2"
                                                 />
                                                 <field
@@ -133,9 +139,13 @@
                     <page string="Delay Setting">
                         <group>
                             <field name="level" />
-                            <field name="channel" />
                             <field name="delay_days" />
                             <field name="computation_mode" />
+                        </group>
+                        <group string="Channels" name="channels">
+                            <field name="channel_email" />
+                            <field name="channel_letter" />
+                            <field name="channel_phone" />
                         </group>
                     </page>
                     <page string="Mail and reporting">
@@ -155,7 +165,9 @@
             <list>
                 <field name="name" />
                 <field name="level" />
-                <field name="channel" />
+                <field name="channel_email" />
+                <field name="channel_letter" />
+                <field name="channel_phone" />
                 <field name="delay_days" />
                 <field name="computation_mode" />
                 <field name="email_template_id" />
