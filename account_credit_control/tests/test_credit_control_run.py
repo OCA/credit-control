@@ -14,8 +14,7 @@ from odoo.tests import Form, RecordCapturer, tagged
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-@tagged("post_install", "-at_install")
-class TestCreditControlRun(AccountTestInvoicingCommon):
+class TestCreditControlRunCase(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -79,6 +78,9 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         cls.invoice = invoice_form.save()
         cls.invoice.action_post()
 
+
+@tagged("post_install", "-at_install")
+class TestCreditControlRun(TestCreditControlRunCase):
     def test_check_run_date(self):
         """
         Create a control run older than the last control run
@@ -127,10 +129,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         )
 
         report_regex = (
-            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>"
+            rf'Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br>"
         )
-        regex_result = re.match(report_regex, control_run.report)
+        regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
     def test_generate_credit_lines_with_max_level(self):
@@ -213,10 +215,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>"
+            rf'Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br>"
         )
-        regex_result = re.match(report_regex, control_run.report)
+        regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
         # Mark lines to be send
@@ -248,10 +250,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>"
+            rf'Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br>"
         )
-        regex_result = re.match(report_regex, control_run.report)
+        regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
         # Mark lines to be send
@@ -288,30 +290,42 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
             {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
         )
         marker.mark_lines()
-        emailer_obj = self.env["credit.control.emailer"].with_context(
-            domain_notifications_email="test@example.com"
-        )
-        wiz_emailer = emailer_obj.create({})
+        wiz_emailer = self.env["credit.control.emailer"].create({})
         wiz_emailer.line_ids = control_lines
+        self.env.user.company_id.email = "test@example.com"
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
-            wiz_emailer.email_lines()
+            wiz_emailer.with_context(queue_job__no_delay=True).email_lines()
         new_communication = capture.records
         self.assertEqual(len(new_communication), 1)
         self.assertEqual(len(new_communication.message_ids), 1)
         # Verify that the email include the invoice details.
         self.assertIn("Invoices summary", new_communication.message_ids.body)
         self.assertIn(self.invoice.name, new_communication.message_ids.body)
+
+    def test_sent_email_no_invoice_detail(self):
+        """
+        Verify that the email is sent and does not include the invoice details
+        """
+        policy_level_expected = self.env.ref("account_credit_control.3_time_1")
+        self.invoice.partner_id.email = "test@test.com"
+        self.env.user.company_id.email = "test@example.com"
+        control_run = self.env["credit.control.run"].create(
+            {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        control_lines = self.invoice.credit_control_line_ids
+        self.assertEqual(control_lines.policy_level_id, policy_level_expected)
         # CASE 2: set the policy level to show invoice details = False
         control_lines.policy_level_id.mail_show_invoice_detail = False
-        control_lines.state = "to_be_sent"
         marker = self.env["credit.control.marker"].create(
             {"name": "to_be_sent", "line_ids": [(6, 0, control_lines.ids)]}
         )
         marker.mark_lines()
-        wiz_emailer = emailer_obj.create({})
+        wiz_emailer = self.env["credit.control.emailer"].create({})
         wiz_emailer.line_ids = control_lines
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
-            wiz_emailer.email_lines()
+            wiz_emailer.with_context(queue_job__no_delay=True).email_lines()
         new_communication = capture.records
         self.assertEqual(len(new_communication), 1)
         self.assertEqual(len(new_communication.message_ids), 1)
