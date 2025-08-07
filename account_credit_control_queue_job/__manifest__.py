@@ -3,7 +3,7 @@
 
 {
     "name": "Account Credit Control",
-    "version": "18.0.1.0.1",
+    "version": "18.0.2.0.0",
     "author": "360 ERP, Odoo Community Association (OCA)",
     "category": "Finance",
     "depends": [

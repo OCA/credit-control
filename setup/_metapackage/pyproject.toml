@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-credit-control"
-version = "18.0.20250729.0"
+version = "18.0.20250807.0"
 dependencies = [
     "odoo-addon-account_credit_control==18.0.*",
+    "odoo-addon-account_credit_control_queue_job==18.0.*",
     "odoo-addon-account_financial_risk==18.0.*",
     "odoo-addon-account_invoice_overdue_reminder==18.0.*",
     "odoo-addon-account_invoice_overdue_warn==18.0.*",
