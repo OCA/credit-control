@@ -15,6 +15,7 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         "views/account_financial_risk_view.xml",
+        "views/portal_templates.xml",
         "views/res_config_view.xml",
         "views/res_partner_view.xml",
         "wizards/partner_risk_exceeded_view.xml",
