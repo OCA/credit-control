@@ -226,9 +226,7 @@ class OverdueReminderStart(models.TransientModel):
         unrec_domain = [
             ("account_id", "=", commercial_partner.property_account_receivable_id.id),
             ("partner_id", "=", commercial_partner.id),
-            ("full_reconcile_id", "=", False),
-            ("matched_debit_ids", "=", False),
-            ("matched_credit_ids", "=", False),
+            ("matching_number", "=", False),
         ]
         unrec_payments = amlo.search(
             unrec_domain
