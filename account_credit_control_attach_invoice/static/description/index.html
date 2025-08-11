@@ -370,29 +370,71 @@ ul.auto-toc {
 !! source digest: sha256:d9c70d5c69bfbbfb1b5e351cda1b82ab9e0f12fc33cf3e4cab4e05d15bed620c
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/credit-control/tree/18.0/account_credit_control_attach_invoice"><img alt="OCA/credit-control" src="https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/credit-control-18-0/credit-control-18-0-account_credit_control_attach_invoice"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/credit-control&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module allow you to print account credit control summary with
-invoices in the same report</p>
+<p>This module enhances the Odoo Credit Control process by allowing users
+to automatically attach detailed customer invoice reports to each credit
+control summary. When printing or sending a credit control summary
+(reminder) to a customer, the selected invoice report is merged into the
+same PDF document, providing a complete overview of outstanding credits
+and the underlying invoices in a single file.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#usage" id="toc-entry-1">Usage</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-2">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-3">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-4">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-5">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-6">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-7">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
+<li><a class="reference internal" href="#configuration-steps" id="toc-entry-2">Configuration Steps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-3">Usage</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-4">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-5">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-6">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-7">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-8">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-9">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<div class="section" id="configuration-steps">
+<h2><a class="toc-backref" href="#toc-entry-2">Configuration Steps</a></h2>
+<ol class="arabic simple">
+<li><strong>Dependencies</strong>: Ensure that the <tt class="docutils literal">account_credit_control</tt> module
+is installed and configured in your Odoo database.</li>
+<li><strong>Module Installation</strong>: Install this module
+(<tt class="docutils literal">account_credit_control_attach_invoice</tt>) via the Apps menu.</li>
+<li><strong>Configure Report to Attach</strong>:<ul>
+<li>Go to the Accounting\Invoicing app.</li>
+<li>Open the Configuration settings.</li>
+<li>In the Credit Control section, locate the “Report to attach” field.</li>
+<li>Select the invoice report you want to merge with credit control
+summaries (e.g., Customer Invoice, Invoice with Payments, etc.).</li>
+<li>Save your settings.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
-<p>In accounting settings chose a report to be printed with the credit
-control summary</p>
+<h1><a class="toc-backref" href="#toc-entry-3">Usage</a></h1>
+<ol class="arabic simple">
+<li>Create or select a Credit Control Run from the <em>Credit Control Run</em>
+menu in the Accounting\Invoicing app.</li>
+<li>Use the <em>Compute Credit Lines</em> button to generate credit control
+lines for overdue invoices.</li>
+<li>Review the generated credit control lines. Each line represents an
+invoice or receivable to follow up.</li>
+<li>When ready to communicate with customers, print or send the Credit
+Control Summary report from the run.</li>
+<li>The system will automatically merge the selected invoice report (as
+configured) into the credit control summary PDF for each customer, so
+recipients receive both the summary and detailed invoices in one
+document.</li>
+<li>Download, print, or send the combined report as needed.</li>
+</ol>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/credit-control/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -400,15 +442,15 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-3">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-5">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-4">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Authors</a></h2>
 <ul class="simple">
 <li>Camptocamp</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-5">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Contributors</a></h2>
 <ul class="simple">
 <li>Telmo Santos &lt;<a class="reference external" href="mailto:telmo.santos&#64;camptocamp.com">telmo.santos&#64;camptocamp.com</a>&gt;</li>
 <li>Victor Vermot-Petit-Outhenin &lt;<a class="reference external" href="mailto:victorvermot&#64;gmail.com">victorvermot&#64;gmail.com</a>&gt;</li>
@@ -416,7 +458,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-6">Other credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-8">Other credits</a></h2>
 <p>The migration of this module from 17.0 to 18.0 was financially supported
 by:</p>
 <ul class="simple">
@@ -424,7 +466,7 @@ by:</p>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-7">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-9">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org">
 <img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />

@@ -28,19 +28,53 @@ Account credit control attach invoices
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allow you to print account credit control summary with
-invoices in the same report
+This module enhances the Odoo Credit Control process by allowing users
+to automatically attach detailed customer invoice reports to each credit
+control summary. When printing or sending a credit control summary
+(reminder) to a customer, the selected invoice report is merged into the
+same PDF document, providing a complete overview of outstanding credits
+and the underlying invoices in a single file.
 
 **Table of contents**
 
 .. contents::
    :local:
 
+Configuration
+=============
+
+Configuration Steps
+-------------------
+
+1. **Dependencies**: Ensure that the ``account_credit_control`` module
+   is installed and configured in your Odoo database.
+2. **Module Installation**: Install this module
+   (``account_credit_control_attach_invoice``) via the Apps menu.
+3. **Configure Report to Attach**:
+
+   - Go to the Accounting\\Invoicing app.
+   - Open the Configuration settings.
+   - In the Credit Control section, locate the "Report to attach" field.
+   - Select the invoice report you want to merge with credit control
+     summaries (e.g., Customer Invoice, Invoice with Payments, etc.).
+   - Save your settings.
+
 Usage
 =====
 
-In accounting settings chose a report to be printed with the credit
-control summary
+1. Create or select a Credit Control Run from the *Credit Control Run*
+   menu in the Accounting\\Invoicing app.
+2. Use the *Compute Credit Lines* button to generate credit control
+   lines for overdue invoices.
+3. Review the generated credit control lines. Each line represents an
+   invoice or receivable to follow up.
+4. When ready to communicate with customers, print or send the Credit
+   Control Summary report from the run.
+5. The system will automatically merge the selected invoice report (as
+   configured) into the credit control summary PDF for each customer, so
+   recipients receive both the summary and detailed invoices in one
+   document.
+6. Download, print, or send the combined report as needed.
 
 Bug Tracker
 ===========
