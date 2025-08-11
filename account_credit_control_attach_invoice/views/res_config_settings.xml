@@ -11,7 +11,7 @@
                             <label
                                 for="report_to_attach_id"
                                 class="col-lg-4 o_light_label"
-                                string="Report to attach"
+                                string="Report to attach to credit control summary"
                             />
                             <field
                                 name="report_to_attach_id"
