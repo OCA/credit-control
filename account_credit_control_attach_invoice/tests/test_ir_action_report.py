@@ -81,8 +81,11 @@ class TestIrActionsReport(SavepointCaseWithUserDemo):
 
     @patch("odoo.addons.base.models.ir_actions_report.IrActionsReport._render_qweb_pdf")
     def test_render_qweb_pdf_with_attached_report(self, mock_render_qweb_pdf):
-        """Test that the PDF merging occurs when report_to_attach_id is true."""
-        self.company.report_to_attach_id = self.report
+        """
+        Test that the PDF merging occurs when
+        credit_control_report_to_attach_id is true.
+        """
+        self.company.credit_control_report_to_attach_id = self.report
         mock_render_qweb_pdf.side_effect = lambda x, res_ids, data=None: (
             b"PDF_CONTENT",
             "pdf",
@@ -110,9 +113,9 @@ class TestIrActionsReport(SavepointCaseWithUserDemo):
     def test_render_qweb_pdf_without_attached_report(self, mock_render_qweb_pdf):
         """
         Test that the report is generated normally when
-        report_to_attach_id is false.
+        credit_control_report_to_attach_id is false.
         """
-        self.company.report_to_attach_id = False
+        self.company.credit_control_report_to_attach_id = False
         mock_render_qweb_pdf.side_effect = lambda x, res_ids, data=None: (
             b"PDF_CONTENT",
             "pdf",

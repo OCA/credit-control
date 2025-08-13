@@ -18,13 +18,16 @@ class IrActionsReport(models.Model):
             "account_credit_control.report_credit_control_summary",
             "account_credit_control.credit_control_summary",
         ]
-        if report_xml_id in reports and self.env.user.company_id.report_to_attach_id:
+        if (
+            report_xml_id in reports
+            and self.env.user.company_id.credit_control_report_to_attach_id
+        ):
             io_list = []
             for comm in self.env["credit.control.communication"].browse(res_ids):
                 comm_pdf, _ = super()._render_qweb_pdf(report_ref, comm.id, data)
                 io_list.append(io.BytesIO(comm_pdf))
                 invoices = comm.mapped("credit_control_line_ids.invoice_id")
-                inv_report = self.env.user.company_id.report_to_attach_id
+                inv_report = self.env.user.company_id.credit_control_report_to_attach_id
                 for inv in invoices:
                     invoice_pdf, _ = inv_report._render_qweb_pdf(
                         inv_report.xml_id, data=data, res_ids=[inv.id]

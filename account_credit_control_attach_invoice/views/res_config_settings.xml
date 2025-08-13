@@ -9,12 +9,12 @@
                     <div class="content-group">
                         <div class="row mt8">
                             <label
-                                for="report_to_attach_id"
+                                for="credit_control_report_to_attach_id"
                                 class="col-lg-4 o_light_label"
                                 string="Report to attach to credit control summary"
                             />
                             <field
-                                name="report_to_attach_id"
+                                name="credit_control_report_to_attach_id"
                                 domain="[('model', '=', 'account.move')]"
                             />
                         </div>
