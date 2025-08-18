@@ -13,7 +13,7 @@
         <field name="lang">{{object.contact_address_id.lang or 'en_US'}}</field>
         <field name="report_template" ref="credit_control_summary" />
         <field name="body_html" type="html">
-            <p>Dear <t t.out="object.contact_address_id.name or ''" /></p>
+            <p>Dear <t t-out="object.contact_address_id.name or ''" /></p>
             <br />
             <br />
             <t t-out="object.policy_level_id.custom_mail_text" />
