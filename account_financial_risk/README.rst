@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ======================
 Account Financial Risk
 ======================
@@ -17,7 +13,7 @@ Account Financial Risk
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
@@ -44,7 +40,13 @@ can click in risk amount to view amount origin.
 When a non-zero credit limit is set, the last modification date is saved
 and displayed next to the credit limit.
 
+Optionally, the credit information can be shown in the portal view for
+the customer, if configured accordingly.
+
+|image2|
+
 .. |image1| image:: https://raw.githubusercontent.com/OCA/credit-control/18.0/account_financial_risk/static/description/financial_risk_click.png
+.. |image2| image:: https://raw.githubusercontent.com/OCA/credit-control/18.0/account_financial_risk/static/description/financial_risk_portal.png
 
 **Table of contents**
 
@@ -61,6 +63,13 @@ To configure this module, you need to:
 3. In the *Customer Payments* section, fill *Maturity Margin* for
    setting the number of days to last after the due date to consider an
    invoice as unpaid.
+
+(Optional) To display credit information in the customer portal, go to
+*Invoicing > Configuration > Settings > Financial Risk* and activate
+**Show credit information in portal**.
+
+Credit information can be displayed on the portal if it is enabled
+globally, and can be disabled individually for certain contacts.
 
 Usage
 =====
@@ -99,17 +108,17 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Carlos Dauden
-  - Pedro M. Baeza
-  - Ernesto Tejeda
+   -  Carlos Dauden
+   -  Pedro M. Baeza
+   -  Ernesto Tejeda
 
-- Agathe Mollé <agathe.molle@savoirfairelinux.com>
-- Ugne Sinkeviciene <ugne@versada.eu>
-- `Ooops404 <https://www.ooops404.com>`__:
+-  Agathe Mollé <agathe.molle@savoirfairelinux.com>
+-  Ugne Sinkeviciene <ugne@versada.eu>
+-  `Ooops404 <https://www.ooops404.com>`__:
 
-  - Ilyas <irazor147@gmail.com>
+   -  Ilyas <irazor147@gmail.com>
 
 Maintainers
 -----------

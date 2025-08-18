@@ -7,6 +7,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import str2bool
 
 
 class ResPartner(models.Model):
@@ -168,6 +169,32 @@ class ResPartner(models.Model):
         compute="_compute_risk_remaining",
         string="Risk Remaining (Percentage)",
     )
+    show_financial_risk_in_portal = fields.Boolean(
+        string="Show credit information in portal",
+        default=True,
+        help="If enabled, this partner will see their financial risk in the portal, "
+        "provided the global setting is also enabled.",
+    )
+    portal_show_financial_risk_visible = fields.Boolean(
+        compute="_compute_portal_show_financial_risk_visible",
+        help="Helper field to control visibility of the partner option based on global "
+        "config.",
+    )
+
+    @api.model
+    def _commercial_fields(self):
+        return super()._commercial_fields() + [
+            "show_financial_risk_in_portal",
+        ]
+
+    @api.depends()
+    def _compute_portal_show_financial_risk_visible(self):
+        global_enabled = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("account_financial_risk.portal_show_financial_risk")
+        )
+        self.portal_show_financial_risk_visible = str2bool(global_enabled)
 
     @api.depends("credit_limit")
     def _compute_date_credit_limit(self):
@@ -184,7 +211,8 @@ class ResPartner(models.Model):
                 record.risk_remaining_percentage = round(
                     100
                     * (record.credit_limit - record.risk_total)
-                    / record.credit_limit
+                    / record.credit_limit,
+                    2,
                 )
             else:
                 record.risk_remaining_percentage = 0
