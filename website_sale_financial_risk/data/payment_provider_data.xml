@@ -27,4 +27,10 @@
             </p>
         </field>
     </record>
+
+    <record id="payment_method_credit" model="account.payment.method">
+        <field name="name">Credit</field>
+        <field name="code">credit</field>
+        <field name="payment_type">inbound</field>
+    </record>
 </odoo>
