@@ -602,3 +602,34 @@ class ResPartner(models.Model):
             "context": self.env.context,
             "domain": domain,
         }
+
+    def _get_financial_risk_lines(self):
+        # Returns [(flag, value, label), ...] already evaluated for the partner itself.
+        self.ensure_one()
+        return [
+            (
+                self.risk_invoice_draft_include,
+                self.risk_invoice_draft,
+                self._fields["risk_invoice_draft"].string,
+            ),
+            (
+                self.risk_invoice_open_include,
+                self.risk_invoice_open,
+                self._fields["risk_invoice_open"].string,
+            ),
+            (
+                self.risk_invoice_unpaid_include,
+                self.risk_invoice_unpaid,
+                self._fields["risk_invoice_unpaid"].string,
+            ),
+            (
+                self.risk_account_amount_include,
+                self.risk_account_amount,
+                self._fields["risk_account_amount"].string,
+            ),
+            (
+                self.risk_account_amount_unpaid_include,
+                self.risk_account_amount_unpaid,
+                self._fields["risk_account_amount_unpaid"].string,
+            ),
+        ]
