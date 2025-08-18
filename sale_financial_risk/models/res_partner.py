@@ -70,3 +70,14 @@ class ResPartner(models.Model):
             return "sale.order.line", self._get_risk_sale_order_domain()
         else:
             return super()._get_field_risk_model_domain(field_name)
+
+    def _get_financial_risk_lines(self):
+        lines = super()._get_financial_risk_lines()
+        lines += [
+            (
+                self.risk_sale_order_include,
+                self.risk_sale_order,
+                self._fields["risk_sale_order"].string,
+            )
+        ]
+        return lines
