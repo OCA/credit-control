@@ -66,7 +66,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
 msgid ""
-"<p>Dear <t t.out=\"object.contact_address_id.name or ''\"/></p>\n"
+"<p>Dear <t t-out=\"object.contact_address_id.name or ''\"/></p>\n"
 "            <br/>\n"
 "            <br/>\n"
 "            <t t-out=\"object.policy_level_id.custom_mail_text\"/>\n"
