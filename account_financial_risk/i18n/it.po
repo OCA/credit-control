@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2025-07-25 16:21+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2025-08-19 15:27+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/it/)\n"
 "Language: it\n"
@@ -22,27 +22,27 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<em>Draft Invoices </em>"
-msgstr ""
+msgstr "<em>Fatture in bozza </em>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<em>Open Invoices </em>"
-msgstr ""
+msgstr "<em>Fatture aperte </em>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<em>Other Open Amount </em>"
-msgstr ""
+msgstr "<em>Altro importo aperto </em>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<em>Other Unpaid Amount </em>"
-msgstr ""
+msgstr "<em>Altro valore non pagato </em>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<em>Unpaid Invoices </em>"
-msgstr ""
+msgstr "<em>Fatture non pagate </em>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -67,17 +67,17 @@ msgstr "<span class=\"oe_read_only\">)</span>"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<strong>Consumed credit </strong>"
-msgstr ""
+msgstr "<strong>Credito consumato </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<strong>Credit limit </strong>"
-msgstr ""
+msgstr "<strong>Limite credito </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "<strong>Remaining credit </strong>"
-msgstr ""
+msgstr "<strong>Credito residuo </strong>"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
@@ -202,7 +202,7 @@ msgstr "Politica del credito"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
 msgid "Credit information"
-msgstr ""
+msgstr "Informazioni credito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
@@ -329,6 +329,8 @@ msgid ""
 "Helper field to control visibility of the partner option based on global "
 "config."
 msgstr ""
+"Campo di aiuto per controllare la visibilità dell'opzione partner in base "
+"alla configurazione globale."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
@@ -340,6 +342,8 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "If enabled, portal users will be able to see their credit information."
 msgstr ""
+"Se abilitata, gli utenti portale potranno vedere le loro informazioni di "
+"credito."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__show_financial_risk_in_portal
@@ -348,6 +352,8 @@ msgid ""
 "If enabled, this partner will see their financial risk in the portal, "
 "provided the global setting is also enabled."
 msgstr ""
+"Se abilitata, questo partner vedrà il proprio rischio finanziario nel "
+"portale, a condizione che sia abilitata anche l'impostazione globale."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -479,7 +485,7 @@ msgstr "Fido partner superato"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
 msgid "Portal Show Financial Risk Visible"
-msgstr ""
+msgstr "Il portale visualizza il rischio finanziario visibile"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
@@ -617,7 +623,7 @@ msgstr "Imposta a 0 se non bloccato"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
 msgid "Show credit information in portal"
-msgstr ""
+msgstr "Visualizza informazioni del credito nel portale"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
