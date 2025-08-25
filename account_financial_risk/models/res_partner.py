@@ -135,7 +135,21 @@ class ResPartner(models.Model):
     )
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
-    credit_limit = fields.Float(tracking=True)
+    credit_limit = fields.Float(string="Credit Limit (Original)")
+    # Field credit_limit_sudo is created to make sure financial risk users that
+    # don't have accounting permissions can see and edit the credit limit.
+    credit_limit_sudo = fields.Float(
+        string="Credit Limit",
+        help="Credit limit specific to this partner.",
+        company_dependent=True,
+        copy=False,
+        readonly=False,
+        store=True,
+        tracking=True,
+        compute="_compute_credit_limit_sudo",
+        inverse="_inverse_credit_limit_sudo",
+        groups="account_financial_risk.group_account_financial_risk_user",
+    )
     credit_currency = fields.Selection(
         selection=[
             ("company", "Company Currency"),
@@ -186,6 +200,15 @@ class ResPartner(models.Model):
         return super()._commercial_fields() + [
             "show_financial_risk_in_portal",
         ]
+
+    @api.depends("credit_limit")
+    def _compute_credit_limit_sudo(self):
+        for partner in self:
+            partner.credit_limit_sudo = partner.sudo().credit_limit
+
+    def _inverse_credit_limit_sudo(self):
+        for partner in self:
+            partner.sudo().credit_limit = partner.credit_limit_sudo
 
     @api.depends()
     def _compute_portal_show_financial_risk_visible(self):

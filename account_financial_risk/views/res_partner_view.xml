@@ -210,10 +210,10 @@
                                 />)
                                 </span>
                             </div>
-                            <label for="credit_limit" />
+                            <label for="credit_limit_sudo" />
                             <div class="o_row">
                                 <field
-                                    name="credit_limit"
+                                    name="credit_limit_sudo"
                                     widget="monetary"
                                     options="{'currency_field': 'risk_currency_id'}"
                                     readonly="not risk_allow_edit"
