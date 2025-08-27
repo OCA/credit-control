@@ -70,14 +70,14 @@ class ResPartner(models.Model):
     def _compute_company_credit_limit(self):
         for partner in self:
             partner.company_credit_limit = max(
-                0, (partner.credit_limit - partner.insurance_credit_limit)
+                0, (partner.sudo().credit_limit - partner.insurance_credit_limit)
             )
 
     @api.onchange("insurance_credit_limit")
     def _onchange_insurance_credit_limit_update_total_limit(self):
         """Set the total limit to the insurance limit if it is greater."""
-        if self.insurance_credit_limit > self.credit_limit:
-            self.credit_limit = self.insurance_credit_limit
+        if self.insurance_credit_limit > self.sudo().credit_limit:
+            self.sudo().credit_limit = self.insurance_credit_limit
 
     @api.onchange("use_partner_credit_limit")
     def _onchange_use_partner_credit_limit(self):
