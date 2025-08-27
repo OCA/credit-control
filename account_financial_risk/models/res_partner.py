@@ -168,6 +168,7 @@ class ResPartner(models.Model):
     risk_remaining_percentage = fields.Float(
         compute="_compute_risk_remaining",
         string="Risk Remaining (Percentage)",
+        search="_search_risk_remaining_percentage",
     )
     show_financial_risk_in_portal = fields.Boolean(
         string="Show credit information in portal",
@@ -513,6 +514,15 @@ class ResPartner(models.Model):
             return [("id", "in", risk_partner_ids)]
         else:
             return [("id", "not in", risk_partner_ids)]
+
+    @api.model
+    def _search_risk_remaining_percentage(self, operator, value):
+        # Make risk_remaining_percentage searchable.
+        partners = self.search([("credit_limit", ">", 0)])
+        partner_ids = partners.filtered_domain(
+            [("risk_remaining_percentage", operator, value)]
+        ).ids
+        return [("id", "in", partner_ids)]
 
     @api.model
     def _max_risk_date_due(self):
