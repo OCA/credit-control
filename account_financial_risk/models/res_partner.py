@@ -242,6 +242,18 @@ class ResPartner(models.Model):
             else:
                 partner.risk_currency_id = partner.currency_id
 
+    @api.model
+    def _setup_complete(self):
+        # Change when we find a better way to add a group while maintaining inheritance.
+        res = super()._setup_complete()
+        field = self._fields["credit_limit"]
+        new_group = "account_financial_risk.group_account_financial_risk_user"
+        group_list = field.groups.split(",") if field.groups else []
+        if new_group not in group_list:
+            group_list.append(new_group)
+            field.groups = ",".join(group_list)
+        return res
+
     @api.onchange("credit_currency")
     def _onchange_credit_currency(self):
         for partner in self:
