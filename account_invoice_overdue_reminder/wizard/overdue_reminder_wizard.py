@@ -7,8 +7,9 @@ import logging
 from collections import defaultdict
 
 from dateutil.relativedelta import relativedelta
+from markupsafe import Markup
 
-from odoo import _, api, fields, models, tools
+from odoo import Command, _, api, fields, models, tools
 from odoo.exceptions import UserError
 
 logger = logging.getLogger(__name__)
@@ -82,7 +83,7 @@ class OverdueReminderStart(models.TransientModel):
                 "last_entry_create_date": last and last.create_date or False,
                 "last_entry_create_uid": last and last.create_uid.id or False,
             }
-            payments.append((0, 0, vals))
+            payments.append(Command.create(vals))
         res.update(
             {
                 "payment_ids": payments,
@@ -276,9 +277,9 @@ class OverdueReminderStart(models.TransientModel):
             "partner_id": partner_id,
             "commercial_partner_id": commercial_partner.id,
             "user_id": self.env.user.id,
-            "invoice_ids": [(6, 0, invs.ids)],
+            "invoice_ids": [Command.set(invs.ids)],
             "company_id": self.company_id.id,
-            "warn_unreconciled_move_line_ids": [(6, 0, warn_unrec.ids)],
+            "warn_unreconciled_move_line_ids": [Command.set(warn_unrec.ids)],
             "interface": self.interface,
         }
         return vals
@@ -586,7 +587,7 @@ class OverdueReminderStep(models.TransientModel):
         mail = self.env["mail.mail"].sudo().create(mvals)
         if self.company_id.overdue_reminder_attach_invoice:
             attachment_ids = self._get_attachment_ids(mail)
-            mail.write({"attachment_ids": [(6, 0, attachment_ids)]})
+            mail.write({"attachment_ids": [Command.set(attachment_ids)]})
         vals = {"mail_id": mail.id}
         return vals
 
@@ -621,7 +622,33 @@ class OverdueReminderStep(models.TransientModel):
             rvals = {"invoice_id": inv.id}
             if self.reminder_type != "phone":
                 rvals["counter"] = inv.overdue_reminder_counter + 1
-            vals["reminder_ids"].append((0, 0, rvals))
+            vals["reminder_ids"].append(Command.create(rvals))
+            if self.reminder_type == "mail":
+                inv.message_post(
+                    body=Markup(
+                        _(
+                            "<strong>Overdue reminder</strong> sent by mail: "
+                            "<a href=# data-oe-model=mail.mail "
+                            "data-oe-id=%(mail_id)s>%(mail_subject)s</a>.",
+                            mail_id=vals["mail_id"],
+                            mail_subject=self.mail_subject,
+                        )
+                    )
+                )
+            elif self.reminder_type == "phone":
+                inv.message_post(
+                    body=Markup(
+                        _(
+                            "<strong>Overdue reminder</strong> by phone. "
+                            "Result/Info: %(result)s.",
+                            result=self.result_id.name,
+                        )
+                    )
+                )
+            elif self.reminder_type == "post":
+                inv.message_post(
+                    body=Markup(_("<strong>Overdue reminder</strong> sent by post."))
+                )
 
     def print_letter(self):
         self.check_warnings()
