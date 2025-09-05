@@ -117,8 +117,8 @@ msgid ""
 "                            </td>\n"
 "                        </tr>\n"
 "                    </t>\n"
-"                    <t t-foreach=\"object.total_residual()\" t-as="
-"\"total_residual\">\n"
+"                    <t t-foreach=\"object.total_residual()\" t-"
+"as=\"total_residual\">\n"
 "                        <tr>\n"
 "                            <td></td>\n"
 "                            <td></td>\n"
@@ -145,8 +145,8 @@ msgid ""
 "                <p>If you made a payment for these invoices a few days ago, "
 "please ignore this email.</p>\n"
 "\n"
-"                <t t-if=\"object.company_id.overdue_reminder_attach_invoice"
-"\">\n"
+"                <t t-if=\"object.company_id."
+"overdue_reminder_attach_invoice\">\n"
 "                    <p>You will find enclosed the overdue invoices.</p>\n"
 "                </t>\n"
 "\n"
@@ -170,6 +170,29 @@ msgid ""
 "\n"
 "            </div>\n"
 "        "
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+#, python-format
+msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+#, python-format
+msgid ""
+"<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-model=mail."
+"mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+#, python-format
+msgid "<strong>Overdue reminder</strong> sent by post."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
