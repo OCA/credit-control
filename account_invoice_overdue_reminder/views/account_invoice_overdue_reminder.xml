@@ -72,7 +72,7 @@
     <field name="name">account.invoice.overdue.reminder.tree</field>
     <field name="model">account.invoice.overdue.reminder</field>
     <field name="arch" type="xml">
-        <tree>
+        <tree create="0">
             <field
                     name="counter"
                     attrs="{'invisible': [('action_reminder_type', '=', 'phone')]}"
@@ -105,7 +105,7 @@
     <field name="model">account.invoice.overdue.reminder</field>
     <field name="priority">100</field>
     <field name="arch" type="xml">
-        <tree>
+        <tree create="0">
             <field name="invoice_id" />
             <field name="counter" />
         </tree>

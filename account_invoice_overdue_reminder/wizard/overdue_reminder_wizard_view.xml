@@ -103,24 +103,25 @@
     <field name="model">overdue.reminder.step</field>
     <field name="arch" type="xml">
         <form>
-            <group name="main" col="4">
-                <field name="commercial_partner_id" />
-                <field name="counter" />
-                <field
-                        name="partner_id"
-                        domain="[('id', 'child_of', commercial_partner_id)]"
-                    />
-                <field name="partner_phone" widget="phone" />
-                <field name="partner_email" widget="email" />
-                <field name="partner_mobile" widget="phone" />
-                <field name="date" invisible="1" />
-                <field name="company_id" invisible="1" />
+            <group name="main">
+                <group name="main-left">
+                     <field name="commercial_partner_id" />
+                    <field
+                            name="partner_id"
+                            domain="[('id', 'child_of', commercial_partner_id)]"
+                        />
+                    <field name="partner_email" widget="email" />
+                    <field name="date" invisible="1" />
+                    <field name="company_id" invisible="1" />
+                </group>
+                <group name="main-right">
+                    <field name="counter" />
+                    <field name="partner_phone" widget="phone" />
+                    <field name="partner_mobile" widget="phone" />
+                </group>
             </group>
-            <group
-                    attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}"
-                    string="WARNING: unreconciled payments/refunds"
-                    col="1"
-                >
+            <div attrs="{'invisible': [('warn_unreconciled_move_line_ids', '=', [])]}">
+                <h4 style="color: red">WARNING: unreconciled payments/refunds</h4>
                 <p>
                     Customer has unreconciled payments/refunds. You should
                     reconcile these payments/refunds and start the overdue
@@ -129,7 +130,7 @@
                     be reconciled with an open invoice.
                 </p>
                 <field name="warn_unreconciled_move_line_ids" nolabel="1" colspan="2" />
-            </group>
+            </div>
             <group name="invoices">
                 <field
                         name="invoice_ids"
