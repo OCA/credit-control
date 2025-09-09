@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-29 22:25+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>\n"
+"PO-Revision-Date: 2025-09-09 14:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -314,6 +314,7 @@ msgstr ""
 #, python-format
 msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
 msgstr ""
+"<strong>Promemoria scadenza</strong> da telefono. Risultato/Info: %(result)s."
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
@@ -323,13 +324,15 @@ msgid ""
 "<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-model=mail."
 "mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
 msgstr ""
+"<strong>Promemoria scadenza</strong> inviato per e-mail: <a href=# data-oe-"
+"model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 #, python-format
 msgid "<strong>Overdue reminder</strong> sent by post."
-msgstr ""
+msgstr "<strong>Promemoria scadenza</strong> inviata per posta."
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
