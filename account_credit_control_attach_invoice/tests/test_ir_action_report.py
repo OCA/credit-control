@@ -39,7 +39,7 @@ class TestIrActionsReport(SavepointCaseWithUserDemo):
                 "computation_mode": "net_days",
                 "delay_days": 2,
                 "email_template_id": cls.mail_template.id,
-                "channel": "email",
+                "channel_email": True,
                 "custom_mail_text": "<t t-out='4 + 9'/>",
                 "custom_text": "<t t-out='4 + 9'/>",
             }
@@ -68,7 +68,7 @@ class TestIrActionsReport(SavepointCaseWithUserDemo):
                             "partner_id": cls.partner.id,
                             "move_line_id": cls.invoice.line_ids[0].id,
                             "policy_level_id": cls.credit_control_policy_level.id,
-                            "channel": "email",
+                            "channel_email": True,
                             "date": Datetime.now(),
                             "date_due": Datetime.now(),
                             "amount_due": 25,
