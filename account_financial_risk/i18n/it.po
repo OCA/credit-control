@@ -20,31 +20,6 @@ msgstr ""
 "X-Generator: Weblate 5.10.4\n"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
-msgid "<em>Draft Invoices </em>"
-msgstr "<em>Fatture in bozza </em>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
-msgid "<em>Open Invoices </em>"
-msgstr "<em>Fatture aperte </em>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
-msgid "<em>Other Open Amount </em>"
-msgstr "<em>Altro importo aperto </em>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
-msgid "<em>Other Unpaid Amount </em>"
-msgstr "<em>Altro valore non pagato </em>"
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
-msgid "<em>Unpaid Invoices </em>"
-msgstr "<em>Fatture non pagate </em>"
-
-#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
 msgstr "<span class=\"oe_inline\"> (</span>"
@@ -65,17 +40,17 @@ msgid "<span class=\"oe_read_only\">)</span>"
 msgstr "<span class=\"oe_read_only\">)</span>"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Consumed credit </strong>"
 msgstr "<strong>Credito consumato </strong>"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Credit limit </strong>"
 msgstr "<strong>Limite credito </strong>"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Remaining credit </strong>"
 msgstr "<strong>Credito residuo </strong>"
 
@@ -202,7 +177,7 @@ msgid "Credit Policy"
 msgstr "Politica del credito"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.portal_layout
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
 msgstr "Informazioni credito"
 
@@ -742,6 +717,21 @@ msgstr "Utente"
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
 msgstr "Valida movimento contabile"
+
+#~ msgid "<em>Draft Invoices </em>"
+#~ msgstr "<em>Fatture in bozza </em>"
+
+#~ msgid "<em>Open Invoices </em>"
+#~ msgstr "<em>Fatture aperte </em>"
+
+#~ msgid "<em>Other Open Amount </em>"
+#~ msgstr "<em>Altro importo aperto </em>"
+
+#~ msgid "<em>Other Unpaid Amount </em>"
+#~ msgstr "<em>Altro valore non pagato </em>"
+
+#~ msgid "<em>Unpaid Invoices </em>"
+#~ msgstr "<em>Fatture non pagate </em>"
 
 #, fuzzy
 #~ msgid ""
