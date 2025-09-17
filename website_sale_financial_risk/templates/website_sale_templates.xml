@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="payment" inherit_id="website_sale.payment">
+        <xpath expr="//t[@t-call='website_sale.cart_summary']" position="before">
+            <t t-call="account_financial_risk.financial_risk_info">
+                <t t-set="partner" t-value="order.partner_id" />
+            </t>
+        </xpath>
+    </template>
+</odoo>
