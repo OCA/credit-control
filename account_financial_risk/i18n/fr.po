@@ -21,31 +21,6 @@ msgstr ""
 "X-Generator: Weblate 4.14.1\n"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
-msgid "<em>Draft Invoices </em>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
-msgid "<em>Open Invoices </em>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
-msgid "<em>Other Open Amount </em>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
-msgid "<em>Other Unpaid Amount </em>"
-msgstr ""
-
-#. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
-msgid "<em>Unpaid Invoices </em>"
-msgstr ""
-
-#. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
 msgstr ""
@@ -66,17 +41,17 @@ msgid "<span class=\"oe_read_only\">)</span>"
 msgstr ""
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Consumed credit </strong>"
 msgstr ""
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Credit limit </strong>"
 msgstr ""
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Remaining credit </strong>"
 msgstr ""
 
@@ -194,7 +169,7 @@ msgid "Credit Policy"
 msgstr "Politique de crédit"
 
 #. module: account_financial_risk
-#: model_terms:ir.ui.view,arch_db:account_financial_risk.side_content
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
 msgstr ""
 
