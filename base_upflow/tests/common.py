@@ -157,7 +157,13 @@ class AccountingCommonCase(TestCase):
 
         :param partner: False value means not set while None means get partner from invoice
         """
-        (bank_journal, _method, payment_date, amount, _currency,) = cls._payment_params(
+        (
+            bank_journal,
+            _method,
+            payment_date,
+            amount,
+            _currency,
+        ) = cls._payment_params(
             invoice,
             bank_journal=bank_journal,
             method=None,

@@ -4,12 +4,12 @@
 {
     "name": "Base Upflow.io",
     "summary": "Base module to generate Upflow.io API payloads format from odoo object",
-    "version": "14.0.2.0.1",
+    "version": "17.0.1.0.0",
     "development_status": "Alpha",
     "category": "EDI",
     "website": "https://github.com/OCA/credit-control",
     "author": "Pierre Verkest, Odoo Community Association (OCA)",
-    "maintainers": ["petrus-v"],
+    "maintainers": ["foodles", "petrus-v"],
     "license": "AGPL-3",
     "application": True,
     "depends": [

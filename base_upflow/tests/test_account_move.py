@@ -170,7 +170,6 @@ class TestAccountMoveUpflowType(SavepointCase, AccountingCommonCase):
 
     @mute_logger("odoo.addons.base_upflow.models.account_move")
     def test_receivables_null(self):
-
         account_user_type = self.env["account.account.type"].create(
             {
                 "name": "Test account type",
@@ -217,4 +216,4 @@ class TestAccountMoveUpflowType(SavepointCase, AccountingCommonCase):
             }
         )
         entry_move.action_post()
-        self.assertEquals(entry_move.upflow_type, "none")
+        self.assertEqual(entry_move.upflow_type, "none")
