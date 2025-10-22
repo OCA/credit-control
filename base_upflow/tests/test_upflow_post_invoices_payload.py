@@ -540,7 +540,9 @@ class UpflowAccountMovePayloadTest(SavepointCase, AccountingCommonCase):
         ]
 
         for partial_reconcile, expected_payload in zip(
-            full_reconcile.partial_reconcile_ids, expected_payloads
+            full_reconcile.partial_reconcile_ids,
+            expected_payloads,
+            strict=True,
         ):
             reconcile_content = (
                 partial_reconcile.get_upflow_api_post_reconcile_payload()

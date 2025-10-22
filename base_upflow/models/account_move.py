@@ -181,13 +181,10 @@ class AccountMove(models.Model):
             raise UserError(
                 _(
                     "You try to get upflow PDF payload "
-                    "on account entry %s with an unexpected type %s "
-                    "(expected out_invoice or out_refund)"
+                    "on account entry %(name)s with an unexpected type %(move_type)s "
+                    "(expected out_invoice or out_refund)",
                 )
-                % (
-                    self.name,
-                    self.move_type,
-                )
+                % {"name": self.name, "move_type": self.move_type}
             )
         return {
             "data": self._get_b64_invoice_pdf(),

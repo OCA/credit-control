@@ -40,10 +40,7 @@ class Partner(models.Model):
             {
                 "name": customer_company.name,
                 "vatNumber": customer_company.vat or "",
-                # "accountingRef": "UPFL",
                 "externalId": str(customer_company.id),
-                # "accountManagerId": "00a70b35-2be3-4c43-aefb-397190134655",
-                # "dunningPlanId": "7a6c91dc-3580-4c43-aefb-397190134655",
                 "address": {
                     "address": (
                         f"{customer_company.street or ''} "
@@ -54,23 +51,7 @@ class Partner(models.Model):
                     "state": customer_company.state_id.name or "",
                     "country": customer_company.country_id.name or "",
                 },
-                # "parent": {
-                #     "id": "00a70b35-2be3-4c43-aefb-397190134655",
-                #     "externalId": "1a2c3b",
-                # },
-                # "paymentMethods": {
-                #     "card": {"enabled": False},
-                #     "check": {"enabled": False},
-                #     "achDebit": {"enabled": False},
-                #     "sepaDebit": {"enabled": False},
-                #     "goCardless": {"enabled": False},
-                #     "wireTransfer": {
-                #         "enabled": False,
-                #         "bankAccount": {"id": "00a70b35-2be3-4c43-aefb-397190134655"},
-                #         "bankAccounts": [{"id": "00a70b35-2be3-4c43-aefb-397190134655"}],
-                #     },
-                # },
-                "customFields": customer_company._prepare_customer_custom_field_payloads(),
+                "customFields": customer_company._prepare_customer_custom_field_payloads(),  # noqa: E501
                 "contacts": [
                     contact.get_upflow_api_post_contacts_payload()
                     for contact in customer_company.child_ids
@@ -91,7 +72,6 @@ class Partner(models.Model):
                 "externalId": str(self.id),
                 "isMain": self.commercial_partner_id
                 and self.commercial_partner_id.main_contact_id == self,
-                # "id": "00a70b35-2be3-4c43-aefb-397190134655",
             }
         )
         if self.upflow_position_id:

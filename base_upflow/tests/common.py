@@ -153,10 +153,6 @@ class AccountingCommonCase(TestCase):
         reconcile_param=None,
         partner=None,
     ):
-        """payment registered by from bank statement reconciliation
-
-        :param partner: False value means not set while None means get partner from invoice
-        """
         (
             bank_journal,
             _method,
