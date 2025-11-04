@@ -8,11 +8,12 @@ from openupgradelib import openupgrade
 @openupgrade.migrate()
 def migrate(env, version):
     # Preserve channel historic data from credit.control.line records
-    openupgrade.copy_columns(
-        env.cr,
-        {
-            "credit_control_line": [
-                ("channel", "channel_old", None),
-            ]
-        },
-    )
+    if openupgrade.column_exists(env.cr, "credit_control_line", "channel"):
+        openupgrade.copy_columns(
+            env.cr,
+            {
+                "credit_control_line": [
+                    ("channel", "channel_old", None),
+                ]
+            },
+        )

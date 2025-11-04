@@ -7,24 +7,25 @@ from openupgradelib import openupgrade
 @openupgrade.migrate()
 def migrate(env, version):
     cr = env.cr
-    openupgrade.map_values(
-        cr,
-        "channel_old",
-        "channel_letter",
-        [("letter", "t")],
-        table="credit_control_line",
-    )
-    openupgrade.map_values(
-        cr,
-        "channel_old",
-        "channel_email",
-        [("email", "t")],
-        table="credit_control_line",
-    )
-    openupgrade.map_values(
-        cr,
-        "channel_old",
-        "channel_phone",
-        [("phone", "t")],
-        table="credit_control_line",
-    )
+    if openupgrade.column_exists(cr, "credit_control_line", "channel"):
+        openupgrade.map_values(
+            cr,
+            "channel_old",
+            "channel_letter",
+            [("letter", "t")],
+            table="credit_control_line",
+        )
+        openupgrade.map_values(
+            cr,
+            "channel_old",
+            "channel_email",
+            [("email", "t")],
+            table="credit_control_line",
+        )
+        openupgrade.map_values(
+            cr,
+            "channel_old",
+            "channel_phone",
+            [("phone", "t")],
+            table="credit_control_line",
+        )
