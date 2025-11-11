@@ -121,6 +121,31 @@ msgstr ""
 "                                    </span>"
 
 #. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
+msgid "<span>Allows to manually change credit level</span>"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
+msgid "<span>Change the state of the selected lines.</span>"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
+msgid "<span>Manual no follow</span>"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
+msgid "<span>Print selected lines</span>"
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
+msgid "<span>Send an email for the selected lines.</span>"
+msgstr ""
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Fecha:</strong>"
@@ -144,11 +169,11 @@ msgstr "Una línea de control de crédito"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
-"En %(lines_date)s existe una línea de control de créditos más reciente que "
-"%(controlling_date)s"
+"En %(lines_date)s existe una línea de control de créditos más reciente que %"
+"(controlling_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -220,11 +245,6 @@ msgid "Activity Type Icon"
 msgstr "tipo de icono de actividad"
 
 #. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
-msgid "Allows to manually change credit level"
-msgstr "Permite cambiar manualmente el nivel de crédito"
-
-#. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 msgid "Amount Due"
@@ -236,7 +256,6 @@ msgid "An error has occured during the sending of the email."
 msgstr "Ha ocurrido un error durante el envío del correo electrónico."
 
 #. module: account_credit_control
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
 #: model:ir.model.fields,help:account_credit_control.field_res_config_settings__default_apply_max_policy_level
 msgid ""
 "Apply max policy lavel for one partner in a credit control run execution to "
@@ -255,6 +274,13 @@ msgid ""
 "Apply max policy level for one partner in a "
 "credit                             control run execution to have all credit "
 "control lines on                             same communication level"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
+msgid ""
+"Apply max policy level for one partner in a credit control run execution to "
+"have all credit control lines on same communication level"
 msgstr ""
 
 #. module: account_credit_control
@@ -329,11 +355,6 @@ msgstr "Cambia el nivel de seguimiento de la factura actual"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change the state of the selected lines"
 msgstr "Cambiar el estado de las líneas seleccionadas"
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
-msgid "Change the state of the selected lines."
-msgstr "Cambia el estado de las líneas seleccionadas."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__channel
@@ -453,6 +474,7 @@ msgstr "Creado en"
 #: model:ir.module.category,name:account_credit_control.category_credit_control
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
+#: model:res.groups.privilege,name:account_credit_control.privilege_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -638,6 +660,8 @@ msgid "Delay Setting"
 msgstr "Configuración de retardo"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_account_account__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__display_name
@@ -648,6 +672,11 @@ msgstr "Configuración de retardo"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
@@ -755,11 +784,6 @@ msgid "Error"
 msgstr "Error"
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Filters"
-msgstr "Filtros"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_responsible_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__payment_responsible_id
 msgid "Follow-up Responsible"
@@ -810,12 +834,6 @@ msgstr ""
 "créditos."
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Group By"
-msgstr "Agrupar por"
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__has_message
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__has_message
 msgid "Has Message"
@@ -827,6 +845,8 @@ msgid "Hide Change State Button"
 msgstr "Ocultar el botón Cambiar estado"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_account_account__id
+#: model:ir.model.fields,field_description:account_credit_control.field_account_move__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__id
@@ -837,6 +857,11 @@ msgstr "Ocultar el botón Cambiar estado"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__id
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__id
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_company__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__id
 msgid "ID"
 msgstr "ID"
@@ -1085,7 +1110,6 @@ msgstr "Seguimiento manual"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
-#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr "Sin seguimiento (manual)"
 
@@ -1273,10 +1297,8 @@ msgstr "Importe pendiente"
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
 msgid ""
-"Open balance on credit control linesof same partner, policy and currency"
+"Open balance on credit control lines of same partner, policy and currency"
 msgstr ""
-"Saldo pendiente en las líneas de control de crédito del mismo socio, póliza "
-"y divisa"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1530,8 +1552,8 @@ msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
 msgstr ""
-"La política \"<b>%(name)s</b>\" ha generado "
-"<b>%(len_policy_lines_generated)d líneas de control de crédito.</b><br/>"
+"La política \"<b>%(name)s</b>\" ha generado <b>%"
+"(len_policy_lines_generated)d líneas de control de crédito.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1566,11 +1588,6 @@ msgstr "Imprimir"
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard_menu_action
 msgid "Print Lines"
 msgstr "Imprimir líneas"
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
-msgid "Print selected lines"
-msgstr "Imprimir líneas seleccionadas"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
@@ -1639,11 +1656,6 @@ msgstr "Vendedor/a"
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
 msgstr "Enviar por correo electrónico"
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
-msgid "Send an email for the selected lines."
-msgstr "Envía correos electrónicos para las líneas seleccionadas."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -1892,6 +1904,30 @@ msgstr ""
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
+
+#~ msgid "Allows to manually change credit level"
+#~ msgstr "Permite cambiar manualmente el nivel de crédito"
+
+#~ msgid "Change the state of the selected lines."
+#~ msgstr "Cambia el estado de las líneas seleccionadas."
+
+#~ msgid "Filters"
+#~ msgstr "Filtros"
+
+#~ msgid "Group By"
+#~ msgstr "Agrupar por"
+
+#~ msgid ""
+#~ "Open balance on credit control linesof same partner, policy and currency"
+#~ msgstr ""
+#~ "Saldo pendiente en las líneas de control de crédito del mismo socio, "
+#~ "póliza y divisa"
+
+#~ msgid "Print selected lines"
+#~ msgstr "Imprimir líneas seleccionadas"
+
+#~ msgid "Send an email for the selected lines."
+#~ msgstr "Envía correos electrónicos para las líneas seleccionadas."
 
 #~ msgid ""
 #~ "<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"

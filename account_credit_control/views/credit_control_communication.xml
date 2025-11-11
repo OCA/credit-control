@@ -64,7 +64,7 @@
                     <field name="policy_id" />
                     <field name="report_date" />
                 </group>
-                <group expand="0" string="Group By" name="group_by">
+                <group name="group_by">
                     <filter
                         name="group_by_report_date"
                         domain='[]'
