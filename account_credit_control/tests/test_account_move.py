@@ -17,7 +17,7 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref(
+        cls.env.user.group_ids |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
         )
 
@@ -27,7 +27,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.company_data["default_journal_sale"]
 
         account = self.env["account.account"].create(
             {
@@ -77,7 +76,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         invoice_form.invoice_date = date_invoice
         invoice_form.invoice_date_due = date_invoice
         invoice_form.partner_id = partner
-        invoice_form.journal_id = journal
         invoice_form.invoice_payment_term_id = payment_term
 
         with invoice_form.invoice_line_ids.new() as invoice_line_form:
@@ -119,7 +117,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
         """
-        journal = self.company_data["default_journal_sale"]
 
         account = self.env["account.account"].create(
             {
@@ -169,7 +166,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         invoice_form.invoice_date = date_invoice
         invoice_form.invoice_date_due = date_invoice
         invoice_form.partner_id = partner
-        invoice_form.journal_id = journal
         invoice_form.invoice_payment_term_id = payment_term
 
         with invoice_form.invoice_line_ids.new() as invoice_line_form:
@@ -198,7 +194,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         We will create an invoice, change credit policy and check
         if it has change the policy on invoice
         """
-        journal = self.company_data["default_journal_sale"]
 
         account = self.env["account.account"].create(
             {
@@ -248,7 +243,6 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         invoice_form.invoice_date = date_invoice
         invoice_form.invoice_date_due = date_invoice
         invoice_form.partner_id = partner
-        invoice_form.journal_id = journal
         invoice_form.invoice_payment_term_id = payment_term
 
         with invoice_form.invoice_line_ids.new() as invoice_line_form:

@@ -12,71 +12,111 @@ from odoo.exceptions import AccessError, UserError
 from odoo.tests import Form, RecordCapturer, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.base.tests.common import TransactionCaseWithUserDemo
 
 
-class TestCreditControlRunCase(AccountTestInvoicingCommon):
+class TestCreditControlRunCase(AccountTestInvoicingCommon, TransactionCaseWithUserDemo):
+    @classmethod
+    def _create_invoice(
+        cls,
+        partner_id,
+        invoice_date,
+        invoice_date_due,
+        post=False,
+    ):
+        """Helper to create an invoice in the correct company."""
+        invoice_form = Form(
+            cls.env["account.move"]
+            .with_company(cls.company)
+            .with_context(
+                default_move_type="out_invoice",
+                default_company_id=cls.company.id,
+                check_move_validity=False,
+            )
+        )
+        invoice_form.invoice_date = invoice_date
+        invoice_form.invoice_date_due = invoice_date_due
+        invoice_form.partner_id = cls.env["res.partner"].browse(partner_id)
+        invoice_form.invoice_payment_term_id = cls.payment_term
+        with invoice_form.invoice_line_ids.new() as invoice_line_form:
+            invoice_line_form.product_id = cls.product
+            invoice_line_form.quantity = 1
+            invoice_line_form.price_unit = 500
+            invoice_line_form.account_id = cls.analytic_account
+            invoice_line_form.tax_ids.clear()
+        invoice = invoice_form.save()
+        if post:
+            invoice.action_post()
+        return invoice
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref(
+
+        cls.company = cls.company_data["company"]
+        cls.env.user.company_ids |= cls.company
+        cls.env.user.company_id = cls.company
+
+        cls.env.user.group_ids |= cls.env.ref(
             "account_credit_control.group_account_credit_control_manager"
         )
-        journal = cls.company_data["default_journal_sale"]
 
-        account = cls.env["account.account"].create(
-            {
-                "code": "TEST430001",
-                "name": "Clients (test)",
-                "account_type": "asset_receivable",
-                "reconcile": True,
-            }
-        )
-        tag_operation = cls.env.ref("account.account_tag_operating")
-        analytic_account = cls.env["account.account"].create(
-            {
-                "code": "TEST701001",
-                "name": "Ventes en Belgique (test)",
-                "account_type": "income",
-                "reconcile": True,
-                "tag_ids": [(6, 0, [tag_operation.id])],
-            }
-        )
-        payment_term = cls.env.ref("account.account_payment_term_immediate")
-        product = cls.env["product.product"].create({"name": "Product test"})
-        cls.policy = cls.env.ref("account_credit_control.credit_control_3_time")
-        cls.policy.write({"account_ids": [(6, 0, [account.id])]})
-
-        # There is a bug with Odoo ...
-        # The field "credit_policy_id" is considered as an "old field" and
-        # the field property_account_receivable_id like a "new field"
-        # The ORM will create the record with old field
-        # and update the record with new fields.
-        # However constrains are applied after the first creation.
-        partner = cls.env["res.partner"].create(
-            {"name": "Partner", "property_account_receivable_id": account.id}
-        )
-        partner.credit_policy_id = cls.policy.id
-        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
-
-        # Create an invoice
-        invoice_form = Form(
-            cls.env["account.move"].with_context(
-                default_move_type="out_invoice", check_move_validity=False
+        cls.account = (
+            cls.env["account.account"]
+            .with_company(cls.company)
+            .create(
+                {
+                    "code": "TEST430001",
+                    "name": "Clients (test)",
+                    "account_type": "asset_receivable",
+                    "reconcile": True,
+                }
             )
         )
-        invoice_form.invoice_date = date_invoice
-        invoice_form.invoice_date_due = date_invoice
-        invoice_form.partner_id = partner
-        invoice_form.journal_id = journal
-        invoice_form.invoice_payment_term_id = payment_term
-        with invoice_form.invoice_line_ids.new() as invoice_line_form:
-            invoice_line_form.product_id = product
-            invoice_line_form.quantity = 1
-            invoice_line_form.price_unit = 500
-            invoice_line_form.account_id = analytic_account
-            invoice_line_form.tax_ids.clear()
-        cls.invoice = invoice_form.save()
-        cls.invoice.action_post()
+        tag_operation = cls.env.ref("account.account_tag_operating")
+        cls.analytic_account = (
+            cls.env["account.account"]
+            .with_company(cls.company)
+            .create(
+                {
+                    "code": "TEST701001",
+                    "name": "Ventes en Belgique (test)",
+                    "account_type": "income",
+                    "reconcile": True,
+                    "tag_ids": [(6, 0, [tag_operation.id])],
+                }
+            )
+        )
+        cls.payment_term = cls.env.ref("account.account_payment_term_immediate")
+        cls.product = cls.env["product.product"].create({"name": "Product test"})
+        cls.policy = cls.env.ref("account_credit_control.credit_control_3_time")
+
+        cls.policy.write(
+            {
+                "account_ids": [(6, 0, [cls.account.id])],
+                "company_id": cls.company.id,
+            }
+        )
+
+        cls.partner = (
+            cls.env["res.partner"]
+            .with_company(cls.company)
+            .create(
+                {
+                    "name": "Partner",
+                    "property_account_receivable_id": cls.account.id,
+                }
+            )
+        )
+        cls.partner.credit_policy_id = cls.policy.id
+        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
+
+        cls.invoice = cls._create_invoice(
+            partner_id=cls.partner.id,
+            invoice_date=date_invoice,
+            invoice_date_due=date_invoice,
+            post=True,
+        )
 
 
 @tagged("post_install", "-at_install")
@@ -142,6 +182,17 @@ class TestCreditControlRun(TestCreditControlRunCase):
         runs.
         """
         self.policy.apply_max_policy_level = True
+
+        # Ensure self.invoice is included in the runs by setting a fixed date
+        self.invoice.button_draft()
+        self.invoice.write(
+            {
+                "invoice_date": "2024-11-01",
+                "invoice_date_due": "2024-11-01",
+                "name": False,  # Reset name to allow posting in a different year
+            }
+        )
+        self.invoice.action_post()
 
         invoice1 = self.invoice.copy()
         invoice1.invoice_date = "2024-12-01"
@@ -346,7 +397,10 @@ class TestCreditControlRun(TestCreditControlRunCase):
         self.assertEqual(control_run.state, "done")
 
         # Set company_ids for user demo
-        user_demo = self.env.ref("base.user_demo")
+        user_demo = self.user_demo
+        user_demo.group_ids |= self.env.ref(
+            "account_credit_control.group_account_credit_control_user"
+        )
         user_demo.company_ids += control_run.company_id
 
         # User demo tries to read credit_control_line_action directly
@@ -373,7 +427,10 @@ class TestCreditControlRun(TestCreditControlRunCase):
         self.assertEqual(control_run.state, "done")
 
         # Set company_ids for user demo
-        user_demo = self.env.ref("base.user_demo")
+        user_demo = self.user_demo
+        user_demo.group_ids |= self.env.ref(
+            "account_credit_control.group_account_credit_control_user"
+        )
         user_demo.company_ids += control_run.company_id
 
         # User demo tries to read credit_control_communication_action directly
@@ -386,3 +443,32 @@ class TestCreditControlRun(TestCreditControlRunCase):
         # Invoking open_credit_communications: AccessError not raised
         action = control_run.with_user(user_demo.id).open_credit_communications()
         self.assertIn("domain", action)
+
+    def test_run_channel_action(self):
+        """
+        Test the 'Run channel action' button on the credit control run.
+        """
+        # Ensure partner has an email for the email channel
+        self.invoice.partner_id.email = "test@example.com"
+
+        # Generate lines
+        control_run = self.env["credit.control.run"].create(
+            {"date": fields.Date.today(), "policy_ids": [(6, 0, [self.policy.id])]}
+        )
+        control_run.with_context(lang="en_US").generate_credit_lines()
+        lines = control_run.line_ids
+        self.assertTrue(lines)
+
+        # Set lines to 'to_be_sent'
+        lines.write({"state": "to_be_sent"})
+
+        # Trigger the action
+        control_run.run_channel_action()
+
+        # The line's channel is 'email' by default in the demo data
+        # so its state should now be 'queued'
+        self.assertEqual(
+            lines.state,
+            "queued",
+            "Email lines should be in 'queued' state after run_channel_action.",
+        )

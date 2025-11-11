@@ -3,7 +3,7 @@
     <record id="act_account_credit_relation_relation" model="ir.actions.act_window">
         <field name="name">Credit Lines</field>
         <field
-            name="groups_id"
+            name="group_ids"
             eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
         />
         <field name="domain">[('account_id', '=', active_id)]</field>

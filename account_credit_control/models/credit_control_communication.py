@@ -182,15 +182,21 @@ class CreditControlCommunication(models.Model):
     def _get_credit_control_communication_table(self):
         # ruff: noqa
         th_style = "padding: 5px; border: 1px solid black;"
-        tr_content = "<th style='%s'>%s</th>" % (th_style, _("Invoice number"))
-        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Payment Reference"))
-        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice date"))
-        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Due date"))
-        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Invoice amount"))
-        tr_content += "<th style='%s'>%s</th>" % (th_style, _("Amount Due"))
+        tr_content = "<th style='%s'>%s</th>" % (th_style, self.env._("Invoice number"))
+        tr_content += "<th style='%s'>%s</th>" % (
+            th_style,
+            self.env._("Payment Reference"),
+        )
+        tr_content += "<th style='%s'>%s</th>" % (th_style, self.env._("Invoice date"))
+        tr_content += "<th style='%s'>%s</th>" % (th_style, self.env._("Due date"))
+        tr_content += "<th style='%s'>%s</th>" % (
+            th_style,
+            self.env._("Invoice amount"),
+        )
+        tr_content += "<th style='%s'>%s</th>" % (th_style, self.env._("Amount Due"))
         table_style = "border-spacing: 0; border-collapse: collapse; width: 100%;"
         table_style += "text-align: center;"
-        table_content = "<br/><h3>%s</h3>" % _("Invoices summary")
+        table_content = "<br/><h3>%s</h3>" % self.env._("Invoices summary")
         table_content += "<table style='%s'><tr>%s</tr>" % (table_style, tr_content)
         for line in self.credit_control_line_ids:
             name = line.invoice_id.name

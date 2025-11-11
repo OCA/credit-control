@@ -2,7 +2,7 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -48,7 +48,7 @@ class AccountMove(models.Model):
 
         if cc_nondraft_lines:
             raise UserError(
-                _(
+                self.env._(
                     "You cannot cancel this invoice.\n"
                     "A payment reminder has already been "
                     "sent to the customer.\n"

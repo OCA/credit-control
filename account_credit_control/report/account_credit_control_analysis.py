@@ -24,7 +24,8 @@ class AccountCreditControlAnalysis(models.Model):
     open_balance = fields.Float(
         string="Overdue Balance",
         readonly=True,
-        help="Open balance on credit control linesof same partner, policy and currency",
+        help="Open balance on credit control lines "
+        "of same partner, policy and currency",
     )
     company_id = fields.Many2one(comodel_name="res.company", readonly=True)
 
@@ -86,6 +87,6 @@ class AccountCreditControlAnalysis(models.Model):
             """
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, "credit_control_analysis")
+        tools.drop_view_if_exists(self.env.cr, "credit_control_analysis")
         query = self._get_sql_query()
-        self._cr.execute(query)
+        self.env.cr.execute(query)
