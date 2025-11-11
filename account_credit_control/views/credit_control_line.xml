@@ -67,7 +67,7 @@
                     <field name="level" />
                     <field name="policy_level_id" />
                 </group>
-                <group string="Filters" name="filters">
+                <group name="filters">
                     <filter
                         name="filter_draft"
                         string="Draft"
@@ -99,19 +99,19 @@
                         help="An error has occured during the sending of the email."
                     />
                     <filter
-                        name="filter_manual"
+                        name="filter_manual_change"
                         string="Manual change"
                         domain="[('manually_overridden', '=', True)]"
                         help="The line was deprecated by a manual change of policy on invoice."
                     />
                     <filter
-                        name="filter_manual"
+                        name="filter_manual_followup"
                         string="Manual followup"
                         domain="[('manual_followup', '=', True)]"
                         help="The partner had a manual followup."
                     />
                 </group>
-                <group expand="0" string="Group By" name="group_by">
+                <group name="group_by">
                     <filter
                         name="group_by_date"
                         domain='[]'

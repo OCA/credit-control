@@ -2,7 +2,7 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -62,12 +62,14 @@ class CreditControlMarker(models.TransientModel):
         self.ensure_one()
 
         if not self.line_ids:
-            raise UserError(_("No credit control lines selected."))
+            raise UserError(self.env._("No credit control lines selected."))
 
         filtered_lines = self._filter_lines(self.line_ids)
         if not filtered_lines:
             raise UserError(
-                _("No lines will be changed. All the selected lines are already done.")
+                self.env._(
+                    "No lines will be changed. All the selected lines are already done."
+                )
             )
 
         self._mark_lines(filtered_lines, self.name)
@@ -77,7 +79,7 @@ class CreditControlMarker(models.TransientModel):
             "binding_view_types": "form",
             "view_mode": "list,form",
             "view_id": False,
-            "name": _("Control Credit Line"),
+            "name": self.env._("Control Credit Line"),
             "res_model": "credit.control.line",
             "type": "ir.actions.act_window",
         }

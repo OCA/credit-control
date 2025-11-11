@@ -4,6 +4,7 @@
 from markupsafe import Markup
 
 from odoo import api, models
+from odoo.tools.mail import is_html_empty
 
 
 class MailComposer(models.TransientModel):
@@ -11,6 +12,11 @@ class MailComposer(models.TransientModel):
 
     @api.depends_context("inject_credit_control_communication_table")
     def _compute_body(self):
+        bodies_before_super = {
+            composer.id: composer.body
+            for composer in self
+            if not is_html_empty(composer.body)
+        }
         res = super()._compute_body()
         if self.env.context.get("inject_credit_control_communication_table"):
             for composer in self:
@@ -20,8 +26,12 @@ class MailComposer(models.TransientModel):
                     credit_control_communication = Markup(
                         record._get_credit_control_communication_table()
                     )
-                    if composer.body:
-                        composer.body += credit_control_communication
+                    base_body = composer.body
+                    if is_html_empty(base_body) and composer.id in bodies_before_super:
+                        base_body = bodies_before_super[composer.id]
+
+                    if not is_html_empty(base_body):
+                        composer.body = base_body + credit_control_communication
                     else:
                         composer.body = credit_control_communication
         return res

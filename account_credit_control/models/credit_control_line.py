@@ -3,7 +3,7 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from .credit_control_policy import CHANNEL_LIST
@@ -145,17 +145,18 @@ class CreditControlLine(models.Model):
         res = super()._message_auto_subscribe_followers(
             updated_values=updated_values, default_subtype_ids=default_subtype_ids
         )
-        if "partner_id" in list(updated_values.keys()):
+        partner_id = updated_values.get("partner_id")
+        if partner_id:
             credit_control_new_subtype = self.env.ref(
                 "account_credit_control.mt_credit_control_new"
             )
-            for item in self:
-                partners = item.partner_id | item.partner_id.commercial_partner_id
-                partner_ids = partners.message_follower_ids.filtered(
-                    lambda x: credit_control_new_subtype in x.subtype_ids
-                ).partner_id
-                for partner in partner_ids:
-                    res += [(partner.id, default_subtype_ids, False)]
+            partner = self.env["res.partner"].browse(partner_id)
+            partners_to_check = partner | partner.commercial_partner_id
+            follower_partners = partners_to_check.message_follower_ids.filtered(
+                lambda f: credit_control_new_subtype in f.subtype_ids
+            ).partner_id
+            for follower in follower_partners:
+                res.append((follower.id, default_subtype_ids, False))
         return res
 
     @api.model
@@ -221,6 +222,7 @@ class CreditControlLine(models.Model):
         :returns: recordset of created credit lines
         """
         currency_obj = self.env["res.currency"]
+        # pylint: disable=W8163
         currencies = currency_obj.search([])
 
         tolerance = {}
@@ -274,10 +276,11 @@ class CreditControlLine(models.Model):
         return new_lines
 
     def unlink(self):
+        # pylint: disable=E8140
         for line in self:
             if line.state != "draft":
                 raise UserError(
-                    _(
+                    self.env._(
                         "You are not allowed to delete a credit control "
                         "line that is not in draft state."
                     )

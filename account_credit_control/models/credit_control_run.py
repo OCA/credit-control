@@ -3,7 +3,7 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -17,6 +17,7 @@ class CreditControlRun(models.Model):
 
     @api.model
     def _default_policies(self):
+        # pylint: disable=W8163
         return self.env["credit.control.policy"].search([])
 
     date = fields.Date(
@@ -72,10 +73,12 @@ class CreditControlRun(models.Model):
     )
 
     def _compute_credit_control_count(self):
-        fetch_data = self.env["credit.control.line"].read_group(
-            domain=[("run_id", "in", self.ids)], fields=["run_id"], groupby=["run_id"]
+        fetch_data = self.env["credit.control.line"]._read_group(
+            domain=[("run_id", "in", self.ids)],
+            groupby=["run_id"],
+            aggregates=["__count"],
         )
-        result = {data["run_id"][0]: data["run_id_count"] for data in fetch_data}
+        result = {run.id: count for run, count in fetch_data}
         for rec in self:
             rec.credit_control_count = result.get(rec.id, 0)
             rec.credit_control_communication_count = len(
@@ -97,20 +100,20 @@ class CreditControlRun(models.Model):
             limit=1,
         )
         if runs:
-            raise UserError(
-                _("A run has already been executed more recently (%s)") % (runs.date)
-            )
+            message = self.env._("A run has already been executed more recently (%s)")
+            raise UserError(message % runs.date)
 
         line_obj = self.env["credit.control.line"]
         lines = line_obj.search(
             [("date", ">", controlling_date)], order="date DESC", limit=1
         )
         if lines:
+            message = self.env._(
+                "A credit control line more recent than "
+                "%(controlling_date)s exists at %(lines_date)s"
+            )
             raise UserError(
-                _(
-                    "A credit control line more recent than "
-                    "%(controlling_date)s exists at %(lines_date)s"
-                )
+                message
                 % {"controlling_date": controlling_date, "lines_date": lines.date}
             )
 
@@ -122,7 +125,7 @@ class CreditControlRun(models.Model):
 
         policies = self.policy_ids
         if not policies:
-            raise UserError(_("Please select a policy"))
+            raise UserError(self.env._("Please select a policy"))
 
         report = ""
         generated = self.env["credit.control.line"]
@@ -161,7 +164,7 @@ class CreditControlRun(models.Model):
             # In case of exception openerp will do a rollback
             # for us and free the lock
             raise UserError(
-                _(
+                self.env._(
                     "A credit control run is already running "
                     "in background, please try later."
                 )
@@ -212,4 +215,4 @@ class CreditControlRun(models.Model):
             wiz = self.env["credit.control.printer"].create(
                 {"line_ids": letter_lines.ids}
             )
-            return wiz.print_lines
+            return wiz.print_lines()

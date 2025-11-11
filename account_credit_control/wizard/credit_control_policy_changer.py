@@ -3,7 +3,7 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -34,7 +34,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         selected_lines = self.env["account.move.line"]
         for invoice in invoice_obj.browse(active_ids):
             if invoice.move_type in ("in_invoice", "in_refund", "out_refund"):
-                raise UserError(_("Please use wizard on customer invoices"))
+                raise UserError(self.env._("Please use wizard on customer invoices"))
 
             domain = [
                 ("account_id.account_type", "=", "asset_receivable"),
@@ -112,7 +112,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         self.ensure_one()
         credit_line_obj = self.env["credit.control.line"]
 
-        controlling_date = fields.date.today()
+        controlling_date = fields.Date.today()
         self._check_accounts_policies(self.move_line_ids, self.new_policy_id)
         self._mark_as_overridden(self.move_line_ids)
         # As discussed with business expert
