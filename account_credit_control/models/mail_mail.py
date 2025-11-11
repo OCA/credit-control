@@ -22,12 +22,13 @@ class Mail(models.Model):
                 lines.write({"state": new_state})
 
     def _postprocess_sent_message(
-        self, success_pids, failure_reason=False, failure_type=None
+        self, success_pids, success_emails, failure_reason=False, failure_type=None
     ):
         """Mark credit control lines states."""
         self._update_control_line_status()
         return super()._postprocess_sent_message(
             success_pids=success_pids,
+            success_emails=success_emails,
             failure_reason=failure_reason,
             failure_type=failure_type,
         )

@@ -4,9 +4,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from collections import defaultdict
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
 
@@ -38,7 +38,7 @@ class CreditControlPolicy(models.Model):
     active = fields.Boolean(default=True)
     apply_max_policy_level = fields.Boolean(
         string="Apply max policy level",
-        help="Apply max policy lavel for one partner in a credit control run execution "
+        help="Apply max policy level for one partner in a credit control run execution "
         "to have all credit control lines on same communication level",
     )
 
@@ -181,14 +181,14 @@ class CreditControlPolicy(models.Model):
         )
         if self not in allowed:
             allowed_names = "\n".join(x.name for x in allowed)
+            message = self.env._(
+                "You can only use a policy set on "
+                "account %(account_name)s.\n"
+                "Please choose one of the following "
+                "policies:\n %(allowed_names)s"
+            )
             raise UserError(
-                _(
-                    "You can only use a policy set on "
-                    "account %(account_name)s.\n"
-                    "Please choose one of the following "
-                    "policies:\n %(allowed_names)s"
-                )
-                % {"account_name": account.name, "allowed_names": allowed_names}
+                message % {"account_name": account.name, "allowed_names": allowed_names}
             )
         return True
 
@@ -226,19 +226,20 @@ class CreditControlPolicy(models.Model):
                         default_lines_vals=default_lines_vals,
                     )
         if policy_lines_generated:
-            report = _(
+            report_template = self.env._(
                 'Policy "<b>%(name)s</b>" has generated <b>'
                 "%(len_policy_lines_generated)d Credit "
                 "Control Lines.</b><br/>"
-            ) % {
+            )
+            report = report_template % {
                 "name": self.name,
                 "len_policy_lines_generated": len(policy_lines_generated),
             }
         else:
-            report = (
-                _('Policy "<b>%s</b>" has not generated any Credit Control Lines.<br/>')
-                % self.name
+            report_template = self.env._(
+                'Policy "<b>%s</b>" has not generated any Credit Control Lines.<br/>'
             )
+            report = report_template % self.name
         return (manual_lines, policy_lines_generated, report)
 
     def _generate_policy_lines_with_max_level(
@@ -280,9 +281,7 @@ class CreditControlPolicy(models.Model):
             account_receivable = partner.property_account_receivable_id
         domain = super()._search_display_name(operator, value)
         if account_receivable:
-            domain = expression.AND(
-                [domain, [("account_ids", "in", account_receivable.ids)]]
-            )
+            domain = Domain([("account_ids", "in", account_receivable.ids)]) & domain
         return domain
 
 
@@ -327,9 +326,9 @@ class CreditControlPolicyLevel(models.Model):
         string="Custom Message after details", translate=True
     )
 
-    _sql_constraints = [
-        ("unique_level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
-    ]
+    _unique_level = models.Constraint(
+        "UNIQUE (policy_id, level)", "Level must be unique per policy"
+    )
 
     @api.constrains("level", "computation_mode")
     def _check_level_mode(self):
@@ -344,7 +343,9 @@ class CreditControlPolicyLevel(models.Model):
             )
             if smallest_level.computation_mode == "previous_date":
                 raise ValidationError(
-                    _("The smallest level can not be of type Previous Reminder")
+                    self.env._(
+                        "The smallest level can not be of type Previous Reminder"
+                    )
                 )
 
     def _previous_level(self):
@@ -394,11 +395,10 @@ class CreditControlPolicyLevel(models.Model):
         if hasattr(self, fname):
             fnc = getattr(self, fname)
             return fnc()
-        else:
-            raise NotImplementedError(
-                _("Can not get function for computation mode: %s is not implemented")
-                % (fname,)
-            )
+        message = self.env._(
+            "Can not get function for computation mode: %s is not implemented"
+        )
+        raise NotImplementedError(message % fname)
 
     def _get_sql_level_part(self):
         """Return a where clauses statement for the previous line level"""
@@ -406,8 +406,7 @@ class CreditControlPolicyLevel(models.Model):
         previous_level = self._previous_level()
         if previous_level:
             return f"cr_line.level = {previous_level.level}"
-        else:
-            return "cr_line.id IS NULL"
+        return "cr_line.id IS NULL"
 
     def _get_level_move_lines(self, controlling_date, lines):
         """Retrieve the move lines for all levels."""

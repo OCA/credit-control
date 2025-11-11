@@ -3,7 +3,7 @@
 # Copyright 2020 Manuel Calero - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -44,7 +44,7 @@ class CreditControlPrinter(models.TransientModel):
         self.ensure_one()
         comm_obj = self.env["credit.control.communication"]
         if not self.line_ids:
-            raise UserError(_("No credit control lines selected."))
+            raise UserError(self.env._("No credit control lines selected."))
 
         lines = self._get_lines(self.line_ids, self._credit_line_predicate)
 
@@ -55,4 +55,4 @@ class CreditControlPrinter(models.TransientModel):
 
         report_name = "account_credit_control.report_credit_control_summary"
         report_obj = self.env["ir.actions.report"]._get_report_from_name(report_name)
-        return report_obj.report_action(comms)
+        return report_obj.with_context(discard_logo_check=True).report_action(comms)
