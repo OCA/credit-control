@@ -24,8 +24,7 @@ class AccountCreditControlAnalysis(models.Model):
     open_balance = fields.Float(
         string="Overdue Balance",
         readonly=True,
-        help="Open balance on credit control lines"
-        "of same partner, policy and currency",
+        help="Open balance on credit control linesof same partner, policy and currency",
     )
     company_id = fields.Many2one(comodel_name="res.company", readonly=True)
 

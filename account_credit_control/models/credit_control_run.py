@@ -155,7 +155,7 @@ class CreditControlRun(models.Model):
         """
         try:
             self.env.cr.execute(
-                "SELECT id FROM credit_control_run" " LIMIT 1 FOR UPDATE NOWAIT"
+                "SELECT id FROM credit_control_run LIMIT 1 FOR UPDATE NOWAIT"
             )
         except Exception as err:
             # In case of exception openerp will do a rollback
