@@ -1,12 +1,12 @@
 # Copyright 2016-2021 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 from odoo.tools.misc import str2bool
 
 
@@ -287,7 +287,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _get_risk_company_domain(self):
-        return [("company_id", "in", self.env.companies.ids)]
+        return Domain("company_id", "in", self.env.companies.ids)
 
     def _get_field_risk_model_domain(self, field_name):
         """Returns a tuple with model name and domain"""
@@ -303,10 +303,10 @@ class ResPartner(models.Model):
         # Partner receivable account determines if amount is in invoice field
         if field_name != "risk_invoice_draft":
             if field_name.startswith("risk_invoice_"):
-                domain.append(("account_id", "=", account_receivable_id))
+                domain &= Domain("account_id", "=", account_receivable_id)
             else:
-                domain.append(("account_id", "!=", account_receivable_id))
-        domain.append(("partner_id", "in", self.ids))
+                domain &= Domain("account_id", "!=", account_receivable_id)
+        domain &= Domain("partner_id", "in", self.ids)
         return "account.move.line", domain
 
     @api.model
@@ -321,45 +321,51 @@ class ResPartner(models.Model):
         return {
             "draft": {
                 "domain": company_domain
-                + [
-                    ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
-                    ("account_type", "=", "asset_receivable"),
-                    ("parent_state", "in", ["draft"]),
-                ],
+                & Domain(
+                    [
+                        ("move_id.move_type", "in", ["out_invoice", "out_refund"]),
+                        ("account_type", "=", "asset_receivable"),
+                        ("parent_state", "in", ["draft"]),
+                    ]
+                ),
                 "fields": fields,
                 "group_by": groupby,
             },
             "open": {
                 "domain": company_domain
-                + [
-                    ("reconciled", "=", False),
-                    ("account_type", "=", "asset_receivable"),
-                    "|",
-                    "&",
-                    ("date_maturity", "!=", False),
-                    ("date_maturity", ">=", max_date),
-                    "&",
-                    ("date_maturity", "=", False),
-                    ("date", ">=", max_date),
-                    ("parent_state", "=", "posted"),
-                ],
+                & Domain(
+                    [
+                        ("reconciled", "=", False),
+                        ("account_type", "=", "asset_receivable"),
+                        "|",
+                        "&",
+                        ("date_maturity", "!=", False),
+                        ("date_maturity", ">=", max_date),
+                        "&",
+                        ("date_maturity", "=", False),
+                        ("date", ">=", max_date),
+                        ("parent_state", "=", "posted"),
+                    ]
+                ),
                 "fields": fields,
                 "group_by": groupby,
             },
             "unpaid": {
                 "domain": company_domain
-                + [
-                    ("reconciled", "=", False),
-                    ("account_type", "=", "asset_receivable"),
-                    "|",
-                    "&",
-                    ("date_maturity", "!=", False),
-                    ("date_maturity", "<", max_date),
-                    "&",
-                    ("date_maturity", "=", False),
-                    ("date", "<", max_date),
-                    ("parent_state", "=", "posted"),
-                ],
+                & Domain(
+                    [
+                        ("reconciled", "=", False),
+                        ("account_type", "=", "asset_receivable"),
+                        "|",
+                        "&",
+                        ("date_maturity", "!=", False),
+                        ("date_maturity", "<", max_date),
+                        "&",
+                        ("date_maturity", "=", False),
+                        ("date", "<", max_date),
+                        ("parent_state", "=", "posted"),
+                    ]
+                ),
                 "fields": fields,
                 "group_by": groupby,
             },
@@ -389,7 +395,7 @@ class ResPartner(models.Model):
         groups = self._risk_account_groups()
         for _key, group in groups.items():
             group["read_group"] = self.env["account.move.line"]._read_group(
-                domain=group["domain"] + [("partner_id", "in", customers.ids)],
+                domain=group["domain"] & Domain([("partner_id", "in", customers.ids)]),
                 groupby=group["group_by"],
                 aggregates=group["fields"],
             )
@@ -501,28 +507,31 @@ class ResPartner(models.Model):
     @api.model
     def _search_risk_exception(self, operator, value):
         commercial_partners = self.search(
-            [
-                ("customer_rank", ">", 0),
-                "|",
-                ("is_company", "=", True),
-                ("parent_id", "=", False),
-            ],
+            Domain(
+                [
+                    ("customer_rank", ">", 0),
+                    "|",
+                    ("is_company", "=", True),
+                    ("parent_id", "=", False),
+                ]
+            ),
             order="id",
         )
+
         risk_partner_ids = commercial_partners.filtered("risk_exception").ids
-        if (operator == "=" and value) or (operator == "!=" and not value):
-            return [("id", "in", risk_partner_ids)]
+        if (operator == "in" and value) or (operator == "not in" and not value):
+            return Domain("id", "in", risk_partner_ids)
         else:
-            return [("id", "not in", risk_partner_ids)]
+            return Domain("id", "not in", risk_partner_ids)
 
     @api.model
     def _search_risk_remaining_percentage(self, operator, value):
         # Make risk_remaining_percentage searchable.
-        partners = self.search([("credit_limit", ">", 0)])
+        partners = self.search(Domain(("credit_limit", ">", 0)))
         partner_ids = partners.filtered_domain(
             [("risk_remaining_percentage", operator, value)]
         ).ids
-        return [("id", "in", partner_ids)]
+        return Domain("id", "in", partner_ids)
 
     @api.model
     def _max_risk_date_due(self):

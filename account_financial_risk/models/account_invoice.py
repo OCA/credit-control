@@ -82,9 +82,9 @@ class AccountMove(models.Model):
             raise ValidationError(
                 self.env._(
                     "The partner %s is in risk exception.\n"
-                    "You must post his invoices from form view to allow over risk"
+                    "You must post his invoices from form view to allow over risk",
+                    invoice.partner_id.commercial_partner_id.display_name,
                 )
-                % invoice.partner_id.commercial_partner_id.display_name
             )
         return super()._post(soft)
 

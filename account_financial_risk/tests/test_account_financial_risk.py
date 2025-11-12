@@ -1,6 +1,7 @@
 # Copyright 2016-2019 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import Command, fields
@@ -14,10 +15,10 @@ class TestPartnerFinancialRisk(BaseCommon):
     def setUpClass(cls):
         super().setUpClass()
         (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
-        cls.env.user.groups_id |= cls.env.ref(
+        cls.env.user.group_ids |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
-        main_company = cls.env.ref("base.main_company")
+        main_company = cls.company
         cls.cr.execute(
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
             [cls.env.ref("base.USD").id, main_company.id],
@@ -79,6 +80,7 @@ class TestPartnerFinancialRisk(BaseCommon):
                 .id,
                 "amount_type": "percent",
                 "amount": 10.0,
+                "country_id": cls.env.ref("base.us").id,
             }
         )
         cls.invoice = (
@@ -96,7 +98,7 @@ class TestPartnerFinancialRisk(BaseCommon):
                                 "account_id": cls.account_sale.id,
                                 "price_unit": 50,
                                 "quantity": 10,
-                                "tax_ids": [(6, 0, [cls.tax.id])],
+                                "tax_ids": [Command.set([cls.tax.id])],
                             },
                         )
                     ],

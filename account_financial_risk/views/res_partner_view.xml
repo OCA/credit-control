@@ -12,13 +12,15 @@
                 <field name="portal_show_financial_risk_visible" invisible="1" />
             </field>
             <xpath
-                expr="//notebook/page/field/form//field[@name='mobile']"
-                position="after"
+                expr="//notebook/page/field/form//field[@name='comment']/parent::group"
+                position="before"
             >
-                <field
-                    name="show_financial_risk_in_portal"
-                    invisible="not parent.portal_show_financial_risk_visible"
-                />
+                <group>
+                    <field
+                        name="show_financial_risk_in_portal"
+                        invisible="not parent.portal_show_financial_risk_visible"
+                    />
+                </group>
             </xpath>
             <page name="sales_purchases" position="after">
                 <page
