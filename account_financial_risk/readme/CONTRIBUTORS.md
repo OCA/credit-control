@@ -6,3 +6,6 @@
 - Ugne Sinkeviciene \<<ugne@versada.eu>\>
 - [Ooops404](https://www.ooops404.com):
   - Ilyas \<<irazor147@gmail.com>\>
+- [Studio73](https://www.studio73.es):
+  - Pablo Cortés
+  - Sergio Martínez

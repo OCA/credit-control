@@ -4,13 +4,13 @@
 {
     "name": "Account Financial Risk",
     "summary": "Manage customer risk",
-    "version": "18.0.1.2.0",
+    "version": "19.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "maintainers": ["carlosdauden"],
     "website": "https://github.com/OCA/credit-control",
-    "depends": ["account"],
+    "depends": ["contacts", "account"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
