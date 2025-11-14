@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import new_test_user
 
 from odoo.addons.base.tests.common import BaseCommon
@@ -11,17 +11,38 @@ class TestPartnerSaleRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref(
+        cls.env.user.group_ids |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
+        cls.account_income = cls.env["account.account"].create(
+            {
+                "name": "Test Income Account",
+                "code": "TESTINC",
+                "account_type": "income",
+                "company_ids": [Command.set([cls.env.company.id])],
+            }
+        )
+        cls.account_receivable = cls.env["account.account"].create(
+            {
+                "name": "Test Receivable Account",
+                "code": "TESTREC",
+                "account_type": "asset_receivable",
+                "company_ids": [Command.set([cls.env.company.id])],
+            }
+        )
         cls.partner = cls.env["res.partner"].create(
-            {"name": "Partner test", "customer_rank": 1}
+            {
+                "name": "Partner test",
+                "customer_rank": 1,
+                "property_account_receivable_id": cls.account_receivable.id,
+            }
         )
         cls.product = cls.env["product.product"].create(
             {
                 "sale_ok": True,
                 "taxes_id": [],
                 "name": "Test Product",
+                "property_account_income_id": cls.account_income.id,
             }
         )
         cls.product.invoice_policy = "order"
@@ -33,6 +54,14 @@ class TestPartnerSaleRisk(BaseCommon):
         cls.USD = cls.env.ref("base.USD")
         cls.sale_order = cls.create_sale_order(cls.main_currency, cls.env.company)
         cls.env.user.lang = "en_US"
+        cls.journal = cls.env["account.journal"].create(
+            {
+                "name": "Test Sale Journal",
+                "code": "TSJ",
+                "type": "sale",
+                "company_id": cls.env.company.id,
+            }
+        )
 
     @classmethod
     def create_sale_order(cls, currency, company):
@@ -43,16 +72,14 @@ class TestPartnerSaleRisk(BaseCommon):
                 "currency_id": currency.id,
                 "company_id": company.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
-                            "product_uom": cls.product.uom_id.id,
+                            "product_uom_id": cls.product.uom_id.id,
                             "price_unit": 115.0,
-                            "tax_id": False,
+                            "tax_ids": False,
                             "company_id": company.id,
                         },
                     )
@@ -172,7 +199,8 @@ class TestPartnerSaleRisk(BaseCommon):
             [
                 ("type", "=", "sale"),
                 ("company_id", "=", self.env.company.id),
-            ]
+            ],
+            limit=1,
         )
         ref_wiz_obj = self.env["account.move.reversal"].with_context(
             active_model="account.move", active_ids=[invoice.id]
