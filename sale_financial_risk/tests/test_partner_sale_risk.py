@@ -1,27 +1,50 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields
-from odoo.tests import new_test_user
+from odoo import Command, fields
+from odoo.tests import TransactionCase, new_test_user
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 
 
-class TestPartnerSaleRisk(BaseCommon):
+class TestPartnerSaleRisk(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.groups_id |= cls.env.ref(
+        cls.Account = cls.env["account.account"]
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.env.user.group_ids |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
+        cls.account_income = cls.Account.create(
+            {
+                "name": "Test Income Account",
+                "code": "TESTINC",
+                "account_type": "income",
+                "company_ids": [Command.set([cls.env.company.id])],
+            }
+        )
+        cls.account_receivable = cls.Account.create(
+            {
+                "name": "Test Receivable Account",
+                "code": "TESTREC",
+                "account_type": "asset_receivable",
+                "company_ids": [Command.set([cls.env.company.id])],
+            }
+        )
         cls.partner = cls.env["res.partner"].create(
-            {"name": "Partner test", "customer_rank": 1}
+            {
+                "name": "Partner test",
+                "customer_rank": 1,
+                "property_account_receivable_id": cls.account_receivable.id,
+            }
         )
         cls.product = cls.env["product.product"].create(
             {
                 "sale_ok": True,
                 "taxes_id": [],
                 "name": "Test Product",
+                "property_account_income_id": cls.account_income.id,
             }
         )
         cls.product.invoice_policy = "order"
@@ -33,6 +56,14 @@ class TestPartnerSaleRisk(BaseCommon):
         cls.USD = cls.env.ref("base.USD")
         cls.sale_order = cls.create_sale_order(cls.main_currency, cls.env.company)
         cls.env.user.lang = "en_US"
+        cls.journal = cls.env["account.journal"].create(
+            {
+                "name": "Test Sale Journal",
+                "code": "TSJ",
+                "type": "sale",
+                "company_id": cls.env.company.id,
+            }
+        )
 
     @classmethod
     def create_sale_order(cls, currency, company):
@@ -43,16 +74,14 @@ class TestPartnerSaleRisk(BaseCommon):
                 "currency_id": currency.id,
                 "company_id": company.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
-                            "product_uom": cls.product.uom_id.id,
+                            "product_uom_id": cls.product.uom_id.id,
                             "price_unit": 115.0,
-                            "tax_id": False,
+                            "tax_ids": False,
                             "company_id": company.id,
                         },
                     )
@@ -98,10 +127,7 @@ class TestPartnerSaleRisk(BaseCommon):
             login="test-sale_user",
             groups="sales_team.group_sale_salesman_all_leads",
         )
-        res = sale_order2.action_cancel()
-        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
-        wizard = wizard.with_user(sale_user)
-        wizard.action_cancel()
+        res = sale_order2.with_user(sale_user).action_cancel()
         self.assertEqual(sale_order2.state, "cancel")
 
     def test_sale_order_auto_done(self):
@@ -172,7 +198,8 @@ class TestPartnerSaleRisk(BaseCommon):
             [
                 ("type", "=", "sale"),
                 ("company_id", "=", self.env.company.id),
-            ]
+            ],
+            limit=1,
         )
         ref_wiz_obj = self.env["account.move.reversal"].with_context(
             active_model="account.move", active_ids=[invoice.id]

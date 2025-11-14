@@ -105,7 +105,7 @@ class SaleOrderLine(models.Model):
                 qty = max(qty, line.qty_delivered)
             risk_qty = float_round(
                 qty - line.qty_invoiced,
-                precision_rounding=line.product_uom.rounding or 0.01,
+                precision_rounding=line.product_uom_id.rounding or 0.01,
             )
             # There is no risk if the line hasn't stock moves to deliver
             # Added hasattr condition because fails in post-migration compute

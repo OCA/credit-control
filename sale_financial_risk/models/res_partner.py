@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class ResPartner(models.Model):
@@ -25,10 +26,21 @@ class ResPartner(models.Model):
 
     def _get_risk_sale_order_domain(self):
         risk_states = self.env["sale.order"]._get_risk_states()
-        return self._get_risk_company_domain() + [
-            ("state", "in", risk_states),
-            ("risk_partner_id", "in", self.mapped("commercial_partner_id").ids),
-        ]
+        return Domain.AND(
+            [
+                self._get_risk_company_domain(),
+                Domain(
+                    [
+                        ("state", "in", risk_states),
+                        (
+                            "risk_partner_id",
+                            "in",
+                            self.mapped("commercial_partner_id").ids,
+                        ),
+                    ]
+                ),
+            ]
+        )
 
     @api.depends(
         "sale_order_ids.order_line.risk_amount",

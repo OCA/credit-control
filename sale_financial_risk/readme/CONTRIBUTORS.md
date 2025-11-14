@@ -5,3 +5,7 @@
   - Stefan Ungureanu
 - Agathe Mollé \<<agathe.molle@savoirfairelinux.com>\>
 - Ugne Sinkeviciene \<<ugne@versada.eu>\>
+- [Studio73](https://www.studio73.es/):
+  - Pablo Cortés
+- [Camptocamp](https://www.camptocamp.com):
+  - Maksym Yankin
