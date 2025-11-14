@@ -14,6 +14,15 @@ def migrate(env, version):
             {
                 "credit_control_line": [
                     ("channel", "channel_old", None),
-                ]
+                ],
+            },
+        )
+    if openupgrade.column_exists(env.cr, "credit_control_policy", "channel"):
+        openupgrade.copy_columns(
+            env.cr,
+            {
+                "credit_control_policy": [
+                    ("channel", "channel_old", None),
+                ],
             },
         )
