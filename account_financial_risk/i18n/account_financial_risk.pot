@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,7 +184,12 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -195,6 +200,7 @@ msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.module.category,name:account_financial_risk.category_financial_risk
+#: model:res.groups.privilege,name:account_financial_risk.privilege_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
@@ -264,7 +270,12 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__id
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__id
 msgid "ID"
 msgstr ""
 
