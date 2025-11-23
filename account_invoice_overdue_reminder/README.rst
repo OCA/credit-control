@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ========================
 Overdue Invoice Reminder
 ========================
@@ -17,17 +13,17 @@ Overdue Invoice Reminder
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
-    :target: https://github.com/OCA/credit-control/tree/18.0/account_invoice_overdue_reminder
+    :target: https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_reminder
     :alt: OCA/credit-control
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/credit-control-18-0/credit-control-18-0-account_invoice_overdue_reminder
+    :target: https://translation.odoo-community.org/projects/credit-control-17-0/credit-control-17-0-account_invoice_overdue_reminder
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/credit-control&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -45,22 +41,22 @@ reminders.
 This module has been designed from the start with the following
 priorities:
 
-- **keep control**: you must keep tight control on the overdue invoice
-  reminders that you send. Overdue invoice reminders are part of the
-  communication with your customers, and this is very important to keep
-  a good relation with your customers.
-- **usability**: the module is easy to configure and easy to use.
-- **no accounting skills needed**: the module can be used by users
-  without accounting skills. It can even be used by salesman!
-- **multi-currency**: if you invoice your customer in another currency
-  that your company currency, the invoice reminders only mention the
-  currency of the invoices. And if you invoice a customer with different
-  currencies, the reminder is clear and easy-to-understand by your
-  customer, with a total residual per currency.
-- **multi-channel**: supports overdue invoice reminders by e-mail
-  (default), phone and letter.
-- **simplicity**: for the developers, the code is small and easy to
-  understand.
+-  **keep control**: you must keep tight control on the overdue invoice
+   reminders that you send. Overdue invoice reminders are part of the
+   communication with your customers, and this is very important to keep
+   a good relation with your customers.
+-  **usability**: the module is easy to configure and easy to use.
+-  **no accounting skills needed**: the module can be used by users
+   without accounting skills. It can even be used by salesman!
+-  **multi-currency**: if you invoice your customer in another currency
+   that your company currency, the invoice reminders only mention the
+   currency of the invoices. And if you invoice a customer with
+   different currencies, the reminder is clear and easy-to-understand by
+   your customer, with a total residual per currency.
+-  **multi-channel**: supports overdue invoice reminders by e-mail
+   (default), phone and letter.
+-  **simplicity**: for the developers, the code is small and easy to
+   understand.
 
 The specifications written before starting the development of this
 module are written in this
@@ -77,25 +73,25 @@ invoices of that customer.
 
 The module supports a clever per-invoice reminder counter mechanism:
 
-- the reminder counter is a property of an invoice,
-- the reminder counter of each overdue invoice is incremented when
-  sending a reminder by email or by post. It is not incremented for
-  reminders by phone.
-- in an email or a letter, the subject will be *Overdue invoice reminder
-  n°N* where N is the maximum value of the counter of the overdue
-  invoices plus one.
+-  the reminder counter is a property of an invoice,
+-  the reminder counter of each overdue invoice is incremented when
+   sending a reminder by email or by post. It is not incremented for
+   reminders by phone.
+-  in an email or a letter, the subject will be *Overdue invoice
+   reminder n°N* where N is the maximum value of the counter of the
+   overdue invoices plus one.
 
 There are two user interfaces to send reminders:
 
-- the **one-by-one** interface, which displays one screen for each
-  customer that has overdue invoices, one after the other. You should
-  use this interface when you have a reasonable volume of reminders to
-  send (less than 100 overdue reminders for example). It gives you a
-  tight control on the reminders and the possibility to easily and
-  rapidly customize the reminder e-mails.
-- the **mass** interface, which displays a list view of all customers
-  that have overdue invoices, and you can process several reminders at
-  the same time (via the *Actions* menu).
+-  the **one-by-one** interface, which displays one screen for each
+   customer that has overdue invoices, one after the other. You should
+   use this interface when you have a reasonable volume of reminders to
+   send (less than 100 overdue reminders for example). It gives you a
+   tight control on the reminders and the possibility to easily and
+   rapidly customize the reminder e-mails.
+-  the **mass** interface, which displays a list view of all customers
+   that have overdue invoices, and you can process several reminders at
+   the same time (via the *Actions* menu).
 
 This video tutorial in English will show you how to configure and use
 the module: `Youtube
@@ -116,11 +112,11 @@ payments.
 Then, go to the menu *Invoicing > Customers > Overdue Invoice Remind*:
 you will get the start screen where you can:
 
-- filter the customers that you want to remind (filter by customer or by
-  salesman),
-- check that your bank journals are up-to-date,
-- choose between the *one-by-one* and *mass* interfaces,
-- customize some parameters.
+-  filter the customers that you want to remind (filter by customer or
+   by salesman),
+-  check that your bank journals are up-to-date,
+-  choose between the *one-by-one* and *mass* interfaces,
+-  customize some parameters.
 
 Then follow the process until the end.
 
@@ -135,12 +131,12 @@ Changelog
 
 **Features**
 
-- Credit notes have been added to the e-mail summary that are sent to
-  the customer. They are marked in a different colour.
+-  Credit notes have been added to the e-mail summary that are sent to
+   the customer. They are marked in a different colour.
 
-  Furthermore, the button toggle to allow to send a reminder with
-  unreconciled payments has been removed. The warning remains.
-  (`#226 <https://github.com/OCA/credit-control/issues/226>`__)
+   Furthermore, the button toggle to allow to send a reminder with
+   unreconciled payments has been removed. The warning remains.
+   (`#226 <https://github.com/OCA/credit-control/issues/226>`__)
 
 Bug Tracker
 ===========
@@ -148,7 +144,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/credit-control/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_reminder%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/credit-control/issues/new?body=module:%20account_invoice_overdue_reminder%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -163,7 +159,8 @@ Authors
 Contributors
 ------------
 
-- Alexis de Lattre <alexis.delattre@akretion.com>
+-  Alexis de Lattre <alexis.delattre@akretion.com>
+-  Nils Coenen <nils.coenen@nico-solutions.de>
 
 Maintainers
 -----------
@@ -186,6 +183,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-alexis-via| 
 
-This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/18.0/account_invoice_overdue_reminder>`_ project on GitHub.
+This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/17.0/account_invoice_overdue_reminder>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

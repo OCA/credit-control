@@ -11,6 +11,8 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <div role="alert" position="after">
+                <field name="overdue" invisible="1" />
+                <field name="overdue_remind_sent" invisible="1" />
                 <div class="alert alert-warning" role="alert" invisible="not overdue">
                         This customer invoice is overdue.
             <button
@@ -46,7 +48,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="status_in_payment" position="after">
+            <field name="payment_state" position="after">
                 <field
                     name="overdue_reminder_counter"
                     optional="hide"

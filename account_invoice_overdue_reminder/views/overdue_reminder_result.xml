@@ -11,6 +11,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="active" invisible="1" />
                     <widget
                         name="web_ribbon"
                         title="Archived"
@@ -26,13 +27,13 @@
     </record>
 
     <record id="overdue_reminder_result_tree" model="ir.ui.view">
-        <field name="name">overdue.reminder.result.list</field>
+        <field name="name">overdue.reminder.result.tree</field>
         <field name="model">overdue.reminder.result</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -54,7 +55,7 @@
     <record id="overdue_reminder_result_action" model="ir.actions.act_window">
         <field name="name">Invoice Reminder Results</field>
         <field name="res_model">overdue.reminder.result</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
