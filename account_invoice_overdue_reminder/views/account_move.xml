@@ -14,13 +14,13 @@
                 <div class="alert alert-warning" role="alert" invisible="not overdue">
                         This customer invoice is overdue.
             <button
-                    name="%(overdue_reminder_start_action)d"
-                    string="Send an overdue reminder"
-                    type="action"
-                    context="{'default_partner_ids': [commercial_partner_id]}"
-                    invisible="not overdue or no_overdue_reminder or overdue_remind_sent"
-                    class="oe_link"
-                />
+                        name="%(overdue_reminder_start_action)d"
+                        string="Send an overdue reminder"
+                        type="action"
+                        context="{'default_partner_ids': [commercial_partner_id]}"
+                        invisible="not overdue or no_overdue_reminder or overdue_remind_sent"
+                        class="oe_link"
+                    />
 
                 </div>
             </div>
