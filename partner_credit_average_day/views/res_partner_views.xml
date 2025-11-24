@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_partner_property_form_inherit_credit_average" model="ir.ui.view">
+        <field name="name">res.partner.form.credit.average</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <group name='accounting_automation' position="after">
+                <group string="Credit Control" name="credit_control">
+                    <field name="credit_limit_exception" />
+                    <field name="credit_limit_day" />
+                    <field name="credit_average_day" readonly="1" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
