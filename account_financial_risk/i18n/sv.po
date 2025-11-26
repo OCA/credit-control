@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2025-11-13 14:42+0000\n"
+"PO-Revision-Date: 2025-11-26 08:41+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/sv/)\n"
@@ -58,12 +58,12 @@ msgstr "<strong>Kvarvarande krediter </strong>"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
-msgstr "Konton flyttas"
+msgstr "Verifikat"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 msgid "Account move lines"
-msgstr "Konto flytta linjer"
+msgstr "Verifikatsrader"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -115,7 +115,7 @@ msgstr "Välj Manuell kreditvaluta."
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
-msgstr "Företag"
+msgstr "Bolag"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
@@ -200,7 +200,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
 msgid "Display Name"
-msgstr "Visa namn"
+msgstr "Visningsnamn"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__exception_msg
