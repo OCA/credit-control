@@ -7,6 +7,7 @@ import logging
 from collections import defaultdict
 
 from dateutil.relativedelta import relativedelta
+from markupsafe import Markup
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError
@@ -634,6 +635,30 @@ class OverdueReminderStep(models.TransientModel):
             if self.reminder_type != "phone":
                 rvals["counter"] = inv.overdue_reminder_counter + 1
             vals["reminder_ids"].append((0, 0, rvals))
+            if self.reminder_type == "mail":
+                inv.message_post(
+                    body=Markup(
+                        _(
+                            "<strong>Overdue reminder</strong> sent by mail: "
+                            "%(mail_body)s",
+                            mail_body=str(self.mail_body),
+                        )
+                    )
+                )
+            elif self.reminder_type == "phone":
+                inv.message_post(
+                    body=Markup(
+                        _(
+                            "<strong>Overdue reminder</strong> by phone. "
+                            "Result/Info: %(result)s.",
+                            result=self.result_id.name,
+                        )
+                    )
+                )
+            elif self.reminder_type == "post":
+                inv.message_post(
+                    body=Markup(_("<strong>Overdue reminder</strong> sent by post."))
+                )
 
     def print_letter(self):
         self.check_warnings()
