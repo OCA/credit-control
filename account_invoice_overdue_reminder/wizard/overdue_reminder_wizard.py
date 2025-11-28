@@ -628,10 +628,8 @@ class OverdueReminderStep(models.TransientModel):
                     body=Markup(
                         _(
                             "<strong>Overdue reminder</strong> sent by mail: "
-                            "<a href=# data-oe-model=mail.mail "
-                            "data-oe-id=%(mail_id)s>%(mail_subject)s</a>.",
-                            mail_id=vals["mail_id"],
-                            mail_subject=self.mail_subject,
+                            "%(mail_body)s",
+                            mail_body=str(self.mail_body),
                         )
                     )
                 )
