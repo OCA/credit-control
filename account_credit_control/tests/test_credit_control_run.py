@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 
 from dateutil import relativedelta
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
@@ -16,6 +17,7 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 class TestCreditControlRunCase(AccountTestInvoicingCommon):
     @classmethod
+    @freeze_time("2025-04-24")
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user.groups_id |= cls.env.ref(
@@ -135,6 +137,7 @@ class TestCreditControlRun(TestCreditControlRunCase):
         regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
+    @freeze_time("2025-04-24")
     def test_generate_credit_lines_with_max_level(self):
         """
         Test the method generate_credit_lines with max level group.
