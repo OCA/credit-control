@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 
 from dateutil import relativedelta
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
@@ -19,6 +20,7 @@ from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 @tagged("post_install", "-at_install")
 class TestCreditControlRun(AccountTestInvoicingCommon):
     @classmethod
+    @freeze_time("2025-04-24")
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
@@ -136,6 +138,7 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
+    @freeze_time("2025-04-24")
     def test_generate_credit_lines_with_max_level(self):
         """
         Test the method generate_credit_lines with max level group.
