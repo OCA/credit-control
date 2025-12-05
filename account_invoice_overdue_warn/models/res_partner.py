@@ -62,7 +62,7 @@ class ResPartner(models.Model):
             ("date_maturity", "<", today),
             ("move_id.state", "=", "posted"),
             ("reconciled", "=", False),
-            ("account_internal_type", "=", "receivable"),
+            ("account_type", "=", "asset_receivable"),
             ("amount_residual", "!=", 0.0),
         ]
         return domain
