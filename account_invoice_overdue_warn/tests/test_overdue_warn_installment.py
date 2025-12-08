@@ -11,6 +11,12 @@ class TestOverdueWarn(TransactionCase):
     def setUp(self):
         super().setUp()
         self.company = self.env.ref("base.main_company")
+        self.company.write(
+            {
+                "account_sale_tax_id": False,
+                "account_purchase_tax_id": False,
+            }
+        )
         self.partner = self.env["res.partner"].create(
             {
                 "name": "Test Partner",
@@ -22,11 +28,7 @@ class TestOverdueWarn(TransactionCase):
         self.revenue_acc = self.env["account.account"].search(
             [
                 ("company_id", "=", self.company.id),
-                (
-                    "user_type_id",
-                    "=",
-                    self.env.ref("account.data_account_type_revenue").id,
-                ),
+                ("account_type", "in", ["income", "income_other"]),
             ],
             limit=1,
         )
@@ -115,6 +117,11 @@ class TestOverdueWarn(TransactionCase):
             }
         )
 
+    def _get_payment_term_lines(self, move):
+        return move.line_ids.filtered(
+            lambda line: line.display_type == "payment_term"
+        ).sorted("date_maturity")
+
     def test_out_invoice_draft(self):
         out_invoice_draft = self.env["account.move"].create(
             {
@@ -138,9 +145,11 @@ class TestOverdueWarn(TransactionCase):
                 ],
             }
         )
+        payment_term_lines = self._get_payment_term_lines(out_invoice_draft)
+        self.assertTrue(payment_term_lines)
         self.assertEqual(
             out_invoice_draft.invoice_date_due,
-            out_invoice_draft.line_ids[1].date_maturity,
+            payment_term_lines[-1].date_maturity,
         )
         self.assertEqual(out_invoice_draft.state, "draft")
         self.assertEqual(self.partner.overdue_invoice_count, 0)
@@ -170,9 +179,11 @@ class TestOverdueWarn(TransactionCase):
             }
         )
         out_invoice_supplier.action_post()
+        payment_term_lines = self._get_payment_term_lines(out_invoice_supplier)
+        self.assertTrue(payment_term_lines)
         self.assertEqual(
             out_invoice_supplier.invoice_date_due,
-            out_invoice_supplier.line_ids[1].date_maturity,
+            payment_term_lines[-1].date_maturity,
         )
         self.assertEqual(self.partner.overdue_invoice_count, 0)
         self.assertEqual(self.partner.overdue_invoice_amount, 0.0)
@@ -236,9 +247,11 @@ class TestOverdueWarn(TransactionCase):
         wizard_a.amount = 450.0
         wizard_a.action_create_payments()
 
+        payment_term_lines = self._get_payment_term_lines(out_invoice_b)
+        self.assertTrue(payment_term_lines)
         self.assertEqual(
             out_invoice_b.invoice_date_due,
-            out_invoice_b.line_ids[3].date_maturity,
+            payment_term_lines[-1].date_maturity,
         )
         self.assertEqual(self.partner.overdue_invoice_count, 2)
         self.assertEqual(self.partner.overdue_invoice_amount, 1049.94)
@@ -272,9 +285,11 @@ class TestOverdueWarn(TransactionCase):
             self.env["account.payment.register"].with_context(**action_data["context"])
         ).save()
         wizard.action_create_payments()
+        payment_term_lines = self._get_payment_term_lines(out_invoice_past_paid)
+        self.assertTrue(payment_term_lines)
         self.assertEqual(
             out_invoice_past_paid.invoice_date_due,
-            out_invoice_past_paid.line_ids[1].date_maturity,
+            payment_term_lines[-1].date_maturity,
         )
         self.assertEqual(self.partner.overdue_invoice_count, 0)
         self.assertEqual(self.partner.overdue_invoice_amount, 0)
@@ -303,9 +318,11 @@ class TestOverdueWarn(TransactionCase):
             }
         )
         out_invoice_future.action_post()
+        payment_term_lines = self._get_payment_term_lines(out_invoice_future)
+        self.assertTrue(payment_term_lines)
         self.assertEqual(
             out_invoice_future.invoice_date_due,
-            out_invoice_future.line_ids[1].date_maturity,
+            payment_term_lines[-1].date_maturity,
         )
         self.assertEqual(self.partner.overdue_invoice_count, 0)
         self.assertEqual(self.partner.overdue_invoice_amount, 0)
