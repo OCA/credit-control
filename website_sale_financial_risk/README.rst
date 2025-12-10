@@ -75,9 +75,9 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-     - Pilar Vargas
+      -  Pilar Vargas
 
 Maintainers
 -----------

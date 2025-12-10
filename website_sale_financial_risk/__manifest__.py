@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Website Sale Financial Risk",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "E-Commerce",
     "summary": "",
     "license": "AGPL-3",
@@ -14,7 +14,7 @@
     ],
     "assets": {
         "web.assets_frontend": [
-            "website_sale_financial_risk/static/src/js/post_processing.js",
+            "website_sale_financial_risk/static/src/js/post_processing.esm.js",
         ],
     },
     "author": "Tecnativa, Odoo Community Association (OCA)",

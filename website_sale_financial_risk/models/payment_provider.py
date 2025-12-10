@@ -12,10 +12,21 @@ class PaymentProvider(models.Model):
 
     @api.model
     def _get_compatible_providers(
-        self, *args, sale_order_id=None, website_id=None, **kwargs
+        self,
+        company_id,
+        *args,
+        sale_order_id=None,
+        website_id=None,
+        report=None,
+        **kwargs,
     ):
         all_providers = super()._get_compatible_providers(
-            *args, sale_order_id=sale_order_id, website_id=website_id, **kwargs
+            company_id,
+            *args,
+            sale_order_id=sale_order_id,
+            website_id=website_id,
+            report=report,
+            **kwargs,
         )
         # Always hide "credit" unless explicitly allowed
         providers = all_providers.filtered(lambda p: p.code != "credit")

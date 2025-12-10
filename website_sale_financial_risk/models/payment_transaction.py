@@ -1,6 +1,6 @@
 # Copyright 2025 Tecnativa - Pilar Vargas
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import ValidationError
 
 from ..controllers.main import CreditController
@@ -28,7 +28,9 @@ class PaymentTransaction(models.Model):
         )
         if not tx:
             raise ValidationError(
-                _("On Credit: No transaction found matching reference %s.", reference)
+                self.env._(
+                    "On Credit: No transaction found matching reference %s.", reference
+                )
             )
         return tx
 
