@@ -23,7 +23,7 @@
             <p>
                 <i>Your order has been <strong>confirmed</strong>.</i><br />
                 The payment has been registered as <strong
-                >credit</strong> and is pending invoicing.
+            >credit</strong> and is pending invoicing.
             </p>
         </field>
     </record>
