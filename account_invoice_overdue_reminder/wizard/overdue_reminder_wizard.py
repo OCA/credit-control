@@ -563,9 +563,12 @@ class OverdueReminderStep(models.TransientModel):
     def generate_mail_vals(self):
         self.ensure_one()
         xmlid = self._get_overdue_invoice_reminder_template()
-        mvals = self.env.ref(xmlid).generate_email(
-            self.id, ["email_from", "email_to", "partner_to", "reply_to"]
-        )
+        mail_tmpl = self.env.ref(xmlid)
+        mail_tmpl_fields = ["email_from", "email_to", "partner_to", "reply_to"]
+        # if OCA module 'mail_composer_cc_bcc' is installed
+        if hasattr(mail_tmpl, "email_bcc"):
+            mail_tmpl_fields.append("email_bcc")
+        mvals = mail_tmpl.generate_email(self.id, mail_tmpl_fields)
         cc_list = [p.email for p in self.mail_cc_partner_ids if p.email]
         if mvals.get("email_cc"):
             cc_list.append(mvals["email_cc"])
