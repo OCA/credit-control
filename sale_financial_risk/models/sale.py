@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.tools import float_round
+from odoo.tools import float_compare, float_round
 
 
 class SaleOrder(models.Model):
@@ -15,6 +15,12 @@ class SaleOrder(models.Model):
 
     def evaluate_risk_message(self, partner):
         self.ensure_one()
+        # A. riesgo disminuyó o se mantuvo. Permitido sin aviso.
+        exception_msg = ""
+        risk_difference = self.env.context.get("current_risk_difference")
+        if risk_difference is not None and risk_difference <= 0:
+            return exception_msg
+
         risk_amount = self.currency_id._convert(
             self.amount_total,
             partner.risk_currency_id,
@@ -64,6 +70,48 @@ class SaleOrder(models.Model):
         if ICP.get_param("sale_financial_risk.include_risk_sale_order_done"):
             risk_states.append("done")
         return risk_states
+
+    def write(self, vals):
+        # 1. IDENTIFICAR PEDIDOS CONFIRMADOS
+        orders_to_check = self.filtered(lambda so: so.state == "sale")
+        old_risk_total = {}
+        # Almacenar el riesgo total ANTES
+        for order in orders_to_check:
+            partner = order.partner_invoice_id.commercial_partner_id
+            old_risk_total[order.id] = partner.risk_total
+        # 2.actualizar  líneas y recalcular riesgo
+        res = super(SaleOrder, self).write(vals)
+        # 3. VALIDAR RIESGO DESPUÉS CAMBIOS
+        for order in orders_to_check:
+            partner = order.partner_invoice_id.commercial_partner_id
+            new_risk_total = partner.risk_total
+            # Comparar el riesgo con el valor almacenado ANTES del 'write'
+            risk_difference = float_compare(
+                new_risk_total, old_risk_total[order.id], precision_digits=2
+            )
+            exception_msg = order.with_context(
+                current_risk_difference=risk_difference
+            ).evaluate_risk_message(partner)
+            # B. AUMENTO
+            exception_msg = order.evaluate_risk_message(partner)
+            if exception_msg:
+                warning_message = (
+                    _(
+                        "RISK EXCEEDED: A confirmed order has been modified and saved. "
+                        "This operation increases the client's consumed risk. %s"
+                    )
+                    % exception_msg
+                )
+                self.env.cr.execute(
+                    """
+                    INSERT INTO ir_logging
+                    (create_date, create_uid, name, level, message, type, path, line, func)
+                    VALUES
+                    (NOW(), %s, 'sale.order', 'WARNING', %s, 'server', 'sale.py', %s, 'write')
+                    """,
+                    (self.env.uid, warning_message, 95),
+                )
+        return res
 
 
 class SaleOrderLine(models.Model):
