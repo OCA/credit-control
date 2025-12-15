@@ -2,8 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.tools import float_round,float_compare
-from odoo import exceptions
+from odoo.tools import float_compare, float_round
 
 
 class SaleOrder(models.Model):
@@ -68,7 +67,7 @@ class SaleOrder(models.Model):
 
     def write(self, vals):
         # 1. IDENTIFICAR PEDIDOS CONFIRMADOS
-        orders_to_check = self.filtered(lambda so: so.state == 'sale')
+        orders_to_check = self.filtered(lambda so: so.state == "sale")
         old_risk_total = {}
         # Almacenar el riesgo total ANTES
         for order in orders_to_check:
@@ -81,18 +80,31 @@ class SaleOrder(models.Model):
             partner = order.partner_invoice_id.commercial_partner_id
             new_risk_total = partner.risk_total
             # Comparar el riesgo con el valor almacenado ANTES del 'write'
-            risk_difference = float_compare(new_risk_total, old_risk_total[order.id], precision_digits=2)
+            risk_difference = float_compare(
+                new_risk_total, old_risk_total[order.id], precision_digits=2
+            )
             # A. riesgo disminuyó o se mantuvo. Permitido sin aviso.
             if risk_difference <= 0:
                 continue
             # B. AUMENTO
             exception_msg = order.evaluate_risk_message(partner)
             if exception_msg:
-                warning_message = _(
-                    "ADVERTENCIA POR RIESGO EXCEDIDO: Se ha modificado y guardado un pedido confirmado. "
-                    "Esta operación incrementa el riesgo consumido del cliente. %s"
-                ) % exception_msg
-                raise UserWarning(warning_message)
+                warning_message = (
+                    _(
+                        "RIESGO EXCEDIDO: Se ha modificado y guardado un pedido confirmado. "
+                        "Esta operación incrementa el riesgo consumido del cliente. %s"
+                    )
+                    % exception_msg
+                )
+                self.env.cr.execute(
+                    """
+                    INSERT INTO ir_logging
+                    (create_date, create_uid, name, level, message, type, path, line, func)
+                    VALUES
+                    (NOW(), %s, 'sale.order', 'WARNING', %s, 'server', 'sale.py', %s, 'write')
+                    """,
+                    (self.env.uid, warning_message, 95),
+                )
         return res
 
 
