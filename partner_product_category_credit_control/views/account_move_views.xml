@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_account_move_form_credit_control" model="ir.ui.view">
+        <field name="name">account.move.form.credit.control</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <field name="credit_control_active" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

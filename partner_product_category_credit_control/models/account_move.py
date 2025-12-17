@@ -1,12 +1,27 @@
-from odoo import _, models
+from odoo import _, fields, models
 from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    credit_control_active = fields.Boolean(
+        string="Activate Credit Control",
+        default=True,
+        help="Enable or disable credit control for this invoice."
+    )
+
+    def toggle_credit_control_active(self):
+        """Toggle the credit_control_active field."""
+        for record in self:
+            record.credit_control_active = not record.credit_control_active
+
     def action_post(self):
         for record in self:
+            # Skip credit control if disabled for this invoice
+            if not record.credit_control_active:
+                continue
+                
             if (
                 not self.env.user.has_group("account.group_account_manager")
                 and record.partner_id
