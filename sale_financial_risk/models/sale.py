@@ -73,44 +73,35 @@ class SaleOrder(models.Model):
 
     def write(self, vals):
         # 1. IDENTIFICAR PEDIDOS CONFIRMADOS
-        orders_to_check = self.filtered(lambda so: so.state == "sale")
-        old_risk_total = {}
-        # Almacenar el riesgo total ANTES
-        for order in orders_to_check:
-            partner = order.partner_invoice_id.commercial_partner_id
-            old_risk_total[order.id] = partner.risk_total
+        orders_to_check = self.filtered(lambda so: so.state in self._get_risk_states())
+        old_risk_totals = {order.id: order.partner_invoice_id.commercial_partner_id.risk_total for order in orders_to_check}
+
+        
         # 2.actualizar  líneas y recalcular riesgo
         res = super(SaleOrder, self).write(vals)
         # 3. VALIDAR RIESGO DESPUÉS CAMBIOS
+        warnings = []
         for order in orders_to_check:
             partner = order.partner_invoice_id.commercial_partner_id
             new_risk_total = partner.risk_total
-            # Comparar el riesgo con el valor almacenado ANTES del 'write'
-            risk_difference = float_compare(
-                new_risk_total, old_risk_total[order.id], precision_digits=2
-            )
-            exception_msg = order.with_context(
-                current_risk_difference=risk_difference
-            ).evaluate_risk_message(partner)
-            # B. AUMENTO
-            exception_msg = order.evaluate_risk_message(partner)
-            if exception_msg:
-                warning_message = (
-                    _(
-                        "RISK EXCEEDED: A confirmed order has been modified and saved. "
-                        "This operation increases the client's consumed risk. %s"
-                    )
-                    % exception_msg
-                )
-                self.env.cr.execute(
-                    """
-                    INSERT INTO ir_logging
-                    (create_date, create_uid, name, level, message, type, path, line, func)
-                    VALUES
-                    (NOW(), %s, 'sale.order', 'WARNING', %s, 'server', 'sale.py', %s, 'write')
-                    """,
-                    (self.env.uid, warning_message, 95),
-                )
+            if float_compare(new_risk_total, old_risk_totals.get(order.id, 0.0), precision_digits=2) > 0:
+                exception_msg = order.with_context(
+                    current_risk_difference=(new_risk_total - old_risk_totals.get(order.id, 0.0))
+                ).evaluate_risk_message(partner)
+                if exception_msg:
+                    msg = _(
+                            "RISK EXCEEDED: A confirmed order has been modified and saved. "
+                            "This operation increases the client's consumed risk. %s"
+                        )% (order.name, exception_msg)
+                    warnings.append(msg)
+                
+        if warnings:
+            return {
+                'warning': {
+                    'title': _("RISK EXCEEDED"),
+                    'message': "\n".join(warnings),
+                }
+            }
         return res
 
 
