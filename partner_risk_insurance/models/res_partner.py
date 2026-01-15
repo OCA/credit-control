@@ -25,45 +25,54 @@ class ResPartner(models.Model):
             "It represents the amount of credit that an insurance policy guarantees."
         ),
         tracking=True,
+        copy=False,
     )
     risk_insurance_coverage_percent = fields.Float(
         "Insurance coverage (%)",
         groups="account.group_account_invoice,account.group_account_readonly",
         help="Percentage of the credit that is covered by the insurance.",
+        copy=False,
     )
     risk_insurance_requested = fields.Boolean(
         "Insurance Requested",
         help="Mark this field if an insurance was "
         "requested for the credit of this partner.",
+        copy=False,
     )
     risk_insurance_grant_date = fields.Date(
         "Insurance Grant Date",
         help="Date when the insurance was granted by the insurance company.",
+        copy=False,
     )
     risk_insurance_code = fields.Char(
         "Insurance Code",
         help="Code assigned to this partner by the risk insurance company.",
+        copy=False,
     )
     risk_insurance_code_2 = fields.Char(
         "Insurance Code 2",
         help="Secondary code assigned to this "
         "partner by the risk insurance "
         "company.",
+        copy=False,
     )
     credit_policy_state_id = fields.Many2one(
         string="Policy State",
         comodel_name="credit.policy.state",
         ondelete="restrict",
+        copy=False,
     )
     credit_policy_insure_invoices = fields.Boolean(
         string="Insure Invoices",
         related="credit_policy_state_id.insure_invoices",
         store=False,
+        copy=False,
     )
     credit_policy_company_id = fields.Many2one(
         string="Credit Policy Company",
         comodel_name="credit.policy.company",
         ondelete="restrict",
+        copy=False,
     )
 
     @api.depends("credit_limit", "insurance_credit_limit")
