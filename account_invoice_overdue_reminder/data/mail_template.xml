@@ -67,13 +67,13 @@
                                 <t t-out="inv.name" />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;">
-                                <t t-out="inv.invoice_date" />
+                                <t t-out="format_date(inv.invoice_date)" />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.invoice_payment_term_id.name or ''" />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;">
-                                <t t-out="inv.invoice_date_due" />
+                                <t t-out="format_date(inv.invoice_date_due)" />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.ref or ''" />
