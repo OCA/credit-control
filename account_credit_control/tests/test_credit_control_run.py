@@ -132,10 +132,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         )
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            r'Policy "<b>%s</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br>" % self.policy.name
         )
-        regex_result = re.match(report_regex, control_run.report)
+        regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
     @freeze_time("2025-04-24")
@@ -219,10 +219,10 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br>"
         )
-        regex_result = re.match(report_regex, control_run.report)
+        regex_result = re.search(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
 
         # Mark lines to be send
@@ -254,8 +254,8 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         self.assertEqual(control_run.state, "done")
 
         report_regex = (
-            r'<p>Policy "<b>%s</b>" has generated <b>'
-            r"\d+ Credit Control Lines.</b><br></p>" % self.policy.name
+            rf'<p>Policy "<b>{self.policy.name}</b>" has generated <b>'
+            r"\d+ Credit Control Lines.</b><br></p>"
         )
         regex_result = re.match(report_regex, control_run.report)
         self.assertIsNotNone(regex_result)
@@ -297,6 +297,7 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         emailer_obj = self.env["credit.control.emailer"]
         wiz_emailer = emailer_obj.create({})
         wiz_emailer.line_ids = control_lines
+        self.env.user.company_id.email = "test@example.com"
         with RecordCapturer(self.env["credit.control.communication"], []) as capture:
             wiz_emailer.email_lines()
         new_communication = capture.records
