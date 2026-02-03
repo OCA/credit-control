@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="checkout_layout" inherit_id="website_sale.checkout_layout">
+        <xpath expr="//div[@id='o_wsale_total_accordion_item']/.." position="before">
+            <t t-call="account_financial_risk.financial_risk_info">
+                <t t-set="partner" t-value="order.partner_id" />
+            </t>
+        </xpath>
+    </template>
+</odoo>
