@@ -34,6 +34,7 @@ addon | version | maintainers | summary
 [sale_financial_risk](sale_financial_risk/) | 18.0.1.0.6 |  | Manage partner risk in sales orders
 [sale_financial_risk_info](sale_financial_risk_info/) | 18.0.1.0.1 |  | Adds risk consumption info in sales orders.
 [stock_financial_risk](stock_financial_risk/) | 18.0.1.0.0 |  | Manage partner risk in stock moves
+[website_sale_financial_risk](website_sale_financial_risk/) | 18.0.1.0.0 |  | Website Sale Financial Risk
 
 [//]: # (end addons)
 
