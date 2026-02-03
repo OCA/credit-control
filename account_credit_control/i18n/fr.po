@@ -146,8 +146,8 @@ msgstr "Ligne de relance"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
 "Une ligne de rappel de paiement plus récente que %(controlling_date)s existe "
 "au %(lines_date)s"
@@ -1528,6 +1528,12 @@ msgstr "Imprimer la sélection"
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__queued
 msgid "Queued"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: account_credit_control

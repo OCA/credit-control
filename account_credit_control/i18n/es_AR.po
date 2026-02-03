@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
 "PO-Revision-Date: 2017-11-28 23:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
+"23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,8 +124,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
 
 #. module: account_credit_control
@@ -1470,6 +1470,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__queued
 msgid "Queued"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: account_credit_control

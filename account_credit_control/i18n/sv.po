@@ -46,8 +46,8 @@ msgstr ""
 "Om din betalning inte har mottagits inom de närmaste 5 dagarna kommer din "
 "fil att överföras till vår inkassobyrå.\n"
 "\n"
-"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela oss."
-"\n"
+"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela "
+"oss.\n"
 "Ett kundkontoutdrag bifogas för att underlätta för dig.\n"
 "\n"
 "Tack på förhand för ert förväntade samarbete i detta ärende.\n"
@@ -104,8 +104,8 @@ msgstr ""
 "            <br/>\n"
 "             <br/>\n"
 "            <p>\n"
-"                <t t-out=\"object.policy_level_id.custom_mail_text or ''\"/>"
-"\n"
+"                <t t-out=\"object.policy_level_id.custom_mail_text or ''\"/"
+">\n"
 "            </p>\n"
 "        "
 
@@ -153,11 +153,11 @@ msgstr "En kreditkontrollinje"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
-"En kreditkontrollinje som är nyare än %(controlling_date)s finns på "
-"%(lines_date)s"
+"En kreditkontrollinje som är nyare än %(controlling_date)s finns på %"
+"(lines_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -1276,7 +1276,8 @@ msgstr "Öppet belopp"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
 msgid ""
 "Open balance on credit control linesof same partner, policy and currency"
-msgstr "Öppet saldo på kreditkontrollinjer med samma partner, policy och valuta"
+msgstr ""
+"Öppet saldo på kreditkontrollinjer med samma partner, policy och valuta"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1396,8 +1397,8 @@ msgid ""
 "be transferred to our debt collection agency."
 msgstr ""
 "Våra register visar att vi fortfarande inte har mottagit betalningen av de "
-"fakturor som nämns i det bifogade dokumentet trots våra två påminnelser.<br>"
-"\n"
+"fakturor som nämns i det bifogade dokumentet trots våra två påminnelser."
+"<br>\n"
 "  Om betalningen redan har skickats, vänligen bortse från detta meddelande. "
 "Om inte, vänligen fortsätt med betalningen.<br>\n"
 "  Om din betalning inte har mottagits inom de närmaste 5 dagarna kommer din "
@@ -1430,8 +1431,8 @@ msgstr ""
 "Om din betalning inte har mottagits inom de närmaste 5 dagarna kommer din "
 "fil att överföras till vår inkassobyrå.\n"
 "\n"
-"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela oss."
-"\n"
+"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela "
+"oss.\n"
 "Ett kundkontoutdrag bifogas för att underlätta för dig.\n"
 "\n"
 "Tack på förhand för ert förväntade samarbete i detta ärende.\n"
@@ -1582,6 +1583,12 @@ msgid "Queued"
 msgstr "I kö"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__policy_id
@@ -1681,8 +1688,8 @@ msgid ""
 "Should you need us to arrange a payment plan for you, please advise.<br>\n"
 "  A customer account statement is enclosed for you convenience."
 msgstr ""
-"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela.<br>"
-"\n"
+"Om du vill att vi ska ordna en betalningsplan för dig, vänligen meddela."
+"<br>\n"
 "  Ett kundkontoutdrag bifogas för att underlätta för dig."
 
 #. module: account_credit_control

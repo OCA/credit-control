@@ -103,8 +103,8 @@ msgstr ""
 "            <br/>\n"
 "            <br/>\n"
 "            <p>\n"
-"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/>"
-"\n"
+"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/"
+">\n"
 "            </p>\n"
 "        "
 
@@ -152,8 +152,8 @@ msgstr "Una línia de control de crèdit"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
 "Existeix una línia de control de crèdit més recent que %(controlling_date)s "
 "a %(lines_date)s"
@@ -1381,8 +1381,8 @@ msgid ""
 "proceed with payment within 5 days."
 msgstr ""
 "Els nostres registres indiquen que encara no hem rebut el pagament de les "
-"factures esmentades al document adjunt tot i el nostre primer "
-"recordatori.<br>\n"
+"factures esmentades al document adjunt tot i el nostre primer recordatori."
+"<br>\n"
 "  Si ja s'ha enviat, ignoreu aquest avís. Si no, si us plau procediu al "
 "pagament en un termini de 5 dies."
 
@@ -1406,8 +1406,8 @@ msgid ""
 "be transferred to our debt collection agency."
 msgstr ""
 "Els nostres registres indiquen que encara no hem rebut el pagament de les "
-"factures esmentades al document adjunt tot i els nostres dos "
-"recordatoris.<br>\n"
+"factures esmentades al document adjunt tot i els nostres dos recordatoris."
+"<br>\n"
 "  Si el pagament ja s'ha enviat, ignoreu aquest avís. Si no, si us plau "
 "procediu amb el pagament.<br>\n"
 "  Si el vostre pagament no es rep en els propers 5 dies, el vostre expedient "
@@ -1591,6 +1591,12 @@ msgstr "Imprimeix les línies seleccionades"
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__queued
 msgid "Queued"
 msgstr "En cua"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
+msgid "Ratings"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id

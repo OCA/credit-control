@@ -153,11 +153,11 @@ msgstr "Riga controllo di credito"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_run.py:0
 msgid ""
-"A credit control line more recent than %(controlling_date)s exists at "
-"%(lines_date)s"
+"A credit control line more recent than %(controlling_date)s exists at %"
+"(lines_date)s"
 msgstr ""
-"Esiste una riga controllo credito più recente di %(controlling_date)s al "
-"%(lines_date)s"
+"Esiste una riga controllo credito più recente di %(controlling_date)s al %"
+"(lines_date)s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -1542,8 +1542,8 @@ msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
 msgstr ""
-"La politica \"<b>%(name)s</b>\" ha generato "
-"<b>%(len_policy_lines_generated)d righe controllo credito.</b><br/>"
+"La politica \"<b>%(name)s</b>\" ha generato <b>%"
+"(len_policy_lines_generated)d righe controllo credito.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1593,6 +1593,12 @@ msgstr "Stampa righe selezionate"
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__queued
 msgid "Queued"
 msgstr "In coda"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
+msgid "Ratings"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id
