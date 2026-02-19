@@ -7,7 +7,7 @@
     "version": "18.0.1.0.0",
     "category": "Sales Management",
     "license": "AGPL-3",
-    "author": "Tecnativa, " "Odoo Community Association (OCA)",
+    "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/credit-control",
     "depends": ["stock", "account_financial_risk"],
     "installable": True,
