@@ -2,15 +2,15 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields
+from odoo.tests import new_test_user
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT, BaseCommon
+from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestPartnerSaleRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env.user.groups_id |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )
@@ -86,6 +86,23 @@ class TestPartnerSaleRisk(BaseCommon):
         self.assertTrue(self.partner.risk_allow_edit)
         wiz.button_continue()
         self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+        # Create invoice
+        invoice = sale_order2._create_invoices()
+        res = invoice.action_post()
+        wizard = self.env[res["res_model"]].browse(res["res_id"])
+        wizard.button_continue()
+        self.assertEqual(invoice.state, "posted")
+        # Cancel order + invoice with sale user
+        sale_user = new_test_user(
+            self.env,
+            login="test-sale_user",
+            groups="sales_team.group_sale_salesman_all_leads",
+        )
+        res = sale_order2.action_cancel()
+        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
+        wizard = wizard.with_user(sale_user)
+        wizard.action_cancel()
+        self.assertEqual(sale_order2.state, "cancel")
 
     def test_sale_order_auto_done(self):
         self.env["ir.config_parameter"].create(
