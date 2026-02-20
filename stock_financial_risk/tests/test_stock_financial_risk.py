@@ -55,7 +55,6 @@ class TestStockFinancialRisk(TransactionCase):
         )
         cls.move = cls.env["stock.move"].create(
             {
-                "name": "/",
                 "picking_id": cls.picking.id,
                 "product_uom_qty": 10,
                 "product_uom": cls.product.uom_id.id,
