@@ -35,7 +35,10 @@ class AccountMove(models.Model):
     def button_cancel(self):
         """Prevent to cancel invoice related to credit line"""
         # We will search if this invoice is linked with credit
-        cc_line_obj = self.env["credit.control.line"]
+        # We must apply sudo() because the user may not have sufficient permissions
+        # to access credit.control.line (for example, a sales user when canceling
+        #  an order).
+        cc_line_obj = self.env["credit.control.line"].sudo()
         nondraft_domain = [
             ("invoice_id", "in", self.ids),
             ("state", "!=", "draft"),
