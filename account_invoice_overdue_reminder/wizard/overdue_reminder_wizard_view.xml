@@ -215,7 +215,7 @@
                 <group name="mail" invisible="reminder_type != 'mail'">
                     <field
                         name="mail_cc_partner_ids"
-                        domain="[('id', 'child_of', commercial_partner_id), ('id', '!=', partner_id), ('email', '!=', False)]"
+                        domain="[('id', '!=', partner_id), ('email', '!=', False)]"
                         widget="many2many_tags"
                     />
                     <field name="mail_subject" />
