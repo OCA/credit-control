@@ -1,5 +1,5 @@
 # Copyright 2022 ForgeFlow, S.L.
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
 _logger = logging.getLogger(__name__)

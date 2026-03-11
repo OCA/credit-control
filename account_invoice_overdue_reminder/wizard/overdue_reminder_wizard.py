@@ -653,7 +653,7 @@ class OverdueReminderStep(models.TransientModel):
     def print_letter(self):
         self.check_warnings()
         self.write({"letter_printed": True})
-        action = action = (
+        action = (
             self.env.ref(MOD + ".overdue_reminder_step_report")
             .with_context(discard_logo_check=True)
             .report_action(self)
