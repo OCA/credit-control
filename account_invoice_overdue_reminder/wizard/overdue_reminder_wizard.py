@@ -584,6 +584,10 @@ class OverdueReminderStep(models.TransientModel):
         if self.company_id.overdue_reminder_attach_invoice:
             attachment_ids = self._get_attachment_ids(mail)
             mail.write({"attachment_ids": [(6, 0, attachment_ids)]})
+        # to make sure the sender receives the potential answer
+        self.commercial_partner_id.message_subscribe(
+            partner_ids=[self.env.user.partner_id.id]
+        )
         vals = {"mail_id": mail.id}
         return vals
 
