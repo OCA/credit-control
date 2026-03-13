@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2026-03-12 15:41+0000\n"
+"PO-Revision-Date: 2026-03-13 09:45+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
 "Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "Language: fi\n"
@@ -769,7 +769,7 @@ msgstr "Sähköpostitusvirhe"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__date_entry
 msgid "Entry date"
-msgstr "Tulopäivä"
+msgstr "Merkintäpäivä"
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__error
@@ -1569,7 +1569,7 @@ msgid ""
 "Credit Control Lines.</b><br/>"
 msgstr ""
 "Käytänne \"<b>%(name)s</b>\" on luonut <b>%(len_policy_lines_generated)d "
-"luotonvalvontarivit.</b><br/>"
+"luotonvalvontariviä.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1657,7 +1657,7 @@ msgstr "Vastuukäyttäjä"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Run channel action"
-msgstr "Aja kanavan toiminto"
+msgstr "Aja suunnitellut toiminnot"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
@@ -1716,7 +1716,7 @@ msgstr "Aseta uusi käytänne"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Set to ready all"
-msgstr "Aseta kaikki valmiiksi"
+msgstr "Aseta kaikki käsittelyvalmiiksi"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
