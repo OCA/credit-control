@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Jarsa
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="financial_risk_purchase_order_line_pivot_view" model="ir.ui.view">
+        <field
+            name="name"
+        >Purchase financial risk purchase order line pivot view</field>
+        <field name="model">purchase.order.line</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <pivot string="Purchase Order Lines">
+                <field name="purchase_risk_partner_id" type="row" />
+                <field name="purchase_risk_amount" type="measure" />
+            </pivot>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Jarsa
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="financial_risk_account_move_pivot_view" model="ir.ui.view">
+        <field name="name">Purchase financial risk vendor bill pivot view</field>
+        <field name="model">account.move</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <pivot string="Vendor Bills">
+                <field name="commercial_partner_id" type="row" />
+                <field name="invoice_date" interval="month" type="col" />
+                <field name="amount_residual_signed" type="measure" />
+            </pivot>
+        </field>
+    </record>
+</odoo>

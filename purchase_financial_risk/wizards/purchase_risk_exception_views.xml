@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Jarsa
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="purchase_risk_exception_wizard" model="ir.ui.view">
+        <field name="name">purchase.risk.exception</field>
+        <field name="model">purchase.risk.exception</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Risk Limit Exceeded">
+                <p>This document exceeds the vendor's purchase risk limit.</p>
+                <field name="exception_msg" colspan="2" nolabel="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="order_id" invisible="not order_id" />
+                <field name="move_id" invisible="not move_id" />
+                <group>
+                    <field
+                        name="purchase_risk"
+                        widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                    />
+                    <field
+                        name="purchase_risk_limit"
+                        widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                    />
+                </group>
+                <footer>
+                    <button
+                        string="Confirm Anyway"
+                        class="btn-primary"
+                        name="button_confirm"
+                        type="object"
+                        groups="purchase_financial_risk.group_purchase_risk_manager"
+                    />
+                    <button string="Cancel" class="btn-link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

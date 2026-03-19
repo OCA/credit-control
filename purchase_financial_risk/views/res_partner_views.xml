@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Jarsa
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_partner_view_purchase_risk" model="ir.ui.view">
+        <field name="name">res.partner.view.purchase.risk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <page name="sales_purchases" position="after">
+                <page
+                    name="purchase_financial_risk"
+                    string="Purchase Risk"
+                    invisible="not is_company and parent_id"
+                    groups="purchase_financial_risk.group_purchase_risk_manager"
+                >
+                    <group name="purchase_risk_general">
+                        <group string="Purchase Risk Summary">
+                            <field
+                                name="purchase_risk_currency_id"
+                                readonly="not purchase_risk_allow_edit"
+                                options="{'no_create': True}"
+                            />
+                            <field
+                                name="purchase_risk_limit"
+                                readonly="not purchase_risk_allow_edit"
+                                widget="monetary"
+                                options="{'currency_field': 'purchase_risk_currency_id'}"
+                            />
+                            <label for="purchase_risk_po" />
+                            <div class="o_row">
+                                <button
+                                    name="open_purchase_risk_pivot_info"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    context="{'open_risk_field': 'purchase_risk_po'}"
+                                >
+                                    <field
+                                        name="purchase_risk_po"
+                                        nolabel="1"
+                                        widget="monetary"
+                                        options="{'currency_field': 'purchase_risk_currency_id'}"
+                                    />
+                                </button>
+                            </div>
+                            <label for="purchase_risk_bill_draft" />
+                            <div class="o_row">
+                                <button
+                                    name="open_purchase_risk_pivot_info"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    context="{'open_risk_field': 'purchase_risk_bill_draft'}"
+                                >
+                                    <field
+                                        name="purchase_risk_bill_draft"
+                                        nolabel="1"
+                                        widget="monetary"
+                                        options="{'currency_field': 'purchase_risk_currency_id'}"
+                                    />
+                                </button>
+                            </div>
+                            <label for="purchase_risk_bill_open" />
+                            <div class="o_row">
+                                <button
+                                    name="open_purchase_risk_pivot_info"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    context="{'open_risk_field': 'purchase_risk_bill_open'}"
+                                >
+                                    <field
+                                        name="purchase_risk_bill_open"
+                                        nolabel="1"
+                                        widget="monetary"
+                                        options="{'currency_field': 'purchase_risk_currency_id'}"
+                                    />
+                                </button>
+                            </div>
+                            <field
+                                name="purchase_risk"
+                                widget="monetary"
+                                options="{'currency_field': 'purchase_risk_currency_id'}"
+                            />
+                            <field name="purchase_risk_percent" string="Risk (%)" />
+                            <field
+                                name="purchase_risk_exception"
+                                readonly="not purchase_risk_allow_edit"
+                            />
+                            <field name="purchase_risk_allow_edit" invisible="1" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

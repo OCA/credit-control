@@ -1,0 +1,320 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_financial_risk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-19 15:55+0000\n"
+"PO-Revision-Date: 2026-03-30 09:32-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#. module: purchase_financial_risk
+#: model:res.groups,comment:purchase_financial_risk.group_purchase_risk_manager
+msgid "Can override purchase risk blocks and edit vendor risk limits"
+msgstr ""
+"Puede anular los bloqueos de riesgo de compra y editar los límites de "
+"riesgo del proveedor."
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.purchase_risk_exception_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_order_line__purchase_risk_partner_id
+msgid "Commercial Vendor"
+msgstr "Proveedor comercial"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_order_line__company_currency_id
+msgid "Company Currency"
+msgstr "Moneda de la empresa"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.purchase_risk_exception_wizard
+msgid "Confirm Anyway"
+msgstr "Confirmar de todos modos"
+
+#. module: purchase_financial_risk
+#: model:ir.model,name:purchase_financial_risk.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_purchase_risk_exception__currency_id
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_currency_id
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_currency_id
+msgid "Currency used for the purchase risk limit and exposure amounts."
+msgstr ""
+"Moneda utilizada para el límite de riesgo de compra y los importes de "
+"riesgo."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__purchase_risk
+msgid "Current Purchase Risk"
+msgstr "Riesgo de Compra Actual"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__exception_msg
+msgid "Exception Message"
+msgstr "Mensaje de excepción"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__id
+msgid "ID"
+msgstr ""
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_exception
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_exception
+msgid "If checked, purchase orders bypass the risk limit check."
+msgstr ""
+"Si se marca esta opción, los pedidos de compra y factura omiten la "
+"comprobación del límite de riesgo."
+
+#. module: purchase_financial_risk
+#: model:ir.model,name:purchase_financial_risk.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__write_date
+msgid "Last Updated on"
+msgstr "Última modificación en"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_purchase_risk_exception__purchase_risk_limit
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_limit
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_limit
+msgid "Maximum financial exposure allowed for this vendor."
+msgstr "Máximo riesgo financiero permitida para este proveedor."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_percent
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_percent
+msgid "Percentage of purchase risk limit consumed."
+msgstr "Porcentaje del límite de riesgo de compra consumido."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk
+msgid "Purchase Financial Risk"
+msgstr "Riesgo financiero de la compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model,name:purchase_financial_risk.model_purchase_order
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__order_id
+msgid "Purchase Order"
+msgstr "Orden de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model,name:purchase_financial_risk.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de la orden de compra"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.financial_risk_purchase_order_line_pivot_view
+msgid "Purchase Order Lines"
+msgstr "Línea de Orden de Compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_order_line_risk_ids
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_order_line_risk_ids
+msgid "Purchase Order Lines (Risk)"
+msgstr "Líneas de órdenes de compra (riesgo)"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.res_partner_view_purchase_risk
+msgid "Purchase Risk"
+msgstr "Riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_percent
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_percent
+msgid "Purchase Risk (%)"
+msgstr "Riesgo de compra (%)"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_allow_edit
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_allow_edit
+msgid "Purchase Risk Allow Edit"
+msgstr "Riesgo de compra Permitir edición"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_order_line__purchase_risk_amount
+msgid "Purchase Risk Amount"
+msgstr "Monto del riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_currency_id
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_currency_id
+msgid "Purchase Risk Currency"
+msgstr "Moneda de riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_exception
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_exception
+msgid "Purchase Risk Exception"
+msgstr "Excepción de riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model,name:purchase_financial_risk.model_purchase_risk_exception
+msgid "Purchase Risk Exception Wizard"
+msgstr "Asistente para excepciones de riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__purchase_risk_limit
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_limit
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_limit
+msgid "Purchase Risk Limit"
+msgstr "Límite de riesgo de compra"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.purchase_risk_exception_wizard
+msgid "Purchase Risk Limit Exceeded"
+msgstr "Se ha superado el límite de riesgo de compra."
+
+#. module: purchase_financial_risk
+#: model:res.groups,name:purchase_financial_risk.group_purchase_risk_manager
+msgid "Purchase Risk Manager"
+msgstr "Administrador de riesgos de compra"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.res_partner_view_purchase_risk
+msgid "Purchase Risk Summary"
+msgstr "Resumen de riesgos de compra"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_bill_draft
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_bill_draft
+msgid "Purchase Risk from Draft Bills"
+msgstr "Riesgo de compra por facturas en borrador"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_bill_open
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_bill_open
+msgid "Purchase Risk from Open Bills"
+msgstr "Riesgo de compra por facturas abiertas"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_partner__purchase_risk_po
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_res_users__purchase_risk_po
+msgid "Purchase Risk from POs"
+msgstr "Riesgo de compra por órdenes de compra"
+
+#. module: purchase_financial_risk
+#. odoo-python
+#: code:addons/purchase_financial_risk/models/res_partner.py:0
+#, python-format
+msgid "Purchase financial risk information"
+msgstr "Información de Riesgo de Compra"
+
+#. module: purchase_financial_risk
+#. odoo-python
+#: code:addons/purchase_financial_risk/wizards/purchase_risk_exception.py:0
+#, python-format
+msgid "Purchase risk limit exceeded"
+msgstr "Se ha superado el límite de riesgo de compra."
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.res_partner_view_purchase_risk
+msgid "Risk (%)"
+msgstr "Riesgo (%)"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.purchase_risk_exception_wizard
+msgid "This document exceeds the vendor's purchase risk limit."
+msgstr "Este documento supera el límite de riesgo de compra del proveedor."
+
+#. module: purchase_financial_risk
+#. odoo-python
+#: code:addons/purchase_financial_risk/models/account_move.py:0
+#: code:addons/purchase_financial_risk/models/purchase_order.py:0
+#, python-format
+msgid "This document exceeds the vendor's purchase risk limit.\n"
+msgstr "Este documento supera el límite de riesgo de compra del proveedor.\n"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_bill_draft
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_bill_draft
+msgid "Total financial exposure from draft vendor bills."
+msgstr "Exposición financiera total por facturas de proveedores en borrador."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_po
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_po
+msgid "Total financial exposure from open POs (uninvoiced)."
+msgstr ""
+"Exposición financiera total por órdenes de compra confirmadas (sin "
+"facturar)."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk_bill_open
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk_bill_open
+msgid "Total financial exposure from posted/open unpaid vendor bills."
+msgstr ""
+"Exposición financiera total facturas de proveedores confirmadas pendientes "
+"de pago."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_purchase_risk_exception__purchase_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_partner__purchase_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_res_users__purchase_risk
+msgid "Total financial exposure: open POs (uninvoiced) + unpaid vendor bills."
+msgstr ""
+"Exposición financiera total: órdenes de compra abiertas (sin facturar) + "
+"facturas de proveedores pendientes de pago."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,help:purchase_financial_risk.field_purchase_order_line__purchase_risk_amount
+msgid "Uninvoiced amount for this line in company currency."
+msgstr "Importe no facturado para esta línea en la moneda de la empresa."
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__partner_id
+msgid "Vendor"
+msgstr "Proveedor"
+
+#. module: purchase_financial_risk
+#: model:ir.model.fields,field_description:purchase_financial_risk.field_purchase_risk_exception__move_id
+msgid "Vendor Bill"
+msgstr "Factura del proveedor"
+
+#. module: purchase_financial_risk
+#: model_terms:ir.ui.view,arch_db:purchase_financial_risk.financial_risk_account_move_pivot_view
+msgid "Vendor Bills"
+msgstr "Facturas de proveedores"
