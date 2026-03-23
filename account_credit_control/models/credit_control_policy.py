@@ -281,7 +281,7 @@ class CreditControlPolicyLevel(models.Model):
     mail_fields_required = fields.Boolean(compute="_compute_mail_fields_required")
     custom_text = fields.Text(string="Custom Message", translate=True)
     mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
-    custom_mail_text = fields.Html(string="Custom Mail Message", translate=True)
+    custom_mail_text = fields.Text(string="Custom Mail Message", translate=True)
     custom_text_after_details = fields.Text(
         string="Custom Message after details", translate=True
     )
