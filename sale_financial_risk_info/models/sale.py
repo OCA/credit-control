@@ -1,7 +1,7 @@
 # Copyright 2021 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools.misc import format_amount
 
 
@@ -26,7 +26,7 @@ class SaleOrder(models.Model):
             partner = sale.partner_invoice_id.commercial_partner_id
             credit_limit = partner.sudo().credit_limit
             if not credit_limit:
-                sale.risk_info = _("Unlimited")
+                sale.risk_info = self.env._("Unlimited")
                 continue
             risk_percent = round(partner.risk_total / credit_limit * 100)
             if risk_percent >= partner.risk_percent_warning:
