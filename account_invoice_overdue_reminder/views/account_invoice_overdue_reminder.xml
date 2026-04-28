@@ -11,7 +11,11 @@
         <field name="arch" type="xml">
             <form>
                 <group name="main">
-                    <field name="counter" invisible="action_reminder_type == 'phone'" />
+                    <field
+                        name="counter"
+                        invisible="action_reminder_type == 'phone'"
+                        readonly="1"
+                    />
                     <field
                         name="action_commercial_partner_id"
                         invisible="not context.get('overdue_reminder_main_view')"
@@ -20,6 +24,7 @@
                     <field
                         name="invoice_id"
                         invisible="not context.get('overdue_reminder_main_view')"
+                        readonly="1"
                     />
                     <field name="action_date" />
                     <field name="action_user_id" />
@@ -52,9 +57,13 @@
         <field name="arch" type="xml">
             <form>
                 <group name="main">
-                    <field name="invoice_id" />
+                    <field name="invoice_id" readonly="1" />
                     <field name="action_reminder_type" invisible="1" />
-                    <field name="counter" invisible="action_reminder_type == 'phone'" />
+                    <field
+                        name="counter"
+                        invisible="action_reminder_type == 'phone'"
+                        readonly="1"
+                    />
                 </group>
             </form>
         </field>
@@ -65,7 +74,11 @@
         <field name="model">account.invoice.overdue.reminder</field>
         <field name="arch" type="xml">
             <list create="0">
-                <field name="counter" invisible="action_reminder_type == 'phone'" />
+                <field
+                    name="counter"
+                    invisible="action_reminder_type == 'phone'"
+                    readonly="1"
+                />
                 <field name="action_date" />
                 <field
                     name="action_partner_id"
@@ -74,6 +87,7 @@
                 <field
                     name="invoice_id"
                     column_invisible="not context.get('overdue_reminder_main_view')"
+                    readonly="1"
                 />
                 <field
                     name="action_user_id"
@@ -104,8 +118,8 @@
         <field name="priority">100</field>
         <field name="arch" type="xml">
             <list create="0">
-                <field name="invoice_id" />
-                <field name="counter" />
+                <field name="invoice_id" readonly="1" />
+                <field name="counter" readonly="1" />
             </list>
         </field>
     </record>

@@ -61,6 +61,6 @@
         id="overdue_reminder_result_menu"
         action="overdue_reminder_result_action"
         sequence="100"
-        parent="account.account_management_menu"
+        parent="account.account_reports_management_menu"
     />
 </odoo>

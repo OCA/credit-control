@@ -753,11 +753,6 @@ msgid "Minimum Delay Since Last Reminder"
 msgstr "Minimumvertraging sinds laatste herinnering"
 
 #. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__partner_mobile
-msgid "Mobile"
-msgstr "Mobiel"
-
-#. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__name
 msgid "Name"
 msgstr "Naam"

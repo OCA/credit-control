@@ -124,8 +124,7 @@
                     </group>
                     <group name="main-right">
                         <field name="counter" />
-                        <field name="partner_phone" widget="phone" />
-                        <field name="partner_mobile" widget="phone" />
+                        <field name="partner_phone" widget="phone" />s
                     </group>
                 </group>
                 <div invisible="not warn_unreconciled_move_line_ids">

@@ -763,10 +763,6 @@ msgstr "Nachricht auf der Voicemail hinterlassen"
 msgid "Minimum Delay Since Last Reminder"
 msgstr "Mindestverzögerung seit der letzten Erinnerung"
 
-#. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__partner_mobile
-msgid "Mobile"
-msgstr "Mobil"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__name
