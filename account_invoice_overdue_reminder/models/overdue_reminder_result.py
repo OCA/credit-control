@@ -14,6 +14,7 @@ class OverdueReminderResult(models.Model):
     active = fields.Boolean(default=True)
     sequence = fields.Integer()
 
-    _sql_constraints = [
-        ("name_unique", "unique(name)", "This overdue reminder result already exists")
-    ]
+    _name_unique = models.Constraint(
+        "unique(name)",
+        "This overdue reminder result already exists",
+    )

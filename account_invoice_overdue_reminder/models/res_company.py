@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class ResCompany(models.Model):
@@ -34,27 +34,23 @@ class ResCompany(models.Model):
     @api.model
     def _overdue_reminder_interface_selection(self):
         return [
-            ("onebyone", _("One by One")),
-            ("mass", _("Mass")),
+            ("onebyone", "One by One"),
+            ("mass", "Mass"),
         ]
 
     @api.model
     def _overdue_reminder_partner_policy_selection(self):
         return [
-            ("last_reminder", _("Last Reminder")),
-            ("last_invoice", _("Last Invoice")),
-            ("invoice_contact", _("Invoice Contact")),
+            ("last_reminder", "Last Reminder"),
+            ("last_invoice", "Last Invoice"),
+            ("invoice_contact", "Invoice Contact"),
         ]
 
-    _sql_constraints = [
-        (
-            "overdue_reminder_start_days_positive",
-            "CHECK(overdue_reminder_start_days >= 0)",
-            "Overdue Reminder Trigger Delay must always be positive",
-        ),
-        (
-            "overdue_reminder_min_interval_days_positive",
-            "CHECK(overdue_reminder_min_interval_days > 0)",
-            "Overdue Reminder Minimum Interval must always be strictly positive",
-        ),
-    ]
+    _overdue_reminder_start_days_positive = models.Constraint(
+        "CHECK(overdue_reminder_start_days >= 0)",
+        "Overdue Reminder Trigger Delay must always be positive",
+    )
+    _overdue_reminder_min_interval_days_positive = models.Constraint(
+        "CHECK(overdue_reminder_min_interval_days > 0)",
+        "Overdue Reminder Minimum Interval must always be strictly positive",
+    )

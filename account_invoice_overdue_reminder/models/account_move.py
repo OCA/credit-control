@@ -34,13 +34,10 @@ class AccountMove(models.Model):
     )
     overdue = fields.Boolean(compute="_compute_overdue")
 
-    _sql_constraints = [
-        (
-            "counter_positive",
-            "CHECK(overdue_reminder_counter >= 0)",
-            "Overdue Invoice Counter must always be positive",
-        )
-    ]
+    _counter_positive = models.Constraint(
+        "CHECK(overdue_reminder_counter >= 0)",
+        "Overdue Invoice Counter must always be positive",
+    )
 
     @api.depends("move_type", "state", "payment_state", "invoice_date_due")
     def _compute_overdue(self):

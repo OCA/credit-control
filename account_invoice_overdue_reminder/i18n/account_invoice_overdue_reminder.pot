@@ -701,10 +701,6 @@ msgstr ""
 msgid "Minimum Delay Since Last Reminder"
 msgstr ""
 
-#. module: account_invoice_overdue_reminder
-#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__partner_mobile
-msgid "Mobile"
-msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__name
