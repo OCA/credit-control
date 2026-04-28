@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -14,9 +14,7 @@ class AccountInvoiceOverdueReminder(models.Model):
     # For the link to invoice: why a M2O and not a M2M ?
     # Because of the "counter" field: a single reminder action for a customer,
     # the "counter" may not be the same for each invoice
-    invoice_id = fields.Many2one(
-        "account.move", string="Invoice", ondelete="cascade", readonly=True
-    )
+    invoice_id = fields.Many2one("account.move", string="Invoice", ondelete="cascade")
     action_id = fields.Many2one(
         "overdue.reminder.action", string="Overdue Reminder Action", ondelete="cascade"
     )
@@ -32,28 +30,24 @@ class AccountInvoiceOverdueReminder(models.Model):
     action_result_id = fields.Many2one(related="action_id.result_id", readonly=False)
     action_result_notes = fields.Html(related="action_id.result_notes", readonly=False)
     action_mail_id = fields.Many2one(related="action_id.mail_id")
-    action_mail_cc = fields.Char(
-        related="action_id.mail_id.email_cc", readonly=True, string="Cc"
-    )
+    action_mail_cc = fields.Char(related="action_id.mail_id.email_cc", string="Cc")
     action_mail_state = fields.Selection(
         related="action_id.mail_id.state", string="E-mail Status"
     )
-    counter = fields.Integer(readonly=True)
+    counter = fields.Integer()
     company_id = fields.Many2one(related="invoice_id.company_id", store=True)
 
-    _sql_constraints = [
-        ("counter_positive", "CHECK(counter >= 0)", "Counter must always be positive")
-    ]
+    _counter_positive = models.Constraint(
+        "CHECK(counter >= 0)",
+        "Counter must always be positive",
+    )
 
     @api.constrains("invoice_id")
     def invoice_id_check(self):
         for action in self:
-            if action.invoice_id and action.invoice_id.move_type not in [
-                "out_invoice",
-                "out_refund",
-            ]:
+            if action.invoice_id and not action.invoice_id.is_sale_document():
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "An overdue reminder can only be attached "
                         "to a customer invoice or credit note"
                     )
@@ -62,7 +56,8 @@ class AccountInvoiceOverdueReminder(models.Model):
     @api.depends("invoice_id", "counter")
     def _compute_display_name(self):
         for rec in self:
-            name = _("%(invoice_name)s Reminder n°%(counter)d") % (
-                {"invoice_name": rec.invoice_id.name, "counter": rec.counter}
+            rec.display_name = self.env._(
+                "%(invoice_name)s Reminder n°%(counter)d",
+                invoice_name=rec.invoice_id.name,
+                counter=rec.counter,
             )
-            rec.display_name = name

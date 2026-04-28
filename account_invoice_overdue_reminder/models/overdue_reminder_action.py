@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools.misc import format_date
 
 
@@ -55,29 +55,27 @@ class OverdueReminderAction(models.Model):
     @api.model
     def _reminder_type_selection(self):
         return [
-            ("mail", _("E-mail")),
-            ("phone", _("Phone")),
-            ("post", _("Letter")),
+            ("mail", self.env._("E-mail")),
+            ("phone", self.env._("Phone")),
+            ("post", self.env._("Letter")),
         ]
 
     @api.depends("reminder_ids")
     def _compute_invoice_count(self):
-        rg_res = self.env["account.invoice.overdue.reminder"].read_group(
+        rg_res = self.env["account.invoice.overdue.reminder"]._read_group(
             [("action_id", "in", self.ids), ("invoice_id", "!=", False)],
             ["action_id"],
-            ["action_id"],
+            ["__count"],
         )
-        mapped_data = {x["action_id"][0]: x["action_id_count"] for x in rg_res}
+        mapped_data = {action.id: count for action, count in rg_res if action}
         for rec in self:
             rec.reminder_count = mapped_data.get(rec.id, 0)
 
     @api.depends("commercial_partner_id", "date")
     def _compute_display_name(self):
         for action in self:
-            name = _("%(partner_name)s, Reminder %(date)s") % (
-                {
-                    "partner_name": action.commercial_partner_id.display_name,
-                    "date": format_date(self.env, action.date),
-                }
+            action.display_name = self.env._(
+                "%(partner_name)s, Reminder %(date)s",
+                partner_name=action.commercial_partner_id.display_name,
+                date=format_date(self.env, action.date),
             )
-            action.display_name = name
