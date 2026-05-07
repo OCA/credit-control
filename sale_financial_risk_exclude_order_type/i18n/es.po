@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_financial_risk_exclude_order_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-23 07:27+0000\n"
+"PO-Revision-Date: 2026-04-23 07:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model.fields,field_description:sale_financial_risk_exclude_order_type.field_sale_order_type__allow_blocking_bypass
+msgid "Allow Risk Blocking Bypass"
+msgstr "Permitir omitir bloqueo de riesgo"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model,name:sale_financial_risk_exclude_order_type.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model.fields,field_description:sale_financial_risk_exclude_order_type.field_sale_order_type__exclude_from_risk
+msgid "Exclude from Risk Computation"
+msgstr "Excluir del cálculo de riesgo"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk_exclude_order_type.sale_order_type_view_form_inherit_sale_financial_risk_exclude_order_type
+msgid "Financial Risk"
+msgstr "Riesgo financiero"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model.fields,help:sale_financial_risk_exclude_order_type.field_sale_order_type__exclude_from_risk
+msgid ""
+"If enabled, sale orders of this type are excluded from sale financial risk "
+"computation."
+msgstr ""
+"Si está habilitado, los pedidos de venta de este tipo se excluyen del cálculo "
+"del riesgo financiero de venta."
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model.fields,help:sale_financial_risk_exclude_order_type.field_sale_order_type__allow_blocking_bypass
+msgid ""
+"If enabled, sale orders of this type can be confirmed without financial risk"
+" blocking."
+msgstr ""
+"Si está habilitado, los pedidos de venta de este tipo se pueden confirmar "
+"sin bloqueo por riesgo financiero. "
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model,name:sale_financial_risk_exclude_order_type.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_financial_risk_exclude_order_type
+#: model:ir.model,name:sale_financial_risk_exclude_order_type.model_sale_order_type
+msgid "Type of sale order"
+msgstr "Tipo de pedido de venta"
