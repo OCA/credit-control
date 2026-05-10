@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-29 10:36+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-05-10 08:56+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/models/account_invoice_overdue_reminder.py:0
 msgid "%(invoice_name)s Reminder n°%(counter)d"
-msgstr ""
+msgstr "%(invoice_name)s Recordatorio n°%(counter)d"
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
@@ -174,17 +174,154 @@ msgid ""
 "            </div>\n"
 "        "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                <p>Estimado cliente,</p>\n"
+"                <p>Según nuestros libros, las siguientes facturas están "
+"vencidas:</p>\n"
+"\n"
+"                <table style=\"border-spacing: 0; border-collapse: collapse; "
+"width: 100%; text-align: center;\">\n"
+"                    <tr>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Número de Factura</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"IFecha de Factura</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Términos de pago</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Fecha del Adeudo</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Ref. Pedido</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Tipo</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Total Sin impuestos</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Total</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Resto</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;\">"
+"Recordatorios pasados</th>\n"
+"                    </tr>\n"
+"                    <t t-foreach=\"object.invoice_ids.sorted"
+"(key='invoice_date')\" t-as=\"inv\">\n"
+"                        <tr style=\"background-"
+"color:                             % if inv.move_type == "
+"'out_refund':                                 LightGray"
+"                             % endif                         \">\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.name\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.invoice_date\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.invoice_payment_term_id.name "
+"or ''\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.invoice_date_due\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.ref or ''\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\"><t t-out=\"dict(inv.fields_get(allfields=['move_type'])"
+"['move_type']['selection'])[inv.move_type]\"></t></td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black; text-align: right;\">\n"
+"                                <t t-out=\"format_amount(inv.amount_untaxed "
+"* (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black; text-align: right;\">\n"
+"                                <t t-out=\"format_amount(inv.amount_total * "
+"(inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black; text-align: right;\">\n"
+"                                <t t-out=\"format_amount(inv.amount_residual "
+"* (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)\"></t>\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black;\">\n"
+"                                <t t-out=\"inv.overdue_reminder_counter\"></"
+"t>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                    </t>\n"
+"                    <t t-foreach=\"object.total_residual()\" t-"
+"as=\"total_residual\">\n"
+"                        <tr>\n"
+"                            <td></td>\n"
+"                            <td></td>\n"
+"                            <td></td>\n"
+"                            <td></td>\n"
+"                            <td></td>\n"
+"                            <td></td>\n"
+"                            <td colspan=\"2\" style=\"padding: 5px; border: "
+"1px solid black; font-weight: bold; text-align: right;\">\n"
+"                                Total\n"
+"                                Resto en\n"
+"                                <t t-out=\"total_residual[0].name\"></t>:\n"
+"                            </td>\n"
+"                            <td style=\"padding: 5px; border: 1px solid "
+"black; font-weight: bold; text-align: right;\">\n"
+"                                <t t-out=\"format_amount(total_residual[1], "
+"total_residual[0])\"></t>\n"
+"                            </td>\n"
+"                            <td></td>\n"
+"                        </tr>\n"
+"                    </t>\n"
+"                </table>\n"
+"\n"
+"                <p>Si realizó el pago de estas facturas hace unos días, "
+"ignore este correo electrónico.</p>\n"
+"\n"
+"                <t t-"
+"if=\"object.company_id.overdue_reminder_attach_invoice\">\n"
+"                    <p>Adjunto encontrará las facturas vencidas.</p>\n"
+"                </t>\n"
+"\n"
+"                <t t-if=\"object.counter &gt; 2\">\n"
+"                    <p>A pesar de varios recordatorios, nos decepciona ver "
+"que estas facturas vencidas siguen pendientes de pago.l\n"
+"                        inpagadas.\n"
+"                        Para evitar procedimientos judiciales, le instamos a "
+"que abone estas facturas vencidas en los próximos\n"
+"                        días.\n"
+"                    </p>\n"
+"                </t>\n"
+"\n"
+"                <p>Saludos,</p>\n"
+"\n"
+"                <t t-if=\"user.signature\">\n"
+"                    <p>\n"
+"                        <t t-out=\"user.signature or ''\"></t>\n"
+"                    </p>\n"
+"                </t>\n"
+"\n"
+"            </div>\n"
+"        "
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
+#, fuzzy
 msgid "<span> days</span>"
-msgstr ""
+msgstr "<span> días</span>"
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
 msgstr ""
+"<strong>Recordatorio de vencimiento</strong> por teléfono. Resultado/Info: %"
+"(result)s."
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
@@ -193,12 +330,14 @@ msgid ""
 "<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-"
 "model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
 msgstr ""
+"<strong>Recordatorio de vencimiento</strong> enviado por correo: <a href=# "
+"data-oe-model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 msgid "<strong>Overdue reminder</strong> sent by post."
-msgstr ""
+msgstr "<strong>Recordatorio de vencimiento</strong> enviado por correo postal."
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
@@ -416,13 +555,13 @@ msgstr "Querido Cliente,"
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__overdue_reminder_min_interval_days
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_min_interval_days
 msgid "Default Overdue Reminder Minimum Interval"
-msgstr ""
+msgstr "Intervalo mínimo predeterminado de recordatorio de vencimiento"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__overdue_reminder_start_days
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_start_days
 msgid "Default Overdue Reminder Trigger Delay"
-msgstr ""
+msgstr "Retraso de activación predeterminado del recordatorio de vencimiento"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__overdue_reminder_interface
@@ -434,13 +573,14 @@ msgstr "Interfaz predeterminada del asistente de recordatorio de vencimiento"
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_res_company__overdue_reminder_min_interval_days
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_min_interval_days
 msgid "Default overdue reminder minimum interval in days"
-msgstr ""
+msgstr "Intervalo mínimo predeterminado del recordatorio de vencimiento en días"
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_res_company__overdue_reminder_start_days
 #: model:ir.model.fields,help:account_invoice_overdue_reminder.field_res_config_settings__overdue_reminder_start_days
 msgid "Default overdue reminder trigger delay in days"
 msgstr ""
+"Retraso de activación predeterminado del recordatorio de vencimiento en días"
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
@@ -1263,7 +1403,7 @@ msgstr "días"
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 msgid "overdue_letter-%s"
-msgstr ""
+msgstr "carta_vencimiento-%s"
 
 #. module: account_invoice_overdue_reminder
 #: model:mail.template,subject:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
