@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ========================
 Sale Financial Risk Info
 ========================
@@ -17,7 +13,7 @@ Sale Financial Risk Info
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
@@ -45,11 +41,14 @@ Configuration
 ir.configparameter options
 --------------------------
 
-#. You can define the configparameter
-"salefinancial_risk_info.info_pattern" to customize displayed info. Ex.
-"<h5{textclass}>{risktotal} / {creditlimit} ({riskpercent}%)</h5>" In
-addition to the example parameters there is the parameter
-"riskavailable".
+You can define the configparameter
+``sale_financial_risk_info.info_pattern`` to customize displayed info.
+
+Ex:
+``<h5{text_class}\>{risk_total} / {credit_limit} ({risk_percent}%)\</h5\>``
+
+In addition to the example parameters there is the parameter
+``risk_available``.
 
 Usage
 =====
