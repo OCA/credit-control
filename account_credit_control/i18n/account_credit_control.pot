@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -201,7 +201,6 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
 #: model:ir.model.fields,help:account_credit_control.field_res_config_settings__default_apply_max_policy_level
 msgid ""
 "Apply max policy lavel for one partner in a credit control run execution to "
@@ -220,6 +219,13 @@ msgid ""
 "Apply max policy level for one partner in a credit"
 "                             control run execution to have all credit "
 "control lines on                             same communication level"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_credit_control_policy__apply_max_policy_level
+msgid ""
+"Apply max policy level for one partner in a credit control run execution to "
+"have all credit control lines on same communication level"
 msgstr ""
 
 #. module: account_credit_control
@@ -413,6 +419,7 @@ msgstr ""
 #: model:ir.module.category,name:account_credit_control.category_credit_control
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
+#: model:res.groups.privilege,name:account_credit_control.privilege_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -597,6 +604,8 @@ msgid "Delay Setting"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_account_account__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__display_name
@@ -607,6 +616,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__display_name
 msgid "Display Name"
 msgstr ""
@@ -710,11 +724,6 @@ msgid "Error"
 msgstr ""
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Filters"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__payment_responsible_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__payment_responsible_id
 msgid "Follow-up Responsible"
@@ -762,12 +771,6 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
-#: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-msgid "Group By"
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__has_message
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__has_message
 msgid "Has Message"
@@ -779,6 +782,8 @@ msgid "Hide Change State Button"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_account_account__id
+#: model:ir.model.fields,field_description:account_credit_control.field_account_move__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer__id
@@ -789,6 +794,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__id
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_compose_message__id
+#: model:ir.model.fields,field_description:account_credit_control.field_mail_mail__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_company__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__id
 msgid "ID"
 msgstr ""
@@ -1214,7 +1224,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
 msgid ""
-"Open balance on credit control linesof same partner, policy and currency"
+"Open balance on credit control lines of same partner, policy and currency"
 msgstr ""
 
 #. module: account_credit_control
