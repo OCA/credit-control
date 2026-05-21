@@ -22,6 +22,19 @@ class ResPartner(models.Model):
         help="Overdue invoice total residual amount in company currency.",
     )
 
+    credit_note = fields.Boolean(compute="_compute_credit_note", compute_sudo=True)
+    credit_note_count = fields.Integer(
+        compute="_compute_credit_note_count_amount",
+        string="# of Credit Note",
+        compute_sudo=True,
+    )
+
+    credit_note_amount = fields.Monetary(
+        compute="_compute_credit_note_count_amount",
+        string="Credit Note Residual",
+        compute_sudo=True,
+    )
+
     def _compute_overdue_invoice_count_amount(self):
         for partner in self:
             company_id = partner.company_id.id or partner.env.company.id
@@ -81,4 +94,72 @@ class ResPartner(models.Model):
         self.ensure_one()
         company_id = self.company_id.id or self.env.company.id
         action = self._prepare_jump_to_overdue_invoices(company_id)
+        return action
+
+    def _compute_credit_note(self):
+        for partner in self:
+            company_id = partner.company_id or partner.env.company
+            partner.credit_note = company_id.credit_note_partner
+
+    def _compute_credit_note_count_amount(self):
+        for partner in self:
+            company_id = partner.company_id.id or partner.env.company.id
+            (
+                count,
+                amount_company_currency,
+            ) = partner._prepare_credit_note_count_amount(company_id)
+            partner.credit_note_count = count
+            partner.credit_note_amount = amount_company_currency
+
+    def _prepare_credit_note_count_amount(self, company_id):
+        self.ensure_one()
+        domain = self._prepare_credit_note_domain(company_id)
+        # amount_residual_signed is in company currency
+        rg_res = self.env["account.move"].read_group(
+            domain, ["amount_residual_signed"], []
+        )
+        count = 0
+        overdue_invoice_amount = 0.0
+        if rg_res:
+            count = rg_res[0]["__count"]
+            overdue_invoice_amount = (
+                abs(rg_res[0]["amount_residual_signed"])
+                if rg_res[0]["amount_residual_signed"]
+                else rg_res[0]["amount_residual_signed"]
+            )
+        return (count, overdue_invoice_amount)
+
+    def _prepare_credit_note_domain(self, company_id):
+        # The use of commercial_partner_id is in this method
+        self.ensure_one()
+        today = fields.Date.context_today(self)
+        if company_id is None:
+            company_id = self.env.company.id
+        domain = [
+            ("move_type", "=", "out_refund"),
+            ("company_id", "=", company_id),
+            ("commercial_partner_id", "=", self.commercial_partner_id.id),
+            ("invoice_date", "<", today),
+            ("state", "=", "posted"),
+            ("payment_state", "in", ("not_paid", "partial")),
+        ]
+        return domain
+
+    def _prepare_jump_to_credit_note(self, company_id):
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "account.action_move_out_refund_type"
+        )
+        action["domain"] = self._prepare_credit_note_domain(company_id)
+        action["context"] = {
+            "journal_type": "sale",
+            "move_type": "out_refund",
+            "default_move_type": "out_refund",
+            "default_partner_id": self.id,
+        }
+        return action
+
+    def jump_to_credit_note(self):
+        self.ensure_one()
+        company_id = self.company_id.id or self.env.company.id
+        action = self._prepare_jump_to_credit_note(company_id)
         return action

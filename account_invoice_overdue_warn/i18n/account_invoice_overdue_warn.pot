@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-26 16:06+0000\n"
+"PO-Revision-Date: 2024-06-26 16:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,14 +16,54 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__credit_note_count
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__credit_note_count
+msgid "# of Credit Note"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__overdue_invoice_count
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__overdue_invoice_count
 msgid "# of Overdue Invoices"
 msgstr ""
 
 #. module: account_invoice_overdue_warn
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn.res_config_settings_view_form
+msgid "Activate to show credit note due alert on partner"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model,name:account_invoice_overdue_warn.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model,name:account_invoice_overdue_warn.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
 #: model:ir.model,name:account_invoice_overdue_warn.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__credit_note
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__credit_note
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn.view_partner_form_overdue_warn
+msgid "Credit Note"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_partner__credit_note_amount
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_users__credit_note_amount
+msgid "Credit Note Residual"
+msgstr ""
+
+#. module: account_invoice_overdue_warn
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_company__credit_note_partner
+#: model:ir.model.fields,field_description:account_invoice_overdue_warn.field_res_config_settings__credit_note_partner
+msgid "Credit note on partner"
 msgstr ""
 
 #. module: account_invoice_overdue_warn
