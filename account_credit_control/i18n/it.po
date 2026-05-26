@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2025-06-24 08:25+0000\n"
+"PO-Revision-Date: 2026-05-26 09:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -132,27 +132,27 @@ msgstr ""
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
 msgid "<span>Allows to manually change credit level</span>"
-msgstr ""
+msgstr "<span>Consente di modificare manualmente il livello di credito</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
 msgid "<span>Change the state of the selected lines.</span>"
-msgstr ""
+msgstr "<span>Cambia lo stato delle righe selezionate.</span>"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 msgid "<span>Manual no follow</span>"
-msgstr ""
+msgstr "<span>Non seguire manuale</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
 msgid "<span>Print selected lines</span>"
-msgstr ""
+msgstr "<span>Stampa righe selezionate</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
 msgid "<span>Send an email for the selected lines.</span>"
-msgstr ""
+msgstr "<span>Invia una email per le righe selezionate.</span>"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -270,7 +270,7 @@ msgid ""
 "have all credit control lines on same communication level"
 msgstr ""
 "Applicare il massimo livello politica per un partner in un'esecuzione di "
-"controllo del credito per avere tutte le linee di controllo del credito "
+"controllo del credito per avere tutte le righe di controllo del credito "
 "sullo stesso livello di comunicazione"
 
 #. module: account_credit_control
@@ -297,6 +297,9 @@ msgid ""
 "Apply max policy level for one partner in a credit control run execution to "
 "have all credit control lines on same communication level"
 msgstr ""
+"Applicare il massimo livello politica per un partner in un'esecuzione di "
+"controllo del credito per avere tutte le righe di controllo del credito "
+"sullo stesso livello di comunicazione"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
@@ -1310,6 +1313,7 @@ msgstr "Valore scoperto"
 msgid ""
 "Open balance on credit control lines of same partner, policy and currency"
 msgstr ""
+"Saldo sulle righe controllo credito a parità di partner, politica e valuta"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
