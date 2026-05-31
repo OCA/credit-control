@@ -9,22 +9,23 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 00:47+0000\n"
-"PO-Revision-Date: 2017-06-02 00:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2026-05-31 19:46+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_financial_risk
 #. odoo-python
 #: code:addons/stock_financial_risk/models/stock.py:0
 #, python-format
 msgid "Financial risk exceeded \n"
-msgstr ""
+msgstr "Prekoračeno finančno tveganje \n"
 
 #. module: stock_financial_risk
 #. odoo-python
@@ -34,6 +35,8 @@ msgid ""
 "Financial risk exceeded in partner:\n"
 "%s"
 msgstr ""
+"Finančno tveganje prekoračeno za partnerja:\n"
+"%s"
 
 #. module: stock_financial_risk
 #: model:ir.model,name:stock_financial_risk.model_stock_move
