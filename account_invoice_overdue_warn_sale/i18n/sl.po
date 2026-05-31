@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-31 19:46+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,26 +15,27 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_count
 msgid "# of Overdue Invoices"
-msgstr ""
+msgstr "Št. zapadlih računov"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__commercial_partner_invoicing_id
 msgid "Commercial Invoicing Partner"
-msgstr ""
+msgstr "Pravna oseba na računu"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta družbe"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,field_description:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
 msgid "Overdue Invoices Residual"
-msgstr ""
+msgstr "Preostanek zapadlih računov"
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model.fields,help:account_invoice_overdue_warn_sale.field_sale_order__overdue_invoice_amount
@@ -41,28 +43,30 @@ msgid ""
 "Overdue invoices total residual amount of the invoicing partner in company "
 "currency."
 msgstr ""
+"Skupni preostali znesek zapadlih računov partnerja za izdajo računov v "
+"valuti družbe."
 
 #. module: account_invoice_overdue_warn_sale
 #: model:ir.model,name:account_invoice_overdue_warn_sale.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Prodajni nalog"
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "The invoicing partner"
-msgstr ""
+msgstr "Obračunski partner"
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "for a total residual of"
-msgstr ""
+msgstr "za skupni preostanek v višini"
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "has"
-msgstr ""
+msgstr "ima"
 
 #. module: account_invoice_overdue_warn_sale
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_warn_sale.view_order_form
 msgid "overdue invoice(s)"
-msgstr ""
+msgstr "zapadli(h) račun(ov)"
