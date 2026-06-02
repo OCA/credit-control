@@ -121,31 +121,6 @@ msgstr ""
 "                                    </span>"
 
 #. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
-msgid "<span>Allows to manually change credit level</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
-msgid "<span>Change the state of the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
-msgid "<span>Manual no follow</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
-msgid "<span>Print selected lines</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
-msgid "<span>Send an email for the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Fecha:</strong>"
@@ -243,6 +218,11 @@ msgstr "estado de la actividad"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_icon
 msgid "Activity Type Icon"
 msgstr "tipo de icono de actividad"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
+msgid "Allows to manually change credit level"
+msgstr "Permite cambiar manualmente el nivel de crédito"
 
 #. module: account_credit_control
 #. odoo-python
@@ -355,6 +335,11 @@ msgstr "Cambia el nivel de seguimiento de la factura actual"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change the state of the selected lines"
 msgstr "Cambiar el estado de las líneas seleccionadas"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
+msgid "Change the state of the selected lines."
+msgstr "Cambia el estado de las líneas seleccionadas."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__channel
@@ -1110,6 +1095,7 @@ msgstr "Seguimiento manual"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr "Sin seguimiento (manual)"
 
@@ -1590,6 +1576,11 @@ msgid "Print Lines"
 msgstr "Imprimir líneas"
 
 #. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
+msgid "Print selected lines"
+msgstr "Imprimir líneas seleccionadas"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print the selected lines"
 msgstr "Imprime las líneas seleccionadas"
@@ -1656,6 +1647,11 @@ msgstr "Vendedor/a"
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
 msgstr "Enviar por correo electrónico"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
+msgid "Send an email for the selected lines."
+msgstr "Envía correos electrónicos para las líneas seleccionadas."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -1905,12 +1901,6 @@ msgstr ""
 msgid "credit control communication"
 msgstr "comunicación de control de crédito"
 
-#~ msgid "Allows to manually change credit level"
-#~ msgstr "Permite cambiar manualmente el nivel de crédito"
-
-#~ msgid "Change the state of the selected lines."
-#~ msgstr "Cambia el estado de las líneas seleccionadas."
-
 #~ msgid "Filters"
 #~ msgstr "Filtros"
 
@@ -1922,12 +1912,6 @@ msgstr "comunicación de control de crédito"
 #~ msgstr ""
 #~ "Saldo pendiente en las líneas de control de crédito del mismo socio, "
 #~ "póliza y divisa"
-
-#~ msgid "Print selected lines"
-#~ msgstr "Imprimir líneas seleccionadas"
-
-#~ msgid "Send an email for the selected lines."
-#~ msgstr "Envía correos electrónicos para las líneas seleccionadas."
 
 #~ msgid ""
 #~ "<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"

@@ -105,31 +105,6 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
-msgid "<span>Allows to manually change credit level</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
-msgid "<span>Change the state of the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
-msgid "<span>Manual no follow</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
-msgid "<span>Print selected lines</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
-msgid "<span>Send an email for the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 #, fuzzy
 msgid "<strong>Date:</strong>"
@@ -229,6 +204,11 @@ msgstr "Aktiv"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_icon
 msgid "Activity Type Icon"
 msgstr ""
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
+msgid "Allows to manually change credit level"
+msgstr "Ermögliche manuelle Änderung der Kredithöhe"
 
 #. module: account_credit_control
 #. odoo-python
@@ -336,6 +316,11 @@ msgstr "Mahnstufe dieser Rechnung ändern"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change the state of the selected lines"
 msgstr "Status ausgewählter Positionen ändern"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
+msgid "Change the state of the selected lines."
+msgstr "Status der ausgewählten Positionen ändern."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__channel
@@ -1089,6 +1074,7 @@ msgstr "Manuelle Nachverfolgung"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr "Manuell ohne Nachverfolgung"
 
@@ -1521,6 +1507,11 @@ msgid "Print Lines"
 msgstr "Posten drucken"
 
 #. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
+msgid "Print selected lines"
+msgstr "Ausgewählte Posten drucken"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print the selected lines"
 msgstr "Drucke die ausgewählten Posten"
@@ -1588,6 +1579,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
 msgstr "Sende per Email"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
+msgid "Send an email for the selected lines."
+msgstr "Versende eine Email zu ausgewählten Posten."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -1830,23 +1826,11 @@ msgstr ""
 msgid "credit control communication"
 msgstr "Mahn-Kommunikation"
 
-#~ msgid "Allows to manually change credit level"
-#~ msgstr "Ermögliche manuelle Änderung der Kredithöhe"
-
-#~ msgid "Change the state of the selected lines."
-#~ msgstr "Status der ausgewählten Positionen ändern."
-
 #~ msgid "Filters"
 #~ msgstr "Filter"
 
 #~ msgid "Group By"
 #~ msgstr "Gruppiert nach"
-
-#~ msgid "Print selected lines"
-#~ msgstr "Ausgewählte Posten drucken"
-
-#~ msgid "Send an email for the selected lines."
-#~ msgstr "Versende eine Email zu ausgewählten Posten."
 
 #~ msgid "Control Credit Lines"
 #~ msgstr "Mahnpositionen"
