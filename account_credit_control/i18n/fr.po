@@ -123,31 +123,6 @@ msgstr ""
 "                </span>"
 
 #. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
-msgid "<span>Allows to manually change credit level</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
-msgid "<span>Change the state of the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
-msgid "<span>Manual no follow</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
-msgid "<span>Print selected lines</span>"
-msgstr ""
-
-#. module: account_credit_control
-#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
-msgid "<span>Send an email for the selected lines.</span>"
-msgstr ""
-
-#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "<strong>Date:</strong>"
 msgstr "<strong>Date :</strong>"
@@ -245,6 +220,11 @@ msgstr "Statut de l'activité"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_icon
 msgid "Activity Type Icon"
 msgstr "Icône du type d'activité"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
+msgid "Allows to manually change credit level"
+msgstr "Permet de changer manuellement le niveau de relance"
 
 #. module: account_credit_control
 #. odoo-python
@@ -356,6 +336,11 @@ msgstr "Changer le niveau de relance de la facture courante"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change the state of the selected lines"
+msgstr "Modifier l'état des lignes sélectionnées."
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
+msgid "Change the state of the selected lines."
 msgstr "Modifier l'état des lignes sélectionnées."
 
 #. module: account_credit_control
@@ -1107,6 +1092,7 @@ msgstr "Suivi manuel"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
+#: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr "Ne pas suivre (Manuel)"
 
@@ -1540,6 +1526,11 @@ msgid "Print Lines"
 msgstr "Imprimer la sélection"
 
 #. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
+msgid "Print selected lines"
+msgstr "Imprimer la sélection"
+
+#. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print the selected lines"
 msgstr "Imprimer la sélection"
@@ -1607,6 +1598,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
 msgstr "Envoyer par email"
+
+#. module: account_credit_control
+#: model_terms:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
+msgid "Send an email for the selected lines."
+msgstr "Envoyer les rappels par email."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -1849,23 +1845,11 @@ msgstr ""
 msgid "credit control communication"
 msgstr "Lettre de relance"
 
-#~ msgid "Allows to manually change credit level"
-#~ msgstr "Permet de changer manuellement le niveau de relance"
-
-#~ msgid "Change the state of the selected lines."
-#~ msgstr "Modifier l'état des lignes sélectionnées."
-
 #~ msgid "Filters"
 #~ msgstr "Filtres"
 
 #~ msgid "Group By"
 #~ msgstr "Grouper par"
-
-#~ msgid "Print selected lines"
-#~ msgstr "Imprimer la sélection"
-
-#~ msgid "Send an email for the selected lines."
-#~ msgstr "Envoyer les rappels par email."
 
 #~ msgid ""
 #~ "<p>Dear <t t-out=\"object.contact_address_id.name or '' \"></t>,</p>\n"
