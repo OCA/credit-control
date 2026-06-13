@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [partner_risk_insurance_product_sticker_invoice_report](partner_risk_insurance_product_sticker_invoice_report/) | 18.0.1.0.1 | <a href='https://github.com/Shide'><img src='https://github.com/Shide.png' width='32' height='32' style='border-radius:50%;' alt='Shide'/></a> <a href='https://github.com/rafaelbn'><img src='https://github.com/rafaelbn.png' width='32' height='32' style='border-radius:50%;' alt='rafaelbn'/></a> | Display a Sticker on Invoice Reports secured with Risk Insurance
 [sale_financial_risk](sale_financial_risk/) | 18.0.1.0.7 |  | Manage partner risk in sales orders
 [sale_financial_risk_info](sale_financial_risk_info/) | 18.0.1.0.1 |  | Adds risk consumption info in sales orders.
+[sale_payment_sheet_financial_risk](sale_payment_sheet_financial_risk/) | 18.0.1.0.0 |  | Manage partner risk in sale payment sheet
 [stock_financial_risk](stock_financial_risk/) | 18.0.1.0.0 |  | Manage partner risk in stock moves
 [website_sale_financial_risk](website_sale_financial_risk/) | 18.0.1.0.0 |  | Website Sale Financial Risk
 
