@@ -1,6 +1,6 @@
 # Copyright 2024 Moduon Team S.L. <info@moduon.team>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class AccountMove(models.Model):
@@ -82,7 +82,7 @@ class AccountMove(models.Model):
             return
         if not partner.credit_policy_insure_invoices:
             raise exceptions.UserError(
-                _(
+                self.env._(
                     "The partner %s has no credit policy to insure invoices.",
                     partner.display_name,
                 )

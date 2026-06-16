@@ -1,7 +1,7 @@
 # Copyright 2023 Tecnativa - Stefan Ungureanu
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -26,7 +26,7 @@ class InvoiceRiskInsuranceWizard(models.TransientModel):
         )
         if not moves:
             raise ValidationError(
-                _(
+                self.env._(
                     "There aren't moves between this dates\n"
                     "Please, select different dates"
                 )
