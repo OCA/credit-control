@@ -51,9 +51,7 @@ class ResPartner(models.Model):
     )
     risk_insurance_code_2 = fields.Char(
         "Insurance Code 2",
-        help="Secondary code assigned to this "
-        "partner by the risk insurance "
-        "company.",
+        help="Secondary code assigned to this partner by the risk insurance company.",
         copy=False,
     )
     credit_policy_state_id = fields.Many2one(
