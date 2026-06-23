@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 04:59+0000\n"
-"PO-Revision-Date: 2017-02-27 10:19+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"PO-Revision-Date: 2026-06-23 14:46+0000\n"
+"Last-Translator: apf-c2c <alex.pfandler@camptocamp.com>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -152,7 +153,7 @@ msgstr "erstellt am"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr ""
+msgstr "Kredit Währung"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -424,7 +425,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Manuelle Kredit Währung"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -458,7 +459,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Preisliste Währung"
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
@@ -468,7 +469,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Forderungen Währung"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -537,7 +538,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr ""
+msgstr "Risiko Währung"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
@@ -554,19 +555,19 @@ msgstr ""
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Risk Remaining"
-msgstr ""
+msgstr "Verbleibendes Risiko"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Verbleibendes Risiko (Prozent)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Verbleibendes Risiko (Wert)"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
