@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-23 18:14:48+0000\n"
-"PO-Revision-Date: 2026-06-26 06:59+0000\n"
+"PO-Revision-Date: 2026-06-26 07:06+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/"
 "language/sl/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_move_form
 msgid "<span> with </span>"
-msgstr ""
+msgstr "<span> z </span>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
@@ -75,6 +75,9 @@ msgid ""
 "limit the company is willing to offer to the client, excluding the insured "
 "portion."
 msgstr ""
+"Izračunano kot skupni kreditni limit minus zavarovani kreditni limit; "
+"predstavlja kreditni limit, ki ga je družba pripravljena ponuditi kupcu brez "
+"zavarovanega dela."
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
@@ -96,12 +99,12 @@ msgstr "Družba"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__company_credit_limit
 msgid "Company Credit Limit"
-msgstr ""
+msgstr "Kreditni limit družbe"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_company
 msgid "Company of Credit Policies"
-msgstr ""
+msgstr "Družba kreditnih polic"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_res_partner
@@ -137,7 +140,7 @@ msgstr "Kreditni limit"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_company_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_company_id
 msgid "Credit Policy Company"
-msgstr ""
+msgstr "Družba kreditne police"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__credit_limit
@@ -166,7 +169,7 @@ msgstr "Prikazani naziv"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__date_from
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__id
@@ -178,12 +181,12 @@ msgstr "ID"
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "INSURED CUSTOMERS"
-msgstr ""
+msgstr "ZAVAROVANI KUPCI"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "INVOICE LIST - COUNTRY - INSURED"
-msgstr ""
+msgstr "SEZNAM RAČUNOV - DRŽAVA - ZAVAROVANO"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_credit_policy_state__insure_invoices
@@ -193,13 +196,15 @@ msgid ""
 "If checked, the invoices created when the partner has this state will be "
 "marked as insured"
 msgstr ""
+"Če je označeno, bodo računi, ustvarjeni, ko ima partner to stanje, označeni "
+"kot zavarovani"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__insured_with_credit_policy
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__insured_with_credit_policy
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__insured_with_credit_policy
 msgid "Indicates if the invoice is insured by a credit policy."
-msgstr ""
+msgstr "Označuje, ali je račun zavarovan s kreditno polico."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_code
@@ -243,40 +248,40 @@ msgstr "Zavarovanje zahtevano"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Insurance coverage (%)"
-msgstr ""
+msgstr "Zavarovalno kritje (%)"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__insure_invoices
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_insure_invoices
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_insure_invoices
 msgid "Insure Invoices"
-msgstr ""
+msgstr "Zavaruj račune"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_account_invoice_filter
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_move_form
 msgid "Insured"
-msgstr ""
+msgstr "Zavarovano"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_bank_statement_line__insured_with_credit_policy
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__insured_with_credit_policy
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__insured_with_credit_policy
 msgid "Insured by a Credit Policy"
-msgstr ""
+msgstr "Zavarovano s kreditno polico"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__insurance_credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__insurance_credit_limit
 msgid "Insured credit limit"
-msgstr ""
+msgstr "Zavarovani kreditni limit"
 
 #. module: partner_risk_insurance
 #: model:ir.actions.act_window,name:partner_risk_insurance.invoice_risk_insurance_action
 #: model:ir.actions.report,name:partner_risk_insurance.action_report_invoice_risk_insurance_template
 #: model:ir.ui.menu,name:partner_risk_insurance.invoice_risk_insurance_menu
 msgid "Invoice Risk Insurance Report"
-msgstr ""
+msgstr "Poročilo zavarovanja tveganja računov"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_account_move
@@ -322,13 +327,13 @@ msgstr "Naziv"
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_coverage_percent
 msgid "Percentage of the credit that is covered by the insurance."
-msgstr ""
+msgstr "Odstotek kredita, ki ga krije zavarovanje."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_state_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_policy_state_id
 msgid "Policy State"
-msgstr ""
+msgstr "Stanje police"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
@@ -346,21 +351,21 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_credit_policy_state
 msgid "State of credit policies"
-msgstr ""
+msgstr "Stanje kreditnih polic"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__credit_policy_company_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__credit_policy_company_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__credit_policy_company_id
 msgid "The insurance company that insures the invoices of the partner."
-msgstr ""
+msgstr "Zavarovalnica, ki zavaruje račune partnerja."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__credit_policy_state_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__credit_policy_state_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__credit_policy_state_id
 msgid "The insurance policy that insures the invoices of the partner."
-msgstr ""
+msgstr "Zavarovalna polica, ki zavaruje račune partnerja."
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
@@ -368,13 +373,15 @@ msgid ""
 "The overall credit limit available to a client, set by the user. It includes "
 "both the company's own credit limit and the insured credit limit."
 msgstr ""
+"Skupni kreditni limit, ki je na voljo kupcu in ga nastavi uporabnik. "
+"Vključuje lastni kreditni limit družbe in zavarovani kreditni limit."
 
 #. module: partner_risk_insurance
 #. odoo-python
 #: code:addons/partner_risk_insurance/models/account_move.py:0
 #, python-format
 msgid "The partner %s has no credit policy to insure invoices."
-msgstr ""
+msgstr "Partner %s nima kreditne police za zavarovanje računov."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
@@ -383,6 +390,8 @@ msgid ""
 "The portion of credit that is covered by insurance, set by the user. It "
 "represents the amount of credit that an insurance policy guarantees."
 msgstr ""
+"Del kredita, ki ga krije zavarovanje in ga nastavi uporabnik. Predstavlja "
+"znesek kredita, ki ga jamči zavarovalna polica."
 
 #. module: partner_risk_insurance
 #. odoo-python
@@ -392,36 +401,38 @@ msgid ""
 "There aren't moves between this dates\n"
 "Please, select different dates"
 msgstr ""
+"Med tema datumoma ni premikov\n"
+"Prosimo, izberite druge datume"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__date_to
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
 msgid "Total credit limit"
-msgstr ""
+msgstr "Skupni kreditni limit"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "Total insured customers:"
-msgstr ""
+msgstr "Skupaj zavarovani kupci:"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "Total not insured customers:"
-msgstr ""
+msgstr "Skupaj nezavarovani kupci:"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "UNINSURED CUSTOMERS"
-msgstr ""
+msgstr "NEZAVAROVANI KUPCI"
 
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_partner_risk_insurance_wizard
 msgid "Wizard to see invoices sorted by risk"
-msgstr ""
+msgstr "Čarovnik za prikaz računov, razvrščenih po tveganju"
 
 #~ msgid "Company's Credit Limit"
 #~ msgstr "Kreditni limit družbe"
