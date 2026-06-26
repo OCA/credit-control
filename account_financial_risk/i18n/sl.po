@@ -8,69 +8,69 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-07 04:30+0000\n"
-"PO-Revision-Date: 2023-03-31 21:31+0000\n"
+"PO-Revision-Date: 2026-06-26 09:39+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-partner-"
-"contact-9-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-partner-contact-9-"
+"0/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\"> (</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\">%)</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\">%)</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">(</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">(</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">)</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">)</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Consumed credit </strong>"
-msgstr ""
+msgstr "<strong>Porabljeni kredit </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Credit limit </strong>"
-msgstr ""
+msgstr "<strong>Kreditni limit </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Remaining credit </strong>"
-msgstr ""
+msgstr "<strong>Preostali kredit </strong>"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
-msgstr ""
+msgstr "Temeljnice"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 msgid "Account move lines"
-msgstr ""
+msgstr "Postavke temeljnic"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
-msgstr ""
+msgstr "Dovoli potrditev računa nad tveganjem"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -81,6 +81,10 @@ msgid ""
 "risk                                 has already been allowed when "
 "confirming these."
 msgstr ""
+"Vedno dovoli potrditev osnutkov računov.                                 "
+"Uporabno, ko tok izhaja iz prodajnih nalogov in je bila"
+"                                     prekoračitev tveganja"
+"                                 že dovoljena ob njihovi potrditvi."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -90,11 +94,14 @@ msgid ""
 "from sales orders and the over-risk has already been allowed when confirming "
 "these."
 msgstr ""
+"Vedno dovoli potrditev osnutkov računov. Uporabno, ko tok izhaja iz "
+"prodajnih nalogov in je bila prekoračitev tveganja že dovoljena ob njihovi "
+"potrditvi."
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
 msgid "Can edit risk limit and overpass partner risk exceptions"
-msgstr ""
+msgstr "Lahko ureja limit tveganja in preseže izjeme tveganja partnerja"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -105,7 +112,7 @@ msgstr "Preklic"
 #. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Izberite ročno kreditno valuto."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -115,18 +122,17 @@ msgstr "Družbe"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta družbe"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
-#, fuzzy
 msgid "Config Settings"
-msgstr "account.config.settings"
+msgstr "Nastavitve"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Stik"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -135,9 +141,8 @@ msgstr "Nadaljuj"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__continue_method
-#, fuzzy
 msgid "Continue Method"
-msgstr "Nadaljuj z metodo"
+msgstr "Metoda nadaljevanja"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
@@ -153,32 +158,30 @@ msgstr "Ustvarjeno"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr ""
+msgstr "Kreditna valuta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_limit
-#, fuzzy
 msgid "Credit Limit"
-msgstr "Kreditni pravilnik"
+msgstr "Kreditni limit"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
-#, fuzzy
 msgid "Credit Policy"
 msgstr "Kreditni pravilnik"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
-msgstr ""
+msgstr "Kreditne informacije"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Kreditni limit, specifičen za tega partnerja."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
@@ -193,6 +196,9 @@ msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
 msgstr ""
+"Število dni po datumu zapadlosti, po katerih se račun nastavi kot neplačan. "
+"Sprememba tega polja ponovno izračuna tveganje vseh partnerjev; bodite "
+"potrpežljivi."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
@@ -201,7 +207,6 @@ msgstr "Prikazani naziv"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__exception_msg
-#, fuzzy
 msgid "Exception Msg"
 msgstr "Sporočilo ob izjemi"
 
@@ -221,9 +226,8 @@ msgstr "Prekoračeno finančno tveganje.\n"
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
-#, fuzzy
 msgid "Financial risk information"
-msgstr "Finančno tveganje"
+msgstr "Informacije o finančnem tveganju"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -234,58 +238,58 @@ msgstr "Polna obdelava tveganja"
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
-#, fuzzy
 msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with distinct account that is "
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Polni izračun tveganja.\n"
+"Preostali znesek neusklajenih postavk temeljnice z drugim kontom, ki je "
+"nastavljen kot terjatev partnerja, in prekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_include
-#, fuzzy
 msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with distinct account that is "
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Polni izračun tveganja.\n"
+"Preostali znesek neusklajenih postavk temeljnice z drugim kontom, ki je "
+"nastavljen kot terjatev partnerja, in neprekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_include
-#, fuzzy
 msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with the same account that is "
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Polni izračun tveganja.\n"
+"Preostali znesek neusklajenih postavk temeljnice z istim kontom, ki je "
+"nastavljen kot terjatev partnerja, in prekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open_include
-#, fuzzy
 msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with the same account that is "
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Polni izračun tveganja.\n"
+"Preostali znesek neusklajenih postavk temeljnice z istim kontom, ki je "
+"nastavljen kot terjatev partnerja, in neprekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -299,6 +303,8 @@ msgid ""
 "Helper field to control visibility of the partner option based on global "
 "config."
 msgstr ""
+"Pomožno polje za nadzor vidnosti možnosti partnerja glede na globalno "
+"nastavitev."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
@@ -310,6 +316,8 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "If enabled, portal users will be able to see their credit information."
 msgstr ""
+"Če je omogočeno, bodo uporabniki portala lahko videli svoje kreditne "
+"informacije."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__show_financial_risk_in_portal
@@ -318,6 +326,8 @@ msgid ""
 "If enabled, this partner will see their financial risk in the portal, "
 "provided the global setting is also enabled."
 msgstr ""
+"Če je omogočeno, bo ta partner videl svoje finančno tveganje v portalu, če "
+"je omogočena tudi globalna nastavitev."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -328,30 +338,26 @@ msgstr "Vključno osnutki računov"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_include
-#, fuzzy
 msgid "Include Open Invoices/Principal Balance"
-msgstr "Vključno odprti računi"
+msgstr "Vključi odprte račune/stanje glavnice"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
-#, fuzzy
 msgid "Include Other Account Open Amount"
-msgstr "Vključno zneski drugih kontov"
+msgstr "Vključi odprti znesek drugega konta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
-#, fuzzy
 msgid "Include Other Account Unpaid Amount"
-msgstr "Vključno zneski drugih kontov"
+msgstr "Vključi neplačani znesek drugega konta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
-#, fuzzy
 msgid "Include Unpaid Invoices/Principal Balance"
-msgstr "Vključno neplačani računi"
+msgstr "Vključi neplačane račune/stanje glavnice"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -367,13 +373,13 @@ msgstr "kazalnik prekoračitve tveganja za partnerja"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Temeljnica"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
-msgstr ""
+msgstr "Datum zadnjega kreditnega limita"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
@@ -394,42 +400,38 @@ msgstr "Omejitev pri osnutkih računov"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
-#, fuzzy
 msgid "Limit In Open Invoices/Principal Balance"
-msgstr "Omejitev pri odprtih računih"
+msgstr "Limit pri odprtih računih/stanju glavnice"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
-#, fuzzy
 msgid "Limit In Unpaid Invoices/Principal Balance"
-msgstr "Omejitev pri neplačanih računih"
+msgstr "Limit pri neplačanih računih/stanju glavnice"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
-#, fuzzy
 msgid "Limit Other Account Open Amount"
-msgstr "Omejitev pri zneskih drugih kontov"
+msgstr "Limit odprtega zneska drugega konta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
-#, fuzzy
 msgid "Limit Other Account Unpaid Amount"
-msgstr "Omejitev pri zneskih drugih kontov"
+msgstr "Limit neplačanega zneska drugega konta"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
 msgid "Manager"
-msgstr ""
+msgstr "Upravitelj"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Ročna kreditna valuta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -444,9 +446,8 @@ msgstr "Objekt"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
-#, fuzzy
 msgid "Partner Risk Exceeded Wizard"
-msgstr "Prekoračeno tveganje za partnerja"
+msgstr "Čarovnik za prekoračeno tveganje partnerja"
 
 #. module: account_financial_risk
 #. odoo-python
@@ -458,87 +459,82 @@ msgstr "Prekoračeno tveganje za partnerja"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
 msgid "Portal Show Financial Risk Visible"
-msgstr ""
+msgstr "Portal prikaže vidno finančno tveganje"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Valuta cenika"
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
 msgid "Read only access to financial risk info"
-msgstr ""
+msgstr "Dostop samo za branje informacij o finančnem tveganju"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Valuta terjatev"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount_unpaid
-#, fuzzy
 msgid ""
 "Residual amount of move lines not reconciled with distinct account that is "
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Preostali znesek neusklajenih postavk temeljnice z drugim kontom, ki je "
+"nastavljen kot terjatev partnerja, in prekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_account_amount
-#, fuzzy
 msgid ""
 "Residual amount of move lines not reconciled with distinct account that is "
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Preostali znesek neusklajenih postavk temeljnice z drugim kontom, ki je "
+"nastavljen kot terjatev partnerja, in neprekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid
-#, fuzzy
 msgid ""
 "Residual amount of move lines not reconciled with the same account that is "
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Preostali znesek neusklajenih postavk temeljnice z istim kontom, ki je "
+"nastavljen kot terjatev partnerja, in prekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open
-#, fuzzy
 msgid ""
 "Residual amount of move lines not reconciled with the same account that is "
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
-"Preostali znesek računov v odprtem stanju in ne prekoračenem datumom "
-"zapadlosti ob upoštevanju nastavljenega odstopanja od zapadlosti v "
-"nastavitvah konta"
+"Preostali znesek neusklajenih postavk temeljnice z istim kontom, ki je "
+"nastavljen kot terjatev partnerja, in neprekoračenim datumom zapadlosti, ob "
+"upoštevanju odstopanja zapadlosti v nastavitvah konta."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_allow_edit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
-#, fuzzy
 msgid "Risk Allow Edit"
-msgstr "Omogoči urejanje tveganja"
+msgstr "Dovoli urejanje tveganja"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr ""
+msgstr "Skupni znesek tveganja"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
@@ -546,7 +542,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr ""
+msgstr "Valuta tveganja"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
@@ -558,24 +554,24 @@ msgstr "Izjema tveganja"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
 msgid "Risk Over Limit"
-msgstr ""
+msgstr "Tveganje nad limitom"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Risk Remaining"
-msgstr ""
+msgstr "Preostalo tveganje"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Preostalo tveganje (odstotek)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Preostalo tveganje (vrednost)"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -601,7 +597,7 @@ msgstr "Nastavi 0 če ni zaklenjeno"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
 msgid "Show credit information in portal"
-msgstr ""
+msgstr "Prikaži kreditne informacije v portalu"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -621,6 +617,8 @@ msgid ""
 "The partner %s is in risk exception.\n"
 "You must post his invoices from form view to allow over risk"
 msgstr ""
+"Partner %s je v izjemi tveganja.\n"
+"Njegove račune morate knjižiti iz obrazca, da dovolite prekoračitev tveganja"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -648,23 +646,20 @@ msgstr "Skupaj osnutki računov"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open
-#, fuzzy
 msgid "Total Open Invoices/Principal Balance"
-msgstr "Skupaj odprti računi"
+msgstr "Skupaj odprti računi/stanje glavnice"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount
-#, fuzzy
 msgid "Total Other Account Open Amount"
-msgstr "Znesek drugih kontov"
+msgstr "Skupaj odprti znesek drugega konta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid
-#, fuzzy
 msgid "Total Other Account Unpaid Amount"
-msgstr "Znesek drugih kontov"
+msgstr "Skupaj neplačani znesek drugega konta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_total
@@ -675,9 +670,8 @@ msgstr "Skupaj tveganje"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid
-#, fuzzy
 msgid "Total Unpaid Invoices/Principal Balance"
-msgstr "Skupaj neplačani računi"
+msgstr "Skupaj neplačani računi/stanje glavnice"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
@@ -688,12 +682,12 @@ msgstr "Skupni znesek računov v stanjih osnutek ali pro-forma"
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
 msgid "User"
-msgstr ""
+msgstr "Uporabnik"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
-msgstr ""
+msgstr "Potrdi temeljnico"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Zadnjič spremenjeno"
