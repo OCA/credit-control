@@ -9,16 +9,17 @@ msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-23 18:14:48+0000\n"
-"PO-Revision-Date: 2015-09-20 19:01+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"PO-Revision-Date: 2026-06-26 06:59+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/"
 "language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_move_form
@@ -28,43 +29,43 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Date</strong>"
-msgstr ""
+msgstr "<strong>Datum</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Invoice</strong>"
-msgstr ""
+msgstr "<strong>Račun</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Partner Name</strong>"
-msgstr ""
+msgstr "<strong>Naziv partnerja</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Partner Ref.</strong>"
-msgstr ""
+msgstr "<strong>Sklic partnerja</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Total Amount</strong>"
-msgstr ""
+msgstr "<strong>Skupaj znesek</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Total amount:</strong>"
-msgstr ""
+msgstr "<strong>Skupaj znesek:</strong>"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
 msgid "<strong>Total by country:</strong>"
-msgstr ""
+msgstr "<strong>Skupaj po državi:</strong>"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__active
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__active
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__company_credit_limit
@@ -78,21 +79,18 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__risk_insurance_code
-#, fuzzy
 msgid "Code assigned to this partner by the risk insurance company."
-msgstr ""
-"Sekundarna koda, ki jo je partnerju dodelila zavarovalnica za zavarovanje "
-"tveganj."
+msgstr "Koda, ki jo je partnerju dodelila zavarovalnica za zavarovanje tveganj."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__partner_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__company_credit_limit
@@ -108,21 +106,21 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Stik"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__create_uid
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_uid
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__create_date
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__create_date
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.view_partner_form
@@ -132,9 +130,8 @@ msgstr "Zavarovanje kredita"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_users__credit_limit
-#, fuzzy
 msgid "Credit Limit"
-msgstr "Kreditni limit družbe"
+msgstr "Kreditni limit"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__credit_policy_company_id
@@ -146,7 +143,7 @@ msgstr ""
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__credit_limit
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Kreditni limit, specifičen za tega partnerja."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
@@ -157,14 +154,14 @@ msgstr "Datum, ko je zavarovalnica odobrila zavarovanje."
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
 msgid "Dates"
-msgstr ""
+msgstr "Datumi"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__display_name
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__display_name
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__date_from
@@ -176,7 +173,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.report_invoice_risk_insurance_document
@@ -221,7 +218,7 @@ msgstr "Zavarovalna koda 2"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__credit_policy_company_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__credit_policy_company_id
 msgid "Insurance Company"
-msgstr ""
+msgstr "Zavarovalnica"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_grant_date
@@ -234,7 +231,7 @@ msgstr "Datum odobritve zavarovanja"
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__credit_policy_state_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__credit_policy_state_id
 msgid "Insurance Policy"
-msgstr ""
+msgstr "Zavarovalna polica"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_res_partner__risk_insurance_requested
@@ -284,28 +281,28 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model,name:partner_risk_insurance.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Temeljnica"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company____last_update
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnjič spremenjeno"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__write_uid
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_uid
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__write_date
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__write_date
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_requested
@@ -319,7 +316,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__name
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
@@ -336,7 +333,7 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model_terms:ir.ui.view,arch_db:partner_risk_insurance.invoice_risk_insurance_form
 msgid "Print"
-msgstr ""
+msgstr "Natisni"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_code_2
