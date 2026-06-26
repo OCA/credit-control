@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-26 07:22+0000\n"
+"PO-Revision-Date: 2026-06-26 07:24+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -25,6 +25,12 @@ msgid ""
 "                    of instant payment, as you still have available credit.\n"
 "                </i>"
 msgstr ""
+"<i>\n"
+"                    Naročilo bo potrjeno <strong>na kredit</strong> brez "
+"potrebe\n"
+"                    po takojšnjem plačilu, ker imate še razpoložljiv "
+"kredit.\n"
+"                </i>"
 
 #. module: website_sale_financial_risk
 #: model_terms:payment.provider,pending_msg:website_sale_financial_risk.payment_provider_credit
@@ -32,6 +38,9 @@ msgid ""
 "<i>Your order has been <strong>confirmed</strong>.</i><br>\n"
 "                The payment has been registered as <strong>credit</strong> and is pending invoicing."
 msgstr ""
+"<i>Vaše naročilo je bilo <strong>potrjeno</strong>.</i><br>\n"
+"                Plačilo je bilo zabeleženo kot <strong>kredit</strong> in "
+"čaka na izdajo računa."
 
 #. module: website_sale_financial_risk
 #: model:ir.model.fields,field_description:website_sale_financial_risk.field_payment_provider__code
@@ -47,13 +56,13 @@ msgstr "Dobro"
 #: model:ir.model.fields.selection,name:website_sale_financial_risk.selection__payment_provider__code__credit
 #: model:payment.provider,name:website_sale_financial_risk.payment_provider_credit
 msgid "On Credit"
-msgstr ""
+msgstr "Na kredit"
 
 #. module: website_sale_financial_risk
 #. odoo-python
 #: code:addons/website_sale_financial_risk/models/payment_transaction.py:0
 msgid "On Credit: No transaction found matching reference %s."
-msgstr ""
+msgstr "Na kredit: ni najdene transakcije, ki bi ustrezala sklicu %s."
 
 #. module: website_sale_financial_risk
 #: model:ir.model,name:website_sale_financial_risk.model_payment_provider
@@ -68,19 +77,19 @@ msgstr "Plačilna transakcija"
 #. module: website_sale_financial_risk
 #: model:ir.model.fields,help:website_sale_financial_risk.field_payment_provider__code
 msgid "The technical code of this payment provider."
-msgstr ""
+msgstr "Tehnična koda tega ponudnika plačilnih storitev."
 
 #. module: website_sale_financial_risk
 #: model_terms:payment.provider,auth_msg:website_sale_financial_risk.payment_provider_credit
 msgid "Your payment has been authorized."
-msgstr ""
+msgstr "Vaše plačilo je bilo odobreno."
 
 #. module: website_sale_financial_risk
 #: model_terms:payment.provider,cancel_msg:website_sale_financial_risk.payment_provider_credit
 msgid "Your payment has been cancelled."
-msgstr ""
+msgstr "Vaše plačilo je bilo preklicano."
 
 #. module: website_sale_financial_risk
 #: model_terms:payment.provider,done_msg:website_sale_financial_risk.payment_provider_credit
 msgid "Your payment has been successfully processed."
-msgstr ""
+msgstr "Vaše plačilo je bilo uspešno obdelano."
