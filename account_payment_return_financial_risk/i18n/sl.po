@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-28 01:36+0000\n"
-"PO-Revision-Date: 2026-06-26 06:59+0000\n"
+"PO-Revision-Date: 2026-06-26 07:06+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -33,18 +33,21 @@ msgid ""
 "Full risk computation.\n"
 "Residual amount of move lines not reconciled with returned lines related."
 msgstr ""
+"Polni izračun tveganja.\n"
+"Preostali znesek neusklajenih postavk temeljnice, povezanih z vrnjenimi "
+"postavkami."
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return_include
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return_include
 msgid "Include Payments Returns"
-msgstr ""
+msgstr "Vključi vračila plačil"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return_limit
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return_limit
 msgid "Limit Payments Returns"
-msgstr ""
+msgstr "Limit vračil plačil"
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return
@@ -52,6 +55,8 @@ msgstr ""
 msgid ""
 "Residual amount of move lines not reconciled with returned lines related."
 msgstr ""
+"Preostali znesek neusklajenih postavk temeljnice, povezanih z vrnjenimi "
+"postavkami."
 
 #. module: account_payment_return_financial_risk
 #: model:ir.model.fields,help:account_payment_return_financial_risk.field_res_partner__risk_payment_return_limit
@@ -63,4 +68,4 @@ msgstr "Nastavi 0 če ni zaklenjeno"
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_partner__risk_payment_return
 #: model:ir.model.fields,field_description:account_payment_return_financial_risk.field_res_users__risk_payment_return
 msgid "Total Payments Returns"
-msgstr ""
+msgstr "Skupaj vračila plačil"
