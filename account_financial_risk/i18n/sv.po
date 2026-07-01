@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2024-06-05 14:37+0000\n"
-"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
+"PO-Revision-Date: 2026-07-01 15:46+0000\n"
+"Last-Translator: Laura V <laura.valls@forgeflow.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/sv/)\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -42,17 +42,17 @@ msgstr "<span class=\"oe_read_only\">)</span>"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Consumed credit </strong>"
-msgstr ""
+msgstr "<strong>Förbrukad kredit </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Credit limit </strong>"
-msgstr ""
+msgstr "<strong>Kreditgräns </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Remaining credit </strong>"
-msgstr ""
+msgstr "<strong>Återstående kredit </strong>"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
@@ -173,7 +173,7 @@ msgstr "Kreditpolicy"
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
-msgstr ""
+msgstr "Kreditinformation"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
@@ -301,6 +301,8 @@ msgid ""
 "Helper field to control visibility of the partner option based on global "
 "config."
 msgstr ""
+"Hjälpfält för att styra synligheten för partneralternativet baserat på "
+"global konfiguration."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
@@ -311,7 +313,7 @@ msgstr "ID"
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "If enabled, portal users will be able to see their credit information."
-msgstr ""
+msgstr "Om aktiverat kan portalanvändare se sin kreditinformation."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__show_financial_risk_in_portal
@@ -320,6 +322,8 @@ msgid ""
 "If enabled, this partner will see their financial risk in the portal, "
 "provided the global setting is also enabled."
 msgstr ""
+"Om aktiverat kommer denna partner att se sin finansiella risk i portalen, "
+"förutsatt att den globala inställningen också är aktiverad."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
@@ -451,7 +455,7 @@ msgstr "Partnerrisk överskreds"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
 msgid "Portal Show Financial Risk Visible"
-msgstr ""
+msgstr "Portal visa finansiell risk synlig"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
@@ -589,7 +593,7 @@ msgstr "Ställ in 0 om den inte är låst"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
 msgid "Show credit information in portal"
-msgstr ""
+msgstr "Visa kreditinformation i portalen"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
