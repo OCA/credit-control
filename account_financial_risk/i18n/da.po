@@ -8,67 +8,68 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2016-10-23 16:16+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2026-07-01 15:46+0000\n"
+"Last-Translator: Laura V <laura.valls@forgeflow.com>\n"
 "Language-Team: Danish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\"> (</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\"> (</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_inline\">%)</span>"
-msgstr ""
+msgstr "<span class=\"oe_inline\">%)</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">(</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">(</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "<span class=\"oe_read_only\">)</span>"
-msgstr ""
+msgstr "<span class=\"oe_read_only\">)</span>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Consumed credit </strong>"
-msgstr ""
+msgstr "<strong>Forbrugt kredit </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Credit limit </strong>"
-msgstr ""
+msgstr "<strong>Kreditgrænse </strong>"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "<strong>Remaining credit </strong>"
-msgstr ""
+msgstr "<strong>Resterende kredit </strong>"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__move_line_ids
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__move_line_ids
 msgid "Account Moves"
-msgstr ""
+msgstr "Kontoflytninger"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_account_move_line_pivot_view
 msgid "Account move lines"
-msgstr ""
+msgstr "Kontoflytningslinjer"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__allow_overrisk_invoice_validation
 msgid "Allow invoice validation over the risk"
-msgstr ""
+msgstr "Tillad fakturavalidering over risikoen"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
@@ -79,6 +80,8 @@ msgid ""
 "risk                                 has already been allowed when "
 "confirming these."
 msgstr ""
+"Tillad altid validering af kladdefakturaer. Nyttigt når forløbet kommer fra "
+"salgsordrer, og over-risikoen allerede er tilladt ved bekræftelsen af disse."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -88,11 +91,13 @@ msgid ""
 "from sales orders and the over-risk has already been allowed when confirming "
 "these."
 msgstr ""
+"Tillad altid validering af kladdefakturaer. Nyttigt når forløbet kommer fra "
+"salgsordrer, og over-risikoen allerede er tilladt ved bekræftelsen af disse."
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_manager
 msgid "Can edit risk limit and overpass partner risk exceptions"
-msgstr ""
+msgstr "Kan redigere risikogrænse og tilsidesætte partnerens risikoundtagelser"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -103,7 +108,7 @@ msgstr "Annuller"
 #. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 msgid "Choose Manual Credit Currency."
-msgstr ""
+msgstr "Vælg manuel kreditvaluta."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -113,27 +118,27 @@ msgstr "Virksomheder"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr ""
+msgstr "Virksomhedsvaluta"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfigurationsindstillinger"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Continue"
-msgstr ""
+msgstr "Fortsæt"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__continue_method
 msgid "Continue Method"
-msgstr ""
+msgstr "Fortsæt-metode"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
@@ -149,35 +154,35 @@ msgstr "Oprettet den"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr ""
+msgstr "Kreditvaluta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_limit
 msgid "Credit Limit"
-msgstr ""
+msgstr "Kreditgrænse"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_policy
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_policy
 msgid "Credit Policy"
-msgstr ""
+msgstr "Kreditpolitik"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
-msgstr ""
+msgstr "Kreditoplysninger"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Kreditgrænse specifik for denne partner."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__partner_id
 msgid "Customer"
-msgstr ""
+msgstr "Kunde"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -187,6 +192,8 @@ msgid ""
 "Days after due date to set an invoice as unpaid. The change of this field "
 "recompute all partners risk, be patient."
 msgstr ""
+"Dage efter forfaldsdato for at markere en faktura som ubetalt. Ændring af "
+"dette felt genberegner alle partneres risiko – vær tålmodig."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
@@ -196,32 +203,32 @@ msgstr "Vist navn"
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__exception_msg
 msgid "Exception Msg"
-msgstr ""
+msgstr "Undtagelsesbesked"
 
 #. module: account_financial_risk
 #: model:ir.module.category,name:account_financial_risk.category_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
-msgstr ""
+msgstr "Finansiel risiko"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 msgid "Financial risk exceeded.\n"
-msgstr ""
+msgstr "Finansiel risiko overskredet.\n"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 msgid "Financial risk information"
-msgstr ""
+msgstr "Finansielle risikooplysninger"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft_include
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft_include
 msgid "Full risk computation"
-msgstr ""
+msgstr "Fuld risikoberegning"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
@@ -232,6 +239,10 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Fuld risikoberegning.\n"
+"Restbeløb af posteringslinjer ikke afstemt med distinkt konto, der er sat "
+"som partnerens tilgodehavende, og forfaldsdatoen er overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_include
@@ -242,6 +253,10 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Fuld risikoberegning.\n"
+"Restbeløb af posteringslinjer ikke afstemt med distinkt konto, der er sat "
+"som partnerens tilgodehavende, og forfaldsdatoen er ikke overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
@@ -252,6 +267,10 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Fuld risikoberegning.\n"
+"Restbeløb af posteringslinjer ikke afstemt med samme konto, der er sat som "
+"partnerens tilgodehavende, og forfaldsdatoen er overskredet, under hensyn "
+"til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open_include
@@ -262,11 +281,15 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Fuld risikoberegning.\n"
+"Restbeløb af posteringslinjer ikke afstemt med samme konto, der er sat som "
+"partnerens tilgodehavende, og forfaldsdatoen er ikke overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "General Limits"
-msgstr ""
+msgstr "Generelle grænser"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
@@ -275,6 +298,8 @@ msgid ""
 "Helper field to control visibility of the partner option based on global "
 "config."
 msgstr ""
+"Hjælpefelt til styring af synlighed af partnerindstillingen baseret på "
+"global konfiguration."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
@@ -285,7 +310,7 @@ msgstr "Id"
 #: model:ir.model.fields,help:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 msgid "If enabled, portal users will be able to see their credit information."
-msgstr ""
+msgstr "Hvis aktiveret kan portalbrugere se deres kreditoplysninger."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__show_financial_risk_in_portal
@@ -294,58 +319,60 @@ msgid ""
 "If enabled, this partner will see their financial risk in the portal, "
 "provided the global setting is also enabled."
 msgstr ""
+"Hvis aktiveret vil denne partner kunne se sin finansielle risiko i portalen, "
+"forudsat at den globale indstilling også er aktiveret."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_include
 msgid "Include Draft Invoices"
-msgstr ""
+msgstr "Inkluder kladdefakturaer"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_include
 msgid "Include Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Inkluder åbne fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
 msgid "Include Other Account Open Amount"
-msgstr ""
+msgstr "Inkluder åbent beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
 msgid "Include Other Account Unpaid Amount"
-msgstr ""
+msgstr "Inkluder ubetalt beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
 msgid "Include Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Inkluder ubetalte fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
 msgid "It Indicate if partner risk exceeded"
-msgstr ""
+msgstr "Angiver om partnerens risiko er overskredet"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Kladdepostering"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
-msgstr ""
+msgstr "Seneste kreditgrænse-dato"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
@@ -361,86 +388,86 @@ msgstr "Sidst opdateret den"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_limit
 msgid "Limit In Draft Invoices"
-msgstr ""
+msgstr "Grænse i kladdefakturaer"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
 msgid "Limit In Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Grænse i åbne fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Limit In Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Grænse i ubetalte fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
 msgid "Limit Other Account Open Amount"
-msgstr ""
+msgstr "Grænse for åbent beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
 msgid "Limit Other Account Unpaid Amount"
-msgstr ""
+msgstr "Grænse for ubetalt beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
 msgid "Manager"
-msgstr ""
+msgstr "Administrator"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Manuel kreditvaluta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
 msgid "Maturity Margin"
-msgstr ""
+msgstr "Forfaldsmarginen"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__origin_reference
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
-msgstr ""
+msgstr "Guide: partnerrisiko overskredet"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 msgid "Partner risk exceeded"
-msgstr ""
+msgstr "Partnerrisiko overskredet"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
 msgid "Portal Show Financial Risk Visible"
-msgstr ""
+msgstr "Portal: vis finansiel risiko synlig"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Prisliste-valuta"
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
 msgid "Read only access to financial risk info"
-msgstr ""
+msgstr "Skrivebeskyttet adgang til finansielle risikooplysninger"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Tilgodehavende valuta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -450,6 +477,9 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Restbeløb af posteringslinjer ikke afstemt med distinkt konto, der er sat "
+"som partnerens tilgodehavende, og forfaldsdatoen er overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount
@@ -459,6 +489,9 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Restbeløb af posteringslinjer ikke afstemt med distinkt konto, der er sat "
+"som partnerens tilgodehavende, og forfaldsdatoen er ikke overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_unpaid
@@ -468,6 +501,9 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Restbeløb af posteringslinjer ikke afstemt med samme konto, der er sat som "
+"partnerens tilgodehavende, og forfaldsdatoen er overskredet, under hensyn "
+"til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_open
@@ -477,18 +513,21 @@ msgid ""
 "set as partner receivable and date maturity not exceeded, considering Due "
 "Margin set in account settings."
 msgstr ""
+"Restbeløb af posteringslinjer ikke afstemt med samme konto, der er sat som "
+"partnerens tilgodehavende, og forfaldsdatoen er ikke overskredet, under "
+"hensyn til forfaldsmarginen sat i kontoindstillingerne."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_allow_edit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_allow_edit
 msgid "Risk Allow Edit"
-msgstr ""
+msgstr "Risiko: tillad redigering"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_amount_total_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_move__risk_amount_total_currency
 msgid "Risk Amount Total"
-msgstr ""
+msgstr "Risiko: samlet beløb"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_account_bank_statement_line__risk_currency_id
@@ -496,41 +535,41 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr ""
+msgstr "Risikovaluta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_exception
 msgid "Risk Exception"
-msgstr ""
+msgstr "Risikoundtagelse"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_amount_exceeded
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_amount_exceeded
 msgid "Risk Over Limit"
-msgstr ""
+msgstr "Risiko over grænse"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Risk Remaining"
-msgstr ""
+msgstr "Resterende risiko"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_percentage
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Resterende risiko (procent)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_remaining_value
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Resterende risiko (værdi)"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "Risk exceeded"
-msgstr ""
+msgstr "Risiko overskredet"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_limit
@@ -544,25 +583,25 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_open_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Set 0 if it is not locked"
-msgstr ""
+msgstr "Sæt 0 hvis den ikke er låst"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
 msgid "Show credit information in portal"
-msgstr ""
+msgstr "Vis kreditoplysninger i portal"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Specific Limits"
-msgstr ""
+msgstr "Specifikke grænser"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
-msgstr ""
+msgstr "Sum af samlet inkluderet risiko"
 
 #. module: account_financial_risk
 #. odoo-python
@@ -571,75 +610,78 @@ msgid ""
 "The partner %s is in risk exception.\n"
 "You must post his invoices from form view to allow over risk"
 msgstr ""
+"Partneren %s er i risikoundtagelse.\n"
+"Du skal bogføre dennes fakturaer fra formularvisning for at tillade over-"
+"risiko"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
 msgid "The partner has exceeded his risk"
-msgstr ""
+msgstr "Partneren har overskredet sin risiko"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 msgid "This invoice exceeds the financial risk.\n"
-msgstr ""
+msgstr "Denne faktura overskrider den finansielle risiko.\n"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/models/account_invoice.py:0
 msgid "This invoice exceeds the open invoices risk.\n"
-msgstr ""
+msgstr "Denne faktura overskrider risikoen for åbne fakturaer.\n"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total Draft Invoices"
-msgstr ""
+msgstr "Samlet kladdefakturaer"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open
 msgid "Total Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Samlede åbne fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount
 msgid "Total Other Account Open Amount"
-msgstr ""
+msgstr "Samlet åbent beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid
 msgid "Total Other Account Unpaid Amount"
-msgstr ""
+msgstr "Samlet ubetalt beløb på andre konti"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_total
 msgid "Total Risk"
-msgstr ""
+msgstr "Samlet risiko"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid
 msgid "Total Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Samlede ubetalte fakturaer/primærsaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_invoice_draft
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_invoice_draft
 msgid "Total amount of invoices in Draft or Pro-forma state"
-msgstr ""
+msgstr "Samlet beløb af fakturaer i kladde- eller pro forma-status"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_user
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
-msgstr ""
+msgstr "Valider kontopostering"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Sidst ændret den"
