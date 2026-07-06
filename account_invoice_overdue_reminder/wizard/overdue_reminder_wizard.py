@@ -230,6 +230,7 @@ class OverdueReminderStart(models.TransientModel):
             ("full_reconcile_id", "=", False),
             ("matched_debit_ids", "=", False),
             ("matched_credit_ids", "=", False),
+            ("parent_state", "=", "posted"),
         ]
         unrec_payments = amlo.search(
             unrec_domain
