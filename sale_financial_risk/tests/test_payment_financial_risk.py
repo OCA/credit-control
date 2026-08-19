@@ -93,6 +93,7 @@ class TestRiskSalePayment(AccountPaymentCommon, PaymentHttpCommon):
                 {
                     "partner_id": cls.partner.id,
                     "pricelist_id": cls.pricelist.id,
+                    "require_signature": False,
                     "order_line": [
                         Command.create(
                             {
