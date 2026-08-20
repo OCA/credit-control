@@ -56,11 +56,7 @@
                     <tr
                         t-foreach="object.invoice_ids.sorted(key='invoice_date')"
                         t-as="inv"
-                        style="background-color:
-                            % if inv.move_type == 'out_refund':
-                                LightGray
-                            % endif
-                        "
+                        t-att-style="'background-color: LightGray' if inv.move_type == 'out_refund' else None"
                     >
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.name" />
