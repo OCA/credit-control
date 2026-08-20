@@ -53,17 +53,15 @@
                             style="padding: 5px; border: 1px solid black;"
                         >Past Reminders</th>
                     </tr>
-                    <t
+                    <tr
                         t-foreach="object.invoice_ids.sorted(key='invoice_date')"
                         t-as="inv"
-                    >
-                        <tr
-                            style="background-color:
+                        style="background-color:
                             % if inv.move_type == 'out_refund':
                                 LightGray
                             % endif
                         "
-                        >
+                    >
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.name" />
                             </td>
@@ -80,36 +78,34 @@
                                 <t t-out="inv.ref or ''" />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;"><t
-                                    t-out="dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]"
-                                /></td>
+                                t-out="dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])[inv.move_type]"
+                            /></td>
                             <td
-                                style="padding: 5px; border: 1px solid black; text-align: right;"
-                            >
+                            style="padding: 5px; border: 1px solid black; text-align: right;"
+                        >
                                 <t
-                                    t-out="format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
-                                />
+                                t-out="format_amount(inv.amount_untaxed * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                            />
                             </td>
                             <td
-                                style="padding: 5px; border: 1px solid black; text-align: right;"
-                            >
+                            style="padding: 5px; border: 1px solid black; text-align: right;"
+                        >
                                 <t
-                                    t-out="format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
-                                />
+                                t-out="format_amount(inv.amount_total * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                            />
                             </td>
                             <td
-                                style="padding: 5px; border: 1px solid black; text-align: right;"
-                            >
+                            style="padding: 5px; border: 1px solid black; text-align: right;"
+                        >
                                 <t
-                                    t-out="format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
-                                />
+                                t-out="format_amount(inv.amount_residual * (inv.move_type == 'out_refund' and -1 or 1), inv.currency_id)"
+                            />
                             </td>
                             <td style="padding: 5px; border: 1px solid black;">
                                 <t t-out="inv.overdue_reminder_counter" />
                             </td>
                         </tr>
-                    </t>
-                    <t t-foreach="object.total_residual()" t-as="total_residual">
-                        <tr>
+                    <tr t-foreach="object.total_residual()" t-as="total_residual">
                             <td />
                             <td />
                             <td />
@@ -117,23 +113,22 @@
                             <td />
                             <td />
                             <td
-                                colspan="2"
-                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
-                            >
+                            colspan="2"
+                            style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                        >
                                 Total
                                 Residual in
                                 <t t-out="total_residual[0].name" />:
                             </td>
                             <td
-                                style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
-                            >
+                            style="padding: 5px; border: 1px solid black; font-weight: bold; text-align: right;"
+                        >
                                 <t
-                                    t-out="format_amount(total_residual[1], total_residual[0])"
-                                />
+                                t-out="format_amount(total_residual[1], total_residual[0])"
+                            />
                             </td>
                             <td />
-                        </tr>
-                    </t>
+                    </tr>
                 </table>
 
                 <p
