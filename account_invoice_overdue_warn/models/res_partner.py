@@ -57,7 +57,7 @@ class ResPartner(models.Model):
         domain = [
             ("move_type", "=", "out_invoice"),
             ("company_id", "=", company_id),
-            ("commercial_partner_id", "=", self.commercial_partner_id.id),
+            ("commercial_partner_id", "in", self.commercial_partner_id.ids),
             ("invoice_date_due", "<", today),
             ("state", "=", "posted"),
             ("payment_state", "in", ("not_paid", "partial")),
