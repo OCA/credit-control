@@ -1,0 +1,1 @@
+odoo-addon-queue_job_batch @ git+https://github.com/OCA/queue.git@refs/pull/842/head#subdirectory=queue_job_batch
