@@ -57,6 +57,18 @@ class TestRiskSalePayment(AccountPaymentCommon, SaleCommon, PaymentHttpCommon):
         """When the order confirmation come from a payment authorization the risk
         is bypassed. This is a trimmed version of sale/tests/test_11_so_payment_link
         to easily test that case"""
+        # /payment/pay (PaymentHttpCommon._get_portal_pay_context(), used
+        # below) is a website=True route (odoo/addons/payment/controllers/
+        # portal.py) - it 404s unless the website module is installed, even
+        # though neither this module nor its declared dependencies
+        # (sale, account_financial_risk) require it. Skip rather than fail
+        # on an install that deliberately doesn't carry website.
+        if (
+            not self.env["ir.module.module"]
+            .sudo()
+            .search_count([("name", "=", "website"), ("state", "=", "installed")])
+        ):
+            self.skipTest("website is not installed")
         # Force risk exception to whatever amount
         self.assertFalse(self.partner.risk_exception)
         self.amount = self.order.amount_total
