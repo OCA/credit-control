@@ -29,6 +29,7 @@
                     name="overdue_reminder"
                     string="Overdue Reminder"
                     invisible="not overdue"
+                    groups="account.group_account_invoice,account.group_account_readonly"
                 >
                     <group name="overdue_reminder_main" col="4">
                         <field name="overdue_reminder_counter" />
