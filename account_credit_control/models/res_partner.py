@@ -39,6 +39,10 @@ class ResPartner(models.Model):
     credit_control_count = fields.Integer(
         compute="_compute_credit_control_count", string="# of Credit Control Lines"
     )
+    credit_control_communication_count = fields.Integer(
+        compute="_compute_credit_control_communication_count",
+        string="# of Credit Control Communications",
+    )
     payment_responsible_id = fields.Many2one(
         comodel_name="res.users",
         ondelete="set null",
@@ -74,6 +78,19 @@ class ResPartner(models.Model):
         string="Credit Control Levels",
         groups="account_credit_control.group_account_credit_control_info",
     )
+
+    def _compute_credit_control_communication_count(self):
+        partners = self.filtered(lambda x: not x.parent_id)
+        fetch_data = self.env["credit.control.communication"].read_group(
+            domain=[("partner_id", "in", partners.ids)],
+            fields=["partner_id"],
+            groupby=["partner_id"],
+        )
+        result = {
+            data["partner_id"][0]: data["partner_id_count"] for data in fetch_data
+        }
+        for partner in self:
+            partner.credit_control_communication_count = result.get(partner.id, 0)
 
     def _compute_credit_control_count(self):
         partners = self.filtered(lambda x: not x.parent_id)
