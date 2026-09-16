@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
@@ -9,6 +10,7 @@ from odoo.exceptions import UserError
 from odoo.addons.base.tests.common import BaseCommon
 
 
+@freeze_time("2024-01-15 12:00:00")
 class TestPartnerFinancialRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
@@ -104,6 +106,13 @@ class TestPartnerFinancialRisk(BaseCommon):
             )
         )
         cls.env.user.lang = False
+        # Use the same "today" reference _max_risk_date_due() itself
+        # compares against (context_today(), timezone-aware) rather than
+        # the naive Date.today() - with time frozen above this doesn't
+        # change which day either resolves to, but it keeps the test
+        # exercising the exact same date computation the module uses
+        # instead of one that merely happens to agree with it right now.
+        cls.today = fields.Date.context_today(cls.env.user)
 
     def test_invoices(self):
         self.partner.risk_invoice_draft_include = True
@@ -134,7 +143,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         unrisk_partners = self.partner.search([("risk_exception", "=", False)])
         self.assertIn(self.partner, unrisk_partners)
         self.partner.risk_invoice_open_limit = 300.0
-        invoice2.invoice_date_due = fields.Date.today()
+        invoice2.invoice_date_due = self.today
         wiz_dic = invoice2.action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
@@ -152,7 +161,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         self.assertAlmostEqual(self.partner.risk_invoice_open, 0.0)
         wiz.button_continue()
         # HACK: Force the maturity date for not having an error here
-        invoice2.line_ids.write({"date_maturity": fields.Date.today()})
+        invoice2.line_ids.write({"date_maturity": self.today})
         self.assertAlmostEqual(self.partner.risk_invoice_open, 550.0)
         self.assertTrue(self.partner.risk_allow_edit)
 
@@ -163,7 +172,7 @@ class TestPartnerFinancialRisk(BaseCommon):
             .create(
                 {
                     "journal_id": self.journal_sale.id,
-                    "date": fields.Date.today(),
+                    "date": self.today,
                     "line_ids": [
                         Command.create(
                             {
@@ -191,7 +200,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         line.date_maturity = "2017-01-01"
         self.assertAlmostEqual(self.partner.risk_account_amount, 0.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 100.0)
-        line.date_maturity = fields.Date.today() - relativedelta(days=2)
+        line.date_maturity = self.today - relativedelta(days=2)
         self.assertAlmostEqual(self.partner.risk_account_amount, 0.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 100.0)
         line.company_id.invoice_unpaid_margin = 3
