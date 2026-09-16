@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="act_partner_credit_communication" model="ir.actions.act_window">
+        <field name="name">Credit Control Communication</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"
+        />
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+        <field
+            name="context"
+        >{'search_default_partner_id': active_id, 'default_partner_id': active_id}</field>
+        <field name="res_model">credit.control.communication</field>
+        <field name="view_mode">list,form,activity</field>
+    </record>
     <record id="act_partner_credit_relation_relation" model="ir.actions.act_window">
         <field name="name">Credit Lines</field>
         <field
@@ -19,6 +32,21 @@
         <field name="inherit_id" ref="account.partner_view_buttons" />
         <field name="arch" type="xml">
             <button name="action_view_partner_invoices" position="after">
+                <button
+                    class="oe_stat_button"
+                    type="action"
+                    name="%(act_partner_credit_communication)d"
+                    invisible="credit_control_communication_count == 0"
+                    icon="fa-comments-o"
+                    groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+                >
+                    <field
+                        string="Credit Control Communication"
+                        name="credit_control_communication_count"
+                        widget="statinfo"
+                        groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+                    />
+                </button>
                 <button
                     class="oe_stat_button"
                     type="action"
