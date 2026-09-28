@@ -187,6 +187,11 @@ msgid "INVOICE LIST - COUNTRY - INSURED"
 msgstr "ELENCO FATTURA - NAZIONE - ASSICURATO"
 
 #. module: partner_risk_insurance
+#: model:ir.model.fields,help:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
+msgid "If check, includes only invoices in state not paid"
+msgstr ""
+
+#. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_credit_policy_state__insure_invoices
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__credit_policy_insure_invoices
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_users__credit_policy_insure_invoices
@@ -200,7 +205,6 @@ msgstr ""
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__insured_with_credit_policy
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__insured_with_credit_policy
-#: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__insured_with_credit_policy
 msgid "Indicates if the invoice is insured by a credit policy."
 msgstr "Indica se la fattura è assicurata da una polizza di credito."
 
@@ -219,7 +223,6 @@ msgstr "Codice assicurazione 2"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_bank_statement_line__credit_policy_company_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__credit_policy_company_id
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__credit_policy_company_id
 msgid "Insurance Company"
 msgstr "Compagnia assicuratrice"
 
@@ -232,7 +235,6 @@ msgstr "Data di concessione dell'assicurazione"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_bank_statement_line__credit_policy_state_id
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__credit_policy_state_id
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__credit_policy_state_id
 msgid "Insurance Policy"
 msgstr "Polizza assicurazione"
 
@@ -264,7 +266,6 @@ msgstr "Assicurate"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_bank_statement_line__insured_with_credit_policy
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_account_move__insured_with_credit_policy
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_account_payment__insured_with_credit_policy
 msgid "Insured by a Credit Policy"
 msgstr "Assicurate da una polizza del credito"
 
@@ -285,13 +286,6 @@ msgstr "Resoconto assicurazione rischio fattura"
 #: model:ir.model,name:partner_risk_insurance.model_account_move
 msgid "Journal Entry"
 msgstr "Registrazione contabile"
-
-#. module: partner_risk_insurance
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company____last_update
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state____last_update
-#: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_company__write_uid
@@ -321,6 +315,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_risk_insurance.field_credit_policy_state__name
 msgid "Name"
 msgstr "Nome"
+
+#. module: partner_risk_insurance
+#: model:ir.model.fields,field_description:partner_risk_insurance.field_partner_risk_insurance_wizard__only_unpaid
+msgid "Only Unpaid"
+msgstr ""
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__risk_insurance_coverage_percent
@@ -355,14 +354,12 @@ msgstr "Stato delle polizze del credito"
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__credit_policy_company_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__credit_policy_company_id
-#: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__credit_policy_company_id
 msgid "The insurance company that insures the invoices of the partner."
 msgstr "La compagnia assicurativa che assicura le fatture del partner."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_bank_statement_line__credit_policy_state_id
 #: model:ir.model.fields,help:partner_risk_insurance.field_account_move__credit_policy_state_id
-#: model:ir.model.fields,help:partner_risk_insurance.field_account_payment__credit_policy_state_id
 msgid "The insurance policy that insures the invoices of the partner."
 msgstr "La polizza assicurativa che assicura le fatture del partner."
 
@@ -379,9 +376,9 @@ msgstr ""
 #. module: partner_risk_insurance
 #. odoo-python
 #: code:addons/partner_risk_insurance/models/account_move.py:0
-#, python-format
 msgid "The partner %s has no credit policy to insure invoices."
-msgstr "Il partner %s non ha una polizza del credito per assicurare le fatture."
+msgstr ""
+"Il partner %s non ha una polizza del credito per assicurare le fatture."
 
 #. module: partner_risk_insurance
 #: model:ir.model.fields,help:partner_risk_insurance.field_res_partner__insurance_credit_limit
@@ -396,7 +393,6 @@ msgstr ""
 #. module: partner_risk_insurance
 #. odoo-python
 #: code:addons/partner_risk_insurance/wizard/invoice_risk_insurance_wizard.py:0
-#, python-format
 msgid ""
 "There aren't moves between this dates\n"
 "Please, select different dates"
@@ -433,6 +429,9 @@ msgstr "CLIENTI NON ASSICURATI"
 #: model:ir.model,name:partner_risk_insurance.model_partner_risk_insurance_wizard
 msgid "Wizard to see invoices sorted by risk"
 msgstr "Procedura guidata per visualizzare le fatture salvate per rischio"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
 
 #~ msgid "Company's Credit Limit"
 #~ msgstr "Limite di Credito dell'Azienda"
