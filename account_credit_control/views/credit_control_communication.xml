@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2020 Tecnativa - Jairo Llopis
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -119,7 +119,7 @@
             </list>
         </field>
     </record>
-    <record model="ir.actions.act_window" id="credit_control_communication_action">
+    <record id="credit_control_communication_action" model="ir.actions.act_window">
         <field name="name">Credit Control Communications</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.communication</field>
@@ -137,10 +137,10 @@
         </field>
     </record>
     <menuitem
+        id="credit_control_communication_action_menu"
         name="Communications"
         parent="base_credit_control_menu"
         action="credit_control_communication_action"
         sequence="25"
-        id="credit_control_communication_action_menu"
     />
 </odoo>
