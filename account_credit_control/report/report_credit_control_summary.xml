@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_credit_control_summary_document">
         <t t-call="web.external_layout">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <h3>Summary</h3>
-                <table class="table table-sm" id="summary_table">
+                <table id="summary_table" class="table table-sm">
                     <thead>
                         <tr>
                             <th>Invoice number</th>

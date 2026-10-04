@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="act_partner_credit_relation_relation" model="ir.actions.act_window">
         <field name="name">Credit Lines</field>
@@ -129,14 +129,14 @@
         <field name="act_window_id" ref="action_customer_followup" />
     </record>
     <menuitem
+        id="credit_control_manual_action_menu"
         name="Do Manual Follow-Ups"
         parent="base_credit_control_menu"
         action="action_customer_followup"
         sequence="30"
-        id="credit_control_manual_action_menu"
     />
     <!-- Partner Payment Action Types -->
-    <record model="ir.ui.view" id="res_partner_payment_action_type_form_view">
+    <record id="res_partner_payment_action_type_form_view" model="ir.ui.view">
         <field name="name">res.partner.payment.action.type.form</field>
         <field name="model">res.partner.payment.action.type</field>
         <field name="arch" type="xml">
@@ -160,7 +160,7 @@
             </form>
         </field>
     </record>
-    <record model="ir.ui.view" id="res_partner_payment_action_type_tree_view">
+    <record id="res_partner_payment_action_type_tree_view" model="ir.ui.view">
         <field name="name">res.partner.payment.action.type.form</field>
         <field name="model">res.partner.payment.action.type</field>
         <field name="arch" type="xml">
@@ -171,14 +171,14 @@
         </field>
     </record>
     <record
-        model="ir.actions.act_window"
         id="res_partner_payment_action_type_act_window"
+        model="ir.actions.act_window"
     >
         <field name="name">Partner Payment Action Types</field>
         <field name="res_model">res.partner.payment.action.type</field>
         <field name="view_mode">list,form</field>
     </record>
-    <record model="ir.ui.menu" id="res_partner_payment_action_type_menu">
+    <record id="res_partner_payment_action_type_menu" model="ir.ui.menu">
         <field name="name">Partner Payment Action Types</field>
         <field
             name="parent_id"
