@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="credit_control_run_tree" model="ir.ui.view">
         <field name="name">credit.control.run.list</field>
@@ -112,7 +112,7 @@
             </form>
         </field>
     </record>
-    <record model="ir.actions.act_window" id="credit_control_run">
+    <record id="credit_control_run" model="ir.actions.act_window">
         <field name="name">Credit Control Run</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.run</field>
@@ -122,11 +122,11 @@
         <field name="view_id" ref="credit_control_run_tree" />
     </record>
     <menuitem
+        id="credit_control_run_menu"
         name="Runs"
         parent="base_credit_control_menu"
         action="credit_control_run"
         sequence="10"
-        id="credit_control_run_menu"
         groups="account_credit_control.group_account_credit_control_user"
     />
 </odoo>
