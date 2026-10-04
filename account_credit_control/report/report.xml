@@ -7,9 +7,6 @@
         <field
             name="report_name"
         >account_credit_control.report_credit_control_summary</field>
-        <field
-            name="report_file"
-        >account_credit_control.report_credit_control_summary</field>
         <field name="binding_type">report</field>
     </record>
 </odoo>

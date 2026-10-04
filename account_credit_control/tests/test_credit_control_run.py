@@ -3,7 +3,6 @@
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
-from datetime import datetime
 
 from dateutil import relativedelta
 
@@ -109,7 +108,7 @@ class TestCreditControlRunCase(AccountTestInvoicingCommon, TransactionCaseWithUs
             )
         )
         cls.partner.credit_policy_id = cls.policy.id
-        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
+        date_invoice = fields.Date.today() - relativedelta.relativedelta(years=1)
 
         cls.invoice = cls._create_invoice(
             partner_id=cls.partner.id,
@@ -130,7 +129,7 @@ class TestCreditControlRun(TestCreditControlRunCase):
         )
 
         with self.assertRaises(UserError):
-            today = datetime.today()
+            today = fields.Date.today()
             previous_date = today - relativedelta.relativedelta(days=15)
             previous_date_str = fields.Date.to_string(previous_date)
             control_run._check_run_date(previous_date_str)
@@ -226,9 +225,9 @@ class TestCreditControlRun(TestCreditControlRunCase):
         Generate several control run
         """
 
-        six_months = datetime.today() - relativedelta.relativedelta(months=6)
+        six_months = fields.Date.today() - relativedelta.relativedelta(months=6)
         six_months_str = fields.Date.to_string(six_months)
-        three_months = datetime.today() - relativedelta.relativedelta(months=2)
+        three_months = fields.Date.today() - relativedelta.relativedelta(months=2)
         three_months_str = fields.Date.to_string(three_months)
 
         # First run
@@ -282,6 +281,12 @@ class TestCreditControlRun(TestCreditControlRunCase):
         # Create wizard
         emailer_obj = self.env["credit.control.emailer"]
         wiz_emailer = emailer_obj.create({})
+        # Only email lines to be sent can be linked to the emailer
+        with self.assertRaises(ValueError):
+            wiz_emailer.line_ids = control_lines.filtered(
+                lambda line: line.channel != "email"
+            )
+        control_lines.channel = "email"
         wiz_emailer.line_ids = control_lines
 
         # Send email

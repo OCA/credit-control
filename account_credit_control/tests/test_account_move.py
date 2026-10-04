@@ -1,7 +1,6 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from datetime import datetime
 
 from dateutil import relativedelta
 
@@ -65,7 +64,7 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         )
         partner.credit_policy_id = policy.id
 
-        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
+        date_invoice = fields.Date.today() - relativedelta.relativedelta(years=1)
 
         # Create an invoice
         invoice_form = Form(
@@ -155,7 +154,7 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         )
         partner.credit_policy_id = policy.id
 
-        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
+        date_invoice = fields.Date.today() - relativedelta.relativedelta(years=1)
 
         # Create an invoice
         invoice_form = Form(
@@ -232,7 +231,7 @@ class TestAccountInvoice(AccountTestInvoicingCommon):
         )
         partner.credit_policy_id = policy.id
 
-        date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
+        date_invoice = fields.Date.today() - relativedelta.relativedelta(years=1)
 
         # Create an invoice
         invoice_form = Form(

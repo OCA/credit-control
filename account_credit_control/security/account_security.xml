@@ -39,52 +39,6 @@
         </record>
     </data>
     <data noupdate="1">
-        <record id="credit_control_run_rule" model="ir.rule">
-            <field name="name">Credit Control Run</field>
-            <field name="model_id" ref="model_credit_control_run" />
-            <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >[('company_id','in',company_ids + [False])]</field>
-        </record>
-        <record id="credit_control_communication_rule" model="ir.rule">
-            <field name="name">Credit Control Communication</field>
-            <field name="model_id" ref="model_credit_control_communication" />
-            <field name="global" eval="True" />
-            <field name="domain_force">[('company_id','in',company_ids)]</field>
-        </record>
-        <record id="credit_control_line_rule" model="ir.rule">
-            <field name="name">Credit Control Line</field>
-            <field name="model_id" ref="model_credit_control_line" />
-            <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >[('company_id','in',company_ids + [False])]</field>
-        </record>
-        <record id="credit_control_policy_rule" model="ir.rule">
-            <field name="name">Credit Control Policy</field>
-            <field name="model_id" ref="model_credit_control_policy" />
-            <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >[('company_id','in',company_ids + [False])]</field>
-        </record>
-        <record id="credit_control_analysis_rule" model="ir.rule">
-            <field name="name">Credit Control Analysis</field>
-            <field name="model_id" ref="model_credit_control_analysis" />
-            <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >[('company_id','in',company_ids + [False])]</field>
-        </record>
-        <record id="credit_control_partner_payment_action_type_rule" model="ir.rule">
-            <field name="name">Credit Control Partner Payment Action Type</field>
-            <field name="model_id" ref="model_res_partner_payment_action_type" />
-            <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >[('company_id','in',company_ids + [False])]</field>
-        </record>
         <record id="base.user_admin" model="res.users">
             <field
                 name="group_ids"
