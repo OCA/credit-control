@@ -258,10 +258,10 @@ class CreditControlPolicy(models.Model):
             if level_line.partner_id.id not in partner_level_dic:
                 partner_level_dic[level_line.partner_id.id] = level
             level_dic[partner_level_dic[level_line.partner_id.id]].append(level_line.id)
-        for level, line_ids in level_dic.items():
+        for max_level, line_ids in level_dic.items():
             policy_lines_generated += create(
                 AccountMoveLine.browse(line_ids),
-                level,
+                max_level,
                 credit_control_run.date,
                 credit_control_run.company_id,
                 default_lines_vals=default_lines_vals,

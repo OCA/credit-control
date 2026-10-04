@@ -1,7 +1,6 @@
 # Copyright 2025 360ERP (<https://www.360erp.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
 
 from dateutil import relativedelta
 
@@ -20,9 +19,9 @@ class TestCreditControlAnalysis(TestCreditControlRunCase):
         # Invoice 2 for the same partner, will generate a level 2 line later
         cls.invoice2 = cls.invoice.copy(
             {
-                "invoice_date": datetime.today()
+                "invoice_date": fields.Date.today()
                 - relativedelta.relativedelta(months=7),
-                "invoice_date_due": datetime.today()
+                "invoice_date_due": fields.Date.today()
                 - relativedelta.relativedelta(months=7),
             }
         )
@@ -30,7 +29,7 @@ class TestCreditControlAnalysis(TestCreditControlRunCase):
 
         # Run 1: generates level 1 for invoice 1 and level 2 for invoice 2
         first_run_date = fields.Date.to_string(
-            datetime.today() - relativedelta.relativedelta(months=5)
+            fields.Date.today() - relativedelta.relativedelta(months=5)
         )
         control_run_1 = cls.env["credit.control.run"].create(
             {"date": first_run_date, "policy_ids": [(6, 0, [cls.policy.id])]}
@@ -39,7 +38,7 @@ class TestCreditControlAnalysis(TestCreditControlRunCase):
 
         # Run 2: generates level 2 for invoice 1 and level 3 for invoice 2
         second_run_date = fields.Date.to_string(
-            datetime.today() - relativedelta.relativedelta(months=2)
+            fields.Date.today() - relativedelta.relativedelta(months=2)
         )
         control_run_2 = cls.env["credit.control.run"].create(
             {"date": second_run_date, "policy_ids": [(6, 0, [cls.policy.id])]}
