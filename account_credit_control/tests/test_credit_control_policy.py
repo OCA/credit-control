@@ -8,6 +8,12 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("post_install", "-at_install")
 class TestCreditControlPolicy(BaseCommon):
+    _test_user_groups = (
+        "account.group_account_manager",
+        "account_credit_control.group_account_credit_control_manager",
+        "base.group_partner_manager",
+    )
+
     def test_check_policy_against_account(self):
         """
         Test the model check_policy_against_account with several case

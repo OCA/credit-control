@@ -19,7 +19,7 @@ class CreditControlLine(models.Model):
     """
 
     _name = "credit.control.line"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
     _description = "A credit control line"
     _rec_name = "id"
     _order = "date DESC"

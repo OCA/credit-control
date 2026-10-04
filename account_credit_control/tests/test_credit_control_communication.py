@@ -3,7 +3,6 @@
 
 from markupsafe import Markup
 
-from odoo.modules.module import load_script
 from odoo.tests import tagged
 
 from .test_credit_control_run import TestCreditControlRunCase
@@ -104,8 +103,7 @@ class TestCreditControlCommunication(TestCreditControlRunCase):
     def test_email_recipient(self):
         """The email is sent to the communication's contact address.
 
-        This relies on use_default_to being set to non-default value False,
-        which is applied on existing installations by a migration script.
+        This relies on use_default_to being set to non-default value False.
         """
         partner = self.invoice.partner_id
         partner.email = "partner@test.com"
@@ -128,28 +126,8 @@ class TestCreditControlCommunication(TestCreditControlRunCase):
         )
         self.assertEqual(template, comm.policy_level_id.email_template_id)
         subtype = self.env.ref("account_credit_control.mt_request")
-
-        # Mimic an installation prior to the migration script: with default
-        # recipients, the contact address is ignored
-        template.use_default_to = True
+        self.assertFalse(template.use_default_to)
         comm._send_communications_by_email()
         message = comm.message_ids.filtered(lambda msg: msg.subtype_id == subtype)
-        self.assertEqual(len(message), 1)
-        self.assertEqual(message.partner_ids, partner)
-
-        # Run the migration script
-        script_name = "odoo.upgrade.account_credit_control.19.0.1.0.3.post-migration"
-        script = load_script(
-            "account_credit_control/migrations/19.0.1.0.3/post-migration.py",
-            script_name,
-        )
-        script.migrate(self.env.cr, "19.0.1.0.2")
-        self.assertFalse(template.use_default_to)
-
-        # Now the email is sent to the contact address
-        comm._send_communications_by_email()
-        message = (
-            comm.message_ids.filtered(lambda msg: msg.subtype_id == subtype) - message
-        )
         self.assertEqual(len(message), 1)
         self.assertEqual(message.partner_ids, contact)

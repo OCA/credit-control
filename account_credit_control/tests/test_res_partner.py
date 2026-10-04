@@ -9,6 +9,12 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("post_install", "-at_install")
 class TestCreditControlPolicyLevel(BaseCommon):
+    _test_user_groups = (
+        "account.group_account_manager",
+        "account_credit_control.group_account_credit_control_manager",
+        "base.group_partner_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

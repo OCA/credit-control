@@ -1,0 +1,31 @@
+id,name,model_id,group_id/id,operation,domain
+ir_model_access_271,credit_control_user_line,credit.control.line,account_credit_control.group_account_credit_control_user,crud,
+ir_model_access_272,credit_control_info_line,credit.control.line,account_credit_control.group_account_credit_control_info,r,
+ir_model_access_291,credit_control_fin_invoice_line,credit.control.line,account.group_account_invoice,r,
+ir_model_access_292,credit_control_fin_manager_line,credit.control.line,account.group_account_manager,crud,
+credit_control_line_rule,Credit Control Line,credit.control.line,,crud,"[('company_id','in',company_ids + [False])]"
+ir_model_access_273,credit_control_manager_mail_template,mail.template,account_credit_control.group_account_credit_control_manager,crud,
+ir_model_access_275,credit_control_manager_mail_message,mail.message,account_credit_control.group_account_credit_control_manager,crud,
+ir_model_access_276,credit_control_user_mail_message,mail.message,account_credit_control.group_account_credit_control_user,cru,
+ir_model_access_277,credit_control_info_mail_message,mail.message,account_credit_control.group_account_credit_control_info,r,
+ir_model_access_282,credit_control_user_run,credit.control.run,account_credit_control.group_account_credit_control_user,crud,
+ir_model_access_283,credit_control_info_run,credit.control.run,account_credit_control.group_account_credit_control_info,r,
+credit_control_run_rule,Credit Control Run,credit.control.run,,crud,"[('company_id','in',company_ids + [False])]"
+ir_model_access_284,credit_control_manager_policy,credit.control.policy,account_credit_control.group_account_credit_control_manager,crud,
+ir_model_access_286,credit_control_info_policy,credit.control.policy,account_credit_control.group_account_credit_control_info,r,
+credit_control_policy_rule,Credit Control Policy,credit.control.policy,,crud,"[('company_id','in',company_ids + [False])]"
+ir_model_access_287,credit_control_manager_level,credit.control.policy.level,account_credit_control.group_account_credit_control_manager,crud,
+ir_model_access_289,credit_control_info_level,credit.control.policy.level,account_credit_control.group_account_credit_control_info,r,
+access_communication_info,credit.control.communication info,credit.control.communication,account_credit_control.group_account_credit_control_info,r,
+access_communication_user,credit.control.communication user,credit.control.communication,account_credit_control.group_account_credit_control_user,cru,
+access_communication_manager,credit.control.communication manager,credit.control.communication,account_credit_control.group_account_credit_control_manager,crud,
+credit_control_communication_rule,Credit Control Communication,credit.control.communication,,crud,"[('company_id','in',company_ids)]"
+access_credit_control_emailer_credit_control_user,credit_control_emailer_credit_control_user,credit.control.emailer,account_credit_control.group_account_credit_control_user,cru,
+access_credit_control_marker_credit_control_user,credit_control_marker_credit_control_user,credit.control.marker,account_credit_control.group_account_credit_control_user,cru,
+access_credit_control_printer_credit_control_user,credit_control_printer_credit_control_user,credit.control.printer,account_credit_control.group_account_credit_control_user,cru,
+access_credit_control_policy_changer_credit_control_user,credit_control_policy_changer_credit_control_user,credit.control.policy.changer,account_credit_control.group_account_credit_control_user,cru,
+res_partner_payment_action_type_info_access,res.partner.payment.action.type info access,res.partner.payment.action.type,account_credit_control.group_account_credit_control_info,r,
+res_partner_payment_action_type_manager_access,res.partner.payment.action.type manager access,res.partner.payment.action.type,account_credit_control.group_account_credit_control_manager,crud,
+credit_control_partner_payment_action_type_rule,Credit Control Partner Payment Action Type,res.partner.payment.action.type,,crud,"[('company_id','in',company_ids + [False])]"
+credit_control_analysis_info_access,credit.control.analysis access,credit.control.analysis,account_credit_control.group_account_credit_control_info,r,
+credit_control_analysis_rule,Credit Control Analysis,credit.control.analysis,,crud,"[('company_id','in',company_ids + [False])]"
