@@ -20,6 +20,7 @@ MOD = "account_invoice_overdue_reminder"
 class OverdueReminderStart(models.TransientModel):
     _name = "overdue.reminder.start"
     _description = "Wizard to reminder overdue customer invoice"
+    _check_company_auto = True
 
     partner_ids = fields.Many2many(
         "res.partner",
@@ -27,6 +28,12 @@ class OverdueReminderStart(models.TransientModel):
         domain=[("customer_rank", ">", 0), ("parent_id", "=", False)],
     )
     user_ids = fields.Many2many("res.users", string="Salesman")
+    sale_journal_ids = fields.Many2many(
+        "account.journal",
+        string="Sale Journals",
+        domain="[('type', '=', 'sale'), ('company_id', '=', company_id)]",
+        check_company=True,
+    )
     payment_ids = fields.Many2many("overdue.reminder.start.payment", readonly=True)
     start_days = fields.Integer(
         string="Trigger Delay",
@@ -114,6 +121,8 @@ class OverdueReminderStart(models.TransientModel):
             domain.append(("commercial_partner_id", "in", self.partner_ids.ids))
         if self.user_ids:
             domain.append(("user_id", "in", self.user_ids.ids))
+        if self.sale_journal_ids:
+            domain.append(("journal_id", "in", self.sale_journal_ids.ids))
         return domain
 
     def run(self):
