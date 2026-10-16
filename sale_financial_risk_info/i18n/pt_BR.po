@@ -6,48 +6,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-16 09:19+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: sale_financial_risk_info
 #: model:ir.model,name:sale_financial_risk_info.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contato"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_info
 msgid "Risk Info"
-msgstr ""
+msgstr "Risco do cliente"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_percentage
 msgid "Risk Remaining (Percentage)"
-msgstr ""
+msgstr "Risco disponível (percentual)"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_value
 msgid "Risk Remaining (Value)"
-msgstr ""
+msgstr "Risco disponível (valor)"
 
 #. module: sale_financial_risk_info
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__risk_percent_warning
 #: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_users__risk_percent_warning
 msgid "Risk percent warning"
-msgstr ""
+msgstr "Percentual de alerta de risco"
 
 #. module: sale_financial_risk_info
 #: model:ir.model,name:sale_financial_risk_info.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Pedido de venda"
 
 #. module: sale_financial_risk_info
 #. odoo-python
 #: code:addons/sale_financial_risk_info/models/sale.py:0
 #, python-format
 msgid "Unlimited"
-msgstr ""
+msgstr "Sem limite"
