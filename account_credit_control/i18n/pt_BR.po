@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2026-10-14 04:46+0000\n"
-"Last-Translator: Antônio Neto <netosjb@yahoo.com.br>\n"
+"PO-Revision-Date: 2026-10-16 01:07+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -1509,15 +1509,13 @@ msgstr "Tipos de Ação de Pagamento do Parceiro"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
-#, fuzzy
 msgid "Partner Ref"
-msgstr "Parceiro"
+msgstr "Ref. do parceiro"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
-#, fuzzy
 msgid "Partners"
-msgstr "Parceiro"
+msgstr "Parceiros"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_note
