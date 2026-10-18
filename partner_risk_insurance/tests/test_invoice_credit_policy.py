@@ -79,3 +79,26 @@ class TestInvoiceCreditPolicy(AccountTestInvoicingCommon):
                 self.assertEqual(inv_p_ins.insured_with_credit_policy, False)
                 self.assertEqual(inv_p_ins.credit_policy_company_id.id, False)
                 self.assertEqual(inv_p_ins.credit_policy_state_id.id, False)
+
+    def test_print_invoices_by_risk(self):
+        """The wizard prints the invoices of the dates"""
+        self.env.company.external_report_layout_id = self.env.ref(
+            "web.external_layout_standard"
+        )
+        invoice = self.init_invoice(
+            "out_invoice", partner=self.partner_ins, amounts=[100], post=True
+        )
+        wizard = self.env["partner.risk.insurance.wizard"].create(
+            {"date_from": invoice.date, "date_to": invoice.date}
+        )
+        action = wizard.action_print_report()
+        self.assertEqual(action["context"]["active_ids"], invoice.ids)
+        report = self.env.ref(
+            "partner_risk_insurance.action_report_invoice_risk_insurance_template"
+        )
+        html = report._render_qweb_html(report.report_name, invoice.ids)[0].decode()
+        self.assertIn("Test Insurance Partner", html)
+        self.assertIn(invoice.name, html)
+        wizard.date_from = wizard.date_to = invoice.date.replace(year=2000)
+        with self.assertRaises(exceptions.ValidationError):
+            wizard.action_print_report()

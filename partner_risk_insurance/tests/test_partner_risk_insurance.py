@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import DISABLED_MAIL_CREATE_CONTEXT
 
 
 @tagged("post_install", "-at_install")
@@ -17,7 +17,7 @@ class TestSaleOrderLineInput(TransactionCase):
                 "inv_user",
                 "base.group_partner_manager,account.group_account_invoice",
             ),
-            context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT),
+            context=dict(cls.env.context, **DISABLED_MAIL_CREATE_CONTEXT),
         )
         # set global credit_limit
         cls.env["res.config.settings"].sudo().create(

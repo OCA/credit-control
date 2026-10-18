@@ -67,7 +67,6 @@ class ResPartner(models.Model):
         copy=False,
     )
     credit_policy_company_id = fields.Many2one(
-        string="Credit Policy Company",
         comodel_name="credit.policy.company",
         ondelete="restrict",
         copy=False,

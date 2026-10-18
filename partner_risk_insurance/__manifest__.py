@@ -1,7 +1,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Partner Risk Insurance",
-    "version": "18.0.1.1.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "summary": "Risk insurance partner information",
     "author": "AvanzOSC,"
@@ -16,12 +16,12 @@
     "depends": ["account"],
     "category": "Credit Control",
     "data": [
-        "security/ir.model.access.csv",
         "views/credit_policy_company_view.xml",
         "views/res_partner_view.xml",
         "views/account_move_view.xml",
         "wizard/invoice_risk_insurance_wizard.xml",
         "templates/invoice_risk_insurance_template.xml",
+        "security/ir.access.csv",
     ],
     "installable": True,
     "maintainers": [

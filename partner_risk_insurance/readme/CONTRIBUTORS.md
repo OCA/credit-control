@@ -5,6 +5,7 @@
   - Alexandre Díaz
   - Carlos Roca
   - Stefan Ungureanu
+  - Carlos Dauden
 - [Greenice](https://www.greenice.com):
   - Fernando La Chica \<<fernandolachica@gmail.com>\>
 - Eduardo de Miguel ([Moduon](https://www.moduon.team/))
