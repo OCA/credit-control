@@ -1,4 +1,4 @@
-# Copyright 2017-2018 Tecnativa - Carlos Dauden
+# Copyright 2017-2026 Tecnativa - Carlos Dauden
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -8,6 +8,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestPartnerPaymentReturnRisk(BaseCommon):
+    _test_user_groups = ("account.group_account_manager",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

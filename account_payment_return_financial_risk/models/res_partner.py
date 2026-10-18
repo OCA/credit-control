@@ -1,8 +1,9 @@
-# Copyright 2016-2018 Tecnativa - Carlos Dauden
+# Copyright 2016-2026 Tecnativa - Carlos Dauden
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class ResPartner(models.Model):
@@ -33,19 +34,18 @@ class ResPartner(models.Model):
     @api.model
     def _risk_account_groups(self):
         res = super()._risk_account_groups()
-        res["open"]["domain"] += [
-            ("partial_reconcile_returned_ids", "=", False),
-        ]
-        res["unpaid"]["domain"] += [
-            ("partial_reconcile_returned_ids", "=", False),
-        ]
+        not_returned = Domain("partial_reconcile_returned_ids", "=", False)
+        res["open"]["domain"] &= not_returned
+        res["unpaid"]["domain"] &= not_returned
         res["returned"] = {
             "domain": self._get_risk_company_domain()
-            + [
-                ("reconciled", "=", False),
-                ("account_type", "=", "asset_receivable"),
-                ("partial_reconcile_returned_ids", "!=", False),
-            ],
+            & Domain(
+                [
+                    ("reconciled", "=", False),
+                    ("account_type", "=", "asset_receivable"),
+                    ("partial_reconcile_returned_ids", "!=", False),
+                ]
+            ),
             "fields": ["amount_residual:sum", "amount_residual_currency:sum"],
             "group_by": ["partner_id", "account_id", "currency_id"],
         }
@@ -83,7 +83,6 @@ class ResPartner(models.Model):
     def _get_field_risk_model_domain(self, field_name):
         if field_name == "risk_payment_return":
             domain = self._risk_account_groups()["returned"]["domain"]
-            domain.append(("partner_id", "in", self.ids))
-            return "account.move.line", domain
+            return "account.move.line", domain & Domain("partner_id", "in", self.ids)
         else:
             return super()._get_field_risk_model_domain(field_name)
