@@ -11,13 +11,17 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestPartnerFinancialRisk(BaseCommon):
+    _test_user_groups = (
+        "base.group_user",
+        "base.group_partner_manager",
+        "account.group_account_manager",
+        "account_financial_risk.group_account_financial_risk_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         (cls.env.ref("base.USD") | cls.env.ref("base.EUR")).active = True
-        cls.env.user.group_ids |= cls.env.ref(
-            "account_financial_risk.group_account_financial_risk_manager"
-        )
         main_company = cls.company
         cls.cr.execute(
             "UPDATE res_company SET currency_id = %s WHERE id = %s",
@@ -52,7 +56,7 @@ class TestPartnerFinancialRisk(BaseCommon):
                 "name": "Partner test",
                 "customer_rank": 1,
                 "property_account_receivable_id": cls.account_customer.id,
-                "company_id": cls.account_customer.company_ids[0].id,
+                "company_id": cls.company.id,
             }
         )
         cls.invoice_address = cls.env["res.partner"].create(
@@ -196,11 +200,11 @@ class TestPartnerFinancialRisk(BaseCommon):
         line.date_maturity = fields.Date.today() - relativedelta(days=2)
         self.assertAlmostEqual(self.partner.risk_account_amount, 0.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 100.0)
-        line.company_id.invoice_unpaid_margin = 3
+        line.company_id.sudo().invoice_unpaid_margin = 3
         self.assertAlmostEqual(self.partner.risk_account_amount, 100.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 0.0)
         # Test pop vals write
-        line.company_id.invoice_unpaid_margin = 3
+        line.company_id.sudo().invoice_unpaid_margin = 3
 
     def test_recompute_newid(self):
         """Computing risk shouldn't fail if record is a NewId."""

@@ -1,13 +1,11 @@
 # Copyright 2016-2021 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.fields import Domain
-from odoo.tools.misc import str2bool
 
 
 class ResPartner(models.Model):
@@ -146,10 +144,7 @@ class ResPartner(models.Model):
         default="company",
         tracking=True,
     )
-    manual_credit_currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        string="Manual Credit Currency",
-    )
+    manual_credit_currency_id = fields.Many2one(comodel_name="res.currency")
     risk_currency_id = fields.Many2one(
         comodel_name="res.currency", compute="_compute_credit_currency"
     )
@@ -190,19 +185,18 @@ class ResPartner(models.Model):
 
     @api.depends()
     def _compute_portal_show_financial_risk_visible(self):
-        global_enabled = (
+        self.portal_show_financial_risk_visible = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("account_financial_risk.portal_show_financial_risk")
+            .get_bool("account_financial_risk.portal_show_financial_risk")
         )
-        self.portal_show_financial_risk_visible = str2bool(global_enabled)
 
     @api.depends("credit_limit")
     def _compute_date_credit_limit(self):
         self.filtered(lambda x: x.sudo().credit_limit == 0.00).date_credit_limit = False
         self.filtered(
             lambda x: x.sudo().credit_limit != 0.00
-        ).date_credit_limit = datetime.today()
+        ).date_credit_limit = fields.Date.context_today(self)
 
     @api.depends("credit_limit", "risk_total")
     def _compute_risk_remaining(self):
@@ -395,7 +389,7 @@ class ResPartner(models.Model):
         if not customers:
             return  # pragma: no cover
         groups = self._risk_account_groups()
-        for _key, group in groups.items():
+        for group in groups.values():
             group["read_group"] = self.env["account.move.line"]._read_group(
                 domain=group["domain"] & Domain([("partner_id", "in", customers.ids)]),
                 groupby=group["group_by"],

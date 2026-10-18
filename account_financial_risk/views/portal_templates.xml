@@ -64,9 +64,10 @@
     </template>
     <template id="side_content" inherit_id="portal.side_content">
         <xpath expr="//div[hasclass('o_my_contact')]" position="after">
-            <t t-call="account_financial_risk.financial_risk_info">
-                <t t-set="partner" t-value="user_id.partner_id" />
-            </t>
+            <t
+                t-call="account_financial_risk.financial_risk_info"
+                partner="user_id.partner_id"
+            />
         </xpath>
     </template>
 </odoo>
