@@ -67,8 +67,10 @@ class AccountMove(models.Model):
         if self.env.context.get("bypass_risk", False):
             return ret
         for invoice in self.filtered(
-            lambda x: x.move_type == "out_invoice"
-            and not x.company_id.allow_overrisk_invoice_validation
+            lambda x: (
+                x.move_type == "out_invoice"
+                and not x.company_id.allow_overrisk_invoice_validation
+            )
         ):
             exception_msg = invoice.risk_exception_msg()
             if exception_msg:

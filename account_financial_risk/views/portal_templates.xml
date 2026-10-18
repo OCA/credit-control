@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2025 Tecnativa - Pilar Varga
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -30,8 +30,8 @@
                     class="list-group-item bg-transparent border-0 p-0"
                 >
                     <ul
-                        class="list-group border-top border-bottom"
                         id="consumption_credit_detail"
+                        class="list-group border-top border-bottom"
                     >
                         <t
                             t-foreach="commercial_partner._get_financial_risk_lines()"
@@ -41,9 +41,9 @@
                                 t-if="line[0] and line[1] != 0"
                                 class="list-group-item bg-transparent border-0"
                             >
-                                <em class="me-1" t-esc="line[2]" />
+                                <em class="me-1" t-out="line[2]" />
                                 <span
-                                    t-esc="line[1]"
+                                    t-out="line[1]"
                                     t-options='{"widget": "monetary", "display_currency": commercial_partner.risk_currency_id}'
                                 />
                             </li>
