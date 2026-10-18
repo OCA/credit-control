@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2016-2018 Tecnativa - Sergio Teruel
      Copyright 2024 Moduon Team S.L. <info@moduon.team>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!--Add risk insurance tab in partner form. -->
-    <record model="ir.ui.view" id="view_partner_form">
+    <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form.risk_insurance</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />

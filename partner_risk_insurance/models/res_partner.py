@@ -51,9 +51,7 @@ class ResPartner(models.Model):
     )
     risk_insurance_code_2 = fields.Char(
         "Insurance Code 2",
-        help="Secondary code assigned to this "
-        "partner by the risk insurance "
-        "company.",
+        help="Secondary code assigned to this partner by the risk insurance company.",
         copy=False,
     )
     credit_policy_state_id = fields.Many2one(
@@ -85,8 +83,9 @@ class ResPartner(models.Model):
     @api.onchange("insurance_credit_limit")
     def _onchange_insurance_credit_limit_update_total_limit(self):
         """Set the total limit to the insurance limit if it is greater."""
-        if self.insurance_credit_limit > self.sudo().credit_limit:
-            self.sudo().credit_limit = self.insurance_credit_limit
+        self.sudo().credit_limit = max(
+            self.sudo().credit_limit, self.insurance_credit_limit
+        )
 
     @api.onchange("use_partner_credit_limit")
     def _onchange_use_partner_credit_limit(self):
