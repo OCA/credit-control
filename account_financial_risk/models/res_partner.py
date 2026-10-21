@@ -524,7 +524,7 @@ class ResPartner(models.Model):
     @api.model
     def _search_risk_remaining_percentage(self, operator, value):
         # Make risk_remaining_percentage searchable.
-        partners = self.search(Domain(("credit_limit", ">", 0)))
+        partners = self.search(Domain("credit_limit", ">", 0))
         partner_ids = partners.filtered_domain(
             [("risk_remaining_percentage", operator, value)]
         ).ids
