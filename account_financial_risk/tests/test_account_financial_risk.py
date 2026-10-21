@@ -232,6 +232,20 @@ class TestPartnerFinancialRisk(BaseCommon):
             validate_wiz.validate_move()
         self.assertEqual(invoice2.state, "draft")
 
+    def test_batch_confirm_entries_direct_post(self):
+        """Confirm Entries posts invoices dated today without the wizard:
+        the risk must be checked on that path too."""
+        self.partner.risk_invoice_draft_include = True
+        self.partner.credit_limit = 100.0
+        self.invoice.invoice_date = fields.Date.context_today(self.invoice)
+        with self.assertRaises(UserError):
+            self.invoice.action_validate_moves_with_confirmation()
+        self.assertEqual(self.invoice.state, "draft")
+        # Under the limit, the same action posts the invoice
+        self.partner.credit_limit = 10000.0
+        self.invoice.action_validate_moves_with_confirmation()
+        self.assertEqual(self.invoice.state, "posted")
+
     def test_open_risk_pivot_info(self):
         action = self.partner.with_context(
             open_risk_field="risk_invoice_draft"
