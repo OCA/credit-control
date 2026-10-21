@@ -6,7 +6,7 @@ from odoo.fields import Command
 from odoo.tests import tagged
 
 from odoo.addons.account_payment.tests.common import AccountPaymentCommon
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import DISABLED_MAIL_CREATE_CONTEXT
 from odoo.addons.payment.tests.http_common import PaymentHttpCommon
 
 _logger = logging.getLogger(__name__)
@@ -19,12 +19,12 @@ class TestRiskSalePayment(AccountPaymentCommon, PaymentHttpCommon):
         super().setUpClass()
         cls.Account = cls.env["account.account"]
         cls.Pricelist = cls.env["product.pricelist"]
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CREATE_CONTEXT))
         payment_method_record = cls.env["payment.method"].browse(cls.payment_method_id)
         payment_method_record.active = True  # Ahora esto funciona
         cls.provider.write(
             {
-                "state": "test",
+                "is_live": False,
                 "is_published": True,
                 "available_currency_ids": [Command.set([cls.currency.id])],
                 "available_country_ids": [Command.clear()],
@@ -121,6 +121,7 @@ class TestRiskSalePayment(AccountPaymentCommon, PaymentHttpCommon):
             reference="Test Transaction Draft 1",
         )
         self.assertEqual(self.order.state, "draft")
+        tx_pending = tx_pending.with_context(payment_safe_write=True)
         tx_pending._set_done()
         tx_pending._post_process()
         self.assertEqual(self.order.state, "sale")
