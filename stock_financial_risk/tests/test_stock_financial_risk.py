@@ -57,7 +57,7 @@ class TestStockFinancialRisk(TransactionCase):
             {
                 "picking_id": cls.picking.id,
                 "product_uom_qty": 10,
-                "product_uom": cls.product.uom_id.id,
+                "uom_id": cls.product.uom_id.id,
                 "location_id": cls.location.id,
                 "location_dest_id": cls.location_customers.id,
                 "product_id": cls.product.id,
