@@ -387,8 +387,10 @@ class ResPartner(models.Model):
             }
         )
         customers = self.filtered(
-            lambda p: p == p.commercial_partner_id
-            or (p._origin and p._origin.id in p.commercial_partner_id.ids)
+            lambda p: (
+                p == p.commercial_partner_id
+                or (p._origin and p._origin.id in p.commercial_partner_id.ids)
+            )
         )
         if not customers:
             return  # pragma: no cover
@@ -414,7 +416,7 @@ class ResPartner(models.Model):
         for (
             partner,
             _account,
-            currency,  # noqa: B007
+            currency,
             amount_residual,
             amount_residual_currency,  # noqa: B007
         ) in groups["draft"]["read_group"]:
