@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
     @api.depends("partner_invoice_id")
     def _compute_risk_info(self):
         ICP = self.env["ir.config_parameter"].sudo()
-        info_pattern = ICP.get_param(
+        info_pattern = ICP.get_str(
             "sale_financial_risk_info.info_pattern",
             default="<h5{text_class}>{risk_total} / {credit_limit} ("
             "{risk_percent}%)</h5>",
