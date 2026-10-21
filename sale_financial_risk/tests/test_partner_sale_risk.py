@@ -4,7 +4,7 @@
 from odoo import Command, fields
 from odoo.tests import TransactionCase, new_test_user
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import DISABLED_MAIL_CREATE_CONTEXT
 
 
 class TestPartnerSaleRisk(TransactionCase):
@@ -12,7 +12,7 @@ class TestPartnerSaleRisk(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.Account = cls.env["account.account"]
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CREATE_CONTEXT))
         cls.env.user.group_ids |= cls.env.ref(
             "account_financial_risk.group_account_financial_risk_manager"
         )

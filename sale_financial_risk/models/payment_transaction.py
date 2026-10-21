@@ -9,12 +9,14 @@ class PaymentTransaction(models.Model):
 
     def _set_authorized(self, **kwargs):
         """Bypass risk for sale confirmation triggered by this method"""
-        self = self.with_context(bypass_risk=True)
-        return super()._set_authorized(**kwargs)
+        return super(
+            PaymentTransaction, self.with_context(bypass_risk=True)
+        )._set_authorized(**kwargs)
 
     def _post_process(self):
         """Bypass risk for sale confirmation and invoice creation triggered
         by this method
         """
-        self = self.with_context(bypass_risk=True)
-        return super()._post_process()
+        return super(
+            PaymentTransaction, self.with_context(bypass_risk=True)
+        )._post_process()
