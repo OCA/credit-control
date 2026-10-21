@@ -11,6 +11,14 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestPartnerFinancialRisk(BaseCommon):
+    _test_user_groups = (
+        "base.group_user",
+        "base.group_partner_manager",
+        "base.group_erp_manager",
+        "account.group_account_manager",
+        "account_financial_risk.group_account_financial_risk_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
