@@ -88,7 +88,7 @@ class CreditControlCommunication(models.Model):
             )
             if one.contact_address_id in partners:
                 # Contact is already child of partner
-                return
+                continue
             address_ids = one.partner_id.address_get(adr_pref=["invoice"])
             one.contact_address_id = address_ids["invoice"]
 
