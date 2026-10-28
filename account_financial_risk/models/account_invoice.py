@@ -90,6 +90,13 @@ class AccountMove(models.Model):
             )
         return super()._post(soft)
 
+    def action_validate_moves_with_confirmation(self):
+        """Confirm Entries posts the moves that need no confirmation directly,
+        without the validate.account.move wizard: check the risk there too."""
+        return super(
+            AccountMove, self.with_context(from_validate_move_wiz=True)
+        ).action_validate_moves_with_confirmation()
+
     def action_post(self):
         invoice, exception_msg = self._first_invoice_exception_msg()
         if exception_msg and not self.env.context.get("from_validate_move_wiz", False):

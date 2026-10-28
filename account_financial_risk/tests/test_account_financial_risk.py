@@ -228,6 +228,30 @@ class TestPartnerFinancialRisk(BaseCommon):
             validate_wiz.validate_move()
         self.assertEqual(invoice2.state, "draft")
 
+    def test_confirm_entries_direct_post(self):
+        """Confirm Entries posts invoices dated today without the wizard."""
+        self.partner.risk_invoice_draft_include = True
+        self.partner.credit_limit = 100.0
+        self.invoice.invoice_date = fields.Date.context_today(self.invoice)
+        with self.assertRaises(UserError):
+            self.invoice.action_validate_moves_with_confirmation()
+        self.assertEqual(self.invoice.state, "draft")
+        self.partner.credit_limit = 10000.0
+        self.invoice.action_validate_moves_with_confirmation()
+        self.assertEqual(self.invoice.state, "posted")
+
+    def test_search_risk_remaining_percentage(self):
+        self.partner.risk_invoice_draft_include = True
+        self.partner.credit_limit = 1000.0
+        self.assertAlmostEqual(self.partner.risk_remaining_percentage, 45.0)
+        Partner = self.env["res.partner"]
+        self.assertIn(
+            self.partner, Partner.search([("risk_remaining_percentage", "<", 50)])
+        )
+        self.assertNotIn(
+            self.partner, Partner.search([("risk_remaining_percentage", ">", 50)])
+        )
+
     def test_open_risk_pivot_info(self):
         action = self.partner.with_context(
             open_risk_field="risk_invoice_draft"
