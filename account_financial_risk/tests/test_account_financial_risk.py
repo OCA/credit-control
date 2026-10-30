@@ -3,9 +3,11 @@
 
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
+from lxml import etree
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
+from odoo.tests import Form
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -266,6 +268,42 @@ class TestPartnerFinancialRisk(BaseCommon):
         self.assertEqual(action["res_model"], "account.move.line")
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
+
+    def test_core_credit_limit_disabled(self):
+        company = self.env.company
+        company.account_use_credit_limit = False
+        with Form(self.env["res.config.settings"]) as settings_form:
+            settings_form.account_default_credit_limit = 500.0
+        settings_form.save().execute()
+        self.assertEqual(
+            self.env["ir.default"]._get(
+                "res.partner", "credit_limit", company_id=company.id
+            ),
+            500.0,
+        )
+        partner = self.env["res.partner"].create({"name": "Partner default limit"})
+        self.assertEqual(partner.credit_limit, 500.0)
+        # Credit limit data of other modules does not depend on the warnings
+        self.assertTrue(partner.show_credit_limit)
+        # The partner form neither shows nor computes the core receivable
+        arch = etree.fromstring(
+            self.env["res.partner"].get_view(view_type="form")["arch"]
+        )
+        self.assertTrue(
+            arch.xpath("//page[@name='financial_risk']//field[@name='credit_limit']")
+        )
+        self.assertFalse(arch.xpath("//field[@name='credit']"))
+        self.assertFalse(arch.xpath("//field[@name='days_sales_outstanding']"))
+        # The core option tells that the financial risk covers it
+        settings_arch = etree.fromstring(
+            self.env["res.config.settings"].get_view(view_type="form")["arch"]
+        )
+        self.assertTrue(
+            settings_arch.xpath(
+                "//setting[field[@name='account_use_credit_limit']]"
+                "/div[@id='financial_risk_core_credit_limit_note']"
+            )
+        )
 
     def test_invoice_risk_draft_same_currency(self):
         self.partner.risk_invoice_draft_include = True

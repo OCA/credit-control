@@ -181,6 +181,9 @@ class ResPartner(models.Model):
         help="Helper field to control visibility of the partner option based on global "
         "config.",
     )
+    # The financial risk always uses the credit limit, so modules that show
+    # credit limit data do not depend on the core credit limit warnings
+    show_credit_limit = fields.Boolean(default=True)
 
     @api.model
     def _commercial_fields(self):
@@ -242,6 +245,9 @@ class ResPartner(models.Model):
                 )
             else:
                 partner.risk_currency_id = partner.currency_id
+
+    def _compute_show_credit_limit(self):
+        self.show_credit_limit = True
 
     @api.model
     def _setup_complete(self):
