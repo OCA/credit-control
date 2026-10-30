@@ -260,6 +260,28 @@ class TestPartnerSaleRisk(BaseCommon):
         self.assertNotEqual(result, True)
         self.assertEqual(result["res_model"], "partner.risk.exceeded.wiz")
 
+    def test_manual_currency_risk_sale_order(self):
+        """The partner risk converts the sales orders risk once."""
+        risk_currency = self.USD if self.main_currency == self.EUR else self.EUR
+        risk_currency.rate_ids.unlink()
+        self.env["res.currency.rate"].create(
+            {
+                "currency_id": risk_currency.id,
+                "name": fields.Date.today(),
+                "rate": 2.0,
+                "company_id": self.env.company.id,
+            }
+        )
+        self.partner.write(
+            {"credit_currency": "manual", "manual_credit_currency_id": risk_currency.id}
+        )
+        self.sale_order.action_confirm()
+        line = self.sale_order.order_line
+        self.assertEqual(line.company_currency_id, self.main_currency)
+        self.assertAlmostEqual(line.risk_amount, 115.0)
+        self.assertEqual(self.partner.risk_currency_id, risk_currency)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+
     def test_sale_order_multi_company(self):
         """The order is checked against the risk and limit of its company,
         whatever company is active."""
