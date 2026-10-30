@@ -76,6 +76,7 @@ class ResPartner(models.Model):
     )
 
     @api.depends("credit_limit", "insurance_credit_limit")
+    @api.depends_context("company")
     def _compute_company_credit_limit(self):
         for partner in self:
             partner.company_credit_limit = max(

@@ -292,3 +292,105 @@ class TestPartnerFinancialRisk(BaseCommon):
             self.partner.risk_amount_exceeded,
             self.partner.risk_total - self.partner.credit_limit,
         )
+
+    def _create_company_b_invoice(self):
+        company_b = self.env["res.company"].create(
+            {
+                "name": "Company B financial risk",
+                "currency_id": self.env.ref("base.USD").id,
+            }
+        )
+        self.env.user.company_ids |= company_b
+        # A customer shared by both companies
+        self.partner.company_id = False
+        account_customer_b, account_sale_b = self.env["account.account"].create(
+            [
+                {
+                    "name": "Customer B",
+                    "code": "XX430B",
+                    "account_type": "asset_receivable",
+                    "reconcile": True,
+                    "company_ids": [Command.set(company_b.ids)],
+                },
+                {
+                    "name": "Sale B",
+                    "code": "XX700B",
+                    "account_type": "income_other",
+                    "company_ids": [Command.set(company_b.ids)],
+                },
+            ]
+        )
+        self.partner.with_company(
+            company_b
+        ).property_account_receivable_id = account_customer_b
+        journal_sale_b = self.env["account.journal"].create(
+            {
+                "name": "Test journal for sale B",
+                "type": "sale",
+                "code": "TSALB",
+                "company_id": company_b.id,
+            }
+        )
+        invoice_b = (
+            self.env["account.move"]
+            .with_company(company_b)
+            .with_context(default_move_type="out_invoice")
+            .create(
+                {
+                    "partner_id": self.partner.id,
+                    "journal_id": journal_sale_b.id,
+                    "invoice_payment_term_id": False,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "Test product",
+                                "account_id": account_sale_b.id,
+                                "price_unit": 500,
+                                "quantity": 1,
+                                "tax_ids": [],
+                            },
+                        )
+                    ],
+                }
+            )
+        )
+        return company_b, invoice_b
+
+    def test_multi_company(self):
+        """Risk and limit are those of one company: the active one on the partner
+        form, the document one when posting a document."""
+        company_b, invoice_b = self._create_company_b_invoice()
+        self.partner.write(
+            {
+                "risk_invoice_open_include": True,
+                "risk_account_amount_include": True,
+                "credit_limit": 1000.0,
+            }
+        )
+        self.partner.with_company(company_b).credit_limit = 100.0
+        invoice_b.with_context(bypass_risk=True).action_post()
+        # Main company active with both companies selected
+        partner = self.partner.with_context(
+            allowed_company_ids=[self.env.company.id, company_b.id]
+        )
+        self.assertAlmostEqual(partner.risk_invoice_open, 0.0)
+        self.assertAlmostEqual(partner.risk_account_amount, 0.0)
+        self.assertAlmostEqual(partner.risk_total, 0.0)
+        self.assertFalse(partner.risk_exception)
+        # Company B active, read in the same transaction
+        partner_b = partner.with_company(company_b)
+        self.assertAlmostEqual(partner_b.risk_invoice_open, 500.0)
+        self.assertAlmostEqual(partner_b.risk_total, 500.0)
+        self.assertTrue(partner_b.risk_exception)
+        # A company B invoice is checked against company B risk and limit
+        invoice_b2 = invoice_b.copy()
+        wiz_dic = invoice_b2.with_context(
+            allowed_company_ids=[self.env.company.id, company_b.id]
+        ).action_post()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
+        # A main company invoice is not, even with company B active
+        self.invoice.with_context(
+            allowed_company_ids=[company_b.id, self.env.company.id]
+        ).action_post()
+        self.assertEqual(self.invoice.state, "posted")

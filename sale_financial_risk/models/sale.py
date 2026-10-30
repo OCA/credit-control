@@ -10,6 +10,8 @@ class SaleOrder(models.Model):
 
     def evaluate_risk_message(self, partner):
         self.ensure_one()
+        # Credit limit and risk amounts of the order company
+        partner = partner.with_company(self.company_id)
         risk_amount = self.currency_id._convert(
             self.amount_total,
             partner.risk_currency_id,
@@ -126,9 +128,10 @@ class SaleOrderLine(models.Model):
                 risk_amount = line.price_total * (risk_qty / line.product_uom_qty)
             else:
                 risk_amount = line.price_reduce_taxinc * risk_qty
+            # In company currency, the partner risk converts the sum
             line.risk_amount = line.order_id.currency_id._convert(
                 risk_amount,
-                line.order_id.partner_id.risk_currency_id,
+                line.company_currency_id,
                 line.company_id,
                 line.order_id.date_order
                 and line.order_id.date_order.date()

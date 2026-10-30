@@ -41,19 +41,21 @@ class AccountMove(models.Model):
 
     def risk_exception_msg(self):
         self.ensure_one()
-        partner = self.partner_id.commercial_partner_id
+        # Credit limit and risk amounts of the invoice company
+        invoice = self.with_company(self.company_id)
+        partner = invoice.partner_id.commercial_partner_id
         exception_msg = ""
         if partner.risk_exception:
             exception_msg = self.env._("Financial risk exceeded.\n")
         elif partner.risk_invoice_open_limit and (
-            (partner.risk_invoice_open + self.risk_amount_total_currency)
+            (partner.risk_invoice_open + invoice.risk_amount_total_currency)
             > partner.risk_invoice_open_limit
         ):
             exception_msg = self.env._("This invoice exceeds the open invoices risk.\n")
         # If risk_invoice_draft_include this invoice included in risk_total
         elif not partner.risk_invoice_draft_include and (
             partner.risk_invoice_open_include
-            and (partner.risk_total + self.risk_amount_total_currency)
+            and (partner.risk_total + invoice.risk_amount_total_currency)
             > partner.sudo().credit_limit
         ):
             exception_msg = self.env._("This invoice exceeds the financial risk.\n")

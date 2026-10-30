@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
         related="partner_id.risk_remaining_percentage"
     )
 
-    @api.depends("partner_invoice_id")
+    @api.depends("partner_invoice_id", "company_id")
     def _compute_risk_info(self):
         ICP = self.env["ir.config_parameter"].sudo()
         info_pattern = ICP.get_param(
@@ -23,7 +23,10 @@ class SaleOrder(models.Model):
             "{risk_percent}%)</h5>",
         )
         for sale in self:
-            partner = sale.partner_invoice_id.commercial_partner_id
+            # Credit limit and risk amounts of the order company
+            partner = sale.partner_invoice_id.commercial_partner_id.with_company(
+                sale.company_id
+            )
             credit_limit = partner.sudo().credit_limit
             if not credit_limit:
                 sale.risk_info = _("Unlimited")
