@@ -292,3 +292,21 @@ class TestPartnerFinancialRisk(BaseCommon):
             self.partner.risk_amount_exceeded,
             self.partner.risk_total - self.partner.credit_limit,
         )
+
+    def test_invoice_risk_foreign_currency_amount(self):
+        """The residual of the lines is in company currency (USD): converting
+        it as if it were in the invoice currency (EUR) gives a wrong risk."""
+        eur = self.env.ref("base.EUR")
+        (self.env.ref("base.USD") | eur).rate_ids.unlink()
+        self.env["res.currency.rate"].create(
+            {"currency_id": eur.id, "name": "2024-01-01", "rate": 2.0}
+        )
+        self.invoice.currency_id = eur
+        self.assertEqual(self.partner.risk_currency_id, self.env.ref("base.USD"))
+        # 550 EUR at 2 EUR per USD
+        self.assertAlmostEqual(self.partner.risk_invoice_draft, 275.0)
+        self.invoice._post()
+        self.assertAlmostEqual(self.partner.risk_invoice_open, 275.0)
+        self.assertAlmostEqual(
+            self.partner.risk_invoice_open, self.invoice.risk_amount_total_currency
+        )
