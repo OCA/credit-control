@@ -414,7 +414,8 @@ class ResPartner(models.Model):
         ) in groups["draft"]["read_group"]:
             if partner.id not in self.ids:
                 continue  # pragma: no cover
-            vals["risk_invoice_draft"] += currency._convert(
+            # amount_residual is in company currency
+            vals["risk_invoice_draft"] += self.env.company.currency_id._convert(
                 amount_residual,
                 self.risk_currency_id,
                 self.env.company,
@@ -460,13 +461,14 @@ class ResPartner(models.Model):
     def _get_amount_in_risk_currency(
         self, currency, amount_residual_currency, amount_residual, account
     ):
-        acc_currency_id = currency.id
+        # amount_residual is in company currency
+        company_currency = self.env.company.currency_id
         risk_currency_id = self.risk_currency_id.id
         if currency.id == risk_currency_id:
             return amount_residual_currency
-        elif acc_currency_id == risk_currency_id:
+        elif company_currency.id == risk_currency_id:
             return amount_residual
-        return currency._convert(
+        return company_currency._convert(
             amount_residual,
             self.risk_currency_id,
             self.env.company,
