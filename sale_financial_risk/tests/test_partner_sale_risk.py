@@ -259,3 +259,58 @@ class TestPartnerSaleRisk(BaseCommon):
         # Limit exceeded
         self.assertNotEqual(result, True)
         self.assertEqual(result["res_model"], "partner.risk.exceeded.wiz")
+
+    def test_manual_currency_risk_sale_order(self):
+        """The partner risk converts the sales orders risk once."""
+        risk_currency = self.USD if self.main_currency == self.EUR else self.EUR
+        risk_currency.rate_ids.unlink()
+        self.env["res.currency.rate"].create(
+            {
+                "currency_id": risk_currency.id,
+                "name": fields.Date.today(),
+                "rate": 2.0,
+                "company_id": self.env.company.id,
+            }
+        )
+        self.partner.write(
+            {"credit_currency": "manual", "manual_credit_currency_id": risk_currency.id}
+        )
+        self.sale_order.action_confirm()
+        line = self.sale_order.order_line
+        self.assertEqual(line.company_currency_id, self.main_currency)
+        self.assertAlmostEqual(line.risk_amount, 115.0)
+        self.assertEqual(self.partner.risk_currency_id, risk_currency)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+
+    def test_sale_order_multi_company(self):
+        """The order is checked against the risk and limit of its company,
+        whatever company is active."""
+        main_company = self.env.company
+        company_b = self.env["res.company"].create(
+            {"name": "Company B financial risk", "currency_id": self.main_currency.id}
+        )
+        self.env.user.company_ids |= company_b
+        self.product_pricelist.company_id = False
+        self.partner.write({"risk_sale_order_include": True, "credit_limit": 1000.0})
+        self.partner.with_company(company_b).credit_limit = 100.0
+        self.sale_order.action_confirm()
+        partner = self.partner.with_context(
+            allowed_company_ids=[main_company.id, company_b.id]
+        )
+        self.assertAlmostEqual(partner.risk_sale_order, 115.0)
+        self.assertAlmostEqual(partner.with_company(company_b).risk_sale_order, 0.0)
+        # Company B order with the main company active
+        order_b = self.create_sale_order(self.main_currency, company_b)
+        wiz_dic = order_b.with_context(
+            allowed_company_ids=[main_company.id, company_b.id]
+        ).action_confirm()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(
+            wiz.exception_msg, "This sale order exceeds the financial risk.\n"
+        )
+        # Main company order with company B active
+        order_main = self.sale_order.copy()
+        order_main.with_context(
+            allowed_company_ids=[company_b.id, main_company.id]
+        ).action_confirm()
+        self.assertEqual(order_main.state, "sale")

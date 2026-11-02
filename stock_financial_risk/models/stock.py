@@ -12,7 +12,9 @@ class StockMove(models.Model):
             moves = self.filtered(
                 lambda x: (
                     x.location_dest_id.usage == "customer"
-                    and x.partner_id.commercial_partner_id.risk_exception
+                    and x.partner_id.commercial_partner_id.with_company(
+                        x.company_id
+                    ).risk_exception
                 )
             )
             if moves:
@@ -27,6 +29,12 @@ class StockMove(models.Model):
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
+
+    def _is_risk_exception(self):
+        """Risk exception of the partner for the picking company"""
+        self.ensure_one()
+        partner = self.partner_id.commercial_partner_id
+        return partner.with_company(self.company_id).risk_exception
 
     def show_risk_wizard(self, continue_method):
         return (
@@ -47,14 +55,14 @@ class StockPicking(models.Model):
             for pick in self:
                 if (
                     pick.location_dest_id.usage == "customer"
-                    and pick.partner_id.commercial_partner_id.risk_exception
+                    and pick._is_risk_exception()
                 ):
                     return pick.show_risk_wizard("action_confirm")
         return super().action_confirm()
 
     def action_assign(self):
         if not self.env.context.get("bypass_risk") and self.filtered(
-            "partner_id.commercial_partner_id.risk_exception"
+            lambda pick: pick._is_risk_exception()
         ):
             return self.show_risk_wizard("action_assign")
         return super().action_assign()
@@ -64,7 +72,7 @@ class StockPicking(models.Model):
             for pick in self:
                 if (
                     pick.location_dest_id.usage == "customer"
-                    and pick.partner_id.commercial_partner_id.risk_exception
+                    and pick._is_risk_exception()
                 ):
                     return self.show_risk_wizard("button_validate")
         return super().button_validate()

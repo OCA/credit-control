@@ -205,6 +205,7 @@ class ResPartner(models.Model):
         ).date_credit_limit = datetime.today()
 
     @api.depends("credit_limit", "risk_total")
+    @api.depends_context("company")
     def _compute_risk_remaining(self):
         for record in self:
             credit_limit = record.sudo().credit_limit
@@ -224,6 +225,7 @@ class ResPartner(models.Model):
         "country_id",
         "company_id.currency_id",
     )
+    @api.depends_context("company")
     def _compute_credit_currency(self):
         for partner in self:
             if partner.credit_currency == "manual":
@@ -287,7 +289,9 @@ class ResPartner(models.Model):
 
     @api.model
     def _get_risk_company_domain(self):
-        return [("company_id", "in", self.env.companies.ids)]
+        # Same company as the company dependent credit_limit: the document
+        # company when evaluating a document, the active one otherwise
+        return [("company_id", "=", self.env.company.id)]
 
     def _get_field_risk_model_domain(self, field_name):
         """Returns a tuple with model name and domain"""
@@ -370,6 +374,7 @@ class ResPartner(models.Model):
         "move_line_ids.date_maturity",
         "company_id.invoice_unpaid_margin",
     )
+    @api.depends_context("company")
     def _compute_risk_account_amount(self):
         self.update(
             {
@@ -475,6 +480,7 @@ class ResPartner(models.Model):
         )
 
     @api.depends(lambda x: x._get_depends_compute_risk_exception())
+    @api.depends_context("company")
     def _compute_risk_exception(self):
         risk_field_list = self._risk_field_list()
         for partner in self:

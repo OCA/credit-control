@@ -34,6 +34,7 @@ class ResPartner(models.Model):
         "sale_order_ids.order_line.risk_amount",
         "child_ids.sale_order_ids.order_line.risk_amount",
     )
+    @api.depends_context("company")
     def _compute_risk_sale_order(self):
         self.update({"risk_sale_order": 0.0})
         orders_group = self.env["sale.order.line"]._read_group(
