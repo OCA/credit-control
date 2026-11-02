@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===================
 Sale Financial Risk
 ===================
@@ -17,7 +13,7 @@ Sale Financial Risk
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fcredit--control-lightgray.png?logo=github
@@ -45,6 +41,15 @@ orders.
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+The sales orders risk is not the amount shown by the Odoo core credit
+limit banner on draft sales orders, which only counts the delivered and
+not invoiced quantities. To avoid showing two different amounts, disable
+*Sales Credit Limit* in the accounting settings of each company, as
+explained in *account_financial_risk*.
 
 Usage
 =====

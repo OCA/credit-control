@@ -251,4 +251,26 @@
             </page>
         </field>
     </record>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">res.partner.property.form.risk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <!-- The financial risk tab shows the credit limit. The total
+                 receivable and DSO are removed, not only hidden, so the form
+                 does not compute them. -->
+            <group name="credit_limits" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <xpath
+                expr="//group[@name='credit_limits']/field[@name='credit']"
+                position="replace"
+            />
+            <xpath
+                expr="//group[@name='credit_limits']/field[@name='days_sales_outstanding']"
+                position="replace"
+            />
+        </field>
+    </record>
 </odoo>
