@@ -171,6 +171,11 @@ msgid "Credit information"
 msgstr ""
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid "Credit limit of the partners without a specific one."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
@@ -589,6 +594,12 @@ msgid "Set 0 if it is not locked"
 msgstr "Establezca 0 si no está bloqueado"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
@@ -605,6 +616,15 @@ msgstr "Límites Específicos"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
 msgstr "Suma del riesgo total incluido"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"The Financial Risk tab already controls the partners credit\n"
+"                    limit, with its own amounts. Disable this option to show "
+"only\n"
+"                    the financial risk amounts."
+msgstr ""
 
 #. module: account_financial_risk
 #. odoo-python

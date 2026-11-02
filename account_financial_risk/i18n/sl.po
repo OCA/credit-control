@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2017-01-07 04:30+0000\n"
 "PO-Revision-Date: 2026-06-26 06:59+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-partner-contact-9-"
-"0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-partner-"
+"contact-9-0/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,9 +82,9 @@ msgid ""
 "confirming these."
 msgstr ""
 "Vedno dovoli potrditev osnutkov računov.                                 "
-"Uporabno, ko tok izhaja iz prodajnih nalogov in je bila"
-"                                     prekoračitev tveganja"
-"                                 že dovoljena ob njihovi potrditvi."
+"Uporabno, ko tok izhaja iz prodajnih nalogov in je "
+"bila                                     prekoračitev "
+"tveganja                                 že dovoljena ob njihovi potrditvi."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_company__allow_overrisk_invoice_validation
@@ -176,6 +176,11 @@ msgstr "Kreditni pravilnik"
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.financial_risk_info
 msgid "Credit information"
 msgstr "Kreditne informacije"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid "Credit limit of the partners without a specific one."
+msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
@@ -593,6 +598,12 @@ msgid "Set 0 if it is not locked"
 msgstr "Nastavi 0 če ni zaklenjeno"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
@@ -609,6 +620,15 @@ msgstr "Določene omejitve"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
 msgstr "Vključno vsota skupnega tveganja"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"The Financial Risk tab already controls the partners credit\n"
+"                    limit, with its own amounts. Disable this option to show "
+"only\n"
+"                    the financial risk amounts."
+msgstr ""
 
 #. module: account_financial_risk
 #. odoo-python
