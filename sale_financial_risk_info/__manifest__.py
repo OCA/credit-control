@@ -8,6 +8,7 @@
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
+    "maintainers": ["carlosdauden"],
     "website": "https://github.com/OCA/credit-control",
     "depends": ["sale", "account_financial_risk"],
     "data": ["views/res_partner_view.xml", "views/sale_order_view.xml"],
