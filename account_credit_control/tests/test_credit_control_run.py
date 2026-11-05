@@ -6,11 +6,10 @@ import re
 from datetime import datetime
 
 from dateutil import relativedelta
-from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
-from odoo.tests import Form, RecordCapturer, tagged
+from odoo.tests import Form, RecordCapturer, freeze_time, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
