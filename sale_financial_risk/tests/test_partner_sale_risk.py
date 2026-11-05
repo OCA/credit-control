@@ -132,41 +132,37 @@ class TestPartnerSaleRisk(TransactionCase):
         res = sale_order2.with_user(sale_user).action_cancel()
         self.assertEqual(sale_order2.state, "cancel")
 
-    def test_sale_order_auto_done(self):
-        self.env["ir.config_parameter"].create(
-            {"key": "sale.auto_done_setting", "value": "True"}
-        )
-        self.env["ir.config_parameter"].create(
-            {
-                "key": "sale_financial_risk.include_risk_sale_order_done",
-                "value": "True",
-            }
+    def test_sale_order_locked(self):
+        """Locked orders, the done state up to 16.0, only count in the risk
+        when the setting includes them."""
+        self.env.ref("base.group_user").sudo()._apply_group(
+            self.env.ref("sale.group_auto_done_setting")
         )
         self.sale_order.action_confirm()
-        self.partner.risk_sale_order_include = True
+        self.assertTrue(self.sale_order.locked)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        action = self.partner.with_context(
+            open_risk_field="risk_sale_order"
+        ).open_risk_pivot_info()
+        self.assertFalse(self.env["sale.order.line"].search(action["domain"]))
+        # Including locked orders recomputes their lines
+        self.env["res.config.settings"].create(
+            {"include_risk_sale_order_done": True}
+        ).set_values()
         self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
-        self.assertFalse(self.partner.risk_exception)
-        self.partner.risk_sale_order_limit = 99.0
-        self.assertTrue(self.partner.risk_exception)
-        sale_order2 = self.sale_order.copy()
-        wiz_dic = sale_order2.action_confirm()
-        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.partner.risk_sale_order_limit = 150.0
-        wiz_dic = sale_order2.action_confirm()
+        wiz_dic = self.sale_order.copy().action_confirm()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This sale order exceeds the sales orders risk.\n"
         )
-        self.partner.risk_sale_order_limit = 0.0
-        self.partner.risk_sale_order_include = True
-        self.partner.credit_limit = 100.0
-        wiz_dic = sale_order2.action_confirm()
-        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
-        self.assertTrue(self.partner.risk_allow_edit)
-        wiz.button_continue()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+        # Back to the default, unlocking the order adds its risk
+        self.env["res.config.settings"].create(
+            {"include_risk_sale_order_done": False}
+        ).set_values()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        self.sale_order.action_unlock()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
 
     def test_compute_risk_amount(self):
         self.sale_order.action_confirm()

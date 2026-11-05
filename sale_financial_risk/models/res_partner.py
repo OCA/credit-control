@@ -25,13 +25,13 @@ class ResPartner(models.Model):
     )
 
     def _get_risk_sale_order_domain(self):
-        risk_states = self.env["sale.order"]._get_risk_states()
-        return Domain.AND(
+        SaleOrder = self.env["sale.order"]
+        domain = Domain.AND(
             [
                 self._get_risk_company_domain(),
                 Domain(
                     [
-                        ("state", "in", risk_states),
+                        ("state", "in", SaleOrder._get_risk_states()),
                         (
                             "risk_partner_id",
                             "in",
@@ -41,6 +41,9 @@ class ResPartner(models.Model):
                 ),
             ]
         )
+        if not SaleOrder._get_risk_include_locked():
+            domain &= Domain("order_id.locked", "=", False)
+        return domain
 
     @api.depends(
         "sale_order_ids.order_line.risk_amount",

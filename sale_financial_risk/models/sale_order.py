@@ -60,11 +60,14 @@ class SaleOrder(models.Model):
 
     @api.model
     def _get_risk_states(self):
-        risk_states = ["sale"]
+        return ["sale"]
+
+    @api.model
+    def _get_risk_include_locked(self):
+        """Locked orders are finished orders, as the done state up to 16.0,
+        so they only count in the risk when the setting includes them"""
         ICP = self.env["ir.config_parameter"].sudo()
-        if ICP.get_bool("sale_financial_risk.include_risk_sale_order_done"):
-            risk_states.append("done")
-        return risk_states
+        return ICP.get_bool("sale_financial_risk.include_risk_sale_order_done")
 
 
 class SaleOrderLine(models.Model):
@@ -91,6 +94,7 @@ class SaleOrderLine(models.Model):
 
     @api.depends(
         "state",
+        "order_id.locked",
         "price_reduce_taxinc",
         "qty_delivered",
         "product_uom_qty",
@@ -99,8 +103,9 @@ class SaleOrderLine(models.Model):
     )
     def _compute_risk_amount(self):
         risk_states = self.env["sale.order"]._get_risk_states()
+        include_locked = self.env["sale.order"]._get_risk_include_locked()
         for line in self:
-            risk_qty = line._get_risk_qty(risk_states)
+            risk_qty = line._get_risk_qty(risk_states, include_locked)
             if risk_qty and not line._can_be_invoiced_alone():
                 # Delivery, discount and reward lines are only invoiced with
                 # other lines, so they have no risk when the other lines of
@@ -113,7 +118,8 @@ class SaleOrderLine(models.Model):
                     )
                 )
                 if other_lines and not any(
-                    other._get_risk_qty(risk_states) for other in other_lines
+                    other._get_risk_qty(risk_states, include_locked)
+                    for other in other_lines
                 ):
                     risk_qty = 0.0
             if risk_qty == 0.0:
@@ -155,10 +161,16 @@ class SaleOrderLine(models.Model):
             # on it does, skips the records marked in the meantime
             field.recompute(dependent_lines)
 
-    def _get_risk_qty(self, risk_states):
+    def _get_risk_qty(self, risk_states, include_locked=None):
         """Quantity of the line that counts in the sales orders risk"""
         self.ensure_one()
-        if self.state not in risk_states or self.display_type:
+        if include_locked is None:
+            include_locked = self.env["sale.order"]._get_risk_include_locked()
+        if (
+            self.state not in risk_states
+            or self.display_type
+            or (self.order_id.locked and not include_locked)
+        ):
             return 0.0
         qty = self.product_uom_qty
         if self.product_id.invoice_policy == "delivery":
