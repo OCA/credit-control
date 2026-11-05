@@ -37,6 +37,8 @@ class StockPicking(models.Model):
         return partner.with_company(self.company_id).risk_exception
 
     def show_risk_wizard(self, continue_method):
+        """Risk wizard of one picking, continuing applies the method to it"""
+        self.ensure_one()
         return (
             self.env["partner.risk.exceeded.wiz"]
             .create(
@@ -61,10 +63,10 @@ class StockPicking(models.Model):
         return super().action_confirm()
 
     def action_assign(self):
-        if not self.env.context.get("bypass_risk") and self.filtered(
-            lambda pick: pick._is_risk_exception()
-        ):
-            return self.show_risk_wizard("action_assign")
+        if not self.env.context.get("bypass_risk"):
+            risk_pickings = self.filtered(lambda pick: pick._is_risk_exception())
+            if risk_pickings:
+                return risk_pickings[0].show_risk_wizard("action_assign")
         return super().action_assign()
 
     def button_validate(self):
@@ -74,5 +76,5 @@ class StockPicking(models.Model):
                     pick.location_dest_id.usage == "customer"
                     and pick._is_risk_exception()
                 ):
-                    return self.show_risk_wizard("button_validate")
+                    return pick.show_risk_wizard("button_validate")
         return super().button_validate()
