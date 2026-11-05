@@ -2,12 +2,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
-from freezegun import freeze_time
 from lxml import etree
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
-from odoo.tests import Form
+from odoo.tests import Form, freeze_time
 
 from odoo.addons.base.tests.common import BaseCommon
 
