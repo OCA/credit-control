@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_credit_control_queue_job
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_credit_control_queue_job
+#: model:ir.model.fields,field_description:account_credit_control_queue_job.field_res_config_settings__credit_control_batch_size
+msgid "Batch Size for Credit Control"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#. odoo-python
+#: code:addons/account_credit_control_queue_job/models/credit_control_communication.py:0
+msgid "Credit Control Emails"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_run
+msgid "Credit control line generator"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#. odoo-python
+#: code:addons/account_credit_control_queue_job/models/credit_control_run.py:0
+msgid "Jobs enqueued"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#. odoo-python
+#: code:addons/account_credit_control_queue_job/models/credit_control_communication.py:0
+msgid "Sending credit control email for %s"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#. odoo-python
+#: code:addons/account_credit_control_queue_job/models/credit_control_communication.py:0
+msgid "Sending credit control emails for ids: %s"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#. odoo-python
+#: code:addons/account_credit_control_queue_job/models/credit_control_run.py:0
+msgid "The emails will be sent in the background"
+msgstr ""
+
+#. module: account_credit_control_queue_job
+#: model:ir.model,name:account_credit_control_queue_job.model_credit_control_communication
+msgid "credit control communication"
+msgstr ""
