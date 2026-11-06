@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-credit-control"
+version = "20.0.20261106.0"
+dependencies = [
+    "odoo-addon-account_financial_risk==20.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 20.0",
+]
