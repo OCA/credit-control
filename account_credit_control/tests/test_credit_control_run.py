@@ -9,12 +9,15 @@ from dateutil import relativedelta
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
-from odoo.tests import Form, RecordCapturer, tagged
+from odoo.tests import Form, RecordCapturer, freeze_time, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.base.tests.common import TransactionCaseWithUserDemo
 
 
+# The invoices are due one year before today and some tests run the credit
+# control on fixed dates, so they need a fixed today
+@freeze_time("2025-11-13")
 class TestCreditControlRunCase(AccountTestInvoicingCommon, TransactionCaseWithUserDemo):
     @classmethod
     def _create_invoice(
