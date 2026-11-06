@@ -9,6 +9,13 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
+            <field name="account_use_credit_limit" position="after">
+                <div id="financial_risk_core_credit_limit_note" class="text-muted">
+                    The Financial Risk tab already controls the partners credit
+                    limit, with its own amounts. Disable this option to show only
+                    the financial risk amounts.
+                </div>
+            </field>
             <xpath
                 expr="//block[@id='pay_invoice_online_setting_container']"
                 position="after"
@@ -38,6 +45,16 @@
                         help="If enabled, portal users will be able to see their credit information."
                     >
                         <field name="portal_show_financial_risk" />
+                    </setting>
+                    <!-- Shown in the core Sales Credit Limit setting while it
+                         is enabled -->
+                    <setting
+                        id="financial_risk_default_credit_limit"
+                        company_dependent="1"
+                        invisible="account_use_credit_limit"
+                        help="Credit limit of the partners without a specific one."
+                    >
+                        <field name="account_default_credit_limit" />
                     </setting>
                 </block>
             </xpath>
