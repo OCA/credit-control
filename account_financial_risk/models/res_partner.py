@@ -148,7 +148,6 @@ class ResPartner(models.Model):
     )
     manual_credit_currency_id = fields.Many2one(
         comodel_name="res.currency",
-        string="Manual Credit Currency",
     )
     risk_currency_id = fields.Many2one(
         comodel_name="res.currency", compute="_compute_credit_currency"
