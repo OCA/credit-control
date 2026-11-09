@@ -57,6 +57,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_communication_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_communication_count
 msgid "# of Credit Control Communications"
 msgstr "Št. komunikacij kreditnega nadzora"
 
@@ -104,8 +106,8 @@ msgstr ""
 "            <br/>\n"
 "            <br/>\n"
 "            <p>\n"
-"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/>"
-"\n"
+"                <t t-out=\"object.policy_level_id.custom_mail_text or '' \"/"
+">\n"
 "            </p>\n"
 "        "
 
@@ -267,10 +269,10 @@ msgid ""
 "credit                             control run execution to have all credit "
 "control lines on                             same communication level"
 msgstr ""
-"Uporabi najvišji nivo pravila za enega partnerja pri izvedbi"
-"                             zagona kreditnega nadzora, da so vse postavke "
-"kreditnega nadzora na                             istem komunikacijskem "
-"nivoju"
+"Uporabi najvišji nivo pravila za enega partnerja pri "
+"izvedbi                             zagona kreditnega nadzora, da so vse "
+"postavke kreditnega nadzora na                             istem "
+"komunikacijskem nivoju"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
@@ -481,6 +483,12 @@ msgstr "Kreditni nadzor"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_analysis_pivot_view
 msgid "Credit Control Analysis"
 msgstr "Analiza kreditnega nadzora"
+
+#. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.act_partner_credit_communication
+#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
+msgid "Credit Control Communication"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_communication_action

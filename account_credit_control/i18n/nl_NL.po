@@ -42,6 +42,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_communication_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_communication_count
 msgid "# of Credit Control Communications"
 msgstr ""
 
@@ -448,6 +450,12 @@ msgstr ""
 #, fuzzy
 msgid "Credit Control Analysis"
 msgstr "Aantal Factuurregels"
+
+#. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.act_partner_credit_communication
+#: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
+msgid "Credit Control Communication"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_communication_action
