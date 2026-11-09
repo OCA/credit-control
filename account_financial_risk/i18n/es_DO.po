@@ -169,6 +169,11 @@ msgid "Credit information"
 msgstr ""
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid "Credit limit of the partners without a specific one."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
@@ -189,7 +194,12 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -200,6 +210,7 @@ msgstr ""
 
 #. module: account_financial_risk
 #: model:ir.module.category,name:account_financial_risk.category_financial_risk
+#: model:res.groups.privilege,name:account_financial_risk.privilege_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
@@ -277,7 +288,12 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__id
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__id
 msgid "ID"
 msgstr "ID"
 
@@ -547,6 +563,12 @@ msgid "Set 0 if it is not locked"
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
@@ -562,6 +584,15 @@ msgstr ""
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_total
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
+msgstr ""
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"The Financial Risk tab already controls the partners credit\n"
+"                    limit, with its own amounts. Disable this option to show "
+"only\n"
+"                    the financial risk amounts."
 msgstr ""
 
 #. module: account_financial_risk

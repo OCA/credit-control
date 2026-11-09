@@ -174,6 +174,11 @@ msgid "Credit information"
 msgstr ""
 
 #. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid "Credit limit of the partners without a specific one."
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__credit_limit
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__credit_limit
 msgid "Credit limit specific to this partner."
@@ -197,7 +202,12 @@ msgstr ""
 "partenaires, soyez patient."
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__display_name
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -208,6 +218,7 @@ msgstr "Message d'exception"
 
 #. module: account_financial_risk
 #: model:ir.module.category,name:account_financial_risk.category_financial_risk
+#: model:res.groups.privilege,name:account_financial_risk.privilege_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Financial Risk"
@@ -302,7 +313,12 @@ msgid ""
 msgstr ""
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_account_move__id
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_company__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__id
+#: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__id
 msgid "ID"
 msgstr "Id"
 
@@ -585,6 +601,12 @@ msgid "Set 0 if it is not locked"
 msgstr "Mettre 0 si vous ne voulez pas bloquer"
 
 #. module: account_financial_risk
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_credit_limit
+#: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
+
+#. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__portal_show_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__show_financial_risk_in_portal
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__show_financial_risk_in_portal
@@ -601,6 +623,15 @@ msgstr "Limite Spécifique"
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_total
 msgid "Sum of total risk included"
 msgstr "Somme du risque total inclus"
+
+#. module: account_financial_risk
+#: model_terms:ir.ui.view,arch_db:account_financial_risk.res_config_settings_view_form
+msgid ""
+"The Financial Risk tab already controls the partners credit\n"
+"                    limit, with its own amounts. Disable this option to show "
+"only\n"
+"                    the financial risk amounts."
+msgstr ""
 
 #. module: account_financial_risk
 #. odoo-python
@@ -792,8 +823,8 @@ msgstr "Valider les écritures comptables"
 #~ "<span class=\"o_form_label\">Risque financier</span>\n"
 #~ "                    <span class=\"fa fa-lg fa-building-o\" title=\"Les "
 #~ "valeurs définies ici sont spécifiques à la société.\" aria-label=\"Les "
-#~ "valeurs définies ici sont spécifiques à la société.\" groups=\"base."
-#~ "group_multi_company\" role=\"img\"/>"
+#~ "valeurs définies ici sont spécifiques à la société.\" "
+#~ "groups=\"base.group_multi_company\" role=\"img\"/>"
 
 #~ msgid "Set options applied to financial risk"
 #~ msgstr "Définir les options appliquées au risque financier"
