@@ -3,13 +3,16 @@
 
 
 from dateutil.relativedelta import relativedelta
+from lxml import etree
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
+from odoo.tests import Form, freeze_time
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
+@freeze_time("2024-01-15 12:00:00")
 class TestPartnerFinancialRisk(BaseCommon):
     @classmethod
     def setUpClass(cls):
@@ -106,6 +109,13 @@ class TestPartnerFinancialRisk(BaseCommon):
             )
         )
         cls.env.user.lang = False
+        # Use the same "today" reference _max_risk_date_due() itself
+        # compares against (context_today(), timezone-aware) rather than
+        # the naive Date.today() - with time frozen above this doesn't
+        # change which day either resolves to, but it keeps the test
+        # exercising the exact same date computation the module uses
+        # instead of one that merely happens to agree with it right now.
+        cls.today = fields.Date.context_today(cls.env.user)
 
     def test_invoices(self):
         self.partner.risk_invoice_draft_include = True
@@ -136,7 +146,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         unrisk_partners = self.partner.search([("risk_exception", "=", False)])
         self.assertIn(self.partner, unrisk_partners)
         self.partner.risk_invoice_open_limit = 300.0
-        invoice2.invoice_date_due = fields.Date.today()
+        invoice2.invoice_date_due = self.today
         wiz_dic = invoice2.action_post()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
@@ -154,7 +164,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         self.assertAlmostEqual(self.partner.risk_invoice_open, 0.0)
         wiz.button_continue()
         # HACK: Force the maturity date for not having an error here
-        invoice2.line_ids.write({"date_maturity": fields.Date.today()})
+        invoice2.line_ids.write({"date_maturity": self.today})
         self.assertAlmostEqual(self.partner.risk_invoice_open, 550.0)
         self.assertTrue(self.partner.risk_allow_edit)
 
@@ -165,7 +175,7 @@ class TestPartnerFinancialRisk(BaseCommon):
             .create(
                 {
                     "journal_id": self.journal_sale.id,
-                    "date": fields.Date.today(),
+                    "date": self.today,
                     "line_ids": [
                         Command.create(
                             {
@@ -193,7 +203,7 @@ class TestPartnerFinancialRisk(BaseCommon):
         line.date_maturity = "2017-01-01"
         self.assertAlmostEqual(self.partner.risk_account_amount, 0.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 100.0)
-        line.date_maturity = fields.Date.today() - relativedelta(days=2)
+        line.date_maturity = self.today - relativedelta(days=2)
         self.assertAlmostEqual(self.partner.risk_account_amount, 0.0)
         self.assertAlmostEqual(self.partner.risk_account_amount_unpaid, 100.0)
         line.company_id.invoice_unpaid_margin = 3
@@ -260,6 +270,42 @@ class TestPartnerFinancialRisk(BaseCommon):
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
 
+    def test_core_credit_limit_disabled(self):
+        company = self.env.company
+        company.account_use_credit_limit = False
+        with Form(self.env["res.config.settings"]) as settings_form:
+            settings_form.account_default_credit_limit = 500.0
+        settings_form.save().execute()
+        self.assertEqual(
+            self.env["ir.default"]._get(
+                "res.partner", "credit_limit", company_id=company.id
+            ),
+            500.0,
+        )
+        partner = self.env["res.partner"].create({"name": "Partner default limit"})
+        self.assertEqual(partner.credit_limit, 500.0)
+        # Credit limit data of other modules does not depend on the warnings
+        self.assertTrue(partner.show_credit_limit)
+        # The partner form neither shows nor computes the core receivable
+        arch = etree.fromstring(
+            self.env["res.partner"].get_view(view_type="form")["arch"]
+        )
+        self.assertTrue(
+            arch.xpath("//page[@name='financial_risk']//field[@name='credit_limit']")
+        )
+        self.assertFalse(arch.xpath("//field[@name='credit']"))
+        self.assertFalse(arch.xpath("//field[@name='days_sales_outstanding']"))
+        # The core option tells that the financial risk covers it
+        settings_arch = etree.fromstring(
+            self.env["res.config.settings"].get_view(view_type="form")["arch"]
+        )
+        self.assertTrue(
+            settings_arch.xpath(
+                "//setting[field[@name='account_use_credit_limit']]"
+                "/div[@id='financial_risk_core_credit_limit_note']"
+            )
+        )
+
     def test_invoice_risk_draft_same_currency(self):
         self.partner.risk_invoice_draft_include = True
         self.invoice.currency_id = self.env.ref("base.USD")
@@ -285,3 +331,105 @@ class TestPartnerFinancialRisk(BaseCommon):
             self.partner.risk_amount_exceeded,
             self.partner.risk_total - self.partner.credit_limit,
         )
+
+    def _create_company_b_invoice(self):
+        company_b = self.env["res.company"].create(
+            {
+                "name": "Company B financial risk",
+                "currency_id": self.env.ref("base.USD").id,
+            }
+        )
+        self.env.user.company_ids |= company_b
+        # A customer shared by both companies
+        self.partner.company_id = False
+        account_customer_b, account_sale_b = self.env["account.account"].create(
+            [
+                {
+                    "name": "Customer B",
+                    "code": "XX430B",
+                    "account_type": "asset_receivable",
+                    "reconcile": True,
+                    "company_ids": [Command.set(company_b.ids)],
+                },
+                {
+                    "name": "Sale B",
+                    "code": "XX700B",
+                    "account_type": "income_other",
+                    "company_ids": [Command.set(company_b.ids)],
+                },
+            ]
+        )
+        self.partner.with_company(
+            company_b
+        ).property_account_receivable_id = account_customer_b
+        journal_sale_b = self.env["account.journal"].create(
+            {
+                "name": "Test journal for sale B",
+                "type": "sale",
+                "code": "TSALB",
+                "company_id": company_b.id,
+            }
+        )
+        invoice_b = (
+            self.env["account.move"]
+            .with_company(company_b)
+            .with_context(default_move_type="out_invoice")
+            .create(
+                {
+                    "partner_id": self.partner.id,
+                    "journal_id": journal_sale_b.id,
+                    "invoice_payment_term_id": False,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "Test product",
+                                "account_id": account_sale_b.id,
+                                "price_unit": 500,
+                                "quantity": 1,
+                                "tax_ids": [],
+                            },
+                        )
+                    ],
+                }
+            )
+        )
+        return company_b, invoice_b
+
+    def test_multi_company(self):
+        """Risk and limit are those of one company: the active one on the partner
+        form, the document one when posting a document."""
+        company_b, invoice_b = self._create_company_b_invoice()
+        self.partner.write(
+            {
+                "risk_invoice_open_include": True,
+                "risk_account_amount_include": True,
+                "credit_limit": 1000.0,
+            }
+        )
+        self.partner.with_company(company_b).credit_limit = 100.0
+        invoice_b.with_context(bypass_risk=True).action_post()
+        # Main company active with both companies selected
+        partner = self.partner.with_context(
+            allowed_company_ids=[self.env.company.id, company_b.id]
+        )
+        self.assertAlmostEqual(partner.risk_invoice_open, 0.0)
+        self.assertAlmostEqual(partner.risk_account_amount, 0.0)
+        self.assertAlmostEqual(partner.risk_total, 0.0)
+        self.assertFalse(partner.risk_exception)
+        # Company B active, read in the same transaction
+        partner_b = partner.with_company(company_b)
+        self.assertAlmostEqual(partner_b.risk_invoice_open, 500.0)
+        self.assertAlmostEqual(partner_b.risk_total, 500.0)
+        self.assertTrue(partner_b.risk_exception)
+        # A company B invoice is checked against company B risk and limit
+        invoice_b2 = invoice_b.copy()
+        wiz_dic = invoice_b2.with_context(
+            allowed_company_ids=[self.env.company.id, company_b.id]
+        ).action_post()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
+        # A main company invoice is not, even with company B active
+        self.invoice.with_context(
+            allowed_company_ids=[company_b.id, self.env.company.id]
+        ).action_post()
+        self.assertEqual(self.invoice.state, "posted")
