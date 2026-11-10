@@ -406,9 +406,9 @@ the customer, if configured accordingly.</p>
 <ol class="arabic simple">
 <li>Go to User and set group User or Manager Financial Risk</li>
 <li>Go to <em>Invoicing/Accounting &gt; Configuration &gt; Settings &gt; Accounting</em></li>
-<li>In the <em>Customer Payments</em> section, fill <em>Maturity Margin</em> for
-setting the number of days to last after the due date to consider an
-invoice as unpaid.</li>
+<li>In the <em>Financial Risk</em> section, fill <em>Maturity Margin</em> for setting
+the number of days to last after the due date to consider an invoice
+as unpaid.</li>
 </ol>
 <p>(Optional) To display credit information in the customer portal, go to
 <em>Invoicing &gt; Configuration &gt; Settings &gt; Financial Risk</em> and activate
@@ -417,15 +417,16 @@ invoice as unpaid.</li>
 globally, and can be disabled individually for certain contacts.</p>
 <p>Odoo core has its own credit limit warning (<em>Invoicing/Accounting &gt;
 Configuration &gt; Settings &gt; Sales Credit Limit</em>). It shows a banner on
-draft invoices and sales orders using the same partner <em>Credit Limit</em>,
-but with other amounts: the total receivable plus the delivered and not
-invoiced sales orders of the user’s main company. To show only the
-financial risk amounts, disable <em>Sales Credit Limit</em> in each company:
-Odoo then skips the banner computation. With this module the partner
-credit limit is edited in the <em>Financial Risk</em> tab, the core <em>Credit
-Limits</em> group of the <em>Invoicing</em> tab is hidden, and the company default
-credit limit is set in the <em>Financial Risk</em> settings block while <em>Sales
-Credit Limit</em> is disabled.</p>
+draft invoices using the same partner <em>Credit Limit</em>, but with another
+amount: the total receivable of the partner in the current company.
+Sales adds the sales orders not invoiced yet and shows the banner on
+draft sales orders too, as explained in <em>sale_financial_risk</em>. To show
+only the financial risk amounts, disable <em>Sales Credit Limit</em> in each
+company: Odoo then skips the banner computation. With this module the
+partner credit limit is edited in the <em>Financial Risk</em> tab, the core
+<em>Credit Limits</em> group of the <em>Invoicing</em> tab is hidden, and the company
+default credit limit is set in the <em>Financial Risk</em> settings block while
+<em>Sales Credit Limit</em> is disabled.</p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-2">Usage</a></h2>
