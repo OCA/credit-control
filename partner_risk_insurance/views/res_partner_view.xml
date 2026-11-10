@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2018 Tecnativa - Sergio Teruel
+     Copyright 2024 Moduon Team S.L. <info@moduon.team>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!--Add risk insurance tab in partner form. -->
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">res.partner.form.risk_insurance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="50" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page
+                    string="Credit Insurance"
+                    name="credit_insurance"
+                    invisible="not show_credit_limit or (not is_company and parent_id)"
+                    groups='account.group_account_invoice,account.group_account_readonly'
+                >
+                    <group name="credit_insurance_main">
+                        <group name="credit_insurance_limit">
+                            <field name="company_credit_limit" />
+                            <field name="insurance_credit_limit" />
+                            <field
+                                name="credit_limit"
+                                string="Total credit limit"
+                                help="The overall credit limit available to a client, set by the user. It includes both the company's own credit limit and the insured credit limit."
+                            />
+                        </group>
+                        <group name="credit_insurance_request">
+                            <field name="risk_insurance_requested" />
+                            <field name="risk_insurance_grant_date" />
+                        </group>
+                        <group name="credit_insurance_coverage">
+                            <field name="risk_insurance_coverage_percent" />
+                        </group>
+                        <group name="credit_insurance_code">
+                            <field name="risk_insurance_code" />
+                            <field name="risk_insurance_code_2" />
+                            <field name="credit_policy_state_id" />
+                            <field
+                                name="credit_policy_company_id"
+                                required="credit_policy_insure_invoices"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
