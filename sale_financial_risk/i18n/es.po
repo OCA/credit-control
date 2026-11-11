@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-04 00:25+0000\n"
-"PO-Revision-Date: 2023-10-28 15:45+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_partner_id
@@ -28,7 +28,7 @@ msgstr "Entidad comercial"
 #. module: sale_financial_risk
 #: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__company_currency_id
 msgid "Company Currency"
-msgstr "divisa de la compañía"
+msgstr "moneda de la compañía"
 
 #. module: sale_financial_risk
 #: model:ir.model,name:sale_financial_risk.model_res_config_settings
