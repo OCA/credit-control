@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2026-11-11 10:46+0000\n"
+"PO-Revision-Date: 2026-11-11 13:46+0000\n"
 "Last-Translator: leszekszczepkowski <leszekszczepkowski@gmail.com>\n"
 "Language-Team: Polish (https://www.transifex.com/oca/teams/23907/pl/)\n"
 "Language: pl\n"
@@ -214,19 +214,19 @@ msgstr "Czynności"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_exception_decoration
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Dekoracja wyjątku czynności"
+msgstr "Dekoracja wyjątku aktywności"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_state
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_state
 msgid "Activity State"
-msgstr "Stan czynności"
+msgstr "Stan aktywności"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_type_icon
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_icon
 msgid "Activity Type Icon"
-msgstr "Ikona typu czynności"
+msgstr "Ikona typu aktywności"
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -454,7 +454,7 @@ msgstr "Data kontroli"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__create_uid
 msgid "Created by"
-msgstr "Utworzone przez"
+msgstr "Utworzył(a)"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__create_date
@@ -468,7 +468,7 @@ msgstr "Utworzone przez"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__create_date
 msgid "Created on"
-msgstr "Utworzono"
+msgstr "Data utworzenia"
 
 #. module: account_credit_control
 #: model:ir.module.category,name:account_credit_control.category_credit_control
@@ -678,7 +678,7 @@ msgstr "Ustawienia opóźnienia"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__display_name
 msgid "Display Name"
-msgstr "Wyświetlana nazwa "
+msgstr "Nazwa wyświetlana"
 
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_manual_action_menu
@@ -704,7 +704,7 @@ msgstr "Wykonane"
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_run__state__draft
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Draft"
-msgstr "Projekt"
+msgstr "Wersja robocza"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -726,7 +726,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__amount_due
 msgid "Due Amount Tax incl."
-msgstr "Kwota należna z podatkiem"
+msgstr "Kwota należna brutto"
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_policy_level__computation_mode__net_days
@@ -874,7 +874,7 @@ msgstr "Ikona"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__activity_exception_icon
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr "Ikona wskazująca czynność wyjątku."
+msgstr "Ikona wskazująca na wyjątek aktywności."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_run__manual_ids
@@ -895,7 +895,8 @@ msgstr "Jeśli zaznaczone, nowe wiadomości wymagają twojej uwagi."
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Jeśli zaznaczone, niektóre wiadomości mają błąd dostarczenia."
+msgstr ""
+"Jeśli zaznaczone, niektóre wiadomości napotkały błędy podczas doręczenia."
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -989,7 +990,7 @@ msgstr "Zapis dziennika"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__write_uid
 msgid "Last Updated by"
-msgstr "Ostatnio modyfikowane przez"
+msgstr "Ostatnio aktualizowane przez"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__write_date
@@ -1003,7 +1004,7 @@ msgstr "Ostatnio modyfikowane przez"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__write_date
 msgid "Last Updated on"
-msgstr "Ostatnia zmiana"
+msgstr "Data ostatniej aktualizacji"
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__channel__letter
@@ -1072,7 +1073,7 @@ msgstr "Wysyłka e-mail"
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_manager
 msgid "Manager"
-msgstr "Kierownik"
+msgstr "Menedżer"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.view_move_form
@@ -1151,7 +1152,7 @@ msgstr "Maksymalny poziom"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_error
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_has_error
 msgid "Message Delivery error"
-msgstr "Błąd dostarczenia wiadomości"
+msgstr "Błąd doręczenia wiadomości"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_ids
@@ -1162,23 +1163,23 @@ msgstr "Wiadomości"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__move_line_id
 msgid "Move line"
-msgstr "Pozycja dziennika"
+msgstr "Pozycja zapisu"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer__move_line_ids
 msgid "Move line to change"
-msgstr "Pozycja dziennika do zmiany"
+msgstr "Pozycja zapisu do zmiany"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Move lines to affect"
-msgstr "Pozycje dziennika, których dotyczy zmiana"
+msgstr "Pozycje zapisów, których dotyczy zmiana"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__my_activity_date_deadline
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr "Termin moich czynności"
+msgstr "Ostateczny termin moich aktywności"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__name
@@ -1219,19 +1220,19 @@ msgstr "Typ następnego działania"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_date_deadline
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Termin następnej czynności"
+msgstr "Termin kolejnej aktywności"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_summary
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_summary
 msgid "Next Activity Summary"
-msgstr "Podsumowanie następnej czynności"
+msgstr "Podsumowanie kolejnej aktywności"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_type_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_type_id
 msgid "Next Activity Type"
-msgstr "Typ następnej czynności"
+msgstr "Typ następnej aktywności"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1263,7 +1264,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Liczba działań"
+msgstr "Liczba akcji"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__message_has_error_counter
@@ -1275,13 +1276,13 @@ msgstr "Liczba błędów"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "Liczba wiadomości wymagających działania"
+msgstr "Liczba wiadomości wymagających akcji"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_has_error_counter
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Liczba wiadomości z błędem dostarczenia"
+msgstr "Liczba wiadomości z błędami przy doręczeniu"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_printer__mark_as_sent
@@ -1291,7 +1292,7 @@ msgstr "Zostaną oznaczone tylko pozycje listów."
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
-msgstr "Kwota otwarta"
+msgstr "Pozostało do zapłaty"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_analysis__open_balance
@@ -1483,7 +1484,7 @@ msgstr "Poziom zaległości"
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Partner"
-msgstr "Partner"
+msgstr "Kontrahent"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.res_partner_payment_action_type_act_window
@@ -1733,9 +1734,9 @@ msgid ""
 "Planned: Future activities."
 msgstr ""
 "Status na podstawie czynności\n"
-"Zaległe: termin już minął\n"
-"Dzisiaj: czynność zaplanowana na dziś\n"
-"Zaplanowane: przyszłe czynności."
+"Zaległe: Termin już minął\n"
+"Dzisiaj: Data czynności przypada na dzisiaj\n"
+"Zaplanowane: Przyszłe czynności."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -1854,7 +1855,7 @@ msgstr "Razem zafakturowano"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__activity_exception_decoration
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "Typ czynności wyjątku w rekordzie."
+msgstr "Typ wyjątku aktywności na rekordzie."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__user_id
@@ -1866,13 +1867,13 @@ msgstr "Użytkownik"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__website_message_ids
 msgid "Website Messages"
-msgstr "Wiadomości z witryny"
+msgstr "Wiadomości"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__website_message_ids
 msgid "Website communication history"
-msgstr "Historia komunikacji z witryny"
+msgstr "Historia komunikacji"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1904,7 +1905,7 @@ msgid ""
 msgstr ""
 "Nie możesz anulować tej faktury.\n"
 "Do klienta wysłano już przypomnienie o płatności.\n"
-"Musisz wystawić korektę i nową fakturę."
+"Musisz wystawić fakturę korygującą i nową fakturę."
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
