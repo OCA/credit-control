@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-04 00:25+0000\n"
-"PO-Revision-Date: 2026-05-10 08:56+0000\n"
-"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/es/)\n"
 "Language: es\n"
@@ -118,7 +118,7 @@ msgstr "Cancelar"
 #. odoo-python
 #: code:addons/account_financial_risk/models/res_partner.py:0
 msgid "Choose Manual Credit Currency."
-msgstr "Seleccione Divisa de crédito manual."
+msgstr "Seleccione Moneda de crédito manual."
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
@@ -128,7 +128,7 @@ msgstr "Compañías"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
 msgid "Company Currency"
-msgstr "divisa de la compañía"
+msgstr "moneda de la compañía"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
@@ -164,7 +164,7 @@ msgstr "Creado en"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__credit_currency
 msgid "Credit Currency"
-msgstr "Divisa de crédito"
+msgstr "Moneda de crédito"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_limit
@@ -445,7 +445,7 @@ msgstr "Gerente"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr "Divisa de crédito manual"
+msgstr "Moneda de crédito manual"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
@@ -478,7 +478,7 @@ msgstr "Mostrar riesgo financiero visible en portal"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr "Divisa de la lista de precios"
+msgstr "Moneda de la lista de precios"
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
@@ -488,7 +488,7 @@ msgstr "Acceso de solo lectura a información de riesgo financiero"
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr "Divisa a cobrar"
+msgstr "Moneda a cobrar"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -559,7 +559,7 @@ msgstr "importe total del riesgo"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_currency_id
 msgid "Risk Currency"
-msgstr "Divisa de riesgo"
+msgstr "Moneda de riesgo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_exception
