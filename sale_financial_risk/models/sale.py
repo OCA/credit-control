@@ -95,31 +95,25 @@ class SaleOrderLine(models.Model):
         "qty_delivered",
         "product_uom_qty",
         "qty_invoiced",
+        "qty_to_invoice",
     )
     def _compute_risk_amount(self):
         risk_states = self.env["sale.order"]._get_risk_states()
         for line in self:
-            if line.state not in risk_states or line.display_type:
-                line.risk_amount = 0.0
-                continue
-            qty = line.product_uom_qty
-            if line.product_id.invoice_policy == "delivery":
-                qty = max(qty, line.qty_delivered)
-            risk_qty = float_round(
-                qty - line.qty_invoiced,
-                precision_rounding=line.product_uom.rounding or 0.01,
-            )
-            # There is no risk if the line hasn't stock moves to deliver
-            # Added hasattr condition because fails in post-migration compute
-            if (
-                risk_qty
-                and line.qty_delivered_method == "stock_move"
-                and (hasattr(line, "move_ids"))
-            ):
-                if not line.move_ids.filtered(
-                    lambda move: move.state not in ("done", "cancel")
+            risk_qty = line._get_risk_qty(risk_states)
+            if risk_qty and not line._can_be_invoiced_alone():
+                # Delivery, discount and reward lines are only invoiced with
+                # other lines, so they have no risk when the other lines of
+                # the order have nothing left to invoice
+                other_lines = line.order_id.order_line.filtered(
+                    lambda other: not other.display_type
+                    and not other.is_downpayment
+                    and other._can_be_invoiced_alone()
+                )
+                if other_lines and not any(
+                    other._get_risk_qty(risk_states) for other in other_lines
                 ):
-                    risk_qty = line.qty_to_invoice
+                    risk_qty = 0.0
             if risk_qty == 0.0:
                 line.risk_amount = 0.0
                 continue
@@ -138,3 +132,47 @@ class SaleOrderLine(models.Model):
                 or fields.Date.context_today(self),
                 round=False,
             )
+        # The lines not invoiced alone depend on the other lines of their
+        # order. Recompute only them: a dependency on order_id.order_line
+        # would recompute every line of the order, and confirmed orders
+        # flush once per edited line.
+        alone_lines = self.filtered(
+            lambda line: line.order_id.state in risk_states
+            and line._can_be_invoiced_alone()
+        )
+        dependent_lines = (alone_lines.order_id.order_line - self).filtered(
+            lambda line: line.id
+            and not line.display_type
+            and not line._can_be_invoiced_alone()
+        )
+        if dependent_lines:
+            field = self._fields["risk_amount"]
+            self.env.add_to_compute(field, dependent_lines)
+            # Compute them now: recomputing this field alone, as a read_group
+            # on it does, skips the records marked in the meantime
+            field.recompute(dependent_lines)
+
+    def _get_risk_qty(self, risk_states):
+        """Quantity of the line that counts in the sales orders risk"""
+        self.ensure_one()
+        if self.state not in risk_states or self.display_type:
+            return 0.0
+        qty = self.product_uom_qty
+        if self.product_id.invoice_policy == "delivery":
+            qty = max(qty, self.qty_delivered)
+        risk_qty = float_round(
+            qty - self.qty_invoiced,
+            precision_rounding=self.product_uom.rounding or 0.01,
+        )
+        # There is no risk if the line hasn't stock moves to deliver
+        # Added hasattr condition because fails in post-migration compute
+        if (
+            risk_qty
+            and self.qty_delivered_method == "stock_move"
+            and (hasattr(self, "move_ids"))
+        ):
+            if not self.move_ids.filtered(
+                lambda move: move.state not in ("done", "cancel")
+            ):
+                risk_qty = self.qty_to_invoice
+        return risk_qty

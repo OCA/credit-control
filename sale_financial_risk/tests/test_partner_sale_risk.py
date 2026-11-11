@@ -199,6 +199,41 @@ class TestPartnerSaleRisk(BaseCommon):
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
 
+    def test_line_not_invoiced_alone(self):
+        """A line that is only invoiced with other lines, as a delivery or a
+        discount, has no risk when the rest of the order has none."""
+        discount_product = self.env["product.product"].create(
+            {"name": "Discount", "type": "service", "taxes_id": []}
+        )
+        self.env.company.sale_discount_product_id = discount_product
+        # Price kept when the quantity changes
+        self.product.list_price = 115.0
+        discount_vals = {
+            "product_id": discount_product.id,
+            "product_uom_qty": 1,
+            "price_unit": -15.0,
+            "tax_id": False,
+        }
+        self.sale_order.order_line = [(0, 0, discount_vals)]
+        self.sale_order.action_confirm()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        # The customer finally does not want the product
+        product_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id == self.product
+        )
+        product_line.product_uom_qty = 0.0
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        # The customer wants it again
+        product_line.product_uom_qty = 1.0
+        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        product_line.product_uom_qty = 0.0
+        # An order with only such lines is invoiced, so it has risk
+        order = self.env["sale.order"].create(
+            {"partner_id": self.partner.id, "order_line": [(0, 0, discount_vals)]}
+        )
+        order.action_confirm()
+        self.assertAlmostEqual(self.partner.risk_sale_order, -15.0)
+
     def test_manual_currency_risk_not_exceeded(self):
         if self.env.company.currency_id == self.EUR:
             self.product_pricelist.currency_id = self.USD
