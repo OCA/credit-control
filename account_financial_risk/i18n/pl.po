@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2016-10-23 16:16+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2026-11-11 13:46+0000\n"
+"Last-Translator: leszekszczepkowski <leszekszczepkowski@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
@@ -109,7 +110,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Firmy"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__company
@@ -119,12 +120,12 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfiguracja ustawień"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.partner_risk_exceeded_wizard
@@ -139,12 +140,12 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_uid
 msgid "Created by"
-msgstr "Utworzone przez"
+msgstr "Utworzył(a)"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__create_date
 msgid "Created on"
-msgstr "Utworzono"
+msgstr "Data utworzenia"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__credit_currency
@@ -202,7 +203,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__display_name
 #: model:ir.model.fields,field_description:account_financial_risk.field_validate_account_move__display_name
 msgid "Display Name"
-msgstr "Wyświetlana nazwa "
+msgstr "Nazwa wyświetlana"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__exception_msg
@@ -356,7 +357,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Zapis dziennika"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
@@ -367,12 +368,12 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
 msgid "Last Updated by"
-msgstr "Ostatnio modyfikowane przez"
+msgstr "Ostatnio aktualizowane przez"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_date
 msgid "Last Updated on"
-msgstr "Ostatnia zmiana"
+msgstr "Data ostatniej aktualizacji"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
@@ -671,7 +672,7 @@ msgstr ""
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_validate_account_move
 msgid "Validate Account Move"
-msgstr ""
+msgstr "Zatwierdź zapis księgowy"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ostatnio modyfikowano"
