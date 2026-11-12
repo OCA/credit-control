@@ -10,7 +10,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="partner_id" />
+                            <field name="partner_id" required="True" />
                             <field name="contact_address_id" />
                             <field
                                 name="company_id"
@@ -19,7 +19,7 @@
                             <field name="user_id" />
                         </group>
                         <group>
-                            <field name="policy_level_id" />
+                            <field name="policy_level_id" required="True" />
                             <field name="policy_id" />
                             <field name="report_date" />
                         </group>

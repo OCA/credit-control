@@ -16,16 +16,19 @@ class CreditControlCommunication(models.Model):
     _description = "credit control communication"
     _rec_name = "partner_id"
 
-    partner_id = fields.Many2one(comodel_name="res.partner", required=True, index=True)
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", index=True, ondelete="cascade"
+    )
     policy_id = fields.Many2one(
-        related="policy_level_id.policy_id",
+        comodel_name="credit.control.policy",
+        compute="_compute_policy_id",
         store=True,
         index=True,
+        ondelete="cascade",
     )
     policy_level_id = fields.Many2one(
         comodel_name="credit.control.policy.level",
         string="Level",
-        required=True,
         index=True,
     )
     currency_id = fields.Many2one(
@@ -68,6 +71,11 @@ class CreditControlCommunication(models.Model):
     def _get_total_due(self):
         balance_field = "credit_control_line_ids.balance_due"
         return sum(self.mapped(balance_field))
+
+    @api.depends("policy_level_id")
+    def _compute_policy_id(self):
+        for item in self.filtered(lambda x: x.policy_level_id):
+            item.policy_id = item.policy_level_id.policy_id
 
     @api.depends(
         "credit_control_line_ids",
