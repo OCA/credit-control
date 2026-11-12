@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="credit_control_policy_level_form_sms" model="ir.ui.view">
+        <field name="name">credit.control.policy.level.form.sms</field>
+        <field name="model">credit.control.policy.level</field>
+        <field
+            name="inherit_id"
+            ref="account_credit_control.credit_mangement_policy_level_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='mail_and_reporting']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('channel', '=', 'sms')]}</attribute>
+            </xpath>
+            <xpath expr="//page[@name='mail_and_reporting']" position="after">
+                <page
+                    string="SMS"
+                    name="sms"
+                    attrs="{'invisible': [('channel', '!=', 'sms')]}"
+                >
+                    <group>
+                        <field
+                            name="sms_template_id"
+                            attrs="{'required': [('channel', '=', 'sms')]}"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

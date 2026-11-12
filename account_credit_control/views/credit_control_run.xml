@@ -97,7 +97,11 @@
                                 attrs="{'invisible': [('report', '=', False)]}"
                             />
                         </page>
-                        <page string="Manual Lines" name="manual_lines" groups="base.group_no_one">
+                        <page
+                            string="Manual Lines"
+                            name="manual_lines"
+                            groups="base.group_no_one"
+                        >
                             <field name="manual_ids" colspan="4" nolabel="1" />
                         </page>
                     </notebook>
