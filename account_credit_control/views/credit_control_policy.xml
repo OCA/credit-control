@@ -37,6 +37,10 @@
                                         <group>
                                             <field name="level" />
                                             <field name="channel" />
+                                            <field
+                                                name="mail_fields_required"
+                                                invisible="1"
+                                            />
                                             <field name="delay_days" />
                                             <field name="computation_mode" />
                                         </group>
@@ -45,9 +49,14 @@
                                         <group colspan="2">
                                             <field
                                                 name="email_template_id"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
                                                 colspan="2"
                                             />
-                                            <field name="custom_text" colspan="2" />
+                                            <field
+                                                name="custom_text"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                                                colspan="2"
+                                            />
                                             <field
                                                 name="custom_text_after_details"
                                                 colspan="2"
@@ -59,6 +68,7 @@
                                             />
                                             <field
                                                 name="custom_mail_text"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
                                                 colspan="2"
                                             />
                                         </group>
@@ -116,14 +126,21 @@
                         <group>
                             <field name="level" />
                             <field name="channel" />
+                            <field name="mail_fields_required" invisible="1" />
                             <field name="delay_days" />
                             <field name="computation_mode" />
                         </group>
                     </page>
                     <page string="Mail and reporting" name="mail_and_reporting">
                         <group>
-                            <field name="email_template_id" />
-                            <field name="custom_text" />
+                            <field
+                                name="email_template_id"
+                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                            />
+                            <field
+                                name="custom_text"
+                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                            />
                         </group>
                     </page>
                 </notebook>
