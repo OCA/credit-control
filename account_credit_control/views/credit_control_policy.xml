@@ -39,7 +39,9 @@
                                     <field name="email_template_id" />
                                 </list>
                                 <form>
-                                    <field name="name" />
+                                    <group col="2">
+                                        <field name="name" colspan="2" />
+                                    </group>
                                     <notebook>
                                         <page string="Delay Setting">
                                             <group>
