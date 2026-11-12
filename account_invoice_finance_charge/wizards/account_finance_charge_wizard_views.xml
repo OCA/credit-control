@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_finance_charge_wizard_view_form" model="ir.ui.view">
+        <field name="name">account.finance.charge.wizard.form</field>
+        <field name="model">account.finance.charge.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Finance Charges" create="0" delete="0" duplicate="0">
+                <header>
+                    <button
+                        name="action_create_charges"
+                        type="object"
+                        string="Create Draft Charges"
+                        class="btn-primary"
+                        invisible="selected_count == 0"
+                    />
+                    <button
+                        name="action_select_all"
+                        type="object"
+                        string="Select All"
+                        invisible="line_count == 0"
+                    />
+                    <button
+                        name="action_select_none"
+                        type="object"
+                        string="Select None"
+                        invisible="line_count == 0"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Finance Charges</h1>
+                    </div>
+                    <p class="text-muted">
+                        <field name="policy_summary" nolabel="1" />
+                    </p>
+                    <group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <label for="date" />
+                            <div class="d-flex align-items-center gap-2">
+                                <field name="date" nolabel="1" class="oe_inline" />
+                                <button
+                                    name="action_recalculate"
+                                    type="object"
+                                    string="Recalculate"
+                                    class="btn-secondary btn-sm"
+                                />
+                            </div>
+                        </group>
+                        <group>
+                            <div class="o_td_label">
+                                <strong>Selected</strong>
+                            </div>
+                            <field
+                                name="selection_summary"
+                                nolabel="1"
+                                class="fw-bold"
+                            />
+                        </group>
+                    </group>
+                    <div
+                        class="alert alert-info"
+                        role="status"
+                        invisible="line_count != 0"
+                    >
+                        No past-due invoices qualify for a finance charge on this date.
+                    </div>
+                    <field name="line_count" invisible="1" />
+                    <field name="selected_count" invisible="1" />
+                    <field
+                        name="line_ids"
+                        nolabel="1"
+                        invisible="line_count == 0"
+                        mode="list"
+                    >
+                        <list
+                            editable="bottom"
+                            create="0"
+                            delete="0"
+                            limit="1000"
+                            decoration-danger="review_note"
+                        >
+                            <field name="selected" nolabel="1" width="60px" />
+                            <field name="partner_id" />
+                            <field name="move_id" />
+                            <field name="date_due" width="90px" />
+                            <field name="days_past_due" width="70px" />
+                            <field name="residual" width="100px" />
+                            <field name="days" width="55px" />
+                            <field name="amount" class="fw-bold" width="115px" />
+                            <field name="note" optional="show" width="110px" />
+                            <field name="review_note" width="170px" />
+                            <field name="date_from" column_invisible="1" />
+                            <field name="currency_id" column_invisible="1" />
+                            <button
+                                name="action_open_invoice"
+                                type="object"
+                                icon="fa-external-link"
+                                title="Open invoice"
+                            />
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_finance_charge_review" model="ir.actions.server">
+        <field name="name">Finance Charges</field>
+        <field name="model_id" ref="model_account_finance_charge_wizard" />
+        <field name="state">code</field>
+        <field name="code">action = model.action_open()</field>
+    </record>
+
+    <menuitem
+        id="menu_account_finance_charge_review"
+        name="Finance Charges"
+        parent="account.menu_finance_receivables"
+        action="action_account_finance_charge_review"
+        groups="account.group_account_invoice"
+        sequence="100"
+    />
+</odoo>
