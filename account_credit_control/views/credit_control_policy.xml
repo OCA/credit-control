@@ -45,7 +45,10 @@
                                             <field name="computation_mode" />
                                         </group>
                                     </page>
-                                    <page string="Mail and reporting" name="mail_and_reporting">
+                                    <page
+                                        string="Mail and reporting"
+                                        name="mail_and_reporting"
+                                    >
                                         <group colspan="2">
                                             <field
                                                 name="email_template_id"
