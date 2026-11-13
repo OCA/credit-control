@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="credit_control_line_search_sms" model="ir.ui.view">
+        <field name="name">credit.control.line.search.sms</field>
+        <field name="model">credit.control.line</field>
+        <field
+            name="inherit_id"
+            ref="account_credit_control.credit_control_line_search"
+        />
+        <field name="arch" type="xml">
+            <filter name="filter_error" position="attributes">
+                <attribute
+                    name="domain"
+                >[('state', 'in', ('error', 'email_error', 'sms_error'))]</attribute>
+                <attribute
+                    name="help"
+                >An error has occured during the sending of the email or SMS.</attribute>
+            </filter>
+        </field>
+    </record>
+</odoo>

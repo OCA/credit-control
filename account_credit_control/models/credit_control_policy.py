@@ -276,14 +276,12 @@ class CreditControlPolicyLevel(models.Model):
     email_template_id = fields.Many2one(
         comodel_name="mail.template",
         domain=[("model_id.model", "=", "credit.control.communication")],
-        required=True,
     )
     channel = fields.Selection(selection=CHANNEL_LIST, required=True)
-    custom_text = fields.Text(string="Custom Message", required=True, translate=True)
+    mail_fields_required = fields.Boolean(compute="_compute_mail_fields_required")
+    custom_text = fields.Text(string="Custom Message", translate=True)
     mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
-    custom_mail_text = fields.Html(
-        string="Custom Mail Message", required=True, translate=True
-    )
+    custom_mail_text = fields.Html(string="Custom Mail Message", translate=True)
     custom_text_after_details = fields.Text(
         string="Custom Message after details", translate=True
     )
@@ -291,6 +289,42 @@ class CreditControlPolicyLevel(models.Model):
     _sql_constraints = [
         ("unique_level", "UNIQUE (policy_id, level)", "Level must be unique per policy")
     ]
+
+    @api.model
+    def _get_mail_fields_required_channels(self):
+        """Return the channels for which the email template and custom
+        messages are required. Can be extended by modules adding channels."""
+        return ["letter", "email", "phone"]
+
+    @api.model
+    def _get_mail_required_fields(self):
+        return ["email_template_id", "custom_text", "custom_mail_text"]
+
+    @api.depends("channel")
+    def _compute_mail_fields_required(self):
+        channels = self._get_mail_fields_required_channels()
+        for level in self:
+            level.mail_fields_required = level.channel in channels
+
+    @api.constrains("channel", "email_template_id", "custom_text", "custom_mail_text")
+    def _check_mail_required_fields(self):
+        for level in self:
+            if not level.mail_fields_required:
+                continue
+            missing = [
+                level._fields[fname].get_description(self.env)["string"]
+                for fname in self._get_mail_required_fields()
+                if not level[fname]
+            ]
+            if missing:
+                raise ValidationError(
+                    _(
+                        "The following fields are required on policy level "
+                        "%(level)s: %(fields)s",
+                        level=level.name,
+                        fields=", ".join(missing),
+                    )
+                )
 
     @api.constrains("level", "computation_mode")
     def _check_level_mode(self):
