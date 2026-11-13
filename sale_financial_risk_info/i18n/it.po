@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_financial_risk_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-10-27 18:43+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: sale_financial_risk_info
+#: model:ir.model,name:sale_financial_risk_info.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_info
+msgid "Risk Info"
+msgstr "Informazioni sul rischio"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_percentage
+msgid "Risk Remaining (Percentage)"
+msgstr "Rischio rimanente (%)"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_sale_order__risk_remaining_value
+msgid "Risk Remaining (Value)"
+msgstr "Rischio rimanente (valore)"
+
+#. module: sale_financial_risk_info
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_partner__risk_percent_warning
+#: model:ir.model.fields,field_description:sale_financial_risk_info.field_res_users__risk_percent_warning
+msgid "Risk percent warning"
+msgstr "Avviso percentuale di rischio"
+
+#. module: sale_financial_risk_info
+#: model:ir.model,name:sale_financial_risk_info.model_sale_order
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: sale_financial_risk_info
+#. odoo-python
+#: code:addons/sale_financial_risk_info/models/sale.py:0
+#, python-format
+msgid "Unlimited"
+msgstr "Illimitato"
+
+#~ msgid "Display Name"
+#~ msgstr "Nome da visualizzare"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
