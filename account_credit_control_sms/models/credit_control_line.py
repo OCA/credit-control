@@ -25,8 +25,10 @@ class CreditControlLine(models.Model):
         )
         partner = move_line.partner_id
         # Fallback to letter, as done for email channel
-        if data.get("channel") == "sms" and partner and not (
-            partner.mobile or partner.phone
+        if (
+            data.get("channel") == "sms"
+            and partner
+            and not (partner.mobile or partner.phone)
         ):
             data["channel"] = "letter"
         return data
@@ -40,9 +42,9 @@ class CreditControlLine(models.Model):
         lines = self._filter_sms_lines_to_send()
         if not lines:
             raise UserError(_("No credit control lines to send by SMS selected."))
-        comms = self.env["credit.control.communication"]._generate_comm_from_credit_lines(
-            lines
-        )
+        comms = self.env[
+            "credit.control.communication"
+        ]._generate_comm_from_credit_lines(lines)
         comms._generate_sms()
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "account_credit_control.credit_control_communication_action"

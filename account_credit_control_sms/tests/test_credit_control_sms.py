@@ -156,7 +156,9 @@ class TestCreditControlSms(AccountTestInvoicingCommon, SMSCase):
             )
             self.assertEqual(comms.credit_control_line_ids, lines)
             self.assertEqual(lines.state, "queued")
-            self.assertEqual(action["domain"], [("id", "in", lines.communication_id.ids)])
+            self.assertEqual(
+                action["domain"], [("id", "in", lines.communication_id.ids)]
+            )
             self._new_sms.send()
         self.assertEqual(lines.state, "sent")
         # Nothing left to send
