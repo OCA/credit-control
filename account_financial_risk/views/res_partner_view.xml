@@ -33,7 +33,7 @@
                         <group name="risk_include" class="o_group_col_6">
                             <group
                                 col="3"
-                                class="oe_subtotal_footer"
+                                class="oe_subtotal_footer oe_risk_group"
                                 string="General Limits"
                                 style="float: left !important; border-top: none;"
                             >
@@ -127,7 +127,7 @@
                                     for="risk_remaining_percentage"
                                     string="Risk Remaining"
                                 />
-                                <div class="oe_inline" colspan="2">
+                                <div class="text-md-end" colspan="2">
                                     <field
                                         class="oe_inline"
                                         name="risk_remaining_value"
@@ -144,18 +144,21 @@
                                     <span class="oe_inline">%)</span>
                                 </div>
 
-                                <field
-                                    name="risk_total"
-                                    colspan="3"
-                                    class="oe_subtotal_footer_separator"
-                                    widget='monetary'
-                                    options="{'currency_field': 'risk_currency_id'}"
-                                />
+                                <label for="risk_total" />
+                                <div colspan="2">
+                                    <field
+                                        name="risk_total"
+                                        nolabel="1"
+                                        class="oe_subtotal_footer_separator"
+                                        widget='monetary'
+                                        options="{'currency_field': 'risk_currency_id'}"
+                                    />
+                                </div>
                             </group>
                         </group>
                         <group name="risk_limits" class="o_group_col_6">
                             <group
-                                class="oe_subtotal_footer"
+                                class="oe_subtotal_footer oe_risk_group"
                                 string="Specific Limits"
                                 style="float: left !important; border-top: none; "
                             >
