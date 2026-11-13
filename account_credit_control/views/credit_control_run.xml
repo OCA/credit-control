@@ -84,7 +84,7 @@
                         <field name="hide_change_state_button" invisible="1" />
                     </group>
                     <notebook>
-                        <page string="Policies">
+                        <page string="Policies" name="policies">
                             <field name="policy_ids" colspan="4" nolabel="1" />
                             <separator
                                 string="Report"
@@ -97,7 +97,11 @@
                                 attrs="{'invisible': [('report', '=', False)]}"
                             />
                         </page>
-                        <page string="Manual Lines" groups="base.group_no_one">
+                        <page
+                            string="Manual Lines"
+                            name="manual_lines"
+                            groups="base.group_no_one"
+                        >
                             <field name="manual_ids" colspan="4" nolabel="1" />
                         </page>
                     </notebook>

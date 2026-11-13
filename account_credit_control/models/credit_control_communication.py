@@ -140,6 +140,10 @@ class CreditControlCommunication(models.Model):
             " ORDER by credit_control_policy_level.level, "
             "          credit_control_line.currency_id"
         )
+        self.env["credit.control.line"].flush_model(
+            ["partner_id", "policy_level_id", "currency_id", "company_id"]
+        )
+        self.env["credit.control.policy.level"].flush_model(["level"])
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids),))
         res = cr.dictfetchall()
