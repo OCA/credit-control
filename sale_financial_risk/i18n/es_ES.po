@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_financial_risk
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-02 00:47+0000\n"
+"PO-Revision-Date: 2017-06-02 00:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/"
+"es_ES/)\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: sale_financial_risk
+#. odoo-python
+#: code:addons/sale_financial_risk/models/sale.py:0
+#, python-format
+msgid "Financial risk exceeded.\n"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner__risk_sale_order_include
+#: model:ir.model.fields,help:sale_financial_risk.field_res_users__risk_sale_order_include
+msgid "Full risk computation"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order_include
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_include
+msgid "Include Sales Orders"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_config_settings__include_risk_sale_order_done
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
+msgid "Include locked sale orders into risk calculation"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.res_config_settings_view_form
+msgid "Include orders in done state"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order__partner_invoice_id
+msgid "Invoice Address"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order_limit
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order_limit
+msgid "Limit Sales Orders"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_sale_order_line__risk_amount
+msgid "Risk Amount"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model_terms:ir.ui.view,arch_db:sale_financial_risk.financial_risk_sale_order_line_pivot_view
+#, fuzzy
+msgid "Sale lines"
+msgstr "Pedido de venta"
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_sale_order
+#, fuzzy
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_financial_risk
+#: model:ir.model,name:sale_financial_risk.model_sale_order_line
+#, fuzzy
+msgid "Sales Order Line"
+msgstr "Pedido de venta"
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner__risk_sale_order_limit
+#: model:ir.model.fields,help:sale_financial_risk.field_res_users__risk_sale_order_limit
+msgid "Set 0 if it is not locked"
+msgstr ""
+
+#. module: sale_financial_risk
+#. odoo-python
+#: code:addons/sale_financial_risk/models/sale.py:0
+#, python-format
+msgid "This sale order exceeds the financial risk.\n"
+msgstr ""
+
+#. module: sale_financial_risk
+#. odoo-python
+#: code:addons/sale_financial_risk/models/sale.py:0
+#, python-format
+msgid "This sale order exceeds the sales orders risk.\n"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_partner__risk_sale_order
+#: model:ir.model.fields,field_description:sale_financial_risk.field_res_users__risk_sale_order
+msgid "Total Sales Orders Not Invoiced"
+msgstr ""
+
+#. module: sale_financial_risk
+#: model:ir.model.fields,help:sale_financial_risk.field_res_partner__risk_sale_order
+#: model:ir.model.fields,help:sale_financial_risk.field_res_users__risk_sale_order
+msgid "Total not invoiced of sales orders in Sale Order state"
+msgstr ""
