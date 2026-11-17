@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L. <info@moduon.team>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="credit_policy_company_view" model="ir.ui.view">
+        <field name="name">credit.policy.company.form</field>
+        <field name="model">credit.policy.company</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="partner_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

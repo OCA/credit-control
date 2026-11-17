@@ -1,0 +1,12 @@
+- Daniel Campos \<<danielcampos@avanzosc.es>\>
+- Omar Castiñeira \<<omar@comunitea.com>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Sergio Teruel
+  - Alexandre Díaz
+  - Carlos Roca
+  - Stefan Ungureanu
+- [Greenice](https://www.greenice.com):
+  - Fernando La Chica \<<fernandolachica@gmail.com>\>
+- Eduardo de Miguel ([Moduon](https://www.moduon.team/))
+- Rafael Blasco ([Moduon](https://www.moduon.team/))
+- Jairo Llopis ([Moduon](https://www.moduon.team/))
