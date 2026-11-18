@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2026-11-18 13:46+0000\n"
+"PO-Revision-Date: 2026-11-18 16:46+0000\n"
 "Last-Translator: Dorian <dorian.villard@mind-and-go.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -1425,6 +1425,15 @@ msgid ""
 "  If your payment has not been received in the next 5 days, your file will "
 "be transferred to our debt collection agency."
 msgstr ""
+"Nos dossiers indiquent que le paiement des factures figurant dans le "
+"document joint ne nous est toujours pas parvenu, en dépit de nos deux "
+"précédentes relances.<br>\n"
+"  Si votre règlement a déjà été expédié, vous pouvez ignorer cette "
+"notification. Autrement, nous vous remercions de bien vouloir régulariser la "
+"situation immédiatement.<br>\n"
+"  À défaut de réception de votre paiement sous 5 jours, nous nous verrons "
+"dans l'obligation de transférer votre dossier au service de recouvrement de "
+"créances."
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -1445,6 +1454,24 @@ msgid ""
 "Best regards\n"
 "        "
 msgstr ""
+"Nos dossiers indiquent que le règlement de la facture mentionnée ci-dessous "
+"ne nous est toujours pas parvenu, en dépit de notre rappel.\n"
+"\n"
+"Si vous avez déjà procédé au règlement, vous pouvez ignorer cette "
+"notification. Autrement, nous vous remercions de bien vouloir régulariser la "
+"situation sans délai.\n"
+"À défaut de réception de votre paiement sous 5 jours, nous nous verrons dans "
+"l'obligation de transférer votre dossier à notre agence de recouvrement de "
+"créances.\n"
+"\n"
+"Nous restons à votre disposition pour convenir d'un plan de règlement si "
+"nécessaire.\n"
+"Un relevé de compte client est joint à cet envoi.\n"
+"\n"
+"Merci d'avance pour votre collaboration dans ce dossier.\n"
+"\n"
+"Cordialement\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
@@ -1476,19 +1503,17 @@ msgstr "Partenaire"
 #: model:ir.model,name:account_credit_control.model_res_partner_payment_action_type
 #: model:ir.ui.menu,name:account_credit_control.res_partner_payment_action_type_menu
 msgid "Partner Payment Action Types"
-msgstr ""
+msgstr "Types d'actions de règlement contact"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__partner_ref
-#, fuzzy
 msgid "Partner Ref"
-msgstr "Partenaire"
+msgstr "Référence Contact"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__partner_ids
-#, fuzzy
 msgid "Partners"
-msgstr "Partenaire"
+msgstr "Contacts"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_note
@@ -1500,13 +1525,13 @@ msgstr "Note de paiement"
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_communication.py:0
 msgid "Payment Reference"
-msgstr ""
+msgstr "Référence de paiement"
 
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__channel__phone
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_policy_level__channel__phone
 msgid "Phone"
-msgstr ""
+msgstr "Téléphone"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1539,6 +1564,8 @@ msgid ""
 "Policy \"<b>%(name)s</b>\" has generated <b>%(len_policy_lines_generated)d "
 "Credit Control Lines.</b><br/>"
 msgstr ""
+"La politique \" <b>%(name)s</b> \" a généré <b>%(len_policy_lines_generated)"
+"d lignes de relance client.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1587,13 +1614,13 @@ msgstr "Imprimer la sélection"
 #. module: account_credit_control
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_line__state__queued
 msgid "Queued"
-msgstr ""
+msgstr "file d'attente"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__rating_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "Classements"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__policy_id
@@ -1623,12 +1650,12 @@ msgstr "Date du rapport"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__activity_user_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Responsable"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Run channel action"
-msgstr ""
+msgstr "Exécuter l'action de canal"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
@@ -1639,14 +1666,14 @@ msgstr "Date de relance"
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_run_menu
 msgid "Runs"
-msgstr ""
+msgstr "Exécutions"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__partner_user_id
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Salesperson"
-msgstr ""
+msgstr "Vendeur"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
@@ -1672,7 +1699,7 @@ msgstr "Envoyer les courriels"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_action_type__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Séquence"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -1686,9 +1713,8 @@ msgstr "Définir une nouvelle politique de relance"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-#, fuzzy
 msgid "Set to ready all"
-msgstr "Définir le niveau de relance actuel"
+msgstr "Tout définir comme prêt"
 
 #. module: account_credit_control
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1697,11 +1723,14 @@ msgid ""
 "Should you need us to arrange a payment plan for you, please advise.<br>\n"
 "  A customer account statement is enclosed for you convenience."
 msgstr ""
+"i vous avez besoin que nous mettions en place un échéancier de paiement, "
+"n'hésitez pas à nous en informer.<br>\n"
+"  Un relevé de compte client est joint à cet envoi."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level__mail_show_invoice_detail
 msgid "Show Invoice Details in mail"
-msgstr ""
+msgstr "Afficher les détails de la facture dans l'e-mail"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__run_id
@@ -1723,6 +1752,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Statut basé sur les activités\n"
+"Échu : Date d'échéance dépassée\n"
+"Aujourd'hui : Activité du jour\n"
+"Planifié : Activités programmées."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -1736,7 +1769,7 @@ msgstr "Liste des factures en attente de règlement"
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
 msgid "Thank you in advance for your anticipated cooperation in this matter."
-msgstr ""
+msgstr "Nous vous remercions de l'attention que vous porterez à cette demande."
 
 #. module: account_credit_control
 #: model_terms:ir.actions.act_window,help:account_credit_control.credit_control_communication_action
@@ -1744,6 +1777,8 @@ msgid ""
 "That's the most common way of creating these records. However, you can do it "
 "from here too if you want, by pressing <i>Create</i>."
 msgstr ""
+"C'est la manière habituelle de créer ces enregistrements. Vous pouvez "
+"également le faire depuis cet écran en cliquant sur <i>Créer</i>."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_bank_statement_line__credit_policy_id
@@ -1796,9 +1831,8 @@ msgstr "Le premier niveau ne peut pas être basé sur un précédent rappel"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
-#, fuzzy
 msgid "These lines are to do using the Actions."
-msgstr "Ces lignes sont prêtes à être traitées"
+msgstr "Ces lignes sont prêtes à être traitées."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_next_action
@@ -1824,7 +1858,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_credit_control.selection__credit_control_marker__name__to_be_sent
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "To Do"
-msgstr ""
+msgstr "A faire"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1845,7 +1879,7 @@ msgstr "Total facturé"
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__activity_exception_decoration
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Type d’activité d’exception enregistrée."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__user_id
@@ -1856,15 +1890,14 @@ msgstr "Utilisateur"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line__website_message_ids
-#, fuzzy
 msgid "Website Messages"
-msgstr "Message personnalisable"
+msgstr "Message du site internet"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__website_message_ids
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historique de communication du site internet"
 
 #. module: account_credit_control
 #. odoo-python
@@ -1883,6 +1916,10 @@ msgid ""
 "Please choose one of the following policies:\n"
 " %(allowed_names)s"
 msgstr ""
+"Vous ne pouvez utiliser que les politiques définies sur le compte %"
+"(account_name)s.\n"
+"Veuillez choisir l'une des politiques suivantes :\n"
+" %(allowed_names)s"
 
 #. module: account_credit_control
 #. odoo-python
