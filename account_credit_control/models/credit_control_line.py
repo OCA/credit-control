@@ -266,6 +266,53 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
+    def _run_channel_action(self, channels=None):
+        """Send the lines in "To Do" on each of their channels.
+
+        The lines are first grouped into communications (one per partner,
+        level, currency, company and set of channels). Then, for each channel,
+        the lines having this channel are given to ``_run_channel_action_<channel>``.
+        Manual channels (see ``_get_manual_channels``) are skipped.
+
+        :param channels: channel keys to run, all channels if not set
+        :return: the first action returned by a channel (e.g. letter report)
+        """
+        manual_channels = self._get_manual_channels()
+        channels = [
+            channel
+            for channel in self._get_channels()
+            if channel not in manual_channels and (not channels or channel in channels)
+        ]
+        lines = self.filtered(
+            lambda line: line.state == "to_be_sent"
+            and any(line[f"use_channel_{channel}"] for channel in channels)
+        )
+        if not lines:
+            return None
+        self.env["credit.control.communication"]._generate_comm_from_credit_lines(lines)
+        action = None
+        for channel in channels:
+            channel_lines = lines.filtered(f"use_channel_{channel}")
+            if not channel_lines:
+                continue
+            channel_action = getattr(channel_lines, f"_run_channel_action_{channel}")()
+            action = action or channel_action
+        return action
+
+    def _run_channel_action_letter(self):
+        """Print the letters of the communications and mark the lines as done."""
+        self.write({"state": "sent"})
+        return self.communication_id._print_letters()
+
+    def _run_channel_action_email(self):
+        """Queue the emails of the communications.
+
+        The lines are marked as done or in error when the email is sent
+        (see ``mail.mail._update_control_line_status``).
+        """
+        self.write({"state": "queued"})
+        self.communication_id._generate_emails()
+
     def unlink(self):
         for line in self:
             if line.state != "draft":

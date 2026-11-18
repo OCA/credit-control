@@ -45,12 +45,9 @@ class CreditControlEmailer(models.TransientModel):
 
     def _send_emails(self):
         self.ensure_one()
-        comm_obj = self.env["credit.control.communication"]
-
         filtered_lines = self._filter_lines(self.line_ids)
-        comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
-        comms._generate_emails()
-        return comms
+        filtered_lines._run_channel_action(channels=["email"])
+        return filtered_lines.communication_id
 
     def email_lines(self):
         self.ensure_one()

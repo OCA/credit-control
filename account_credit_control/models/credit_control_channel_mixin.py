@@ -12,7 +12,9 @@ class CreditControlChannelMixin(models.AbstractModel):
     To add a channel ``K``, a module must:
 
     * add a boolean field ``use_channel_K`` on this mixin,
-    * add ``K`` to the list returned by ``_get_channels``.
+    * add ``K`` to the list returned by ``_get_channels``,
+    * implement ``credit.control.line._run_channel_action_K``, or add ``K``
+      to ``_get_manual_channels`` if nothing is sent automatically.
     """
 
     _name = "credit.control.channel.mixin"
@@ -24,8 +26,21 @@ class CreditControlChannelMixin(models.AbstractModel):
 
     @api.model
     def _get_channels(self):
-        """Return the channel keys."""
+        """Return the channel keys, in the order they are run.
+
+        Asynchronous channels (email) come after synchronous ones (letter),
+        so that their final result is the one kept on the line state.
+        """
         return ["letter", "email", "phone"]
+
+    @api.model
+    def _get_manual_channels(self):
+        """Return the channel keys handled manually by the user.
+
+        Nothing is sent on these channels and no communication is generated
+        for them: the lines stay "To Do" until the user marks them.
+        """
+        return ["phone"]
 
     @api.model
     def _get_channel_field_names(self):

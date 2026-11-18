@@ -16,7 +16,8 @@ On each generated line, you have many choices:
 
 Once your lines are properly set up, go back to the "run" and click on
 *Run channel action* to massively generate and queue communication emails or
-letters for all linked lines.
+letters for all linked lines. A line with several channels is sent on each of
+them (e.g. a letter is printed and an email is queued).
 
 Then, use the *Communications* smart button to see all email communication
 processes that have been created and follow them.
