@@ -206,8 +206,8 @@ class CreditControlRun(models.Model):
     def run_channel_action(self):
         self.ensure_one()
         lines = self.line_ids.filtered(lambda x: x.state == "to_be_sent")
-        letter_lines = lines.filtered(lambda x: x.channel == "letter")
-        email_lines = lines.filtered(lambda x: x.channel == "email")
+        letter_lines = lines.filtered("use_channel_letter")
+        email_lines = lines.filtered("use_channel_email")
         if email_lines:
             comm_obj = self.env["credit.control.communication"]
             comms = comm_obj._generate_comm_from_credit_lines(email_lines)

@@ -5,8 +5,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
-CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
-
 
 class CreditControlPolicy(models.Model):
     """Define a policy of reminder"""
@@ -252,6 +250,7 @@ class CreditControlPolicyLevel(models.Model):
     a move line is due and the level of overdue of the line"""
 
     _name = "credit.control.policy.level"
+    _inherit = "credit.control.channel.mixin"
     _order = "level"
     _description = """A credit control policy level"""
 
@@ -278,7 +277,6 @@ class CreditControlPolicyLevel(models.Model):
         domain=[("model_id.model", "=", "credit.control.communication")],
         required=True,
     )
-    channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
     custom_mail_text = fields.Html(
@@ -306,6 +304,18 @@ class CreditControlPolicyLevel(models.Model):
             if smallest_level.computation_mode == "previous_date":
                 raise ValidationError(
                     _("The smallest level can not be " "of type Previous Reminder")
+                )
+
+    @api.constrains(lambda self: self._get_channel_field_names())
+    def _check_channels(self):
+        """A level must send the reminder on at least one channel."""
+        for policy_level in self:
+            if not any(policy_level._get_channel_values().values()):
+                raise ValidationError(
+                    _(
+                        "The level %(name)s must have at least one channel.",
+                        name=policy_level.display_name,
+                    )
                 )
 
     def _previous_level(self):

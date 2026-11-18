@@ -6,8 +6,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from .credit_control_policy import CHANNEL_LIST
-
 
 class CreditControlLine(models.Model):
     """A credit control line describes an amount due by a customer
@@ -19,7 +17,11 @@ class CreditControlLine(models.Model):
     """
 
     _name = "credit.control.line"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = [
+        "mail.thread",
+        "mail.activity.mixin",
+        "credit.control.channel.mixin",
+    ]
     _description = "A credit control line"
     _rec_name = "id"
     _order = "date DESC"
@@ -66,11 +68,15 @@ class CreditControlLine(models.Model):
         "Draft and ignored lines will be "
         "generated again on the next run.",
     )
-    channel = fields.Selection(
-        selection=CHANNEL_LIST,
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+    # editable in draft only, like the other fields copied from the level
+    use_channel_letter = fields.Boolean(
+        readonly=True, states={"draft": [("readonly", False)]}
+    )
+    use_channel_email = fields.Boolean(
+        readonly=True, states={"draft": [("readonly", False)]}
+    )
+    use_channel_phone = fields.Boolean(
+        readonly=True, states={"draft": [("readonly", False)]}
     )
     invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
@@ -150,18 +156,18 @@ class CreditControlLine(models.Model):
         self, move_line, level, controlling_date, open_amount, default_lines_vals
     ):
         """Create credit control line"""
-        channel = level.channel
         partner = move_line.partner_id
+        channel_values = level._get_channel_values()
         # Fallback to letter
-        if channel == "email" and partner and not partner.email:
-            channel = "letter"
+        if channel_values["use_channel_email"] and partner and not partner.email:
+            channel_values.update(use_channel_email=False, use_channel_letter=True)
         data = default_lines_vals.copy()
+        data.update(channel_values)
         data.update(
             {
                 "date": controlling_date,
                 "date_due": move_line.date_maturity,
                 "state": "draft",
-                "channel": channel,
                 "invoice_id": (move_line.move_id.id if move_line.move_id else False),
                 "partner_id": partner.id,
                 "amount_due": (

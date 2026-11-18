@@ -25,7 +25,9 @@
                             <field name="date" />
                             <field name="date_entry" />
                             <field name="date_due" />
-                            <field name="channel" />
+                            <field name="use_channel_letter" />
+                            <field name="use_channel_email" />
+                            <field name="use_channel_phone" />
                             <field name="date_sent" />
                             <field name="communication_id" />
                         </group>
@@ -61,7 +63,6 @@
             <search string="Control Credit Lines">
                 <group>
                     <field name="date" />
-                    <field name="channel" />
                     <field name="policy_id" />
                     <separator />
                     <field name="partner_id" />
@@ -107,6 +108,23 @@
                         domain="[('state', 'in', ('error', 'email_error'))]"
                         help="An error has occured during the sending of the email."
                     />
+                    <separator />
+                    <filter
+                        name="filter_channel_letter"
+                        string="Letter"
+                        domain="[('use_channel_letter', '=', True)]"
+                    />
+                    <filter
+                        name="filter_channel_email"
+                        string="Email"
+                        domain="[('use_channel_email', '=', True)]"
+                    />
+                    <filter
+                        name="filter_channel_phone"
+                        string="Phone"
+                        domain="[('use_channel_phone', '=', True)]"
+                    />
+                    <separator />
                     <filter
                         name="filter_manual"
                         icon="fa-hand-paper-o"
@@ -173,13 +191,6 @@
                         string="Credit policy level"
                     />
                     <filter
-                        name="group_by_channel"
-                        domain='[]'
-                        context="{'group_by': 'channel'}"
-                        icon="terp-document-new"
-                        string="Channel"
-                    />
-                    <filter
                         name="group_by_overridden"
                         domain='[]'
                         context="{'group_by': 'manually_overridden'}"
@@ -226,7 +237,9 @@
                 <field name="level" />
                 <field name="manually_overridden" />
                 <field name="state" />
-                <field name="channel" />
+                <field name="use_channel_letter" />
+                <field name="use_channel_email" />
+                <field name="use_channel_phone" />
                 <field name="invoice_id" />
                 <field name="partner_id" />
                 <field name="manual_followup" />
