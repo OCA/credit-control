@@ -1,6 +1,7 @@
 # Copyright 2026 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class CreditControlPolicyLevel(models.Model):
@@ -15,3 +16,11 @@ class CreditControlPolicyLevel(models.Model):
         string="SMS Template",
         domain=[("model_id.model", "=", "credit.control.communication")],
     )
+
+    @api.constrains("channel", "sms_template_id")
+    def _check_sms_template(self):
+        for level in self:
+            if level.channel == "sms" and not level.sms_template_id:
+                raise ValidationError(
+                    _("An SMS template is required on policy level %s.", level.name)
+                )

@@ -54,7 +54,7 @@ class SmsSms(models.Model):
                 line_obj.search(
                     [
                         ("communication_id", "in", list(comm_ids)),
-                        ("state", "=", "queued"),
+                        ("state", "in", ("queued", "sms_error")),
                     ]
                 ).write({"state": new_state})
         return res
