@@ -79,9 +79,9 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         control_run.generate_credit_lines()
         line = self.invoice.credit_control_line_ids
         self.assertEqual(len(line), 1)
-        self.assertTrue(line.use_channel_letter)
-        self.assertTrue(line.use_channel_email)
-        self.assertFalse(line.use_channel_phone)
+        self.assertEqual(line.state_channel_letter, "to_send")
+        self.assertEqual(line.state_channel_email, "to_send")
+        self.assertEqual(line.state_channel_phone, "unused")
 
     def test_line_email_fallback_to_letter(self):
         self.mc_level.use_channel_letter = False
@@ -89,8 +89,8 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         control_run = self._create_run()
         control_run.generate_credit_lines()
         line = self.invoice.credit_control_line_ids
-        self.assertTrue(line.use_channel_letter)
-        self.assertFalse(line.use_channel_email)
+        self.assertEqual(line.state_channel_letter, "to_send")
+        self.assertEqual(line.state_channel_email, "unused")
 
     def test_run_channel_action_multi_channel(self):
         """One line on 2 channels: one communication, one letter, one email."""
@@ -173,6 +173,9 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         self.assertFalse(action)
         self.assertEqual(line.state, "to_be_sent")
         self.assertFalse(line.communication_id)
+        # the user made the call
+        line.state_channel_phone = "sent"
+        self.assertEqual(line.state, "sent")
 
     def test_communication_grouped_by_channels(self):
         """Lines of the same partner and level, with different channels
@@ -186,7 +189,7 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         control_run.generate_credit_lines()
         lines = control_run.line_ids
         self.assertEqual(len(lines), 2)
-        lines[0].use_channel_letter = False
+        lines[0].state_channel_letter = "unused"
         control_run.set_to_ready_lines()
 
         control_run.run_channel_action()
@@ -204,7 +207,7 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         )
         wizard.email_lines()
         self.assertEqual(line.state_channel_email, "queued")
-        self.assertFalse(line.state_channel_letter)
+        self.assertEqual(line.state_channel_letter, "to_send")
         # the letter is not sent yet
         self.assertEqual(line.state, "to_be_sent")
         self.assertEqual(len(self._get_communication_mails(line.communication_id)), 1)

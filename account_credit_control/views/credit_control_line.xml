@@ -25,11 +25,9 @@
                             <field name="date" />
                             <field name="date_entry" />
                             <field name="date_due" />
-                            <field name="use_channel_letter" />
                             <field name="state_channel_letter" />
-                            <field name="use_channel_email" />
                             <field name="state_channel_email" />
-                            <field name="use_channel_phone" />
+                            <field name="state_channel_phone" />
                             <field name="date_sent" />
                             <field name="communication_id" />
                         </group>
@@ -114,17 +112,17 @@
                     <filter
                         name="filter_channel_letter"
                         string="Letter"
-                        domain="[('use_channel_letter', '=', True)]"
+                        domain="[('state_channel_letter', '!=', 'unused')]"
                     />
                     <filter
                         name="filter_channel_email"
                         string="Email"
-                        domain="[('use_channel_email', '=', True)]"
+                        domain="[('state_channel_email', '!=', 'unused')]"
                     />
                     <filter
                         name="filter_channel_phone"
                         string="Phone"
-                        domain="[('use_channel_phone', '=', True)]"
+                        domain="[('state_channel_phone', '!=', 'unused')]"
                     />
                     <separator />
                     <filter
@@ -239,11 +237,9 @@
                 <field name="level" />
                 <field name="manually_overridden" />
                 <field name="state" />
-                <field name="use_channel_letter" />
-                <field name="use_channel_email" />
-                <field name="use_channel_phone" />
-                <field name="state_channel_letter" optional="hide" />
-                <field name="state_channel_email" optional="hide" />
+                <field name="state_channel_letter" />
+                <field name="state_channel_email" />
+                <field name="state_channel_phone" />
                 <field name="invoice_id" />
                 <field name="partner_id" />
                 <field name="manual_followup" />

@@ -250,11 +250,15 @@ class CreditControlPolicyLevel(models.Model):
     a move line is due and the level of overdue of the line"""
 
     _name = "credit.control.policy.level"
-    _inherit = "credit.control.channel.mixin"
     _order = "level"
     _description = """A credit control policy level"""
 
     name = fields.Char(required=True, translate=True)
+    # one boolean per channel: a module adding a channel K adds
+    # use_channel_K here, K in _get_channels and state_channel_K on the line
+    use_channel_letter = fields.Boolean(string="Letter")
+    use_channel_email = fields.Boolean(string="Email")
+    use_channel_phone = fields.Boolean(string="Phone")
     policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
         string="Related Policy",
@@ -306,11 +310,33 @@ class CreditControlPolicyLevel(models.Model):
                     _("The smallest level can not be " "of type Previous Reminder")
                 )
 
-    @api.constrains(lambda self: self._get_channel_field_names())
+    @api.model_create_multi
+    def create(self, vals_list):
+        levels = super().create(vals_list)
+        levels._check_channels()
+        return levels
+
+    def write(self, vals):
+        res = super().write(vals)
+        self._check_channels()
+        return res
+
+    @api.model
+    def _get_channels(self):
+        """Return the supported channel keys."""
+        return ["letter", "email", "phone"]
+
+    def _has_channel(self):
+        """Return whether the level uses at least one channel."""
+        self.ensure_one()
+        return any(
+            self[f"use_channel_{channel}"] for channel in self._get_channels()
+        )
+
     def _check_channels(self):
         """A level must send the reminder on at least one channel."""
         for policy_level in self:
-            if not any(policy_level._get_channel_values().values()):
+            if not policy_level._has_channel():
                 raise ValidationError(
                     _(
                         "The level %(name)s must have at least one channel.",

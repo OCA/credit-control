@@ -6,7 +6,13 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-CHANNEL_STATES = [("queued", "Queued"), ("sent", "Done"), ("error", "Error")]
+CHANNEL_STATES = [
+    ("unused", "Unused"),
+    ("to_send", "To Send"),
+    ("queued", "Queued"),
+    ("sent", "Done"),
+    ("error", "Error"),
+]
 
 
 class CreditControlLine(models.Model):
@@ -22,7 +28,6 @@ class CreditControlLine(models.Model):
     _inherit = [
         "mail.thread",
         "mail.activity.mixin",
-        "credit.control.channel.mixin",
     ]
     _description = "A credit control line"
     _rec_name = "id"
@@ -70,23 +75,39 @@ class CreditControlLine(models.Model):
         "Draft and ignored lines will be "
         "generated again on the next run.",
     )
-    # editable in draft only, like the other fields copied from the level
-    use_channel_letter = fields.Boolean(
-        readonly=True, states={"draft": [("readonly", False)]}
-    )
-    use_channel_email = fields.Boolean(
-        readonly=True, states={"draft": [("readonly", False)]}
-    )
-    use_channel_phone = fields.Boolean(
-        readonly=True, states={"draft": [("readonly", False)]}
-    )
-    # one state per channel sent automatically: 2 channels can finish at
-    # different times (e.g. email and SMS), each one keeps its own result
+    # one state per channel, set from the level when the line is created:
+    # 2 channels can finish at different times (e.g. email and SMS), each one
+    # keeps its own result; editable in draft (choose the channels)
     state_channel_letter = fields.Selection(
-        selection=CHANNEL_STATES, string="Letter status", readonly=True, copy=False
+        selection=CHANNEL_STATES,
+        string="Letter status",
+        required=True,
+        default="unused",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        copy=False,
     )
     state_channel_email = fields.Selection(
-        selection=CHANNEL_STATES, string="Email status", readonly=True, copy=False
+        selection=CHANNEL_STATES,
+        string="Email status",
+        required=True,
+        default="unused",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        copy=False,
+    )
+    # phone is manual: the user marks it as done when the call is made
+    state_channel_phone = fields.Selection(
+        selection=CHANNEL_STATES,
+        string="Phone status",
+        required=True,
+        default="unused",
+        readonly=True,
+        states={
+            "draft": [("readonly", False)],
+            "to_be_sent": [("readonly", False)],
+        },
+        copy=False,
     )
     invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
@@ -167,12 +188,14 @@ class CreditControlLine(models.Model):
     ):
         """Create credit control line"""
         partner = move_line.partner_id
-        channel_values = level._get_channel_values()
-        # Fallback to letter
-        if channel_values["use_channel_email"] and partner and not partner.email:
-            channel_values.update(use_channel_email=False, use_channel_letter=True)
         data = default_lines_vals.copy()
-        data.update(channel_values)
+        for channel in level._get_channels():
+            data[f"state_channel_{channel}"] = (
+                "to_send" if level[f"use_channel_{channel}"] else "unused"
+            )
+        # Fallback to letter
+        if data["state_channel_email"] == "to_send" and partner and not partner.email:
+            data.update(state_channel_email="unused", state_channel_letter="to_send")
         data.update(
             {
                 "date": controlling_date,
@@ -276,84 +299,89 @@ class CreditControlLine(models.Model):
 
         return new_lines
 
-    def _run_channel_action(self, channels=None):
-        """Send the lines in "To Do" on each of their channels.
+    def _run_channel_action(self):
+        """Send the lines in "To Do" on their channels not sent yet.
 
-        The lines are first grouped into communications (one per partner,
-        level, currency, company and set of channels). Then, for each channel,
-        the lines having this channel are given to ``_run_channel_action_<channel>``.
-        Manual channels (see ``_get_manual_channels``) are skipped.
+        The lines are first grouped into communications, then sent on each
+        channel (phone is manual: the user marks it as done).
 
-        :param channels: channel keys to run, all channels if not set
-        :return: the first action returned by a channel (e.g. letter report)
+        :return: the letter report action, if letters are printed
         """
-        manual_channels = self._get_manual_channels()
-        channels = [
-            channel
-            for channel in self._get_channels()
-            if channel not in manual_channels and (not channels or channel in channels)
-        ]
-        lines_per_channel = {
-            channel: self.filtered(
-                lambda line, channel=channel: line.state == "to_be_sent"
-                and line._is_channel_to_send(channel)
+        lines = self.filtered(
+            lambda line: line.state == "to_be_sent"
+            and (
+                line._is_channel_to_send("letter")
+                or line._is_channel_to_send("email")
             )
-            for channel in channels
-        }
-        lines = self.browse().union(*lines_per_channel.values())
+        )
         if not lines:
             return None
-        # a line already sent on another channel keeps its communication:
-        # the result of its email is reported to the lines of this communication
-        self.env["credit.control.communication"]._generate_comm_from_credit_lines(
-            lines.filtered(lambda line: not line.communication_id)
-        )
+        lines._generate_communications()
         action = None
-        for channel, channel_lines in lines_per_channel.items():
-            if not channel_lines:
-                continue
-            channel_action = getattr(channel_lines, f"_run_channel_action_{channel}")()
-            action = action or channel_action
+        letter_lines = lines.filtered(lambda line: line._is_channel_to_send("letter"))
+        if letter_lines:
+            action = letter_lines._run_channel_action_letter()
+        email_lines = lines.filtered(lambda line: line._is_channel_to_send("email"))
+        if email_lines:
+            email_lines._run_channel_action_email()
         return action
 
-    def _is_channel_to_send(self, channel):
-        """The line uses the channel and was not sent on it yet (or failed)."""
-        self.ensure_one()
-        return self[f"use_channel_{channel}"] and self[f"state_channel_{channel}"] in (
-            False,
-            "error",
+    def _generate_communications(self):
+        """Group the lines without communication into communications.
+
+        A line already sent on another channel keeps its communication:
+        the result of its email is reported to the lines of this communication.
+        """
+        self.env["credit.control.communication"]._generate_comm_from_credit_lines(
+            self.filtered(lambda line: not line.communication_id)
         )
 
+    def _is_channel_to_send(self, channel):
+        """The line has the channel to send (or to send again after an error)."""
+        self.ensure_one()
+        return self[f"state_channel_{channel}"] in ("to_send", "error")
+
     def _set_channel_state(self, channel, state):
-        """Write the state of one channel, then the line state from all channels."""
+        """Write the state of one channel (the line state follows, see write)."""
         self.write({f"state_channel_{channel}": state})
+
+    def _update_state_from_channels(self):
+        """Set the line state from the states of its channels."""
         for line in self:
+            if line.state == "draft":
+                continue
             new_state = line._get_state_from_channels()
             if new_state and new_state != line.state:
                 line.state = new_state
+
+    def _get_channel_states(self):
+        """Return the states of the channels used by the line."""
+        self.ensure_one()
+        states = [
+            self[f"state_channel_{channel}"]
+            for channel in self.env["credit.control.policy.level"]._get_channels()
+        ]
+        return [state for state in states if state != "unused"]
 
     def _get_state_from_channels(self):
         """Return the line state from the states of its channels.
 
         * a channel in error: the line is in error,
-        * a channel not sent yet (or a manual channel): the line stays as is,
+        * a channel to send: the line stays as is,
         * a channel queued: the line is queued,
         * all channels done: the line is done.
         """
         self.ensure_one()
-        manual_channels = self._get_manual_channels()
-        states = {
-            channel: self[f"state_channel_{channel}"]
-            if channel not in manual_channels
-            else False
-            for channel in self._get_channels()
-            if self[f"use_channel_{channel}"]
-        }
-        if "error" in states.values():
-            return "email_error" if states.get("email") == "error" else "error"
-        if not all(states.values()):
+        if self.state_channel_email == "error":
+            return "email_error"
+        states = self._get_channel_states()
+        if not states:
             return None
-        if "queued" in states.values():
+        if "error" in states:
+            return "error"
+        if "to_send" in states:
+            return None
+        if "queued" in states:
             return "queued"
         return "sent"
 
@@ -384,6 +412,8 @@ class CreditControlLine(models.Model):
 
     def write(self, values):
         res = super().write(values)
+        if any(fname.startswith("state_channel_") for fname in values):
+            self._update_state_from_channels()
         if "manual_followup" in values:
             self.partner_id.write({"manual_followup": values.get("manual_followup")})
         return res

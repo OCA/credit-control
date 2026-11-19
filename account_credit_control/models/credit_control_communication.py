@@ -126,8 +126,10 @@ class CreditControlCommunication(models.Model):
             ("currency_id", "=", currency_id),
             ("company_id", "=", company_id),
         ]
-        for fname, value in (channel_values or {}).items():
-            domain.append((fname, "=", value))
+        # channel_values: {channel key: whether the lines use the channel}
+        for channel, used in (channel_values or {}).items():
+            operator = "!=" if used else "="
+            domain.append((f"state_channel_{channel}", operator, "unused"))
         cr_lines = cr_line_obj.search(domain)
         return cr_lines
 
@@ -139,11 +141,11 @@ class CreditControlCommunication(models.Model):
             return []
         # the SQL query below reads the channel columns: flush them first
         lines.flush_recordset()
-        channel_fnames = lines._get_channel_field_names()
-        # coalesce: a boolean column can hold NULL, the ORM reads it as False
+        channels = self.env["credit.control.policy.level"]._get_channels()
         channel_columns = "".join(
-            f", coalesce(credit_control_line.{fname}, false) AS {fname}"
-            for fname in channel_fnames
+            f", credit_control_line.state_channel_{channel} != 'unused'"
+            f" AS use_channel_{channel}"
+            for channel in channels
         )
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
@@ -168,13 +170,16 @@ class CreditControlCommunication(models.Model):
         datas = []
         for group in res:
             data = {}
+            channel_values = {
+                channel: group[f"use_channel_{channel}"] for channel in channels
+            }
             level_lines = self._get_credit_lines(
                 lines.ids,
                 group["partner_id"],
                 group["policy_level_id"],
                 group["currency_id"],
                 group["company_id"],
-                channel_values={fname: group[fname] for fname in channel_fnames},
+                channel_values=channel_values,
             )
             company = (
                 self.env["res.company"].browse(group["company_id"])
