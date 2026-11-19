@@ -108,31 +108,51 @@ class CreditControlCommunication(models.Model):
 
     @api.model
     def _get_credit_lines(
-        self, line_ids, partner_id, level_id, currency_id, company_id
+        self,
+        line_ids,
+        partner_id,
+        level_id,
+        currency_id,
+        company_id,
+        channel_values=None,
     ):
-        """Return credit lines related to a partner and a policy level"""
+        """Return credit lines related to a partner, a policy level
+        and a set of channels"""
         cr_line_obj = self.env["credit.control.line"]
-        cr_lines = cr_line_obj.search(
-            [
-                ("id", "in", line_ids),
-                ("partner_id", "=", partner_id),
-                ("policy_level_id", "=", level_id),
-                ("currency_id", "=", currency_id),
-                ("company_id", "=", company_id),
-            ]
-        )
+        domain = [
+            ("id", "in", line_ids),
+            ("partner_id", "=", partner_id),
+            ("policy_level_id", "=", level_id),
+            ("currency_id", "=", currency_id),
+            ("company_id", "=", company_id),
+        ]
+        # channel_values: {channel key: whether the lines use the channel}
+        for channel, used in (channel_values or {}).items():
+            operator = "!=" if used else "="
+            domain.append((f"state_channel_{channel}", operator, "unused"))
+        cr_lines = cr_line_obj.search(domain)
         return cr_lines
 
     @api.model
     def _aggregate_credit_lines(self, lines):
-        """Aggregate credit control line by partner, level, and currency"""
+        """Aggregate credit control line by partner, level, currency
+        and set of channels"""
         if not lines:
             return []
+        # the SQL query below reads the channel columns: flush them first
+        lines.flush_recordset()
+        channels = self.env["credit.control.policy.level"]._get_channels()
+        channel_columns = "".join(
+            f", credit_control_line.state_channel_{channel} != 'unused'"
+            f" AS use_channel_{channel}"
+            for channel in channels
+        )
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
             " credit_control_line.currency_id, "
             " credit_control_policy_level.level, "
             " credit_control_line.company_id "
+            f" {channel_columns} "
             " FROM credit_control_line JOIN credit_control_policy_level "
             "   ON (credit_control_line.policy_level_id = "
             "       credit_control_policy_level.id)"
@@ -140,18 +160,26 @@ class CreditControlCommunication(models.Model):
             " ORDER by credit_control_policy_level.level, "
             "          credit_control_line.currency_id"
         )
+        self.env["credit.control.line"].flush_model(
+            ["partner_id", "policy_level_id", "currency_id", "company_id"]
+        )
+        self.env["credit.control.policy.level"].flush_model(["level"])
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids),))
         res = cr.dictfetchall()
         datas = []
         for group in res:
             data = {}
+            channel_values = {
+                channel: group[f"use_channel_{channel}"] for channel in channels
+            }
             level_lines = self._get_credit_lines(
                 lines.ids,
                 group["partner_id"],
                 group["policy_level_id"],
                 group["currency_id"],
                 group["company_id"],
+                channel_values=channel_values,
             )
             company = (
                 self.env["res.company"].browse(group["company_id"])
@@ -217,7 +245,11 @@ class CreditControlCommunication(models.Model):
         return table_content
 
     def _generate_emails(self):
-        """Generate email message using template related to level"""
+        """Generate email message using template related to level.
+
+        The state of the lines is handled by
+        ``credit.control.line._run_channel_action_email``.
+        """
         for comm in self:
             if comm.policy_level_id.mail_show_invoice_detail:
                 comm = comm.with_context(inject_credit_control_communication_table=True)
@@ -228,9 +260,12 @@ class CreditControlCommunication(models.Model):
                 notify=True,
                 subtype_id=self.env.ref("account_credit_control.mt_request").id,
             )
-            comm.credit_control_line_ids.filtered(
-                lambda line: line.state == "to_be_sent"
-            ).write({"state": "queued"})
+
+    def _print_letters(self):
+        """Return the action printing the letter of the communications."""
+        report_name = "account_credit_control.report_credit_control_summary"
+        report = self.env["ir.actions.report"]._get_report_from_name(report_name)
+        return report.report_action(self)
 
     def _mark_credit_line_as_sent(self):
         lines = self.mapped("credit_control_line_ids")

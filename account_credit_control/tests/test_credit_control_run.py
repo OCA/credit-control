@@ -16,8 +16,7 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 
 
-@tagged("post_install", "-at_install")
-class TestCreditControlRun(AccountTestInvoicingCommon):
+class TestCreditControlRunCase(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
@@ -82,6 +81,9 @@ class TestCreditControlRun(AccountTestInvoicingCommon):
         cls.invoice = invoice_form.save()
         cls.invoice.action_post()
 
+
+@tagged("post_install", "-at_install")
+class TestCreditControlRun(TestCreditControlRunCase):
     def test_check_run_date(self):
         """
         Create a control run older than the last control run

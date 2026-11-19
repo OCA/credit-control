@@ -32,7 +32,7 @@
         <field name="delay_days" eval="0" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_no_follow" />
-        <field name="channel">email</field>
+        <field name="use_channel_email" eval="True" />
         <field name="custom_text">Manual no follow</field>
         <field name="custom_mail_text">Manual no follow</field>
     </record>
@@ -47,7 +47,7 @@
         <field name="delay_days" eval="10" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_3_time" />
-        <field name="channel">email</field>
+        <field name="use_channel_email" eval="True" />
         <field
             name="custom_text"
         >Our records indicate that we have not received the payment of the invoice mentioned below.
@@ -76,7 +76,7 @@ Best regards
         <field name="delay_days" eval="30" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_3_time" />
-        <field name="channel">email</field>
+        <field name="use_channel_email" eval="True" />
         <field
             name="custom_text"
         >Our records indicate that we have not yet received the payment of the invoice mentioned below despite our first reminder.
@@ -105,7 +105,7 @@ Best regards
         <field name="delay_days" eval="10" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_3_time" />
-        <field name="channel">letter</field>
+        <field name="use_channel_letter" eval="True" />
         <field name="custom_text">
 Our records indicate that we still have not received the payment of the invoice mentioned below despite our two reminders.
 If payment have already been sent, please disregard this notice. If not, please proceed with payment.
@@ -146,7 +146,7 @@ Best regards
         <field name="delay_days" eval="30" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_2_time" />
-        <field name="channel">email</field>
+        <field name="use_channel_email" eval="True" />
         <field
             name="custom_text"
         >Our records indicate that we have not received the payment of the invoice mentioned below.
@@ -175,7 +175,7 @@ Best regards
         <field name="delay_days" eval="60" />
         <field name="email_template_id" ref="email_template_credit_control_base" />
         <field name="policy_id" ref="credit_control_2_time" />
-        <field name="channel">letter</field>
+        <field name="use_channel_letter" eval="True" />
         <field
             name="custom_text"
         >Our records indicate that we still have not received the payment of the mentioned below invoice despite our reminder.

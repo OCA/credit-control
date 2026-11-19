@@ -29,7 +29,7 @@ class CreditControlEmailer(models.TransientModel):
         comodel_name="credit.control.line",
         string="Credit Control Lines",
         default=lambda self: self._get_line_ids(),
-        domain=[("state", "=", "to_be_sent"), ("channel", "=", "email")],
+        domain=[("state", "=", "to_be_sent"), ("state_channel_email", "!=", "unused")],
     )
 
     @api.model
@@ -39,18 +39,18 @@ class CreditControlEmailer(models.TransientModel):
         domain = [
             ("state", "=", "to_be_sent"),
             ("id", "in", lines.ids),
-            ("channel", "=", "email"),
+            ("state_channel_email", "!=", "unused"),
         ]
         return line_obj.search(domain)
 
     def _send_emails(self):
         self.ensure_one()
-        comm_obj = self.env["credit.control.communication"]
-
-        filtered_lines = self._filter_lines(self.line_ids)
-        comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
-        comms._generate_emails()
-        return comms
+        filtered_lines = self._filter_lines(self.line_ids).filtered(
+            lambda line: line._is_channel_to_send("email")
+        )
+        filtered_lines._generate_communications()
+        filtered_lines._run_channel_action_email()
+        return filtered_lines.communication_id
 
     def email_lines(self):
         self.ensure_one()

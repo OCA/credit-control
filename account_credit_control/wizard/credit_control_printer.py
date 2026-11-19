@@ -53,6 +53,4 @@ class CreditControlPrinter(models.TransientModel):
         if self.mark_as_sent:
             comms._mark_credit_line_as_sent()
 
-        report_name = "account_credit_control.report_credit_control_summary"
-        report_obj = self.env["ir.actions.report"]._get_report_from_name(report_name)
-        return report_obj.report_action(comms)
+        return comms._print_letters()
