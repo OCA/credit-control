@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="sms_template_credit_control_base" model="sms.template">
+        <field name="name">Credit Control SMS</field>
+        <field
+            name="model_id"
+            ref="account_credit_control.model_credit_control_communication"
+        />
+        <field name="lang">{{ object.contact_address_id.lang }}</field>
+        <field
+            name="body"
+        >{{ object.company_id.name }}: Dear {{ object.contact_address_id.name }}, our records indicate an overdue balance of {{ format_amount(object.total_due, object.currency_id) }}. Please proceed with the payment or disregard this message if already paid.</field>
+    </record>
+</odoo>

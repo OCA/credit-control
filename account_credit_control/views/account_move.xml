@@ -21,6 +21,7 @@
                 <page
                     string="Credit Control"
                     groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+                    name="credit_control"
                 >
                     <group>
                         <field
