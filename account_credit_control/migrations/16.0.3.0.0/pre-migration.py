@@ -32,9 +32,8 @@ def _migrate_levels(cr):
         f"use_channel_{channel} = (channel IS NOT DISTINCT FROM '{channel}')"
         for channel in CHANNELS
     )
-    cr.execute(
-        f"UPDATE credit_control_policy_level SET {assignments}"  # pylint: disable=E8103
-    )
+    query = f"UPDATE credit_control_policy_level SET {assignments}"
+    cr.execute(query)  # pylint: disable=sql-injection
 
 
 def _migrate_lines(cr):
@@ -45,8 +44,7 @@ def _migrate_lines(cr):
         column = f"state_channel_{channel}"
         if not column_exists(cr, "credit_control_line", column):
             create_column(cr, "credit_control_line", column, "varchar")
-        cr.execute(
-            f"""
+        query = f"""
             UPDATE credit_control_line
             SET {column} = CASE
                 WHEN channel IS DISTINCT FROM '{channel}' THEN 'unused'
@@ -55,5 +53,5 @@ def _migrate_lines(cr):
                 WHEN state IN ('error', 'email_error') THEN 'error'
                 ELSE 'to_send'
             END
-            """  # pylint: disable=E8103
-        )
+        """
+        cr.execute(query)  # pylint: disable=sql-injection

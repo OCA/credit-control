@@ -329,9 +329,7 @@ class CreditControlPolicyLevel(models.Model):
     def _has_channel(self):
         """Return whether the level uses at least one channel."""
         self.ensure_one()
-        return any(
-            self[f"use_channel_{channel}"] for channel in self._get_channels()
-        )
+        return any(self[f"use_channel_{channel}"] for channel in self._get_channels())
 
     def _check_channels(self):
         """A level must send the reminder on at least one channel."""

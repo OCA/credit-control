@@ -310,8 +310,7 @@ class CreditControlLine(models.Model):
         lines = self.filtered(
             lambda line: line.state == "to_be_sent"
             and (
-                line._is_channel_to_send("letter")
-                or line._is_channel_to_send("email")
+                line._is_channel_to_send("letter") or line._is_channel_to_send("email")
             )
         )
         if not lines:
