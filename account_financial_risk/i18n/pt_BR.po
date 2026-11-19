@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2026-11-19 09:27+0000\n"
+"PO-Revision-Date: 2026-11-19 11:46+0000\n"
 "Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-partner-"
 "contact-9-0/language/pt_BR/)\n"
@@ -451,7 +451,7 @@ msgstr "Objeto"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
-msgstr "Assistente de risco do parceiro excedido"
+msgstr "Assistente de limite de crédito excedido"
 
 #. module: account_financial_risk
 #. odoo-python
