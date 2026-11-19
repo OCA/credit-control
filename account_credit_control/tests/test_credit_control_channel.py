@@ -110,7 +110,41 @@ class TestCreditControlChannel(TestCreditControlRunCase):
         self.assertEqual(action["context"]["active_ids"], communication.ids)
         mails = self._get_communication_mails(communication)
         self.assertEqual(len(mails), 1)
-        # the email is the last channel run: its result is the line state
+        self.assertEqual(line.state_channel_letter, "sent")
+        self.assertEqual(line.state_channel_email, "queued")
+        self.assertEqual(line.state, "queued")
+        mails.send()
+        self.assertEqual(line.state_channel_email, "sent")
+        self.assertEqual(line.state, "sent")
+
+    def test_run_channel_action_email_error_keeps_letter_result(self):
+        control_run = self._generate_ready_lines()
+        line = control_run.line_ids
+        control_run.run_channel_action()
+        mails = self._get_communication_mails(line.communication_id)
+        mails.write({"email_to": False, "recipient_ids": [(5, 0, 0)]})
+        mails.send()
+        self.assertEqual(line.state_channel_letter, "sent")
+        self.assertEqual(line.state_channel_email, "error")
+        self.assertEqual(line.state, "email_error")
+
+    def test_run_channel_action_after_emailer(self):
+        """The email sent by the wizard is not sent again by the run,
+        and its result is still reported on the line."""
+        control_run = self._generate_ready_lines()
+        line = control_run.line_ids
+        self.env["credit.control.emailer"].create(
+            {"line_ids": [(6, 0, line.ids)]}
+        ).email_lines()
+        communication = line.communication_id
+        # the letter is not sent yet
+        self.assertEqual(line.state, "to_be_sent")
+
+        control_run.run_channel_action()
+
+        self.assertEqual(line.communication_id, communication)
+        mails = self._get_communication_mails(communication)
+        self.assertEqual(len(mails), 1)
         self.assertEqual(line.state, "queued")
         mails.send()
         self.assertEqual(line.state, "sent")
@@ -169,5 +203,8 @@ class TestCreditControlChannel(TestCreditControlRunCase):
             {"line_ids": [(6, 0, line.ids)]}
         )
         wizard.email_lines()
-        self.assertEqual(line.state, "queued")
+        self.assertEqual(line.state_channel_email, "queued")
+        self.assertFalse(line.state_channel_letter)
+        # the letter is not sent yet
+        self.assertEqual(line.state, "to_be_sent")
         self.assertEqual(len(self._get_communication_mails(line.communication_id)), 1)

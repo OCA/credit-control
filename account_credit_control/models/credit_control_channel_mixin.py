@@ -13,7 +13,8 @@ class CreditControlChannelMixin(models.AbstractModel):
 
     * add a boolean field ``use_channel_K`` on this mixin,
     * add ``K`` to the list returned by ``_get_channels``,
-    * implement ``credit.control.line._run_channel_action_K``, or add ``K``
+    * implement ``credit.control.line._run_channel_action_K`` and add a
+      ``state_channel_K`` field on ``credit.control.line``, or add ``K``
       to ``_get_manual_channels`` if nothing is sent automatically.
     """
 
@@ -26,11 +27,7 @@ class CreditControlChannelMixin(models.AbstractModel):
 
     @api.model
     def _get_channels(self):
-        """Return the channel keys, in the order they are run.
-
-        Asynchronous channels (email) come after synchronous ones (letter),
-        so that their final result is the one kept on the line state.
-        """
+        """Return the channel keys, in the order they are run."""
         return ["letter", "email", "phone"]
 
     @api.model
@@ -38,7 +35,8 @@ class CreditControlChannelMixin(models.AbstractModel):
         """Return the channel keys handled manually by the user.
 
         Nothing is sent on these channels and no communication is generated
-        for them: the lines stay "To Do" until the user marks them.
+        for them: the lines stay "To Do" until the user marks them, even when
+        their other channels are done.
         """
         return ["phone"]
 

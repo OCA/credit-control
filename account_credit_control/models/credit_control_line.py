@@ -6,6 +6,8 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+CHANNEL_STATES = [("queued", "Queued"), ("sent", "Done"), ("error", "Error")]
+
 
 class CreditControlLine(models.Model):
     """A credit control line describes an amount due by a customer
@@ -77,6 +79,14 @@ class CreditControlLine(models.Model):
     )
     use_channel_phone = fields.Boolean(
         readonly=True, states={"draft": [("readonly", False)]}
+    )
+    # one state per channel sent automatically: 2 channels can finish at
+    # different times (e.g. email and SMS), each one keeps its own result
+    state_channel_letter = fields.Selection(
+        selection=CHANNEL_STATES, string="Letter status", readonly=True, copy=False
+    )
+    state_channel_email = fields.Selection(
+        selection=CHANNEL_STATES, string="Email status", readonly=True, copy=False
     )
     invoice_id = fields.Many2one(comodel_name="account.move", readonly=True)
     partner_id = fields.Many2one(
@@ -283,34 +293,82 @@ class CreditControlLine(models.Model):
             for channel in self._get_channels()
             if channel not in manual_channels and (not channels or channel in channels)
         ]
-        lines = self.filtered(
-            lambda line: line.state == "to_be_sent"
-            and any(line[f"use_channel_{channel}"] for channel in channels)
-        )
+        lines_per_channel = {
+            channel: self.filtered(
+                lambda line, channel=channel: line.state == "to_be_sent"
+                and line._is_channel_to_send(channel)
+            )
+            for channel in channels
+        }
+        lines = self.browse().union(*lines_per_channel.values())
         if not lines:
             return None
-        self.env["credit.control.communication"]._generate_comm_from_credit_lines(lines)
+        # a line already sent on another channel keeps its communication:
+        # the result of its email is reported to the lines of this communication
+        self.env["credit.control.communication"]._generate_comm_from_credit_lines(
+            lines.filtered(lambda line: not line.communication_id)
+        )
         action = None
-        for channel in channels:
-            channel_lines = lines.filtered(f"use_channel_{channel}")
+        for channel, channel_lines in lines_per_channel.items():
             if not channel_lines:
                 continue
             channel_action = getattr(channel_lines, f"_run_channel_action_{channel}")()
             action = action or channel_action
         return action
 
+    def _is_channel_to_send(self, channel):
+        """The line uses the channel and was not sent on it yet (or failed)."""
+        self.ensure_one()
+        return self[f"use_channel_{channel}"] and self[f"state_channel_{channel}"] in (
+            False,
+            "error",
+        )
+
+    def _set_channel_state(self, channel, state):
+        """Write the state of one channel, then the line state from all channels."""
+        self.write({f"state_channel_{channel}": state})
+        for line in self:
+            new_state = line._get_state_from_channels()
+            if new_state and new_state != line.state:
+                line.state = new_state
+
+    def _get_state_from_channels(self):
+        """Return the line state from the states of its channels.
+
+        * a channel in error: the line is in error,
+        * a channel not sent yet (or a manual channel): the line stays as is,
+        * a channel queued: the line is queued,
+        * all channels done: the line is done.
+        """
+        self.ensure_one()
+        manual_channels = self._get_manual_channels()
+        states = {
+            channel: self[f"state_channel_{channel}"]
+            if channel not in manual_channels
+            else False
+            for channel in self._get_channels()
+            if self[f"use_channel_{channel}"]
+        }
+        if "error" in states.values():
+            return "email_error" if states.get("email") == "error" else "error"
+        if not all(states.values()):
+            return None
+        if "queued" in states.values():
+            return "queued"
+        return "sent"
+
     def _run_channel_action_letter(self):
         """Print the letters of the communications and mark the lines as done."""
-        self.write({"state": "sent"})
+        self._set_channel_state("letter", "sent")
         return self.communication_id._print_letters()
 
     def _run_channel_action_email(self):
         """Queue the emails of the communications.
 
         The lines are marked as done or in error when the email is sent
-        (see ``mail.mail._update_control_line_status``).
+        (see ``mail.mail._postprocess_sent_message``).
         """
-        self.write({"state": "queued"})
+        self._set_channel_state("email", "queued")
         self.communication_id._generate_emails()
 
     def unlink(self):

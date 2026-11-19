@@ -26,7 +26,9 @@
                             <field name="date_entry" />
                             <field name="date_due" />
                             <field name="use_channel_letter" />
+                            <field name="state_channel_letter" />
                             <field name="use_channel_email" />
+                            <field name="state_channel_email" />
                             <field name="use_channel_phone" />
                             <field name="date_sent" />
                             <field name="communication_id" />
@@ -240,6 +242,8 @@
                 <field name="use_channel_letter" />
                 <field name="use_channel_email" />
                 <field name="use_channel_phone" />
+                <field name="state_channel_letter" optional="hide" />
+                <field name="state_channel_email" optional="hide" />
                 <field name="invoice_id" />
                 <field name="partner_id" />
                 <field name="manual_followup" />
