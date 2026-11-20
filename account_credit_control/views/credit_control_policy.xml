@@ -30,8 +30,9 @@
                     <notebook colspan="4">
                         <page string="Policy levels">
                             <field name="level_ids" nolabel="1" colspan="4">
-                                <list>
+                                <list decoration-muted="not active">
                                     <field name="name" />
+                                    <field name="active" />
                                     <field name="level" />
                                     <field name="channel" />
                                     <field name="delay_days" />
@@ -39,10 +40,13 @@
                                     <field name="email_template_id" />
                                 </list>
                                 <form>
-                                    <field name="name" />
+                                    <group col="2">
+                                        <field name="name" colspan="2" />
+                                    </group>
                                     <notebook>
                                         <page string="Delay Setting">
                                             <group>
+                                                <field name="active" />
                                                 <field name="level" />
                                                 <field name="channel" />
                                                 <field name="delay_days" />
