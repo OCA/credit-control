@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-24 01:41+0000\n"
-"PO-Revision-Date: 2026-11-21 17:46+0000\n"
+"PO-Revision-Date: 2026-11-21 20:46+0000\n"
 "Last-Translator: painkin <pasi.inkinen@iodo.fi>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-partner-contact-9-0/"
 "language/fi/)\n"
@@ -348,41 +348,41 @@ msgstr "Sisällytä avoimet laskut / pääomasaldo"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_include
 msgid "Include Other Account Open Amount"
-msgstr ""
+msgstr "Sisällytä muiden tilien avaussumma"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_include
 msgid "Include Other Account Unpaid Amount"
-msgstr ""
+msgstr "Sisällytä muiden tilien maksamaton summa"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_include
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_include
 msgid "Include Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Sisällytä maksamattomat laskut / pääomasaldo"
 
 #. module: account_financial_risk
 #: model_terms:ir.ui.view,arch_db:account_financial_risk.res_partner_view_risk
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_exception
 #: model:ir.model.fields,help:account_financial_risk.field_res_users__risk_exception
 msgid "It Indicate if partner risk exceeded"
-msgstr ""
+msgstr "Ilmoita, ylittikö kumppaniriski rajan"
 
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Päiväkirjamerkintä"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__date_credit_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__date_credit_limit
 msgid "Last Credit Limit Date"
-msgstr ""
+msgstr "Luottorajan viimeisin päivämäärä"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__write_uid
@@ -398,49 +398,49 @@ msgstr "Viimeksi päivittänyt"
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_draft_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_draft_limit
 msgid "Limit In Draft Invoices"
-msgstr ""
+msgstr "Raja luonnoslaskuissa"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_open_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_open_limit
 msgid "Limit In Open Invoices/Principal Balance"
-msgstr ""
+msgstr "Raja avoimissa laskuissa / pääomasaldo"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_invoice_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_invoice_unpaid_limit
 msgid "Limit In Unpaid Invoices/Principal Balance"
-msgstr ""
+msgstr "Raja maksamattomissa laskuissa / pääomasaldossa"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_limit
 msgid "Limit Other Account Open Amount"
-msgstr ""
+msgstr "Rajoita muiden tilien avaamisen määrää"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__risk_account_amount_unpaid_limit
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__risk_account_amount_unpaid_limit
 msgid "Limit Other Account Unpaid Amount"
-msgstr ""
+msgstr "Rajoita muiden tilien maksamatonta summaa"
 
 #. module: account_financial_risk
 #: model:res.groups,name:account_financial_risk.group_account_financial_risk_manager
 msgid "Manager"
-msgstr ""
+msgstr "Esihenkilö"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__manual_credit_currency_id
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__manual_credit_currency_id
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__manual
 msgid "Manual Credit Currency"
-msgstr ""
+msgstr "Manuaalinen luottovaluutta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_company__invoice_unpaid_margin
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_config_settings__invoice_unpaid_margin
 msgid "Maturity Margin"
-msgstr ""
+msgstr "Erääntymismarginaali"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_partner_risk_exceeded_wiz__origin_reference
@@ -450,34 +450,34 @@ msgstr "Objekti"
 #. module: account_financial_risk
 #: model:ir.model,name:account_financial_risk.model_partner_risk_exceeded_wiz
 msgid "Partner Risk Exceeded Wizard"
-msgstr ""
+msgstr "Kumppaniriski ylitti ohjatun toiminnon"
 
 #. module: account_financial_risk
 #. odoo-python
 #: code:addons/account_financial_risk/wizards/parner_risk_exceeded.py:0
 msgid "Partner risk exceeded"
-msgstr ""
+msgstr "Kumppaniriski ylitti ohjatun toiminnon"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_partner__portal_show_financial_risk_visible
 #: model:ir.model.fields,field_description:account_financial_risk.field_res_users__portal_show_financial_risk_visible
 msgid "Portal Show Financial Risk Visible"
-msgstr ""
+msgstr "Tuo taloudellinen riski näkyviin portaalissa"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__pricelist
 msgid "Pricelist Currency"
-msgstr ""
+msgstr "Hinnaston valuutta"
 
 #. module: account_financial_risk
 #: model:res.groups,comment:account_financial_risk.group_account_financial_risk_user
 msgid "Read only access to financial risk info"
-msgstr ""
+msgstr "Vain luku -oikeus taloudellisia riskejä koskeviin tietoihin"
 
 #. module: account_financial_risk
 #: model:ir.model.fields.selection,name:account_financial_risk.selection__res_partner__credit_currency__receivable
 msgid "Receivable Currency"
-msgstr ""
+msgstr "Saamisten valuutta"
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount_unpaid
@@ -487,6 +487,9 @@ msgid ""
 "set as partner receivable and date maturity exceeded, considering Due Margin "
 "set in account settings."
 msgstr ""
+"Täsmäyttämätön jäännössumma kirjausriveillä, jotka liittyvät kumppanin "
+"myyntisaamiset-tiliksi määritettyyn tiliin, ja joiden eräpäivä on ylittynyt "
+"– huomioiden tiliasetuksissa määritetyn sallitun marginaalin (Due Margin)."
 
 #. module: account_financial_risk
 #: model:ir.model.fields,help:account_financial_risk.field_res_partner__risk_account_amount
