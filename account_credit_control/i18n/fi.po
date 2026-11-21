@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2026-11-21 17:46+0000\n"
+"PO-Revision-Date: 2026-11-21 20:46+0000\n"
 "Last-Translator: painkin <pasi.inkinen@iodo.fi>\n"
 "Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "Language: fi\n"
@@ -38,6 +38,22 @@ msgid ""
 "Best regards\n"
 "        "
 msgstr ""
+"\n"
+"Tietojemme mukaan emme ole vieläkään saaneet alla mainitun laskun maksua "
+"kahdesta muistutuksestamme huolimatta.\n"
+"Jos maksu on jo lähetetty, jätä tämä ilmoitus huomiotta. Jos ei, jatka "
+"maksua.\n"
+"Jos maksuasi ei ole saapunut seuraavan 5 päivän aikana, tiedostosi "
+"siirretään perintätoimistollemme.\n"
+"\n"
+"Jos tarvitset meidän järjestämään sinulle maksusuunnitelman, ole hyvä ja "
+"neuvo.\n"
+"Asiakkaan tiliote on toimituksen avuksi.\n"
+"\n"
+"Kiitos jo etukäteen yhteistyöstäsi tässä asiassa.\n"
+"\n"
+"Ystävällisin terveisin\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
@@ -469,23 +485,23 @@ msgstr "Luotonvalvonnan analyysi"
 #: model:ir.actions.act_window,name:account_credit_control.act_partner_credit_communication
 #: model_terms:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 msgid "Credit Control Communication"
-msgstr "Saatavien hallintaan liittyvä viestintä"
+msgstr "Luotonhallintaan liittyvä viestintä"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_communication_action
 msgid "Credit Control Communications"
-msgstr "Saatavien hallintaan liittyvä viestintä"
+msgstr "Luotonvalvontaan liittyvä viestintä"
 
 #. module: account_credit_control
 #: model:mail.template,name:account_credit_control.email_template_credit_control_base
 msgid "Credit Control Email"
-msgstr "Saatavien valvontaa koskeva sähköposti"
+msgstr "Luoton valvontaa koskeva sähköposti"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_analysis_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_analysis_ids
 msgid "Credit Control Levels"
-msgstr "Saatavien hallinnan tasot"
+msgstr "Luotonvalvonnan tasot"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_line_action
@@ -493,13 +509,13 @@ msgstr "Saatavien hallinnan tasot"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker__line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer__line_ids
 msgid "Credit Control Lines"
-msgstr "Saatavien hallinnan rivit"
+msgstr "Luotonvalvonnan rivit"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_policy_configuration_action
 #: model:ir.ui.menu,name:account_credit_control.credit_policy_configuration_action_menu
 msgid "Credit Control Policies"
-msgstr "Saatavien hallinnan säännöt"
+msgstr "Luotonvalvonnan säännöt"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_account_bank_statement_line__credit_policy_id
@@ -509,33 +525,33 @@ msgstr "Saatavien hallinnan säännöt"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_policy_id
 msgid "Credit Control Policy"
-msgstr "Saatavien hallinnan sääntö"
+msgstr "Luotonvalvonnan sääntö"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 msgid "Credit Control Policy Changer"
-msgstr "Saatavien hallinnan sääntöjen muuttaja"
+msgstr "Luotonvalvonnan sääntöjen muuttaja"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_run
 msgid "Credit Control Run"
-msgstr "Saatavien hallinnan ajo"
+msgstr "Luotonvalvonnan ajo"
 
 #. module: account_credit_control
 #: model:ir.actions.report,name:account_credit_control.credit_control_summary
 msgid "Credit Control Summary"
-msgstr "Saatavien hallinnan yhteenveto"
+msgstr "Luotonvalvonnan yhteenveto"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company__credit_control_tolerance
 #: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings__credit_control_tolerance
 msgid "Credit Control Tolerance"
-msgstr "Saatavien hallinnan toleranssi"
+msgstr "Luotonvalvonnan toleranssi"
 
 #. module: account_credit_control
 #: model:mail.template,subject:account_credit_control.email_template_credit_control_base
 msgid "Credit Control: ({{object.policy_level_id.name or 'n/a'}})"
-msgstr "Saatavien hallinta: ({{object.policy_level_id.name or 'n/a'}})"
+msgstr "Luotonvalvonta: ({{object.policy_level_id.name or 'n/a'}})"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.act_account_credit_relation_relation
@@ -545,45 +561,45 @@ msgstr "Saatavien hallinta: ({{object.policy_level_id.name or 'n/a'}})"
 #: model:ir.model.fields,field_description:account_credit_control.field_account_move__credit_control_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication__credit_control_line_ids
 msgid "Credit Lines"
-msgstr "Saatavien hallinnan rajat"
+msgstr "Luotonvalvonnan rajat"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Tolerance Limit"
-msgstr "Saatavien toleranssirajat"
+msgstr "Luoton toleranssirajat"
 
 #. module: account_credit_control
 #: model:mail.message.subtype,name:account_credit_control.mt_credit_control_new
 #: model:mail.message.subtype,name:account_credit_control.mt_request
 msgid "Credit control"
-msgstr "Saatavien hallinta"
+msgstr "Luotonvalvonta"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line__communication_id
 msgid "Credit control communication process where this line belongs"
-msgstr "Saatavien hallinnan viestintäprosessi, johon tämä linja kuuluu"
+msgstr "Luotonvalvonnan viestintäprosessi, johon tämä linja kuuluu"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
 msgid "Credit control line generator"
-msgstr "Saatavien hallinnan luontityökalu"
+msgstr "Luotonvalvonnan luontityökalu"
 
 #. module: account_credit_control
 #: model:mail.message.subtype,description:account_credit_control.mt_request
 msgid "Credit control notification"
-msgstr "Saatavien hallintailmoitus"
+msgstr "Luotonvalvontailmoitus"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Credit policy"
-msgstr "Saatavien politiikka"
+msgstr "Luottokäytäntö"
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Credit policy level"
-msgstr "Saatavien politiikan taso"
+msgstr "Luottokäytännön taso"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_analysis__currency_id
@@ -621,7 +637,7 @@ msgstr "Eräpäivä"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Default credit control policy to partners"
-msgstr "Kumppaneita koskeva oletusarvoinen saatavien hallinnan käytäntö"
+msgstr "Kumppaneita koskeva oletusarvoinen luotonvalvonnan käytäntö"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy
@@ -807,9 +823,8 @@ msgid ""
 "Go to <i>Invoicing &gt; Credit Control &gt; Credit Control Run</i> to create "
 "a new credit control communication process."
 msgstr ""
-"Siirry kohtaan <i>Laskutus &gt; Saatavien valvonta &gt; Saatavien valvonta-"
-"ajo</i> luodaksesi uuden prosessin saatavien valvontaan liittyvää viestintää "
-"varten."
+"Siirry kohtaan <i>Laskutus &gt; Luotonvalvonta&gt; Luotonvalvonnan ajo</i> "
+"luodaksesi uuden prosessin luotonvalvontaan liittyvää viestintää varten."
 
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.credit_control_communication_search_view
@@ -861,8 +876,8 @@ msgid ""
 "If a credit control line has been generatedon a policy and the policy has "
 "been changed in the meantime, it has to be handled manually"
 msgstr ""
-"Jos käytännölle on luotu saatavien hallinnan rivi ja käytäntöön on sillä "
-"välin tehty muutoksia, se on käsiteltävä manuaalisesti."
+"Jos käytännölle on luotu luotonvalvonnan rivi ja käytäntöön on sillä välin "
+"tehty muutoksia, se on käsiteltävä manuaalisesti."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_communication__message_needaction
@@ -1055,7 +1070,7 @@ msgstr "Vastuuhenkilö"
 #. module: account_credit_control
 #: model_terms:ir.ui.view,arch_db:account_credit_control.view_move_form
 msgid "Manual Credit Control Policy"
-msgstr "Manuaalinen Saatavien hallinnan käytäntö"
+msgstr "Manuaalinen luotonvalvonnan käytäntö"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.action_customer_followup
@@ -1108,7 +1123,7 @@ msgstr "Merkitse kirjerivit käsitellyiksi"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_emailer
 msgid "Mass credit line emailer"
-msgstr "Saatavien hallintarivien massapostitus"
+msgstr "Luotonvalvonntarivien massapostitus"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_marker
@@ -1217,7 +1232,7 @@ msgstr "Seuraavan toimenpiteen tyyppi"
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:0
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:0
 msgid "No credit control lines selected."
-msgstr "Saatavien hallinnan rivejä ei ole valittu"
+msgstr "Luotonvalvonnan rivejä ei ole valittu"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.no_follow_1
@@ -1274,8 +1289,7 @@ msgstr "Avoin summa"
 msgid ""
 "Open balance on credit control linesof same partner, policy and currency"
 msgstr ""
-"Avoin saldo saman kumppanin, käytännön ja valuutan saatavien hallinnan "
-"riveillä"
+"Avoin saldo saman kumppanin, käytännön ja valuutan luotonvalvonnan riveillä"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner__payment_responsible_id
@@ -1530,13 +1544,13 @@ msgid ""
 "Credit Control Lines.</b><br/>"
 msgstr ""
 "Käytäntö ”<b>%(name)s</b>” on luonut <b>%(len_policy_lines_generated)d "
-"saatavien hallintariviä.</b><br/>"
+"luotonvalvonnan riviä.</b><br/>"
 
 #. module: account_credit_control
 #. odoo-python
 #: code:addons/account_credit_control/models/credit_control_policy.py:0
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
-msgstr "Käytäntö ”<b>%s</b>” ei ole luonut yhtään saatavienhallintariviä.<br/>"
+msgstr "Käytäntö ”<b>%s</b>” ei ole luonut yhtään luotonvalvonnan riviä.<br/>"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy__level_ids
@@ -1758,9 +1772,9 @@ msgid ""
 "The Credit Control Policy used for this partner. This setting can be forced "
 "on the invoice. If nothing is defined, it will use the company setting."
 msgstr ""
-"Tälle kumppanille käytettävä saatavien halllintakäytäntö. Tämä asetus "
-"voidaan määrätä pakolliseksi laskulle. Jos mitään ei ole määritelty, "
-"käytetään yritystason asetusta."
+"Tälle kumppanille käytettävä luotonvalvonnan käytäntö. Tämä asetus voidaan "
+"määrätä pakolliseksi laskulle. Jos mitään ei ole määritelty, käytetään "
+"yritystason asetusta."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_company__credit_policy_id
@@ -1769,7 +1783,7 @@ msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
 "overridden on partners or invoices."
 msgstr ""
-"Saatavien hallintakäytäntö, jota sovelletaan kumppaneihin oletusarvoisesti. "
+"Luotonvalvonnan käytäntö, jota sovelletaan kumppaneihin oletusarvoisesti. "
 "Tämä asetus voidaan ohittaa kumppanikohtaisesti tai laskukohtaisesti."
 
 #. module: account_credit_control
@@ -1893,7 +1907,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
-msgstr "Saatavien hallintaan liittyvä viestintä"
+msgstr "Luotonvalvontaan liittyvä viestintä"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Viimeksi muokattu"
