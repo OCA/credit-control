@@ -4,9 +4,10 @@
 {
     "name": "Sale Financial Risk",
     "summary": "Manage partner risk in sales orders",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.1.0",
     "category": "Sales Management",
     "license": "AGPL-3",
+    "maintainers": ["carlosdauden"],
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/credit-control",
     "depends": ["sale", "account_financial_risk"],

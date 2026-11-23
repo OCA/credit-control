@@ -46,12 +46,23 @@ orders.
 .. contents::
    :local:
 
+Configuration
+=============
+
+The sales orders risk is not the amount shown by the Odoo core credit
+limit banner on draft sales orders, which adds to the total receivable
+the ordered amount not invoiced in posted invoices of the confirmed
+sales orders of the user's main company. To avoid showing two different
+amounts, disable *Sales Credit Limit* in the accounting settings of each
+company, as explained in *account_financial_risk*.
+
 Usage
 =====
 
 To use this module, you need to:
 
-1. Go to *Customers > Financial Risk*
+1. Go to *Sales > Orders > Customers*, open a customer and select its
+   *Financial Risk* tab.
 2. Set limits and choose options to compute in credit limit.
 3. Go to *Sales -> Orders -> Orders* and create a new Sales Orders.
 
@@ -105,6 +116,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-carlosdauden| image:: https://github.com/carlosdauden.png?size=40px
+    :target: https://github.com/carlosdauden
+    :alt: carlosdauden
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-carlosdauden| 
 
 This module is part of the `OCA/credit-control <https://github.com/OCA/credit-control/tree/20.0/sale_financial_risk>`_ project on GitHub.
 

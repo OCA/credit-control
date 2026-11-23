@@ -14,11 +14,12 @@
             >
                 <setting
                     id="include_risk_sale_order_done"
-                    string="Include orders in done state"
+                    string="Include locked orders"
                 >
                     <field name="include_risk_sale_order_done" />
                     <div class="text-muted">
-                        Include locked sale orders into risk calculation
+                        Include locked sale orders into risk calculation.
+                        Without it, locking an order removes it from the risk.
                     </div>
                 </setting>
                 <setting

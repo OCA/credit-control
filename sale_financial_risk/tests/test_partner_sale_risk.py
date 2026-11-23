@@ -1,6 +1,8 @@
 # Copyright 2016-2018 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import timedelta
+
 from odoo import Command, fields
 from odoo.tests import TransactionCase, new_test_user
 
@@ -130,41 +132,37 @@ class TestPartnerSaleRisk(TransactionCase):
         res = sale_order2.with_user(sale_user).action_cancel()
         self.assertEqual(sale_order2.state, "cancel")
 
-    def test_sale_order_auto_done(self):
-        self.env["ir.config_parameter"].create(
-            {"key": "sale.auto_done_setting", "value": "True"}
-        )
-        self.env["ir.config_parameter"].create(
-            {
-                "key": "sale_financial_risk.include_risk_sale_order_done",
-                "value": "True",
-            }
+    def test_sale_order_locked(self):
+        """Locked orders, the done state up to 16.0, only count in the risk
+        when the setting includes them."""
+        self.env.ref("base.group_user").sudo()._apply_group(
+            self.env.ref("sale.group_auto_done_setting")
         )
         self.sale_order.action_confirm()
-        self.partner.risk_sale_order_include = True
+        self.assertTrue(self.sale_order.locked)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        action = self.partner.with_context(
+            open_risk_field="risk_sale_order"
+        ).open_risk_pivot_info()
+        self.assertFalse(self.env["sale.order.line"].search(action["domain"]))
+        # Including locked orders recomputes their lines
+        self.env["res.config.settings"].create(
+            {"include_risk_sale_order_done": True}
+        ).set_values()
         self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
-        self.assertFalse(self.partner.risk_exception)
-        self.partner.risk_sale_order_limit = 99.0
-        self.assertTrue(self.partner.risk_exception)
-        sale_order2 = self.sale_order.copy()
-        wiz_dic = sale_order2.action_confirm()
-        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
         self.partner.risk_sale_order_limit = 150.0
-        wiz_dic = sale_order2.action_confirm()
+        wiz_dic = self.sale_order.copy().action_confirm()
         wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
         self.assertEqual(
             wiz.exception_msg, "This sale order exceeds the sales orders risk.\n"
         )
-        self.partner.risk_sale_order_limit = 0.0
-        self.partner.risk_sale_order_include = True
-        self.partner.credit_limit = 100.0
-        wiz_dic = sale_order2.action_confirm()
-        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
-        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
-        self.assertTrue(self.partner.risk_allow_edit)
-        wiz.button_continue()
-        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+        # Back to the default, unlocking the order adds its risk
+        self.env["res.config.settings"].create(
+            {"include_risk_sale_order_done": False}
+        ).set_values()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        self.sale_order.action_unlock()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 115.0)
 
     def test_compute_risk_amount(self):
         self.sale_order.action_confirm()
@@ -226,6 +224,44 @@ class TestPartnerSaleRisk(TransactionCase):
         self.assertTrue(action["view_id"])
         self.assertTrue(action["domain"])
 
+    def test_line_not_invoiced_alone(self):
+        """A line that is only invoiced with other lines, as a delivery or a
+        discount, has no risk when the rest of the order has none."""
+        discount_product = self.env["product.product"].create(
+            {"name": "Discount", "type": "service", "taxes_id": []}
+        )
+        self.env.company.sale_discount_product_id = discount_product
+        # Price kept when the quantity changes
+        self.product.list_price = 115.0
+        discount_vals = {
+            "product_id": discount_product.id,
+            "product_uom_qty": 1,
+            "price_unit": -15.0,
+            "tax_ids": False,
+        }
+        self.sale_order.order_line = [Command.create(discount_vals)]
+        self.sale_order.action_confirm()
+        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        # The customer finally does not want the product
+        product_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id == self.product
+        )
+        product_line.product_uom_qty = 0.0
+        self.assertAlmostEqual(self.partner.risk_sale_order, 0.0)
+        # The customer wants it again
+        product_line.product_uom_qty = 1.0
+        self.assertAlmostEqual(self.partner.risk_sale_order, 100.0)
+        product_line.product_uom_qty = 0.0
+        # An order with only such lines is invoiced, so it has risk
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "order_line": [Command.create(discount_vals)],
+            }
+        )
+        order.action_confirm()
+        self.assertAlmostEqual(self.partner.risk_sale_order, -15.0)
+
     def test_manual_currency_risk_not_exceeded(self):
         if self.env.company.currency_id == self.EUR:
             self.product_pricelist.currency_id = self.USD
@@ -245,7 +281,8 @@ class TestPartnerSaleRisk(TransactionCase):
         self.env["res.currency.rate"].create(
             {
                 "currency_id": self.main_currency.id,
-                "name": fields.Date.today(),
+                # Rates apply from the day after their date
+                "name": fields.Date.today() - timedelta(days=1),
                 "rate": 0.5,
                 "company_id": self.env.company.id,
             }
@@ -275,7 +312,8 @@ class TestPartnerSaleRisk(TransactionCase):
         self.env["res.currency.rate"].create(
             {
                 "currency_id": self.main_currency.id,
-                "name": fields.Date.today(),
+                # Rates apply from the day after their date
+                "name": fields.Date.today() - timedelta(days=1),
                 "rate": 2.0,
                 "company_id": self.env.company.id,
             }
@@ -286,3 +324,59 @@ class TestPartnerSaleRisk(TransactionCase):
         # Limit exceeded
         self.assertNotEqual(result, True)
         self.assertEqual(result["res_model"], "partner.risk.exceeded.wiz")
+
+    def test_manual_currency_risk_sale_order(self):
+        """The partner risk converts the sales orders risk once."""
+        risk_currency = self.USD if self.main_currency == self.EUR else self.EUR
+        risk_currency.rate_ids.unlink()
+        self.env["res.currency.rate"].create(
+            {
+                "currency_id": risk_currency.id,
+                # Rates apply from the day after their date
+                "name": fields.Date.today() - timedelta(days=1),
+                "rate": 2.0,
+                "company_id": self.env.company.id,
+            }
+        )
+        self.partner.write(
+            {"credit_currency": "manual", "manual_credit_currency_id": risk_currency.id}
+        )
+        self.sale_order.action_confirm()
+        line = self.sale_order.order_line
+        self.assertEqual(line.company_currency_id, self.main_currency)
+        self.assertAlmostEqual(line.risk_amount, 115.0)
+        self.assertEqual(self.partner.risk_currency_id, risk_currency)
+        self.assertAlmostEqual(self.partner.risk_sale_order, 230.0)
+
+    def test_sale_order_multi_company(self):
+        """The order is checked against the risk and limit of its company,
+        whatever company is active."""
+        main_company = self.env.company
+        company_b = self.env["res.company"].create(
+            {"name": "Company B financial risk", "currency_id": self.main_currency.id}
+        )
+        self.env.user.company_ids |= company_b
+        self.product_pricelist.company_id = False
+        self.partner.write({"risk_sale_order_include": True, "credit_limit": 1000.0})
+        self.partner.with_company(company_b).credit_limit = 100.0
+        self.sale_order.action_confirm()
+        partner = self.partner.with_context(
+            allowed_company_ids=[main_company.id, company_b.id]
+        )
+        self.assertAlmostEqual(partner.risk_sale_order, 115.0)
+        self.assertAlmostEqual(partner.with_company(company_b).risk_sale_order, 0.0)
+        # Company B order with the main company active
+        order_b = self.create_sale_order(self.main_currency, company_b)
+        wiz_dic = order_b.with_context(
+            allowed_company_ids=[main_company.id, company_b.id]
+        ).action_confirm()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(
+            wiz.exception_msg, "This sale order exceeds the financial risk.\n"
+        )
+        # Main company order with company B active
+        order_main = self.sale_order.copy()
+        order_main.with_context(
+            allowed_company_ids=[company_b.id, main_company.id]
+        ).action_confirm()
+        self.assertEqual(order_main.state, "sale")
