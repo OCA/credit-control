@@ -7,6 +7,7 @@
         <field
             name="subject"
         >Credit Control: ({{object.policy_level_id.name or 'n/a'}})</field>
+        <field name="use_default_to" eval="False" />
         <field name="partner_to">{{object.get_emailing_contact().id or ''}}</field>
         <field name="model_id" ref="model_credit_control_communication" />
         <field name="auto_delete" eval="False" />
