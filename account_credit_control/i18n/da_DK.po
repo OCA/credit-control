@@ -17,26 +17,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
-msgid ""
-"\n"
-"Our records indicate that we still have not received the payment of the "
-"invoice mentioned below despite our two reminders.\n"
-"If payment have already been sent, please disregard this notice. If not, "
-"please proceed with payment.\n"
-"If your payment has not been received in the next 5 days, your file will be "
-"transferred to our debt collection agency.\n"
-"\n"
-"Should you need us to arrange a payment plan for you, please advise.\n"
-"A customer account statement is enclosed for you convenience.\n"
-"\n"
-"Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"Best regards\n"
-"        "
-msgstr ""
-
-#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run__credit_control_communication_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner__credit_control_communication_count
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users__credit_control_communication_count
@@ -1046,8 +1026,8 @@ msgid "Manual followup"
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
 #: model_terms:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr ""
 
@@ -1245,8 +1225,8 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
-#: model:credit.control.policy.level,custom_text:account_credit_control.3_time_1
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_1
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_1
 msgid ""
 "Our records indicate that we have not received the payment of the invoice "
 "mentioned below.\n"
@@ -1255,8 +1235,7 @@ msgid ""
 "\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"Best regards\n"
-"        "
+"Best regards"
 msgstr ""
 
 #. module: account_credit_control
@@ -1279,7 +1258,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_2
 msgid ""
 "Our records indicate that we have not yet received the payment of the "
 "invoice mentioned below despite our first reminder.\n"
@@ -1288,8 +1267,7 @@ msgid ""
 "\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"Best regards\n"
-"        "
+"Best regards"
 msgstr ""
 
 #. module: account_credit_control
@@ -1299,6 +1277,24 @@ msgid ""
 "invoices mentioned in the attached document despite our first reminder.<br>\n"
 "  If it has already been sent, please disregard this notice. If not, please "
 "proceed with payment within 5 days."
+msgstr ""
+
+#. module: account_credit_control
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.3_time_3
+msgid ""
+"Our records indicate that we still have not received the payment of the "
+"invoice mentioned below despite our two reminders.\n"
+"If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.\n"
+"If your payment has not been received in the next 5 days, your file will be "
+"transferred to our debt collection agency.\n"
+"\n"
+"Should you need us to arrange a payment plan for you, please advise.\n"
+"A customer account statement is enclosed for you convenience.\n"
+"\n"
+"Thank you in advance for your anticipated cooperation in this matter.\n"
+"\n"
+"Best regards"
 msgstr ""
 
 #. module: account_credit_control
@@ -1320,7 +1316,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
+#: model_terms:credit.control.policy.level,custom_text:account_credit_control.2_time_2
 msgid ""
 "Our records indicate that we still have not received the payment of the "
 "mentioned below invoice despite our reminder.\n"
@@ -1335,8 +1331,7 @@ msgid ""
 "\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
-"Best regards\n"
-"        "
+"Best regards"
 msgstr ""
 
 #. module: account_credit_control
