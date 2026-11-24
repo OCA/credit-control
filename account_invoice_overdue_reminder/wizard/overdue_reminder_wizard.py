@@ -557,7 +557,7 @@ class OverdueReminderStep(models.TransientModel):
                     )
 
             if rec.create_activity:
-                mao.create(self._prepare_mail_activity())
+                mao.create(rec._prepare_mail_activity())
         self.write({"state": "done"})
         if len(self) == 1:
             if self.interface == "onebyone":
