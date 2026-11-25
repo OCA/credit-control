@@ -32,6 +32,30 @@ msgid "(object._get_report_base_filename())"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> by phone. Result/Info: %(result)s."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> sent by mail."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> sent by post."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model:mail.template,body_html:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
@@ -176,26 +200,6 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "<span> days</span>"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid ""
-"<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-"
-"model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "<strong>Overdue reminder</strong> sent by post."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder

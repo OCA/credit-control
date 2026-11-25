@@ -34,6 +34,30 @@ msgid "(object._get_report_base_filename())"
 msgstr "(object._get_report_base_filename())"
 
 #. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> by phone. Result/Info: %(result)s."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> sent by mail."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#. odoo-python
+#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
+msgid ""
+"<a href=# data-oe-model=overdue.reminder.action data-oe-id=%"
+"(reminder_action_id)s>Overdue reminder</a> sent by post."
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
 #: model:mail.template,body_html:account_invoice_overdue_reminder.overdue_invoice_reminder_mail_template
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
@@ -182,41 +206,41 @@ msgstr ""
 "                <table style=\"border-spacing: 0; border-collapse: collapse; "
 "width: 100%; text-align: center;\">\n"
 "                    <tr>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Numéro de facture</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Date de la facture</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Conditions de paiement</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Date d'échéance</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Référence de la commande</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Type</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Total (HT)</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Total</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Solde</th>\n"
-"                        <th style=\"padding: 5px; border: 1px solid black;\">"
-"Rappels antérieurs</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Numéro de facture</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Date de la facture</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Conditions de paiement</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Date d'échéance</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Référence de la commande</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Type</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Total (HT)</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Total</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Solde</th>\n"
+"                        <th style=\"padding: 5px; border: 1px solid black;"
+"\">Rappels antérieurs</th>\n"
 "                    </tr>\n"
-"                    <t t-foreach=\"object.invoice_ids.sorted"
-"(key='invoice_date')\" t-as=\"inv\">\n"
+"                    <t t-"
+"foreach=\"object.invoice_ids.sorted(key='invoice_date')\" t-as=\"inv\">\n"
 "                        <tr style=\"background-"
 "color:                             % if inv.move_type == "
-"'out_refund':                                 LightGray"
-"                             % endif                         \">\n"
+"'out_refund':                                 "
+"LightGray                             % endif                         \">\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black;\">\n"
 "                                <t t-out=\"inv.name\"/>\n"
 "                            </td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black;\">\n"
-"                                <t t-out=\"format_date(inv.invoice_date)\"/>"
-"\n"
+"                                <t t-out=\"format_date(inv.invoice_date)\"/"
+">\n"
 "                            </td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black;\">\n"
@@ -234,8 +258,9 @@ msgstr ""
 "                            </td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black;\">\n"
-"                                <t t-out=\"dict(inv.fields_get"
-"(allfields=['move_type'])['move_type']['selection'])[inv.move_type]\"/>\n"
+"                                <t t-"
+"out=\"dict(inv.fields_get(allfields=['move_type'])['move_type']['selection'])"
+"[inv.move_type]\"/>\n"
 "                            </td>\n"
 "                            <td style=\"padding: 5px; border: 1px solid "
 "black; text-align: right;\">\n"
@@ -316,28 +341,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.view_account_config_settings
 msgid "<span> days</span>"
 msgstr "<span> jours</span>"
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
-msgstr "<strong>Relance</strong> par téléphone. Résultat/Info : %(result)s."
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid ""
-"<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-"
-"model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
-msgstr ""
-"<strong>Relance</strong> envoyée par e-mail : <a href=# data-oe-"
-"model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "<strong>Overdue reminder</strong> sent by post."
-msgstr "<strong>Relance</strong> envoyée par la poste."
 
 #. module: account_invoice_overdue_reminder
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.report_overdue_reminder_document
@@ -1409,6 +1412,19 @@ msgstr "overdue_letter-%s"
 msgid ""
 "{{object.company_id.name}} - Overdue invoice reminder n°{{object.counter}}"
 msgstr "{{object.company_id.name}} - Relance client n°{{object.counter}}"
+
+#~ msgid "<strong>Overdue reminder</strong> by phone. Result/Info: %(result)s."
+#~ msgstr "<strong>Relance</strong> par téléphone. Résultat/Info : %(result)s."
+
+#~ msgid ""
+#~ "<strong>Overdue reminder</strong> sent by mail: <a href=# data-oe-"
+#~ "model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
+#~ msgstr ""
+#~ "<strong>Relance</strong> envoyée par e-mail : <a href=# data-oe-"
+#~ "model=mail.mail data-oe-id=%(mail_id)s>%(mail_subject)s</a>."
+
+#~ msgid "<strong>Overdue reminder</strong> sent by post."
+#~ msgstr "<strong>Relance</strong> envoyée par la poste."
 
 #~ msgid ""
 #~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
