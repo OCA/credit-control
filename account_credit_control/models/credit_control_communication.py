@@ -176,6 +176,10 @@ class CreditControlCommunication(models.Model):
         return comms
 
     def _get_credit_control_communication_table(self):
+        # Force context to contact's language before rendering strings
+        lang = self.contact_address_id.lang or "en_US"
+        self = self.with_context(lang=lang)
+
         th_style = "padding: 5px; border: 1px solid black;"
         tr_content = "<th style='%s'>%s</th>" % (th_style, _("Invoice number"))
         tr_content += "<th style='%s'>%s</th>" % (th_style, _("Payment Reference"))
