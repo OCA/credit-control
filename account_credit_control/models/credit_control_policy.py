@@ -5,8 +5,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
-CHANNEL_LIST = [("letter", "Letter"), ("email", "Email"), ("phone", "Phone")]
-
 
 class CreditControlPolicy(models.Model):
     """Define a policy of reminder"""
@@ -256,6 +254,11 @@ class CreditControlPolicyLevel(models.Model):
     _description = """A credit control policy level"""
 
     name = fields.Char(required=True, translate=True)
+    # one boolean per channel: a module adding a channel K adds
+    # use_channel_K here, K in _get_channels and state_channel_K on the line
+    use_channel_letter = fields.Boolean(string="Letter")
+    use_channel_email = fields.Boolean(string="Email")
+    use_channel_phone = fields.Boolean(string="Phone")
     policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
         string="Related Policy",
@@ -278,7 +281,6 @@ class CreditControlPolicyLevel(models.Model):
         domain=[("model_id.model", "=", "credit.control.communication")],
         required=True,
     )
-    channel = fields.Selection(selection=CHANNEL_LIST, required=True)
     custom_text = fields.Text(string="Custom Message", required=True, translate=True)
     mail_show_invoice_detail = fields.Boolean(string="Show Invoice Details in mail")
     custom_mail_text = fields.Html(
@@ -306,6 +308,38 @@ class CreditControlPolicyLevel(models.Model):
             if smallest_level.computation_mode == "previous_date":
                 raise ValidationError(
                     _("The smallest level can not be " "of type Previous Reminder")
+                )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        levels = super().create(vals_list)
+        levels._check_channels()
+        return levels
+
+    def write(self, vals):
+        res = super().write(vals)
+        self._check_channels()
+        return res
+
+    @api.model
+    def _get_channels(self):
+        """Return the supported channel keys."""
+        return ["letter", "email", "phone"]
+
+    def _has_channel(self):
+        """Return whether the level uses at least one channel."""
+        self.ensure_one()
+        return any(self[f"use_channel_{channel}"] for channel in self._get_channels())
+
+    def _check_channels(self):
+        """A level must send the reminder on at least one channel."""
+        for policy_level in self:
+            if not policy_level._has_channel():
+                raise ValidationError(
+                    _(
+                        "The level %(name)s must have at least one channel.",
+                        name=policy_level.display_name,
+                    )
                 )
 
     def _previous_level(self):

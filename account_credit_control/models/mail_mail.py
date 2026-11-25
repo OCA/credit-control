@@ -19,10 +19,13 @@ class Mail(models.Model):
             mt_request = self.env.ref("account_credit_control.mt_request")
             if mail.subtype_id == mt_request:
                 lines = self.env["credit.control.line"].search(
-                    [("communication_id", "=", msg.res_id), ("state", "=", "queued")]
+                    [
+                        ("communication_id", "=", msg.res_id),
+                        ("state_channel_email", "=", "queued"),
+                    ]
                 )
-                new_state = "sent" if mail.state == "sent" else "email_error"
-                lines.write({"state": new_state})
+                new_state = "sent" if mail.state == "sent" else "error"
+                lines._set_channel_state("email", new_state)
         return super()._postprocess_sent_message(
             success_pids=success_pids,
             failure_reason=failure_reason,

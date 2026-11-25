@@ -205,15 +205,4 @@ class CreditControlRun(models.Model):
 
     def run_channel_action(self):
         self.ensure_one()
-        lines = self.line_ids.filtered(lambda x: x.state == "to_be_sent")
-        letter_lines = lines.filtered(lambda x: x.channel == "letter")
-        email_lines = lines.filtered(lambda x: x.channel == "email")
-        if email_lines:
-            comm_obj = self.env["credit.control.communication"]
-            comms = comm_obj._generate_comm_from_credit_lines(email_lines)
-            comms._generate_emails()
-        if letter_lines:
-            wiz = self.env["credit.control.printer"].create(
-                {"line_ids": letter_lines.ids}
-            )
-            return wiz.print_lines
+        return self.line_ids._run_channel_action()

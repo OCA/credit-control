@@ -39,7 +39,9 @@
                             <field name="date" />
                             <field name="level" />
                             <field name="state" />
-                            <field name="channel" />
+                            <field name="state_channel_letter" />
+                            <field name="state_channel_email" />
+                            <field name="state_channel_phone" />
                             <field name="balance_due" />
                             <field name="policy_level_id" />
                             <field name="policy_id" />
