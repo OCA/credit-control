@@ -1,0 +1,10 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Carlos Dauden
+  - Pedro M. Baeza
+  - David Vidal
+  - Ernesto Tejeda
+- [Jarsa](https://www.jarsa.com.mx):
+  - Alan Ramos
+- [Versada](https://www.versada.eu):
+  - Ugne Sinkeviciene
+- Urvisha Desai \<<udesai@opensourceintegrators.com>\>
