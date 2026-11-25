@@ -99,8 +99,8 @@ class CreditControlCommunication(models.Model):
             ])
             if one.contact_address_id in partners:
                 # Contact is already child of partner
-                return
-            address_ids = one.partner_id.address_get(adr_pref=['invoice'])
+                continue
+            address_ids = one.partner_id.address_get(adr_pref=["invoice"])
             one.contact_address_id = address_ids["invoice"]
 
     def get_emailing_contact(self):
