@@ -52,6 +52,16 @@ class TestCreditControlPolicy(TransactionCase):
         with self.assertRaises(ValidationError):
             level_1.computation_mode = "previous_date"
 
+    def test_check_mail_required_fields(self):
+        """
+        Email template and custom messages are required for base channels
+        """
+        level_1 = self.env.ref("account_credit_control.3_time_1")
+        self.assertTrue(level_1.mail_fields_required)
+        for fname in ("email_template_id", "custom_text", "custom_mail_text"):
+            with self.assertRaises(ValidationError), self.env.cr.savepoint():
+                level_1.write({fname: False})
+
     def test_previous_level(self):
         """
         Check the method _previous_level on policy level
