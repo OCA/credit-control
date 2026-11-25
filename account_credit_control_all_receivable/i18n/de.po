@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_credit_control_all_receivable
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: de\n"
+
+#. module: account_credit_control_all_receivable
+#: model:ir.model.fields,field_description:account_credit_control_all_receivable.field_credit_control_policy__all_receivable_accounts
+msgid "Include all receivable accounts"
+msgstr "Alle Forderungen-Konten einbeziehen"
+
+#. module: account_credit_control_all_receivable
+#: model:ir.model.fields,help:account_credit_control_all_receivable.field_credit_control_policy__all_receivable_accounts
+msgid ""
+"If set, the policy considers open items on every account of type Receivable "
+"(e.g. individual debtor accounts). New accounts are included automatically, "
+"the account list is ignored."
+msgstr ""
+"Wenn gesetzt, berücksichtigt die Regel offene Posten auf allen Konten vom "
+"Typ Forderungen (z. B. einzelne Debitorenkonten). Neue Konten werden "
+"automatisch einbezogen, die Kontenliste wird ignoriert."
+
+#. module: account_credit_control_all_receivable
+#: code:addons/account_credit_control_all_receivable/models/credit_control_policy.py:0
+#, python-format
+msgid ""
+"Policy '%s': select at least one account or enable 'Include all receivable "
+"accounts'."
+msgstr ""
+"Regel '%s': Bitte mindestens ein Konto auswählen oder 'Alle Forderungen-"
+"Konten einbeziehen' aktivieren."
