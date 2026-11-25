@@ -518,9 +518,46 @@ class OverdueReminderStep(models.TransientModel):
             elif rec.reminder_type == "post":
                 vals = rec.validate_post()
             rec._prepare_overdue_reminder_action(vals)
-            orao.create(vals)
+            reminder_action = orao.create(vals)
+            for inv in rec.invoice_ids:
+                if rec.reminder_type == "mail":
+                    inv.message_post(
+                        body=Markup(
+                            _(
+                                "<a href=# data-oe-model=overdue.reminder.action "
+                                "data-oe-id=%(reminder_action_id)s"
+                                ">Overdue reminder</a> sent by mail.",
+                                reminder_action_id=reminder_action.id,
+                            )
+                        )
+                    )
+                elif rec.reminder_type == "phone":
+                    inv.message_post(
+                        body=Markup(
+                            _(
+                                "<a href=# data-oe-model=overdue.reminder.action "
+                                "data-oe-id=%(reminder_action_id)s"
+                                ">Overdue reminder</a> by phone. "
+                                "Result/Info: %(result)s.",
+                                reminder_action_id=reminder_action.id,
+                                result=rec.result_id.name,
+                            )
+                        )
+                    )
+                elif rec.reminder_type == "post":
+                    inv.message_post(
+                        body=Markup(
+                            _(
+                                "<a href=# data-oe-model=overdue.reminder.action "
+                                "data-oe-id=%(reminder_action_id)s"
+                                ">Overdue reminder</a> sent by post.",
+                                reminder_action_id=reminder_action.id,
+                            )
+                        )
+                    )
+
             if rec.create_activity:
-                mao.create(self._prepare_mail_activity())
+                mao.create(rec._prepare_mail_activity())
         self.write({"state": "done"})
         if len(self) == 1:
             if self.interface == "onebyone":
@@ -628,32 +665,6 @@ class OverdueReminderStep(models.TransientModel):
             if self.reminder_type != "phone":
                 rvals["counter"] = inv.overdue_reminder_counter + 1
             vals["reminder_ids"].append(Command.create(rvals))
-            if self.reminder_type == "mail":
-                inv.message_post(
-                    body=Markup(
-                        _(
-                            "<strong>Overdue reminder</strong> sent by mail: "
-                            "<a href=# data-oe-model=mail.mail "
-                            "data-oe-id=%(mail_id)s>%(mail_subject)s</a>.",
-                            mail_id=vals["mail_id"],
-                            mail_subject=self.mail_subject,
-                        )
-                    )
-                )
-            elif self.reminder_type == "phone":
-                inv.message_post(
-                    body=Markup(
-                        _(
-                            "<strong>Overdue reminder</strong> by phone. "
-                            "Result/Info: %(result)s.",
-                            result=self.result_id.name,
-                        )
-                    )
-                )
-            elif self.reminder_type == "post":
-                inv.message_post(
-                    body=Markup(_("<strong>Overdue reminder</strong> sent by post."))
-                )
 
     def print_letter(self):
         self.check_warnings()

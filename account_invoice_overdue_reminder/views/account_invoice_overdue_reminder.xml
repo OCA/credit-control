@@ -27,14 +27,17 @@
                     <field
                         name="action_mail_id"
                         invisible="action_reminder_type != 'mail'"
+                        groups="base.group_system"
                     />
                     <field
                         name="action_mail_cc"
                         invisible="action_reminder_type != 'mail'"
+                        groups="base.group_system"
                     />
                     <field
                         name="action_mail_state"
                         invisible="action_reminder_type != 'mail'"
+                        groups="base.group_system"
                     />
                 </group>
                 <group string="Info/Result" name="result">
