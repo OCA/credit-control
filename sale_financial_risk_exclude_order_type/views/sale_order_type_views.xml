@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="sale_order_type_view_form_inherit_sale_financial_risk_exclude_order_type"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >sale.order.type.form.sale.financial.risk.exclude.order.type</field>
+        <field name="model">sale.order.type</field>
+        <field name="inherit_id" ref="sale_order_type.sot_sale_order_type_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Financial Risk">
+                    <field name="exclude_from_risk" />
+                    <field name="allow_blocking_bypass" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
