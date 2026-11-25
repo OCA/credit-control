@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_financial_risk](account_financial_risk/) | 20.0.1.0.0 | <a href='https://github.com/carlosdauden'><img src='https://github.com/carlosdauden.png' width='32' height='32' style='border-radius:50%;' alt='carlosdauden'/></a> | Manage customer risk
 [sale_financial_risk](sale_financial_risk/) | 20.0.1.0.0 |  | Manage partner risk in sales orders
 [sale_financial_risk_info](sale_financial_risk_info/) | 20.0.1.0.0 |  | Adds risk consumption info in sales orders.
+[stock_financial_risk](stock_financial_risk/) | 20.0.1.0.0 |  | Manage partner risk in stock moves
 
 [//]: # (end addons)
 
