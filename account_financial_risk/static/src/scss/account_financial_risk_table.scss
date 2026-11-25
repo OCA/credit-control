@@ -1,8 +1,19 @@
-.oe_risk_group {
-    .btn-link {
-        padding: 0rem 0rem 0rem 0.6rem;
-    }
-    td {
-        text-align: right;
+@include media-breakpoint-up(md) {
+    .o_form_view .o_inner_group.oe_subtotal_footer.oe_risk_group .o_cell {
+        // Long labels wrap when the sheet is narrow instead of pushing the
+        // amounts out of it
+        .o_form_label {
+            white-space: normal;
+        }
+        > .btn-link {
+            width: 100%;
+            padding-right: 0;
+            text-align: right;
+        }
+        // Keep the currency symbol of the editable amounts next to their
+        // right-aligned digits, as list views do
+        .o_field_monetary span.o_input {
+            justify-content: flex-end;
+        }
     }
 }

@@ -21,7 +21,7 @@
         "security/ir.access.csv",
     ],
     "assets": {
-        "web.assets_common": [
+        "web.assets_backend": [
             "account_financial_risk/static/src/scss/account_financial_risk_table.scss",
         ],
     },

@@ -3,7 +3,7 @@ To configure this module, you need to:
 1.  Go to User and set group User or Manager Financial Risk
 2.  Go to *Invoicing/Accounting \> Configuration \> Settings \>
     Accounting*
-3.  In the *Customer Payments* section, fill *Maturity Margin* for
+3.  In the *Financial Risk* section, fill *Maturity Margin* for
     setting the number of days to last after the due date to consider an
     invoice as unpaid.
 
@@ -16,9 +16,10 @@ and can be disabled individually for certain contacts.
 
 Odoo core has its own credit limit warning (*Invoicing/Accounting >
 Configuration > Settings > Sales Credit Limit*). It shows a banner on draft
-invoices and sales orders using the same partner *Credit Limit*, but with
-other amounts: the total receivable plus the delivered and not invoiced
-sales orders of the user's main company. To show only the financial risk
+invoices using the same partner *Credit Limit*, but with another amount: the
+total receivable of the partner in the current company. Sales adds the sales
+orders not invoiced yet and shows the banner on draft sales orders too, as
+explained in *sale_financial_risk*. To show only the financial risk
 amounts, disable *Sales Credit Limit* in each company: Odoo then skips the
 banner computation. With this module the partner credit limit is edited in
 the *Financial Risk* tab, the core *Credit Limits* group of the *Invoicing*
