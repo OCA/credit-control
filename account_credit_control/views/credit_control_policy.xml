@@ -20,7 +20,7 @@
                     <field name="active" />
                 </group>
                 <notebook colspan="4">
-                    <page string="Policy levels">
+                    <page string="Policy levels" name="policy_levels">
                         <field name="level_ids" nolabel="1" colspan="4">
                             <tree>
                                 <field name="name" />
@@ -33,21 +33,33 @@
                             <form string="Policy level">
                                 <field name="name" />
                                 <notebook>
-                                    <page string="Delay Setting">
+                                    <page string="Delay Setting" name="delay_setting">
                                         <group>
                                             <field name="level" />
                                             <field name="channel" />
+                                            <field
+                                                name="mail_fields_required"
+                                                invisible="1"
+                                            />
                                             <field name="delay_days" />
                                             <field name="computation_mode" />
                                         </group>
                                     </page>
-                                    <page string="Mail and reporting">
+                                    <page
+                                        string="Mail and reporting"
+                                        name="mail_and_reporting"
+                                    >
                                         <group colspan="2">
                                             <field
                                                 name="email_template_id"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
                                                 colspan="2"
                                             />
-                                            <field name="custom_text" colspan="2" />
+                                            <field
+                                                name="custom_text"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                                                colspan="2"
+                                            />
                                             <field
                                                 name="custom_text_after_details"
                                                 colspan="2"
@@ -59,6 +71,7 @@
                                             />
                                             <field
                                                 name="custom_mail_text"
+                                                attrs="{'required': [('mail_fields_required', '=', True)]}"
                                                 colspan="2"
                                             />
                                         </group>
@@ -67,7 +80,7 @@
                             </form>
                         </field>
                     </page>
-                    <page string="Accounts">
+                    <page string="Accounts" name="accounts">
                         <field name="account_ids" nolabel="1" />
                     </page>
                 </notebook>
@@ -112,18 +125,25 @@
             <form string="Policy level">
                 <field name="name" />
                 <notebook colspan="4">
-                    <page string="Delay Setting">
+                    <page string="Delay Setting" name="delay_setting">
                         <group>
                             <field name="level" />
                             <field name="channel" />
+                            <field name="mail_fields_required" invisible="1" />
                             <field name="delay_days" />
                             <field name="computation_mode" />
                         </group>
                     </page>
-                    <page string="Mail and reporting">
+                    <page string="Mail and reporting" name="mail_and_reporting">
                         <group>
-                            <field name="email_template_id" />
-                            <field name="custom_text" />
+                            <field
+                                name="email_template_id"
+                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                            />
+                            <field
+                                name="custom_text"
+                                attrs="{'required': [('mail_fields_required', '=', True)]}"
+                            />
                         </group>
                     </page>
                 </notebook>

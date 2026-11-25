@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="action_credit_control_line_send_sms" model="ir.actions.server">
+        <field name="name">Send SMS</field>
+        <field name="model_id" ref="account_credit_control.model_credit_control_line" />
+        <field
+            name="binding_model_id"
+            ref="account_credit_control.model_credit_control_line"
+        />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_send_sms()</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('account_credit_control.group_account_credit_control_user')), (4, ref('account_credit_control.group_account_credit_control_manager'))]"
+        />
+    </record>
+</odoo>
