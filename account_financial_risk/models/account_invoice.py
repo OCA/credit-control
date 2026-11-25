@@ -43,6 +43,10 @@ class AccountMove(models.Model):
         self.ensure_one()
         partner = self.partner_id.commercial_partner_id
         exception_msg = ""
+        # Without limits nor includes no exception can be raised, so skip
+        # computing the risk amounts, costly for partners with many entries
+        if not partner._risk_is_configured():
+            return exception_msg
         if partner.risk_exception:
             exception_msg = _("Financial risk exceeded.\n")
         elif partner.risk_invoice_open_limit and (

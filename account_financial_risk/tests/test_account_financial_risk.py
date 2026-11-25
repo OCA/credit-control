@@ -1,6 +1,8 @@
 # Copyright 2016-2019 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from unittest.mock import patch
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -290,3 +292,61 @@ class TestPartnerFinancialRisk(TransactionCase):
             self.partner.risk_amount_exceeded,
             self.partner.risk_total - self.partner.credit_limit,
         )
+
+    def _patch_risk_amounts(self):
+        partner_model = type(self.partner)
+        return patch.object(
+            partner_model,
+            "_compute_risk_account_amount",
+            autospec=True,
+            side_effect=partner_model._compute_risk_account_amount,
+        )
+
+    def test_risk_not_configured_skips_amounts(self):
+        """Without limits nor includes the risk amounts are not computed."""
+        with self._patch_risk_amounts() as compute:
+            self.invoice.action_post()
+        compute.assert_not_called()
+        self.assertEqual(self.invoice.state, "posted")
+
+    def test_risk_credit_limit_without_include_skips_amounts(self):
+        """A credit limit without includes cannot raise an exception."""
+        self.partner.credit_limit = 100.0
+        with self._patch_risk_amounts() as compute:
+            self.invoice.action_post()
+        compute.assert_not_called()
+        self.assertEqual(self.invoice.state, "posted")
+
+    def test_risk_negative_credit_limit_checked(self):
+        """A negative credit limit blocks even without includes."""
+        self.partner.credit_limit = -100.0
+        with self._patch_risk_amounts() as compute:
+            wiz_dic = self.invoice.action_post()
+        compute.assert_called()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(wiz.exception_msg, "Financial risk exceeded.\n")
+        self.assertEqual(self.invoice.state, "draft")
+
+    def test_risk_limit_without_include_checked(self):
+        """A risk limit without includes still blocks the invoice."""
+        self.partner.risk_invoice_open_limit = 100.0
+        with self._patch_risk_amounts() as compute:
+            wiz_dic = self.invoice.action_post()
+        compute.assert_called()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(
+            wiz.exception_msg, "This invoice exceeds the open invoices risk.\n"
+        )
+        self.assertEqual(self.invoice.state, "draft")
+
+    def test_risk_include_without_limit_checked(self):
+        """An include with no credit limit still blocks the invoice."""
+        self.partner.risk_invoice_open_include = True
+        with self._patch_risk_amounts() as compute:
+            wiz_dic = self.invoice.action_post()
+        compute.assert_called()
+        wiz = self.env[wiz_dic["res_model"]].browse(wiz_dic["res_id"])
+        self.assertEqual(
+            wiz.exception_msg, "This invoice exceeds the financial risk.\n"
+        )
+        self.assertEqual(self.invoice.state, "draft")

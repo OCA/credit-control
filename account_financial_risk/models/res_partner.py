@@ -536,6 +536,18 @@ class ResPartner(models.Model):
             ),
         ]
 
+    def _risk_is_configured(self):
+        """Whether any limit or include can raise a risk exception.
+
+        A positive credit limit alone cannot: without includes the risk
+        total is zero. A negative one can.
+        """
+        self.ensure_one()
+        return self.credit_limit < 0 or any(
+            getattr(self, limit, 0.0) or getattr(self, include, False)
+            for _field, limit, include in self._risk_field_list()
+        )
+
     @api.model
     def _get_depends_compute_risk_exception(self):
         res = []
