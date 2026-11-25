@@ -1,0 +1,5 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Carlos Dauden
+  - Ernesto Tejeda
+- [Studio73](https://www.studio73.es/):
+    - Vicent Castells
