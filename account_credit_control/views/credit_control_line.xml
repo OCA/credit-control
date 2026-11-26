@@ -223,9 +223,9 @@
     </record>
     <menuitem
         name="Credit Control"
-        parent="account.menu_finance"
+        parent="account.menu_finance_receivables"
         id="base_credit_control_menu"
-        sequence="4"
+        sequence="120"
         groups="account_credit_control.group_account_credit_control_info"
     />
     <record model="ir.actions.act_window" id="credit_control_line_action">

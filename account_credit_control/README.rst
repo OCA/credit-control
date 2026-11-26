@@ -60,7 +60,7 @@ invoice.
 Usage
 =====
 
-Menu entries are located in *Invoicing > Credit Control*.
+Menu entries are located in *Invoicing > Customers > Credit Control*.
 
 Create a new "run" in the *Credit Control Run* menu with the controlling
 date. Then, use the *Compute Credit Lines* button. All the credit
