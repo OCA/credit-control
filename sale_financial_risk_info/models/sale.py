@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Carlos Dauden
+# Copyright 2021-2025 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
         related="partner_id.risk_remaining_percentage"
     )
 
-    @api.depends("partner_invoice_id")
+    @api.depends("partner_invoice_id", "company_id")
     def _compute_risk_info(self):
         ICP = self.env["ir.config_parameter"].sudo()
         info_pattern = ICP.get_str(
@@ -23,10 +23,20 @@ class SaleOrder(models.Model):
             "{risk_percent}%)</h5>",
         )
         for sale in self:
-            partner = sale.partner_invoice_id.commercial_partner_id
+            # Credit limit and risk amounts of the order company
+            partner = sale.partner_invoice_id.commercial_partner_id.with_company(
+                sale.company_id
+            )
+            risk_total = (
+                format_amount(self.env, partner.risk_total, partner.risk_currency_id)
+                if partner
+                else 0.0
+            )
             credit_limit = partner.sudo().credit_limit
             if not credit_limit:
-                sale.risk_info = self.env._("Unlimited")
+                sale.risk_info = self.env._(
+                    "%(risk_total)s / Unlimited", risk_total=risk_total
+                )
                 continue
             risk_percent = round(partner.risk_total / credit_limit * 100)
             if risk_percent >= partner.risk_percent_warning:
@@ -35,9 +45,7 @@ class SaleOrder(models.Model):
                 text_class = ""
             sale.risk_info = info_pattern.format(
                 text_class=text_class,
-                risk_total=format_amount(
-                    self.env, partner.risk_total, partner.risk_currency_id
-                ),
+                risk_total=risk_total,
                 credit_limit=format_amount(
                     self.env, credit_limit, partner.risk_currency_id
                 ),

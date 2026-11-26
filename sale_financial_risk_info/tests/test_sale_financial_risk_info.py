@@ -3,6 +3,7 @@
 
 from odoo import Command
 from odoo.tests import Form
+from odoo.tools.misc import format_amount
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -57,7 +58,16 @@ class TestSaleFinancialRiskInfo(BaseCommon):
     def test_sale_order_risk_info(self):
         with Form(self.env["sale.order"]) as so_form:
             so_form.partner_id = self.partner_1
-        self.assertIn("Unlimited", so_form.risk_info)
+        # Without credit limit the risk total is shown too
+        risk_total = format_amount(
+            self.env, self.partner_1.risk_total, self.partner_1.risk_currency_id
+        )
+        self.assertTrue(self.partner_1.risk_total)
+        # The html value keeps the no-break space of the amount as an entity
+        self.assertIn(
+            f"{risk_total} / Unlimited",
+            str(so_form.risk_info).replace("&nbsp;", "\xa0"),
+        )
         self.partner_1.credit_limit = 2000
         with Form(self.env["sale.order"]) as so_form:
             so_form.partner_id = self.partner_1
