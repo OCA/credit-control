@@ -7,7 +7,7 @@ from lxml import etree
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
-from odoo.tests import Form, freeze_time
+from odoo.tests import Form, freeze_time, new_test_user
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -470,3 +470,23 @@ class TestPartnerFinancialRisk(BaseCommon):
             allowed_company_ids=[company_b.id, self.env.company.id]
         ).action_post()
         self.assertEqual(self.invoice.state, "posted")
+
+    def test_credit_limit_risk_manager_without_accounting(self):
+        # A user with the financial risk Manager group and no accounting group
+        # (e.g. a salesman) manages the credit limit from the Financial Risk tab
+        salesman = new_test_user(
+            self.env,
+            login="risk_salesman",
+            groups="base.group_user,base.group_partner_manager,"
+            "account_financial_risk.group_account_financial_risk_manager",
+        )
+        self.assertFalse(salesman.has_group("account.group_account_invoice"))
+        self.assertFalse(salesman.has_group("account.group_account_readonly"))
+        partner = self.partner.with_user(salesman)
+        arch = etree.fromstring(partner.get_view(view_type="form")["arch"])
+        self.assertTrue(
+            arch.xpath("//page[@name='financial_risk']//field[@name='credit_limit']")
+        )
+        with Form(partner) as partner_form:
+            partner_form.credit_limit = 1500.0
+        self.assertEqual(partner.credit_limit, 1500.0)

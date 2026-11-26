@@ -133,7 +133,12 @@ class ResPartner(models.Model):
     )
     credit_policy = fields.Char()
     risk_allow_edit = fields.Boolean(compute="_compute_risk_allow_edit")
-    credit_limit = fields.Float(tracking=True)
+    # The core groups plus the financial risk ones, which manage the limit
+    credit_limit = fields.Float(
+        tracking=True,
+        groups="account.group_account_invoice,account.group_account_readonly,"
+        "account_financial_risk.group_account_financial_risk_user",
+    )
     credit_currency = fields.Selection(
         selection=[
             ("company", "Company Currency"),
@@ -244,18 +249,6 @@ class ResPartner(models.Model):
 
     def _compute_show_credit_limit(self):
         self.show_credit_limit = True
-
-    @api.model
-    def _setup_complete(self):
-        # Change when we find a better way to add a group while maintaining inheritance.
-        res = super()._setup_complete()
-        field = self._fields["credit_limit"]
-        new_group = "account_financial_risk.group_account_financial_risk_user"
-        group_list = field.groups.split(",") if field.groups else []
-        if new_group not in group_list:
-            group_list.append(new_group)
-            field.groups = ",".join(group_list)
-        return res
 
     @api.onchange("credit_currency")
     def _onchange_credit_currency(self):
