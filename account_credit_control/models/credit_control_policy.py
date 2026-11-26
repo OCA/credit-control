@@ -23,6 +23,7 @@ class CreditControlPolicy(models.Model):
         inverse_name="policy_id",
         string="Policy Levels",
         copy=True,
+        context={"active_test": False},
     )
     do_nothing = fields.Boolean(
         help="For policies which should not generate lines or are obsolete"
@@ -298,6 +299,7 @@ class CreditControlPolicyLevel(models.Model):
     _description = """A credit control policy level"""
 
     name = fields.Char(required=True, translate=True)
+    active = fields.Boolean(default=True)
     policy_id = fields.Many2one(
         comodel_name="credit.control.policy",
         string="Related Policy",
