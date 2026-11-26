@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -409,12 +409,16 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__display_name
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_action__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_mass_update__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start_payment__display_name
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__display_name
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_partner__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -434,8 +438,6 @@ msgid "Due Date"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/overdue_reminder_action.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.account_invoice_overdue_reminder_search
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_action_search
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_search
@@ -451,7 +453,7 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "E-mail missing on partner '%s'."
+msgid "E-mail missing on partner '%(partner)s'."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -468,14 +470,16 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 msgid ""
-"For the reminder of customer '%s', the deadline is missing for the activity."
+"For the reminder of customer '%(customer)s', you must assign someone for the"
+" activity."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
 msgid ""
-"For the reminder of customer '%s', you must assign someone for the activity."
+"For the reminder of customer '%(customer)s',the deadline is missing for the "
+"activity."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -486,12 +490,16 @@ msgstr ""
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__id
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_move__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_action__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_mass_update__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start_payment__id
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__id
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_company__id
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_config_settings__id
+#: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -525,12 +533,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_invoice_overdue_reminder__invoice_id
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.account_invoice_overdue_reminder_search
 msgid "Invoice"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
-msgid "Invoice Contact"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -617,20 +619,12 @@ msgid "Last Entry Created on"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
-msgid "Last Invoice"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_bank_statement_line__overdue_reminder_last_date
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_account_move__overdue_reminder_last_date
 msgid "Last Overdue Reminder Date"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
 msgid "Last Reminder"
 msgstr ""
@@ -658,12 +652,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/overdue_reminder_action.py:0
-msgid "Letter"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__letter_printed
 msgid "Letter Printed"
 msgstr ""
@@ -686,12 +674,6 @@ msgid "Mail subject is empty."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
-msgid "Mass"
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
 #: model:overdue.reminder.result,name:account_invoice_overdue_reminder.voicemail
 msgid "Message left on voicemail"
 msgstr ""
@@ -700,7 +682,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_start__min_interval_days
 msgid "Minimum Delay Since Last Reminder"
 msgstr ""
-
 
 #. module: account_invoice_overdue_reminder
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_result__name
@@ -747,12 +728,6 @@ msgstr ""
 msgid ""
 "Odoo will propose to send an overdue reminder to a customer if it has at "
 "least one invoice which is overdue for more than N days (N = trigger delay)."
-msgstr ""
-
-#. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/res_company.py:0
-msgid "One by One"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -901,8 +876,6 @@ msgid "Performed by"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
-#. odoo-python
-#: code:addons/account_invoice_overdue_reminder/models/overdue_reminder_action.py:0
 #: model:ir.model.fields,field_description:account_invoice_overdue_reminder.field_overdue_reminder_step__partner_phone
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.account_invoice_overdue_reminder_search
 #: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_action_search
@@ -1043,7 +1016,7 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "There are no invoices to remind for customer '%s'."
+msgid "There are no invoices to remind for customer '%(customer)s'."
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
@@ -1183,7 +1156,12 @@ msgstr ""
 #. module: account_invoice_overdue_reminder
 #. odoo-python
 #: code:addons/account_invoice_overdue_reminder/wizard/overdue_reminder_wizard.py:0
-msgid "overdue_letter-%s"
+msgid "overdue_letter-%(partner)s"
+msgstr ""
+
+#. module: account_invoice_overdue_reminder
+#: model_terms:ir.ui.view,arch_db:account_invoice_overdue_reminder.overdue_reminder_step_form
+msgid "s"
 msgstr ""
 
 #. module: account_invoice_overdue_reminder
