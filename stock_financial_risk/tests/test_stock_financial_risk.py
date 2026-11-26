@@ -96,3 +96,30 @@ class TestStockFinancialRisk(TransactionCase):
         self.partner.risk_exception = True
         res = self.picking.button_validate()
         self.assertEqual(res["name"], "Partner risk exceeded")
+
+    def test_stock_picking_multi_error(self):
+        """Several pickings show the wizard of the first one with risk, and
+        continuing processes that picking."""
+        picking2 = self.picking.copy()
+        pickings = self.picking | picking2
+        pickings.action_confirm()
+        # Confirming already reserves
+        pickings.do_unreserve()
+        self.partner.risk_exception = True
+        res = pickings.action_assign()
+        wiz = self.env[res["res_model"]].browse(res["res_id"])
+        self.assertEqual(wiz.origin_reference, self.picking)
+        wiz.button_continue()
+        self.assertEqual(self.picking.state, "assigned")
+        self.assertEqual(picking2.state, "confirmed")
+
+    def test_button_validate_multi_error(self):
+        picking2 = self.picking.copy()
+        pickings = self.picking | picking2
+        pickings.action_assign()
+        pickings.move_ids.quantity = 5
+        self.partner.risk_exception = True
+        res = pickings.button_validate()
+        wiz = self.env[res["res_model"]].browse(res["res_id"])
+        self.assertEqual(wiz.origin_reference, self.picking)
+        self.assertEqual(wiz.partner_id, self.partner)
